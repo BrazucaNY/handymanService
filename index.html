@@ -804,22 +804,30 @@
 						
                         <!--Footer Widget end-->
 
-                        <!--Footer Widget start-->
-                        <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
-                            <h4 class="title"><span class="text">Newsletter</span></h4>
-                            <p>Subscribe our newsletter and get all latest news about our latest promotions, offers and discount</p>
-                            <form id="mc-form" class="mc-form footer-newsletter">
-                                <input id="mc-email" type="email" name="email_id" autocomplete="off" placeholder="Email Here.." />
-                                <button id="mc-submit"><i class="fa fa-paper-plane-o"></i></button>
-                            </form>
-                            <!-- mailchimp-alerts Start -->
-                            <div class="mailchimp-alerts text-centre">
-                                <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                            </div><!-- mailchimp-alerts end -->
-                        </div>
-                        <!--Footer Widget end-->
+<!--Footer Widget start-->
+<div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+    <h4 class="title"><span class="text">Newsletter</span></h4>
+    <p>Subscribe to our newsletter and get all latest news about our latest promotions, offers and discounts</p>
+    
+    <!-- Netlify Form -->
+    <form name="newsletter" method="POST" netlify netlify-honeypot="bot-field" class="footer-newsletter">
+        <!-- Hidden input for bot detection -->
+        <input type="hidden" name="form-name" value="newsletter">
+        <p style="display:none">
+            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+        </p>
+        
+        <input type="email" name="email_id" placeholder="Email Here.." required />
+        <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
+    </form>
+
+    <!-- Alerts -->
+    <div class="mailchimp-alerts text-centre">
+        <div class="mailchimp-success"></div>
+        <div class="mailchimp-error"></div>
+    </div>
+</div>
+<!--Footer Widget end-->
 
 
                     </div>
