@@ -801,22 +801,20 @@
 </div>
 				
 						
-						
-                        <!--Footer Widget end-->
 
 <!--Footer Widget start-->
 <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
     <h4 class="title"><span class="text">Newsletter</span></h4>
     <p>Subscribe to our newsletter and get all latest news about our latest promotions, offers and discounts</p>
-    
+
     <!-- Netlify Form -->
-    <form name="newsletter" method="POST" netlify netlify-honeypot="bot-field" class="footer-newsletter">
+    <form name="newsletter" method="POST" netlify netlify-honeypot="bot-field" class="footer-newsletter" id="mc-form">
         <!-- Hidden input for bot detection -->
         <input type="hidden" name="form-name" value="newsletter">
         <p style="display:none">
             <label>Don’t fill this out if you're human: <input name="bot-field"></label>
         </p>
-        
+
         <input type="email" name="email_id" placeholder="Email Here.." required />
         <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
     </form>
@@ -827,6 +825,40 @@
         <div class="mailchimp-error"></div>
     </div>
 </div>
+
+<!--Footer Widget end-->
+
+
+<!-- Inline JS for success/error messages -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("mc-form");
+    const successDiv = document.querySelector(".mailchimp-success");
+    const errorDiv = document.querySelector(".mailchimp-error");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); // prevent default form submission
+        successDiv.textContent = "";
+        errorDiv.textContent = "";
+
+        // Use Netlify’s built-in fetch to submit the form
+        const formData = new FormData(form);
+        fetch("/", {
+            method: "POST",
+            body: formData
+        })
+        .then(() => {
+            successDiv.textContent = "Thank you for subscribing!";
+            form.reset();
+        })
+        .catch(() => {
+            errorDiv.textContent = "An error occurred. Please try again.";
+        });
+    });
+});
+</script>
+
+
 <!--Footer Widget end-->
 
 
