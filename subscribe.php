@@ -14,9 +14,18 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-// Example: save to a file (replace with database or Mailchimp API if needed)
-$file = __DIR__ . '/subscribers.txt';
-file_put_contents($file, $email . PHP_EOL, FILE_APPEND | LOCK_EX);
+// Email details
+$to      = "davi65@gmail.com"; // Your email
+$subject = "New Newsletter Subscription";
+$message = "A new user subscribed to your newsletter:\n\nEmail: " . $email;
+$headers = "From: no-reply@rodrigueshandyman.com\r\n" .
+           "Reply-To: no-reply@rodrigueshandyman.com\r\n" .
+           "X-Mailer: PHP/" . phpversion();
 
-echo json_encode(["status" => 200, "message" => "Thank you for subscribing!"]);
+// Send the email
+if (mail($to, $subject, $message, $headers)) {
+    echo json_encode(["status" => 200, "message" => "Thank you for subscribing!"]);
+} else {
+    echo json_encode(["status" => 500, "message" => "Subscription saved, but email failed to send."]);
+}
 exit;
