@@ -1052,9 +1052,8 @@ s0.parentNode.insertBefore(s1,s0);
             $(".mailchimp-error").empty();
             $(".mailchimp-submitting").empty(); 
             var formData    = new FormData($("#enquiry-form")[0]); 
-           
-            $.ajax({
-                url: 'url: 'https://rodrigueshandyman.com/home/subscribe',
+                 $.ajax({
+                url: 'url: 'url: 'https://rodrigueshandyman.com/home/subscribe.php',
                 type: 'POST',
                 data: formData,
                 processData: false,
