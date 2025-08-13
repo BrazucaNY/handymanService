@@ -1,23 +1,22 @@
 <?php
-// Allow cross-domain AJAX if needed
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-// Only accept POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["status" => 405, "message" => "Method not allowed"]);
     exit;
 }
 
-// Example: get the email field from the form
-$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$email = isset($_POST['email_id']) ? trim($_POST['email_id']) : '';
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode(["status" => 400, "message" => "Invalid email address"]);
     exit;
 }
 
-// TODO: Save to database or send to Mailchimp
-// For now, just simulate success
+// Example: save to a file (replace with database or Mailchimp API if needed)
+$file = __DIR__ . '/subscribers.txt';
+file_put_contents($file, $email . PHP_EOL, FILE_APPEND | LOCK_EX);
+
 echo json_encode(["status" => 200, "message" => "Thank you for subscribing!"]);
 exit;
