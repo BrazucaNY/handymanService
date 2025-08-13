@@ -1044,36 +1044,38 @@ s0.parentNode.insertBefore(s1,s0);
         height: 60px;
     }
 </style>
-<script type="text/javascript">
-    jQuery(document).ready(function($){
-        $("#mc-form").submit(function(e){
-            e.preventDefault();
-            $(".mailchimp-success").empty();
-            $(".mailchimp-error").empty();
-            $(".mailchimp-submitting").empty(); 
-            var formData    = new FormData($("#enquiry-form")[0]); 
-                 $.ajax({
-                url: 'url: 'url: 'https://rodrigueshandyman.com/home/subscribe.php',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                cache: false,
-                timeout: 600000,
-                dataType:"json",
-                success: function (data)  {
-                    if(data['status'] == 200) {
-                        $(".mailchimp-success").html(data['message']);
-                        $("#mc-form")[0].reset();
-                    }
-                    else{
-                        $(".mailchimp-error").html(data['message']);
-                    }
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+jQuery(document).ready(function($){
+    $("#mc-form").submit(function(e){
+        e.preventDefault();
+        $(".mailchimp-success, .mailchimp-error, .mailchimp-submitting").empty();
+        var formData = new FormData(this);
+        $.ajax({
+            url: 'https://rodrigueshandyman.com/subscribe.php', // ensure correct path
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            timeout: 600000,
+            dataType: "json",
+            success: function(data) {
+                if (data.status == 200) {
+                    $(".mailchimp-success").html(data.message);
+                    $("#mc-form")[0].reset();
+                } else {
+                    $(".mailchimp-error").html(data.message);
                 }
-            });
+            },
+            error: function() {
+                $(".mailchimp-error").html("An error occurred. Please try again.");
+            }
         });
     });
+});
 </script>
+
 
 
 <script>
