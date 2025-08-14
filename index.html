@@ -1084,39 +1084,6 @@ jQuery(document).ready(function($){
 
 
 
-<script>
-    $("#enquiry-form").on("submit", function(ev) {
-    ev.preventDefault(); // Prevent browser default submit.
-    dataString = $('#enquiry-form').serialize();
-    var formData = new FormData($("#enquiry-form")[0]);
-    $('#sendEnquiry').prop('disabled',true);
-    $('#sendEnquiry').html('Sending...');
-    $.ajax({
-        url: 'https://handymanguru.com/Home/enquiry',
-        type: 'POST',
-        data: formData,
-        async: true,
-        success: function(data) {
-            data = jQuery.parseJSON(data);
-            // console.log(data);
-            if(data.status > 0){
-                $('#enquiry-form')[0].reset();
-                $("#customFile").val('');
-                html    =   '<p class="form-messege success">'+data.message+'</p>';
-            }else{
-                html    =   '<p class="form-messege error">'+data.message+'</p>';
-            }
-            $('#info-msg').html(html);
-            $('#sendEnquiry').prop("disabled", false);
-            $('#sendEnquiry').html('Send Enquiry');
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-    });
-        
-    });
-</script>
 
 <script>
 // Add the following code if you want the name of the file appear on select
