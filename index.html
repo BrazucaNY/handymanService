@@ -1,48 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <!-- Basic Setup -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8"> <!-- Character encoding -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile responsive -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- IE compatibility -->
 
-  <!-- Page Title & Meta -->
-  <meta name="theme-color" content="#ffffff">
-  <meta name="robots" content="noindex" /> <!-- Prevents indexing by search engines -->
-  <title>HANDYMAN SERVICES</title>
+  <!-- Page Title & Meta (SEO Optimized) -->
+  <title>Rodrigues Handyman Services | Home Maintenance & Repairs NYC</title>
+  <meta name="description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs. Call +1 (516) 415-8918 today!">
+  <meta name="keywords" content="handyman NYC, home maintenance New York, house repair NYC, handyman services NYC, plumbing, electrical, carpentry, painting, New York City home repairs">
+  <meta name="theme-color" content="#00b833"> <!-- Mobile browser theme color -->
+  <meta name="robots" content="index, follow"> <!-- Allow Google to index your page -->
 
-  <!-- Redundant Meta Tags (optional cleanup) -->
-  <!-- You have two title and meta tags. Only one set is needed. -->
-  <meta name="keywords" content="">
-  <meta name="description" content="">
-  <meta property="og:image" content=""/>
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Rodrigues Handyman Services NYC">
+  <meta property="og:description" content="Expert home maintenance, repair, and handyman services in New York City. Serving all boroughs.">
+  <meta property="og:image" content="assets/images/logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rodrigueshandyman.com">
 
-  <!-- Favicon Setup -->
-  <link rel="shortcut icon" href="favicon.html" type="image/x-icon"> <!-- ⚠️ This should be .ico or .png, not .html -->
-  <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/logo.png" type="image/png">
 
-  <!-- More Redundant Meta Tags -->
-  <meta charset="utf-8"> <!-- Already declared above -->
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Handyman guru Home Maintenance, Repair Service</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Duplicate -->
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"> <!-- Bootstrap framework -->
+  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css"> <!-- Icon fonts -->
+  <link rel="stylesheet" href="assets/css/vendor/helper.css"> <!-- Helper classes -->
+  <link rel="stylesheet" href="assets/css/plugins/plugins.css"> <!-- Plugin styles -->
+  <link rel="stylesheet" href="assets/css/style.css"> <!-- Main custom stylesheet -->
 
-  <!-- CSS: Bootstrap, Icons, Custom Styles -->
-  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css">
-  <link rel="stylesheet" href="assets/css/vendor/helper.css">
-  <link rel="stylesheet" href="assets/css/plugins/plugins.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- FontAwesome CDN (external) -->
-  <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- ⚠️ This may fail if the path is wrong. Should be from CDN: https://cdnjs.cloudflare.com/... -->
-
-  <!-- JS for older browsers -->
+  <!-- JS for older browser support -->
   <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+
+  <!-- Local Business Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Rodrigues Handyman",
+    "image": "https://rodrigueshandyman.com/assets/images/logo.png",
+    "@id": "https://rodrigueshandyman.com",
+    "url": "https://rodrigueshandyman.com",
+    "telephone": "+1-516-415-8918",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "N MacQuesten Pkwy",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "postalCode": "",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "New York City"
+    },
+    "description": "Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs."
+  }
+  </script>
 </head>
 <body>
+
 
 <!-- START MAIN WRAPPER -->
 <div id="main-wrapper">
