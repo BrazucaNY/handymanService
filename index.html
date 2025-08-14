@@ -730,30 +730,22 @@
     </ul>
 </div>
 				
-						
-
-<!--Footer Widget start-->
-
-<!-- Footer Widget start -->
+	<!-- Footer Widget start -->
 <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
     <h4 class="title"><span class="text">Newsletter</span></h4>
     <p>Subscribe to our newsletter and get all latest news about our latest promotions, offers and discounts</p>
 
     <!-- Netlify Form -->
     <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="footer-newsletter" id="mc-form">
-        <!-- Hidden input for Netlify form tracking -->
         <input type="hidden" name="form-name" value="newsletter">
-
-        <!-- Honeypot field to prevent spam -->
         <p style="display:none">
             <label>Don’t fill this out if you're human: <input name="bot-field"></label>
         </p>
-
         <input type="email" name="email" placeholder="Email Here.." required />
         <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
     </form>
 
-    <!-- Inline Alerts -->
+    <!-- Alerts -->
     <div class="mailchimp-alerts text-center">
         <div class="mailchimp-success" style="color:green; margin-top:10px;"></div>
         <div class="mailchimp-error" style="color:red; margin-top:10px;"></div>
@@ -761,7 +753,7 @@
 </div>
 <!-- Footer Widget end -->
 
-<!-- JavaScript for Netlify AJAX form -->
+<!-- Netlify AJAX script -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("mc-form");
@@ -769,18 +761,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const errorDiv = document.querySelector(".mailchimp-error");
 
     form.addEventListener("submit", function(e) {
-        e.preventDefault(); // Prevent page reload
+        e.preventDefault();
         successDiv.textContent = "";
         errorDiv.textContent = "";
 
-        // Create hidden input values for Netlify
         const formData = new FormData(form);
         formData.append("form-name", form.getAttribute("name"));
 
-        // Submit the form using fetch
+        // Convert FormData to URL-encoded string for Netlify
+        const body = new URLSearchParams();
+        for (const pair of formData) {
+            body.append(pair[0], pair[1]);
+        }
+
         fetch("/", {
             method: "POST",
-            body: formData
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: body.toString()
         })
         .then(() => {
             successDiv.textContent = "Thank you for subscribing!";
@@ -792,8 +789,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
-
-
 
 
                     </div>
