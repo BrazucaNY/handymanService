@@ -1025,16 +1025,21 @@ s0.parentNode.insertBefore(s1,s0);
     
     </div>
   
-
 <!-- REQUIRED JS SCRIPTS -->
-<!-- All jquery file included here -->
-<script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="maps.googleapis.com/maps/api/js5ae75ae7.html?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8&amp;callback">
-</script>
+
+<!-- Load jQuery (latest) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Vendor JS -->
 <script src="assets/js/vendor/popper.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/plugins/plugins.js"></script>
 <script src="assets/js/main.js"></script>
+
+<!-- Google Maps API (corrected URL) -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8&callback=initMap" async defer></script>
+
+<!-- Styles -->
 <style type="text/css">
     header.header.header-transparent.header-sticky.d-lg-block.d-none {
         position: relative !important;
@@ -1051,46 +1056,84 @@ s0.parentNode.insertBefore(s1,s0);
     }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Unified Form Handler -->
 <script>
-jQuery(document).ready(function($){
-    $("#mc-form").submit(function(e){
-        e.preventDefault();
-        $(".mailchimp-success, .mailchimp-error, .mailchimp-submitting").empty();
-        var formData = new FormData(this);
-        $.ajax({
-            url: 'https://rodrigueshandyman.com/subscribe.php', // ensure correct path
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            timeout: 600000,
-            dataType: "json",
-            success: function(data) {
-                if (data.status == 200) {
-                    $(".mailchimp-success").html(data.message);
-                    $("#mc-form")[0].reset();
-                } else {
-                    $(".mailchimp-error").html(data.message);
-                }
-            },
-            error: function() {
-                $(".mailchimp-error").html("An error occurred. Please try again.");
+jQuery(function($) {
+
+    function handleAjaxForm(formSelector, actionUrl, successContainer, errorContainer, buttonSelector) {
+        $(formSelector).off("submit").on("submit", function(e) {
+            e.preventDefault();
+
+            // Prevent multiple submissions
+            if ($(this).data("submitting")) return;
+            $(this).data("submitting", true);
+
+            $(successContainer).empty();
+            $(errorContainer).empty();
+            var formData = new FormData(this);
+
+            if (buttonSelector) {
+                $(buttonSelector).prop('disabled', true).html('Sending...');
             }
+
+            $.ajax({
+                url: actionUrl,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function(data) {
+                    if (data.status == 200 || data.status > 0) {
+                        $(successContainer).html(data.message);
+                        $(formSelector)[0].reset();
+                        $("#customFile").val('');
+                    } else {
+                        $(errorContainer).html(data.message);
+                    }
+                    if (buttonSelector) {
+                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
+                    }
+                },
+                error: function() {
+                    $(errorContainer).html("An error occurred. Please try again.");
+                    if (buttonSelector) {
+                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
+                    }
+                },
+                complete: function() {
+                    $(formSelector).data("submitting", false);
+                }
+            });
         });
+    }
+
+    // Mailchimp Newsletter Form
+    handleAjaxForm(
+        "#mc-form",
+        "https://rodrigueshandyman.com/subscribe.php",
+        ".mailchimp-success",
+        ".mailchimp-error",
+        null // No button for newsletter
+    );
+
+    // Enquiry Form
+    handleAjaxForm(
+        "#enquiry-form",
+        "https://handymanguru.com/Home/enquiry",
+        "#info-msg",
+        "#info-msg",
+        "#sendEnquiry" // Button to disable
+    );
+
+    // File input label updater
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
 });
 </script>
 
-
-
-
-<script>
-// Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
-</script>     
 </body>
 </html>
