@@ -784,7 +784,7 @@ document.addEventListener("DOMContentLoaded", function() {
             form.reset();
         })
         .catch(() => {
-            errorDiv.textContent = "An error occurred. Please try again.";
+            errorDiv.textContent = "Please book a call.";
         });
     });
 });
@@ -1071,32 +1071,6 @@ jQuery(function($) {
         });
     }
 
-    // Mailchimp Newsletter Form
-    handleAjaxForm(
-        "#mc-form",
-        "https://rodrigueshandyman.com/subscribe.php",
-        ".mailchimp-success",
-        ".mailchimp-error",
-        null // No button for newsletter
-    );
-
-    // Enquiry Form
-    handleAjaxForm(
-        "#enquiry-form",
-        "https://handymanguru.com/Home/enquiry",
-        "#info-msg",
-        "#info-msg",
-        "#sendEnquiry" // Button to disable
-    );
-
-    // File input label updater
-    $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-
-});
-</script>
 
 </body>
 </html>
