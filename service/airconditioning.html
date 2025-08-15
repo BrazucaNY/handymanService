@@ -542,6 +542,44 @@
 
                     </div>
                 </div>
+				
+				<!-- Netlify AJAX script -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("mc-form");
+    const successDiv = document.querySelector(".mailchimp-success");
+    const errorDiv = document.querySelector(".mailchimp-error");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        successDiv.textContent = "";
+        errorDiv.textContent = "";
+
+        const formData = new FormData(form);
+        formData.append("form-name", form.getAttribute("name"));
+
+        // Convert FormData to URL-encoded string for Netlify
+        const body = new URLSearchParams();
+        for (const pair of formData) {
+            body.append(pair[0], pair[1]);
+        }
+
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: body.toString()
+        })
+        .then(() => {
+            successDiv.textContent = "Thank you for subscribing!";
+            form.reset();
+        })
+        .catch(() => {
+            errorDiv.textContent = "Please book a call.";
+        });
+    });
+});
+</script>
+				
                 <div class="social-menu-right">
                     <ul class="social-menu-bottom">
                         <li ><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li>
