@@ -410,10 +410,18 @@
             });
         </script>  
 
-<!-- CTA section start -->
+
+
+<!-- ============================= -->
+<!-- CTA (Call-To-Action) Section  -->
+<!-- ============================= -->
+<!-- Purpose: Encourages users to book a call/consultation -->
+<!-- Background color: bg-gray-two -->
 <div class="cta-section section bg-gray-two">
     <div class="container">
         <div class="row no-gutters align-items-center">
+            
+            <!-- CTA Icon Column (phone icon) -->
             <div class="col-md-1">
                 <div class="pentagon-icon cta-icon">
                     <div class="icon">
@@ -421,31 +429,43 @@
                     </div>
                 </div>
             </div>
+
+            <!-- CTA Text Column -->
             <div class="col-md-8">
                 <div class="cta-content">
                     <h2>Book a Call Today!</h2>
                     <p>Let’s discuss your project and get things started. Schedule your free consultation now!</p>
                 </div>
             </div>
+
+            <!-- CTA Button Column -->
             <div class="col-md-3">
                 <div class="cta-btn text-center">
+                    <!-- Currently links to contact page -->
                     <a href="contact-us.html" class="btn">Book a Call Today <i class="fa fa-angle-double-right"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- CTA section end -->
+<!-- ============================= -->
+<!-- End of CTA Section -->
+<!-- ============================= -->
 
-<!-- Footer section start -->
+
+<!-- ============================= -->
+<!-- Footer Section Start -->
+<!-- ============================= -->
+<!-- Footer has background image and 3 main widgets: About, Office Contact, Newsletter -->
 <footer class="footer-section section bg-image" data-bg="assets/images/bg/footer-bg.jpg">
 
-    <!-- Footer Top start -->
+    <!-- Top area of footer -->
     <div class="footer-top section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-85 pb-lg-65 pb-md-60 pb-sm-50 pb-xs-40">
         <div class="container">
             <div class="row">
 
-                <!-- Footer About -->
+                <!-- Footer About Widget -->
+                <!-- Contains logo and short company description -->
                 <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
                     <div class="footer-logo">
                         <a href="index.html">
@@ -453,51 +473,61 @@
                         </a>
                     </div>
                     <p>
-                        Our mission is to provide the best home maintenance services in New York at the most reasonable prices, without compromising on quality. We take the necessary steps to meet your needs, finish on time, and deliver with quality assurance — every time.
+                        Our mission is to provide the best home maintenance services in New York 
+                        at the most reasonable prices, without compromising on quality. 
+                        We take the necessary steps to meet your needs, finish on time, 
+                        and deliver with quality assurance — every time.
                     </p>
                 </div>
 
-                <!-- Footer Contact -->
+                <!-- Footer Office Contact Widget -->
                 <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
                     <h4 class="title"><span class="text">Office</span></h4>
                     <ul>
+                        <!-- Office Address -->
                         <li>
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <i class="fa fa-map-marker"></i>
                             <a href="https://www.google.com/maps/place/New+York,+NY" target="_blank" rel="noopener">
                                 New York City, NY – Serving All Boroughs
                             </a>
                         </li>
+                        <!-- Phone -->
                         <li>
-                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <i class="fa fa-phone"></i>
                             <a href="tel:+15164158918">+1 (516) 415-8918</a>
                         </li>
+                        <!-- Email -->
                         <li>
-                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                            <i class="fa fa-envelope-o"></i>
                             <a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandyman.com</a>
                         </li>
+                        <!-- Hours -->
                         <li>
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <i class="fa fa-clock-o"></i>
                             Mon – Sat: 8:00 AM – 5:00 PM | Sunday & Emergency
                         </li>
                     </ul>
                 </div>
 
-                <!-- Footer Newsletter -->
+                <!-- Footer Newsletter Widget -->
+                <!-- Netlify-powered subscription form -->
                 <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
                     <h4 class="title"><span class="text">Newsletter</span></h4>
                     <p>Subscribe to our newsletter for promotions, offers, and home improvement tips.</p>
 
-                    <!-- Netlify Form -->
+                    <!-- Netlify Form Start -->
                     <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="footer-newsletter">
                         <input type="hidden" name="form-name" value="newsletter">
+                        <!-- Spam Protection -->
                         <p style="display:none">
                             <label>Don’t fill this out if you're human: <input name="bot-field"></label>
                         </p>
                         <input type="email" name="email" placeholder="Email Here.." required>
-                        <button type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                        <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
                     </form>
+                    <!-- Netlify Form End -->
 
-                    <!-- Alerts -->
+                    <!-- Success/Error Messages -->
                     <div class="mailchimp-alerts text-center">
                         <div class="mailchimp-success" style="color:green; margin-top:10px;"></div>
                         <div class="mailchimp-error" style="color:red; margin-top:10px;"></div>
@@ -507,13 +537,16 @@
             </div>
         </div>
     </div>
-    <!-- Footer Top end -->
+    <!-- Footer Top End -->
 
 </footer>
-<!-- Footer section end -->
+<!-- Footer Section End -->
 
 
-<!-- Netlify AJAX script -->
+<!-- ============================= -->
+<!-- Netlify AJAX Script -->
+<!-- ============================= -->
+<!-- Handles newsletter form submission via fetch POST request -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("mc-form");
@@ -551,34 +584,35 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-                    </div>
-                </div>
-                <div class="social-menu-right">
-                    <ul class="social-menu-bottom">
-                        <li ><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
-                    </ul>
+<!-- ============================= -->
+<!-- Social Media Footer Menu -->
+<!-- ============================= -->
+<div class="social-menu-right">
+    <ul class="social-menu-bottom">
+        <li><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+    </ul>
+</div>
+
+<!-- ============================= -->
+<!-- Footer Bottom Section -->
+<!-- ============================= -->
+<div class="footer-bottom section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="copyright text-center">
+                    <p>Copyright &copy;2025 Rodrigues Handyman</p>
                 </div>
             </div>
-            <!--Footer Top end-->
+        </div>
+    </div>
+</div>
 
-            <!--Footer bottom start-->
-            <div class="footer-bottom section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="copyright text-center">
-                                <p>Copyright &copy;2025 Rodrigues Handyman </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Footer bottom end-->
 
-        </footer>
-        <!--Footer section end-->
+
+
         
         
                       
