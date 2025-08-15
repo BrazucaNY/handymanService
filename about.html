@@ -1,122 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <!-- ===================== BASIC META TAGS ===================== -->
-  <meta charset="UTF-8"> <!-- Character encoding -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile responsive -->
-  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- IE compatibility -->
-  <meta name="theme-color" content="#00b833"> <!-- Browser theme color -->
-  <meta name="robots" content="index, follow"> <!-- Allow Google to index this page -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#00b833">
+  <meta name="robots" content="index, follow">
 
   <!-- ===================== PAGE TITLE & SEO ===================== -->
   <title>About Rodrigues Handyman | NYC Home Maintenance & Repairs</title>
   <meta name="description" content="Learn more about Rodrigues Handyman, your trusted provider of home maintenance, repairs, and handyman services across New York City. Call +1 (516) 415-8918 today!">
   <meta name="keywords" content="Rodrigues Handyman, about us, handyman NYC, home maintenance NYC, repairs NYC">
 
+  <!-- ===================== CANONICAL ===================== -->
+  <link rel="canonical" href="https://rodrigueshandyman.com/about">
+
   <!-- ===================== OPEN GRAPH / SOCIAL SHARING ===================== -->
   <meta property="og:title" content="About Rodrigues Handyman NYC">
   <meta property="og:description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs.">
-  <meta property="og:image" content="assets/images/logo.png">
+  <meta property="og:image" content="https://rodrigueshandyman.com/assets/images/logo.png">
+  <meta property="og:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rodrigueshandyman.com/about">
 
+  <!-- ===================== TWITTER CARD ===================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About Rodrigues Handyman NYC">
+  <meta name="twitter:description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs.">
+  <meta name="twitter:image" content="https://rodrigueshandyman.com/assets/images/logo.png">
+  <meta name="twitter:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC">
+
   <!-- ===================== FAVICON ===================== -->
-  <link rel="icon" href="assets/images/favicon.ico" type="image/png">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
 
   <!-- ===================== CSS FILES ===================== -->
-  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"> <!-- Bootstrap framework -->
-  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css"> <!-- Icon fonts -->
-  <link rel="stylesheet" href="assets/css/vendor/helper.css"> <!-- Helper classes -->
-  <link rel="stylesheet" href="assets/css/plugins/plugins.css"> <!-- Plugin styles -->
-  <link rel="stylesheet" href="assets/css/style.css"> <!-- Main custom stylesheet -->
-
-  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css">
+  <link rel="stylesheet" href="assets/css/vendor/helper.css">
+  <link rel="stylesheet" href="assets/css/plugins/plugins.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- Modernizr JS -->
+  <!-- ===================== JS FILES ===================== -->
   <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 
-  <!-- Local Business Structured Data for SEO -->
- <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",  // Type of business
-  "name": "Rodrigues Handyman",            // Business name
-  "image": "https://rodrigueshandyman.com/assets/images/rodrigueshandyman.jpg",  // Logo or main image
-  "@id": "https://rodrigueshandyman.com",  // Unique identifier for structured data
-  "url": "https://rodrigueshandyman.com",  // Website URL
-  "telephone": "+1-516-415-8918",          // Contact number
-  "priceRange": "$$",                       // Optional: general price range
-  "address": {                              // Physical address
-    "@type": "PostalAddress",
-    "streetAddress": "N MacQuesten Pkwy",
-    "addressLocality": "New York",
-    "addressRegion": "NY",
-    "postalCode": "10538",                 // Add postal code if available
-    "addressCountry": "US"
-  },
-  "areaServed": {                           // Service area
-    "@type": "City",
-    "name": "New York City"
-  },
-  "description": "Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs.",
-  
-  // ===================== OPENING HOURS =====================
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"
-      ],
-      "opens": "08:00",
-      "closes": "20:00"
+  <!-- ===================== Local Business Structured Data (JSON-LD) ===================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Rodrigues Handyman",
+    "image": "https://rodrigueshandyman.com/assets/images/rodrigueshandyman.jpg",
+    "@id": "https://rodrigueshandyman.com",
+    "url": "https://rodrigueshandyman.com",
+    "telephone": "+1-516-415-8918",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "N MacQuesten Pkwy",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "postalCode": "10538",
+      "addressCountry": "US"
     },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Sunday",
-      "opens": "09:00",
-      "closes": "18:00"
-    }
-  ],
-
-  // ===================== SOCIAL PROFILES =====================
-  "sameAs": [
-    "https://www.facebook.com/rodrigueshandyman",
-    "https://www.instagram.com/rodrigueshandyman",
-   ],
-
-  // ===================== SERVICES =====================
-  "makesOffer": [
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Home Repairs",
-        "description": "Professional repairs for plumbing, electrical, carpentry, and more."
-      }
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.9111,
+      "longitude": -73.8950
     },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Annual Maintenance Contracts",
-        "description": "Scheduled home maintenance to keep your property in top condition."
-      }
+    "areaServed": {
+      "@type": "City",
+      "name": "New York City"
     },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Painting & Renovation",
-        "description": "Interior and exterior painting and renovation services."
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "09:00",
+        "closes": "18:00"
       }
-    }
-  ]
-}
-</script>
-
+    ],
+    "sameAs": [
+      "https://www.facebook.com/rodrigueshandyman",
+      "https://www.instagram.com/rodrigueshandyman",
+      "https://www.linkedin.com/company/rodrigues-handyman"
+    ],
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Home Repairs",
+          "description": "Professional repairs for plumbing, electrical, carpentry, and more."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Annual Maintenance Contracts",
+          "description": "Scheduled home maintenance to keep your property in top condition."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Painting & Renovation",
+          "description": "Interior and exterior painting and renovation services."
+        }
+      }
+    ],
+    "description": "Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs."
+  }
+  </script>
 </head>
 <body>
+
 
 <div id="main-wrapper">
 <!-- Header section start-->
