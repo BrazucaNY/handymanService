@@ -308,94 +308,105 @@
 <!-- ============================= -->
 <footer class="footer-section section bg-image" data-bg="assets/images/bg/footer-bg.jpg">
 
-    <!-- Footer Top -->
-    <div class="footer-top section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-85 pb-lg-65 pb-md-60 pb-sm-50 pb-xs-40">
-        <div class="container">
-            <div class="row">
+ <!-- ============================= -->
+<!-- Footer Section Start -->
+<!-- ============================= -->
 
-                <!-- Footer About Widget -->
-                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
-                    <!-- Company Logo -->
-                    <div class="footer-logo">
-                        <a href="index.html">
-                            <img src="assets/images/logo-white.png" alt="Rodrigues Handyman">
-                        </a>
-                    </div>
-                    <p>
-                        Our mission is to provide the best Home Maintenance Service at the most reasonable price 
-                        without compromising on quality. You will be highly satisfied with our work, knowing we take 
-                        the necessary steps to meet your needs and get the job done on time with quality assurance.
+<!-- Footer Top -->
+<div class="footer-top section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-85 pb-lg-65 pb-md-60 pb-sm-50 pb-xs-40">
+    <div class="container">
+        <div class="row">
+
+            <!-- Footer About Widget -->
+            <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+                <!-- Company Logo -->
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/images/logo-white.png" alt="Rodrigues Handyman">
+                    </a>
+                </div>
+                <!-- About Text -->
+                <p>
+                    Our mission is to provide the best Home Maintenance Service at the most reasonable price 
+                    without compromising on quality. You will be highly satisfied with our work, knowing we take 
+                    the necessary steps to meet your needs and get the job done on time with quality assurance.
+                </p>
+            </div>
+
+            <!-- Footer Office Widget -->
+            <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+                <h4 class="title"><span class="text">Office</span></h4>
+                <ul>
+                    <!-- Office Address -->
+                    <li>
+                        <i class="fa fa-map-marker"></i>
+                        <span>
+                            <a href="https://www.google.com/maps/place/New+York,+NY" target="_blank" rel="noopener noreferrer">
+                                New York City, NY – Serving All Boroughs
+                            </a>
+                        </span>
+                    </li>
+                    <!-- Office Phone -->
+                    <li>
+                        <i class="fa fa-phone"></i>
+                        <span><a href="tel:+15164158918">+1 (516) 415-8918</a></span>
+                    </li>
+                    <!-- Office Email -->
+                    <li>
+                        <i class="fa fa-envelope-o"></i>
+                        <span><a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandyman.com</a></span>
+                    </li>
+                    <!-- Office Hours -->
+                    <li>
+                        <i class="fa fa-clock-o"></i>
+                        <span>Mon – Sat: 8:00 AM – 5:00 PM | Sunday & Emergency</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Footer Newsletter Widget -->
+            <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+                <h4 class="title"><span class="text">Newsletter</span></h4>
+                <p>Subscribe to our newsletter for promotions, offers, and home improvement tips.</p>
+
+                <!-- Netlify AJAX Newsletter Form -->
+                <form id="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="footer-newsletter">
+                    <input type="hidden" name="form-name" value="newsletter">
+                    <!-- Spam Protection Field (hidden) -->
+                    <p style="display:none">
+                        <label>Don’t fill this out if you're human: <input name="bot-field"></label>
                     </p>
+                    <!-- Email Input -->
+                    <input type="email" name="email" placeholder="Email Here.." required>
+                    <!-- Submit Button -->
+                    <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
+                </form>
+
+                <!-- Success / Error Messages -->
+                <div class="mailchimp-alerts text-center">
+                    <div class="mailchimp-success" style="color:green; margin-top:10px;"></div>
+                    <div class="mailchimp-error" style="color:red; margin-top:10px;"></div>
                 </div>
-
-                <!-- Footer Office Widget -->
-                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
-                    <h4 class="title"><span class="text">Office</span></h4>
-                    <ul>
-                        <li>
-                            <i class="fa fa-map-marker"></i>
-                            <span>
-                                <a href="https://www.google.com/maps/place/New+York,+NY" target="_blank">
-                                    New York City, NY – Serving All Boroughs
-                                </a>
-                            </span>
-                        </li>
-                        <li>
-                            <i class="fa fa-phone"></i>
-                            <span><a href="tel:+15164158918">+1 (516) 415-8918</a></span>
-                        </li>
-                        <li>
-                            <i class="fa fa-envelope-o"></i>
-                            <span><a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandyman.com</a></span>
-                        </li>
-                        <li>
-                            <i class="fa fa-clock-o"></i>
-                            <span>Mon – Sat: 8:00 AM – 5:00 PM | Sunday & Emergency</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Footer Newsletter Widget -->
-                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
-                    <h4 class="title"><span class="text">Newsletter</span></h4>
-                    <p>Subscribe to our newsletter for promotions, offers, and home improvement tips.</p>
-
-                    <!-- Netlify AJAX Newsletter Form -->
-                    <form id="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="footer-newsletter">
-                        <input type="hidden" name="form-name" value="newsletter">
-                        <!-- Spam Protection -->
-                        <p style="display:none">
-                            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
-                        </p>
-                        <input type="email" name="email" placeholder="Email Here.." required>
-                        <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
-                    </form>
-
-                    <!-- Success / Error Messages -->
-                    <div class="mailchimp-alerts text-center">
-                        <div class="mailchimp-success" style="color:green; margin-top:10px;"></div>
-                        <div class="mailchimp-error" style="color:red; margin-top:10px;"></div>
-                    </div>
-                </div>
-
             </div>
+
         </div>
     </div>
-    <!-- Footer Top End -->
+</div>
+<!-- Footer Top End -->
 
-    <!-- Footer Bottom -->
-    <div class="footer-bottom section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="copyright text-center">
-                        <p>Copyright &copy; 2025 Rodrigues Handyman</p>
-                    </div>
+<!-- Footer Bottom -->
+<div class="footer-bottom section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="copyright text-center">
+                    <p>Copyright &copy; 2025 Rodrigues Handyman</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Footer Bottom End -->
+</div>
+<!-- Footer Bottom End -->
 
 </footer>
 <!-- Footer Section End -->
@@ -405,37 +416,44 @@
 <!-- ============================= -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+    // Select the newsletter form and message containers
     const form = document.getElementById("newsletter-form");
     const successDiv = document.querySelector(".mailchimp-success");
     const errorDiv = document.querySelector(".mailchimp-error");
 
     form.addEventListener("submit", function(e) {
-        e.preventDefault(); // Stop the default form submission (no page reload)
+        e.preventDefault(); // Stop page reload on submit
         successDiv.textContent = "";
         errorDiv.textContent = "";
 
+        // Collect form data
         const formData = new FormData(form);
-        formData.append("form-name", form.getAttribute("name"));
+        formData.append("form-name", form.getAttribute("name")); // Ensure Netlify form-name included
 
-        // Convert form data to URL-encoded format
+        // Convert form data to URL-encoded format for Netlify
         const body = new URLSearchParams();
         for (const pair of formData) {
             body.append(pair[0], pair[1]);
         }
 
-        // Send AJAX request to Netlify
+        // Send AJAX POST request to Netlify
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: body.toString()
         })
         .then(() => {
+            // Show success message and reset form
             successDiv.textContent = "Thank you for subscribing!";
-            form.reset(); // Clear the form
+            form.reset();
         })
-        .catch(() => {
+        .catch((error) => {
+            console.error(error); // Log errors for debugging
             errorDiv.textContent = "Something went wrong. Please try again.";
         });
     });
 });
 </script>
+
+</body>
+</html>
