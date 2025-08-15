@@ -540,7 +540,33 @@
     </div>
     <!-- Footer Top End -->
 
-</footer>
+                    </div>
+                </div>
+                <div class="social-menu-right">
+                    <ul class="social-menu-bottom">
+                        <li ><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--Footer Top end-->
+
+            <!--Footer bottom start-->
+            <div class="footer-bottom section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="copyright text-center">
+                                <p>Copyright & 2025 Rodrigues Handyman </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Footer bottom end-->
+
+        </footer>
 <!-- Footer Section End -->
 
 <!-- ============================= -->
@@ -559,62 +585,149 @@
 <!-- ============================= -->
 <!-- Styles for Floating Buttons -->
 <!-- ============================= -->
-<style>
-/* Shared styles for floating buttons */
-.c-btn-phone, .c-btn-whatsapp {
-    display: block;
-    position: fixed;
-    cursor: pointer;
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-    line-height: 45px;
-    text-align: center;
-    background: #00b833;
-    z-index: 300;
-    -ms-flex-pack: center;
-    justify-content: center;
-    display: -ms-flexbox;
-    -ms-flex-align: center;
-    align-items: center;
-    padding-top: 3px;
-}
 
-/* Phone button position */
-.c-btn-phone { bottom: 125px; right: 15px; }
-
-/* WhatsApp button position */
-.c-btn-whatsapp { bottom: 185px; right: 15px; }
-
-/* Pulsing animation for phone button */
-.c-btn-phone::after, .c-btn-phone::before {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    z-index: -1;
-    transition: all linear .2s 0s;
-    animation: phonePulse 1.5s infinite;
-}
-@keyframes phonePulse {
-    0% { transform: scale(0); opacity: 1 }
-    100% { transform: scale(1.5); opacity: 0 }
-}
-
-/* Pulsing animation for WhatsApp button */
-.c-btn-whatsapp::after, .c-btn-whatsapp::before {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    z-index: -1;
-    transition: all linear .2s 0s;
-    animation: whatsAppPulse 1.5s infinite;
-}
-@keyframes whatsAppPulse {
-    0% { transform: scale(0); opacity: 1 }
-    100% { transform: scale(1.5); opacity: 0 }
-}
-</style>
-
+    <style>
+        .c-btn-phone {
+            display: block;
+            position: fixed;
+            cursor: pointer;
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            line-height: 45px;
+            text-align: center;
+            background: #00b833;
+            z-index: 300;
+            right: 15px;
+            bottom: 125px;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+    
+        .c-btn-phone,
+        .c-social-links ul {
+            display: -ms-flexbox;
+            /*display: flex;*/
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 3px;
+        }
+    
+        .c-btn-phone::before {
+            background: rgba(0, 184, 51, .6);
+            width: 55px;
+            height: 55px;
+            left: -5px;
+            top: -5px;
+        }
+    
+        .c-btn-phone::after,
+        .c-btn-phone::before {
+            transition: all linear .2s 0s;
+            position: absolute;
+            display: block;
+            content: '';
+            border-radius: 50%;
+            z-index: -1;
+            animation: phonePulse 1.5s infinite;
+        }
+    
+        @keyframes phonePulse {
+            0% {
+                transform: scale(0);
+                opacity: 1
+            }
+    
+            to {
+                transform: scale(1.5);
+                opacity: 0
+            }
+        }
+    
+        @-webkit-keyframes phonePulse {
+            0% {
+                transform: scale(0);
+                opacity: 1
+            }
+    
+            to {
+                transform: scale(1.5);
+                opacity: 0
+            }
+        }
+        
+        
+        
+        .c-btn-whatsapp {
+            display: block;
+            position: fixed;
+            cursor: pointer;
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            line-height: 45px;
+            text-align: center;
+            background: #00b833;
+            z-index: 300;
+            right: 15px;
+            bottom: 185px;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+    
+        .c-btn-whatsapp,
+        .c-social-links ul {
+            display: -ms-flexbox;
+            /*display: flex;*/
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 3px;
+        }
+    
+        .c-btn-whatsapp::before {
+            background: rgba(0, 184, 51, .6);
+            width: 55px;
+            height: 55px;
+            left: -5px;
+            top: -5px;
+        }
+    
+        .c-btn-whatsapp::after,
+        .c-btn-whatsapp::before {
+            transition: all linear .2s 0s;
+            position: absolute;
+            display: block;
+            content: '';
+            border-radius: 50%;
+            z-index: -1;
+            animation: whatsAppPulse 1.5s infinite;
+        }
+    
+        @keyframes whatsAppPulse {
+            0% {
+                transform: scale(0);
+                opacity: 1
+            }
+    
+            to {
+                transform: scale(1.5);
+                opacity: 0
+            }
+        }
+    
+        @-webkit-keyframes whatsAppPulse {
+            0% {
+                transform: scale(0);
+                opacity: 1
+            }
+    
+            to {
+                transform: scale(1.5);
+                opacity: 0
+            }
+        }
+    </style>
+	
 <!-- ============================= -->
 <!-- Tawk.to Live Chat Widget -->
 <!-- ============================= -->
@@ -639,23 +752,26 @@ s0.parentNode.insertBefore(s1,s0);
 <script src="assets/js/plugins/plugins.js"></script>
 <script src="assets/js/main.js"></script>
 
-<!-- Google Maps API -->
+<!-- Google Maps API (corrected URL) -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8&callback=initMap" async defer></script>
 
-<!-- ============================= -->
-<!-- Custom Inline Styles -->
-<!-- ============================= -->
-
+<!-- Styles -->
 <style type="text/css">
-header.header.header-transparent.header-sticky.d-lg-block.d-none {
-    position: relative !important;
-}
-.mailchimp-success { color: #027502; }
-.mailchimp-error { color: #f50707; }
-.sidebar-blog .image img { width: 100%; height: 60px; }
+    header.header.header-transparent.header-sticky.d-lg-block.d-none {
+        position: relative !important;
+    }
+    .mailchimp-success {
+        color: #027502;
+    }
+    .mailchimp-error {
+        color: #f50707;
+    }
+    .sidebar-blog .image img {
+        width: 100%;
+        height: 60px;
+    }
 </style>
 
-<
 <!-- Unified Form Handler -->
 <script>
 jQuery(function($) {
