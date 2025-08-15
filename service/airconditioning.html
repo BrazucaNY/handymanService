@@ -436,63 +436,48 @@
 </div>
 <!-- CTA section end -->
 
-
 <!-- ============================= -->
 <!-- Footer Section Start -->
 <!-- ============================= -->
 
-        <footer class="footer-section section bg-image" data-bg="assets/images/bg/footer-bg.jpg">
+<footer class="footer-section section bg-image" data-bg="assets/images/bg/footer-bg.jpg">
 
-            <!--Footer Top start-->
-            <div class="footer-top section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-85 pb-lg-65 pb-md-60 pb-sm-50 pb-xs-40">
-                <div class="container">
-                    <div class="row">
+    <!-- Footer Top -->
+    <div class="footer-top section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-85 pb-lg-65 pb-md-60 pb-sm-50 pb-xs-40">
+        <div class="container">
+            <div class="row">
 
-                        <!--Footer Widget start-->
-                        <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
-                            <div class="footer-logo">
-                                <a href="index.html"><img src="assets/images/logo-white.png" alt="Rodrigues Handyman"></a>
-                            </div>
-                            <p> Our mission is to provide the best Home Maintenance Service at the most reasonable price without compromising on quality. You will be highly satisfied with our work, knowing we take the necessary steps to meet your needs and get the job done on time with quality assurance.</p>
-                        </div>
-                        <!--Footer Widget end-->
+                <!-- Footer Widget 1: Company Info -->
+                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+                    <div class="footer-logo">
+                        <a href="index.html"><img src="assets/images/logo-white.png" alt="Rodrigues Handyman"></a>
+                    </div>
+                    <p>Our mission is to provide the best Home Maintenance Service at the most reasonable price without compromising on quality. You will be highly satisfied with our work, knowing we take the necessary steps to meet your needs and get the job done on time with quality assurance.</p>
+                </div>
 
-                        <!--Footer Widget start-->
-                        
-						<div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
-    <h4 class="title"><span class="text">Office</span></h4>
-    <ul>
-        <li>
-            <i class="fa fa-map-marker"></i>
-            <span>
-                <a href="https://www.google.com/maps/place/New+York,+NY" target="_blank">
-                    New York City, NY – Serving All Boroughs
-                </a>
-            </span>
-        </li>
-        <li><i class="fa fa-phone"></i><span><a href="tel:+15164158918">+1 (516) 415-8918</a></span></li>
-        <li><i class="fa fa-envelope-o"></i><span><a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandy.com</a></span></li>
-        <li><i class="fa fa-clock-o"></i><span><a href="#">Mon – Sat: 8:00 AM – 5:00 PM | Sunday & Emergency</a></span></li>
-    </ul>
-</div>
+                <!-- Footer Widget 2: Office Info -->
+                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+                    <h4 class="title"><span class="text">Office</span></h4>
+                    <ul>
+                        <li><i class="fa fa-map-marker"></i><span><a href="https://www.google.com/maps/place/New+York,+NY" target="_blank">New York City, NY – Serving All Boroughs</a></span></li>
+                        <li><i class="fa fa-phone"></i><span><a href="tel:+15164158918">+1 (516) 415-8918</a></span></li>
+                        <li><i class="fa fa-envelope-o"></i><span><a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandyman.com</a></span></li>
+                        <li><i class="fa fa-clock-o"></i><span>Mon – Sat: 8:00 AM – 5:00 PM | Sunday & Emergency</span></li>
+                    </ul>
+                </div>
 
-                <!-- Footer Newsletter Widget -->
-                <!-- Netlify-powered subscription form -->
+                <!-- Footer Widget 3: Newsletter -->
                 <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
                     <h4 class="title"><span class="text">Newsletter</span></h4>
                     <p>Subscribe to our newsletter for promotions, offers, and home improvement tips.</p>
 
-                    <!-- Netlify Form Start -->
-                    <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="footer-newsletter">
+                    <!-- Newsletter Form -->
+                    <form id="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="footer-newsletter">
                         <input type="hidden" name="form-name" value="newsletter">
-                        <!-- Spam Protection Field -->
-                        <p style="display:none">
-                            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
-                        </p>
+                        <p style="display:none"><label>Don’t fill this out if you're human: <input name="bot-field"></label></p>
                         <input type="email" name="email" placeholder="Email Here.." required>
                         <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
                     </form>
-                    <!-- Netlify Form End -->
 
                     <!-- Success/Error Messages -->
                     <div class="mailchimp-alerts text-center">
@@ -506,245 +491,59 @@
     </div>
     <!-- Footer Top End -->
 
+    <!-- Footer Bottom -->
+    <div class="footer-bottom section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="copyright text-center">
+                        <p>Copyright &copy; 2025 Rodrigues Handyman</p>
                     </div>
                 </div>
-				
-				<!-- Netlify AJAX script -->
+            </div>
+        </div>
+    </div>
+    <!-- Footer Bottom End -->
+
+</footer>
+<!-- Footer Section End -->
+
+<!-- ============================= -->
+<!-- Floating Phone & WhatsApp Buttons -->
+<!-- ============================= -->
+<a class="c-btn-phone" href="tel:+15164158918"><span class="fa fa-phone"></span></a>
+<a class="c-btn-whatsapp" href="https://wa.me/15164158918?text=Hello!%20I'd%20like%20to%20book%20an%20appointment."><span class="fa fa-whatsapp"></span></a>
+
+<!-- ============================= -->
+<!-- Newsletter AJAX Script -->
+<!-- Prevents page refresh when form submits -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("mc-form");
+    const form = document.getElementById("newsletter-form");
     const successDiv = document.querySelector(".mailchimp-success");
     const errorDiv = document.querySelector(".mailchimp-error");
 
     form.addEventListener("submit", function(e) {
-        e.preventDefault();
+        e.preventDefault(); // stop page reload
         successDiv.textContent = "";
         errorDiv.textContent = "";
 
         const formData = new FormData(form);
         formData.append("form-name", form.getAttribute("name"));
 
-        // Convert FormData to URL-encoded string for Netlify
         const body = new URLSearchParams();
-        for (const pair of formData) {
-            body.append(pair[0], pair[1]);
-        }
+        for (const pair of formData) body.append(pair[0], pair[1]);
 
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: body.toString()
-        })
+        fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() })
         .then(() => {
             successDiv.textContent = "Thank you for subscribing!";
             form.reset();
         })
         .catch(() => {
-            errorDiv.textContent = "Please book a call.";
+            errorDiv.textContent = "Something went wrong. Please try again.";
         });
     });
 });
-</script>
-				
-                <div class="social-menu-right">
-                    <ul class="social-menu-bottom">
-                        <li ><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <!--Footer Top end-->
-
-            <!--Footer bottom start-->
-            <div class="footer-bottom section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="copyright text-center">
-                                <p>Copyright & 2025 Rodrigues Handyman </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Footer bottom end-->
-
-        </footer>
-<!-- Footer Section End -->
-
-<!-- ============================= -->
-<!-- Floating Call & WhatsApp Buttons -->
-<!-- ============================= -->
-<!-- Phone button fixed to bottom right -->
-<a class="c-btn-phone" href="tel:+15164158918">
-    <span class="fa fa-phone" style="color: #fff; font-size: 24px; padding-top: 8px;"></span>
-</a>
-
-<!-- WhatsApp button fixed above phone button -->
-<a class="c-btn-whatsapp" href="https://wa.me/15164158918?text=Hello!%20I'd%20like%20to%20book%20an%20appointment.">
-    <span class="fa fa-whatsapp" style="color: #fff; font-size: 24px;padding-top: 7px;"></span>
-</a>
-
-<!-- ============================= -->
-<!-- Styles for Floating Buttons -->
-<!-- ============================= -->
-
-    <style>
-        .c-btn-phone {
-            display: block;
-            position: fixed;
-            cursor: pointer;
-            height: 45px;
-            width: 45px;
-            border-radius: 50%;
-            line-height: 45px;
-            text-align: center;
-            background: #00b833;
-            z-index: 300;
-            right: 15px;
-            bottom: 125px;
-            -ms-flex-pack: center;
-            justify-content: center;
-        }
-    
-        .c-btn-phone,
-        .c-social-links ul {
-            display: -ms-flexbox;
-            /*display: flex;*/
-            -ms-flex-align: center;
-            align-items: center;
-            padding-top: 3px;
-        }
-    
-        .c-btn-phone::before {
-            background: rgba(0, 184, 51, .6);
-            width: 55px;
-            height: 55px;
-            left: -5px;
-            top: -5px;
-        }
-    
-        .c-btn-phone::after,
-        .c-btn-phone::before {
-            transition: all linear .2s 0s;
-            position: absolute;
-            display: block;
-            content: '';
-            border-radius: 50%;
-            z-index: -1;
-            animation: phonePulse 1.5s infinite;
-        }
-    
-        @keyframes phonePulse {
-            0% {
-                transform: scale(0);
-                opacity: 1
-            }
-    
-            to {
-                transform: scale(1.5);
-                opacity: 0
-            }
-        }
-    
-        @-webkit-keyframes phonePulse {
-            0% {
-                transform: scale(0);
-                opacity: 1
-            }
-    
-            to {
-                transform: scale(1.5);
-                opacity: 0
-            }
-        }
-        
-        
-        
-        .c-btn-whatsapp {
-            display: block;
-            position: fixed;
-            cursor: pointer;
-            height: 45px;
-            width: 45px;
-            border-radius: 50%;
-            line-height: 45px;
-            text-align: center;
-            background: #00b833;
-            z-index: 300;
-            right: 15px;
-            bottom: 185px;
-            -ms-flex-pack: center;
-            justify-content: center;
-        }
-    
-        .c-btn-whatsapp,
-        .c-social-links ul {
-            display: -ms-flexbox;
-            /*display: flex;*/
-            -ms-flex-align: center;
-            align-items: center;
-            padding-top: 3px;
-        }
-    
-        .c-btn-whatsapp::before {
-            background: rgba(0, 184, 51, .6);
-            width: 55px;
-            height: 55px;
-            left: -5px;
-            top: -5px;
-        }
-    
-        .c-btn-whatsapp::after,
-        .c-btn-whatsapp::before {
-            transition: all linear .2s 0s;
-            position: absolute;
-            display: block;
-            content: '';
-            border-radius: 50%;
-            z-index: -1;
-            animation: whatsAppPulse 1.5s infinite;
-        }
-    
-        @keyframes whatsAppPulse {
-            0% {
-                transform: scale(0);
-                opacity: 1
-            }
-    
-            to {
-                transform: scale(1.5);
-                opacity: 0
-            }
-        }
-    
-        @-webkit-keyframes whatsAppPulse {
-            0% {
-                transform: scale(0);
-                opacity: 1
-            }
-    
-            to {
-                transform: scale(1.5);
-                opacity: 0
-            }
-        }
-    </style>
-	
-<!-- ============================= -->
-<!-- Tawk.to Live Chat Widget -->
-<!-- ============================= -->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/640afa364247f20fefe51753/1j1fvdu99';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
 </script>
 
 <!-- ============================= -->
@@ -756,78 +555,18 @@ s0.parentNode.insertBefore(s1,s0);
 <script src="assets/js/plugins/plugins.js"></script>
 <script src="assets/js/main.js"></script>
 
-<!-- Google Maps API (corrected URL) -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8&callback=initMap" async defer></script>
-
-<!-- Styles -->
-<style type="text/css">
-    header.header.header-transparent.header-sticky.d-lg-block.d-none {
-        position: relative !important;
-    }
-    .mailchimp-success {
-        color: #027502;
-    }
-    .mailchimp-error {
-        color: #f50707;
-    }
-    .sidebar-blog .image img {
-        width: 100%;
-        height: 60px;
-    }
-</style>
-
-<!-- Unified Form Handler -->
-<script>
-jQuery(function($) {
-
-    function handleAjaxForm(formSelector, actionUrl, successContainer, errorContainer, buttonSelector) {
-        $(formSelector).off("submit").on("submit", function(e) {
-            e.preventDefault();
-
-            // Prevent multiple submissions
-            if ($(this).data("submitting")) return;
-            $(this).data("submitting", true);
-
-            $(successContainer).empty();
-            $(errorContainer).empty();
-            var formData = new FormData(this);
-
-            if (buttonSelector) {
-                $(buttonSelector).prop('disabled', true).html('Sending...');
-            }
-
-            $.ajax({
-                url: actionUrl,
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                dataType: "json",
-                success: function(data) {
-                    if (data.status == 200 || data.status > 0) {
-                        $(successContainer).html(data.message);
-                        $(formSelector)[0].reset();
-                        $("#customFile").val('');
-                    } else {
-                        $(errorContainer).html(data.message);
-                    }
-                    if (buttonSelector) {
-                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
-                    }
-                },
-                error: function() {
-                    $(errorContainer).html("An error occurred. Please try again.");
-                    if (buttonSelector) {
-                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
-                    }
-                },
-                complete: function() {
-                    $(formSelector).data("submitting", false);
-                }
-            });
-        });
-    }
-
+<!-- Tawk.to Chat -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/640afa364247f20fefe51753/1j1fvdu99';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
 
 </body>
 </html>
