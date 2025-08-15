@@ -37,30 +37,84 @@
   <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 
   <!-- Local Business Structured Data for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "name": "Rodrigues Handyman",
-    "image": "https://rodrigueshandyman.com/assets/images/logo.png",
-    "@id": "https://rodrigueshandyman.com",
-    "url": "https://rodrigueshandyman.com",
-    "telephone": "+1-516-415-8918",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "N MacQuesten Pkwy",
-      "addressLocality": "New York",
-      "addressRegion": "NY",
-      "postalCode": "",
-      "addressCountry": "US"
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",  // Type of business
+  "name": "Rodrigues Handyman",            // Business name
+  "image": "https://rodrigueshandyman.com/assets/images/rodrigueshandyman.jpg",  // Logo or main image
+  "@id": "https://rodrigueshandyman.com",  // Unique identifier for structured data
+  "url": "https://rodrigueshandyman.com",  // Website URL
+  "telephone": "+1-516-415-8918",          // Contact number
+  "priceRange": "$$",                       // Optional: general price range
+  "address": {                              // Physical address
+    "@type": "PostalAddress",
+    "streetAddress": "N MacQuesten Pkwy",
+    "addressLocality": "New York",
+    "addressRegion": "NY",
+    "postalCode": "10538",                 // Add postal code if available
+    "addressCountry": "US"
+  },
+  "areaServed": {                           // Service area
+    "@type": "City",
+    "name": "New York City"
+  },
+  "description": "Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs.",
+  
+  // ===================== OPENING HOURS =====================
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"
+      ],
+      "opens": "08:00",
+      "closes": "20:00"
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "New York City"
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  ],
+
+  // ===================== SOCIAL PROFILES =====================
+  "sameAs": [
+    "https://www.facebook.com/rodrigueshandyman",
+    "https://www.instagram.com/rodrigueshandyman",
+   ],
+
+  // ===================== SERVICES =====================
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Home Repairs",
+        "description": "Professional repairs for plumbing, electrical, carpentry, and more."
+      }
     },
-    "description": "Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs."
-  }
-  </script>
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Annual Maintenance Contracts",
+        "description": "Scheduled home maintenance to keep your property in top condition."
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Painting & Renovation",
+        "description": "Interior and exterior painting and renovation services."
+      }
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 
@@ -778,54 +832,89 @@ s0.parentNode.insertBefore(s1,s0);
 <script>
 jQuery(function($) {
 
+    // ===================== FUNCTION: handleAjaxForm =====================
+    // This function attaches an AJAX form submission handler to a specific form.
+    // Parameters:
+    //  formSelector      - jQuery selector for the form to attach the handler
+    //  actionUrl         - URL where the form data will be sent via POST
+    //  successContainer  - Selector for element where success message will be displayed
+    //  errorContainer    - Selector for element where error message will be displayed
+    //  buttonSelector    - Selector for the submit button to show "sending..." status
     function handleAjaxForm(formSelector, actionUrl, successContainer, errorContainer, buttonSelector) {
+
+        // Remove any previously attached submit events to prevent duplicates
         $(formSelector).off("submit").on("submit", function(e) {
+
+            // Prevent the default form submission behavior (page reload)
             e.preventDefault();
 
-            // Prevent multiple submissions
+            // Prevent multiple submissions if the form is already submitting
             if ($(this).data("submitting")) return;
+
+            // Mark the form as submitting
             $(this).data("submitting", true);
 
+            // Clear previous success or error messages
             $(successContainer).empty();
             $(errorContainer).empty();
+
+            // Collect form data, including file uploads if any
             var formData = new FormData(this);
 
+            // Disable the submit button and change its text to indicate sending
             if (buttonSelector) {
                 $(buttonSelector).prop('disabled', true).html('Sending...');
             }
 
+            // ===================== AJAX REQUEST =====================
             $.ajax({
-                url: actionUrl,
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                dataType: "json",
+                url: actionUrl,           // URL to submit the form data
+                type: 'POST',             // HTTP method
+                data: formData,           // The form data
+                processData: false,       // Prevent jQuery from processing the data (required for FormData)
+                contentType: false,       // Prevent jQuery from setting content-type header (required for FormData)
+                dataType: "json",         // Expect JSON response from the server
+
+                // ===================== SUCCESS HANDLER =====================
                 success: function(data) {
+
+                    // If server returns a positive status, show success message
                     if (data.status == 200 || data.status > 0) {
-                        $(successContainer).html(data.message);
-                        $(formSelector)[0].reset();
-                        $("#customFile").val('');
+                        $(successContainer).html(data.message); // Display success message
+                        $(formSelector)[0].reset();             // Reset form fields
+                        $("#customFile").val('');               // Reset file input if exists
+
                     } else {
+                        // Otherwise show error message returned from server
                         $(errorContainer).html(data.message);
                     }
+
+                    // Re-enable the submit button and reset its text
                     if (buttonSelector) {
                         $(buttonSelector).prop('disabled', false).html('Book a Call Today');
                     }
                 },
+
+                // ===================== ERROR HANDLER =====================
                 error: function() {
+                    // Show generic error message if AJAX call fails
                     $(errorContainer).html("An error occurred. Please try again.");
+
+                    // Re-enable the submit button
                     if (buttonSelector) {
                         $(buttonSelector).prop('disabled', false).html('Book a Call Today');
                     }
                 },
+
+                // ===================== COMPLETE HANDLER =====================
                 complete: function() {
+                    // Mark the form as not submitting so user can submit again
                     $(formSelector).data("submitting", false);
                 }
             });
-        });
-    }
 
+        }); // End of form submit handler
+    } // End of handleAjaxForm function
 
-</body>
-</html>
+}); // End of jQuery ready function
+</script>
