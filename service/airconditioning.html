@@ -473,11 +473,9 @@
 
                     <!-- Newsletter Form -->
                     <form id="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="footer-newsletter">
-                        <!-- Netlify hidden field -->
                         <input type="hidden" name="form-name" value="newsletter">
                         <!-- Spam protection -->
                         <p style="display:none"><label>Don’t fill this out if you're human: <input name="bot-field"></label></p>
-                        <!-- Email input -->
                         <input type="email" name="email" placeholder="Email Here.." required>
                         <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
                     </form>
@@ -518,49 +516,58 @@
 <a class="c-btn-whatsapp" href="https://wa.me/15164158918?text=Hello!%20I'd%20like%20to%20book%20an%20appointment."><span class="fa fa-whatsapp"></span></a>
 
 <!-- ============================= -->
+<!-- Floating Buttons CSS -->
+<!-- Ensures buttons always appear on top -->
+<style>
+.c-btn-phone, .c-btn-whatsapp {
+    display: block;
+    position: fixed;
+    cursor: pointer;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 45px;
+    background: #00b833;
+    z-index: 9999; /* high z-index ensures visibility */
+}
+
+/* Phone button at bottom */
+.c-btn-phone { bottom: 125px; right: 15px; }
+/* WhatsApp button above phone button */
+.c-btn-whatsapp { bottom: 185px; right: 15px; }
+</style>
+
+<!-- ============================= -->
 <!-- Newsletter AJAX Script -->
-<!-- Submits form without refreshing the page -->
+<!-- Prevent page refresh on submission -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("newsletter-form"); // select form
-    const successDiv = document.querySelector(".mailchimp-success"); // success message container
-    const errorDiv = document.querySelector(".mailchimp-error"); // error message container
+    const form = document.getElementById("newsletter-form");
+    const successDiv = document.querySelector(".mailchimp-success");
+    const errorDiv = document.querySelector(".mailchimp-error");
 
     form.addEventListener("submit", function(e) {
-        e.preventDefault(); // prevent page reload
-
-        // Clear previous messages
+        e.preventDefault(); // stop page reload
         successDiv.textContent = "";
         errorDiv.textContent = "";
 
-        // Collect form data
         const formData = new FormData(form);
-        formData.append("form-name", form.getAttribute("name")); // Netlify requirement
+        formData.append("form-name", form.getAttribute("name"));
 
-        // Convert form data to URL-encoded string
         const body = new URLSearchParams();
-        for (const pair of formData.entries()) {
-            body.append(pair[0], pair[1]);
-        }
+        for (const pair of formData) body.append(pair[0], pair[1]);
 
-        // Send form data via fetch to Netlify
         fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: body.toString()
         })
-        .then(response => {
-            if (response.ok) {
-                // Show success message
-                successDiv.textContent = "Thank you for subscribing!";
-                form.reset(); // reset form fields
-            } else {
-                // Show error if submission fails
-                errorDiv.textContent = "Something went wrong. Please try again.";
-            }
+        .then(() => {
+            successDiv.textContent = "Thank you for subscribing!";
+            form.reset();
         })
         .catch(() => {
-            // Catch network errors
             errorDiv.textContent = "Something went wrong. Please try again.";
         });
     });
@@ -569,14 +576,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <!-- ============================= -->
 <!-- Required JS Scripts -->
-<!-- ============================= -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="assets/js/vendor/popper.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="assets/js/plugins/plugins.js"></script>
 <script src="assets/js/main.js"></script>
 
-<!-- Tawk.to Chat -->
+<!-- ============================= -->
+<!-- Tawk.to Live Chat -->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
