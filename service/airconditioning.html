@@ -655,34 +655,27 @@ header.header.header-transparent.header-sticky.d-lg-block.d-none {
 .sidebar-blog .image img { width: 100%; height: 60px; }
 </style>
 
-<!-- ============================= -->
-<!-- Unified AJAX Form Handler -->
-<!-- ============================= -->
+<
+<!-- Unified Form Handler -->
 <script>
 jQuery(function($) {
 
-    // Function to attach AJAX submission to a form
     function handleAjaxForm(formSelector, actionUrl, successContainer, errorContainer, buttonSelector) {
-
         $(formSelector).off("submit").on("submit", function(e) {
-
             e.preventDefault();
 
-            // Prevent duplicate submissions
+            // Prevent multiple submissions
             if ($(this).data("submitting")) return;
             $(this).data("submitting", true);
 
-            // Clear previous messages
             $(successContainer).empty();
             $(errorContainer).empty();
-
-            // Collect form data
             var formData = new FormData(this);
 
-            // Disable button while submitting
-            if (buttonSelector) $(buttonSelector).prop('disabled', true).html('Sending...');
+            if (buttonSelector) {
+                $(buttonSelector).prop('disabled', true).html('Sending...');
+            }
 
-            // AJAX POST request
             $.ajax({
                 url: actionUrl,
                 type: 'POST',
@@ -690,7 +683,6 @@ jQuery(function($) {
                 processData: false,
                 contentType: false,
                 dataType: "json",
-
                 success: function(data) {
                     if (data.status == 200 || data.status > 0) {
                         $(successContainer).html(data.message);
@@ -699,21 +691,23 @@ jQuery(function($) {
                     } else {
                         $(errorContainer).html(data.message);
                     }
-                    if (buttonSelector) $(buttonSelector).prop('disabled', false).html('Book a Call Today');
+                    if (buttonSelector) {
+                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
+                    }
                 },
-
                 error: function() {
                     $(errorContainer).html("An error occurred. Please try again.");
-                    if (buttonSelector) $(buttonSelector).prop('disabled', false).html('Book a Call Today');
+                    if (buttonSelector) {
+                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
+                    }
                 },
-
                 complete: function() {
                     $(formSelector).data("submitting", false);
                 }
             });
-
         });
     }
 
-}); // End jQuery ready
-</script>
+
+</body>
+</html>
