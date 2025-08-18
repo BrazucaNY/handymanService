@@ -1,61 +1,73 @@
 <head>
   <!-- ================= Basic Setup ================= -->
-  <meta charset="UTF-8"> <!-- Character encoding -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile responsive -->
-  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- IE compatibility -->
+  <meta charset="UTF-8"> <!-- Defines character encoding as UTF-8 (universal standard for text, avoids special character issues like accents breaking) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures mobile responsiveness, scales content to fit device width -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- Forces latest rendering engine in Internet Explorer (backward compatibility) -->
 
   <!-- ================= Page Title & Meta (SEO Optimized) ================= -->
-  <title>Rodrigues Handyman NYC | Home Maintenance & Repairs</title>
-  <meta name="description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs. Call +1 (516) 415-8918 today!">
-  <meta name="keywords" content="handyman NY, home maintenance New York, house repair NY, plumbing, electrical, carpentry, painting">
-  <meta name="theme-color" content="#00b833">
-  <meta name="robots" content="index, follow">
+  <title>Rodrigues Handyman NYC | Home Maintenance & Repairs</title> <!-- Main title of the page (shows in search results & browser tab) -->
+  <meta name="description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs. Call +1 (516) 415-8918 today!"> 
+  <!-- Meta description (important for SEO & CTR in Google results) -->
+  
+  <meta name="keywords" content="handyman NY, home maintenance New York, house repair NY, plumbing, electrical, carpentry, painting"> 
+  <!-- Keywords meta (not as relevant for Google anymore, but still used by smaller search engines) -->
+
+  <meta name="theme-color" content="#00b833"> <!-- Sets browser theme color on mobile (Android Chrome UI bar color) -->
+  <meta name="robots" content="index, follow"> <!-- Allows search engines to index and follow all links on this page -->
 
   <!-- ================= Canonical URL ================= -->
-  <link rel="canonical" href="https://rodrigueshandyman.com/"> <!-- Tells search engines the official URL of this page -->
+  <link rel="canonical" href="https://rodrigueshandyman.com/"> 
+  <!-- Prevents duplicate content issues if multiple URLs point to same page -->
 
   <!-- ================= Open Graph / Social Sharing ================= -->
+  <!-- These tags control how your page looks when shared on Facebook, LinkedIn, WhatsApp, etc. -->
   <meta property="og:title" content="Handyman NY | Home Maintenance & Repairs">
   <meta property="og:description" content="Expert home maintenance, repair, and handyman services across all NYC boroughs. Call +1 (516) 415-8918 for service today!">
-  <meta property="og:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
-  <meta property="og:image:width" content="1200">
+  <meta property="og:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg"> <!-- Must be 1200x630px for best results -->
+  <meta property="og:image:width" content="1200"> <!-- Helps Facebook/LinkedIn know correct dimensions -->
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://rodrigueshandyman.com">
+  <meta property="og:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC"> <!-- Accessible alternative text -->
+  <meta property="og:type" content="website"> <!-- Type of resource -->
+  <meta property="og:url" content="https://rodrigueshandyman.com"> <!-- Canonical URL for Open Graph -->
 
   <!-- ================= Twitter Card Meta ================= -->
-  <meta name="twitter:card" content="summary_large_image">
+  <!-- These tags control how your page looks when shared on Twitter -->
+  <meta name="twitter:card" content="summary_large_image"> <!-- Forces large preview card -->
   <meta name="twitter:title" content="Handyman NY | Home Maintenance & Repairs">
   <meta name="twitter:description" content="Expert home maintenance, repair, and handyman services across all NYC boroughs. Call +1 (516) 415-8918 for service today!">
   <meta name="twitter:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
   <meta name="twitter:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC">
 
   <!-- ================= Favicon ================= -->
-  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png"> <!-- Small browser tab icon -->
 
   <!-- ================= CSS Files ================= -->
-  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css">
-  <link rel="stylesheet" href="assets/css/vendor/helper.css">
-  <link rel="stylesheet" href="assets/css/plugins/plugins.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Vendor & custom CSS for layout, fonts, and styles -->
+  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"> <!-- Bootstrap framework for grid and responsive design -->
+  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css"> <!-- Custom icon font library -->
+  <link rel="stylesheet" href="assets/css/vendor/helper.css"> <!-- Helper classes (likely spacing, display utilities, etc.) -->
+  <link rel="stylesheet" href="assets/css/plugins/plugins.css"> <!-- Plugin-specific CSS (sliders, popups, animations) -->
+  <link rel="stylesheet" href="assets/css/style.css"> <!-- Main custom site stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <!-- Font Awesome for scalable icons (social media, UI icons, etc.) -->
 
   <!-- ================= JS for Older Browser Support ================= -->
-  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script> 
+  <!-- Detects browser features (e.g., flexbox, HTML5 video support), allows fallback for older browsers -->
 
   <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
+  <!-- Schema.org JSON-LD structured data (helps Google understand your business) -->
+  <!-- Boosts SEO by showing business details (name, address, phone, services) in Google Knowledge Panel & Maps -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
-    "name": "Rodrigues Handyman",
-    "image": "https://rodrigueshandyman.com/assets/images/rodrigueshandyman.jpg",
+    "name": "Rodrigues Handyman", 
+    "image": "https://rodrigueshandyman.com/assets/images/rodrigueshandyman.jpg", 
     "@id": "https://rodrigueshandyman.com",
     "url": "https://rodrigueshandyman.com",
     "telephone": "+1-516-415-8918",
-    "priceRange": "$$",
+    "priceRange": "$$", <!-- Helps customers know price range (cheap $, expensive $$$) -->
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "N MacQuesten Pkwy",
@@ -66,8 +78,8 @@
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 40.9111,
-      "longitude": -73.8950
+      "latitude": 40.9111, <!-- Business latitude (used for Google Maps placement) -->
+      "longitude": -73.8950 <!-- Business longitude -->
     },
     "areaServed": {
       "@type": "City",
@@ -75,7 +87,7 @@
     },
     "sameAs": [
       "https://www.facebook.com/rodrigueshandyman",
-      "https://www.instagram.com/rodrigueshandyman",
+      "https://www.instagram.com/rodrigueshandyman"
     ],
     "description": "Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs."
   }
@@ -83,92 +95,113 @@
 </head>
 <body>
 
-
-
-
 <!-- START MAIN WRAPPER -->
-<div id="main-wrapper">
+<div id="main-wrapper"> <!-- Main container wrapper for the entire site content -->
 
-<!-- ================= HEADER SECTION ================= -->
-<header class="header header-transparent header-sticky d-lg-block d-none">
+  <!-- ================= HEADER SECTION ================= -->
+  <!-- Header is transparent and sticky (fixed to top). 
+       "d-lg-block d-none" makes it visible only on desktop (hidden on mobile). -->
+  <header class="header header-transparent header-sticky d-lg-block d-none">
   
-  <!-- ========== HEADER MIDDLE ========== -->
-  <div class="header-middle">
-    <div class="container">
-      <div class="row align-items-center">
+    <!-- ========== HEADER MIDDLE ========== -->
+    <!-- This section contains logo, contact info, and search -->
+    <div class="header-middle">
+      <div class="container"> <!-- Bootstrap container for responsive layout -->
+        <div class="row align-items-center"> <!-- Align items vertically center -->
 
-        <!-- LOGO COLUMN -->
-        <div class="col-lg-2">
-          <div class="logo">
-            <a href="index.html"><img src="assets/images/logo.png" alt="Handyman David Logo"></a>
-          </div>
-        </div>
-
-        <!-- CONTACT INFO + SEARCH -->
-        <div class="col-lg-10">
-          <div class="header-middle-right">
-            <div class="row">
-
-              <!-- Contact info -->
-              <div class="col-lg-10">
-                <div class="emergncy-contact-area">
-                  <div class="row">
-
-                    <!-- Phone -->
-                    <div class="col-sm-5 col-lg-5 pl-85 pl-md-70">
-                      <div class="single-emergncy-contact">
-                        <div class="icon"><i class="fa fa-phone"></i></div>
-                        <div class="content">
-                          <h3>+ 516 415 8918</h3>
-                          <span>info@rodrigueshandyman.com</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Address -->
-                    <div class="col-sm-7 col-lg-6">
-                      <div class="single-emergncy-contact">
-                        <div class="icon"><i class="fa fa-home"></i></div>
-                        <div class="content">
-                          <h3>New York</h3>
-                          <span>Serving All Boroughs</span>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-              <!-- Search Button -->
-              <div class="col-lg-2 d-flex align-items-center">
-                <div class="header-search">
-                  <button class="header-search-toggle"><i class="fa fa-search"></i></button>
-                  <div class="header-search-form">
-                    <form action="#">
-                      <input type="text" placeholder="Type and hit enter">
-                      <button><i class="fa fa-search"></i></button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
+          <!-- LOGO COLUMN -->
+          <div class="col-lg-2">
+            <div class="logo">
+              <!-- Logo links back to homepage -->
+              <a href="index.html">
+                <img src="assets/images/logo.png" alt="Handyman David Logo">
+              </a>
             </div>
           </div>
-        </div>
 
+          <!-- CONTACT INFO + SEARCH COLUMN -->
+          <div class="col-lg-10">
+            <div class="header-middle-right">
+              <div class="row">
+
+                <!-- Contact info area -->
+                <div class="col-lg-10">
+                  <div class="emergncy-contact-area"> <!-- NOTE: Typo "emergncy" (from theme) -->
+                    <div class="row">
+
+                      <!-- Phone Information -->
+                      <!-- "pl-85 pl-md-70" = padding left (desktop vs tablet) -->
+                      <div class="col-sm-5 col-lg-5 pl-85 pl-md-70">
+                        <div class="single-emergncy-contact">
+                          <div class="icon"><i class="fa fa-phone"></i></div> <!-- Phone icon -->
+                          <div class="content">
+                            <h3>+ 516 415 8918</h3> <!-- Phone number -->
+                            <span>info@rodrigueshandyman.com</span> <!-- Email -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Address Information -->
+                      <div class="col-sm-7 col-lg-6">
+                        <div class="single-emergncy-contact">
+                          <div class="icon"><i class="fa fa-home"></i></div> <!-- Home icon -->
+                          <div class="content">
+                            <h3>New York</h3> <!-- City -->
+                            <span>Serving All Boroughs</span> <!-- Service coverage -->
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Search Button -->
+                <!-- Search field appears when button is toggled -->
+                <div class="col-lg-2 d-flex align-items-center">
+                  <div class="header-search">
+                    <button class="header-search-toggle">
+                      <i class="fa fa-search"></i> <!-- Magnifying glass icon -->
+                    </button>
+                    <div class="header-search-form">
+                      <form action="#"> <!-- CHANGE: currently "#" (no real search backend yet) -->
+                        <input type="text" placeholder="Type and hit enter"> <!-- Search field -->
+                        <button><i class="fa fa-search"></i></button> <!-- Submit button -->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Social Links -->
+      <!-- Social menu icons for Facebook, Instagram, YouTube -->
+      <div class="social-menu">
+        <ul class="social-menu-top">
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/rodrigueshandyman/" target="_blank">
+              <i class="fa fa-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/" target="_blank">
+              <i class="fa fa-youtube-play"></i>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <!-- Social Links -->
-    <div class="social-menu">
-      <ul class="social-menu-top">
-        <li><a href="https://www.facebook.com/profile.php?id=61578693421538"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="https://www.instagram.com/rodrigueshandyman/"><i class="fa fa-instagram"></i></a></li>
-        <li><a href="https://www.youtube.com/"><i class="fa fa-youtube-play"></i></a></li>
-      </ul>
-    </div>
-  </div>
 
   <!-- ========== HEADER BOTTOM - MAIN MENU ========== -->
   <div class="header-bottom menu-right">
