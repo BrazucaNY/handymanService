@@ -281,149 +281,92 @@
 </div>
 <!-- End Breadcrumb -->
 
-
-
 <!-- ================= LIGHTBOX STYLE ================= -->
 <style>
-/* Fullscreen lightbox background (hidden until triggered) */
+/* Fullscreen lightbox background (hidden by default) */
 .lightbox {
-  display: none;
-  position: fixed;
-  z-index: 9999;
+  display: none;              /* hidden until an image is clicked */
+  position: fixed;            /* stays fixed when scrolling */
+  z-index: 9999;              /* above all other content */
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
+  width: 100%;                /* full screen width */
+  height: 100%;               /* full screen height */
+  background: rgba(0,0,0,0.8); /* semi-transparent black overlay */
+  justify-content: center;    /* center image horizontally */
+  align-items: center;        /* center image vertically */
 }
 
+/* Image inside the lightbox */
 .lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  max-width: 90%;             /* scale down if image too wide */
+  max-height: 90%;            /* scale down if image too tall */
+  border-radius: 10px;        /* rounded corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* subtle shadow */
 }
 </style>
 
-<!-- ================= GALLERY SCRIPT ================= -->
-<script>
-fetch('gallery.json')
-  .then(res => res.json())
-  .then(images => {
-    const gallery = document.querySelector('.gallery-sec .row');
-    images.forEach(src => {
-      const div = document.createElement('div');
-      div.className = 'col-md-3 col-6 mb-30';
-      div.innerHTML = `
-        <a class="chocolat-image profile-img-container" href="${src}" title="Gallery Image">
-          <img width="100" src="${src}" alt="Gallery Image" />
-          <div class="overlay"></div>
-        </a>`;
-      gallery.appendChild(div);
-    });
-
-    // Add lightbox click events after images are loaded
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-
-    document.querySelectorAll('.gallery-sec a').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        lightboxImg.src = link.querySelector('img').src;
-        lightbox.style.display = 'flex';
-      });
-    });
-
-    // Close lightbox when clicking outside the image
-    lightbox.addEventListener("click", e => {
-      if (e.target !== lightboxImg) lightbox.style.display = "none";
-    });
-
-    // Close lightbox on ESC key
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape") lightbox.style.display = "none";
-    });
-  });
-</script>
-
-<!-- ================= LIGHTBOX CONTAINER (empty until image clicked) ================= -->
+<!-- ================= LIGHTBOX CONTAINER ================= -->
 <div class="lightbox" id="lightbox">
-  <img id="lightbox-img" src="" alt="">
+  <img id="lightbox-img" src="" alt="Gallery Image">
 </div>
 
-<!-- ================= YOUR GALLERY SECTION ================= -->
+<!-- ================= GALLERY SECTION ================= -->
 <div class="gallery-sec service-section section pt-30 pb-70 pb-lg-50 pb-md-40 pb-sm-30 pb-xs-20">
   <div class="container">
     <div class="row">
-
-      <!-- Gallery item #1 -->
-      <div class="col-md-3 col-6 mb-30">
-        <!-- <a> is kept for fallback (so users can still open image if JS fails) -->
-        <a class="chocolat-image profile-img-container" href="uploads/gallery/door.jpg" title="Gallery Image">
-          <!-- Thumbnail image -->
-          <img width="100" src="uploads/gallery/door.jpg" alt="Door" />
-          <!-- Overlay (your existing design effect) -->
-          <div class="overlay"></div>
-        </a>
-      </div>
-
-      <!-- Gallery item #2 -->
-      <div class="col-md-3 col-6 mb-30">
-        <a class="chocolat-image profile-img-container" href="uploads/gallery/img_7277.webp" title="Gallery Image">
-          <img width="100" src="uploads/gallery/img_7277.webp" alt="Gallery Sample" />
-          <div class="overlay"></div>
-        </a>
-      </div>
-
-      <!-- Repeat as many as needed for your gallery images -->
-      
+      <!-- Images will be dynamically inserted here -->
     </div>
   </div>
 </div>
 
-<!-- ================= LIGHTBOX SCRIPT ================= -->
+<!-- ================= GALLERY SCRIPT ================= -->
 <script>
-// Grab the lightbox container (the overlay div)
-const lightbox = document.getElementById("lightbox");
+  // Grab the container for the gallery
+  const galleryRow = document.querySelector('.gallery-sec .row');
 
-// Grab the image element inside the lightbox
-const lightboxImg = document.getElementById("lightbox-img");
+  // Grab the lightbox elements
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
 
-// Select ALL links inside the gallery section
-document.querySelectorAll(".gallery-sec a").forEach(link => {
-  
-  // Attach a click event to each link
-  link.addEventListener("click", (e) => {
-    e.preventDefault(); // Prevents default action (opening image file directly)
-    
-    // Find the <img> element inside the clicked link
-    const img = link.querySelector("img");
-    
-    // Set lightbox image source to the clicked thumbnail's source
-    lightboxImg.src = img.src;
-    
-    // Display the lightbox (by switching from "display: none" to flexbox)
-    lightbox.style.display = "flex";
+  // Load images from gallery.json
+  fetch('gallery.json')
+    .then(res => res.json())
+    .then(images => {
+      images.forEach(src => {
+        // Create a column div for each image
+        const div = document.createElement('div');
+        div.className = 'col-md-3 col-6 mb-30';
+        div.innerHTML = `
+          <a class="chocolat-image profile-img-container" href="${src}" title="Gallery Image">
+            <img width="100" src="${src}" alt="Gallery Image">
+            <div class="overlay"></div>
+          </a>
+        `;
+        galleryRow.appendChild(div);
+      });
+
+      // After all images are added, attach lightbox click events
+      document.querySelectorAll('.gallery-sec a').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault(); // Prevent default link behavior
+          lightboxImg.src = link.querySelector('img').src; // Set lightbox image
+          lightbox.style.display = 'flex'; // Show lightbox
+        });
+      });
+    })
+    .catch(err => console.error('Error loading gallery:', err));
+
+  // Close lightbox when clicking outside the image
+  lightbox.addEventListener('click', e => {
+    if (e.target !== lightboxImg) lightbox.style.display = 'none';
   });
-});
 
-// Event listener: close lightbox when clicking outside the image
-lightbox.addEventListener("click", (e) => {
-  if (e.target !== lightboxImg) { // only close if user clicked background
-    lightbox.style.display = "none"; // hide the lightbox
-  }
-});
-
-// Event listener: close lightbox when pressing ESC key
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {  // check if ESC key is pressed
-    lightbox.style.display = "none"; // hide the lightbox
-  }
-});
+  // Close lightbox when pressing ESC key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') lightbox.style.display = 'none';
+  });
 </script>
-
 
 
 
