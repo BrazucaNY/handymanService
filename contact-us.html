@@ -308,14 +308,22 @@
             - `data-netlify="true"` tells Netlify to capture submissions
             - `name="contact"` is the unique form name in Netlify UI
             - Hidden input `form-name` is required for AJAX submission
+            - Added honeypot field for extra spam protection
           -->
           <form 
             id="contact-form" 
             name="contact" 
             method="POST" 
             data-netlify="true"
+            netlify-honeypot="bot-field"
           >
+            <!-- Required for Netlify AJAX submission -->
             <input type="hidden" name="form-name" value="contact">
+
+            <!-- Honeypot field (hidden from users) -->
+            <p class="hidden">
+              <label>Don't fill this out if you're human: <input name="bot-field" type="text"></label>
+            </p>
 
             <div class="row">
 
@@ -410,14 +418,7 @@
   </div>
 </div>
 
-<!-- ================= GOOGLE RECAPTCHA ENTERPRISE ================= -->
-<!-- 
-  - Load Google reCAPTCHA Enterprise JS
-  - Replace the site key with your own
-  - This script allows us to generate a token for AJAX submission
--->
-<script src="https://www.google.com/recaptcha/enterprise.js?render=6LfXS6srAAAAAL0XPu-K9i0WjL5XaY33t8Ps0EOf"></script>
-
+<!-- ================= AJAX FORM SUBMISSION ================= -->
 <script>
   // Select the form and feedback message container
   const form = document.getElementById("contact-form");
@@ -428,37 +429,28 @@
     // Prevent default page reload
     event.preventDefault();
 
-    // Wait until reCAPTCHA Enterprise is ready
-    grecaptcha.enterprise.ready(() => {
-      // Execute reCAPTCHA with your site key and action name
-      grecaptcha.enterprise.execute('6LfXS6srAAAAAL0XPu-K9i0WjL5XaY33t8Ps0EOf', {action: 'contact_form'})
-      .then(token => {
-        // Prepare form data for submission
-        const formData = new FormData(form);
+    // Prepare form data for submission
+    const formData = new FormData(form);
 
-        // Append the reCAPTCHA token to form data
-        formData.append('g-recaptcha-response', token);
-
-        // Submit form data to Netlify using fetch (AJAX)
-        fetch("/", {
-          method: "POST",
-          body: formData
-        })
-        .then(() => {
-          // Success message
-          formMessage.innerText = "Thank you for your submission!";
-          // Reset the form fields
-          form.reset();
-        })
-        .catch(error => {
-          // Error message
-          formMessage.innerText = "Submission failed. Please try again.";
-          console.error(error);
-        });
-      });
+    // Submit form data to Netlify using fetch (AJAX)
+    fetch("/", {
+      method: "POST",
+      body: formData
+    })
+    .then(() => {
+      // Success message
+      formMessage.innerText = "Thank you for your submission!";
+      // Reset the form fields
+      form.reset();
+    })
+    .catch(error => {
+      // Error message
+      formMessage.innerText = "Submission failed. Please try again.";
+      console.error(error);
     });
   });
 </script>
+
 
 <!-- ============================
      CTA (Call To Action) SECTION
