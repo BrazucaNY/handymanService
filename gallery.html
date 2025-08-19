@@ -264,80 +264,121 @@
 
         </div>
         <!-- End of offcanvas mobile menu -->
+<!-- ================= GALLERY PAGE SECTION ================= -->
 
-
-      <!-- Service Intro Section Start -->
+<!-- Breadcrumb / Page Title -->
 <div class="breadcrumb-section section bg-black pt-25 pb-25 pt-sm-55 pb-sm-55 pt-xs-45 pb-xs-45">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <div class="breadcrumb-title">
-                    <h2>Gallery</h2>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-12">
+        <div class="breadcrumb-title">
+          <h2>Gallery</h2>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-<!-- Service Intro Section End -->
+<!-- End Breadcrumb -->
 
-
-
+<!-- ================= LIGHTBOX STYLE ================= -->
 <style>
-/* Lightbox background */
+/* Fullscreen lightbox background */
 .lightbox {
-  display: none;
+  display: none; /* hidden by default */
   position: fixed;
-  z-index: 9999;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
+  z-index: 9999; /* stays above all content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8); /* dark transparent overlay */
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
 }
+
+/* Image inside the lightbox */
 .lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  max-width: 90%;  /* keep it inside viewport width */
+  max-height: 90%; /* keep it inside viewport height */
+  border-radius: 10px; /* rounded corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* subtle shadow */
 }
 </style>
 
-<!-- Gallery -->
-<div class="gallery">
-  <img src="uploads/gallery/door.jpg" alt="Door" class="gallery-img" width="150">
-  <img src="uploads/gallery/img_7277.webp" alt="Sample" class="gallery-img" width="150">
-</div>
-
-<!-- Lightbox -->
+<!-- ================= LIGHTBOX HTML (empty by default) ================= -->
 <div class="lightbox" id="lightbox">
   <img id="lightbox-img" src="" alt="">
 </div>
 
+<!-- ================= YOUR GALLERY SECTION ================= -->
+<div class="gallery-sec service-section section pt-30 pb-70 pb-lg-50 pb-md-40 pb-sm-30 pb-xs-20">
+  <div class="container">
+    <div class="row">
+
+      <!-- Example gallery item -->
+      <div class="col-md-3 col-6 mb-30">
+        <!-- Wrap image in <a> (not needed for lightbox, but safe if no JS loads) -->
+        <a class="chocolat-image profile-img-container" href="uploads/gallery/door.jpg" title="Gallery Image">
+          <!-- The image itself -->
+          <img width="100" src="uploads/gallery/door.jpg" alt="Door" />
+          <div class="overlay"></div> <!-- Overlay effect (your existing design) -->
+        </a>
+      </div>
+
+      <!-- Repeat for all other images... -->
+      <div class="col-md-3 col-6 mb-30">
+        <a class="chocolat-image profile-img-container" href="uploads/gallery/img_7277.webp" title="Gallery Image">
+          <img width="100" src="uploads/gallery/img_7277.webp" alt="Gallery Sample" />
+          <div class="overlay"></div>
+        </a>
+      </div>
+
+      <!-- Keep repeating your gallery items as you had -->
+      <!-- ... -->
+      
+    </div>
+  </div>
+</div>
+
+<!-- ================= LIGHTBOX SCRIPT ================= -->
 <script>
+// Grab lightbox container
 const lightbox = document.getElementById("lightbox");
+
+// Grab the image inside the lightbox
 const lightboxImg = document.getElementById("lightbox-img");
 
-document.querySelectorAll(".gallery-img").forEach(img => {
-  img.addEventListener("click", () => {
+// Select ALL images inside .gallery-sec (your big gallery)
+document.querySelectorAll(".gallery-sec img").forEach(img => {
+  
+  // Add click event to each image
+  img.addEventListener("click", (e) => {
+    e.preventDefault(); // prevent <a> from opening the image file directly
+    
+    // Set the lightbox image source to the clicked image
     lightboxImg.src = img.src;
+    
+    // Show the lightbox (use flex to center the image)
     lightbox.style.display = "flex";
   });
 });
 
-// Close when clicking outside image
+// Close lightbox when clicking outside the image
 lightbox.addEventListener("click", (e) => {
+  // if user clicks background (not the image itself)
   if (e.target !== lightboxImg) {
-    lightbox.style.display = "none";
+    lightbox.style.display = "none"; // hide the lightbox
   }
 });
 
-// Close on ESC key
+// Close lightbox when pressing ESC key
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    lightbox.style.display = "none";
+  if (e.key === "Escape") { // check if ESC is pressed
+    lightbox.style.display = "none"; // hide the lightbox
   }
 });
 </script>
+
 
 
 
