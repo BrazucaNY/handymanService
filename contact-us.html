@@ -777,40 +777,60 @@ s0.parentNode.insertBefore(s1,s0);
     });
 </script>
 
-
 <script>
-    $("#enquiry-form").on("submit", function(ev) {
-    ev.preventDefault(); // Prevent browser default submit.
-    dataString = $('#enquiry-form').serialize();
+$("#enquiry-form").on("submit", function(ev) {
+    ev.preventDefault(); // Prevent default form submission
+    
+    // Prepare the form data
     var formData = new FormData($("#enquiry-form")[0]);
-    $('#sendEnquiry').prop('disabled',true);
-    $('#sendEnquiry').html('Sending...');
+    
+    // Disable submit button and show sending message
+    $('#sendEnquiry').prop('disabled', true).html('Sending...');
+    
     $.ajax({
-        url: 'https://handymanguru.com/Home/enquiry',
+        url: 'https://handymanguru.com/Home/enquiry', // Endpoint that handles form
         type: 'POST',
         data: formData,
         async: true,
-        success: function(data) {
-            data = jQuery.parseJSON(data);
-            // console.log(data);
-            if(data.status > 0){
-                $('#enquiry-form')[0].reset();
-                $("#customFile").val('');
-                html    =   '<p class="form-messege success">'+data.message+'</p>';
-            }else{
-                html    =   '<p class="form-messege error">'+data.message+'</p>';
-            }
-            $('#info-msg').html(html);
-            $('#sendEnquiry').prop("disabled", false);
-            $('#sendEnquiry').html('Send Enquiry');
-        },
         cache: false,
         contentType: false,
-        processData: false
+        processData: false,
+        success: function(response) {
+            // Parse JSON response
+            var data = jQuery.parseJSON(response);
+            var html = '';
+
+            if (data.status > 0) {
+                // Successful submission
+                $('#enquiry-form')[0].reset();  // Clear the form fields
+                $("#customFile").val('');       // Clear file input if any
+                
+                // Show success message
+                html = '<p class="form-messege success" style="color:green; font-weight:bold;">' + 
+                        data.message + '</p>';
+            } else {
+                // Failed submission
+                html = '<p class="form-messege error" style="color:red; font-weight:bold;">' + 
+                        data.message + '</p>';
+            }
+
+            // Inject message into the page
+            $('#info-msg').html(html);
+            
+            // Re-enable submit button
+            $('#sendEnquiry').prop("disabled", false).html('Send Enquiry');
+        },
+        error: function() {
+            // Handle network or server error
+            $('#info-msg').html('<p class="form-messege error" style="color:red; font-weight:bold;">' +
+                                'There was an error sending your message. Please try again.' +
+                                '</p>');
+            $('#sendEnquiry').prop("disabled", false).html('Send Enquiry');
+        }
     });
-        
-    });
+});
 </script>
+
 
 <script>
 // Add the following code if you want the name of the file appear on select
