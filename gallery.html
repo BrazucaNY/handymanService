@@ -283,32 +283,47 @@
 
 <!-- ================= LIGHTBOX STYLE ================= -->
 <style>
-/* Fullscreen lightbox background (hidden by default) */
 .lightbox {
   display: none;              /* hidden until an image is clicked */
-  position: fixed;            /* stays fixed when scrolling */
-  z-index: 9999;              /* above all other content */
-  top: 0;
-  left: 0;
-  width: 100%;                /* full screen width */
-  height: 100%;               /* full screen height */
-  background: rgba(0,0,0,0.8); /* semi-transparent black overlay */
-  justify-content: center;    /* center image horizontally */
-  align-items: center;        /* center image vertically */
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
 }
 
-/* Image inside the lightbox */
 .lightbox img {
-  max-width: 90%;             /* scale down if image too wide */
-  max-height: 90%;            /* scale down if image too tall */
-  border-radius: 10px;        /* rounded corners */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* subtle shadow */
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
+
+/* Arrows styling */
+#prev, #next {
+  position: absolute;
+  top: 50%;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 10000;
+}
+#prev { left: 10px; }
+#next { right: 10px; }
 </style>
 
 <!-- ================= LIGHTBOX CONTAINER ================= -->
 <div class="lightbox" id="lightbox">
+  <button id="prev">&#10094;</button>
   <img id="lightbox-img" src="" alt="Gallery Image">
+  <button id="next">&#10095;</button>
 </div>
 
 <!-- ================= GALLERY SECTION ================= -->
@@ -322,26 +337,27 @@
 
 <!-- ================= GALLERY SCRIPT ================= -->
 <script>
-  // Grab the container for the gallery
-  const galleryRow = document.querySelector('.gallery-sec .row');
+let imagesArray = [];
+let currentIndex = 0;
 
-  // Grab the lightbox elements
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
+const galleryRow = document.querySelector('.gallery-sec .row');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const nextBtn = document.getElementById('next');
+const prevBtn = document.getElementById('prev');
 
-  // Load images from gallery.json
-fetch('uploads/gallery/gallery.json') // Correct path relative to HTML
+// Load gallery images
+fetch('uploads/gallery/gallery.json')
   .then(res => res.json())
   .then(images => {
-    const galleryRow = document.querySelector('.gallery-sec .row');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
+    imagesArray = images;
 
-    images.forEach(src => {
+    // Create gallery thumbnails
+    images.forEach((src, index) => {
       const div = document.createElement('div');
       div.className = 'col-md-3 col-6 mb-30';
       div.innerHTML = `
-        <a class="chocolat-image profile-img-container" href="${src}" title="Gallery Image">
+        <a class="chocolat-image profile-img-container" href="${src}" data-index="${index}">
           <img width="100" src="${src}" alt="Gallery Image">
           <div class="overlay"></div>
         </a>
@@ -349,29 +365,41 @@ fetch('uploads/gallery/gallery.json') // Correct path relative to HTML
       galleryRow.appendChild(div);
     });
 
-    // Attach lightbox click events
+    // Open lightbox when clicking thumbnail
     document.querySelectorAll('.gallery-sec a').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
-        lightboxImg.src = link.querySelector('img').src;
+        currentIndex = parseInt(link.dataset.index);
+        lightboxImg.src = imagesArray[currentIndex];
         lightbox.style.display = 'flex';
       });
     });
   })
   .catch(err => console.error('Error loading gallery:', err));
 
+// Next/Previous arrows
+nextBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % imagesArray.length;
+  lightboxImg.src = imagesArray[currentIndex];
+});
 
-  // Close lightbox when clicking outside the image
-  lightbox.addEventListener('click', e => {
-    if (e.target !== lightboxImg) lightbox.style.display = 'none';
-  });
+prevBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  currentIndex = (currentIndex - 1 + imagesArray.length) % imagesArray.length;
+  lightboxImg.src = imagesArray[currentIndex];
+});
 
-  // Close lightbox when pressing ESC key
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') lightbox.style.display = 'none';
-  });
+// Close lightbox on background click
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) lightbox.style.display = 'none';
+});
+
+// Close lightbox on ESC key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') lightbox.style.display = 'none';
+});
 </script>
-
 
 
 
