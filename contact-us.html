@@ -701,72 +701,118 @@
         }
     </style>
         
-  <!-- ============================= -->
+<!-- ============================= -->
 <!-- Tawk.to Live Chat Widget -->
 <!-- ============================= -->
 <script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/640afa364247f20fefe51753/1j1fvdu99';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+    // Initialize Tawk API object if not already initialized
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+
+    (function() {
+        // Create a new <script> element
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0]; // First script on the page
+
+        // Set async to true so it loads in the background
+        s1.async = true;
+
+        // Set the source to Tawk.to embed script URL
+        s1.src = 'https://embed.tawk.to/640afa364247f20fefe51753/1j1fvdu99';
+
+        // Set charset to UTF-8
+        s1.charset = 'UTF-8';
+
+        // Allow cross-origin requests
+        s1.setAttribute('crossorigin', '*');
+
+        // Insert the Tawk.to script before the first script tag
+        s0.parentNode.insertBefore(s1, s0);
+    })();
 </script>
 
-    
-    
-    </div>
-  
 
+<!-- ============================ -->
 <!-- REQUIRED JS SCRIPTS -->
-<!-- All jquery file included here -->
+<!-- All jQuery and plugin scripts included below -->
+<!-- ============================ -->
+
+<!-- jQuery library (v1.12.4) -->
 <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+
+<!-- Google Maps API -->
 <script src="maps.googleapis.com/maps/api/js5ae75ae7.html?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8&amp;callback">
 </script>
+
+<!-- Popper.js (required for Bootstrap tooltips and popovers) -->
 <script src="assets/js/vendor/popper.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
 <script src="assets/js/vendor/bootstrap.min.js"></script>
+
+<!-- Additional plugin scripts -->
 <script src="assets/js/plugins/plugins.js"></script>
+
+<!-- Main custom JavaScript -->
 <script src="assets/js/main.js"></script>
+
+<!-- ============================ -->
+<!-- Custom inline CSS -->
+<!-- ============================ -->
 <style type="text/css">
+    /* Fixes header position when transparent & sticky on desktop */
     header.header.header-transparent.header-sticky.d-lg-block.d-none {
         position: relative !important;
     }
+
+    /* Success message style for Mailchimp form */
     .mailchimp-success {
         color: #027502;
     }
+
+    /* Error message style for Mailchimp form */
     .mailchimp-error {
         color: #f50707;
     }
+
+    /* Adjust sidebar blog image size */
     .sidebar-blog .image img {
         width: 100%;
         height: 60px;
     }
 </style>
+
+<!-- ============================ -->
+<!-- AJAX submission for Mailchimp newsletter form -->
+<!-- ============================ -->
 <script type="text/javascript">
     jQuery(document).ready(function($){
+        // Intercept the newsletter form submission
         $("#mc-form").submit(function(e){
-            e.preventDefault();
+            e.preventDefault(); // Prevent default browser submission
+
+            // Clear previous success/error messages
             $(".mailchimp-success").empty();
             $(".mailchimp-error").empty();
             $(".mailchimp-submitting").empty(); 
-            var formData    = new FormData($("#enquiry-form")[0]); 
+
+            // Gather form data from enquiry form
+            var formData = new FormData($("#enquiry-form")[0]); 
            
+            // Send form data via AJAX
             $.ajax({
-                url: 'https://handymanguru.com/home/subscribe',
+                url: 'https://handymanguru.com/home/subscribe', // API endpoint
                 type: 'POST',
                 data: formData,
-                processData: false,
-                contentType: false,
+                processData: false,   // Prevent jQuery from automatically transforming the data
+                contentType: false,   // Let the browser set content type
                 cache: false,
-                timeout: 600000,
+                timeout: 600000,      // Timeout in milliseconds
                 dataType:"json",
                 success: function (data)  {
+                    // Display success or error message based on API response
                     if(data['status'] == 200) {
                         $(".mailchimp-success").html(data['message']);
-                        $("#mc-form")[0].reset();
+                        $("#mc-form")[0].reset(); // Reset form fields
                     }
                     else{
                         $(".mailchimp-error").html(data['message']);
@@ -776,6 +822,8 @@ s0.parentNode.insertBefore(s1,s0);
         });
     });
 </script>
+
+
 
 <script>
 $("#enquiry-form").on("submit", function(ev) {
@@ -831,15 +879,5 @@ $("#enquiry-form").on("submit", function(ev) {
 });
 </script>
 
-
-<script>
-// Add the following code if you want the name of the file appear on select
-$(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
-</script>     
 </body>
-
-<!-- Mirrored from handymanguru.com/contact-us by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 04 Aug 2025 16:09:22 GMT -->
 </html>
