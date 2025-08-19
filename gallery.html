@@ -280,11 +280,10 @@
   </div>
 </div>
 <!-- End Breadcrumb -->
-
 <!-- ================= LIGHTBOX STYLE ================= -->
 <style>
 .lightbox {
-  display: none;              /* hidden until an image is clicked */
+  display: none;              
   position: fixed;
   z-index: 9999;
   top: 0; left: 0;
@@ -293,6 +292,13 @@
   background: rgba(0,0,0,0.8);
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease; /* smooth fade */
+}
+
+.lightbox.show {
+  display: flex;
+  opacity: 1;
 }
 
 .lightbox img {
@@ -300,6 +306,12 @@
   max-height: 90%;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: opacity 0.3s ease; /* fade when changing images */
+  opacity: 0;
+}
+
+.lightbox img.show {
+  opacity: 1;
 }
 
 /* Arrows styling */
@@ -314,10 +326,105 @@
   cursor: pointer;
   transform: translateY(-50%);
   z-index: 10000;
+  user-select: none;
 }
 #prev { left: 10px; }
 #next { right: 10px; }
 </style>
+
+<!-- ================= LIGHTBOX CONTAINER ================= -->
+<div class="lightbox" id="lightbox">
+  <button id="prev">&#10094;</button>
+  <img id="lightbox-img" src="" alt="Gallery Image">
+  <button id="next">&#10095;</button>
+</div>
+
+<!-- ================= GALLERY SCRIPT ================= -->
+<script>
+let imagesArray = [];
+let currentIndex = 0;
+
+const galleryRow = document.querySelector('.gallery-sec .row');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const nextBtn = document.getElementById('next');
+const prevBtn = document.getElementById('prev');
+
+// Load gallery images
+fetch('uploads/gallery/gallery.json')
+  .then(res => res.json())
+  .then(images => {
+    imagesArray = images;
+
+    // Create gallery thumbnails
+    images.forEach((src, index) => {
+      const div = document.createElement('div');
+      div.className = 'col-md-3 col-6 mb-30';
+      div.innerHTML = `
+        <a class="chocolat-image profile-img-container" href="${src}" data-index="${index}">
+          <img width="100" src="${src}" alt="Gallery Image">
+          <div class="overlay"></div>
+        </a>
+      `;
+      galleryRow.appendChild(div);
+    });
+
+    // Open lightbox when clicking thumbnail
+    document.querySelectorAll('.gallery-sec a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        currentIndex = parseInt(link.dataset.index);
+        showLightbox();
+      });
+    });
+  })
+  .catch(err => console.error('Error loading gallery:', err));
+
+// Function to show lightbox with fade
+function showLightbox() {
+  lightboxImg.classList.remove('show'); // fade out previous image
+  lightbox.style.display = 'flex';
+  setTimeout(() => lightbox.classList.add('show'), 10); // fade-in overlay
+
+  lightboxImg.src = imagesArray[currentIndex];
+  setTimeout(() => lightboxImg.classList.add('show'), 50); // fade-in image
+}
+
+// Navigate images
+nextBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % imagesArray.length;
+  lightboxImg.classList.remove('show');
+  setTimeout(() => {
+    lightboxImg.src = imagesArray[currentIndex];
+    lightboxImg.classList.add('show');
+  }, 200);
+});
+
+prevBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  currentIndex = (currentIndex - 1 + imagesArray.length) % imagesArray.length;
+  lightboxImg.classList.remove('show');
+  setTimeout(() => {
+    lightboxImg.src = imagesArray[currentIndex];
+    lightboxImg.classList.add('show');
+  }, 200);
+});
+
+// Close lightbox on background click or ESC
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+function closeLightbox() {
+  lightbox.classList.remove('show');
+  setTimeout(() => lightbox.style.display = 'none', 400);
+}
+</script>
+
 
 <!-- ================= LIGHTBOX CONTAINER ================= -->
 <div class="lightbox" id="lightbox">
