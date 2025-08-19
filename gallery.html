@@ -9,7 +9,7 @@
   <meta name="robots" content="index, follow">
 
   <!-- ================= Page Title & Meta (SEO Optimized) ================= -->
-  <title>Rodrigues Handyman NYC | Home Maintenance & Repairs</title>
+  <title>Handyman NY | Home Maintenance & Repairs</title>
   <meta name="description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across New York City. Call +1 (516) 415-8918 today!">
   <meta name="keywords" content="handyman NY, home maintenance New York, house repair NY, plumbing, electrical, carpentry, painting">
 
@@ -348,24 +348,26 @@ const lightbox = document.getElementById("lightbox");
 // Grab the image inside the lightbox
 const lightboxImg = document.getElementById("lightbox-img");
 
-// Select ALL images inside .gallery-sec (your big gallery)
-document.querySelectorAll(".gallery-sec img").forEach(img => {
+// Select ALL <a> links inside the gallery
+document.querySelectorAll(".gallery-sec a").forEach(link => {
   
-  // Add click event to each image
-  img.addEventListener("click", (e) => {
-    e.preventDefault(); // prevent <a> from opening the image file directly
+  // Add click event to each link
+  link.addEventListener("click", (e) => {
+    e.preventDefault(); // STOP the link from opening the image file
     
-    // Set the lightbox image source to the clicked image
+    // Find the <img> inside this link
+    const img = link.querySelector("img");
+    
+    // Set the lightbox image source
     lightboxImg.src = img.src;
     
-    // Show the lightbox (use flex to center the image)
+    // Show the lightbox
     lightbox.style.display = "flex";
   });
 });
 
 // Close lightbox when clicking outside the image
 lightbox.addEventListener("click", (e) => {
-  // if user clicks background (not the image itself)
   if (e.target !== lightboxImg) {
     lightbox.style.display = "none"; // hide the lightbox
   }
@@ -373,7 +375,7 @@ lightbox.addEventListener("click", (e) => {
 
 // Close lightbox when pressing ESC key
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") { // check if ESC is pressed
+  if (e.key === "Escape") {
     lightbox.style.display = "none"; // hide the lightbox
   }
 });
