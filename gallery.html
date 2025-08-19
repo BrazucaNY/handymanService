@@ -330,32 +330,36 @@
   const lightboxImg = document.getElementById('lightbox-img');
 
   // Load images from gallery.json
-  fetch('gallery.json')
-    .then(res => res.json())
-    .then(images => {
-      images.forEach(src => {
-        // Create a column div for each image
-        const div = document.createElement('div');
-        div.className = 'col-md-3 col-6 mb-30';
-        div.innerHTML = `
-          <a class="chocolat-image profile-img-container" href="${src}" title="Gallery Image">
-            <img width="100" src="${src}" alt="Gallery Image">
-            <div class="overlay"></div>
-          </a>
-        `;
-        galleryRow.appendChild(div);
-      });
+fetch('uploads/gallery/gallery.json') // Correct path relative to HTML
+  .then(res => res.json())
+  .then(images => {
+    const galleryRow = document.querySelector('.gallery-sec .row');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
 
-      // After all images are added, attach lightbox click events
-      document.querySelectorAll('.gallery-sec a').forEach(link => {
-        link.addEventListener('click', e => {
-          e.preventDefault(); // Prevent default link behavior
-          lightboxImg.src = link.querySelector('img').src; // Set lightbox image
-          lightbox.style.display = 'flex'; // Show lightbox
-        });
+    images.forEach(src => {
+      const div = document.createElement('div');
+      div.className = 'col-md-3 col-6 mb-30';
+      div.innerHTML = `
+        <a class="chocolat-image profile-img-container" href="${src}" title="Gallery Image">
+          <img width="100" src="${src}" alt="Gallery Image">
+          <div class="overlay"></div>
+        </a>
+      `;
+      galleryRow.appendChild(div);
+    });
+
+    // Attach lightbox click events
+    document.querySelectorAll('.gallery-sec a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        lightboxImg.src = link.querySelector('img').src;
+        lightbox.style.display = 'flex';
       });
-    })
-    .catch(err => console.error('Error loading gallery:', err));
+    });
+  })
+  .catch(err => console.error('Error loading gallery:', err));
+
 
   // Close lightbox when clicking outside the image
   lightbox.addEventListener('click', e => {
