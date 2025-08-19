@@ -279,33 +279,32 @@
   </div>
 </div>
 <!-- End Breadcrumb -->
-
 <!-- ================= LIGHTBOX STYLE ================= -->
 <style>
-/* Fullscreen lightbox background */
+/* Fullscreen lightbox background (hidden until triggered) */
 .lightbox {
-  display: none; /* hidden by default */
-  position: fixed;
-  z-index: 9999; /* stays above all content */
+  display: none;              /* hidden by default */
+  position: fixed;            /* stays fixed even when scrolling */
+  z-index: 9999;              /* sits above all other elements */
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8); /* dark transparent overlay */
-  justify-content: center; /* center horizontally */
-  align-items: center; /* center vertically */
+  width: 100%;                /* full width of screen */
+  height: 100%;               /* full height of screen */
+  background: rgba(0,0,0,0.8);/* semi-transparent black overlay */
+  justify-content: center;    /* center child element horizontally */
+  align-items: center;        /* center child element vertically */
 }
 
 /* Image inside the lightbox */
 .lightbox img {
-  max-width: 90%;  /* keep it inside viewport width */
-  max-height: 90%; /* keep it inside viewport height */
-  border-radius: 10px; /* rounded corners */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* subtle shadow */
+  max-width: 90%;             /* scale down if wider than screen */
+  max-height: 90%;            /* scale down if taller than screen */
+  border-radius: 10px;        /* rounded corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* subtle shadow around image */
 }
 </style>
 
-<!-- ================= LIGHTBOX HTML (empty by default) ================= -->
+<!-- ================= LIGHTBOX CONTAINER (empty until image clicked) ================= -->
 <div class="lightbox" id="lightbox">
   <img id="lightbox-img" src="" alt="">
 </div>
@@ -315,17 +314,18 @@
   <div class="container">
     <div class="row">
 
-      <!-- Example gallery item -->
+      <!-- Gallery item #1 -->
       <div class="col-md-3 col-6 mb-30">
-        <!-- Wrap image in <a> (not needed for lightbox, but safe if no JS loads) -->
+        <!-- <a> is kept for fallback (so users can still open image if JS fails) -->
         <a class="chocolat-image profile-img-container" href="uploads/gallery/door.jpg" title="Gallery Image">
-          <!-- The image itself -->
+          <!-- Thumbnail image -->
           <img width="100" src="uploads/gallery/door.jpg" alt="Door" />
-          <div class="overlay"></div> <!-- Overlay effect (your existing design) -->
+          <!-- Overlay (your existing design effect) -->
+          <div class="overlay"></div>
         </a>
       </div>
 
-      <!-- Repeat for all other images... -->
+      <!-- Gallery item #2 -->
       <div class="col-md-3 col-6 mb-30">
         <a class="chocolat-image profile-img-container" href="uploads/gallery/img_7277.webp" title="Gallery Image">
           <img width="100" src="uploads/gallery/img_7277.webp" alt="Gallery Sample" />
@@ -333,8 +333,7 @@
         </a>
       </div>
 
-      <!-- Keep repeating your gallery items as you had -->
-      <!-- ... -->
+      <!-- Repeat as many as needed for your gallery images -->
       
     </div>
   </div>
@@ -342,40 +341,40 @@
 
 <!-- ================= LIGHTBOX SCRIPT ================= -->
 <script>
-// Grab lightbox container
+// Grab the lightbox container (the overlay div)
 const lightbox = document.getElementById("lightbox");
 
-// Grab the image inside the lightbox
+// Grab the image element inside the lightbox
 const lightboxImg = document.getElementById("lightbox-img");
 
-// Select ALL <a> links inside the gallery
+// Select ALL links inside the gallery section
 document.querySelectorAll(".gallery-sec a").forEach(link => {
   
-  // Add click event to each link
+  // Attach a click event to each link
   link.addEventListener("click", (e) => {
-    e.preventDefault(); // STOP the link from opening the image file
+    e.preventDefault(); // Prevents default action (opening image file directly)
     
-    // Find the <img> inside this link
+    // Find the <img> element inside the clicked link
     const img = link.querySelector("img");
     
-    // Set the lightbox image source
+    // Set lightbox image source to the clicked thumbnail's source
     lightboxImg.src = img.src;
     
-    // Show the lightbox
+    // Display the lightbox (by switching from "display: none" to flexbox)
     lightbox.style.display = "flex";
   });
 });
 
-// Close lightbox when clicking outside the image
+// Event listener: close lightbox when clicking outside the image
 lightbox.addEventListener("click", (e) => {
-  if (e.target !== lightboxImg) {
+  if (e.target !== lightboxImg) { // only close if user clicked background
     lightbox.style.display = "none"; // hide the lightbox
   }
 });
 
-// Close lightbox when pressing ESC key
+// Event listener: close lightbox when pressing ESC key
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
+  if (e.key === "Escape") {  // check if ESC key is pressed
     lightbox.style.display = "none"; // hide the lightbox
   }
 });
