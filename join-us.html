@@ -277,7 +277,6 @@
           <li><a href="our-services.html">Our Services</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="contact-us.html">Contact Us</a></li>
-          <li><a href="join-us.html">Join Us</a></li>
         </ul>
       </nav>
 
@@ -301,21 +300,23 @@
 <!-- ========== END BREADCRUMB SECTION ========== -->
 
 
-<!-- ================= CONTACT SECTION START ================= -->
-<div class="contact-section section pt-50 pb-80"> <!-- Contact section with top/bottom padding -->
-    <div class="container"> <!-- Bootstrap container for alignment -->
-        <div class="row align-items-center"> <!-- Centers items vertically -->
+<!<!-- ================= CONTACT SECTION START ================= -->
+<div class="contact-section section pt-50 pb-80">
+    <div class="container">
+        <div class="row align-items-center">
             
             <!-- CONTACT FORM WRAPPER -->
-            <div class="col-lg-7 mx-auto"> <!-- Centers form horizontally with mx-auto -->
+            <div class="col-lg-7 mx-auto">
                 <div class="contact-form-wrap">
-                    <h2 class="contact-title">Send Us A Message</h2> <!-- Section heading -->
+                    <h2 class="contact-title">Send Us A Message</h2>
                     
-                    <!-- CONTACT FORM -->
-                    <!-- action="#" = placeholder (form won’t submit anywhere until backend is added) -->
-                    <form id="enquiry-form" action="#" method="post" enctype="multipart/form-data">
-                        <!-- Hidden field to identify form type on backend -->
-                        <input name="formtype" type="hidden" value="contact">
+                    <!-- Netlify Contact Form -->
+                    <form name="contact" method="POST" data-netlify="true" enctype="multipart/form-data" netlify-honeypot="bot-field">
+                        <!-- Hidden fields for Netlify -->
+                        <input type="hidden" name="form-name" value="contact">
+                        <p style="display:none">
+                            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+                        </p>
 
                         <div class="row">
                             <!-- First Name -->
@@ -330,7 +331,7 @@
                             <div class="col-md-12">
                                 <div class="contact-form-style mb-20">
                                     <label>Last Name</label>
-                                    <input name="lname" type="text" id="lname" required>
+                                    <input name="lname" id="lname" type="text" required>
                                 </div>
                             </div>
 
@@ -338,7 +339,7 @@
                             <div class="col-md-12">
                                 <div class="contact-form-style mb-20">
                                     <label>Contact Number</label>
-                                    <input name="ph_number" type="text" id="ph_number" required>
+                                    <input name="ph_number" id="ph_number" type="text" required>
                                 </div>
                             </div>
 
@@ -358,33 +359,28 @@
                                 </div>
                             </div>
 
-                            <!-- File Upload + Submit Button -->
+                            <!-- File Upload -->
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <div class="contact-form-style mb-20">
                                     <label>Upload File</label>
-                                    <div class="custom-file">
-                                        <!-- File input (required by default) -->
-                                        <input type="file" class="custom-file-input" id="customFile" name="customFile" required>
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
-                                    </div>
-                                    <!-- Submit button -->
-                                    <button class="btn" type="submit" id="sendEnquiry">
-                                        <span>Send message</span>
-                                    </button>
+                                    <input type="file" name="customFile" id="customFile">
                                 </div>
                             </div>
 
-                            <!-- Info message placeholder -->
+                            <!-- Submit Button -->
                             <div class="col-md-12">
-                                <div class="contact-form-style mb-20" id="info-msg">
-                                    <!-- Status messages (success/error) will be displayed here dynamically -->
-                                </div>
+                                <button class="btn" type="submit">
+                                    <span>Send message</span>
+                                </button>
+                            </div>
+
+                            <!-- Status messages -->
+                            <div class="col-md-12">
+                                <div class="contact-form-style mb-20" id="info-msg"></div>
                             </div>
                         </div>
                     </form>
 
-                    <!-- Placeholder for any validation or success message -->
-                    <p class="form-messege"></p>
                 </div>
             </div>
         </div>
