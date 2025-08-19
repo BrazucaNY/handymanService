@@ -296,42 +296,25 @@
 
 
 
-<!-- ================= CONTACT SECTION START ================= -->
+<!-- ============================  
+     CONTACT SECTION START  
+============================= -->
 <div class="contact-section section pt-95 pt-lg-75 pt-md-65 pt-sm-55 pt-xs-45 pb-100 pb-lg-80 pb-md-70 pb-sm-60 pb-xs-50">
   <div class="container">
     <div class="row align-items-center">
 
-      <!-- ================= CONTACT FORM COLUMN ================= -->
+      <!-- CONTACT FORM COLUMN -->
       <div class="col-lg-7">
         <div class="contact-form-wrap">
           <h2 class="contact-title">Send Us A Message</h2>
 
-          <!-- 
-            Netlify-enabled form
-            ---------------------
-            - `data-netlify="true"` tells Netlify to capture submissions
-            - `name="contact"` is the unique form name in Netlify UI
-            - Hidden input `form-name` is required for AJAX submission
-            - Added honeypot field for extra spam protection
-          -->
-          <form 
-            id="contact-form" 
-            name="contact" 
-            method="POST" 
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-          >
-            <!-- Required for Netlify AJAX submission -->
+          <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="contact">
-
-            <!-- Honeypot field (hidden from users) -->
             <p class="hidden">
               <label>Don't fill this out if you're human: <input name="bot-field" type="text"></label>
             </p>
 
             <div class="row">
-
-              <!-- Name field -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Your Name (required)</label>
@@ -339,7 +322,6 @@
                 </div>
               </div>
 
-              <!-- Email field -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Your Email (required)</label>
@@ -347,7 +329,6 @@
                 </div>
               </div>
 
-              <!-- Contact number field -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Contact Number (required)</label>
@@ -355,7 +336,6 @@
                 </div>
               </div>
 
-              <!-- Subject field -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Subject</label>
@@ -363,7 +343,6 @@
                 </div>
               </div>
 
-              <!-- Message textarea -->
               <div class="col-md-12">
                 <div class="contact-form-style">
                   <label>Your Message</label>
@@ -371,30 +350,24 @@
                 </div>
               </div>
 
-              <!-- Submit button -->
               <div class="col-md-12">
                 <button class="btn" type="submit"><span>Send message</span></button>
               </div>
-
             </div>
           </form>
 
-          <!-- Form feedback message -->
           <p class="form-messege"></p>
         </div>
       </div>
 
-      <!-- ================= EMERGENCY CONTACT INFO COLUMN ================= -->
+      <!-- EMERGENCY CONTACT INFO COLUMN -->
       <div class="col-lg-5">
         <div class="emergncy-contact">
           <h3>Call us today for special offers!</h3>
 
-          <!-- Phone contact -->
           <div class="single-emergncy-contact icon-black mb-30">
             <div class="pentagon-icon contact-icon">
-              <div class="icon">
-                <i class="fa fa-phone"></i>
-              </div>
+              <div class="icon"><i class="fa fa-phone"></i></div>
             </div>
             <div class="content">
               <h3>+ 516 415 8918</h3>
@@ -402,12 +375,9 @@
             </div>
           </div>
 
-          <!-- Address contact -->
           <div class="single-emergncy-contact icon-black mb-30">
             <div class="pentagon-icon contact-icon">
-              <div class="icon">
-                <i class="fa fa-home"></i>
-              </div>
+              <div class="icon"><i class="fa fa-home"></i></div>
             </div>
             <div class="content">
               <h3>Address</h3>
@@ -421,8 +391,17 @@
     </div>
   </div>
 </div>
+<!-- ============================  
+     END CONTACT SECTION  
+============================= -->
 
-<!-- ================= AJAX FORM SUBMISSION ================= -->
+<!-- Now the page jumps directly to the footer -->
+<footer class="footer-section section bg-image" data-bg="assets/images/bg/footer-bg.jpg">
+  <!-- Footer content here -->
+</footer>
+
+
+
 <script>
   // Select the form and feedback message container
   const form = document.getElementById("contact-form");
@@ -456,46 +435,6 @@
 </script>
 
 
-<!-- ============================
-     CTA (Call To Action) SECTION
-============================= -->
-<div class="cta-section section bg-gray-two"> <!-- 📌 Wrapper for CTA with gray background -->
-    <div class="container"> <!-- 📌 Bootstrap container for alignment -->
-        <div class="row no-gutters align-items-center"> <!-- 📌 Flex row, removes gutter spacing, vertically centers -->
-
-            <!-- ===== LEFT SIDE (ICON) ===== -->
-            <div class="col-md-1">
-                <div class="pentagon-icon cta-icon">
-                    <div class="icon">
-                        <i class="fa fa-phone"></i> <!-- 📞 Phone icon inside pentagon shape -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== MIDDLE CONTENT (TEXT) ===== -->
-            <div class="col-md-8">
-                <div class="cta-content">
-                    <h2>Book a Call Today!</h2> <!-- 📌 Strong headline -->
-                    <p>Let’s discuss your project and get things started. 
-                       Schedule your free consultation now!</p> <!-- 📌 Supporting text -->
-                </div>
-            </div>
-
-            <!-- ===== RIGHT SIDE (BUTTON) ===== -->
-            <div class="col-md-3">
-                <div class="cta-btn text-center">
-                    <a href="contact-us.html" class="btn">
-                        Book a Call Today <i class="fa fa-angle-double-right"></i> <!-- ➡️ CTA Button with arrow -->
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- ============================
-     END CTA SECTION
-============================= -->
 
 <!-- ============================
      FOOTER SECTION START
