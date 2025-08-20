@@ -149,9 +149,9 @@
                 </div>
                 <div class="social-menu">
                     <ul class="social-menu-top">
-                        <li><a href="https://www.facebook.com/HandymanGuru-771728772843634"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.instagram.com/handymanguru/"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="https://www.youtube.com/channel/UCrLDfGiNOYXXc3nFMwW2Xww"><i class="fa fa-youtube-play"></i></a></li>
+                       <li><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- 👍 FB -->
+						<li><a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a></li> <!-- 📸 IG -->
+						<li><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li> <!-- ▶️ YT -->
                     </ul>
                 </div>
             </div>
@@ -183,33 +183,43 @@
 
 
 
-
-
-        <!--  mobile header area -->
-        <div class="mobile-header-area d-block d-lg-none">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <!-- logo -->
-                        <div class="logo d-none">
-                            <a href="../index.html">
-                                <img src="../assets/images/logo.png" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-6 d-flex align-items-center justify-content-end">
-                        <!-- <div class="mobile-cart">
-                            <a href="cart.html"><i class="fa fa-shopping-cart"></i></a>
-                        </div> -->
-                        <!-- mobile menu -->
-                        <div class="mobile-navigation-icon" id="mobile-menu-trigger">
-                            <i></i>
-                        </div>
-                    </div>
+<!-- ================= MOBILE HEADER AREA START ================= -->
+<!-- This section is displayed only on mobile devices (d-block d-lg-none) -->
+<div class="mobile-header-area d-block d-lg-none">
+    <div class="container">
+        <div class="row align-items-center">
+            
+            <!-- LEFT COLUMN: LOGO -->
+            <div class="col-6">
+                <!-- Logo (currently hidden with d-none) -->
+                <div class="logo d-none">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.png" class="img-fluid" alt="Website Logo">
+                    </a>
                 </div>
             </div>
-        </div>
-        <!--  End of mobile header area -->
+            
+            <!-- RIGHT COLUMN: MENU ICON AND CART -->
+            <div class="col-6 d-flex align-items-center justify-content-end">
+                
+                <!-- Mobile Cart (commented out for now) -->
+                <!--
+                <div class="mobile-cart">
+                    <a href="cart.html"><i class="fa fa-shopping-cart"></i></a>
+                </div>
+                -->
+
+                <!-- Mobile Navigation Icon / Hamburger Menu -->
+                <div class="mobile-navigation-icon" id="mobile-menu-trigger">
+                    <i></i> <!-- Icon lines are generated with CSS -->
+                </div>
+            </div>
+            
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div>
+<!-- ================= MOBILE HEADER AREA END ================= -->
+
 
         <!-- offcanvas mobile menu -->
         <div class="offcanvas-mobile-menu d-block d-lg-none" id="mobile-menu-overlay">
@@ -256,49 +266,61 @@
     </div>
 </div>
 
-<!-- Service Details Section Start -->
+
+<!-- ================= SERVICE DETAILS SECTION START ================= -->
 <div class="service-details-section section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-90 pb-lg-70 pb-md-60 pb-sm-50 pb-xs-40">
-            <div class="container">
-                <div class="row">
-                    
-                    <div class="col-md-6 col-sm-6">
-                        <!-- Single Service Gallery Start -->
-                        <div class="single-service-gallery mb-35">
-                            <div class="gallery-img">
-                                <img src="../uploads/services/5efb47689c3d5504359f1597171d3ea4.jpg" alt="">
-                            </div>
-                        </div>
-                        <!-- Single Service Gallery End -->
-                    </div>
-                    
-                    <div class="col-md-6 col-sm-6 ">
-                        <div class="service-details-content mb-sm-30 mb-xs-30">
-                            <h2>Handyman Services</h2>
-                            <p><strong>Handyman services&nbsp;</strong><br />
-&bull; We install pictures<br />
-&bull; Hanging mirrors<br />
-&bull; Mounting shelves<br />
-&bull; Fixing curtains<br />
-&bull; Fixing TV and electrical equipments.<br />
-<br />
-<strong>Carpentry</strong><br />
-&bull; Repairing of doors and windows<br />
-&bull; Wood painting and polishing<br />
-&bull; Wood flooring<br />
-&bull; Assembling of flatpack furniture.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-12">
-                        <p><strong>Fly Screen</strong><br />
-We handle all kinds of windows and door fly screen installation, sliding and pleated type so that you can the cool breeze and keep the bugs and insects out.</p>
-                    </div>
+    <div class="container">
+        <div class="row">
             
-                </div>                
-
+            <!-- LEFT COLUMN: SERVICE IMAGE -->
+            <div class="col-md-6 col-sm-6">
+                <!-- Single Service Gallery Start -->
+                <div class="single-service-gallery mb-35">
+                    <div class="gallery-img">
+                        <!-- Service image -->
+                        <img src="../uploads/services/5efb47689c3d5504359f1597171d3ea4.jpg" alt="">
+                    </div>
+                </div>
+                <!-- Single Service Gallery End -->
             </div>
-        </div>
-<!-- Service Details Section End -->
+            
+            <!-- RIGHT COLUMN: SERVICE DETAILS CONTENT -->
+            <div class="col-md-6 col-sm-6">
+                <div class="service-details-content mb-sm-30 mb-xs-30">
+                    <!-- Service title -->
+                    <h2>Handyman Services</h2>
+                    <!-- Service description and list of offerings -->
+                    <p>
+                        <strong>Handyman services&nbsp;</strong><br />
+                        &bull; We install pictures<br />
+                        &bull; Hanging mirrors<br />
+                        &bull; Mounting shelves<br />
+                        &bull; Fixing curtains<br />
+                        &bull; Fixing TV and electrical equipments.<br /><br />
+                        
+                        <strong>Carpentry</strong><br />
+                        &bull; Repairing of doors and windows<br />
+                        &bull; Wood painting and polishing<br />
+                        &bull; Wood flooring<br />
+                        &bull; Assembling of flatpack furniture.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FULL-WIDTH ROW: ADDITIONAL SERVICE -->
+            <div class="col-sm-12 col-md-12">
+                <!-- Fly screen service description -->
+                <p>
+                    <strong>Fly Screen</strong><br />
+                    We handle all kinds of windows and door fly screen installation, sliding and pleated type so that you can enjoy the cool breeze and keep the bugs and insects out.
+                </p>
+            </div>
+    
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div>
+<!-- ================= SERVICE DETAILS SECTION END ================= -->
+
 
 <!--Service section start-->
         <div class="service-section service-details-section section  pt-lg-70 pt-md-30 pt-sm-45 pt-xs-40  pb-70 pb-lg-50 pb-md-40 pb-sm-30 pb-xs-20">
@@ -315,8 +337,7 @@ We handle all kinds of windows and door fly screen installation, sliding and ple
                                 <div class="service-content">
                                     <h3>
                                         DIY / Carpentry                                     </h3>
-                                    <!--<p></p>-->
-                                    <!-- <a class="btn service-btn" href="http://dxb.co.com/clients/handymanguru/service/airconditioning"> READ MORE <i class="fa fa-angle-double-right"></i></a> -->
+                                    
                                 </div>
                                 
                                 <div class="service-icon-wrap">
@@ -339,8 +360,7 @@ We handle all kinds of windows and door fly screen installation, sliding and ple
                                     <div class="service-content">
                                         <h3>
                                             DIY / Mirror Fixing                                        </h3>
-                                        <!--<p></p>-->
-                                        <!-- <a class="btn service-btn" href="http://dxb.co.com/clients/handymanguru/service/airconditioning"> READ MORE <i class="fa fa-angle-double-right"></i></a> -->
+                                        
                                     </div>
                                     
                                     <div class="service-icon-wrap">
@@ -362,8 +382,7 @@ We handle all kinds of windows and door fly screen installation, sliding and ple
                                 <div class="service-content">
                                     <h3>
                                         Fly Screen                                    </h3>
-                                    <!--<p></p>-->
-                                    <!-- <a class="btn service-btn" href="http://dxb.co.com/clients/handymanguru/service/airconditioning"> READ MORE <i class="fa fa-angle-double-right"></i></a> -->
+                                    
                                 </div>
                                 
                                 <div class="service-icon-wrap">
@@ -413,7 +432,7 @@ We handle all kinds of windows and door fly screen installation, sliding and ple
             <!-- ===== RIGHT SIDE (BUTTON) ===== -->
             <div class="col-md-3">
                 <div class="cta-btn text-center">
-                    <a href="contact-us.html" class="btn">
+                    <a href="/contact-us.html" class="btn">
                         Book a Call Today <i class="fa fa-angle-double-right"></i> <!-- ➡️ CTA Button with arrow -->
                     </a>
                 </div>
@@ -514,7 +533,7 @@ We handle all kinds of windows and door fly screen installation, sliding and ple
         <!-- ===== SOCIAL ICONS ===== -->
         <div class="social-menu-right">
             <ul class="social-menu-bottom">
-                <li><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- 👍 FB -->
+               <li><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- 👍 FB -->
                 <li><a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a></li> <!-- 📸 IG -->
                 <li><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li> <!-- ▶️ YT -->
             </ul>
