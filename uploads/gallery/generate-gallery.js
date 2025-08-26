@@ -13,3 +13,5 @@ const images = fs.readdirSync(galleryDir)
 fs.writeFileSync('gallery.json', JSON.stringify(images, null, 2));
 
 console.log(`gallery.json generated with ${images.length} images.`);
+
+
