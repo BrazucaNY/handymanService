@@ -283,6 +283,8 @@
     </div> <!-- END .row -->
   </div> <!-- END .container -->
 </div> <!-- END .contact-section -->
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
@@ -290,39 +292,33 @@
         const contactForm = document.getElementById('contact-form');
         const contactMessage = document.getElementById('form-message');
 
-        // Check if the form and message element exist before adding a listener
         if (contactForm && contactMessage) {
             contactForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Stop the form from reloading the page
-
+                event.preventDefault(); 
                 const submitButton = contactForm.querySelector('button[type="submit"]');
 
-                // Disable the button to prevent multiple submissions
+                // Disable button and show a waiting message
                 submitButton.disabled = true;
+                contactMessage.style.color = 'black';
+                contactMessage.textContent = 'Verifying and sending...';
 
-                // Simple client-side validation
-                const name = contactForm.name.value.trim();
-                const email = contactForm.email.value.trim();
-                const phone = contactForm.contact_number.value.trim();
-                const subject = contactForm.subject.value.trim();
-                const message = contactForm.message.value.trim();
-
-                if (!name || !email || !phone || !subject || !message) {
+                // Netlify reCAPTCHA validation check
+                const recaptchaResponse = contactForm.querySelector('[name="g-recaptcha-response"]');
+                if (!recaptchaResponse || !recaptchaResponse.value) {
                     contactMessage.style.color = 'red';
-                    contactMessage.textContent = 'Please fill in all required fields.';
-                    submitButton.disabled = false; // Re-enable button on failure
+                    contactMessage.textContent = 'Please complete the reCAPTCHA challenge.';
+                    submitButton.disabled = false;
                     return;
                 }
 
                 // Prepare form data for Netlify
                 const data = new FormData(contactForm);
-                data.append("form-name", contactForm.getAttribute("name"));
 
-                // Use fetch to submit to Netlify
+                // This is the crucial part: Use fetch with FormData directly.
+                // This ensures the reCAPTCHA token is properly sent.
                 fetch(contactForm.action || "/", {
                     method: "POST",
-                    body: new URLSearchParams(data).toString(),
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" }
+                    body: data
                 })
                 .then(response => {
                     if (response.ok) {
@@ -338,7 +334,8 @@
                     contactMessage.textContent = `Submission failed: ${error.message}`;
                 })
                 .finally(() => {
-                    submitButton.disabled = false; // Re-enable button on completion
+                    // Re-enable the button regardless of success or failure
+                    submitButton.disabled = false;
                 });
             });
         }
