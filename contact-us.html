@@ -289,13 +289,16 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
+        // --- Contact Form Handling ---
         const contactForm = document.getElementById('contact-form');
         const contactMessage = document.getElementById('form-message');
-        const submitButton = contactForm.querySelector('button[type="submit"]');
 
+        // Check if the form and message element exist before adding a listener
         if (contactForm && contactMessage) {
             contactForm.addEventListener('submit', function(event) {
-                event.preventDefault();
+                event.preventDefault(); // Stop the form from reloading the page
+
+                const submitButton = contactForm.querySelector('button[type="submit"]');
 
                 // Disable the button to prevent multiple submissions
                 submitButton.disabled = true;
@@ -314,9 +317,11 @@
                     return;
                 }
 
+                // Prepare form data for Netlify
                 const data = new FormData(contactForm);
                 data.append("form-name", contactForm.getAttribute("name"));
 
+                // Use fetch to submit to Netlify
                 fetch(contactForm.action || "/", {
                     method: "POST",
                     body: new URLSearchParams(data).toString(),
