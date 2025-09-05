@@ -357,61 +357,46 @@
   const formMessage = document.getElementById('form-message');
 
   form.addEventListener('submit', function(event) {
-    event.preventDefault(); // prevent default submission
-
-    // Reset message color
-    formMessage.style.color = 'red';
-
-    // Get form values
+    // Client-side validation
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const phone = form.contact_number.value.trim();
     const subject = form.subject.value.trim();
     const message = form.message.value.trim();
 
-    // Client-side validation
     if (!name || !email || !phone || !subject || !message) {
+      formMessage.style.color = 'red';
       formMessage.textContent = 'Please fill in all required fields.';
+      event.preventDefault(); // Prevent submission if validation fails
       return;
     }
 
     if (!/^[0-9]{7,15}$/.test(phone)) {
+      formMessage.style.color = 'red';
       formMessage.textContent = 'Contact number must be 7-15 digits.';
+      event.preventDefault();
       return;
     }
 
     if (subject.length < 3) {
+      formMessage.style.color = 'red';
       formMessage.textContent = 'Subject is too short.';
+      event.preventDefault();
       return;
     }
 
     if (message.length < 10) {
+      formMessage.style.color = 'red';
       formMessage.textContent = 'Message must be at least 10 characters.';
+      event.preventDefault();
       return;
     }
 
-    // Prepare form data for Netlify
-    const data = new FormData(form);
-
-    // Use fetch to submit to Netlify
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(data).toString()
-    })
-    .then(response => {
-      if (response.ok) {
-        formMessage.style.color = 'green';
-        formMessage.textContent = 'Thank you! Your message has been sent.';
-        form.reset();
-      } else {
-        return response.text().then(text => { throw new Error(text) });
-      }
-    })
-    .catch(error => {
-      formMessage.style.color = 'red';
-      formMessage.textContent = `Submission failed: ${error.message}`;
-    });
+    // This section is a placeholder to show a success message.
+    // The actual form submission is now handled by Netlify.
+    // You should use Netlify's form submission settings to redirect to a 'thank-you' page for a better user experience.
+    formMessage.style.color = 'green';
+    formMessage.textContent = 'Submitting...';
   });
 </script>
 
