@@ -10623,3 +10623,7 @@ bottom::after {
 .single-service-two .service-icon-wrap {
     margin-top: -1px;
 }
+/* This ensures the honeypot field is completely hidden */
+.hidden {
+    display: none !important;
+}
