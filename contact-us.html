@@ -245,6 +245,70 @@
 ============================ -->
 
 
+<!-- ============================  
+     CONTACT SECTION START  
+============================= -->
+<div class="contact-section section pt-95 pt-lg-75 pt-md-65 pt-sm-55 pt-xs-45 pb-100 pb-lg-80 pb-md-70 pb-sm-60 pb-xs-50">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- CONTACT FORM COLUMN -->
+      <div class="col-lg-7">
+        <div class="contact-form-wrap">
+          <h2 class="contact-title">Send Us A Message</h2>
+
+          <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact">
+            <p class="hidden">
+              <label>Don't fill this out if you're human: <input name="bot-field" type="text"></label>
+            </p>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="contact-form-style mb-20">
+                  <label>Your Name (required)</label>
+                  <input name="name" id="name" type="text" required>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="contact-form-style mb-20">
+                  <label>Your Email (required)</label>
+                  <input name="email" id="email" type="email" required>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="contact-form-style mb-20">
+                  <label>Contact Number (required)</label>
+                  <input name="contact_number" id="contact_number" type="text" required>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="contact-form-style mb-20">
+                  <label>Subject</label>
+                  <input name="subject" type="text" id="subject" required>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="contact-form-style">
+                  <label>Your Message</label>
+                  <textarea name="message" placeholder="Type your message here.." required></textarea>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <button class="btn" type="submit"><span>Send message</span></button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Inline success/error message will show here -->
+          <p class="form-messege"></p>
+        </div>
+      </div>
 
       <!-- EMERGENCY CONTACT INFO COLUMN -->
       <div class="col-lg-5">
