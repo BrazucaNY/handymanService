@@ -245,7 +245,7 @@
 		       <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Attach Photos (optional)</label>
-                  <input type="file" name="file_upload" id="file_upload" accept="image/*" minlength="10">
+                  <input type="file" name="file_upload" id="file_upload" accept="image/*" multiple data-max-files="3">
                 </div>
               </div>
 			      <div data-netlify-recaptcha="true"></div>
@@ -291,17 +291,15 @@
   </div> <!-- END .container -->
 </div> <!-- END .contact-section -->
 
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-
-        // --- Contact Form Handling ---
         const contactForm = document.getElementById('contact-form');
         const contactMessage = document.getElementById('form-message');
+        const fileInput = document.getElementById('file_upload');
 
         if (contactForm && contactMessage) {
             contactForm.addEventListener('submit', function(event) {
-                event.preventDefault(); 
+                event.preventDefault();
                 const submitButton = contactForm.querySelector('button[type="submit"]');
 
                 // Disable button and show a waiting message
@@ -318,11 +316,24 @@
                     return;
                 }
 
+                // Check for basic form validation
+                const name = contactForm.name.value.trim();
+                const email = contactForm.email.value.trim();
+                const phone = contactForm.contact_number.value.trim();
+                const subject = contactForm.subject.value.trim();
+                const message = contactForm.message.value.trim();
+
+                if (!name || !email || !phone || !subject || !message) {
+                    contactMessage.style.color = 'red';
+                    contactMessage.textContent = 'Please fill in all required fields.';
+                    submitButton.disabled = false;
+                    return;
+                }
+                
                 // Prepare form data for Netlify
                 const data = new FormData(contactForm);
 
-                // This is the crucial part: Use fetch with FormData directly.
-                // This ensures the reCAPTCHA token is properly sent.
+                // Use fetch with FormData directly. This is crucial for reCAPTCHA.
                 fetch(contactForm.action || "/", {
                     method: "POST",
                     body: data
@@ -348,6 +359,9 @@
         }
     });
 </script>
+
+
+
 
 
 <footer class="footer-section section bg-image" data-bg="assets/images/bg/footer-bg.jpg">
