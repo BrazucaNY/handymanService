@@ -243,6 +243,7 @@
 <!-- ============================
      END MOBILE HEADER AREA
 ============================ -->
+
 <!-- ============================  
      CONTACT SECTION START  
 ============================= -->
@@ -255,10 +256,14 @@
         <div class="contact-form-wrap">
           <h2 class="contact-title">Send Us A Message</h2>
 
+          <!-- Netlify Form -->
           <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <!-- Required hidden input -->
             <input type="hidden" name="form-name" value="contact">
+
+            <!-- Honeypot field to block bots -->
             <p class="hidden">
-              <label>Don't fill this out if you're human: <input name="bot-field" type="text"></label>
+              <label>Don't fill this out if you're human: <input name="bot-field"></label>
             </p>
 
             <div class="row">
@@ -286,7 +291,7 @@
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Subject</label>
-                  <input name="subject" type="text" id="subject" required>
+                  <input name="subject" id="subject" type="text" required>
                 </div>
               </div>
 
@@ -301,12 +306,43 @@
                 <button class="btn" type="submit"><span>Send message</span></button>
               </div>
             </div>
+
+            <!-- Success / Error Messages -->
+            <p id="form-message" style="margin-top: 10px;"></p>
           </form>
 
-          <!-- Inline success/error message will show here -->
-          <p class="form-messege"></p>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Optional: JS to handle submission message -->
+<script>
+  const form = document.getElementById('contact-form');
+  const formMessage = document.getElementById('form-message');
+
+  form.addEventListener('submit', function(event) {
+    formMessage.textContent = 'Sending message...';
+    // Allow normal Netlify form submission
+    setTimeout(() => {
+      formMessage.textContent = 'Thank you! Your message has been sent.';
+      form.reset();
+    }, 500);
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
       <!-- EMERGENCY CONTACT INFO COLUMN -->
       <div class="col-lg-5">
