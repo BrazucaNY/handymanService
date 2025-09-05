@@ -249,34 +249,25 @@
 ============================= -->
 <div class="contact-section section pt-95 pt-lg-75 pt-md-65 pt-sm-55 pt-xs-45 pb-100 pb-lg-80 pb-md-70 pb-sm-60 pb-xs-50">
   <div class="container">
-
-    <!-- Row containing both form and emergency contact -->
     <div class="row align-items-center">
 
-      <!-- ============================  
-           CONTACT FORM COLUMN  
-      ============================= -->
+      <!-- CONTACT FORM COLUMN -->
       <div class="col-lg-7">
         <div class="contact-form-wrap">
           <h2 class="contact-title">Send Us A Message</h2>
 
-          <!-- Netlify Form -->
           <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            
-            <!-- Hidden field required by Netlify -->
+            <!-- Netlify hidden inputs -->
             <input type="hidden" name="form-name" value="contact">
-
-            <!-- Honeypot field to prevent bots -->
             <p class="hidden">
               <label>Don't fill this out if you're human: <input name="bot-field" type="text"></label>
             </p>
 
             <div class="row">
-
               <!-- Name -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
-                  <label for="name">Your Name (required)</label>
+                  <label>Your Name (required)</label>
                   <input name="name" id="name" type="text" required>
                 </div>
               </div>
@@ -284,7 +275,7 @@
               <!-- Email -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
-                  <label for="email">Your Email (required)</label>
+                  <label>Your Email (required)</label>
                   <input name="email" id="email" type="email" required>
                 </div>
               </div>
@@ -292,7 +283,7 @@
               <!-- Contact Number -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
-                  <label for="contact_number">Contact Number (required)</label>
+                  <label>Contact Number (required)</label>
                   <input name="contact_number" id="contact_number" type="text" pattern="[0-9]{7,15}" title="Enter only digits (7-15 characters)" required>
                 </div>
               </div>
@@ -300,16 +291,16 @@
               <!-- Subject -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
-                  <label for="subject">Subject</label>
-                  <input name="subject" id="subject" type="text" minlength="3" maxlength="100" required>
+                  <label>Subject</label>
+                  <input name="subject" type="text" id="subject" minlength="3" maxlength="100" required>
                 </div>
               </div>
 
               <!-- Message -->
               <div class="col-md-12">
                 <div class="contact-form-style">
-                  <label for="message">Your Message</label>
-                  <textarea name="message" id="message" placeholder="Type your message here.." minlength="10" required></textarea>
+                  <label>Your Message</label>
+                  <textarea name="message" placeholder="Type your message here.." minlength="10" required></textarea>
                 </div>
               </div>
 
@@ -317,65 +308,81 @@
               <div class="col-md-12">
                 <button class="btn" type="submit"><span>Send message</span></button>
               </div>
-
             </div>
 
             <!-- Inline success/error message -->
             <p id="form-message" style="margin-top:10px;"></p>
           </form>
-
         </div>
-      </div> <!-- End col-lg-7 -->
+      </div>
 
-      
+      <!-- EMERGENCY CONTACT INFO COLUMN -->
+      <div class="col-lg-5">
+        <div class="emergncy-contact">
+          <h3>Call us today for special offers!</h3>
 
-    </div> <!-- End row -->
-  </div> <!-- End container -->
-</div> <!-- End contact-section -->
+          <div class="single-emergncy-contact icon-black mb-30">
+            <div class="pentagon-icon contact-icon">
+              <div class="icon"><i class="fa fa-phone"></i></div>
+            </div>
+            <div class="content">
+              <h3>+ 516 415 8918</h3>
+              <span>info@rodrigueshandyman.com</span>
+            </div>
+          </div>
+
+          <div class="single-emergncy-contact icon-black mb-30">
+            <div class="pentagon-icon contact-icon">
+              <div class="icon"><i class="fa fa-home"></i></div>
+            </div>
+            <div class="content">
+              <h3>Address</h3>
+              <span>N MacQuesten Pkwy</span><br>
+              <span>Mt Vernon, NY 10552</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- END .row -->
+  </div> <!-- END .container -->
+</div> <!-- END .contact-section -->
 
 <!-- ============================  
-     JS VALIDATIONS & MESSAGES  
+     FORM VALIDATION & AJAX SUBMISSION  
 ============================= -->
 <script>
   const form = document.getElementById('contact-form');
   const formMessage = document.getElementById('form-message');
 
   form.addEventListener('submit', function(event) {
-    // Set default message color to red (for errors)
-    formMessage.style.color = 'red';
+    event.preventDefault(); // prevent default submission
 
+    formMessage.style.color = 'red';
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const phone = form.contact_number.value.trim();
     const subject = form.subject.value.trim();
     const message = form.message.value.trim();
 
-    // Basic required field check
+    // Simple client-side validation
     if (!name || !email || !phone || !subject || !message) {
       formMessage.textContent = 'Please fill in all required fields.';
-      event.preventDefault();
       return;
     }
 
-    // Phone number pattern check
-    const phonePattern = /^[0-9]{7,15}$/;
-    if (!phonePattern.test(phone)) {
+    if (!/^[0-9]{7,15}$/.test(phone)) {
       formMessage.textContent = 'Contact number must be 7-15 digits.';
-      event.preventDefault();
       return;
     }
 
-    // Subject length check
     if (subject.length < 3) {
       formMessage.textContent = 'Subject is too short.';
-      event.preventDefault();
       return;
     }
 
-    // Message length check
     if (message.length < 10) {
       formMessage.textContent = 'Message must be at least 10 characters.';
-      event.preventDefault();
       return;
     }
 
@@ -383,11 +390,21 @@
     formMessage.style.color = 'green';
     formMessage.textContent = 'Sending message...';
 
-    // Optional: form reset for demo purposes (Netlify will handle submission)
-    setTimeout(() => {
+    // Submit via Netlify
+    const formData = new FormData(form);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(() => {
       formMessage.textContent = 'Thank you! Your message has been sent.';
       form.reset();
-    }, 500);
+    })
+    .catch(error => {
+      formMessage.style.color = 'red';
+      formMessage.textContent = `Submission failed: ${error}`;
+    });
   });
 </script>
 
