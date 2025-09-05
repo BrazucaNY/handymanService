@@ -208,8 +208,8 @@
         <div class="contact-form-wrap">
           <h2 class="contact-title">Send Us A Message</h2>
 
-          <form id="contact-form" name="contact" method="POST" data-netlify="true">
-            <input type="hidden" name="form-name" value="contact">
+			<form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
+			<input type="hidden" name="form-name" value="contact">
 			
             <div class="row">
               <div class="col-md-12">
@@ -242,6 +242,7 @@
                   <textarea name="message" placeholder="Type your message here.." minlength="10" required></textarea>
                 </div>
               </div>
+			      <div data-netlify-recaptcha="true"></div>
               <div class="col-md-12">
                 <button class="btn" type="submit"><span>Send message</span></button>
               </div>
