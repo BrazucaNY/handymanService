@@ -244,7 +244,6 @@
      END MOBILE HEADER AREA
 ============================ -->
 
-
 <!-- ============================  
      CONTACT SECTION START  
 ============================= -->
@@ -264,6 +263,7 @@
             </p>
 
             <div class="row">
+              <!-- Name -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Your Name (required)</label>
@@ -271,6 +271,7 @@
                 </div>
               </div>
 
+              <!-- Email -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Your Email (required)</label>
@@ -278,37 +279,103 @@
                 </div>
               </div>
 
+              <!-- Contact Number -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Contact Number (required)</label>
-                  <input name="contact_number" id="contact_number" type="text" required>
+                  <input name="contact_number" id="contact_number" type="text" pattern="[0-9]{7,15}" title="Enter only digits (7-15 characters)" required>
                 </div>
               </div>
 
+              <!-- Subject -->
               <div class="col-md-12">
                 <div class="contact-form-style mb-20">
                   <label>Subject</label>
-                  <input name="subject" type="text" id="subject" required>
+                  <input name="subject" type="text" id="subject" minlength="3" maxlength="100" required>
                 </div>
               </div>
 
+              <!-- Message -->
               <div class="col-md-12">
                 <div class="contact-form-style">
                   <label>Your Message</label>
-                  <textarea name="message" placeholder="Type your message here.." required></textarea>
+                  <textarea name="message" placeholder="Type your message here.." minlength="10" required></textarea>
                 </div>
               </div>
 
+              <!-- Submit Button -->
               <div class="col-md-12">
                 <button class="btn" type="submit"><span>Send message</span></button>
               </div>
             </div>
+
+            <!-- Inline success/error message -->
+            <p id="form-message" style="margin-top:10px;"></p>
           </form>
 
-          <!-- Inline success/error message will show here -->
-          <p class="form-messege"></p>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- JS for validations and success/error messages -->
+<script>
+  const form = document.getElementById('contact-form');
+  const formMessage = document.getElementById('form-message');
+
+  form.addEventListener('submit', function(event) {
+    // Prevent default submission to show validation first
+    formMessage.style.color = 'red';
+    
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.contact_number.value.trim();
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+
+    // Simple validations
+    if (!name || !email || !phone || !subject || !message) {
+      formMessage.textContent = 'Please fill in all required fields.';
+      event.preventDefault();
+      return;
+    }
+
+    const phonePattern = /^[0-9]{7,15}$/;
+    if (!phonePattern.test(phone)) {
+      formMessage.textContent = 'Contact number must be 7-15 digits.';
+      event.preventDefault();
+      return;
+    }
+
+    if (subject.length < 3) {
+      formMessage.textContent = 'Subject is too short.';
+      event.preventDefault();
+      return;
+    }
+
+    if (message.length < 10) {
+      formMessage.textContent = 'Message must be at least 10 characters.';
+      event.preventDefault();
+      return;
+    }
+
+    // Passed all checks
+    formMessage.style.color = 'green';
+    formMessage.textContent = 'Sending message...';
+
+    // Allow form to submit to Netlify
+    setTimeout(() => {
+      formMessage.textContent = 'Thank you! Your message has been sent.';
+      form.reset();
+    }, 500);
+  });
+</script>
+
+
+
+
+
 
       <!-- EMERGENCY CONTACT INFO COLUMN -->
       <div class="col-lg-5">
