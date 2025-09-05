@@ -295,8 +295,6 @@
 <!-- Breadcrumb Section End -->
 
 
-
-
 <!-- ============================  
      CONTACT SECTION START  
 ============================= -->
@@ -357,9 +355,44 @@
             </div>
           </form>
 
+          <!-- Inline success/error message will show here -->
           <p class="form-messege"></p>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================  
+     INLINE FORM HANDLING SCRIPT  
+============================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contact-form");
+  const messageEl = document.querySelector(".form-messege");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // stop normal submit
+
+    const formData = new FormData(form);
+
+    fetch("/", {
+      method: "POST",
+      body: formData
+    })
+    .then(() => {
+      messageEl.textContent = "✅ Your message has been sent successfully!";
+      messageEl.style.color = "green";
+      form.reset(); // clear form after success
+    })
+    .catch(() => {
+      messageEl.textContent = "❌ Something went wrong. Please try again.";
+      messageEl.style.color = "red";
+    });
+  });
+});
+</script>
+
 
       <!-- EMERGENCY CONTACT INFO COLUMN -->
       <div class="col-lg-5">
@@ -879,6 +912,8 @@ $("#enquiry-form").on("submit", function(ev) {
     });
 });
 </script>
+
+
 
 </body>
 </html>
