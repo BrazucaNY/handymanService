@@ -242,13 +242,7 @@
                   <textarea name="message" placeholder="Type your message here.." minlength="10" required></textarea>
                 </div>
               </div>
-		       <div class="col-md-12">
-                <div class="contact-form-style mb-20">
-                  <label>Attach Photos (optional)</label>
-                  <input type="file" name="file_upload" id="file_upload" accept="image/*" multiple data-max-files="3">
-                </div>
-              </div>
-			      <div data-netlify-recaptcha="true"></div>
+		        <div data-netlify-recaptcha="true"></div>
               <div class="col-md-12">
                 <button class="btn" type="submit"><span>Send message</span></button>
               </div>
@@ -291,11 +285,11 @@
   </div> <!-- END .container -->
 </div> <!-- END .contact-section -->
 
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const contactForm = document.getElementById('contact-form');
         const contactMessage = document.getElementById('form-message');
-        const fileInput = document.getElementById('file_upload');
 
         if (contactForm && contactMessage) {
             contactForm.addEventListener('submit', function(event) {
