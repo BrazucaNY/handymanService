@@ -259,7 +259,7 @@
           <h2 class="contact-title">Send Us A Message</h2>
 
           <!-- Netlify Form -->
-          <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="">
             <!-- Netlify hidden inputs -->
             <input type="hidden" name="form-name" value="contact">
             <p class="hidden">
@@ -352,69 +352,51 @@
 </div> <!-- END .contact-section -->
 
 <!-- ============================  
-     FORM VALIDATION & AJAX SUBMISSION  
+     FORM VALIDATION (client-side only, does NOT break Netlify)
 ============================= -->
 <script>
   const form = document.getElementById('contact-form');
   const formMessage = document.getElementById('form-message');
 
   form.addEventListener('submit', function(event) {
-    event.preventDefault(); // prevent normal submission
-
+    // Client-side validation
     formMessage.style.color = 'red';
-
-    // Get input values
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const phone = form.contact_number.value.trim();
     const subject = form.subject.value.trim();
     const message = form.message.value.trim();
 
-    // Client-side validation
     if (!name || !email || !phone || !subject || !message) {
       formMessage.textContent = 'Please fill in all required fields.';
+      event.preventDefault();
       return;
     }
 
     if (!/^[0-9]{7,15}$/.test(phone)) {
       formMessage.textContent = 'Contact number must be 7-15 digits.';
+      event.preventDefault();
       return;
     }
 
     if (subject.length < 3) {
       formMessage.textContent = 'Subject is too short.';
+      event.preventDefault();
       return;
     }
 
     if (message.length < 10) {
       formMessage.textContent = 'Message must be at least 10 characters.';
+      event.preventDefault();
       return;
     }
 
+    // Passed validation
     formMessage.style.color = 'green';
     formMessage.textContent = 'Sending message...';
 
-    // Prepare FormData for Netlify
-    const formData = new FormData(form);
-
-    fetch("/", {
-      method: "POST",
-      body: new URLSearchParams(formData).toString(),
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      mode: "same-origin"
-    })
-    .then(response => {
-      if (response.ok) {
-        formMessage.textContent = 'Thank you! Your message has been sent.';
-        form.reset();
-      } else {
-        throw new Error('Network response was not ok.');
-      }
-    })
-    .catch(error => {
-      formMessage.style.color = 'red';
-      formMessage.textContent = `Submission failed: ${error}`;
-    });
+    // Let Netlify handle submission naturally
+    // (No fetch/AJAX required)
   });
 </script>
 
