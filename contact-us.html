@@ -518,129 +518,142 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
+    <!--Footer section start-->
+        <footer class="footer-section section bg-image" data-bg="assets/images/bg/footer-bg.jpg">
 
-<!-- ============================
-     FOOTER SECTION START
-============================= -->
-<footer class="footer-section section bg-image" data-bg="assets/images/bg/footer-bg.jpg"> 
-    <!-- 📌 Footer wrapper with background image -->
+            <!--Footer Top start-->
+            <div class="footer-top section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-85 pb-lg-65 pb-md-60 pb-sm-50 pb-xs-40">
+                <div class="container">
+                    <div class="row">
 
-    <!-- ===== FOOTER TOP AREA ===== -->
-    <div class="footer-top section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-85 pb-lg-65 pb-md-60 pb-sm-50 pb-xs-40">
-        <!-- 📌 Top footer area with responsive padding -->
-        <div class="container">
-            <div class="row">
+                        <!--Footer Widget start-->
+                        <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+                            <div class="footer-logo">
+                                <a href="index.html"><img src="assets/images/logo-white.png" alt="Rodrigues Handyman"></a>
+                            </div>
+                            <p> Our mission is to provide the best Home Maintenance Service at the most reasonable price without compromising on quality. You will be highly satisfied with our work, knowing we take the necessary steps to meet your needs and get the job done on time with quality assurance.</p>
+                        </div>
+                        <!--Footer Widget end-->
 
-                <!-- ===== FOOTER WIDGET 1 (LOGO + MISSION) ===== -->
-                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
-                    <div class="footer-logo">
-                        <a href="index.html">
-                            <img src="assets/images/logo-white.png" alt="Rodrigues Handyman"> <!-- 🖼 White logo -->
-                        </a>
+                        <!--Footer Widget start-->
+                        
+						<div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+    <h4 class="title"><span class="text">Office</span></h4>
+    <ul>
+        <li>
+            <i class="fa fa-map-marker"></i>
+            <span>
+                <a href="https://www.google.com/maps/place/New+York,+NY" target="_blank">
+                    New York City, NY – Serving All Boroughs
+                </a>
+            </span>
+        </li>
+        <li><i class="fa fa-phone"></i><span><a href="tel:+15164158918">+1 (516) 415-8918</a></span></li>
+        <li><i class="fa fa-envelope-o"></i><span><a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandy.com</a></span></li>
+        <li><i class="fa fa-clock-o"></i><span><a href="#">Mon – Sat: 8:00 AM – 5:00 PM | Sunday & Emergency</a></span></li>
+    </ul>
+</div>
+				
+	<!-- Footer Widget start -->
+<div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+    <h4 class="title"><span class="text">Newsletter</span></h4>
+    <p>Subscribe to our newsletter and get all latest news about our latest promotions, offers and discounts</p>
+
+    <!-- Netlify Form -->
+    <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="footer-newsletter" id="mc-form">
+        <input type="hidden" name="form-name" value="newsletter">
+        <p style="display:none">
+            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+        </p>
+        <input type="email" name="email" placeholder="Email Here.." required />
+        <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
+    </form>
+
+    <!-- Alerts -->
+    <div class="mailchimp-alerts text-center">
+        <div class="mailchimp-success" style="color:green; margin-top:10px;"></div>
+        <div class="mailchimp-error" style="color:red; margin-top:10px;"></div>
+    </div>
+</div>
+<!-- Footer Widget end -->
+
+<!-- Netlify AJAX script -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("mc-form");
+    const successDiv = document.querySelector(".mailchimp-success");
+    const errorDiv = document.querySelector(".mailchimp-error");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        successDiv.textContent = "";
+        errorDiv.textContent = "";
+
+        const formData = new FormData(form);
+        formData.append("form-name", form.getAttribute("name"));
+
+        // Convert FormData to URL-encoded string for Netlify
+        const body = new URLSearchParams();
+        for (const pair of formData) {
+            body.append(pair[0], pair[1]);
+        }
+
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: body.toString()
+        })
+        .then(() => {
+            successDiv.textContent = "Thank you for subscribing!";
+            form.reset();
+        })
+        .catch(() => {
+            errorDiv.textContent = "Please book a call.";
+        });
+    });
+});
+</script>
+
+
                     </div>
-                    <p>
-                        Our mission is to provide the best Home Maintenance Service at the most reasonable price without compromising on quality. You will be highly satisfied with our work, knowing we take the necessary steps to meet your needs and get the job done on time with quality assurance. <!-- 📌 Short mission statement -->
-                    </p>
                 </div>
-                <!-- ===== END FOOTER WIDGET 1 ===== -->
-
-                <!-- ===== FOOTER WIDGET 2 (OFFICE INFO) ===== -->
-                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
-                    <h4 class="title"><span class="text">Office</span></h4> <!-- 📌 Widget title -->
-                    <ul>
-                        <!-- 📍 Address -->
-                        <li>
-                            <i class="fa fa-map-marker"></i>
-                            <span>
-                                <a href="https://www.google.com/maps/place/New+York,+NY" target="_blank">
-                                    New York City, NY – Serving All Boroughs
-                                </a>
-                            </span>
-                        </li>
-                        <!-- 📞 Phone -->
-                        <li>
-                            <i class="fa fa-phone"></i>
-                            <span><a href="tel:+15164158918">+1 (516) 415-8918</a></span>
-                        </li>
-                        <!-- 📧 Email -->
-                        <li>
-                            <i class="fa fa-envelope-o"></i>
-                            <span><a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandy.com</a></span>
-                        </li>
-                        <!-- ⏰ Hours -->
-                        <li>
-                            <i class="fa fa-clock-o"></i>
-                            <span><a href="#">Mon – Sat: 8:00 AM – 5:00 PM | Sunday & Emergency</a></span>
-                        </li>
+                <div class="social-menu-right">
+                    <ul class="social-menu-bottom">
+                        <li ><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
                     </ul>
                 </div>
-                <!-- ===== END FOOTER WIDGET 2 ===== -->
-
-                <!-- ===== FOOTER WIDGET 3 (NEWSLETTER) ===== -->
-                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
-                    <h4 class="title"><span class="text">Newsletter</span></h4>
-                    <p>Subscribe to our newsletter for promotions, offers & discounts.</p>
-
-                    <!-- 📩 Netlify-powered Newsletter Form -->
-                    <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" 
-                          class="footer-newsletter" id="mc-form">
-                        <input type="hidden" name="form-name" value="newsletter">
-                        <p style="display:none">
-                            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
-                        </p>
-                        <input type="email" name="email" placeholder="Email Here.." required /> <!-- 📧 Email input -->
-                        <button type="submit"><i class="fa fa-paper-plane-o"></i></button> <!-- 🚀 Submit -->
-                    </form>
-
-                    <!-- ✅ Success / ❌ Error messages -->
-                    <div class="mailchimp-alerts text-center">
-                        <div class="mailchimp-success" style="color:green; margin-top:10px;"></div>
-                        <div class="mailchimp-error" style="color:red; margin-top:10px;"></div>
-                    </div>
-                </div>
-                <!-- ===== END FOOTER WIDGET 3 ===== -->
-
             </div>
-        </div>
+            <!--Footer Top end-->
 
-        <!-- ===== SOCIAL ICONS ===== -->
-        <div class="social-menu-right">
-            <ul class="social-menu-bottom">
-                <li><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- 👍 FB -->
-                <li><a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a></li> <!-- 📸 IG -->
-                <li><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li> <!-- ▶️ YT -->
-            </ul>
-        </div>
-    </div>
-    <!-- ===== END FOOTER TOP ===== -->
-
-    <!-- ===== FOOTER BOTTOM ===== -->
-    <div class="footer-bottom section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="copyright text-center">
-                        <p>Copyright &copy; 2025 Rodrigues Handyman</p> <!-- © Notice -->
+            <!--Footer bottom start-->
+            <div class="footer-bottom section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="copyright text-center">
+                                <p>Copyright & 2025 Rodrigues Handyman </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- ===== END FOOTER BOTTOM ===== -->
+            <!--Footer bottom end-->
 
-</footer>
-<!-- ============================
-     FOOTER SECTION END
-============================= -->
+        </footer>
+        <!--Footer section end-->
+        
+        
+                      
+    <a class="c-btn-phone" href="tel:+15164158918">
+        <span class="fa fa-phone" style="color: #fff; font-size: 24px; padding-top: 8px;"></span>
+    </a>
+    <a class="c-btn-whatsapp" href="https://wa.me/15164158918?text=Hello!%20I'd%20like%20to%20book%20an%20appointment.">
+        <span class="fa fa-whatsapp" style="color: #fff; font-size: 24px;padding-top: 7px;"></span>
+    </a>
 
-<!-- ===== FLOATING ACTION BUTTONS ===== -->
-<a class="c-btn-phone" href="tel:+15164158918">
-    <span class="fa fa-phone" style="color: #fff; font-size: 24px; padding-top: 8px;"></span> <!-- 📞 Call button -->
-</a>
-<a class="c-btn-whatsapp" href="https://wa.me/15164158918?text=Hello!%20I'd%20like%20to%20book%20an%20appointment.">
-    <span class="fa fa-whatsapp" style="color: #fff; font-size: 24px; padding-top: 7px;"></span> <!-- 💬 WhatsApp button -->
-</a>
-   
+    
     <style>
         .c-btn-phone {
             display: block;
@@ -710,7 +723,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 opacity: 0
             }
         }
-                        
+        
+        
+        
         .c-btn-whatsapp {
             display: block;
             position: fixed;
@@ -785,180 +800,99 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Tawk.to Live Chat Widget -->
 <!-- ============================= -->
 <script type="text/javascript">
-    // Initialize Tawk API object if not already initialized
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-
-    (function() {
-        // Create a new <script> element
-        var s1 = document.createElement("script"),
-            s0 = document.getElementsByTagName("script")[0]; // First script on the page
-
-        // Set async to true so it loads in the background
-        s1.async = true;
-
-        // Set the source to Tawk.to embed script URL
-        s1.src = 'https://embed.tawk.to/640afa364247f20fefe51753/1j1fvdu99';
-
-        // Set charset to UTF-8
-        s1.charset = 'UTF-8';
-
-        // Allow cross-origin requests
-        s1.setAttribute('crossorigin', '*');
-
-        // Insert the Tawk.to script before the first script tag
-        s0.parentNode.insertBefore(s1, s0);
-    })();
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/640afa364247f20fefe51753/1j1fvdu99';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
 
+<!-- ============================= -->
+<!-- Required JS Scripts -->
+<!-- ============================= -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- ============================ -->
-<!-- REQUIRED JS SCRIPTS -->
-<!-- All jQuery and plugin scripts included below -->
-<!-- ============================ -->
-
-<!-- jQuery library (v1.12.4) -->
-<script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-
-<!-- Google Maps API -->
-<script src="maps.googleapis.com/maps/api/js5ae75ae7.html?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8&amp;callback">
-</script>
-
-<!-- Popper.js (required for Bootstrap tooltips and popovers) -->
+<!-- Vendor JS -->
 <script src="assets/js/vendor/popper.min.js"></script>
-
-<!-- Bootstrap JavaScript -->
 <script src="assets/js/vendor/bootstrap.min.js"></script>
-
-<!-- Additional plugin scripts -->
 <script src="assets/js/plugins/plugins.js"></script>
-
-<!-- Main custom JavaScript -->
 <script src="assets/js/main.js"></script>
 
-<!-- ============================ -->
-<!-- Custom inline CSS -->
-<!-- ============================ -->
+<!-- Google Maps API (corrected URL) -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8&callback=initMap" async defer></script>
+
+<!-- Styles -->
 <style type="text/css">
-    /* Fixes header position when transparent & sticky on desktop */
     header.header.header-transparent.header-sticky.d-lg-block.d-none {
         position: relative !important;
     }
-
-    /* Success message style for Mailchimp form */
     .mailchimp-success {
         color: #027502;
     }
-
-    /* Error message style for Mailchimp form */
     .mailchimp-error {
         color: #f50707;
     }
-
-    /* Adjust sidebar blog image size */
     .sidebar-blog .image img {
         width: 100%;
         height: 60px;
     }
 </style>
 
-<!-- ============================ -->
-<!-- AJAX submission for Mailchimp newsletter form -->
-<!-- ============================ -->
-<script type="text/javascript">
-    jQuery(document).ready(function($){
-        // Intercept the newsletter form submission
-        $("#mc-form").submit(function(e){
-            e.preventDefault(); // Prevent default browser submission
+<!-- Unified Form Handler -->
+<script>
+jQuery(function($) {
 
-            // Clear previous success/error messages
-            $(".mailchimp-success").empty();
-            $(".mailchimp-error").empty();
-            $(".mailchimp-submitting").empty(); 
+    function handleAjaxForm(formSelector, actionUrl, successContainer, errorContainer, buttonSelector) {
+        $(formSelector).off("submit").on("submit", function(e) {
+            e.preventDefault();
 
-            // Gather form data from enquiry form
-            var formData = new FormData($("#enquiry-form")[0]); 
-           
-            // Send form data via AJAX
+            // Prevent multiple submissions
+            if ($(this).data("submitting")) return;
+            $(this).data("submitting", true);
+
+            $(successContainer).empty();
+            $(errorContainer).empty();
+            var formData = new FormData(this);
+
+            if (buttonSelector) {
+                $(buttonSelector).prop('disabled', true).html('Sending...');
+            }
+
             $.ajax({
-                url: 'https://handymanguru.com/home/subscribe', // API endpoint
+                url: actionUrl,
                 type: 'POST',
                 data: formData,
-                processData: false,   // Prevent jQuery from automatically transforming the data
-                contentType: false,   // Let the browser set content type
-                cache: false,
-                timeout: 600000,      // Timeout in milliseconds
-                dataType:"json",
-                success: function (data)  {
-                    // Display success or error message based on API response
-                    if(data['status'] == 200) {
-                        $(".mailchimp-success").html(data['message']);
-                        $("#mc-form")[0].reset(); // Reset form fields
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function(data) {
+                    if (data.status == 200 || data.status > 0) {
+                        $(successContainer).html(data.message);
+                        $(formSelector)[0].reset();
+                        $("#customFile").val('');
+                    } else {
+                        $(errorContainer).html(data.message);
                     }
-                    else{
-                        $(".mailchimp-error").html(data['message']);
+                    if (buttonSelector) {
+                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
                     }
+                },
+                error: function() {
+                    $(errorContainer).html("An error occurred. Please try again.");
+                    if (buttonSelector) {
+                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
+                    }
+                },
+                complete: function() {
+                    $(formSelector).data("submitting", false);
                 }
             });
         });
-    });
-</script>
-
-
-
-<script>
-$("#enquiry-form").on("submit", function(ev) {
-    ev.preventDefault(); // Prevent default form submission
-    
-    // Prepare the form data
-    var formData = new FormData($("#enquiry-form")[0]);
-    
-    // Disable submit button and show sending message
-    $('#sendEnquiry').prop('disabled', true).html('Sending...');
-    
-    $.ajax({
-        url: 'https://handymanguru.com/Home/enquiry', // Endpoint that handles form
-        type: 'POST',
-        data: formData,
-        async: true,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            // Parse JSON response
-            var data = jQuery.parseJSON(response);
-            var html = '';
-
-            if (data.status > 0) {
-                // Successful submission
-                $('#enquiry-form')[0].reset();  // Clear the form fields
-                $("#customFile").val('');       // Clear file input if any
-                
-                // Show success message
-                html = '<p class="form-messege success" style="color:green; font-weight:bold;">' + 
-                        data.message + '</p>';
-            } else {
-                // Failed submission
-                html = '<p class="form-messege error" style="color:red; font-weight:bold;">' + 
-                        data.message + '</p>';
-            }
-
-            // Inject message into the page
-            $('#info-msg').html(html);
-            
-            // Re-enable submit button
-            $('#sendEnquiry').prop("disabled", false).html('Send Enquiry');
-        },
-        error: function() {
-            // Handle network or server error
-            $('#info-msg').html('<p class="form-messege error" style="color:red; font-weight:bold;">' +
-                                'There was an error sending your message. Please try again.' +
-                                '</p>');
-            $('#sendEnquiry').prop("disabled", false).html('Send Enquiry');
-        }
-    });
-});
-</script>
-
+    }
 
 
 </body>
