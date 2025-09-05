@@ -244,6 +244,8 @@
      END MOBILE HEADER AREA
 ============================ -->
 
+
+
 <!-- ============================  
      CONTACT SECTION START  
 ============================= -->
@@ -256,6 +258,7 @@
         <div class="contact-form-wrap">
           <h2 class="contact-title">Send Us A Message</h2>
 
+          <!-- Netlify Form -->
           <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <!-- Netlify hidden inputs -->
             <input type="hidden" name="form-name" value="contact">
@@ -356,16 +359,18 @@
   const formMessage = document.getElementById('form-message');
 
   form.addEventListener('submit', function(event) {
-    event.preventDefault(); // prevent default submission
+    event.preventDefault(); // prevent normal submission
 
     formMessage.style.color = 'red';
+
+    // Get input values
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const phone = form.contact_number.value.trim();
     const subject = form.subject.value.trim();
     const message = form.message.value.trim();
 
-    // Simple client-side validation
+    // Client-side validation
     if (!name || !email || !phone || !subject || !message) {
       formMessage.textContent = 'Please fill in all required fields.';
       return;
@@ -386,20 +391,25 @@
       return;
     }
 
-    // Passed all checks
     formMessage.style.color = 'green';
     formMessage.textContent = 'Sending message...';
 
-    // Submit via Netlify
+    // Prepare FormData for Netlify
     const formData = new FormData(form);
+
     fetch("/", {
       method: "POST",
+      body: new URLSearchParams(formData).toString(),
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString()
+      mode: "same-origin"
     })
-    .then(() => {
-      formMessage.textContent = 'Thank you! Your message has been sent.';
-      form.reset();
+    .then(response => {
+      if (response.ok) {
+        formMessage.textContent = 'Thank you! Your message has been sent.';
+        form.reset();
+      } else {
+        throw new Error('Network response was not ok.');
+      }
     })
     .catch(error => {
       formMessage.style.color = 'red';
@@ -407,6 +417,10 @@
     });
   });
 </script>
+
+
+
+
 
 
 
