@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Handyman Admin Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Admin Dashboard - Handyman Service</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Firebase SDK -->
@@ -13,32 +11,52 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <style>
-    * { box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-    body { margin: 0; padding: 0; background: #f2f2f2; }
-    header {
-      background: #4CAF50;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: 500;
+    body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
+    h1 { color: #333; }
+    .container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    form { margin-bottom: 20px; }
+    input, textarea {
+      width: 100%; padding: 10px; margin: 8px 0;
+      border: 1px solid #ccc; border-radius: 6px; font-size: 14px;
     }
-    .container { max-width: 1000px; margin: 30px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-    h2 { color: #333; margin-bottom: 15px; }
-    form input { padding: 10px; margin: 5px 10px 15px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
-    form button { padding: 10px 20px; border: none; border-radius: 8px; background: #4CAF50; color: white; cursor: pointer; font-size: 14px; }
-    form button:hover { background: #388E3C; }
+    button {
+      padding: 10px 20px; border: none; border-radius: 6px;
+      background: #4CAF50; color: #fff; cursor: pointer; font-size: 14px;
+    }
+    button:hover { background: #388E3C; }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    table th, table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
-    table th { background: #4CAF50; color: white; }
-    button.delete-btn { background: #f44336; }
-    button.delete-btn:hover { background: #d32f2f; }
-    #logoutBtn { background: #333; margin-bottom: 20px; padding: 10px 20px; color: white; cursor: pointer; border-radius: 8px; border: none; }
-    #logoutBtn:hover { background: #111; }
+    th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+    th { background: #f0f0f0; }
   </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Customer Management</h1>
+
+    <!-- Customer Registration Form -->
+    <form id="customerForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="phone" placeholder="Phone" required>
+      <input type="text" id="address" placeholder="Address">
+      <textarea id="notes" placeholder="Notes"></textarea>
+      <button type="submit">Add Customer</button>
+    </form>
+
+    <!-- Customers List -->
+    <h2>Customer List</h2>
+    <table id="customerTable">
+      <thead>
+        <tr>
+          <th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Notes</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
   <script>
-    // Firebase configuration
+    // Firebase config (use same as login page)
     const firebaseConfig = {
       apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
       authDomain: "handymanserviceadmin.firebaseapp.com",
@@ -47,106 +65,50 @@
       messagingSenderId: "1073781663456",
       appId: "1:1073781663456:web:abcdef123456"
     };
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
     const db = firebase.firestore();
 
-    // Protect admin page — redirect if not logged in
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (!user) {
-        window.location.href = "login.html";
+    const form = document.getElementById('customerForm');
+    const tableBody = document.querySelector('#customerTable tbody');
+
+    // Add Customer
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      const notes = document.getElementById('notes').value;
+
+      try {
+        await db.collection('customers').add({
+          name, email, phone, address, notes,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        form.reset();
+        alert("Customer added successfully!");
+      } catch (err) {
+        console.error("Error adding customer:", err);
       }
     });
-  </script>
-</head>
-<body>
-  <header>Handyman Service Admin</header>
-  <div class="container">
-    <button id="logoutBtn">Logout</button>
 
-    <!-- Add Customer / Job Form -->
-    <h2>Add Customer / Job</h2>
-    <form id="customerForm">
-      <input type="text" name="name" placeholder="Customer Name" required>
-      <input type="text" name="phone" placeholder="Phone Number" required>
-      <input type="text" name="job" placeholder="Job Type" required>
-      <input type="number" name="hours" placeholder="Hours" required>
-      <input type="number" name="materials" placeholder="Material Cost" required>
-      <button type="submit">Add Estimate</button>
-    </form>
-
-    <!-- Table to show Estimates -->
-    <h2>Existing Estimates</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Customer</th>
-          <th>Phone</th>
-          <th>Job</th>
-          <th>Hours</th>
-          <th>Materials</th>
-          <th>Total</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="estimatesTable"></tbody>
-    </table>
-  </div>
-
-  <script>
-    const customerForm = document.getElementById("customerForm");
-    const estimatesTable = document.getElementById("estimatesTable");
-    const logoutBtn = document.getElementById("logoutBtn");
-
-    // Logout button
-    logoutBtn.addEventListener('click', () => {
-      firebase.auth().signOut().then(() => window.location.href = "login.html");
-    });
-
-    // Render estimates from Firestore
-    function renderEstimates() {
-      estimatesTable.innerHTML = "";
-      db.collection("estimates").get().then(snapshot => {
-        snapshot.forEach(doc => {
-          const e = doc.data();
-          const total = e.hours * 50 + Number(e.materials); // $50/hour example
-          estimatesTable.innerHTML += `
-            <tr>
-              <td>${e.name}</td>
-              <td>${e.phone}</td>
-              <td>${e.job}</td>
-              <td>${e.hours}</td>
-              <td>${e.materials}</td>
-              <td>${total}</td>
-              <td><button class="delete-btn" onclick="deleteEstimate('${doc.id}')">Delete</button></td>
-            </tr>
-          `;
-        });
-      });
-    }
-
-    // Add new estimate
-    customerForm.addEventListener("submit", e => {
-      e.preventDefault();
-      const formData = new FormData(customerForm);
-      db.collection("estimates").add({
-        name: formData.get("name"),
-        phone: formData.get("phone"),
-        job: formData.get("job"),
-        hours: Number(formData.get("hours")),
-        materials: Number(formData.get("materials"))
-      }).then(() => {
-        customerForm.reset();
-        renderEstimates();
+    // Display Customers
+    db.collection('customers').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+      tableBody.innerHTML = '';
+      snapshot.forEach(doc => {
+        const c = doc.data();
+        const row = `<tr>
+          <td>${c.name}</td>
+          <td>${c.email}</td>
+          <td>${c.phone}</td>
+          <td>${c.address || ''}</td>
+          <td>${c.notes || ''}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
       });
     });
-
-    // Delete estimate
-    function deleteEstimate(id) {
-      db.collection("estimates").doc(id).delete().then(() => renderEstimates());
-    }
-
-    // Initial render
-    renderEstimates();
   </script>
 </body>
 </html>
