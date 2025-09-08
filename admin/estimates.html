@@ -1,73 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Estimates - Handyman Admin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Estimate - Handyman Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <style>
-    body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
-    h1 { color: #333; text-align: center; }
-    .container { max-width: 900px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    form { margin-bottom: 20px; display: grid; gap: 12px; }
-    input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
-    button {
-      padding: 12px; border: none; border-radius: 8px; background: #4CAF50; color: #fff;
-      font-size: 14px; cursor: pointer; transition: background 0.3s;
-    }
-    button:hover { background: #388E3C; }
-    button#backBtn { background: #888; margin-bottom: 15px; }
-    button#backBtn:hover { background: #555; }
-    button.delete-btn { background: #f44336; }
-    button.delete-btn:hover { background: #d32f2f; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
-    th { background: #f8f8f8; }
-    @media (max-width: 600px) {
-      input, select, textarea, button { font-size: 13px; padding: 10px; }
-      th, td { font-size: 12px; padding: 8px; }
-    }
-  </style>
+<style>
+body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
+.container { max-width: 900px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+h1, h2 { text-align: center; color: #333; }
+section { margin-bottom: 25px; }
+label { font-weight: 500; margin-top: 10px; display: block; }
+input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+th { background: #f0f0f0; }
+button { padding: 10px 20px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; cursor: pointer; margin-top: 10px; }
+button:hover { background: #388E3C; }
+button.delete-btn { background: #f44336; }
+button.delete-btn:hover { background: #d32f2f; }
+.notes, .signature { margin-top: 15px; }
+.photos { margin-top: 10px; }
+</style>
 </head>
 <body>
 
 <div class="container">
-  <button id="backBtn">← Back to Dashboard</button>
-  <h1>Estimate Management</h1>
+  <h1>Create Estimate</h1>
 
-  <!-- Estimate Form -->
-  <form id="estimateForm">
+  <!-- From Section -->
+  <section>
+    <h2>From</h2>
+    <p><strong>Name:</strong> Rodrigues Handyman</p>
+    <p><strong>Email:</strong> name@business.com</p>
+    <p><strong>Address:</strong> Street</p>
+    <p><strong>Phone:</strong> 516-415-8918</p>
+    <p><strong>Business Number:</strong> Brazuca</p>
+  </section>
+
+  <!-- Bill To Section -->
+  <section>
+    <h2>Bill To</h2>
+    <label for="customerSelect">Select Customer</label>
     <select id="customerSelect" required>
       <option value="">Loading customers...</option>
     </select>
-    <input type="text" id="job" placeholder="Job Type" required>
-    <input type="number" id="hours" placeholder="Hours" min="0" required>
-    <input type="number" id="materials" placeholder="Material Cost" min="0" required>
-    <textarea id="notes" placeholder="Notes (optional)"></textarea>
-    <button type="submit">Add Estimate</button>
-  </form>
+    <label for="estimateNumber">Estimate Number</label>
+    <input type="text" id="estimateNumber" placeholder="EST0001">
+    <label for="estimateDate">Date</label>
+    <input type="date" id="estimateDate" value="">
+  </section>
 
-  <!-- Estimates Table -->
-  <h2>Estimates List</h2>
-  <table id="estimatesTable">
-    <thead>
-      <tr>
-        <th>Customer</th>
-        <th>Job</th>
-        <th>Hours</th>
-        <th>Materials</th>
-        <th>Total</th>
-        <th>Notes</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <!-- Items Section -->
+  <section>
+    <h2>Items</h2>
+    <table id="itemsTable">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Rate</th>
+          <th>Qty</th>
+          <th>Amount</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button id="addItemBtn">Add Item</button>
+  </section>
+
+  <!-- Totals -->
+  <section>
+    <p><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
+    <p><strong>Total:</strong> $<span id="total">0.00</span></p>
+  </section>
+
+  <!-- Notes -->
+  <section class="notes">
+    <label for="notes">Notes</label>
+    <textarea id="notes" placeholder="Notes - any relevant information not covered, additional terms and conditions"></textarea>
+  </section>
+
+  <!-- Signature -->
+  <section class="signature">
+    <label for="signature">Signature</label>
+    <input type="text" id="signature" placeholder="Sign here">
+  </section>
+
+  <!-- Photos -->
+  <section class="photos">
+    <label for="photos">Add Photos</label>
+    <input type="file" id="photos" multiple>
+  </section>
+
+  <button id="saveEstimateBtn">Save Estimate</button>
 </div>
 
 <script>
@@ -83,14 +114,17 @@ if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-const estimateForm = document.getElementById('estimateForm');
-const estimatesTable = document.querySelector('#estimatesTable tbody');
 const customerSelect = document.getElementById('customerSelect');
-const backBtn = document.getElementById('backBtn');
+const estimateDate = document.getElementById('estimateDate');
+const itemsTableBody = document.querySelector('#itemsTable tbody');
+const subtotalEl = document.getElementById('subtotal');
+const totalEl = document.getElementById('total');
+const addItemBtn = document.getElementById('addItemBtn');
+const saveEstimateBtn = document.getElementById('saveEstimateBtn');
 const HOURLY_RATE = 50;
 
-// Back to dashboard
-backBtn.addEventListener('click', () => window.location.href = "admin.html");
+// Set default date
+estimateDate.value = new Date().toISOString().split('T')[0];
 
 // Auth protection
 auth.onAuthStateChanged(user => {
@@ -98,95 +132,111 @@ auth.onAuthStateChanged(user => {
     window.location.href = "login.html";
   } else {
     loadCustomers();
-    loadEstimates();
   }
 });
 
-// Load customers into dropdown
+// Load customers
 function loadCustomers() {
-  customerSelect.innerHTML = '<option value="">Select Customer</option>';
-  db.collection('customers')
-    .orderBy('createdAt', 'desc')
-    .onSnapshot(snapshot => {
-      snapshot.forEach(doc => {
-        const c = doc.data();
-        if (!c.name) return;
-        const option = document.createElement('option');
-        option.value = doc.id;
-        option.textContent = c.name;
-        customerSelect.appendChild(option);
-      });
-      if (customerSelect.options.length === 1) {
-        const option = document.createElement('option');
-        option.value = "";
-        option.textContent = "No customers registered";
-        customerSelect.appendChild(option);
-      }
-    }, err => console.error("Error loading customers:", err));
-}
-
-// Load existing estimates
-function loadEstimates() {
-  estimatesTable.innerHTML = '';
-  db.collection('estimates').orderBy('createdAt', 'desc')
-    .onSnapshot(snapshot => {
-      estimatesTable.innerHTML = '';
-      snapshot.forEach(doc => {
-        const e = doc.data();
-        estimatesTable.innerHTML += `
-          <tr>
-            <td>${e.customerName}</td>
-            <td>${e.job}</td>
-            <td>${e.hours}</td>
-            <td>${e.materials}</td>
-            <td>${e.total}</td>
-            <td>${e.notes || ''}</td>
-            <td><button class="delete-btn" onclick="deleteEstimate('${doc.id}')">Delete</button></td>
-          </tr>
-        `;
-      });
+  db.collection('customers').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+    customerSelect.innerHTML = '<option value="">Select Customer</option>';
+    snapshot.forEach(doc => {
+      const c = doc.data();
+      if (!c.name) return;
+      const option = document.createElement('option');
+      option.value = doc.id;
+      option.textContent = c.name;
+      customerSelect.appendChild(option);
     });
+    if (customerSelect.options.length === 1) {
+      const option = document.createElement('option');
+      option.value = "";
+      option.textContent = "No customers registered";
+      customerSelect.appendChild(option);
+    }
+  });
 }
 
-// Add new estimate
-estimateForm.addEventListener('submit', async e => {
-  e.preventDefault();
-  const customerId = customerSelect.value;
-  const job = document.getElementById('job').value.trim();
-  const hours = Number(document.getElementById('hours').value);
-  const materials = Number(document.getElementById('materials').value);
-  const notes = document.getElementById('notes').value.trim();
+// Add new item row
+addItemBtn.addEventListener('click', () => {
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td><input type="text" class="itemDesc" placeholder="Item Description"></td>
+    <td><input type="number" class="itemRate" min="0" value="0"></td>
+    <td><input type="number" class="itemQty" min="0" value="1"></td>
+    <td class="itemAmount">0.00</td>
+    <td><button class="delete-btn" type="button">Delete</button></td>
+  `;
+  itemsTableBody.appendChild(row);
+  updateAmounts();
+  row.querySelector('.delete-btn').addEventListener('click', () => {
+    row.remove();
+    updateAmounts();
+  });
+  row.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', updateAmounts);
+  });
+});
 
+// Calculate amounts
+function updateAmounts() {
+  let subtotal = 0;
+  itemsTableBody.querySelectorAll('tr').forEach(row => {
+    const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
+    const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
+    const amount = rate * qty;
+    row.querySelector('.itemAmount').textContent = amount.toFixed(2);
+    subtotal += amount;
+  });
+  subtotalEl.textContent = subtotal.toFixed(2);
+  totalEl.textContent = subtotal.toFixed(2); // no tax applied
+}
+
+// Save estimate to Firestore
+saveEstimateBtn.addEventListener('click', async () => {
+  const customerId = customerSelect.value;
   if (!customerId) return alert("Please select a customer");
-  if (hours < 0 || materials < 0) return alert("Hours and Material costs must be positive numbers");
+
+  const customerDoc = await db.collection('customers').doc(customerId).get();
+  const customerName = customerDoc.exists ? customerDoc.data().name : "Unknown";
+
+  const items = [];
+  itemsTableBody.querySelectorAll('tr').forEach(row => {
+    const desc = row.querySelector('.itemDesc').value.trim();
+    const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
+    const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
+    const amount = rate * qty;
+    if(desc) items.push({desc, rate, qty, amount});
+  });
+
+  if(items.length === 0) return alert("Add at least one item");
+
+  const estimateData = {
+    customerId,
+    customerName,
+    estimateNumber: document.getElementById('estimateNumber').value || "",
+    date: estimateDate.value,
+    items,
+    subtotal: parseFloat(subtotalEl.textContent),
+    total: parseFloat(totalEl.textContent),
+    notes: document.getElementById('notes').value.trim(),
+    signature: document.getElementById('signature').value.trim(),
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
 
   try {
-    const customerDoc = await db.collection('customers').doc(customerId).get();
-    const customerName = customerDoc.exists ? customerDoc.data().name : "Unknown";
-
-    await db.collection('estimates').add({
-      customerId,
-      customerName,
-      job,
-      hours,
-      materials,
-      total: hours * HOURLY_RATE + materials,
-      notes,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    estimateForm.reset();
-  } catch (err) {
-    console.error("Error adding estimate:", err);
-    alert("Failed to add estimate. Check console for details.");
+    await db.collection('estimates').add(estimateData);
+    alert("Estimate saved successfully!");
+    // Reset form
+    customerSelect.value = "";
+    itemsTableBody.innerHTML = "";
+    updateAmounts();
+    document.getElementById('notes').value = "";
+    document.getElementById('signature').value = "";
+  } catch(err) {
+    console.error(err);
+    alert("Error saving estimate.");
   }
 });
-
-// Delete estimate
-window.deleteEstimate = async (id) => {
-  if (confirm("Delete this estimate?")) {
-    await db.collection('estimates').doc(id).delete();
-  }
-};
 </script>
 </body>
 </html>
