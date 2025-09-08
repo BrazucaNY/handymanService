@@ -12,7 +12,7 @@
 
 <style>
 body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
-.container { max-width: 900px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.container { max-width: 1000px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 h1, h2 { text-align: center; color: #333; }
 section { margin-bottom: 25px; }
 label { font-weight: 500; margin-top: 10px; display: block; }
@@ -26,9 +26,18 @@ button.delete-btn { background: #f44336; }
 button.delete-btn:hover { background: #d32f2f; }
 .notes, .signature { margin-top: 15px; }
 .photos { margin-top: 10px; }
+nav a { margin-right: 15px; text-decoration:none; font-weight:500; color:#333; }
+nav a:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
+
+<!-- Menu / Navigation -->
+<nav style="margin-bottom:20px; text-align:center;">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="customers.html">Customers</a>
+  <a href="estimates.html">Estimates</a>
+</nav>
 
 <div class="container">
   <h1>Create Estimate</h1>
@@ -53,32 +62,33 @@ button.delete-btn:hover { background: #d32f2f; }
     <label for="estimateNumber">Estimate Number</label>
     <input type="text" id="estimateNumber" placeholder="EST0001">
     <label for="estimateDate">Date</label>
-    <input type="date" id="estimateDate" value="">
+    <input type="date" id="estimateDate">
   </section>
 
-<!-- Items Table -->
-<table id="itemsTable">
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Job Details</th>
-      <th>Rate</th>
-      <th>Qty</th>
-      <th>Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><input type="text" placeholder="Item Description"></td>
-      <td><textarea placeholder="Job description"></textarea></td>
-      <td><input type="number" value="0" min="0" class="rate"></td>
-      <td><input type="number" value="1" min="1" class="qty"></td>
-      <td class="amount">$0.00</td>
-    </tr>
-  </tbody>
-</table>
-<button type="button" onclick="addItem()">Add Item</button>
-
+  <!-- Items Table -->
+  <table id="itemsTable">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Job Details</th>
+        <th>Rate</th>
+        <th>Qty</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" class="itemDesc" placeholder="Item Description"></td>
+        <td><textarea class="itemJob" placeholder="Job description"></textarea></td>
+        <td><input type="number" class="itemRate" value="0" min="0"></td>
+        <td><input type="number" class="itemQty" value="1" min="1"></td>
+        <td class="itemAmount">$0.00</td>
+        <td><button type="button" class="delete-btn">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" id="addItemBtn">Add Item</button>
 
   <!-- Totals -->
   <section>
@@ -127,7 +137,6 @@ const subtotalEl = document.getElementById('subtotal');
 const totalEl = document.getElementById('total');
 const addItemBtn = document.getElementById('addItemBtn');
 const saveEstimateBtn = document.getElementById('saveEstimateBtn');
-const HOURLY_RATE = 50;
 
 // Set default date
 estimateDate.value = new Date().toISOString().split('T')[0];
@@ -162,70 +171,44 @@ function loadCustomers() {
   });
 }
 
-// Add new item row
-addItemBtn.addEventListener('click', () => {
+// Add item
+function addItem() {
   const row = document.createElement('tr');
   row.innerHTML = `
     <td><input type="text" class="itemDesc" placeholder="Item Description"></td>
-    <td><input type="number" class="itemRate" min="0" value="0"></td>
-    <td><input type="number" class="itemQty" min="0" value="1"></td>
-    <td class="itemAmount">0.00</td>
-    <td><button class="delete-btn" type="button">Delete</button></td>
+    <td><textarea class="itemJob" placeholder="Job description"></textarea></td>
+    <td><input type="number" class="itemRate" value="0" min="0"></td>
+    <td><input type="number" class="itemQty" value="1" min="1"></td>
+    <td class="itemAmount">$0.00</td>
+    <td><button type="button" class="delete-btn">Delete</button></td>
   `;
   itemsTableBody.appendChild(row);
-  updateAmounts();
+  row.querySelectorAll('input, textarea').forEach(input => {
+    input.addEventListener('input', calculateTotals);
+  });
   row.querySelector('.delete-btn').addEventListener('click', () => {
     row.remove();
-    updateAmounts();
+    calculateTotals();
   });
-  row.querySelectorAll('input').forEach(input => {
-    input.addEventListener('input', updateAmounts);
-  });
-});
-
-function addItem() {
-  const tbody = document.querySelector('#itemsTable tbody');
-  const row = document.createElement('tr');
-  row.innerHTML = `
-    <td><input type="text" placeholder="Item Description"></td>
-    <td><textarea placeholder="Job description"></textarea></td>
-    <td><input type="number" value="0" min="0" class="rate"></td>
-    <td><input type="number" value="1" min="1" class="qty"></td>
-    <td class="amount">$0.00</td>
-  `;
-  tbody.appendChild(row);
-  attachItemListeners();
+  calculateTotals();
 }
+addItemBtn.addEventListener('click', addItem);
 
+// Calculate totals
 function calculateTotals() {
-  const rows = document.querySelectorAll('#itemsTable tbody tr');
-  let subtotal = 0;
-  rows.forEach(row => {
-    const rate = parseFloat(row.querySelector('.rate').value) || 0;
-    const qty = parseFloat(row.querySelector('.qty').value) || 0;
-    const amount = rate * qty;
-    row.querySelector('.amount').textContent = '$' + amount.toFixed(2);
-    subtotal += amount;
-  });
-  document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-  document.getElementById('total').textContent = subtotal.toFixed(2);
-}
-
-// Calculate amounts
-function updateAmounts() {
   let subtotal = 0;
   itemsTableBody.querySelectorAll('tr').forEach(row => {
     const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
     const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
     const amount = rate * qty;
-    row.querySelector('.itemAmount').textContent = amount.toFixed(2);
+    row.querySelector('.itemAmount').textContent = '$' + amount.toFixed(2);
     subtotal += amount;
   });
   subtotalEl.textContent = subtotal.toFixed(2);
-  totalEl.textContent = subtotal.toFixed(2); // no tax applied
+  totalEl.textContent = subtotal.toFixed(2);
 }
 
-// Save estimate to Firestore
+// Save estimate
 saveEstimateBtn.addEventListener('click', async () => {
   const customerId = customerSelect.value;
   if (!customerId) return alert("Please select a customer");
@@ -236,10 +219,11 @@ saveEstimateBtn.addEventListener('click', async () => {
   const items = [];
   itemsTableBody.querySelectorAll('tr').forEach(row => {
     const desc = row.querySelector('.itemDesc').value.trim();
+    const job = row.querySelector('.itemJob').value.trim();
     const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
     const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
     const amount = rate * qty;
-    if(desc) items.push({desc, rate, qty, amount});
+    if(desc) items.push({desc, job, rate, qty, amount});
   });
 
   if(items.length === 0) return alert("Add at least one item");
@@ -260,10 +244,10 @@ saveEstimateBtn.addEventListener('click', async () => {
   try {
     await db.collection('estimates').add(estimateData);
     alert("Estimate saved successfully!");
-    // Reset form
     customerSelect.value = "";
     itemsTableBody.innerHTML = "";
-    updateAmounts();
+    addItem(); // Add initial row
+    calculateTotals();
     document.getElementById('notes').value = "";
     document.getElementById('signature').value = "";
   } catch(err) {
@@ -271,6 +255,10 @@ saveEstimateBtn.addEventListener('click', async () => {
     alert("Error saving estimate.");
   }
 });
+
+// Initialize first row
+addItem();
 </script>
+
 </body>
 </html>
