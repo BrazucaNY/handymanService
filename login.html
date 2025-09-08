@@ -1,157 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Login - Handyman Service</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Admin Login - Handyman Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Correct Firebase SDK Imports for Modular API -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithCustomToken, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // --- Global Variables provided by the Canvas Environment ---
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-        
-        // --- Firebase Initialization and Authentication ---
-        let app;
-        let db;
-        let auth;
-        let userId = 'anonymous'; // Default anonymous user ID
-        
-        if (firebaseConfig) {
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-            
-            // Authenticate the user for Firestore access
-            const authenticateUser = async () => {
-                try {
-                    if (initialAuthToken) {
-                        const userCredential = await signInWithCustomToken(auth, initialAuthToken);
-                        userId = userCredential.user.uid;
-                        console.log("Signed in with custom token. User ID:", userId);
-                    } else {
-                        const userCredential = await signInAnonymously(auth);
-                        userId = userCredential.user.uid;
-                        console.log("Signed in anonymously. User ID:", userId);
-                    }
-                } catch (error) {
-                    console.error("Authentication error:", error);
-                    alert("Failed to authenticate. Please check the console for more details.");
-                }
-            };
-            
-            // Wait for the DOM to be ready before calling authenticate
-            document.addEventListener('DOMContentLoaded', authenticateUser);
-        } else {
-            console.error("Firebase config is not available.");
-        }
-        
-        // --- Main Logic (moved to a script tag below the HTML) ---
-        window.addEventListener('load', () => {
-            const loginForm = document.getElementById('loginForm');
-            const errorText = document.getElementById('error');
-            
-            // Function to get client IP
-            async function getClientIP() {
-                try {
-                    const response = await fetch('https://api.ipify.org?format=json');
-                    const data = await response.json();
-                    return data.ip;
-                } catch (err) {
-                    return 'unknown';
-                }
-            }
-            
-            loginForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                
-                try {
-                    // This is for demonstration purposes only.
-                    // In a real app, you would use signInWithEmailAndPassword.
-                    if (email === 'admin@example.com' && password === 'admin123') {
-                        // For a real app, you would sign in the user here
-                        // await signInWithEmailAndPassword(auth, email, password);
-                        window.location.href = "admin.html";
-                    } else {
-                        throw new Error('Incorrect email or password.');
-                    }
-                } catch (error) {
-                    // Get client IP
-                    const ip = await getClientIP();
-                    
-                    // Log failed attempt to Firestore
-                    // Note the corrected path for our environment's security rules
-                    const failedLoginsRef = collection(db, `/artifacts/${appId}/public/data/failed_logins`);
-                    await addDoc(failedLoginsRef, {
-                        email: email,
-                        timestamp: serverTimestamp(),
-                        ip: ip
-                    });
-                    
-                    // Show error message + warning
-                    errorText.textContent = `${error.message} Your IP (${ip}) has been recorded.`;
-                }
-            });
-            
-            // This part is for a multi-page app, not strictly needed in this single file.
-            // onAuthStateChanged(auth, (user) => {
-            //     if (user && !window.location.href.includes("admin.html")) {
-            //         window.location.href = "admin.html";
-            //     }
-            // });
-        });
-    </script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-    <style>
-        * { box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(to right, #4CAF50, #81C784);
-        }
-        .login-container {
-            background: #fff;
-            padding: 40px 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            width: 350px;
-            text-align: center;
-        }
-        .login-container h1 { margin-bottom: 30px; color: #333; font-weight: 500; }
-        .login-container input {
-            width: 100%; padding: 12px 15px; margin: 10px 0;
-            border: 1px solid #ccc; border-radius: 8px; font-size: 16px;
-        }
-        .login-container button {
-            width: 100%; padding: 12px; margin-top: 15px;
-            border: none; border-radius: 8px; background-color: #4CAF50;
-            color: white; font-size: 16px; cursor: pointer; transition: background 0.3s;
-        }
-        .login-container button:hover { background-color: #388E3C; }
-        .error-text { color: red; margin-top: 10px; font-size: 14px; }
-    </style>
+  <style>
+    * { box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, #4CAF50, #81C784);
+    }
+    .login-container {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+    .login-container h1 { margin-bottom: 30px; color: #333; font-weight: 500; }
+    .login-container input {
+      width: 100%; padding: 12px 15px; margin: 10px 0;
+      border: 1px solid #ccc; border-radius: 8px; font-size: 16px;
+    }
+    .login-container button {
+      width: 100%; padding: 12px; margin-top: 15px;
+      border: none; border-radius: 8px; background-color: #4CAF50;
+      color: white; font-size: 16px; cursor: pointer; transition: background 0.3s;
+    }
+    .login-container button:hover { background-color: #388E3C; }
+    .error-text { color: red; margin-top: 10px; font-size: 14px; }
+  </style>
+
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+      authDomain: "handymanserviceadmin.firebaseapp.com",
+      projectId: "handymanserviceadmin",
+      storageBucket: "handymanserviceadmin.appspot.com",
+      messagingSenderId: "1073781663456",
+      appId: "1:1073781663456:web:abcdef123456"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
 </head>
 <body>
-    <div class="login-container">
-        <h1>Admin Login</h1>
-        <form id="loginForm">
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-            <p class="error-text" id="error"></p>
-        </form>
-    </div>
+  <div class="login-container">
+    <h1>Admin Login</h1>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <p class="error-text" id="error"></p>
+    </form>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const errorText = document.getElementById('error');
+
+    // Function to get client IP
+    async function getClientIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+      } catch (err) {
+        return 'unknown';
+      }
+    }
+
+    loginForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        await firebase.auth().signInWithEmailAndPassword(email, password);
+        window.location.href = "admin.html";
+      } catch (error) {
+        // Get client IP
+        const ip = await getClientIP();
+
+        // Log failed attempt to Firestore
+        db.collection('failed_logins').add({
+          email: email,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          ip: ip
+        });
+
+        // Show error message + warning
+        errorText.textContent = `${error.message}. Your IP (${ip}) has been recorded.`;
+      }
+    });
+
+    // Redirect logged-in users automatically
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user && !window.location.href.includes("admin.html")) {
+        window.location.href = "admin.html";
+      }
+    });
+  </script>
 </body>
 </html>
