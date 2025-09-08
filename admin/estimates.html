@@ -65,23 +65,22 @@ nav a:hover { text-decoration:underline; }
     <input type="date" id="estimateDate">
   </section>
 
-<!-- Items Table -->
-<table id="itemsTable">
-  <thead>
-    <tr>
-      <th>Item Description</th>
-      <th>Rate</th>
-      <th>Quantity</th>
-      <th>Amount</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Rows will be dynamically added -->
-  </tbody>
-</table>
-<button type="button" id="addItemBtn">Add Item</button>
-
+  <!-- Items Table -->
+  <table id="itemsTable">
+    <thead>
+      <tr>
+        <th>Item Description</th>
+        <th>Rate</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be dynamically added -->
+    </tbody>
+  </table>
+  <button type="button" id="addItemBtn">Add Item</button>
 
   <!-- Totals -->
   <section>
@@ -163,6 +162,7 @@ function loadCustomers() {
     }
   });
 }
+
 // Add new item row
 function addItem() {
   const row = document.createElement('tr');
@@ -201,7 +201,6 @@ function calculateTotals() {
   totalEl.textContent = subtotal.toFixed(2);
 }
 
-
 // Save estimate
 saveEstimateBtn.addEventListener('click', async () => {
   const customerId = customerSelect.value;
@@ -213,11 +212,10 @@ saveEstimateBtn.addEventListener('click', async () => {
   const items = [];
   itemsTableBody.querySelectorAll('tr').forEach(row => {
     const desc = row.querySelector('.itemDesc').value.trim();
-    const job = row.querySelector('.itemJob').value.trim();
     const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
     const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
     const amount = rate * qty;
-    if(desc) items.push({desc, job, rate, qty, amount});
+    if(desc) items.push({desc, rate, qty, amount});
   });
 
   if(items.length === 0) return alert("Add at least one item");
@@ -225,7 +223,7 @@ saveEstimateBtn.addEventListener('click', async () => {
   const estimateData = {
     customerId,
     customerName,
-    estimateNumber: document.getElementById('estimateNumber').value || "",
+    estimateNumber: document.getElementById('estimateNumber').value || 'EST' + Date.now(),
     date: estimateDate.value,
     items,
     subtotal: parseFloat(subtotalEl.textContent),
@@ -249,6 +247,9 @@ saveEstimateBtn.addEventListener('click', async () => {
     alert("Error saving estimate.");
   }
 });
+
+// Add item button
+addItemBtn.addEventListener('click', addItem);
 
 // Initialize first row
 addItem();
