@@ -121,10 +121,11 @@ loginForm.addEventListener('submit', async function(e) {
 
     // Redirect logged-in users automatically
     firebase.auth().onAuthStateChanged(function(user) {
-      if (user && !window.location.href.includes("admin.html")) {
-        window.location.href = "admin.html";
-      }
-    });
+  if (user && !window.location.href.includes("admin/admin.html")) {
+    window.location.href = "admin/admin.html";
+  }
+});
+
   </script>
 </body>
 </html>
