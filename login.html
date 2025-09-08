@@ -12,11 +12,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-    }
-
+    * { box-sizing: border-box; font-family: 'Roboto', sans-serif; }
     body {
       margin: 0;
       display: flex;
@@ -25,7 +21,6 @@
       height: 100vh;
       background: linear-gradient(to right, #4CAF50, #81C784);
     }
-
     .login-container {
       background: #fff;
       padding: 40px 30px;
@@ -34,55 +29,29 @@
       width: 350px;
       text-align: center;
     }
-
-    .login-container h1 {
-      margin-bottom: 30px;
-      color: #333;
-      font-weight: 500;
-    }
-
+    .login-container h1 { margin-bottom: 30px; color: #333; font-weight: 500; }
     .login-container input {
-      width: 100%;
-      padding: 12px 15px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
+      width: 100%; padding: 12px 15px; margin: 10px 0;
+      border: 1px solid #ccc; border-radius: 8px; font-size: 16px;
     }
-
     .login-container button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 8px;
-      background-color: #4CAF50;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
+      width: 100%; padding: 12px; margin-top: 15px;
+      border: none; border-radius: 8px; background-color: #4CAF50;
+      color: white; font-size: 16px; cursor: pointer; transition: background 0.3s;
     }
-
-    .login-container button:hover {
-      background-color: #388E3C;
-    }
-
-    .error-text {
-      color: red;
-      margin-top: 10px;
-      font-size: 14px;
-    }
+    .login-container button:hover { background-color: #388E3C; }
+    .error-text { color: red; margin-top: 10px; font-size: 14px; }
   </style>
 
   <script>
-    // Firebase config — replace with your project info
+    // Firebase configuration — YOUR project info
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+      authDomain: "handymanserviceadmin.firebaseapp.com",
+      projectId: "handymanserviceadmin",
+      storageBucket: "handymanserviceadmin.appspot.com",
+      messagingSenderId: "1073781663456",
+      appId: "1:1073781663456:web:abcdef123456"
     };
     firebase.initializeApp(firebaseConfig);
   </script>
@@ -116,6 +85,7 @@
         });
     });
 
+    // Redirect logged-in admins automatically
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         window.location.href = "admin.html";
