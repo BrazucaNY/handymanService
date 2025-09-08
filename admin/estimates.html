@@ -15,7 +15,7 @@
     h1 { color: #333; }
     .container { max-width: 900px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     form { margin-bottom: 20px; display: grid; gap: 10px; }
-    input, select {
+    input, select, textarea {
       width: 100%; padding: 10px;
       border: 1px solid #ccc; border-radius: 6px; font-size: 14px;
     }
@@ -24,6 +24,8 @@
       background: #4CAF50; color: #fff; cursor: pointer; font-size: 14px;
     }
     button:hover { background: #388E3C; }
+    button#backBtn { background: #888; margin-bottom: 10px; }
+    button#backBtn:hover { background: #555; }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
     th { background: #f0f0f0; }
@@ -33,6 +35,7 @@
 </head>
 <body>
   <div class="container">
+    <button id="backBtn">← Back to Dashboard</button>
     <h1>Estimate Management</h1>
 
     <!-- Estimate Registration Form -->
@@ -41,8 +44,9 @@
         <option value="">Select Customer</option>
       </select>
       <input type="text" id="job" placeholder="Job Type" required>
-      <input type="number" id="hours" placeholder="Hours" required>
-      <input type="number" id="materials" placeholder="Material Cost" required>
+      <input type="number" id="hours" placeholder="Hours" min="0" required>
+      <input type="number" id="materials" placeholder="Material Cost" min="0" required>
+      <textarea id="notes" placeholder="Notes (optional)"></textarea>
       <button type="submit">Add Estimate</button>
     </form>
 
@@ -56,6 +60,7 @@
           <th>Hours</th>
           <th>Materials</th>
           <th>Total</th>
+          <th>Notes</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -78,43 +83,66 @@
     const estimateForm = document.getElementById('estimateForm');
     const estimatesTable = document.querySelector('#estimatesTable tbody');
     const customerSelect = document.getElementById('customerSelect');
+    const backBtn = document.getElementById('backBtn');
+
+    // Back button functionality
+    backBtn.addEventListener('click', () => {
+      window.location.href = "admin.html"; // Adjust if in a subfolder
+    });
 
     // Load customers into select
     db.collection('customers').orderBy('name').onSnapshot(snapshot => {
       customerSelect.innerHTML = '<option value="">Select Customer</option>';
-      snapshot.forEach(doc => {
-        const c = doc.data();
+      if (snapshot.empty) {
         const option = document.createElement('option');
-        option.value = doc.id;
-        option.textContent = c.name;
+        option.value = "";
+        option.textContent = "No customers registered";
         customerSelect.appendChild(option);
-      });
+      } else {
+        snapshot.forEach(doc => {
+          const c = doc.data();
+          const option = document.createElement('option');
+          option.value = doc.id;
+          option.textContent = c.name;
+          customerSelect.appendChild(option);
+        });
+      }
     });
+
+    // Configurable hourly rate
+    const HOURLY_RATE = 50;
 
     // Add new estimate
     estimateForm.addEventListener('submit', async e => {
       e.preventDefault();
       const customerId = customerSelect.value;
-      const job = document.getElementById('job').value;
+      const job = document.getElementById('job').value.trim();
       const hours = Number(document.getElementById('hours').value);
       const materials = Number(document.getElementById('materials').value);
+      const notes = document.getElementById('notes').value.trim();
 
       if (!customerId) return alert("Please select a customer");
+      if (hours < 0 || materials < 0) return alert("Hours and Material costs must be positive numbers");
 
       const customerDoc = await db.collection('customers').doc(customerId).get();
       const customerName = customerDoc.exists ? customerDoc.data().name : "Unknown";
 
-      await db.collection('estimates').add({
-        customerId,
-        customerName,
-        job,
-        hours,
-        materials,
-        total: hours * 50 + materials, // Example: $50/hour
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-
-      estimateForm.reset();
+      try {
+        await db.collection('estimates').add({
+          customerId,
+          customerName,
+          job,
+          hours,
+          materials,
+          total: hours * HOURLY_RATE + materials,
+          notes,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        estimateForm.reset();
+      } catch (err) {
+        console.error("Error adding estimate:", err);
+        alert("Failed to add estimate. Check console for details.");
+      }
     });
 
     // Display estimates
@@ -129,6 +157,7 @@
             <td>${e.hours}</td>
             <td>${e.materials}</td>
             <td>${e.total}</td>
+            <td>${e.notes || ''}</td>
             <td><button class="delete-btn" onclick="deleteEstimate('${doc.id}')">Delete</button></td>
           </tr>
         `;
