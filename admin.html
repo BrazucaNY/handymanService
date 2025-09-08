@@ -4,9 +4,36 @@
   <meta charset="UTF-8">
   <title>Handyman Admin Dashboard</title>
   <link rel="stylesheet" href="assets/style.css">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Protect admin page
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
 </head>
 <body>
   <h1>Handyman Service Admin</h1>
+
+  <!-- Logout Button -->
+  <button id="logoutBtn">Logout</button>
 
   <!-- Add Customer / Job Form -->
   <section id="add-customer">
@@ -42,6 +69,16 @@
     </table>
   </section>
 
+  <!-- Admin JS -->
   <script src="assets/admin.js"></script>
+
+  <!-- Logout Script -->
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      firebase.auth().signOut().then(() => {
+        window.location.href = "login.html";
+      });
+    });
+  </script>
 </body>
 </html>
