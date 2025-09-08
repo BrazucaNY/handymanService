@@ -90,7 +90,7 @@ loginForm.addEventListener('submit', async function(e) {
 
   try {
     await firebase.auth().signInWithEmailAndPassword(email, password);
-    window.location.href = "admin.html";
+    window.location.href = "admin/admin.html";
   } catch (error) {
     // Get client IP
     let ip = 'unknown';
