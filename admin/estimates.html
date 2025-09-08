@@ -5,34 +5,308 @@
 <title>Estimate - Handyman Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+  import { getFirestore, collection, doc, getDoc, onSnapshot, addDoc, runTransaction, serverTimestamp, orderBy, query } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI", // Replace with your actual config
+    authDomain: "handymanserviceadmin.firebaseapp.com",
+    projectId: "handymanserviceadmin",
+    storageBucket: "handymanserviceadmin.appspot.com",
+    messagingSenderId: "1073781663456",
+    appId: "1:1073781663456:web:abcdef123456"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+
+  // --- DOM Elements ---
+  const customerSelect = document.getElementById('customerSelect');
+  const estimateDate = document.getElementById('estimateDate');
+  const itemsTableBody = document.querySelector('#itemsTable tbody');
+  const subtotalEl = document.getElementById('subtotal');
+  const totalEl = document.getElementById('total');
+  const addItemBtn = document.getElementById('addItemBtn');
+  const saveEstimateBtn = document.getElementById('saveEstimateBtn');
+  const photosInput = document.getElementById('photos');
+
+  // --- Utility Functions ---
+  const formatEstimateNumber = (num) => `EST${String(num).padStart(4, '0')}`;
+
+  // --- Core Functions ---
+
+  /**
+   * Loads your business info from Firestore and populates the "From" section.
+   * Creates a 'settings/businessDetails' document in Firestore with fields 
+   * like 'name', 'email', 'address', 'phone', 'businessNumber'.
+   */
+  async function loadBusinessInfo() {
+    try {
+      const docRef = doc(db, 'settings', 'businessDetails');
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        document.getElementById('businessName').textContent = data.name || 'Your Company Name';
+        document.getElementById('businessEmail').textContent = data.email || 'your@email.com';
+        document.getElementById('businessAddress').textContent = data.address || 'Your Address';
+        document.getElementById('businessPhone').textContent = data.phone || 'Your Phone';
+        document.getElementById('businessNumber').textContent = data.businessNumber || 'Your Business No.';
+      } else {
+        console.log("Business details document not found! (settings/businessDetails)");
+      }
+    } catch (error) {
+      console.error("Error loading business info:", error);
+    }
+  }
+  
+  /**
+   * Loads customers from Firestore and populates the select dropdown.
+   */
+  function loadCustomers() {
+    const q = query(collection(db, 'customers'), orderBy('createdAt', 'desc'));
+    onSnapshot(q, (snapshot) => {
+      customerSelect.innerHTML = '<option value="">Select Customer</option>';
+      snapshot.forEach(doc => {
+        const customer = doc.data();
+        if (!customer.name) return;
+        const option = document.createElement('option');
+        option.value = doc.id;
+        option.textContent = customer.name;
+        customerSelect.appendChild(option);
+      });
+      if (customerSelect.options.length === 1) {
+        customerSelect.innerHTML = '<option value="" disabled>No customers found</option>';
+      }
+    });
+  }
+
+  /**
+   * Safely gets the next sequential estimate number using a Firestore transaction.
+   * Creates a 'metadata/counter' document in Firestore with a field 'estimateNumber'.
+   * @returns {Promise<number>} The next estimate number.
+   */
+  async function getNextEstimateNumber() {
+    const counterRef = doc(db, 'metadata', 'counter');
+    try {
+      const newEstimateNumber = await runTransaction(db, async (transaction) => {
+        const counterDoc = await transaction.get(counterRef);
+        if (!counterDoc.exists()) {
+          transaction.set(counterRef, { estimateNumber: 1 });
+          return 1;
+        }
+        const newNumber = counterDoc.data().estimateNumber + 1;
+        transaction.update(counterRef, { estimateNumber: newNumber });
+        return newNumber;
+      });
+      return newEstimateNumber;
+    } catch (e) {
+      console.error("Transaction failed: ", e);
+      throw new Error("Could not generate estimate number.");
+    }
+  }
+
+  /**
+   * Populates the estimate number field.
+   */
+  async function setEstimateNumber() {
+    try {
+      const nextNumber = await getNextEstimateNumber();
+      document.getElementById('estimateNumber').value = formatEstimateNumber(nextNumber);
+    } catch (error) {
+      document.getElementById('estimateNumber').value = "Error";
+      console.error(error);
+    }
+  }
+
+  /**
+   * Adds a new item row to the table.
+   */
+  function addItem() {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><input type="text" class="itemDesc" placeholder="Item Description"></td>
+      <td><textarea class="itemJob" placeholder="Job description"></textarea></td>
+      <td><input type="number" class="itemRate" value="0" min="0" step="0.01"></td>
+      <td><input type="number" class="itemQty" value="1" min="1"></td>
+      <td class="itemAmount">$0.00</td>
+      <td><button type="button" class="delete-btn">Delete</button></td>
+    `;
+    itemsTableBody.appendChild(row);
+
+    // Add event listeners to new row for real-time calculation
+    row.querySelectorAll('input, textarea').forEach(input => {
+      input.addEventListener('input', calculateTotals);
+    });
+    row.querySelector('.delete-btn').addEventListener('click', () => {
+      row.remove();
+      calculateTotals();
+    });
+  }
+  
+  /**
+   * Calculates subtotal and total from all item rows.
+   */
+  function calculateTotals() {
+    let subtotal = 0;
+    itemsTableBody.querySelectorAll('tr').forEach(row => {
+      const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
+      const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
+      const amount = rate * qty;
+      row.querySelector('.itemAmount').textContent = '$' + amount.toFixed(2);
+      subtotal += amount;
+    });
+    subtotalEl.textContent = subtotal.toFixed(2);
+    totalEl.textContent = subtotal.toFixed(2); // In case of future taxes/discounts
+  }
+
+  /**
+   * Resets the entire form to its initial state.
+   */
+  function resetForm() {
+    customerSelect.value = "";
+    itemsTableBody.innerHTML = "";
+    addItem();
+    calculateTotals();
+    document.getElementById('notes').value = "";
+    document.getElementById('signature').value = "";
+    photosInput.value = ""; // Clear file input
+    setEstimateNumber(); // Fetch the next estimate number
+  }
+  
+  /**
+   * Handles the entire process of saving an estimate.
+   */
+  async function saveEstimate() {
+    const customerId = customerSelect.value;
+    if (!customerId) {
+      alert("Please select a customer.");
+      return;
+    }
+    
+    saveEstimateBtn.disabled = true;
+    saveEstimateBtn.textContent = 'Saving...';
+
+    try {
+      // 1. Get customer data
+      const customerDoc = await getDoc(doc(db, 'customers', customerId));
+      const customerName = customerDoc.exists() ? customerDoc.data().name : "Unknown";
+
+      // 2. Prepare item data
+      const items = [];
+      itemsTableBody.querySelectorAll('tr').forEach(row => {
+        const desc = row.querySelector('.itemDesc').value.trim();
+        const job = row.querySelector('.itemJob').value.trim();
+        const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
+        const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
+        const amount = rate * qty;
+        if (desc) items.push({ desc, job, rate, qty, amount });
+      });
+
+      if (items.length === 0) {
+        throw new Error("Please add at least one item to the estimate.");
+      }
+
+      // 3. Upload photos to Firebase Storage
+      const photoURLs = [];
+      const files = photosInput.files;
+      if (files.length > 0) {
+        const estimateId = doc(collection(db, 'estimates')).id; // Pre-generate ID for storage path
+        const uploadPromises = Array.from(files).map(file => {
+          const filePath = `estimates/${estimateId}/${file.name}`;
+          const storageRef = ref(storage, filePath);
+          return uploadBytes(storageRef, file).then(snapshot => getDownloadURL(snapshot.ref));
+        });
+        photoURLs.push(...await Promise.all(uploadPromises));
+      }
+      
+      // 4. Get the latest estimate number
+      const estimateNumber = await getNextEstimateNumber();
+
+      // 5. Construct final estimate object
+      const estimateData = {
+        customerId,
+        customerName,
+        estimateNumber: formatEstimateNumber(estimateNumber),
+        date: estimateDate.value,
+        items,
+        photoURLs,
+        subtotal: parseFloat(subtotalEl.textContent),
+        total: parseFloat(totalEl.textContent),
+        notes: document.getElementById('notes').value.trim(),
+        signature: document.getElementById('signature').value.trim(),
+        createdAt: serverTimestamp(),
+        userId: auth.currentUser.uid, // For security rules
+      };
+
+      // 6. Save to Firestore
+      const docRef = await addDoc(collection(db, 'estimates'), estimateData);
+      alert(`Estimate ${estimateData.estimateNumber} saved successfully!`);
+      resetForm();
+
+    } catch (err) {
+      console.error("Error saving estimate:", err);
+      alert(`Error: ${err.message}`);
+    } finally {
+      saveEstimateBtn.disabled = false;
+      saveEstimateBtn.textContent = 'Save Estimate';
+    }
+  }
+
+  // --- Page Initialization ---
+
+  // Set default date
+  estimateDate.value = new Date().toISOString().split('T')[0];
+  
+  // Auth protection and initial data loading
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in
+      loadBusinessInfo();
+      loadCustomers();
+      resetForm(); // Includes adding first item and calculating totals
+    } else {
+      // User is signed out, redirect to login
+      window.location.href = "login.html";
+    }
+  });
+
+  // Event Listeners
+  addItemBtn.addEventListener('click', addItem);
+  saveEstimateBtn.addEventListener('click', saveEstimate);
+  
+</script>
 
 <style>
-body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
-.container { max-width: 1000px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-h1, h2 { text-align: center; color: #333; }
-section { margin-bottom: 25px; }
-label { font-weight: 500; margin-top: 10px; display: block; }
-input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-th { background: #f0f0f0; }
-button { padding: 10px 20px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; cursor: pointer; margin-top: 10px; }
-button:hover { background: #388E3C; }
-button.delete-btn { background: #f44336; }
-button.delete-btn:hover { background: #d32f2f; }
-.notes, .signature { margin-top: 15px; }
-.photos { margin-top: 10px; }
-nav a { margin-right: 15px; text-decoration:none; font-weight:500; color:#333; }
-nav a:hover { text-decoration:underline; }
+  body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
+  .container { max-width: 1000px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  h1, h2 { text-align: center; color: #333; }
+  section { margin-bottom: 25px; }
+  label { font-weight: 500; margin-top: 10px; display: block; }
+  input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+  th { background: #f0f0f0; }
+  button { padding: 10px 20px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; cursor: pointer; margin-top: 10px; transition: background-color 0.2s, opacity 0.2s; }
+  button:hover { background: #388E3C; }
+  button:disabled { background: #aaa; cursor: not-allowed; }
+  button.delete-btn { background: #f44336; }
+  button.delete-btn:hover { background: #d32f2f; }
+  .notes, .signature { margin-top: 15px; }
+  .photos { margin-top: 10px; }
+  nav a { margin-right: 15px; text-decoration:none; font-weight:500; color:#333; }
+  nav a:hover { text-decoration:underline; }
+  #estimateNumber { background-color: #e9ecef; cursor: not-allowed; }
 </style>
 </head>
 <body>
 
-<!-- Menu / Navigation -->
 <nav style="margin-bottom:20px; text-align:center;">
   <a href="dashboard.html">Dashboard</a>
   <a href="customers.html">Customers</a>
@@ -42,17 +316,15 @@ nav a:hover { text-decoration:underline; }
 <div class="container">
   <h1>Create Estimate</h1>
 
-  <!-- From Section -->
   <section>
     <h2>From</h2>
-    <p><strong>Name:</strong> Rodrigues Handyman</p>
-    <p><strong>Email:</strong> name@business.com</p>
-    <p><strong>Address:</strong> Street</p>
-    <p><strong>Phone:</strong> 516-415-8918</p>
-    <p><strong>Business Number:</strong> Brazuca</p>
+    <p><strong>Name:</strong> <span id="businessName">Loading...</span></p>
+    <p><strong>Email:</strong> <span id="businessEmail">...</span></p>
+    <p><strong>Address:</strong> <span id="businessAddress">...</span></p>
+    <p><strong>Phone:</strong> <span id="businessPhone">...</span></p>
+    <p><strong>Business Number:</strong> <span id="businessNumber">...</span></p>
   </section>
 
-  <!-- Bill To Section -->
   <section>
     <h2>Bill To</h2>
     <label for="customerSelect">Select Customer</label>
@@ -60,12 +332,11 @@ nav a:hover { text-decoration:underline; }
       <option value="">Loading customers...</option>
     </select>
     <label for="estimateNumber">Estimate Number</label>
-    <input type="text" id="estimateNumber" placeholder="EST0001">
+    <input type="text" id="estimateNumber" placeholder="Generating..." readonly>
     <label for="estimateDate">Date</label>
     <input type="date" id="estimateDate">
   </section>
 
-  <!-- Items Table -->
   <table id="itemsTable">
     <thead>
       <tr>
@@ -78,187 +349,32 @@ nav a:hover { text-decoration:underline; }
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><input type="text" class="itemDesc" placeholder="Item Description"></td>
-        <td><textarea class="itemJob" placeholder="Job description"></textarea></td>
-        <td><input type="number" class="itemRate" value="0" min="0"></td>
-        <td><input type="number" class="itemQty" value="1" min="1"></td>
-        <td class="itemAmount">$0.00</td>
-        <td><button type="button" class="delete-btn">Delete</button></td>
-      </tr>
-    </tbody>
+      </tbody>
   </table>
   <button type="button" id="addItemBtn">Add Item</button>
 
-  <!-- Totals -->
   <section>
     <p><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
     <p><strong>Total:</strong> $<span id="total">0.00</span></p>
   </section>
 
-  <!-- Notes -->
   <section class="notes">
     <label for="notes">Notes</label>
     <textarea id="notes" placeholder="Notes - any relevant information not covered, additional terms and conditions"></textarea>
   </section>
 
-  <!-- Signature -->
   <section class="signature">
     <label for="signature">Signature</label>
     <input type="text" id="signature" placeholder="Sign here">
   </section>
 
-  <!-- Photos -->
   <section class="photos">
     <label for="photos">Add Photos</label>
-    <input type="file" id="photos" multiple>
+    <input type="file" id="photos" multiple accept="image/*">
   </section>
 
   <button id="saveEstimateBtn">Save Estimate</button>
 </div>
-
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
-  authDomain: "handymanserviceadmin.firebaseapp.com",
-  projectId: "handymanserviceadmin",
-  storageBucket: "handymanserviceadmin.appspot.com",
-  messagingSenderId: "1073781663456",
-  appId: "1:1073781663456:web:abcdef123456"
-};
-if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-
-const customerSelect = document.getElementById('customerSelect');
-const estimateDate = document.getElementById('estimateDate');
-const itemsTableBody = document.querySelector('#itemsTable tbody');
-const subtotalEl = document.getElementById('subtotal');
-const totalEl = document.getElementById('total');
-const addItemBtn = document.getElementById('addItemBtn');
-const saveEstimateBtn = document.getElementById('saveEstimateBtn');
-
-// Set default date
-estimateDate.value = new Date().toISOString().split('T')[0];
-
-// Auth protection
-auth.onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = "login.html";
-  } else {
-    loadCustomers();
-  }
-});
-
-// Load customers
-function loadCustomers() {
-  db.collection('customers').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
-    customerSelect.innerHTML = '<option value="">Select Customer</option>';
-    snapshot.forEach(doc => {
-      const c = doc.data();
-      if (!c.name) return;
-      const option = document.createElement('option');
-      option.value = doc.id;
-      option.textContent = c.name;
-      customerSelect.appendChild(option);
-    });
-    if (customerSelect.options.length === 1) {
-      const option = document.createElement('option');
-      option.value = "";
-      option.textContent = "No customers registered";
-      customerSelect.appendChild(option);
-    }
-  });
-}
-
-// Add item
-function addItem() {
-  const row = document.createElement('tr');
-  row.innerHTML = `
-    <td><input type="text" class="itemDesc" placeholder="Item Description"></td>
-    <td><textarea class="itemJob" placeholder="Job description"></textarea></td>
-    <td><input type="number" class="itemRate" value="0" min="0"></td>
-    <td><input type="number" class="itemQty" value="1" min="1"></td>
-    <td class="itemAmount">$0.00</td>
-    <td><button type="button" class="delete-btn">Delete</button></td>
-  `;
-  itemsTableBody.appendChild(row);
-  row.querySelectorAll('input, textarea').forEach(input => {
-    input.addEventListener('input', calculateTotals);
-  });
-  row.querySelector('.delete-btn').addEventListener('click', () => {
-    row.remove();
-    calculateTotals();
-  });
-  calculateTotals();
-}
-addItemBtn.addEventListener('click', addItem);
-
-// Calculate totals
-function calculateTotals() {
-  let subtotal = 0;
-  itemsTableBody.querySelectorAll('tr').forEach(row => {
-    const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
-    const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
-    const amount = rate * qty;
-    row.querySelector('.itemAmount').textContent = '$' + amount.toFixed(2);
-    subtotal += amount;
-  });
-  subtotalEl.textContent = subtotal.toFixed(2);
-  totalEl.textContent = subtotal.toFixed(2);
-}
-
-// Save estimate
-saveEstimateBtn.addEventListener('click', async () => {
-  const customerId = customerSelect.value;
-  if (!customerId) return alert("Please select a customer");
-
-  const customerDoc = await db.collection('customers').doc(customerId).get();
-  const customerName = customerDoc.exists ? customerDoc.data().name : "Unknown";
-
-  const items = [];
-  itemsTableBody.querySelectorAll('tr').forEach(row => {
-    const desc = row.querySelector('.itemDesc').value.trim();
-    const job = row.querySelector('.itemJob').value.trim();
-    const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
-    const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
-    const amount = rate * qty;
-    if(desc) items.push({desc, job, rate, qty, amount});
-  });
-
-  if(items.length === 0) return alert("Add at least one item");
-
-  const estimateData = {
-    customerId,
-    customerName,
-    estimateNumber: document.getElementById('estimateNumber').value || "",
-    date: estimateDate.value,
-    items,
-    subtotal: parseFloat(subtotalEl.textContent),
-    total: parseFloat(totalEl.textContent),
-    notes: document.getElementById('notes').value.trim(),
-    signature: document.getElementById('signature').value.trim(),
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  };
-
-  try {
-    await db.collection('estimates').add(estimateData);
-    alert("Estimate saved successfully!");
-    customerSelect.value = "";
-    itemsTableBody.innerHTML = "";
-    addItem(); // Add initial row
-    calculateTotals();
-    document.getElementById('notes').value = "";
-    document.getElementById('signature').value = "";
-  } catch(err) {
-    console.error(err);
-    alert("Error saving estimate.");
-  }
-});
-
-// Initialize first row
-addItem();
-</script>
 
 </body>
 </html>
