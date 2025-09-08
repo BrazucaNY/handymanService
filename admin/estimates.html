@@ -90,8 +90,11 @@
       window.location.href = "admin.html"; // Adjust if in a subfolder
     });
 
-    // Load customers into select
-    db.collection('customers').orderBy('name').onSnapshot(snapshot => {
+  // Load customers into select
+const loadCustomers = () => {
+  db.collection('customers')
+    .orderBy('createdAt', 'desc') // safer than 'name' if some names are empty
+    .onSnapshot(snapshot => {
       customerSelect.innerHTML = '<option value="">Select Customer</option>';
       if (snapshot.empty) {
         const option = document.createElement('option');
@@ -101,13 +104,20 @@
       } else {
         snapshot.forEach(doc => {
           const c = doc.data();
+          if (!c.name) return; // skip empty names
           const option = document.createElement('option');
           option.value = doc.id;
           option.textContent = c.name;
           customerSelect.appendChild(option);
         });
       }
+    }, err => {
+      console.error("Error loading customers:", err);
     });
+};
+
+loadCustomers(); // call on page load
+
 
     // Configurable hourly rate
     const HOURLY_RATE = 50;
