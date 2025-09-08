@@ -83,30 +83,41 @@
         return 'unknown';
       }
     }
+loginForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
 
-    loginForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+  try {
+    await firebase.auth().signInWithEmailAndPassword(email, password);
+    window.location.href = "admin.html";
+  } catch (error) {
+    // Get client IP
+    let ip = 'unknown';
+    try {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      ip = data.ip;
+    } catch(err) {
+      console.error("Failed to get IP:", err);
+    }
 
-      try {
-        await firebase.auth().signInWithEmailAndPassword(email, password);
-        window.location.href = "admin.html";
-      } catch (error) {
-        // Get client IP
-        const ip = await getClientIP();
-
-        // Log failed attempt to Firestore
-        db.collection('failed_logins').add({
-          email: email,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-          ip: ip
-        });
-
-        // Show error message + warning
-        errorText.textContent = `${error.message}. Your IP (${ip}) has been recorded.`;
-      }
+    // Save failed login to Firestore
+    db.collection('failed_logins').add({
+      email: email,
+      ip: ip,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+      console.log("Failed login logged:", email, ip);
+    }).catch(err => {
+      console.error("Error saving failed login:", err);
     });
+
+    // Show message to user
+    errorText.textContent = `${error.message}. Your IP (${ip}) has been recorded.`;
+  }
+});
+
 
     // Redirect logged-in users automatically
     firebase.auth().onAuthStateChanged(function(user) {
