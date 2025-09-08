@@ -11,34 +11,82 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <style>
-    body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
+    body { font-family: 'Roboto', sans-serif; margin: 0; background: #f4f4f4; }
+    
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2c3e50;
+      padding: 10px 20px;
+      color: white;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    .top-nav .left-menu, .top-nav .right-menu { display: flex; align-items: center; }
+    .top-nav a {
+      color: white; text-decoration: none; margin-right: 20px; font-weight: bold;
+      transition: color 0.3s;
+    }
+    .top-nav a:hover { color: #1abc9c; }
+    .top-nav .right-menu a:last-child { margin-right: 0; }
+
+    /* Main Container */
+    .container {
+      max-width: 900px;
+      margin: 100px auto 40px; /* top margin leaves space for fixed nav */
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
     h1, h2 { color: #333; }
-    .container { max-width: 900px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     form { margin-bottom: 20px; }
     input, textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
     button { padding: 10px 20px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; cursor: pointer; font-size: 14px; margin-right: 10px; }
     button:hover { background: #388E3C; }
     button.delete-btn { background: #f44336; }
     button.delete-btn:hover { background: #d32f2f; }
-    #logoutBtn { background: #333; margin-bottom: 20px; }
-    #logoutBtn:hover { background: #111; }
-    #navButtons { margin-bottom: 20px; }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
     th { background: #f0f0f0; }
     .message { margin: 10px 0; font-size: 14px; }
     .success { color: green; }
     .error { color: red; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .top-nav a { margin-right: 10px; font-size: 12px; }
+      button { font-size: 12px; padding: 8px 12px; }
+      input, textarea { font-size: 12px; padding: 8px; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Top Navigation Bar -->
+  <div class="top-nav">
+    <div class="left-menu">
+      <a href="#">Invoice</a>
+      <a href="#">Estimates</a>
+      <a href="#">Expenses</a>
+      <a href="#">Reports</a>
+      <a href="#">Clientes</a>
+      <a href="#">Items</a>
+    </div>
+    <div class="right-menu">
+      <a href="#">Settings</a>
+      <a id="logoutBtn">Logout</a>
+    </div>
+  </div>
+
   <div class="container">
     <h1>Admin Dashboard</h1>
-
-    <div id="navButtons">
-      <button id="logoutBtn">Logout</button>
-      <button onclick="window.location.href='estimates.html'">Go to Estimates</button>
-    </div>
 
     <!-- Customer Registration Form -->
     <h2>Add Customer</h2>
@@ -143,5 +191,6 @@
       });
     });
   </script>
+
 </body>
 </html>
