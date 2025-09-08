@@ -12,151 +12,124 @@
 
   <style>
     body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
-    h1 { color: #333; }
-    .container { max-width: 900px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    form { margin-bottom: 20px; display: grid; gap: 10px; }
-    input, select, textarea {
-      width: 100%; padding: 10px;
-      border: 1px solid #ccc; border-radius: 6px; font-size: 14px;
-    }
+    h1 { color: #333; text-align: center; }
+    .container { max-width: 900px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    form { margin-bottom: 20px; display: grid; gap: 12px; }
+    input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
     button {
-      padding: 10px 20px; border: none; border-radius: 6px;
-      background: #4CAF50; color: #fff; cursor: pointer; font-size: 14px;
+      padding: 12px; border: none; border-radius: 8px; background: #4CAF50; color: #fff;
+      font-size: 14px; cursor: pointer; transition: background 0.3s;
     }
     button:hover { background: #388E3C; }
-    button#backBtn { background: #888; margin-bottom: 10px; }
+    button#backBtn { background: #888; margin-bottom: 15px; }
     button#backBtn:hover { background: #555; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
-    th { background: #f0f0f0; }
     button.delete-btn { background: #f44336; }
     button.delete-btn:hover { background: #d32f2f; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+    th { background: #f8f8f8; }
+    @media (max-width: 600px) {
+      input, select, textarea, button { font-size: 13px; padding: 10px; }
+      th, td { font-size: 12px; padding: 8px; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <button id="backBtn">← Back to Dashboard</button>
-    <h1>Estimate Management</h1>
 
-    <!-- Estimate Registration Form -->
-    <form id="estimateForm">
-      <select id="customerSelect" required>
-        <option value="">Select Customer</option>
-      </select>
-      <input type="text" id="job" placeholder="Job Type" required>
-      <input type="number" id="hours" placeholder="Hours" min="0" required>
-      <input type="number" id="materials" placeholder="Material Cost" min="0" required>
-      <textarea id="notes" placeholder="Notes (optional)"></textarea>
-      <button type="submit">Add Estimate</button>
-    </form>
+<div class="container">
+  <button id="backBtn">← Back to Dashboard</button>
+  <h1>Estimate Management</h1>
 
-    <!-- Existing Estimates -->
-    <h2>Estimates List</h2>
-    <table id="estimatesTable">
-      <thead>
-        <tr>
-          <th>Customer</th>
-          <th>Job</th>
-          <th>Hours</th>
-          <th>Materials</th>
-          <th>Total</th>
-          <th>Notes</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+  <!-- Estimate Form -->
+  <form id="estimateForm">
+    <select id="customerSelect" required>
+      <option value="">Loading customers...</option>
+    </select>
+    <input type="text" id="job" placeholder="Job Type" required>
+    <input type="number" id="hours" placeholder="Hours" min="0" required>
+    <input type="number" id="materials" placeholder="Material Cost" min="0" required>
+    <textarea id="notes" placeholder="Notes (optional)"></textarea>
+    <button type="submit">Add Estimate</button>
+  </form>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
-      authDomain: "handymanserviceadmin.firebaseapp.com",
-      projectId: "handymanserviceadmin",
-      storageBucket: "handymanserviceadmin.appspot.com",
-      messagingSenderId: "1073781663456",
-      appId: "1:1073781663456:web:abcdef123456"
-    };
-    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+  <!-- Estimates Table -->
+  <h2>Estimates List</h2>
+  <table id="estimatesTable">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Job</th>
+        <th>Hours</th>
+        <th>Materials</th>
+        <th>Total</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
-    const estimateForm = document.getElementById('estimateForm');
-    const estimatesTable = document.querySelector('#estimatesTable tbody');
-    const customerSelect = document.getElementById('customerSelect');
-    const backBtn = document.getElementById('backBtn');
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+  authDomain: "handymanserviceadmin.firebaseapp.com",
+  projectId: "handymanserviceadmin",
+  storageBucket: "handymanserviceadmin.appspot.com",
+  messagingSenderId: "1073781663456",
+  appId: "1:1073781663456:web:abcdef123456"
+};
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
 
-    // Back button functionality
-    backBtn.addEventListener('click', () => {
-      window.location.href = "admin.html"; // Adjust if in a subfolder
-    });
+const estimateForm = document.getElementById('estimateForm');
+const estimatesTable = document.querySelector('#estimatesTable tbody');
+const customerSelect = document.getElementById('customerSelect');
+const backBtn = document.getElementById('backBtn');
+const HOURLY_RATE = 50;
 
-  // Load customers into select
-const loadCustomers = () => {
+// Back to dashboard
+backBtn.addEventListener('click', () => window.location.href = "admin.html");
+
+// Auth protection
+auth.onAuthStateChanged(user => {
+  if (!user) {
+    window.location.href = "login.html";
+  } else {
+    loadCustomers();
+    loadEstimates();
+  }
+});
+
+// Load customers into dropdown
+function loadCustomers() {
+  customerSelect.innerHTML = '<option value="">Select Customer</option>';
   db.collection('customers')
-    .orderBy('createdAt', 'desc') // safer than 'name' if some names are empty
+    .orderBy('createdAt', 'desc')
     .onSnapshot(snapshot => {
-      customerSelect.innerHTML = '<option value="">Select Customer</option>';
-      if (snapshot.empty) {
+      snapshot.forEach(doc => {
+        const c = doc.data();
+        if (!c.name) return;
+        const option = document.createElement('option');
+        option.value = doc.id;
+        option.textContent = c.name;
+        customerSelect.appendChild(option);
+      });
+      if (customerSelect.options.length === 1) {
         const option = document.createElement('option');
         option.value = "";
         option.textContent = "No customers registered";
         customerSelect.appendChild(option);
-      } else {
-        snapshot.forEach(doc => {
-          const c = doc.data();
-          if (!c.name) return; // skip empty names
-          const option = document.createElement('option');
-          option.value = doc.id;
-          option.textContent = c.name;
-          customerSelect.appendChild(option);
-        });
       }
-    }, err => {
-      console.error("Error loading customers:", err);
-    });
-};
+    }, err => console.error("Error loading customers:", err));
+}
 
-loadCustomers(); // call on page load
-
-
-    // Configurable hourly rate
-    const HOURLY_RATE = 50;
-
-    // Add new estimate
-    estimateForm.addEventListener('submit', async e => {
-      e.preventDefault();
-      const customerId = customerSelect.value;
-      const job = document.getElementById('job').value.trim();
-      const hours = Number(document.getElementById('hours').value);
-      const materials = Number(document.getElementById('materials').value);
-      const notes = document.getElementById('notes').value.trim();
-
-      if (!customerId) return alert("Please select a customer");
-      if (hours < 0 || materials < 0) return alert("Hours and Material costs must be positive numbers");
-
-      const customerDoc = await db.collection('customers').doc(customerId).get();
-      const customerName = customerDoc.exists ? customerDoc.data().name : "Unknown";
-
-      try {
-        await db.collection('estimates').add({
-          customerId,
-          customerName,
-          job,
-          hours,
-          materials,
-          total: hours * HOURLY_RATE + materials,
-          notes,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        estimateForm.reset();
-      } catch (err) {
-        console.error("Error adding estimate:", err);
-        alert("Failed to add estimate. Check console for details.");
-      }
-    });
-
-    // Display estimates
-    db.collection('estimates').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+// Load existing estimates
+function loadEstimates() {
+  estimatesTable.innerHTML = '';
+  db.collection('estimates').orderBy('createdAt', 'desc')
+    .onSnapshot(snapshot => {
       estimatesTable.innerHTML = '';
       snapshot.forEach(doc => {
         const e = doc.data();
@@ -173,13 +146,47 @@ loadCustomers(); // call on page load
         `;
       });
     });
+}
 
-    // Delete estimate
-    window.deleteEstimate = async (id) => {
-      if (confirm("Delete this estimate?")) {
-        await db.collection('estimates').doc(id).delete();
-      }
-    };
-  </script>
+// Add new estimate
+estimateForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  const customerId = customerSelect.value;
+  const job = document.getElementById('job').value.trim();
+  const hours = Number(document.getElementById('hours').value);
+  const materials = Number(document.getElementById('materials').value);
+  const notes = document.getElementById('notes').value.trim();
+
+  if (!customerId) return alert("Please select a customer");
+  if (hours < 0 || materials < 0) return alert("Hours and Material costs must be positive numbers");
+
+  try {
+    const customerDoc = await db.collection('customers').doc(customerId).get();
+    const customerName = customerDoc.exists ? customerDoc.data().name : "Unknown";
+
+    await db.collection('estimates').add({
+      customerId,
+      customerName,
+      job,
+      hours,
+      materials,
+      total: hours * HOURLY_RATE + materials,
+      notes,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    estimateForm.reset();
+  } catch (err) {
+    console.error("Error adding estimate:", err);
+    alert("Failed to add estimate. Check console for details.");
+  }
+});
+
+// Delete estimate
+window.deleteEstimate = async (id) => {
+  if (confirm("Delete this estimate?")) {
+    await db.collection('estimates').doc(id).delete();
+  }
+};
+</script>
 </body>
 </html>
