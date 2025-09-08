@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - Handyman Service</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <style>
+    body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
+    h1, h2 { color: #333; }
+    .container { max-width: 900px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    form { margin-bottom: 20px; }
+    input, textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+    button { padding: 10px 20px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; cursor: pointer; font-size: 14px; margin-right: 10px; }
+    button:hover { background: #388E3C; }
+    button.delete-btn { background: #f44336; }
+    button.delete-btn:hover { background: #d32f2f; }
+    #logoutBtn { background: #333; margin-bottom: 20px; }
+    #logoutBtn:hover { background: #111; }
+    #navButtons { margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+    th { background: #f0f0f0; }
+    .message { margin: 10px 0; font-size: 14px; }
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+
+    <div id="navButtons">
+      <button id="logoutBtn">Logout</button>
+      <button onclick="window.location.href='estimates.html'">Go to Estimates</button>
+    </div>
+
+    <!-- Customer Registration Form -->
+    <h2>Add Customer</h2>
+    <p id="msg" class="message"></p>
+    <form id="customerForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="phone" placeholder="Phone" required>
+      <input type="text" id="address" placeholder="Address">
+      <textarea id="notes" placeholder="Notes"></textarea>
+      <button type="submit">Add Customer</button>
+    </form>
+
+    <!-- Customers List -->
+    <h2>Customer List</h2>
+    <table id="customerTable">
+      <thead>
+        <tr>
+          <th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Notes</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+      authDomain: "handymanserviceadmin.firebaseapp.com",
+      projectId: "handymanserviceadmin",
+      storageBucket: "handymanserviceadmin.appspot.com",
+      messagingSenderId: "1073781663456",
+      appId: "1:1073781663456:web:abcdef123456"
+    };
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Protect Admin Page
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user) window.location.href = "login.html";
+    });
+
+    // Logout
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', () => {
+      firebase.auth().signOut().then(() => window.location.href = "login.html");
+    });
+
+    const form = document.getElementById('customerForm');
+    const tableBody = document.querySelector('#customerTable tbody');
+    const msg = document.getElementById('msg');
+
+    // Add Customer
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      const notes = document.getElementById('notes').value;
+
+      try {
+        await db.collection('customers').add({
+          name, email, phone, address, notes,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        form.reset();
+        msg.textContent = "Customer added successfully!";
+        msg.className = "message success";
+      } catch (err) {
+        msg.textContent = "Error adding customer.";
+        msg.className = "message error";
+        console.error(err);
+      }
+    });
+
+    // Display Customers & Delete
+    db.collection('customers').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+      tableBody.innerHTML = '';
+      snapshot.forEach(doc => {
+        const c = doc.data();
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+          <td>${c.name}</td>
+          <td>${c.email}</td>
+          <td>${c.phone}</td>
+          <td>${c.address || ''}</td>
+          <td>${c.notes || ''}</td>
+          <td><button class="delete-btn">Delete</button></td>
+        `;
+
+        // Delete Customer
+        row.querySelector(".delete-btn").addEventListener('click', () => {
+          if (confirm(`Delete ${c.name}?`)) {
+            db.collection('customers').doc(doc.id).delete();
+          }
+        });
+
+        tableBody.appendChild(row);
+      });
+    });
+  </script>
+</body>
+</html>
