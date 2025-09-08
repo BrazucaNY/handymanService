@@ -8,6 +8,8 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
   <script>
     // Firebase configuration
     const firebaseConfig = {
@@ -18,8 +20,8 @@
       messagingSenderId: "YOUR_SENDER_ID",
       appId: "YOUR_APP_ID"
     };
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
     // Protect admin page
     firebase.auth().onAuthStateChanged(function(user) {
@@ -31,8 +33,6 @@
 </head>
 <body>
   <h1>Handyman Service Admin</h1>
-
-  <!-- Logout Button -->
   <button id="logoutBtn">Logout</button>
 
   <!-- Add Customer / Job Form -->
@@ -63,9 +63,7 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody id="estimatesTable">
-        <!-- Data will appear here -->
-      </tbody>
+      <tbody id="estimatesTable"></tbody>
     </table>
   </section>
 
