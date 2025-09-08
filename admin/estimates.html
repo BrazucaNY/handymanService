@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Estimate - Handyman Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
@@ -42,11 +43,6 @@
 
   // --- Core Functions ---
 
-  /**
-   * Loads your business info from Firestore and populates the "From" section.
-   * Creates a 'settings/businessDetails' document in Firestore with fields 
-   * like 'name', 'email', 'address', 'phone', 'businessNumber'.
-   */
   async function loadBusinessInfo() {
     try {
       const docRef = doc(db, 'settings', 'businessDetails');
@@ -66,9 +62,6 @@
     }
   }
   
-  /**
-   * Loads customers from Firestore and populates the select dropdown.
-   */
   function loadCustomers() {
     const q = query(collection(db, 'customers'), orderBy('createdAt', 'desc'));
     onSnapshot(q, (snapshot) => {
@@ -87,11 +80,6 @@
     });
   }
 
-  /**
-   * Safely gets the next sequential estimate number using a Firestore transaction.
-   * Creates a 'metadata/counter' document in Firestore with a field 'estimateNumber'.
-   * @returns {Promise<number>} The next estimate number.
-   */
   async function getNextEstimateNumber() {
     const counterRef = doc(db, 'metadata', 'counter');
     try {
@@ -112,9 +100,6 @@
     }
   }
 
-  /**
-   * Populates the estimate number field.
-   */
   async function setEstimateNumber() {
     try {
       const nextNumber = await getNextEstimateNumber();
@@ -125,22 +110,20 @@
     }
   }
 
-  /**
-   * Adds a new item row to the table.
-   */
   function addItem() {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td><input type="text" class="itemDesc" placeholder="Item Description"></td>
-      <td><textarea class="itemJob" placeholder="Job description"></textarea></td>
-      <td><input type="number" class="itemRate" value="0" min="0" step="0.01"></td>
+      <td class="item-description-cell">
+        <button type="button" class="delete-btn"><i class="material-icons">close</i></button>
+        <input type="text" class="itemDesc" placeholder="Item Description">
+        <textarea class="itemJob" placeholder="Additional details"></textarea>
+      </td>
+      <td><input type="number" class="itemRate" value="0.00" min="0" step="0.01"></td>
       <td><input type="number" class="itemQty" value="1" min="1"></td>
       <td class="itemAmount">$0.00</td>
-      <td><button type="button" class="delete-btn">Delete</button></td>
     `;
     itemsTableBody.appendChild(row);
 
-    // Add event listeners to new row for real-time calculation
     row.querySelectorAll('input, textarea').forEach(input => {
       input.addEventListener('input', calculateTotals);
     });
@@ -148,11 +131,9 @@
       row.remove();
       calculateTotals();
     });
+    calculateTotals(); // Call to update totals immediately after adding
   }
   
-  /**
-   * Calculates subtotal and total from all item rows.
-   */
   function calculateTotals() {
     let subtotal = 0;
     itemsTableBody.querySelectorAll('tr').forEach(row => {
@@ -163,12 +144,9 @@
       subtotal += amount;
     });
     subtotalEl.textContent = subtotal.toFixed(2);
-    totalEl.textContent = subtotal.toFixed(2); // In case of future taxes/discounts
+    totalEl.textContent = subtotal.toFixed(2);
   }
 
-  /**
-   * Resets the entire form to its initial state.
-   */
   function resetForm() {
     customerSelect.value = "";
     itemsTableBody.innerHTML = "";
@@ -176,13 +154,10 @@
     calculateTotals();
     document.getElementById('notes').value = "";
     document.getElementById('signature').value = "";
-    photosInput.value = ""; // Clear file input
-    setEstimateNumber(); // Fetch the next estimate number
+    photosInput.value = ""; 
+    setEstimateNumber();
   }
   
-  /**
-   * Handles the entire process of saving an estimate.
-   */
   async function saveEstimate() {
     const customerId = customerSelect.value;
     if (!customerId) {
@@ -194,11 +169,9 @@
     saveEstimateBtn.textContent = 'Saving...';
 
     try {
-      // 1. Get customer data
       const customerDoc = await getDoc(doc(db, 'customers', customerId));
       const customerName = customerDoc.exists() ? customerDoc.data().name : "Unknown";
 
-      // 2. Prepare item data
       const items = [];
       itemsTableBody.querySelectorAll('tr').forEach(row => {
         const desc = row.querySelector('.itemDesc').value.trim();
@@ -213,7 +186,6 @@
         throw new Error("Please add at least one item to the estimate.");
       }
 
-      // 3. Upload photos to Firebase Storage
       const photoURLs = [];
       const files = photosInput.files;
       if (files.length > 0) {
@@ -226,10 +198,8 @@
         photoURLs.push(...await Promise.all(uploadPromises));
       }
       
-      // 4. Get the latest estimate number
       const estimateNumber = await getNextEstimateNumber();
 
-      // 5. Construct final estimate object
       const estimateData = {
         customerId,
         customerName,
@@ -242,10 +212,9 @@
         notes: document.getElementById('notes').value.trim(),
         signature: document.getElementById('signature').value.trim(),
         createdAt: serverTimestamp(),
-        userId: auth.currentUser.uid, // For security rules
+        userId: auth.currentUser.uid,
       };
 
-      // 6. Save to Firestore
       const docRef = await addDoc(collection(db, 'estimates'), estimateData);
       alert(`Estimate ${estimateData.estimateNumber} saved successfully!`);
       resetForm();
@@ -260,19 +229,14 @@
   }
 
   // --- Page Initialization ---
-
-  // Set default date
   estimateDate.value = new Date().toISOString().split('T')[0];
   
-  // Auth protection and initial data loading
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in
       loadBusinessInfo();
       loadCustomers();
-      resetForm(); // Includes adding first item and calculating totals
+      resetForm(); 
     } else {
-      // User is signed out, redirect to login
       window.location.href = "login.html";
     }
   });
@@ -284,25 +248,239 @@
 </script>
 
 <style>
-  body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
-  .container { max-width: 1000px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-  h1, h2 { text-align: center; color: #333; }
-  section { margin-bottom: 25px; }
-  label { font-weight: 500; margin-top: 10px; display: block; }
-  input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
-  table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-  th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-  th { background: #f0f0f0; }
-  button { padding: 10px 20px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; cursor: pointer; margin-top: 10px; transition: background-color 0.2s, opacity 0.2s; }
-  button:hover { background: #388E3C; }
-  button:disabled { background: #aaa; cursor: not-allowed; }
-  button.delete-btn { background: #f44336; }
-  button.delete-btn:hover { background: #d32f2f; }
-  .notes, .signature { margin-top: 15px; }
-  .photos { margin-top: 10px; }
-  nav a { margin-right: 15px; text-decoration:none; font-weight:500; color:#333; }
-  nav a:hover { text-decoration:underline; }
-  #estimateNumber { background-color: #e9ecef; cursor: not-allowed; }
+  body { 
+    font-family: 'Roboto', sans-serif; 
+    margin: 20px; 
+    background: #f4f4f4; 
+    color: #333;
+  }
+  .container { 
+    max-width: 800px; /* Slightly narrower to match screenshot */
+    margin: auto; 
+    background: #fff; 
+    padding: 30px; /* More padding */
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+  }
+  h1, h2 { 
+    text-align: center; 
+    color: #333; 
+    margin-bottom: 25px; /* Added spacing */
+  }
+  section { 
+    margin-bottom: 25px; 
+  }
+  label { 
+    font-weight: 500; 
+    margin-top: 10px; 
+    display: block; 
+    color: #555;
+  }
+  input, select, textarea { 
+    width: 100%; 
+    padding: 10px; 
+    margin-top: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 6px; 
+    box-sizing: border-box; 
+    font-size: 14px; 
+  }
+  input[type="date"] {
+    padding: 9px; /* Adjust for icon */
+  }
+
+  /* --- Top Number and Date Section --- */
+  .estimate-header-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 20px; /* Space between columns */
+    margin-bottom: 30px;
+    align-items: center;
+  }
+  .estimate-header-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .estimate-header-item label {
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+  .estimate-number-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between input and icon */
+  }
+  #estimateNumber { 
+    background-color: #f9f9f9; /* Lighter background for readonly */
+    border: 1px solid #ddd;
+    flex-grow: 1; /* Allows input to take available space */
+  }
+  .check-icon {
+    color: #4CAF50; /* Green for checkmark */
+    font-size: 24px;
+  }
+
+  /* --- Items Table --- */
+  table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px; 
+  }
+  th, td { 
+    padding: 8px; /* Slightly less padding */
+    border: none; /* Remove table borders */
+    text-align: left; 
+    vertical-align: top; /* Align content to top */
+  }
+  th { 
+    background: #fff; /* White background for headers */
+    color: #888; /* Lighter color for headers */
+    font-weight: 400; /* Lighter font weight */
+    border-bottom: 1px solid #eee; /* Light bottom border for headers */
+    padding-bottom: 10px;
+  }
+  td {
+    padding-top: 15px; /* More space between rows */
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee; /* Light separator for rows */
+  }
+  
+  /* Specific column widths for items table */
+  #itemsTable thead th:nth-child(1),
+  #itemsTable tbody td:nth-child(1) { width: 50%; } /* Description */
+  #itemsTable thead th:nth-child(2),
+  #itemsTable tbody td:nth-child(2) { width: 15%; text-align: right; } /* Rate */
+  #itemsTable thead th:nth-child(3),
+  #itemsTable tbody td:nth-child(3) { width: 10%; text-align: center; } /* Qty */
+  #itemsTable thead th:nth-child(4),
+  #itemsTable tbody td:nth-child(4) { width: 20%; text-align: right; } /* Amount */
+
+
+  .item-description-cell {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 30px; /* Space for delete button */
+  }
+  .item-description-cell input[type="text"] {
+    width: calc(100% - 10px); /* Adjust width to fit button */
+    margin-top: 0;
+    margin-bottom: 5px; /* Space between description and job details */
+    padding: 8px 10px;
+  }
+  .item-description-cell textarea {
+    width: calc(100% - 10px); /* Adjust width */
+    height: 40px; /* Shorter textarea */
+    resize: vertical; /* Allow vertical resize */
+    padding: 8px 10px;
+    font-size: 13px;
+    color: #666;
+  }
+
+  .itemRate, .itemQty {
+    text-align: right; /* Align numbers right */
+    padding-right: 10px;
+  }
+  .itemQty {
+    text-align: center;
+  }
+  .itemAmount {
+    text-align: right;
+    font-weight: 500;
+  }
+
+  /* Delete button for items */
+  button.delete-btn { 
+    background: #e0e0e0; /* Light gray background */
+    color: #757575; /* Darker gray icon */
+    border-radius: 50%; /* Circular button */
+    width: 28px; /* Fixed width */
+    height: 28px; /* Fixed height */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px; /* Icon size */
+    position: absolute; /* Position next to input */
+    left: 0;
+    top: 5px; /* Align with top of description input */
+    margin-top: 0;
+  }
+  button.delete-btn:hover {
+    background: #d0d0d0;
+  }
+
+  /* Add Item Button (now a circular plus icon) */
+  #addItemBtn {
+    background: #3f51b5; /* Blue background */
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 24px; /* Plus icon size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 30px; /* Align with item description start */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-top: 20px; /* Space from table */
+  }
+  #addItemBtn:hover {
+    background: #303f9f;
+  }
+
+  /* Totals Section */
+  section p {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    margin: 0;
+    font-size: 15px;
+  }
+  section p strong {
+    flex-basis: 70%; /* Adjust basis for alignment */
+    text-align: right;
+    padding-right: 10px;
+    color: #555;
+  }
+  section p span {
+    flex-basis: 30%;
+    text-align: right;
+    font-weight: 500;
+  }
+  #total {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  /* Notes, Signature, Photos - general input styling adjustments */
+  .notes textarea,
+  .signature input,
+  .photos input[type="file"] {
+    margin-top: 10px;
+  }
+
+  /* Save Estimate Button */
+  #saveEstimateBtn { 
+    background: #007bff; /* A more prominent blue */
+    padding: 12px 25px;
+    font-size: 16px;
+    margin-top: 30px;
+    width: 100%;
+  }
+  #saveEstimateBtn:hover { 
+    background: #0056b3; 
+  }
+  #saveEstimateBtn:disabled { 
+    background: #99cfff; /* Lighter blue when disabled */
+    cursor: not-allowed; 
+  }
+
+  nav {
+    padding-bottom: 30px; /* More space below nav */
+  }
 </style>
 </head>
 <body>
@@ -314,63 +492,38 @@
 </nav>
 
 <div class="container">
-  <h1>Create Estimate</h1>
-
-  <section>
-    <h2>From</h2>
-    <p><strong>Name:</strong> <span id="businessName">Loading...</span></p>
-    <p><strong>Email:</strong> <span id="businessEmail">...</span></p>
-    <p><strong>Address:</strong> <span id="businessAddress">...</span></p>
-    <p><strong>Phone:</strong> <span id="businessPhone">...</span></p>
-    <p><strong>Business Number:</strong> <span id="businessNumber">...</span></p>
-  </section>
-
-  <section>
-    <h2>Bill To</h2>
-    <label for="customerSelect">Select Customer</label>
-    <select id="customerSelect" required>
-      <option value="">Loading customers...</option>
-    </select>
-    <label for="estimateNumber">Estimate Number</label>
-    <input type="text" id="estimateNumber" placeholder="Generating..." readonly>
-    <label for="estimateDate">Date</label>
-    <input type="date" id="estimateDate">
+  <section class="estimate-header-row">
+    <div class="estimate-header-item">
+      <label for="estimateNumber">Number</label>
+      <div class="estimate-number-group">
+        <input type="text" id="estimateNumber" placeholder="Generating..." readonly>
+        <i class="material-icons check-icon">check_circle</i> </div>
+    </div>
+    <div class="estimate-header-item">
+      <label for="estimateDate">Date</label>
+      <input type="date" id="estimateDate">
+    </div>
   </section>
 
   <table id="itemsTable">
     <thead>
       <tr>
         <th>Description</th>
-        <th>Job Details</th>
-        <th>Rate</th>
-        <th>Qty</th>
-        <th>Amount</th>
-        <th>Action</th>
+        <th style="text-align:right;">Rate</th>
+        <th style="text-align:center;">Qty</th>
+        <th style="text-align:right;">Amount</th>
       </tr>
     </thead>
     <tbody>
       </tbody>
   </table>
-  <button type="button" id="addItemBtn">Add Item</button>
-
-  <section>
-    <p><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
+  <button type="button" id="addItemBtn" class="material-icons">add</button> <section style="max-width:300px; margin-left:auto; margin-top: 30px;"> <p><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
     <p><strong>Total:</strong> $<span id="total">0.00</span></p>
   </section>
 
   <section class="notes">
     <label for="notes">Notes</label>
     <textarea id="notes" placeholder="Notes - any relevant information not covered, additional terms and conditions"></textarea>
-  </section>
-
-  <section class="signature">
-    <label for="signature">Signature</label>
-    <input type="text" id="signature" placeholder="Sign here">
-  </section>
-
-  <section class="photos">
-    <label for="photos">Add Photos</label>
-    <input type="file" id="photos" multiple accept="image/*">
   </section>
 
   <button id="saveEstimateBtn">Save Estimate</button>
