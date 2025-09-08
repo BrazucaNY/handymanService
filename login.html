@@ -44,7 +44,7 @@
   </style>
 
   <script>
-    // Firebase configuration — YOUR project info
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
       authDomain: "handymanserviceadmin.firebaseapp.com",
@@ -78,6 +78,7 @@
 
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
+          // Redirect after login
           window.location.href = "admin.html";
         })
         .catch((error) => {
@@ -85,10 +86,13 @@
         });
     });
 
-    // Redirect logged-in admins automatically
+    // Redirect logged-in users safely
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        window.location.href = "admin.html";
+        // Only redirect if not already on admin page
+        if (!window.location.href.includes("admin.html")) {
+          window.location.href = "admin.html";
+        }
       }
     });
   </script>

@@ -3,27 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <title>Handyman Admin Dashboard</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
+  <style>
+    * { box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+    body { margin: 0; padding: 0; background: #f2f2f2; }
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 500;
+    }
+    .container { max-width: 1000px; margin: 30px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    h2 { color: #333; margin-bottom: 15px; }
+    form input { padding: 10px; margin: 5px 10px 15px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
+    form button { padding: 10px 20px; border: none; border-radius: 8px; background: #4CAF50; color: white; cursor: pointer; font-size: 14px; }
+    form button:hover { background: #388E3C; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    table th, table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+    table th { background: #4CAF50; color: white; }
+    button.delete-btn { background: #f44336; }
+    button.delete-btn:hover { background: #d32f2f; }
+    #logoutBtn { background: #333; margin-bottom: 20px; padding: 10px 20px; color: white; cursor: pointer; border-radius: 8px; border: none; }
+    #logoutBtn:hover { background: #111; }
+  </style>
+
   <script>
     // Firebase configuration
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+      authDomain: "handymanserviceadmin.firebaseapp.com",
+      projectId: "handymanserviceadmin",
+      storageBucket: "handymanserviceadmin.appspot.com",
+      messagingSenderId: "1073781663456",
+      appId: "1:1073781663456:web:abcdef123456"
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Protect admin page
+    // Protect admin page — redirect if not logged in
     firebase.auth().onAuthStateChanged(function(user) {
       if (!user) {
         window.location.href = "login.html";
@@ -32,11 +59,11 @@
   </script>
 </head>
 <body>
-  <h1>Handyman Service Admin</h1>
-  <button id="logoutBtn">Logout</button>
+  <header>Handyman Service Admin</header>
+  <div class="container">
+    <button id="logoutBtn">Logout</button>
 
-  <!-- Add Customer / Job Form -->
-  <section id="add-customer">
+    <!-- Add Customer / Job Form -->
     <h2>Add Customer / Job</h2>
     <form id="customerForm">
       <input type="text" name="name" placeholder="Customer Name" required>
@@ -46,12 +73,10 @@
       <input type="number" name="materials" placeholder="Material Cost" required>
       <button type="submit">Add Estimate</button>
     </form>
-  </section>
 
-  <!-- Table to show Estimates -->
-  <section id="estimate-list">
+    <!-- Table to show Estimates -->
     <h2>Existing Estimates</h2>
-    <table border="1">
+    <table>
       <thead>
         <tr>
           <th>Customer</th>
@@ -65,18 +90,63 @@
       </thead>
       <tbody id="estimatesTable"></tbody>
     </table>
-  </section>
+  </div>
 
-  <!-- Admin JS -->
-  <script src="assets/admin.js"></script>
-
-  <!-- Logout Script -->
   <script>
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-      firebase.auth().signOut().then(() => {
-        window.location.href = "login.html";
+    const customerForm = document.getElementById("customerForm");
+    const estimatesTable = document.getElementById("estimatesTable");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // Logout button
+    logoutBtn.addEventListener('click', () => {
+      firebase.auth().signOut().then(() => window.location.href = "login.html");
+    });
+
+    // Render estimates from Firestore
+    function renderEstimates() {
+      estimatesTable.innerHTML = "";
+      db.collection("estimates").get().then(snapshot => {
+        snapshot.forEach(doc => {
+          const e = doc.data();
+          const total = e.hours * 50 + Number(e.materials); // $50/hour example
+          estimatesTable.innerHTML += `
+            <tr>
+              <td>${e.name}</td>
+              <td>${e.phone}</td>
+              <td>${e.job}</td>
+              <td>${e.hours}</td>
+              <td>${e.materials}</td>
+              <td>${total}</td>
+              <td><button class="delete-btn" onclick="deleteEstimate('${doc.id}')">Delete</button></td>
+            </tr>
+          `;
+        });
+      });
+    }
+
+    // Add new estimate
+    customerForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const formData = new FormData(customerForm);
+      db.collection("estimates").add({
+        name: formData.get("name"),
+        phone: formData.get("phone"),
+        job: formData.get("job"),
+        hours: Number(formData.get("hours")),
+        materials: Number(formData.get("materials"))
+      }).then(() => {
+        customerForm.reset();
+        renderEstimates();
       });
     });
+
+    // Delete estimate
+    function deleteEstimate(id) {
+      db.collection("estimates").doc(id).delete().then(() => renderEstimates());
+    }
+
+    // Initial render
+    renderEstimates();
   </script>
 </body>
 </html>
