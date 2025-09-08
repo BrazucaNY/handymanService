@@ -20,7 +20,8 @@
     /* Top Navigation Bar */
     .top-nav {
       display: flex;
-      justify-content: center; /* center all items */
+      justify-content: center; /* center nav items */
+      flex-wrap: wrap;
       align-items: center;
       background-color: #2c3e50;
       padding: 12px 20px;
@@ -30,7 +31,7 @@
     .top-nav a {
       color: white;
       text-decoration: none;
-      margin: 0 15px;
+      margin: 0 12px;
       font-weight: 500;
       transition: color 0.3s;
     }
@@ -40,7 +41,7 @@
     .container {
       max-width: 800px;
       margin: 50px auto;
-      padding: 20px;
+      padding: 25px;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
@@ -92,7 +93,7 @@
 
     /* Responsive */
     @media (max-width: 600px) {
-      .top-nav { flex-wrap: wrap; justify-content: center; gap: 10px; }
+      .top-nav { justify-content: center; gap: 8px; }
       input, textarea { font-size: 13px; padding: 10px; }
       button { font-size: 13px; padding: 10px; }
       table th, table td { font-size: 12px; padding: 8px; }
@@ -104,12 +105,12 @@
   <!-- Top Navigation Bar -->
   <div class="top-nav">
     <a href="#">Invoice</a>
-    <a href="#">Estimates</a>
+    <a href="estimates.html">Estimates</a>
     <a href="#">Expenses</a>
     <a href="#">Reports</a>
     <a href="#">Clientes</a>
     <a href="#">Items</a>
-    <a id="settingsBtn">Settings</a>
+    <a href="#">Settings</a>
     <a id="logoutBtn">Logout</a>
   </div>
 
