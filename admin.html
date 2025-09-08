@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Handyman Admin Dashboard</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <h1>Handyman Service Admin</h1>
+
+  <!-- Add Customer / Job Form -->
+  <section id="add-customer">
+    <h2>Add Customer / Job</h2>
+    <form id="customerForm">
+      <input type="text" name="name" placeholder="Customer Name" required>
+      <input type="text" name="phone" placeholder="Phone Number" required>
+      <input type="text" name="job" placeholder="Job Type" required>
+      <input type="number" name="hours" placeholder="Hours" required>
+      <input type="number" name="materials" placeholder="Material Cost" required>
+      <button type="submit">Add Estimate</button>
+    </form>
+  </section>
+
+  <!-- Table to show Estimates -->
+  <section id="estimate-list">
+    <h2>Existing Estimates</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Phone</th>
+          <th>Job</th>
+          <th>Hours</th>
+          <th>Materials</th>
+          <th>Total</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="estimatesTable">
+        <!-- Data will appear here -->
+      </tbody>
+    </table>
+  </section>
+
+  <script src="assets/admin.js"></script>
+</body>
+</html>
