@@ -11,33 +11,84 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <style>
-body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
-.container { max-width: 1000px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background: #f4f4f4;
+}
+
+/* Top Navigation Bar (same as dashboard) */
+.top-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #2c3e50;
+  padding: 12px 20px;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.top-nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.top-nav a:hover { color: #1abc9c; }
+
+/* Page Container */
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
 h1, h2 { text-align: center; color: #333; }
 section { margin-bottom: 25px; }
 label { font-weight: 500; margin-top: 10px; display: block; }
-input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+input, select, textarea {
+  width: 100%; padding: 10px; margin-top: 5px;
+  border: 1px solid #ccc; border-radius: 6px; font-size: 14px;
+}
 table { width: 100%; border-collapse: collapse; margin-top: 10px; }
 th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
 th { background: #f0f0f0; }
-button { padding: 10px 20px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; cursor: pointer; margin-top: 10px; }
+button {
+  padding: 10px 20px; border: none; border-radius: 6px;
+  background: #4CAF50; color: #fff; cursor: pointer; margin-top: 10px;
+}
 button:hover { background: #388E3C; }
 button.delete-btn { background: #f44336; }
 button.delete-btn:hover { background: #d32f2f; }
 .notes, .signature { margin-top: 15px; }
 .photos { margin-top: 10px; }
-nav a { margin-right: 15px; text-decoration:none; font-weight:500; color:#333; }
-nav a:hover { text-decoration:underline; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .top-nav { justify-content: center; gap: 8px; }
+  input, textarea, select { font-size: 13px; padding: 8px; }
+  table th, table td { font-size: 12px; padding: 6px; }
+}
 </style>
 </head>
 <body>
 
-<!-- Menu / Navigation -->
-<nav style="margin-bottom:20px; text-align:center;">
+<!-- Top Navigation Bar -->
+<div class="top-nav">
   <a href="dashboard.html">Dashboard</a>
   <a href="customers.html">Customers</a>
   <a href="estimates.html">Estimates</a>
-</nav>
+  <a href="#">Expenses</a>
+  <a href="#">Reports</a>
+  <a href="#">Clientes</a>
+  <a href="#">Items</a>
+  <a href="#">Settings</a>
+  <a id="logoutBtn">Logout</a>
+</div>
 
 <div class="container">
   <h1>Create Estimate</h1>
@@ -76,9 +127,7 @@ nav a:hover { text-decoration:underline; }
         <th>Action</th>
       </tr>
     </thead>
-    <tbody>
-      <!-- Rows will be dynamically added -->
-    </tbody>
+    <tbody></tbody>
   </table>
   <button type="button" id="addItemBtn">Add Item</button>
 
@@ -142,6 +191,11 @@ auth.onAuthStateChanged(user => {
   }
 });
 
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  auth.signOut().then(() => window.location.href = "login.html");
+});
+
 // Load customers
 function loadCustomers() {
   db.collection('customers').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
@@ -175,7 +229,6 @@ function addItem() {
   `;
   itemsTableBody.appendChild(row);
 
-  // Event listeners
   row.querySelectorAll('input').forEach(input => {
     input.addEventListener('input', calculateTotals);
   });
@@ -238,7 +291,7 @@ saveEstimateBtn.addEventListener('click', async () => {
     alert("Estimate saved successfully!");
     customerSelect.value = "";
     itemsTableBody.innerHTML = "";
-    addItem(); // Add initial row
+    addItem();
     calculateTotals();
     document.getElementById('notes').value = "";
     document.getElementById('signature').value = "";
