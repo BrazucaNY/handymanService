@@ -11,22 +11,23 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      background: #f0f2f5;
-    }
+    body { font-family: 'Roboto', sans-serif; margin: 0; background: #f0f2f5; }
 
     /* Top Navigation Bar */
     .top-nav {
       display: flex;
-      justify-content: center; /* center nav items */
+      justify-content: center;
       flex-wrap: wrap;
       align-items: center;
       background-color: #2c3e50;
       padding: 12px 20px;
       color: white;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
     }
     .top-nav a {
       color: white;
@@ -40,7 +41,7 @@
     /* Main Container */
     .container {
       max-width: 800px;
-      margin: 50px auto;
+      margin: 100px auto 30px;
       padding: 25px;
       background: #fff;
       border-radius: 12px;
@@ -50,25 +51,9 @@
     h1, h2 { color: #333; text-align: center; }
 
     /* Form Styles */
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    input, textarea {
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-    button {
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+    form { display: flex; flex-direction: column; gap: 12px; }
+    input, textarea { padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
+    button { padding: 12px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; transition: background 0.3s; }
     button.add-btn { background: #4CAF50; color: #fff; }
     button.add-btn:hover { background: #388E3C; }
     button.delete-btn { background: #f44336; color: #fff; }
@@ -79,16 +64,8 @@
     .error { color: red; }
 
     /* Table Styles */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-    }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
     th { background: #f8f8f8; }
 
     /* Responsive */
@@ -102,9 +79,10 @@
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
+  <!-- Integrated Top Navigation Bar -->
   <div class="top-nav">
-    <a href="#">Invoice</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="customers.html">Customers</a>
     <a href="estimates.html">Estimates</a>
     <a href="#">Expenses</a>
     <a href="#">Reports</a>
