@@ -11,16 +11,25 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <style>
-    body { font-family: 'Roboto', sans-serif; margin: 0; background: #f4f4f4; }
+    body { 
+      font-family: 'Roboto', sans-serif; 
+      margin: 0; 
+      background: #f4f4f4; 
+    }
     h1 { color: #333; }
 
-    /* Top menu */
+    /* Fixed top menu */
     nav {
       background: #4CAF50;
       padding: 12px 20px;
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
     }
     nav a {
       margin-right: 20px;
@@ -32,7 +41,7 @@
 
     .container {
       max-width: 900px;
-      margin: 30px auto;
+      margin: 100px auto 30px; /* add top margin so content isn’t hidden behind menu */
       background: #fff;
       padding: 20px;
       border-radius: 10px;
@@ -71,7 +80,7 @@
   </style>
 </head>
 <body>
-  <!-- Menu -->
+  <!-- Fixed Menu -->
   <nav>
     <a href="admin.html">Dashboard</a>
     <a href="customers.html">Customers</a>
