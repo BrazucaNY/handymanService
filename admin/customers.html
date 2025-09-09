@@ -18,38 +18,35 @@
     }
     h1 { color: #333; }
 
-    /* Top fixed menu */
+    /* Top Navigation Bar */
     .top-nav {
-      background: #333;
-      padding: 14px 20px;
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
+      background-color: #2c3e50;
+      padding: 12px 20px;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     .top-nav a {
-      margin: 0 15px;
+      color: white;
       text-decoration: none;
-      color: #fff;
+      margin: 0 12px;
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: color 0.3s;
     }
-    .top-nav a:hover {
-      color: #4CAF50;
-    }
+    .top-nav a:hover { color: #1abc9c; }
 
     .container {
       max-width: 900px;
-      margin: 100px auto 30px; /* Push content below menu */
+      margin: 80px auto 30px; /* top margin to avoid overlap with menu */
       background: #fff;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     form { margin-bottom: 20px; }
     input, textarea {
       width: 100%;
@@ -80,16 +77,27 @@
       text-align: left;
     }
     th { background: #f0f0f0; }
+
+    @media (max-width: 600px) {
+      .top-nav { justify-content: center; gap: 8px; }
+      input, textarea { font-size: 13px; padding: 8px; }
+      table th, table td { font-size: 12px; padding: 6px; }
+    }
   </style>
 </head>
 <body>
-  <!-- Unified Top Menu -->
-  <nav class="top-nav">
-    <a href="admin.html">Dashboard</a>
+  <!-- Top Navigation Bar -->
+  <div class="top-nav">
+    <a href="dashboard.html">Dashboard</a>
     <a href="customers.html">Customers</a>
     <a href="estimates.html">Estimates</a>
-    <a href="#" id="logoutBtn">Logout</a>
-  </nav>
+    <a href="#">Expenses</a>
+    <a href="#">Reports</a>
+    <a href="#">Clientes</a>
+    <a href="#">Items</a>
+    <a href="#">Settings</a>
+    <a id="logoutBtn">Logout</a>
+  </div>
 
   <div class="container">
     <h1>Customer Management</h1>
@@ -109,7 +117,11 @@
     <table id="customerTable">
       <thead>
         <tr>
-          <th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Notes</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Address</th>
+          <th>Notes</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -129,13 +141,14 @@
 
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+    const auth = firebase.auth();
 
     const form = document.getElementById('customerForm');
     const tableBody = document.querySelector('#customerTable tbody');
     const logoutBtn = document.getElementById('logoutBtn');
 
     // Protect page
-    firebase.auth().onAuthStateChanged(user => {
+    auth.onAuthStateChanged(user => {
       if (!user) {
         window.location.href = "../login.html";
       }
@@ -143,7 +156,7 @@
 
     // Logout
     logoutBtn.addEventListener('click', () => {
-      firebase.auth().signOut().then(() => {
+      auth.signOut().then(() => {
         window.location.href = "../login.html";
       });
     });
