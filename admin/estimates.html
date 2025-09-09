@@ -8,6 +8,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 
 <style>
 body {
@@ -15,8 +16,6 @@ body {
   margin: 0;
   background: #f4f4f4;
 }
-
-/* Top Navigation Bar (same as dashboard) */
 .top-nav {
   display: flex;
   justify-content: center;
@@ -36,7 +35,6 @@ body {
 }
 .top-nav a:hover { color: #1abc9c; }
 
-/* Page Container */
 .container {
   max-width: 1000px;
   margin: 40px auto;
@@ -66,7 +64,6 @@ button.delete-btn:hover { background: #d32f2f; }
 .notes, .signature { margin-top: 15px; }
 .photos { margin-top: 10px; }
 
-/* Responsive */
 @media (max-width: 600px) {
   .top-nav { justify-content: center; gap: 8px; }
   input, textarea, select { font-size: 13px; padding: 8px; }
@@ -91,13 +88,33 @@ button.delete-btn:hover { background: #d32f2f; }
 <div class="container">
   <h1>Create Estimate</h1>
 
-  <section>
-    <h2>From</h2>
-    <p><strong>Name:</strong> Rodrigues Handyman</p>
-    <p><strong>Email:</strong> name@business.com</p>
-    <p><strong>Address:</strong> Street</p>
-    <p><strong>Phone:</strong> 516-415-8918</p>
-    <p><strong>Business Number:</strong> Brazuca</p>
+  <!-- Editable From Section with Logo -->
+  <section style="display: flex; justify-content: space-between; align-items: flex-start;">
+    <div style="flex: 1; margin-right: 20px;">
+      <h2>From</h2>
+      <label for="fromName">Name:</label>
+      <input type="text" id="fromName" value="Rodrigues Handyman">
+      
+      <label for="fromEmail">Email:</label>
+      <input type="email" id="fromEmail" value="name@business.com">
+      
+      <label for="fromAddress">Address:</label>
+      <input type="text" id="fromAddress" value="Street">
+      
+      <label for="fromPhone">Phone:</label>
+      <input type="text" id="fromPhone" value="516-415-8918">
+      
+      <label for="fromBusinessNumber">Business Number:</label>
+      <input type="text" id="fromBusinessNumber" value="Brazuca">
+      
+      <button type="button" id="saveFromInfoBtn">Save Info</button>
+    </div>
+
+    <div style="width: 120px; text-align: center;">
+      <label for="logoUpload">Logo</label>
+      <input type="file" id="logoUpload" accept="image/*">
+      <img id="logoPreview" src="" alt="Logo Preview" style="width: 100px; height: 100px; margin-top: 10px; object-fit: contain; border: 1px solid #ccc; border-radius: 6px;">
+    </div>
   </section>
 
   <section>
@@ -161,6 +178,7 @@ const firebaseConfig = {
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
+const storage = firebase.storage();
 
 const customerSelect = document.getElementById('customerSelect');
 const estimateDate = document.getElementById('estimateDate');
@@ -169,6 +187,18 @@ const subtotalEl = document.getElementById('subtotal');
 const totalEl = document.getElementById('total');
 const addItemBtn = document.getElementById('addItemBtn');
 const saveEstimateBtn = document.getElementById('saveEstimateBtn');
+
+// From info elements
+const fromName = document.getElementById('fromName');
+const fromEmail = document.getElementById('fromEmail');
+const fromAddress = document.getElementById('fromAddress');
+const fromPhone = document.getElementById('fromPhone');
+const fromBusinessNumber = document.getElementById('fromBusinessNumber');
+const saveFromInfoBtn = document.getElementById('saveFromInfoBtn');
+const logoUpload = document.getElementById('logoUpload');
+const logoPreview = document.getElementById('logoPreview');
+
+const fromInfoDoc = db.collection('settings').doc('fromInfo');
 
 // Set default date
 estimateDate.value = new Date().toISOString().split('T')[0];
@@ -179,6 +209,7 @@ auth.onAuthStateChanged(user => {
     window.location.href = "login.html";
   } else {
     loadCustomers();
+    loadFromInfo();
   }
 });
 
@@ -197,7 +228,6 @@ function loadCustomers() {
       const option = document.createElement('option');
       option.value = doc.id;
       option.textContent = c.name;
-      // CHANGE: Store the customer name in a data attribute to avoid a future database read.
       option.dataset.customerName = c.name; 
       customerSelect.appendChild(option);
     });
@@ -209,6 +239,61 @@ function loadCustomers() {
     }
   });
 }
+
+// Load saved From info
+function loadFromInfo() {
+  fromInfoDoc.get().then(doc => {
+    if (doc.exists) {
+      const data = doc.data();
+      fromName.value = data.name || '';
+      fromEmail.value = data.email || '';
+      fromAddress.value = data.address || '';
+      fromPhone.value = data.phone || '';
+      fromBusinessNumber.value = data.businessNumber || '';
+      if (data.logoUrl) logoPreview.src = data.logoUrl;
+    }
+  });
+}
+
+// Save From info
+saveFromInfoBtn.addEventListener('click', async () => {
+  try {
+    await fromInfoDoc.set({
+      name: fromName.value.trim(),
+      email: fromEmail.value.trim(),
+      address: fromAddress.value.trim(),
+      phone: fromPhone.value.trim(),
+      businessNumber: fromBusinessNumber.value.trim()
+    }, { merge: true });
+    alert("Your info has been saved!");
+  } catch (err) {
+    console.error(err);
+    alert("Error saving your info.");
+  }
+});
+
+// Logo upload
+logoUpload.addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const storageRef = storage.ref().child('logos/logo.png');
+  const uploadTask = storageRef.put(file);
+
+  uploadTask.on('state_changed', 
+    snapshot => {},
+    error => {
+      console.error(error);
+      alert("Error uploading logo.");
+    },
+    async () => {
+      const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+      logoPreview.src = downloadURL;
+      await fromInfoDoc.set({ logoUrl: downloadURL }, { merge: true });
+      alert("Logo saved successfully!");
+    }
+  );
+});
 
 // Add new item row
 function addItem() {
@@ -252,7 +337,6 @@ saveEstimateBtn.addEventListener('click', async () => {
   const customerId = customerSelect.value;
   if (!customerId) return alert("Please select a customer");
 
-  // CHANGE: Get customer name from the selected option's data attribute instead of a new DB read.
   const selectedOption = customerSelect.options[customerSelect.selectedIndex];
   const customerName = selectedOption.dataset.customerName || "Unknown Customer";
 
@@ -270,7 +354,6 @@ saveEstimateBtn.addEventListener('click', async () => {
   const estimateData = {
     customerId,
     customerName,
-    // CHANGE: Slightly improved fallback format for the estimate number.
     estimateNumber: document.getElementById('estimateNumber').value || 'EST-' + Date.now(),
     date: estimateDate.value,
     items,
@@ -296,10 +379,7 @@ saveEstimateBtn.addEventListener('click', async () => {
   }
 });
 
-// Add item button
 addItemBtn.addEventListener('click', addItem);
-
-// Initialize first row
 addItem();
 </script>
 
