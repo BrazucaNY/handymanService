@@ -11,19 +11,19 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <style>
-    body { 
-      font-family: 'Roboto', sans-serif; 
-      margin: 0; 
-      background: #f4f4f4; 
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
     }
     h1 { color: #333; }
 
-    /* Fixed top menu */
-    nav {
-      background: #4CAF50;
-      padding: 12px 20px;
+    /* Top fixed menu */
+    .top-nav {
+      background: #333;
+      padding: 14px 20px;
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       position: fixed;
       top: 0;
@@ -31,17 +31,20 @@
       width: 100%;
       z-index: 1000;
     }
-    nav a {
-      margin-right: 20px;
+    .top-nav a {
+      margin: 0 15px;
       text-decoration: none;
       color: #fff;
       font-weight: 500;
+      transition: color 0.3s ease;
     }
-    nav a:hover { text-decoration: underline; }
+    .top-nav a:hover {
+      color: #4CAF50;
+    }
 
     .container {
       max-width: 900px;
-      margin: 100px auto 30px; /* add top margin so content isn’t hidden behind menu */
+      margin: 100px auto 30px; /* Push content below menu */
       background: #fff;
       padding: 20px;
       border-radius: 10px;
@@ -80,8 +83,8 @@
   </style>
 </head>
 <body>
-  <!-- Fixed Menu -->
-  <nav>
+  <!-- Unified Top Menu -->
+  <nav class="top-nav">
     <a href="admin.html">Dashboard</a>
     <a href="customers.html">Customers</a>
     <a href="estimates.html">Estimates</a>
@@ -114,7 +117,7 @@
   </div>
 
   <script>
-    // Firebase config (same as login page)
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
       authDomain: "handymanserviceadmin.firebaseapp.com",
@@ -131,14 +134,14 @@
     const tableBody = document.querySelector('#customerTable tbody');
     const logoutBtn = document.getElementById('logoutBtn');
 
-    // Protect page: redirect if not logged in
+    // Protect page
     firebase.auth().onAuthStateChanged(user => {
       if (!user) {
         window.location.href = "../login.html";
       }
     });
 
-    // Logout button
+    // Logout
     logoutBtn.addEventListener('click', () => {
       firebase.auth().signOut().then(() => {
         window.location.href = "../login.html";
