@@ -5,7 +5,6 @@
 <title>Estimate - Handyman Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -77,7 +76,6 @@ button.delete-btn:hover { background: #d32f2f; }
 </head>
 <body>
 
-<!-- Top Navigation Bar -->
 <div class="top-nav">
   <a href="dashboard.html">Dashboard</a>
   <a href="customers.html">Customers</a>
@@ -93,7 +91,6 @@ button.delete-btn:hover { background: #d32f2f; }
 <div class="container">
   <h1>Create Estimate</h1>
 
-  <!-- From Section -->
   <section>
     <h2>From</h2>
     <p><strong>Name:</strong> Rodrigues Handyman</p>
@@ -103,7 +100,6 @@ button.delete-btn:hover { background: #d32f2f; }
     <p><strong>Business Number:</strong> Brazuca</p>
   </section>
 
-  <!-- Bill To Section -->
   <section>
     <h2>Bill To</h2>
     <label for="customerSelect">Select Customer</label>
@@ -116,7 +112,6 @@ button.delete-btn:hover { background: #d32f2f; }
     <input type="date" id="estimateDate">
   </section>
 
-  <!-- Items Table -->
   <table id="itemsTable">
     <thead>
       <tr>
@@ -131,25 +126,21 @@ button.delete-btn:hover { background: #d32f2f; }
   </table>
   <button type="button" id="addItemBtn">Add Item</button>
 
-  <!-- Totals -->
   <section>
     <p><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
     <p><strong>Total:</strong> $<span id="total">0.00</span></p>
   </section>
 
-  <!-- Notes -->
   <section class="notes">
     <label for="notes">Notes</label>
     <textarea id="notes" placeholder="Notes - any relevant information not covered, additional terms and conditions"></textarea>
   </section>
 
-  <!-- Signature -->
   <section class="signature">
     <label for="signature">Signature</label>
     <input type="text" id="signature" placeholder="Sign here">
   </section>
 
-  <!-- Photos -->
   <section class="photos">
     <label for="photos">Add Photos</label>
     <input type="file" id="photos" multiple>
@@ -206,6 +197,8 @@ function loadCustomers() {
       const option = document.createElement('option');
       option.value = doc.id;
       option.textContent = c.name;
+      // CHANGE: Store the customer name in a data attribute to avoid a future database read.
+      option.dataset.customerName = c.name; 
       customerSelect.appendChild(option);
     });
     if (customerSelect.options.length === 1) {
@@ -259,8 +252,9 @@ saveEstimateBtn.addEventListener('click', async () => {
   const customerId = customerSelect.value;
   if (!customerId) return alert("Please select a customer");
 
-  const customerDoc = await db.collection('customers').doc(customerId).get();
-  const customerName = customerDoc.exists ? customerDoc.data().name : "Unknown";
+  // CHANGE: Get customer name from the selected option's data attribute instead of a new DB read.
+  const selectedOption = customerSelect.options[customerSelect.selectedIndex];
+  const customerName = selectedOption.dataset.customerName || "Unknown Customer";
 
   const items = [];
   itemsTableBody.querySelectorAll('tr').forEach(row => {
@@ -276,7 +270,8 @@ saveEstimateBtn.addEventListener('click', async () => {
   const estimateData = {
     customerId,
     customerName,
-    estimateNumber: document.getElementById('estimateNumber').value || 'EST' + Date.now(),
+    // CHANGE: Slightly improved fallback format for the estimate number.
+    estimateNumber: document.getElementById('estimateNumber').value || 'EST-' + Date.now(),
     date: estimateDate.value,
     items,
     subtotal: parseFloat(subtotalEl.textContent),
