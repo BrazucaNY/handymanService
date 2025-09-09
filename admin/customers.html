@@ -11,29 +11,75 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <style>
-    body { font-family: 'Roboto', sans-serif; margin: 20px; background: #f4f4f4; }
+    body { font-family: 'Roboto', sans-serif; margin: 0; background: #f4f4f4; }
     h1 { color: #333; }
-    nav a { margin-right: 15px; text-decoration: none; color: #4CAF50; font-weight: 500; }
+
+    /* Top menu */
+    nav {
+      background: #4CAF50;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    nav a {
+      margin-right: 20px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+    }
     nav a:hover { text-decoration: underline; }
-    .container { max-width: 900px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
     form { margin-bottom: 20px; }
-    input, textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
-    button { padding: 10px 20px; border: none; border-radius: 6px; background: #4CAF50; color: #fff; cursor: pointer; font-size: 14px; }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
     button:hover { background: #388E3C; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
     th { background: #f0f0f0; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <nav>
-      <a href="admin.html">Dashboard</a>
-      <a href="customers.html">Customers</a>
-      <a href="estimates.html">Estimates</a>
-      <a href="#" id="logoutBtn">Logout</a>
-    </nav>
+  <!-- Menu -->
+  <nav>
+    <a href="admin.html">Dashboard</a>
+    <a href="customers.html">Customers</a>
+    <a href="estimates.html">Estimates</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </nav>
 
+  <div class="container">
     <h1>Customer Management</h1>
 
     <!-- Customer Registration Form -->
