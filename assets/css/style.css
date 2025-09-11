@@ -10662,3 +10662,23 @@ bottom::after {
     }
 
 }
+/* =================================== */
+/* ===== REMOVE EXTRA HAMBURGER ===== */
+/* =================================== */
+
+/* Fix 1: Hides the entire white bar containing the extra icon on mobile */
+@media (max-width: 991px) {
+  .header-bottom {
+    display: none !important;
+  }
+}
+
+/* Fix 2: Hides the extra hamburger icon that the theme's script adds on desktop */
+@media (min-width: 992px) {
+  .mean-container {
+    display: none !important;
+  }
+  .main-menu .mobile-menu-icon { /* Fallback for other plugin types */
+      display: none !important;
+  }
+}
