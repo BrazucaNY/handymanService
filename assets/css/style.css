@@ -10623,3 +10623,44 @@ bottom::after {
 .single-service-two .service-icon-wrap {
     margin-top: -1px;
 }
+
+
+/* Add these new rules for the 2-row header */
+@media (max-width: 991px) {
+
+    /* Styles the new top bar */
+    .mobile-top-bar {
+        background-color: #1a1a1a; /* A slightly different dark color */
+        padding: 8px 15px;
+        text-align: center;
+    }
+    .mobile-top-bar .single-emergncy-contact {
+        display: inline-flex; /* Aligns items nicely in the center */
+        align-items: center;
+        margin-bottom: 0;
+    }
+    .mobile-top-bar .single-emergncy-contact .icon {
+        font-size: 16px;
+        color: #00b833; /* Green icon */
+        margin-right: 8px;
+    }
+    .mobile-top-bar .single-emergncy-contact .content h3 {
+        font-size: 13px;
+        color: #ffffff;
+        margin-bottom: 0;
+        line-height: 1.2;
+    }
+    .mobile-top-bar .single-emergncy-contact .content span {
+        font-size: 11px;
+        color: #dddddd;
+        line-height: 1.2;
+    }
+    
+    /* Adjusts the main mobile header to remove the dark background */
+    .mobile-header-area {
+        background-color: #222222; /* Main header background */
+    }
+
+    /* --- Previous Fixes (keep these) --- */
+    /* ... your other mobile CSS rules go here ... */
+}
