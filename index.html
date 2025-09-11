@@ -200,26 +200,6 @@
 <div class="mobile-header-area d-block d-lg-none">
     <div class="container-fluid">
         <div class="row align-items-center">
-
-            <div class="col-7">
-                <div class="mobile-header-left-cluster">
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="assets/images/logo.png" alt="Handyman Logo">
-                        </a>
-                    </div>
-                    <div class="single-emergncy-contact">
-                        <div class="icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="content">
-                            <h3>516 415 8918</h3>
-                            <span>"Your Local NY Handyman</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="col-5">
                 <div class="mobile-header-right-cluster">
                     <a href="tel:+15164158918" class="mobile-call-now-btn">
@@ -1152,57 +1132,6 @@ s0.parentNode.insertBefore(s1,s0);
     }
 </style>
 
-<!-- Unified Form Handler -->
-<script>
-jQuery(function($) {
-
-    function handleAjaxForm(formSelector, actionUrl, successContainer, errorContainer, buttonSelector) {
-        $(formSelector).off("submit").on("submit", function(e) {
-            e.preventDefault();
-
-            // Prevent multiple submissions
-            if ($(this).data("submitting")) return;
-            $(this).data("submitting", true);
-
-            $(successContainer).empty();
-            $(errorContainer).empty();
-            var formData = new FormData(this);
-
-            if (buttonSelector) {
-                $(buttonSelector).prop('disabled', true).html('Sending...');
-            }
-
-            $.ajax({
-                url: actionUrl,
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                dataType: "json",
-                success: function(data) {
-                    if (data.status == 200 || data.status > 0) {
-                        $(successContainer).html(data.message);
-                        $(formSelector)[0].reset();
-                        $("#customFile").val('');
-                    } else {
-                        $(errorContainer).html(data.message);
-                    }
-                    if (buttonSelector) {
-                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
-                    }
-                },
-                error: function() {
-                    $(errorContainer).html("An error occurred. Please try again.");
-                    if (buttonSelector) {
-                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
-                    }
-                },
-                complete: function() {
-                    $(formSelector).data("submitting", false);
-                }
-            });
-        });
-    }
 
 </body>
 </html>

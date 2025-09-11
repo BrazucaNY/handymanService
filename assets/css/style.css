@@ -10625,17 +10625,6 @@ bottom::after {
 }
 
 
-/* =================================================================== */
-/* ============= STYLES FOR SINGLE-ROW MOBILE HEADER ================= */
-/* =================================================================== */
-
-/* This styles the main black bar for the entire mobile header.
-   The padding adds a little space above and below the content inside.
-*/
-.mobile-header-area {
-    background-color: #222222;
-    padding: 8px 0;
-}
 
 /* These rules set up the main left and right sections of the header.
   'display: flex' makes them flexible containers.
