@@ -10711,3 +10711,6 @@ bottom::after {
     font-size: 12px;
     margin-right: 12px;
 }
+.mobile-header-right-cluster {
+    justify-content: flex-end; /* This is the rule that does the work */
+}
