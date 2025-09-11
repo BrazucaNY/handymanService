@@ -462,7 +462,7 @@
 <!-- ============================
      FOOTER SECTION START
 ============================= -->
-<footer class="footer-section section bg-image" data-bg="assets/images/bg/footer-bg.jpg"> 
+<footer class="footer-section section bg-image" data-bg="../assets/images/bg/footer-bg.jpg"> 
     <!-- 📌 Footer wrapper with background image -->
 
     <!-- ===== FOOTER TOP AREA ===== -->
@@ -741,13 +741,25 @@ s0.parentNode.insertBefore(s1,s0);
 <!-- ============================= -->
 <!-- Required JS Scripts -->
 <!-- ============================= -->
+
+<!-- jQuery library (needed before any plugin scripts) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- ============================= -->
 <!-- Vendor JS -->
-<script src="assets/js/vendor/popper.min.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="assets/js/plugins/plugins.js"></script>
-<script src="assets/js/main.js"></script>
+<!-- ============================= -->
+
+<!-- Popper.js (required by Bootstrap for dropdowns, tooltips, etc.) -->
+<script src="../assets/js/vendor/popper.min.js"></script>
+
+<!-- Bootstrap JS (dependent on jQuery and Popper.js) -->
+<script src="../assets/js/vendor/bootstrap.min.js"></script>
+
+<!-- Plugin scripts (custom or third-party plugins for your site) -->
+<script src="../assets/js/plugins/plugins.js"></script>
+
+<!-- Main site JS (your custom scripts controlling interactions and behavior) -->
+<script src="../assets/js/main.js"></script>
 
 <!-- Styles -->
 <style type="text/css">
