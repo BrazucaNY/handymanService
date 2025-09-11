@@ -10623,12 +10623,14 @@ bottom::after {
 .single-service-two .service-icon-wrap {
     margin-top: -1px;
 }
+
+
 /* =================================================================== */
 /* ============= STYLES FOR SINGLE-ROW MOBILE HEADER ================= */
 /* =================================================================== */
 
 /* This styles the main black bar for the entire mobile header.
-  The padding adds a little space above and below the content.
+   The padding adds a little space above and below the content inside.
 */
 .mobile-header-area {
     background-color: #222222;
@@ -10646,18 +10648,18 @@ bottom::after {
 }
 
 /* This pushes the content in the right cluster (the button and menu icon)
-  all the way to the far right of its container.
+   all the way to the far right of its container.
 */
 .mobile-header-right-cluster {
     justify-content: flex-end;
 }
 
-/* --- LEFT SIDE STYLES ---
-*/
+
+/* --- LEFT SIDE STYLES --- */
 
 /* This controls the size of your logo.
-  I've increased the height from 35px to 45px to make it larger and more visible.
-  I also added more margin to give it space from the text.
+   I've increased the height from 35px to 45px to make it larger and more visible.
+   I also added more margin to give it space from the text.
 */
 .mobile-header-left-cluster .logo img {
     max-height: 45px;
@@ -10665,9 +10667,9 @@ bottom::after {
 }
 
 /* This is the container for your phone number and tagline.
-  IMPORTANT: I changed 'display: flex' to 'display: block'.
-  This allows the phone number and tagline to stack neatly on top of each other
-  instead of being forced onto one line, which fixes the formatting issue.
+   IMPORTANT: I changed 'display: flex' to 'display: block'.
+   This allows the phone number and tagline to stack neatly on top of each other
+   instead of being forced onto one line, which fixes the formatting issue.
 */
 .mobile-header-area .single-emergncy-contact {
     display: block;
@@ -10675,7 +10677,7 @@ bottom::after {
 }
 
 /* This styles the little phone icon next to the number.
-  It is hidden by default to save space. To show it, remove the 'display: none;' line.
+   It is hidden by default to save space. To show it, remove the 'display: none;' line.
 */
 .mobile-header-area .single-emergncy-contact .icon {
     font-size: 16px;
@@ -10685,7 +10687,7 @@ bottom::after {
 }
 
 /* This styles the phone number text (the H3 tag).
-  I've increased the font size slightly for better readability.
+   I've increased the font size slightly for better readability.
 */
 .mobile-header-area .single-emergncy-contact .content h3 {
     font-size: 14px;
@@ -10696,7 +10698,7 @@ bottom::after {
 }
 
 /* This styles the tagline text below the number (the SPAN tag).
-  I've adjusted the size to create a nice visual balance.
+   I've adjusted the size to create a nice visual balance.
 */
 .mobile-header-area .single-emergncy-contact .content span {
     font-size: 11px;
@@ -10705,11 +10707,10 @@ bottom::after {
 }
 
 
-/* --- RIGHT SIDE STYLES ---
-*/
+/* --- RIGHT SIDE STYLES --- */
 
 /* This styles the green 'Call Now' button. 
-  The styles make it compact and easy to read.
+   The styles make it compact and easy to read.
 */
 .mobile-call-now-btn {
     background-color: #00b833;
