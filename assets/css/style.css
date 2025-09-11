@@ -10656,17 +10656,18 @@ bottom::after {
     margin-right: 5px;
     display: none; /* Hiding icon to save space, remove this line to show it */
 }
+/* Replace the old rules with these updated ones */
 .mobile-header-area .single-emergncy-contact .content h3 {
-    font-size: 11px;
+    font-size: 13px; /* Changed from 11px */
     font-weight: bold;
     color: #ffffff;
     margin-bottom: 0;
-    line-height: 1.1;
+    line-height: 1.2;
 }
 .mobile-header-area .single-emergncy-contact .content span {
-    font-size: 10px;
+    font-size: 12px; /* Changed from 10px */
     color: #dddddd;
-    line-height: 1.1;
+    line-height: 1.2;
 }
 
 /* Styling the "Call Now" button to be smaller */
