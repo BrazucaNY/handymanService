@@ -465,15 +465,15 @@
                         'slow');
             });
             
-            $(document).ready(function(){
-                var id = "#";
-                if(id){
-                    $('html,body').animate({
-                        scrollTop: $(id).offset().top},
-                        'slow');
-                }
-                
-            });
+           $(document).ready(function(){
+    var id = "#professional-team"; // use the real ID
+    if ($(id).length) { // check element exists
+        $('html,body').animate({
+            scrollTop: $(id).offset().top
+        }, 'slow');
+    }
+});
+
         </script>  
 
 <!-- CTA section start -->
