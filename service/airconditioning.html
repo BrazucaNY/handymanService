@@ -487,12 +487,17 @@
 
                     <!-- Newsletter Form -->
                     <form id="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="footer-newsletter">
-                        <input type="hidden" name="form-name" value="newsletter">
-                        <!-- Spam protection -->
-                        <p style="display:none"><label>Don’t fill this out if you're human: <input name="bot-field"></label></p>
-                        <input type="email" name="email" placeholder="Email Here.." required>
-                        <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
-                    </form>
+    <input type="hidden" name="form-name" value="newsletter">
+    <p style="display:none">
+        <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+    </p>
+
+    <label for="newsletter-email" class="sr-only">Email Address</label>
+    <input type="email" id="newsletter-email" name="email" placeholder="Email Here.." required autocomplete="email">
+
+    <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
+</form>
+
 
                     <!-- Success/Error Messages -->
                     <div class="mailchimp-alerts text-center">
