@@ -832,32 +832,36 @@ s0.parentNode.insertBefore(s1,s0);
     });
   }
 </script>
+<!-- Google Maps container -->
+<div id="map" style="height: 400px; width: 100%;"></div>
 
 <!-- Load Google Maps JS asynchronously -->
-
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQxhjLUtKpWnj2vWgw3vPjnfizKXlysO4&callback=initMap&v=weekly&libraries=marker"
+  async
   defer
 ></script>
 
-async function initMap() {
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+<script>
+  async function initMap() {
+    // Initialize the map centered at your location
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: -25.344, lng: 131.031 }, // Replace with your coordinates
+      zoom: 14,
+      mapId: "YOUR_MAP_ID_HERE" // optional if you want styling
+    });
 
-  const position = { lat: -25.344, lng: 131.031 };
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 4,
-    center: position,
-    mapId: "YOUR_MAP_ID",
-  });
+    // Import AdvancedMarkerElement library
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-  const marker = new AdvancedMarkerElement({
-    map,
-    position: position,
-    title: "Uluru",
-  });
-}
-
-
+    // Add a marker
+    const marker = new AdvancedMarkerElement({
+      map,
+      position: { lat: -25.344, lng: 131.031 },
+      title: "RODRIGUES HANDYMAN",
+    });
+  }
+</script>
 
 
 <!-- Styles -->
