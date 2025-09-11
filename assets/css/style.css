@@ -10623,3 +10623,42 @@ bottom::after {
 .single-service-two .service-icon-wrap {
     margin-top: -1px;
 }
+/* =================================== */
+/* ===== SUPER MOBILE FRIENDLY ===== */
+/* =================================== */
+@media (max-width: 991px) {
+
+    /* 1. Hides the 'ghost' hamburger icon from the desktop menu */
+    .main-menu {
+        display: none !important;
+    }
+
+    /* 2. Fixes the overlapping floating buttons by stacking them */
+    .c-btn-whatsapp {
+        bottom: 75px; /* Moves WhatsApp button up */
+    }
+    .c-btn-phone {
+        bottom: 130px; /* Moves Phone button up further */
+    }
+    /* The Tawk.to chat widget should remain at the bottom */
+
+
+    /* 3. Adds 'breathing room' above the services title */
+    .features-section {
+        padding-top: 40px;
+    }
+
+    /* 4. Increases the base paragraph font size for readability */
+    .single-features p {
+        font-size: 16px;
+    }
+
+    /* 5. Stacks the service features for a better mobile layout */
+    .single-features {
+        text-align: center;
+    }
+    .single-features .pentagon-icon {
+        margin: 0 auto 20px;
+    }
+
+}
