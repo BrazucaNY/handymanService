@@ -10711,6 +10711,64 @@ bottom::after {
     font-size: 12px;
     margin-right: 12px;
 }
+/* =================================================================== */
+/* ============= FINAL STYLES FOR MOBILE HEADER ====================== */
+/* =================================================================== */
+
+/* Styles the main black bar for the entire mobile header. */
+.mobile-header-area {
+    background-color: #222222;
+    padding: 8px 0;
+}
+
+/* Sets up the main left and right sections. */
+.mobile-header-left-cluster, 
 .mobile-header-right-cluster {
-    justify-content: flex-end; /* This is the rule that does the work */
+    display: flex;
+    align-items: center;
+}
+
+/* Pushes the button and menu icon to the far right. */
+.mobile-header-right-cluster {
+    justify-content: flex-end;
+}
+
+/* Controls the size of your logo. */
+.mobile-header-left-cluster .logo img {
+    max-height: 45px;
+    margin-right: 10px; 
+}
+
+/* Container for your phone number and tagline. */
+.mobile-header-area .single-emergncy-contact {
+    display: block; /* Allows text to stack vertically */
+    margin-bottom: 0;
+}
+
+/* Styles the phone number text. */
+.mobile-header-area .single-emergncy-contact .content h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+/* Styles the tagline text below the number. */
+.mobile-header-area .single-emergncy-contact .content span {
+    font-size: 11px;
+    color: #dddddd;
+    line-height: 1.2;
+}
+
+/* Styles the green 'Call Now' button. */
+.mobile-call-now-btn {
+    background-color: #00b833;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 12px;
 }
