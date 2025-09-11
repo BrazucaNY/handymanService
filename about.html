@@ -455,26 +455,19 @@
 		
         <!--Features section end-->
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
-        <script>
-            
-            $('#professional_team').click(function(){
-                $('html,body').animate({
-                        scrollTop: $('#professional-team').offset().top},
-                        'slow');
-            });
-            
-           $(document).ready(function(){
-    var id = "#professional-team"; // use the real ID
-    if ($(id).length) { // check element exists
+<script>
+    // This part is okay to keep - it handles clicks on a specific link.
+    $('#professional_team').click(function(){
         $('html,body').animate({
-            scrollTop: $(id).offset().top
-        }, 'slow');
-    }
-});
+            scrollTop: $('#professional-team').offset().top},
+            'slow');
+    });
 
-        </script>  
+    // The $(document).ready function that was here has been removed.
+
+</script>
 
 <!-- CTA section start -->
 <div class="cta-section section bg-gray-two">
