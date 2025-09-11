@@ -10623,7 +10623,20 @@ bottom::after {
 .single-service-two .service-icon-wrap {
     margin-top: -1px;
 }
+/* =================================== */
+/* ===== MOBILE HOVER ANIMATION ====== */
+/* =================================== */
 
+/* This new rule tells the browser to apply the same hover styles
+   to any service box that has our new 'hover-effect' class,
+   making the animation work on the first tap for mobile.
+*/
+.single-service:hover .service-content,
+.single-service.hover-effect .service-content {
+    transform: translateY(-100%);
+    opacity: 1;
+    visibility: visible;
+}
 
 /* =================================================================== */
 /* ============= STYLES FOR SINGLE-ROW MOBILE HEADER ================= */
