@@ -80,10 +80,6 @@
   </script>
 </head>
 <body>
-
-
-
-
 <!-- START MAIN WRAPPER -->
 <div id="main-wrapper">
 
@@ -1208,6 +1204,37 @@ jQuery(function($) {
         });
     }
 
+<!-- =================================================
+     SCRIPT FOR MOBILE HOVER EFFECT ON SERVICE BOXES
+     ================================================= -->
+<script>
+jQuery(function($) {
 
+    // Select all the service boxes and listen for a 'touchstart' (a tap).
+    $('.single-service').on('touchstart', function(e) {
+
+        // Check if the box you just touched already has our special 'hover-effect' class.
+        if ($(this).hasClass('hover-effect')) {
+            // If it DOES, this is the second tap. Let the link work normally.
+            return true;
+        } else {
+            // If it DOES NOT, this is the first tap.
+            
+            // 1. Stop the browser from following the link immediately.
+            e.preventDefault();
+            
+            // 2. Remove the hover effect from any OTHER service boxes that might have it.
+            $('.single-service').removeClass('hover-effect');
+            
+            // 3. Add the hover effect to the box you just touched.
+            $(this).addClass('hover-effect');
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>
 </body>
 </html>
