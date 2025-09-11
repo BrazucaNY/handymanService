@@ -281,32 +281,32 @@
      HERO SLIDER SECTION START
 ============================ -->
 <div class="hero-section section position-relative">
+    
+    <!-- This wrapper holds ALL slides (Slide 1, 2, 3, etc.) -->
+    <!-- The slider library (Slick/Owl/Swiper) will target this container -->
     <div class="hero-slider section">
-        <!--Hero Item start-->
+
+        <!-- ===================
+             SLIDE 1 START
+        ====================== -->
         <div class="hero-item bg-image" data-bg="/uploads/sliders/8f75ed9e88a9fbca6813079456b2a63d.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <!--Hero Content start-->
+
+                        <!-- Slide Content (logo, titles, buttons, etc.) -->
                         <div class="hero-content-2 center">
+                            <!-- Company Logo -->
                             <div class="logo d-block d-lg-block">
                                 <a href="index.html">
                                     <img src="/assets/images/logo.png" class="img-fluid" alt="Company Logo">
                                 </a>
                             </div>
+                            <!-- Optional Title / Button (currently disabled) -->
+                            <!-- <h1 class="mid-size-white">Professional Services</h1> -->
+                            <!-- <a href="#" class="btn">FIND OUT MORE <i class="fa fa-angle-double-right"></i></a> -->
                         </div>
-                        <!--Hero Content end-->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Hero Item end-->
-    </div>
-</div>
-<!-- ===========================
-     HERO SLIDER SECTION END
-============================ -->
-
+                        <!-- End Slide Content -->
 
                     </div>
                 </div>
@@ -316,25 +316,26 @@
              SLIDE 1 END
         ====================== -->
 
+
         <!-- ===================
              SLIDE 2 START
         ====================== -->
-        <div class="hero-item bg-image" data-bg="uploads/sliders/66905764b1e369ba5a735399aa992bac.jpg">
+        <div class="hero-item bg-image" data-bg="/uploads/sliders/66905764b1e369ba5a735399aa992bac.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
 
                         <!-- Slide Content -->
                         <div class="hero-content-2 center">
-                            <div class="logo d-block d-lg-block" style="background-color: transparent !important;"> 
+                            <!-- Company Logo -->
+                            <div class="logo d-block d-lg-block">
                                 <a href="index.html">
-                                    <img src="assets/images/logo.png" class="img-fluid" alt="">
+                                    <img src="/assets/images/logo.png" class="img-fluid" alt="Company Logo">
                                 </a>
                             </div>
-
-                            <!-- Optional Title and Button (currently commented out) -->
-                            <!--<h1 class="mid-size-white">We can do Anything!</h1>-->
-                            <!--<a href="#" class="btn">FIND OUT MORE <i class="fa fa-angle-double-right"></i></a>-->
+                            <!-- Optional Title / Button (currently disabled) -->
+                            <!-- <h1 class="mid-size-white">We can do Anything!</h1> -->
+                            <!-- <a href="#" class="btn">FIND OUT MORE <i class="fa fa-angle-double-right"></i></a> -->
                         </div>
                         <!-- End Slide Content -->
 
@@ -346,25 +347,26 @@
              SLIDE 2 END
         ====================== -->
 
+
         <!-- ===================
              SLIDE 3 START
         ====================== -->
-        <div class="hero-item bg-image" data-bg="uploads/sliders/73a47a73dff5522e0a31e93d1ba19b54.jpg">
+        <div class="hero-item bg-image" data-bg="/uploads/sliders/73a47a73dff5522e0a31e93d1ba19b54.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
 
                         <!-- Slide Content -->
                         <div class="hero-content-2 center">
-                            <div class="logo d-block d-lg-block" style="background-color: transparent !important;"> 
+                            <!-- Company Logo -->
+                            <div class="logo d-block d-lg-block">
                                 <a href="index.html">
-                                    <img src="assets/images/logo.png" class="img-fluid" alt="">
+                                    <img src="/assets/images/logo.png" class="img-fluid" alt="Company Logo">
                                 </a>
                             </div>
-
-                            <!-- Optional Title and Button (currently commented out) -->
-                            <!--<h1 class="mid-size-white">Planned Maintenance</h1>-->
-                            <!--<a href="#" class="btn">FIND OUT MORE <i class="fa fa-angle-double-right"></i></a>-->
+                            <!-- Optional Title / Button (currently disabled) -->
+                            <!-- <h1 class="mid-size-white">Planned Maintenance</h1> -->
+                            <!-- <a href="#" class="btn">FIND OUT MORE <i class="fa fa-angle-double-right"></i></a> -->
                         </div>
                         <!-- End Slide Content -->
 
@@ -382,12 +384,48 @@
      HERO SLIDER SECTION END
 ============================ -->
 
+<!-- ===========================
+     VAN SCROLLING SECTION
+     Modern CSS version (replaces <marquee>)
+============================ -->
+<div class="van-section">
+    <!-- Van image that will move across the screen -->
+    <img src="assets/images/van.gif" alt="Van driving" class="van">
+</div>
+
+<style>
+/* ====== Container styling ====== */
+.van-section {
+  width: 100%;            /* Full width so animation has space */
+  overflow: hidden;       /* Hide the image when it's outside the viewport */
+  position: relative;     /* Position context for the animation */
+  height: 200px;          /* Adjust height to fit your van image */
+}
+
+/* ====== Van image animation ====== */
+.van {
+  width: 400px;           /* Size of the van */
+  position: absolute;     /* So we can move it freely */
+  bottom: 0;              /* Keep the van aligned at the bottom of the section */
+  animation: drive 8s linear infinite; 
+  /* 
+     drive  -> name of the animation (defined below)
+     8s     -> duration (adjust speed here)
+     linear -> consistent speed (no acceleration)
+     infinite -> repeats forever
+  */
+}
+
+/* ====== Keyframes for movement ====== */
+@keyframes drive {
+  0%   { transform: translateX(-100%); }  /* Start off-screen to the left */
+  100% { transform: translateX(100vw); }  /* Move completely across to the right */
+}
+</style>
 
 
 
-        <div class="van-section">
-            <marquee behavior="scroll" direction="right" Scrollamount=20><img width="400px" src="assets/images/van.gif" alt=""></marquee>
-        </div>   
+
 
 
 <!-- ===================== FEATURES SECTION START ===================== -->
