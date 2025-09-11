@@ -10624,43 +10624,59 @@ bottom::after {
     margin-top: -1px;
 }
 
+/* Styles for the new SINGLE-ROW mobile header */
+.mobile-header-area {
+    background-color: #222222;
+    padding: 5px 0;
+}
+.mobile-header-left-cluster, 
+.mobile-header-right-cluster {
+    display: flex;
+    align-items: center;
+}
+.mobile-header-right-cluster {
+    justify-content: flex-end; /* Pushes items to the far right */
+}
 
-/* Add these new rules for the 2-row header */
-@media (max-width: 991px) {
+/* Styling the logo inside the cluster */
+.mobile-header-left-cluster .logo img {
+    max-height: 35px; /* A bit smaller to fit */
+    margin-right: 5px;
+}
 
-    /* Styles the new top bar */
-    .mobile-top-bar {
-        background-color: #1a1a1a; /* A slightly different dark color */
-        padding: 8px 15px;
-        text-align: center;
-    }
-    .mobile-top-bar .single-emergncy-contact {
-        display: inline-flex; /* Aligns items nicely in the center */
-        align-items: center;
-        margin-bottom: 0;
-    }
-    .mobile-top-bar .single-emergncy-contact .icon {
-        font-size: 16px;
-        color: #00b833; /* Green icon */
-        margin-right: 8px;
-    }
-    .mobile-top-bar .single-emergncy-contact .content h3 {
-        font-size: 13px;
-        color: #ffffff;
-        margin-bottom: 0;
-        line-height: 1.2;
-    }
-    .mobile-top-bar .single-emergncy-contact .content span {
-        font-size: 11px;
-        color: #dddddd;
-        line-height: 1.2;
-    }
-    
-    /* Adjusts the main mobile header to remove the dark background */
-    .mobile-header-area {
-        background-color: #222222; /* Main header background */
-    }
+/* Styling the phone info to be very compact */
+.mobile-header-area .single-emergncy-contact {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+.mobile-header-area .single-emergncy-contact .icon {
+    font-size: 16px;
+    color: #00b833;
+    margin-right: 5px;
+    display: none; /* Hiding icon to save space, remove this line to show it */
+}
+.mobile-header-area .single-emergncy-contact .content h3 {
+    font-size: 11px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0;
+    line-height: 1.1;
+}
+.mobile-header-area .single-emergncy-contact .content span {
+    font-size: 10px;
+    color: #dddddd;
+    line-height: 1.1;
+}
 
-    /* --- Previous Fixes (keep these) --- */
-    /* ... your other mobile CSS rules go here ... */
+/* Styling the "Call Now" button to be smaller */
+.mobile-call-now-btn {
+    background-color: #00b833;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 10px;
 }
