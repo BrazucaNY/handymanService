@@ -834,9 +834,31 @@ s0.parentNode.insertBefore(s1,s0);
 </script>
 
 <!-- Load Google Maps JS asynchronously -->
-<script async
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQxhjLUtKpWnj2vWgw3vPjnfizKXlysO4&callback=initMap">
-</script>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQxhjLUtKpWnj2vWgw3vPjnfizKXlysO4&callback=initMap&v=weekly&libraries=marker"
+  defer
+></script>
+
+async function initMap() {
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+  const position = { lat: -25.344, lng: 131.031 };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 4,
+    center: position,
+    mapId: "YOUR_MAP_ID",
+  });
+
+  const marker = new AdvancedMarkerElement({
+    map,
+    position: position,
+    title: "Uluru",
+  });
+}
+
+
+
 
 <!-- Styles -->
 <style type="text/css">
