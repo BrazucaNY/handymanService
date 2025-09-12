@@ -287,62 +287,7 @@
      ============================ -->
 
 
-<!-- ================= LIGHTBOX STYLE ================= -->
-<style>
-/* Lightbox overlay styling (hidden by default) */
-.lightbox {
-  display: none;               /* hide initially */
-  position: fixed;             /* stay fixed on screen */
-  z-index: 9999;               /* above other content */
-  top: 0; left: 0;             /* cover full viewport */
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8); /* semi-transparent background */
-  justify-content: center;     /* center image horizontally */
-  align-items: center;         /* center image vertically */
-  opacity: 0;                  /* for fade-in effect */
-  transition: opacity 0.4s ease; /* smooth fade overlay */
-}
 
-/* Class to show the lightbox */
-.lightbox.show {
-  display: flex;
-  opacity: 1;
-}
-
-/* Lightbox image styling */
-.lightbox img {
-  max-width: 90%;              /* scale down if too wide */
-  max-height: 90%;             /* scale down if too tall */
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: opacity 0.3s ease; /* smooth fade when changing images */
-  opacity: 0;                  /* start hidden for fade-in */
-}
-
-/* Class to show image with fade-in */
-.lightbox img.show {
-  opacity: 1;
-}
-
-/* Navigation arrows */
-#prev, #next {
-  position: absolute;
-  top: 50%;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: none;
-  font-size: 2rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transform: translateY(-50%);
-  z-index: 10000;
-  user-select: none;
-}
-
-#prev { left: 10px; }
-#next { right: 10px; }
-</style>
 
 
 
@@ -368,59 +313,6 @@
     </div>
   </div>
 </div>
-
-<!-- ============================ -->
-<!-- LIGHTBOX CSS (can also go in style.css) -->
-<!-- ============================ -->
-<style>
-/* Lightbox overlay styling (hidden by default) */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-/* Show lightbox */
-.lightbox.show { display: flex; opacity: 1; }
-
-/* Lightbox image styling */
-.lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: opacity 0.3s ease;
-  opacity: 0;
-}
-
-.lightbox img.show { opacity: 1; }
-
-/* Navigation arrows */
-#prev, #next {
-  position: absolute;
-  top: 50%;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: none;
-  font-size: 2rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transform: translateY(-50%);
-  z-index: 10000;
-  user-select: none;
-}
-
-#prev { left: 10px; }
-#next { right: 10px; }
-</style>
 
 <!-- ============================ -->
 <!-- LIGHTBOX + GALLERY SCRIPT -->
