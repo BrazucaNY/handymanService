@@ -188,9 +188,9 @@ img {
     width: 900px !important;
     height: 176px !important;
     max-width: none !important;
-    object-fit: unset !important; /* prevent cropping/scaling */
+    object-fit: unset !important;
     display: block;
-    margin: 0 auto; /* center it */
+    margin: 0 auto;
 }
 
 
