@@ -770,79 +770,47 @@
 
 <!-- Blog section start -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- Blog section start -->
 
-<div class="works-section">
-    
-    <h1>Our Works</h1>
+<div class="blog-section section bg-dark-two pt-95 pt-lg-75 pt-md-65 pt-sm-55 pt-xs-45 pb-55 pb-lg-35 pb-md-25 pb-sm-20 pb-xs-5">
 
-    <div class="gallery-container" id="gallery-container">
-        
-        <a href="https://www.instagram.com/rodrigueshandyman/" target="_blank" rel="noopener noreferrer" class="instagram-cta">
-            
-            <svg class="insta-icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50">
-                 <path d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 17 C 20.58 17 17 20.58 17 25 C 17 29.42 20.58 33 25 33 C 29.42 33 33 29.42 33 25 C 33 20.58 29.42 17 25 17 z" fill="white"/>
-            </svg>
+    <div class="container">
 
-            <span>Follow us on <strong>Instagram</strong></span>
 
-            <button class="see-more-btn">
-                See More
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </a>
-    </div>
 
-    <div class="decorative-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4A557B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2z"/></svg>
-    </div>
+        <div class="row">
+
+            <div class="col">
+
+                <div class="section-title text-center color-white mb-40">
+
+                    <h1>Our Works</h1>
+
+                </div>
+
+
+
+                <div class="banner-image text-center">
+
+                    <a href="https://www.instagram.com/rodrigueshandyman/" target="_blank" rel="noopener noreferrer">
+
+                        <img src="uploads/images/instagram.gif" alt="Our Works Banner">
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
 
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const manifestFile = 'uploads/gallery/images.json';
-        const galleryPath = 'uploads/gallery/';
-        
-        const galleryContainer = document.getElementById('gallery-container');
-        const instagramCta = document.querySelector('.instagram-cta');
 
-        fetch(manifestFile)
-            .then(response => {
-                if (!response.ok) { throw new Error('Could not find images.json'); }
-                return response.json();
-            })
-            .then(imageFilenames => {
-                // Check if there are exactly 8 images
-                if (imageFilenames.length !== 8) {
-                    console.warn('Warning: The design expects exactly 8 images, but found ' + imageFilenames.length + '.');
-                }
-                
-                imageFilenames.forEach((filename, index) => {
-                    // Create the gallery item div
-                    const galleryItem = document.createElement('div');
-                    // Add the general class AND the specific position class (e.g., 'item-1', 'item-2')
-                    galleryItem.className = `gallery-item item-${index + 1}`;
-
-                    // Create the image element
-                    const img = document.createElement('img');
-                    img.src = galleryPath + filename;
-                    img.alt = `Rodrigues Handyman project work ${index + 1}`;
-                    
-                    galleryItem.appendChild(img);
-                    
-                    // Add the new image div to the container before the Instagram box
-                    galleryContainer.insertBefore(galleryItem, instagramCta);
-                });
-            })
-            .catch(error => {
-                console.error('Error loading gallery:', error);
-                const errorMessage = document.createElement('p');
-                errorMessage.textContent = 'Could not load the image gallery.';
-                errorMessage.style.color = 'white';
-                galleryContainer.insertBefore(errorMessage, instagramCta);
-            });
-    });
-</script>
+<!-- Blog section end -->
 
 <!-- Blog section end -->
 
