@@ -183,6 +183,17 @@ img {
   max-width: 100%;
 }
 
+/* Force our Instagram logo to always display at 900x176 */
+.our-works-logo {
+    width: 900px !important;
+    height: 176px !important;
+    max-width: none !important;
+    object-fit: unset !important; /* prevent cropping/scaling */
+    display: block;
+    margin: 0 auto; /* center it */
+}
+
+
 /*-- 
     - Common Classes
 -----------------------------------------*/
