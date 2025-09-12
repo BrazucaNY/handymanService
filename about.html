@@ -836,32 +836,27 @@ s0.parentNode.insertBefore(s1,s0);
 
 <!-- Google Maps API -->
 <script async
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQxhjLU…&libraries=marker:1012&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQxhjLU…&libraries=marker&callback=initMap">
 </script>
 
-
-
-
-<!-- Initialize Map -->
 <script>
 function initMap() {
-  // Mount Vernon, NY coordinates
-  const location = { lat: 40.9126, lng: -73.8371 };
+  const location = { lat: 40.9126, lng: -73.8371 }; // Mount Vernon, NY
 
-  // Create map
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 14,
     center: location
   });
 
-  // Add marker
-new google.maps.marker.AdvancedMarkerElement({
-  position: location,
-  map: map,
-  title: "Mount Vernon, NY"
-});
+  // Add marker using AdvancedMarkerElement
+  new google.maps.marker.AdvancedMarkerElement({
+    position: location,
+    map: map,
+    title: "Mount Vernon, NY"
+  });
 }
 </script>
+
 
 
 
