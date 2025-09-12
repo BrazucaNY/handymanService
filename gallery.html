@@ -197,38 +197,59 @@
 <!-- ================= END HEADER ================= -->
 <!-- End main-wrapper -->
 </div>
-
-<!-- ============================= -->
-<!-- MOBILE HEADER AREA -->
-<!-- Visible only on screens smaller than 'lg' -->
-<!-- ============================= -->
+<!-- ============================
+     MOBILE HEADER AREA
+     Visible only on screens smaller than 'lg'
+     ============================ -->
 <div class="mobile-header-area d-block d-lg-none">
-    <div class="container-fluid"><!-- Use container-fluid for full width -->
+    <div class="container">
         <div class="row align-items-center">
 
-            <!-- ===== LEFT SIDE: Logo ===== -->
-            <div class="col-7">
-                <div class="mobile-header-left-cluster">
-                    <!-- Logo image -->
+            <!-- ===== LEFT SIDE (LOGO) ===== -->
+            <div class="col-6">
+                <div class="logo d-none"> <!-- ⚠️ NOTE: 'd-none' hides the logo, remove class to show -->
                     <a href="index.html">
                         <img src="assets/images/logo.png" class="img-fluid" alt="Handyman Logo">
                     </a>
                 </div>
             </div>
 
-            <!-- ===== RIGHT SIDE: Call Button + Hamburger Menu ===== -->
+            <!-- ===== RIGHT SIDE (MENU ICON) ===== -->
+            <div class="col-6 d-flex align-items-center justify-content-end">
+          
+                <!-- 📱 Mobile Menu Trigger -->
+                <div class="mobile-navigation-icon" id="mobile-menu-trigger">
+                    <i></i> <!-- JS uses this empty <i> for animation (usually a hamburger icon) -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================
+     COMPLETE & CORRECTED MOBILE HEADER AREA
+     ========================================================== -->
+<div class="mobile-header-area d-block d-lg-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+
+            <!-- ===== LEFT SIDE (Logo & Phone) ===== -->
+            <div class="col-7">
+                <div class="mobile-header-left-cluster">
+                                     
+                </div>
+            </div>
+
+            <!-- ===== RIGHT SIDE (Button & Menu) ===== -->
             <div class="col-5">
-                <div class="mobile-header-right-cluster d-flex align-items-center justify-content-end">
-                    
+                <div class="mobile-header-right-cluster">
                     <!-- Call Now Button -->
                     <a href="tel:+15164158918" class="mobile-call-now-btn">
                         Call Now
                     </a>
-
-                    <!-- Hamburger Menu Trigger -->
-                    <!-- This triggers the offcanvas menu to slide in -->
+                    <!-- Menu Trigger -->
                     <div class="mobile-navigation-icon" id="mobile-menu-trigger">
-                        <i></i> <!-- Empty <i> element is used for the hamburger animation lines -->
+                        <i></i>
                     </div>
                 </div>
             </div>
@@ -236,154 +257,84 @@
         </div>
     </div>
 </div>
-<!-- ============================= -->
-<!-- END MOBILE HEADER AREA -->
-<!-- ============================= -->
 
+<!-- ============================
+     END MOBILE HEADER AREA
+     ============================ -->
 
-<!-- ============================= -->
-<!-- OFFCANVAS MOBILE MENU -->
-<!-- Hidden by default, slides in when active -->
-<!-- ============================= -->
-<div class="offcanvas-mobile-menu" id="mobile-menu-overlay">
-    <!-- Close button -->
-    <a href="javascript:void(0)" class="offcanvas-menu-close" id="mobile-menu-close-trigger">
-        <i class="fa fa-times"></i> <!-- X icon -->
-    </a>
+<!-- ================= GALLERY PAGE SECTION ================= -->
 
-    <div class="offcanvas-wrapper">
-        <div class="offcanvas-inner-content">
-
-            <!-- Optional Search Area -->
-            <div class="offcanvas-mobile-search-area">
-                <form action="#">
-                    <input type="search" placeholder="Search ...">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                </form>
+      <!-- Service Intro Section Start -->
+<div class="breadcrumb-section section bg-black pt-25 pb-25 pt-sm-55 pb-sm-55 pt-xs-45 pb-xs-45">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="breadcrumb-title">
+                    <h2>Gallery</h2>
+                </div>
             </div>
-
-            <!-- Navigation Links -->
-            <nav class="offcanvas-navigation">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="our-services.html">Our Services</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="contact-us.html">Contact</a></li>
-                </ul>
-            </nav>
-
         </div>
     </div>
 </div>
-<!-- ============================= -->
-<!-- END OFFCANVAS MOBILE MENU -->
-<!-- ============================= -->
+<!-- Service Intro Section End -->
 
 
-<!-- ============================= -->
-<!-- MOBILE MENU JS -->
-<!-- ============================= -->
-<script>
-    // Grab the hamburger menu trigger, close button, and menu overlay
-    const menuTrigger = document.getElementById("mobile-menu-trigger");
-    const menuClose = document.getElementById("mobile-menu-close-trigger");
-    const menuOverlay = document.getElementById("mobile-menu-overlay");
-
-    // Open the menu when hamburger is clicked
-    menuTrigger.addEventListener("click", () => {
-        menuOverlay.classList.add("active"); // Show menu
-    });
-
-    // Close the menu when the X button is clicked
-    menuClose.addEventListener("click", () => {
-        menuOverlay.classList.remove("active"); // Hide menu
-    });
-
-    // Optional: close menu when clicking outside the content area
-    menuOverlay.addEventListener("click", (e) => {
-        if (e.target === menuOverlay) { // Only if clicked on the overlay itself
-            menuOverlay.classList.remove("active");
-        }
-    });
-</script>
-
-
-<!-- ============================= -->
-<!-- MOBILE MENU CSS -->
-<!-- ============================= -->
+<!-- ================= LIGHTBOX STYLE ================= -->
 <style>
-/* Offcanvas menu hidden by default */
-.offcanvas-mobile-menu {
-    display: none; /* Hidden initially */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    z-index: 9999;
-    overflow-y: auto;
-    transition: transform 0.3s ease;
-    transform: translateX(-100%); /* Slide out of view initially */
+/* Lightbox overlay styling (hidden by default) */
+.lightbox {
+  display: none;               /* hide initially */
+  position: fixed;             /* stay fixed on screen */
+  z-index: 9999;               /* above other content */
+  top: 0; left: 0;             /* cover full viewport */
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8); /* semi-transparent background */
+  justify-content: center;     /* center image horizontally */
+  align-items: center;         /* center image vertically */
+  opacity: 0;                  /* for fade-in effect */
+  transition: opacity 0.4s ease; /* smooth fade overlay */
 }
 
-/* Active state: slide in menu */
-.offcanvas-mobile-menu.active {
-    display: block;
-    transform: translateX(0);
+/* Class to show the lightbox */
+.lightbox.show {
+  display: flex;
+  opacity: 1;
 }
 
-/* Close button styling */
-.offcanvas-menu-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #333;
+/* Lightbox image styling */
+.lightbox img {
+  max-width: 90%;              /* scale down if too wide */
+  max-height: 90%;             /* scale down if too tall */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  transition: opacity 0.3s ease; /* smooth fade when changing images */
+  opacity: 0;                  /* start hidden for fade-in */
 }
 
-/* Hamburger menu styling */
-.mobile-navigation-icon {
-    cursor: pointer;
-    padding: 10px;
+/* Class to show image with fade-in */
+.lightbox img.show {
+  opacity: 1;
 }
 
-/* Example: hamburger icon lines */
-.mobile-navigation-icon i {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background: #333;
-    margin: 5px 0;
-    transition: all 0.3s ease;
+/* Navigation arrows */
+#prev, #next {
+  position: absolute;
+  top: 50%;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 10000;
+  user-select: none;
 }
 
-/* Optional: Call Now button */
-.mobile-call-now-btn {
-    background: #007bff;
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 4px;
-    margin-right: 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Responsive tweaks */
-@media (max-width: 991px) {
-    .mobile-header-area {
-        padding: 10px 0;
-    }
-}
+#prev { left: 10px; }
+#next { right: 10px; }
 </style>
-
-
-
-
-
-
 
 <!-- ================= LIGHTBOX CONTAINER ================= -->
 <div class="lightbox" id="lightbox">
