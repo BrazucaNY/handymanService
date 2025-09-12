@@ -799,62 +799,47 @@
 
 </div>
 <script>
-    // This function runs as soon as the webpage has loaded.
     document.addEventListener('DOMContentLoaded', function() {
-
-        // The path to your manifest file.
         const manifestFile = 'uploads/gallery/images.json';
-        
-        // The path to the folder where your images are stored.
         const galleryPath = 'uploads/gallery/';
-
-        // Find the empty gallery container in the HTML.
+        
         const galleryContainer = document.getElementById('gallery-container');
+        const instagramCta = document.querySelector('.instagram-cta');
 
-        // Use the 'fetch' API to get the contents of your images.json file.
         fetch(manifestFile)
             .then(response => {
-                // Check if the file was found. If not, throw an error.
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                // Convert the file's text content into a usable JavaScript array.
+                if (!response.ok) { throw new Error('Could not find images.json'); }
                 return response.json();
             })
             .then(imageFilenames => {
-                // 'imageFilenames' is now an array like: ["image1.jpg", "image2.png", ...]
-
-                // Loop through each filename in the array.
+                // Check if there are exactly 8 images
+                if (imageFilenames.length !== 8) {
+                    console.warn('Warning: The design expects exactly 8 images, but found ' + imageFilenames.length + '.');
+                }
+                
                 imageFilenames.forEach((filename, index) => {
-                    
-                    // Create a new div element for the gallery item.
+                    // Create the gallery item div
                     const galleryItem = document.createElement('div');
-                    
-                    // Add the necessary classes to the div.
-                    // The 'item-' class is for the dynamic CSS to create the overlapping pattern.
+                    // Add the general class AND the specific position class (e.g., 'item-1', 'item-2')
                     galleryItem.className = `gallery-item item-${index + 1}`;
 
-                    // Create the image element.
+                    // Create the image element
                     const img = document.createElement('img');
-                    
-                    // Set the image source by combining the path and the filename.
                     img.src = galleryPath + filename;
+                    img.alt = `Rodrigues Handyman project work ${index + 1}`;
                     
-                    // Set the alt text for accessibility.
-                    img.alt = `Rodrigues Handyman project ${index + 1}`;
-                    
-                    // Put the image inside the div.
                     galleryItem.appendChild(img);
                     
-                    // Add the completed gallery item div to the main container on the webpage.
-                    galleryContainer.appendChild(galleryItem);
+                    // Add the new image div to the container before the Instagram box
+                    galleryContainer.insertBefore(galleryItem, instagramCta);
                 });
             })
             .catch(error => {
-                // If anything goes wrong (e.g., file not found, bad JSON format), log an error.
-                console.error('Error fetching or parsing gallery images:', error);
-                // Optionally display a message to the user.
-                galleryContainer.innerHTML = '<p style="color:white;">Could not load the gallery.</p>';
+                console.error('Error loading gallery:', error);
+                const errorMessage = document.createElement('p');
+                errorMessage.textContent = 'Could not load the image gallery.';
+                errorMessage.style.color = 'white';
+                galleryContainer.insertBefore(errorMessage, instagramCta);
             });
     });
 </script>
