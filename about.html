@@ -839,6 +839,8 @@ s0.parentNode.insertBefore(s1,s0);
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQxhjLU…&libraries=marker:1012&callback=initMap">
 </script>
 
+
+
 <!-- Initialize Map -->
 <script>
 function initMap() {
@@ -852,11 +854,11 @@ function initMap() {
   });
 
   // Add marker
-  new google.maps.Marker({
-    position: location,
-    map: map,
-    title: "Mount Vernon, NY"
-  });
+new google.maps.marker.AdvancedMarkerElement({
+  position: location,
+  map: map,
+  title: "Mount Vernon, NY"
+});
 }
 </script>
 
