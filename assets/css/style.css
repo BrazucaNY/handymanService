@@ -182,15 +182,29 @@ ul {
 img {
   max-width: 100%;
 }
-
+/* Desktop default */
 .our-works-logo {
-    width: 858px !important;   /* target width */
-    height: 211px !important;  /* target height */
-    max-width: 858px !important;  /* prevent scaling up */
-    max-height: 211px !important; /* prevent scaling up */
-    object-fit: contain !important; /* maintain aspect ratio */
+    width: 858px;
+    height: 211px;
+    max-width: 100%;
+    object-fit: contain;
     display: block;
     margin: 0 auto;
+}
+
+/* Center the image inside the slider */
+.news-slider {
+    display: flex;
+    justify-content: center;
+}
+
+/* Mobile responsive */
+@media (max-width: 576px) {
+    .our-works-logo {
+        width: 100%;          /* fills container */
+        max-width: 350px;     /* ideal mobile size */
+        height: auto;         /* maintain aspect ratio */
+    }
 }
 
 
