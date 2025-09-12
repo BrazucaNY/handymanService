@@ -183,15 +183,16 @@ img {
   max-width: 100%;
 }
 
-/* Force our Instagram logo to always display at 858x211 */
 .our-works-logo {
-    width: 858px !important;
-    height: 211px !important;
-    max-width: none !important;
-    object-fit: unset !important;
+    width: 858px !important;   /* target width */
+    height: 211px !important;  /* target height */
+    max-width: 858px !important;  /* prevent scaling up */
+    max-height: 211px !important; /* prevent scaling up */
+    object-fit: contain !important; /* maintain aspect ratio */
     display: block;
     margin: 0 auto;
 }
+
 
 .news-slider-four .news-slider {
     display: flex;           /* make it a flex container */
