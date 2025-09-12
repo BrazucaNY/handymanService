@@ -199,17 +199,6 @@ img {
     justify-content: center; /* center the image horizontally */
 }
 
-.our-works-logo {
-    width: 900px !important;
-    height: 176px !important;
-    max-width: none !important;
-    object-fit: unset !important;
-}
-
-
-
-
-
 
 /*-- 
     - Common Classes
