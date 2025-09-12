@@ -185,8 +185,8 @@ img {
 
 /* Force our Instagram logo to always display at 900x176 */
 .our-works-logo {
-    width: 900px !important;
-    height: 176px !important;
+    width: 858px !important;
+    height: 211px !important;
     max-width: none !important;
     object-fit: unset !important;
     display: block;
