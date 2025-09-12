@@ -355,6 +355,7 @@
 </div>
 
 <!-- ================= GALLERY SECTION ================= -->
+<!-- ================= GALLERY SECTION ================= -->
 <div class="gallery-sec service-section section pt-30 pb-70 pb-lg-50 pb-md-40 pb-sm-30 pb-xs-20">
   <div class="container">
     <div class="row">
@@ -362,6 +363,112 @@
     </div>
   </div>
 </div>
+
+<!-- ================= LIGHTBOX CONTAINER ================= -->
+<div class="lightbox" id="lightbox">
+  <button id="prev">&#10094;</button> <!-- Previous arrow -->
+  <img id="lightbox-img" src="" alt="Gallery Image">
+  <button id="next">&#10095;</button> <!-- Next arrow -->
+</div>
+
+<!-- ================= GALLERY SCRIPT ================= -->
+<script>
+  // Store all image URLs in this array
+  let imagesArray = [];
+  // Track which image is currently open in the lightbox
+  let currentIndex = 0;
+
+  // Grab DOM elements
+  const galleryRow = document.querySelector('.gallery-sec .row');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const nextBtn = document.getElementById('next');
+  const prevBtn = document.getElementById('prev');
+
+  // Fetch images from JSON file
+  fetch('uploads/gallery/gallery.json')
+    .then(res => res.json())
+    .then(images => {
+      imagesArray = images;
+
+      // Create gallery thumbnails dynamically
+      images.forEach((src, index) => {
+        const div = document.createElement('div');
+        div.className = 'col-md-3 col-6 mb-30';
+
+        // Use width & height attributes to prevent layout shift
+        // Use loading="lazy" for lazy loading images
+        div.innerHTML = `
+          <a class="chocolat-image profile-img-container" href="${src}" data-index="${index}">
+            <img src="${src}" width="400" height="300" alt="Gallery Image" loading="lazy">
+            <div class="overlay"></div>
+          </a>
+        `;
+        galleryRow.appendChild(div);
+      });
+
+      // Add click event to open lightbox
+      document.querySelectorAll('.gallery-sec a').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault(); // Prevent default link jump
+          currentIndex = parseInt(link.dataset.index); // Get image index
+          showLightbox(); // Open lightbox
+        });
+      });
+    })
+    .catch(err => console.error('Error loading gallery:', err));
+
+  // Function to open lightbox
+  function showLightbox() {
+    lightboxImg.classList.remove('show'); // Fade out previous image
+    lightbox.style.display = 'flex';      // Show overlay
+    setTimeout(() => lightbox.classList.add('show'), 10); // Fade-in overlay
+
+    // Set current image
+    lightboxImg.src = imagesArray[currentIndex];
+    setTimeout(() => lightboxImg.classList.add('show'), 50); // Fade-in image
+  }
+
+  // Navigate to next image
+  nextBtn.addEventListener('click', e => {
+    e.stopPropagation(); // Prevent closing lightbox
+    currentIndex = (currentIndex + 1) % imagesArray.length; // Loop back to first
+    switchImage();
+  });
+
+  // Navigate to previous image
+  prevBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + imagesArray.length) % imagesArray.length; // Loop to last
+    switchImage();
+  });
+
+  // Close lightbox when clicking outside image
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Close lightbox on ESC key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Helper function to switch images with fade effect
+  function switchImage() {
+    lightboxImg.classList.remove('show'); // Fade out current
+    setTimeout(() => {
+      lightboxImg.src = imagesArray[currentIndex]; // Update image
+      lightboxImg.classList.add('show');           // Fade in new
+    }, 200);
+  }
+
+  // Close lightbox function
+  function closeLightbox() {
+    lightbox.classList.remove('show');             // Fade overlay
+    setTimeout(() => lightbox.style.display = 'none', 400); // Hide completely
+  }
+</script>
+
 
 <!-- ================= GALLERY SCRIPT ================= -->
 <script>
