@@ -1127,6 +1127,22 @@ s0.parentNode.insertBefore(s1,s0);
 <!-- ============================= -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- ============================= -->
+<!-- Fix scroll performance warnings -->
+<!-- ============================= -->
+<script>
+jQuery.event.special.touchstart = {
+  setup: function(_, ns, handle) {
+    this.addEventListener("touchstart", handle, { passive: true });
+  }
+};
+jQuery.event.special.touchmove = {
+  setup: function(_, ns, handle) {
+    this.addEventListener("touchmove", handle, { passive: true });
+  }
+};
+</script>
+
 <!-- Vendor JS -->
 <script src="assets/js/vendor/popper.min.js"></script>
 <script src="assets/js/vendor/bootstrap.min.js"></script>
