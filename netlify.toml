@@ -1,7 +1,6 @@
 [build]
   publish = "."                    # or your actual public folder, e.g., "dist"
   functions = "netlify/functions"  # serverless functions folder
-
 # Block access to sensitive files
 [[redirects]]
   from = "/.env*"
