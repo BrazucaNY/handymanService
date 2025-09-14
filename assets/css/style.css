@@ -10882,3 +10882,12 @@ bottom::after {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+.single-service-link {
+  display: block;
+  text-decoration: none; /* removes the underline */
+  color: inherit; /* keeps your text colors */
+}
+
+.single-service-link:hover {
+  text-decoration: none;
+}
