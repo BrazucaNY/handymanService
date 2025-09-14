@@ -896,7 +896,7 @@
                         <!-- 📧 Email -->
                         <li>
                             <i class="fa fa-envelope-o"></i>
-                            <span><a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandy.com</a></span>
+                            <span><a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandyman.com</a></span>
                         </li>
                         <!-- ⏰ Hours -->
                         <li>
@@ -1170,6 +1170,17 @@ jQuery.event.special.touchmove = {
     .sidebar-blog .image img {
         width: 100%;
         height: 60px;
+    }
+    
+    /* Fix logo background - make transparent logos display properly */
+    .logo {
+        background-color: transparent !important;
+    }
+    .logo::before {
+        background-color: transparent !important;
+    }
+    .logo::after {
+        display: none !important;
     }
 </style>
 
