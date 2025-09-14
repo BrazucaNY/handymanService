@@ -1,62 +1,116 @@
-<div class="login-container">
-  <div class="logo">SP</div>
-  <h1>Admin Login</h1>
-  <p class="subtitle">Authorized Access Only</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Admin Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px; width: 90%;
+    }
+    .logo {
+      width: 80px; height: 80px;
+      margin: 0 auto 1rem;
+      background: #667eea; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 2rem; font-weight: bold;
+    }
+    h1 { color: #333; margin-bottom: 0.5rem; font-size: 1.8rem; }
+    .subtitle { color: #666; margin-bottom: 2rem; font-size: 0.9rem; }
+    input {
+      width: 100%; padding: 10px; margin-bottom: 12px;
+      border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;
+    }
+    button {
+      width: 100%; padding: 12px;
+      background: #667eea; color: white; border: none;
+      border-radius: 6px; font-size: 1rem; cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover { background: #5a67d8; }
+    .error-message {
+      background: #fee; color: #c33; padding: 10px;
+      border-radius: 4px; margin-top: 1rem; display: none;
+    }
+    .security-notice {
+      background: #f0f8ff; border: 1px solid #b3d9ff;
+      color: #0066cc; padding: 1rem; border-radius: 6px;
+      margin-top: 1.5rem; font-size: 0.85rem; text-align: left;
+    }
+    .security-notice strong { display: block; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">SP</div>
+    <h1>Admin Login</h1>
+    <p class="subtitle">Authorized Access Only</p>
 
-  <!-- Email login -->
-  <input id="email" type="email" placeholder="Email"/>
-  <input id="password" type="password" placeholder="Password"/>
-  <button id="email-login-btn">Login with Email</button>
+    <!-- Email login form -->
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <button id="email-login-btn">Login</button>
 
-  <!-- GitHub login -->
-  <button id="github-login-btn">Sign in with GitHub</button>
+    <div id="error-message" class="error-message"></div>
 
-  <div id="error-message"></div>
-</div>
+    <div class="security-notice">
+      <strong>🔒 Secure Access</strong>
+      Only authorized users can access this admin portal.
+    </div>
+  </div>
 
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-};
+    const firebaseConfig = {
+      apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+      authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+      projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+      storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+      appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-function showError(msg){
-  const div = document.getElementById('error-message');
-  div.textContent = msg;
-  div.style.display='block';
-  setTimeout(()=> div.style.display='none',5000);
-}
+    const showError = msg => {
+      const div = document.getElementById('error-message');
+      div.textContent = msg;
+      div.style.display = 'block';
+      setTimeout(() => div.style.display = 'none', 5000);
+    }
 
-// Email login
-document.getElementById('email-login-btn').addEventListener('click', async ()=>{
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  try{
-    await signInWithEmailAndPassword(auth, email, password);
-    window.location.href='/admin/dashboard.html';
-  }catch(e){ showError(e.message); }
-});
+    document.getElementById('email-login-btn').addEventListener('click', async () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      if(!email || !password) return showError('Please enter email and password.');
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = '/admin/dashboard.html';
+      } catch (err) {
+        showError(err.message);
+      }
+    });
 
-// Redirect if logged in
-onAuthStateChanged(auth, user=>{
-  if(user) window.location.href='/admin/dashboard.html';
-});
-
-// GitHub login: redirect to GitHub OAuth page
-document.getElementById('github-login-btn').addEventListener('click', ()=>{
-  const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
-  const redirectUri = window.location.origin; // or a backend redirect endpoint
-  const githubUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email`;
-  window.location.href = githubUrl;
-});
-</script>
+    // Redirect already logged-in users
+    onAuthStateChanged(auth, user => {
+      if(user) window.location.href = '/admin/dashboard.html';
+    });
+  </script>
+</body>
+</html>
