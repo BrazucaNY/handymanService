@@ -137,13 +137,14 @@
         // Firebase configuration - for login page, we'll use a minimal secure approach
         // In production, these values should come from environment variables
         const firebaseConfig = {
-            apiKey: window.FIREBASE_CONFIG?.apiKey || "yAIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
-            authDomain: window.FIREBASE_CONFIG?.authDomain || "handymanserviceadmin.firebaseapp.com",
-            projectId: window.FIREBASE_CONFIG?.projectId || "handymanserviceadmin",
-            storageBucket: window.FIREBASE_CONFIG?.storageBucket || "handymanserviceadmin.appspot.com",
-            messagingSenderId: window.FIREBASE_CONFIG?.messagingSenderId || "1073781663456",
-            appId: window.FIREBASE_CONFIG?.appId || "1:1073781663456:web:588017b68ea3bcf6dcd285"
-        };
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+};
+
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
