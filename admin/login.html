@@ -4,73 +4,58 @@
   <meta charset="UTF-8">
   <title>Login - Rodrigues Handyman</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <style>
-    body { font-family: 'Roboto', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    .login-container { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 350px; text-align: center; }
-    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; }
-    button { padding: 12px; width: 100%; border: none; border-radius: 8px; background: #4CAF50; color: #fff; font-size: 16px; cursor: pointer; }
+    body { font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f2f5; }
+    .login-container { background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+    h1 { margin-bottom: 20px; }
+    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
+    button { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 8px; background: #4CAF50; color: #fff; cursor: pointer; font-size: 14px; }
     button:hover { background: #388E3C; }
-    .error { color: red; margin-top: 10px; font-size: 14px; }
+    .message { font-size: 14px; margin-top: 10px; color: red; }
   </style>
 </head>
 <body>
 
 <div class="login-container">
-  <h2>Login</h2>
+  <h1>Login</h1>
+  <p class="message" id="msg"></p>
   <input type="email" id="email" placeholder="Email" required>
   <input type="password" id="password" placeholder="Password" required>
   <button id="loginBtn">Login</button>
-  <p id="errorMsg" class="error"></p>
 </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
 <script>
-async function getFirebaseConfig() {
-  const res = await fetch('/.netlify/functions/firebaseConfig');
-  if (!res.ok) throw new Error('Failed to fetch Firebase config');
-  return await res.json();
-}
-
-async function initFirebase() {
-  try {
-    const config = await getFirebaseConfig();
-    if (!firebase.apps.length) {
+  async function initFirebase() {
+    try {
+      const res = await fetch('/.netlify/functions/firebaseConfig');
+      if (!res.ok) throw new Error('Failed to fetch config');
+      const config = await res.json();
       firebase.initializeApp(config);
+    } catch (err) {
+      console.error('Failed to load Firebase config', err);
+      document.getElementById('msg').textContent = 'Unable to initialize Firebase. Contact admin.';
     }
-    const auth = firebase.auth();
-
-    // Redirect if already logged in
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        window.location.href = '/admin/admin.html';
-      }
-    });
-
-    const loginBtn = document.getElementById('loginBtn');
-    const errorMsg = document.getElementById('errorMsg');
-
-    loginBtn.addEventListener('click', async () => {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      errorMsg.textContent = '';
-
-      try {
-        await auth.signInWithEmailAndPassword(email, password);
-        // Redirect will happen via onAuthStateChanged
-      } catch (err) {
-        console.error(err);
-        errorMsg.textContent = 'Login failed. Check credentials.';
-      }
-    });
-
-  } catch (err) {
-    console.error('Unable to initialize Firebase. Contact admin.', err);
-    alert('Unable to initialize Firebase. Contact admin.');
   }
-}
 
-initFirebase();
+  initFirebase();
+
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const msg = document.getElementById('msg');
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      window.location.href = '/admin/admin.html'; // redirect after login
+    } catch (err) {
+      console.error(err);
+      msg.textContent = 'Login failed. Check your credentials.';
+    }
+  });
 </script>
 
 </body>
