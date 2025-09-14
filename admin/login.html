@@ -76,20 +76,24 @@
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
 
-    const firebaseConfig = {
-      apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-      authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-      projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-      storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-      messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-      appId: import.meta.env.VITE_FIREBASE_APP_ID,
-    };
+    // ✅ Function returns Firebase config
+    function getFirebaseConfig() {
+      return {
+        apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+        authDomain: "handymanserviceadmin.firebaseapp.com",
+        projectId: "handymanserviceadmin",
+        storageBucket: "handymanserviceadmin.appspot.com",
+        messagingSenderId: "1073781663456",
+        appId: "1:1073781663456:web:588017b68ea3bcf6dcd285"
+      };
+    }
 
-    const app = initializeApp(firebaseConfig);
+    const app = initializeApp(getFirebaseConfig());
     const auth = getAuth(app);
 
     const showError = msg => {
       const div = document.getElementById('error-message');
+      console.error("Login Error:", msg); // 👈 also log to console
       div.textContent = msg;
       div.style.display = 'block';
       setTimeout(() => div.style.display = 'none', 5000);
@@ -100,16 +104,19 @@
       const password = document.getElementById('password').value;
       if(!email || !password) return showError('Please enter email and password.');
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        const userCred = await signInWithEmailAndPassword(auth, email, password);
+        console.log("✅ Logged in:", userCred.user.email);
         window.location.href = '/admin/dashboard.html';
       } catch (err) {
         showError(err.message);
       }
     });
 
-    // Redirect already logged-in users
     onAuthStateChanged(auth, user => {
-      if(user) window.location.href = '/admin/dashboard.html';
+      if(user) {
+        console.log("Already logged in:", user.email);
+        window.location.href = '/admin/dashboard.html';
+      }
     });
   </script>
 </body>
