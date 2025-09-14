@@ -19,56 +19,63 @@
 <div class="login-container">
   <h1>Login</h1>
   <p class="message" id="msg"></p>
-  <input type="email" id="email" placeholder="Email" required>
-  <input type="password" id="password" placeholder="Password" required>
-  <button id="loginBtn">Login</button>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
 </div>
 
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
 <script>
-  async function initFirebase() {
-    try {
-      const res = await fetch('/.netlify/functions/firebaseConfig');
-      if (!res.ok) throw new Error('Failed to fetch Firebase config');
+async function initFirebase() {
+  try {
+    // Fetch Firebase config from Netlify function
+    const res = await fetch('/.netlify/functions/firebaseConfig');
+    if (!res.ok) throw new Error('Failed to fetch Firebase config');
 
-      const firebaseConfig = await res.json();
+    const firebaseConfig = await res.json();
 
-      if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-      }
-
-      const auth = firebase.auth();
-
-      // Redirect logged-in users
-      auth.onAuthStateChanged(user => {
-        if (user) window.location.href = '/admin/admin.html';
-      });
-
-      // Example login handler
-      const loginForm = document.getElementById('loginForm');
-      loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        try {
-          await auth.signInWithEmailAndPassword(email, password);
-          window.location.href = '/admin/admin.html';
-        } catch (err) {
-          alert('Login failed: ' + err.message);
-        }
-      });
-
-    } catch (err) {
-      console.error(err);
-      alert('Unable to initialize Firebase. Contact admin.');
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
     }
+
+    const auth = firebase.auth();
+
+    // Redirect logged-in users automatically
+    auth.onAuthStateChanged(user => {
+      if (user) window.location.href = '/admin/admin.html';
+    });
+
+    // Login form handler
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        window.location.href = '/admin/admin.html';
+      } catch (err) {
+        const msg = document.getElementById('msg');
+        msg.textContent = 'Login failed: ' + err.message;
+      }
+    });
+
+  } catch (err) {
+    console.error(err);
+    alert('Unable to initialize Firebase. Contact admin.');
   }
+}
 
-  initFirebase();
+// Initialize Firebase on page load
+initFirebase();
 </script>
-
 
 </body>
 </html>
