@@ -41,6 +41,21 @@
   </style>
 </head>
 <body>
+<script>
+async function getFirebaseConfig() {
+  const response = await fetch('/.netlify/functions/firebaseConfig');
+  return await response.json();
+}
+
+async function initFirebase() {
+  const config = await getFirebaseConfig();
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+  }
+}
+
+initFirebase();
+</script>
 
   <div class="security-notice" id="securityNotice">UNAUTHORIZED ACCESS DETECTED - ACCESS RESTRICTED TO RODRIGUESHANDYMAN.COM</div>
 
