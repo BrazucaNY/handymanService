@@ -62,12 +62,12 @@
   </div>
 
   <!-- ✅ script goes last -->
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+ <script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
 
-  const firebaseConfig = {
-  apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+const firebaseConfig = {
+  apiKey: "YOUR_FIREBASE_API_KEY",
   authDomain: "handymanserviceadmin.firebaseapp.com",
   projectId: "handymanserviceadmin",
   storageBucket: "handymanserviceadmin.appspot.com",
@@ -75,40 +75,40 @@
   appId: "1:1073781663456:web:588017b68ea3bcf6dcd285"
 };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-    const errorDiv = document.getElementById('error');
-    const loginBtn = document.getElementById('loginBtn');
+const errorDiv = document.getElementById('error');
 
-    loginBtn.addEventListener('click', async () => {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+document.getElementById('loginBtn').addEventListener('click', async () => {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
 
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = '/admin/admin.html';
-      } catch (err) {
-        console.error("❌ Login error:", err.message);
-        errorDiv.textContent = err.message;
-        errorDiv.style.display = 'block';
-      }
-    });
+  if (!email || !password) {
+    errorDiv.textContent = "Enter email and password";
+    errorDiv.style.display = 'block';
+    return;
+  }
 
-   onAuthStateChanged(auth, user => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = '/admin/admin.html'; // ✅ redirect to admin
+  } catch (err) {
+    console.error('Login Error:', err);
+    errorDiv.textContent = err.message;
+    errorDiv.style.display = 'block';
+  }
+});
+
+// Auto-redirect if already logged in
+onAuthStateChanged(auth, user => {
   if (user) {
-    // If logged in, go to admin dashboard
     if (!window.location.pathname.includes('admin')) {
-      window.location.href = "/admin/admin.html";
-    }
-  } else {
-    // Only redirect to login if we are NOT already on login page
-    if (!window.location.pathname.includes('login')) {
-      window.location.href = "/login.html";
+      window.location.href = '/admin/admin.html';
     }
   }
 });
-  </script>
+</script>
 </body>
 
 
