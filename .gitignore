@@ -56,3 +56,6 @@ build/
 *.db
 *.sqlite
 *.sqlite3
+
+# Local Netlify folder
+.netlify
