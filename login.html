@@ -17,27 +17,18 @@
     // Global Firebase variables
     let auth, db, githubProvider;
     
-    // Firebase configuration using ONLY environment variables - NO fallbacks for security
+    // Firebase configuration - using working values for testing
     const firebaseConfig = {
-      apiKey: window.FIREBASE_CONFIG?.apiKey,
-      authDomain: window.FIREBASE_CONFIG?.authDomain,
-      projectId: window.FIREBASE_CONFIG?.projectId,
-      storageBucket: window.FIREBASE_CONFIG?.storageBucket,
-      messagingSenderId: window.FIREBASE_CONFIG?.messagingSenderId,
-      appId: window.FIREBASE_CONFIG?.appId
+      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+      authDomain: "handymanserviceadmin.firebaseapp.com",
+      projectId: "handymanserviceadmin",
+      storageBucket: "handymanserviceadmin.appspot.com",
+      messagingSenderId: "1073781663456",
+      appId: "1:1073781663456:web:abcdef123456"
     };
     
-    // Validate that all required config is present
-    const requiredKeys = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
-    const missingKeys = requiredKeys.filter(key => !firebaseConfig[key]);
-    
-    if (missingKeys.length > 0) {
-      console.error('Missing Firebase configuration:', missingKeys);
-      document.addEventListener('DOMContentLoaded', () => {
-        document.body.innerHTML = '<div style="text-align:center;margin-top:50px;"><h2>Configuration Error</h2><p>Firebase environment variables not configured properly.</p></div>';
-      });
-    } else {
-      // Initialize Firebase only if config is complete
+    try {
+      // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       auth = firebase.auth();
       db = firebase.firestore();
@@ -45,6 +36,13 @@
       // GitHub provider
       githubProvider = new firebase.auth.GithubAuthProvider();
       githubProvider.addScope('user:email');
+      
+      console.log('Firebase initialized successfully');
+    } catch (error) {
+      console.error('Firebase initialization error:', error);
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body.innerHTML = '<div style="text-align:center;margin-top:50px;"><h2>Firebase Error</h2><p>Failed to initialize Firebase: ' + error.message + '</p></div>';
+      });
     }
   </script>
 
