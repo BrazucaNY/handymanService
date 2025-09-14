@@ -171,12 +171,12 @@ button.delete-btn:hover { background: #d32f2f; }
 
 <script>
 const firebaseConfig = {
-  apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
-  authDomain: "handymanserviceadmin.firebaseapp.com",
-  projectId: "handymanserviceadmin",
-  storageBucket: "handymanserviceadmin.appspot.com",
-  messagingSenderId: "1073781663456",
-  appId: "1:1073781663456:web:abcdef123456"
+  apiKey: window.FIREBASE_CONFIG?.apiKey || "your_firebase_api_key_here",
+  authDomain: window.FIREBASE_CONFIG?.authDomain || "handymanserviceadmin.firebaseapp.com",
+  projectId: window.FIREBASE_CONFIG?.projectId || "handymanserviceadmin",
+  storageBucket: window.FIREBASE_CONFIG?.storageBucket || "handymanserviceadmin.appspot.com",
+  messagingSenderId: window.FIREBASE_CONFIG?.messagingSenderId || "your_sender_id",
+  appId: window.FIREBASE_CONFIG?.appId || "your_app_id"
 };
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();

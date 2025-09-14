@@ -128,7 +128,7 @@
                 </div>
             </div>
         </header>
-        <!--Header section end-->
+        <!--Header section end>
 
 
 
@@ -337,6 +337,14 @@ Leaving my job to start a business has been one of the best decisions of my life
             </div>
         </div>
         <!--Features section end-->
+        
+        <script>
+            // Use environment variable for Google Maps API key
+            const mapsApiKey = window.GOOGLE_MAPS_API_KEY || "your_google_maps_api_key_here";
+            const mapsScript = document.createElement('script');
+            mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&callback=initMap`;
+            document.head.appendChild(mapsScript);
+        </script>
         
         <script src="../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <script>

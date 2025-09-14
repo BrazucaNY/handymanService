@@ -1,87 +1,21 @@
 [build]
   publish = "."
-  command = "echo 'Static site deployment'"
 
-[build.environment]
-  NODE_VERSION = "18"
-
-# Admin area access control
+# Block sensitive files
 [[redirects]]
-  from = "/admin/*"
-  to = "/admin/:splat"
-  status = 200
-  conditions = {Role = ["admin"]}
-  headers = {X-Robots-Tag = "noindex, nofollow"}
-
-# Redirect unauthorized admin access
-[[redirects]]
-  from = "/admin/*"
-  to = "/login.html"
-  status = 302
-  conditions = {Role = ["!admin"]}
-
-# GitHub OAuth callback
-[[redirects]]
-  from = "/auth/github/callback"
-  to = "/.netlify/functions/github-auth"
-  status = 200
-
-# Environment-specific redirects
-[[redirects]]
-  from = "/admin"
-  to = "/admin/dashboard.html"
-  status = 301
-  conditions = {Country = ["US", "BR"]}
-
-# Security redirects - block common attack paths
-[[redirects]]
-  from = "/wp-admin/*"
+  from = "/.env*"
   to = "/404.html"
   status = 404
 
 [[redirects]]
-  from = "/.env"
+  from = "/admin/firebase-config.js"
   to = "/404.html"
   status = 404
 
-[[redirects]]
-  from = "/config/*"
-  to = "/404.html"
-  status = 404
-
-# Default redirects
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# Headers for admin security
+# Basic security headers
 [[headers]]
   for = "/admin/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
-    X-XSS-Protection = "1; mode=block"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Cache-Control = "no-cache, no-store, must-revalidate"
-    Pragma = "no-cache"
-    Expires = "0"
-    X-Robots-Tag = "noindex, nofollow"
-
-# Environment variables (set these in Netlify dashboard)
-[context.production.environment]
-  FIREBASE_API_KEY = "your_production_api_key"
-  FIREBASE_AUTH_DOMAIN = "handymanserviceadmin.firebaseapp.com"
-  FIREBASE_PROJECT_ID = "handymanserviceadmin"
-  FIREBASE_STORAGE_BUCKET = "handymanserviceadmin.appspot.com"
-  FIREBASE_MESSAGING_SENDER_ID = "1073781663456"
-  FIREBASE_APP_ID = "your_production_app_id"
-  GITHUB_CLIENT_ID = "your_github_oauth_client_id"
-  GITHUB_CLIENT_SECRET = "your_github_oauth_client_secret"
-  ADMIN_DOMAIN = "rodrigueshandyman.com"
-
-[context.staging.environment]
-  FIREBASE_API_KEY = "your_staging_api_key"
-  FIREBASE_AUTH_DOMAIN = "handymanserviceadmin-staging.firebaseapp.com"
-  FIREBASE_PROJECT_ID = "handymanserviceadmin-staging"
-  ADMIN_DOMAIN = "staging.rodrigueshandyman.com"
