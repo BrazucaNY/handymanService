@@ -10882,3 +10882,28 @@ bottom::after {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+/* --- Desktop Styles --- */
+.service-link-wrapper .hidden-text {
+    display: none; /* Hide text by default */
+}
+
+/* On hover, show the text and change the background */
+.service-link-wrapper:hover .service-item {
+    background-color: yellow;
+}
+
+.service-link-wrapper:hover .hidden-text {
+    display: block; /* Show the text on hover */
+}
+
+
+/* --- Mobile Styles --- */
+/* For screens 768px or smaller */
+@media (max-width: 768px) {
+    /* On mobile, we don't need a hover effect. 
+       Tapping the box will just navigate to the page. */
+
+    .service-link-wrapper:hover .service-item {
+        background-color: transparent; /* Optional: remove hover color change on mobile */
+    }
+}
