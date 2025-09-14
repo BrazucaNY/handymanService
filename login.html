@@ -14,6 +14,9 @@
   
   <!-- Firebase Configuration -->
   <script>
+    // Global Firebase variables
+    let auth, db, githubProvider;
+    
     // Firebase configuration using ONLY environment variables - NO fallbacks for security
     const firebaseConfig = {
       apiKey: window.FIREBASE_CONFIG?.apiKey,
@@ -30,15 +33,17 @@
     
     if (missingKeys.length > 0) {
       console.error('Missing Firebase configuration:', missingKeys);
-      document.body.innerHTML = '<div style="text-align:center;margin-top:50px;"><h2>Configuration Error</h2><p>Firebase environment variables not configured properly.</p></div>';
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body.innerHTML = '<div style="text-align:center;margin-top:50px;"><h2>Configuration Error</h2><p>Firebase environment variables not configured properly.</p></div>';
+      });
     } else {
       // Initialize Firebase only if config is complete
       firebase.initializeApp(firebaseConfig);
-      const auth = firebase.auth();
-      const db = firebase.firestore();
+      auth = firebase.auth();
+      db = firebase.firestore();
       
       // GitHub provider
-      const githubProvider = new firebase.auth.GithubAuthProvider();
+      githubProvider = new firebase.auth.GithubAuthProvider();
       githubProvider.addScope('user:email');
     }
   </script>
@@ -121,8 +126,19 @@
       setTimeout(() => errorText.textContent = '', 5000);
     }
 
+    // Check if Firebase is initialized
+    function checkFirebaseInit() {
+      if (!auth || !db) {
+        showError('Firebase not initialized. Please check configuration.');
+        return false;
+      }
+      return true;
+    }
+
     // GitHub OAuth Login
     githubLoginBtn.addEventListener('click', async () => {
+      if (!checkFirebaseInit()) return;
+      
       try {
         const result = await auth.signInWithPopup(githubProvider);
         const user = result.user;
@@ -143,6 +159,9 @@
     // Email/Password Login
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      
+      if (!checkFirebaseInit()) return;
+      
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
@@ -181,11 +200,13 @@
     });
 
     // Auto-redirect if already logged in
-    auth.onAuthStateChanged((user) => {
-      if (user && !window.location.href.includes('admin/')) {
-        window.location.href = 'admin/dashboard.html';
-      }
-    });
+    if (auth) {
+      auth.onAuthStateChanged((user) => {
+        if (user && !window.location.href.includes('admin/')) {
+          window.location.href = 'admin/dashboard.html';
+        }
+      });
+    }
   </script>
 </body>
 </html>
