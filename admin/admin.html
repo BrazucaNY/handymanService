@@ -4,18 +4,11 @@
   <meta charset="UTF-8">
   <title>Admin Dashboard - Rodrigues Handyman</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
   <style>
     body { font-family: 'Roboto', sans-serif; margin: 0; background: #f0f2f5; }
-    .security-notice { background: #e74c3c; color: white; padding: 10px; text-align: center; font-weight: bold; position: fixed; top: 0; left: 0; width: 100%; z-index: 1001; display: none; }
-    .top-nav { display: flex; justify-content: center; flex-wrap: wrap; align-items: center; background-color: #2c3e50; padding: 12px 20px; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
-    .top-nav a { color: white; text-decoration: none; margin: 0 12px; font-weight: 500; transition: color 0.3s; }
-    .top-nav a:hover { color: #1abc9c; }
     .container { max-width: 800px; margin: 100px auto 30px; padding: 25px; background: #fff; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
     h1, h2 { color: #333; text-align: center; }
     form { display: flex; flex-direction: column; gap: 12px; }
@@ -25,115 +18,79 @@
     button.add-btn:hover { background: #388E3C; }
     button.delete-btn { background: #f44336; color: #fff; }
     button.delete-btn:hover { background: #d32f2f; }
-    .message { text-align: center; font-size: 14px; margin: 10px 0; }
-    .success { color: green; }
-    .error { color: red; }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
     th { background: #f8f8f8; }
+    .top-nav { display: flex; justify-content: center; flex-wrap: wrap; align-items: center; background-color: #2c3e50; padding: 12px 20px; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+    .top-nav a { color: white; text-decoration: none; margin: 0 12px; font-weight: 500; transition: color 0.3s; }
+    .top-nav a:hover { color: #1abc9c; }
     .security-status { background: #27ae60; color: white; padding: 8px 12px; border-radius: 4px; font-size: 12px; margin-bottom: 20px; text-align: center; }
-    @media (max-width: 600px) {
-      .top-nav { justify-content: center; gap: 8px; }
-      input, textarea { font-size: 13px; padding: 10px; }
-      button { font-size: 13px; padding: 10px; }
-      table th, table td { font-size: 12px; padding: 8px; }
-    }
+    .message { text-align: center; font-size: 14px; margin: 10px 0; }
+    .success { color: green; }
+    .error { color: red; }
   </style>
 </head>
 <body>
+
+<div class="top-nav">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="customers.html">Customers</a>
+  <a href="estimates.html">Estimates</a>
+  <a href="#">Expenses</a>
+  <a href="#">Reports</a>
+  <a href="#">Clientes</a>
+  <a href="#">Items</a>
+  <a href="#">Settings</a>
+  <a id="logoutBtn">Logout</a>
+</div>
+
+<div class="container">
+  <div class="security-status" id="securityStatus">🔒 Secure Connection - Domain Verified</div>
+  <h1>Admin Dashboard - Rodrigues Handyman</h1>
+
+  <h2>Add Customer</h2>
+  <p id="msg" class="message"></p>
+  <form id="customerForm">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="text" id="phone" placeholder="Phone" required>
+    <input type="text" id="address" placeholder="Address">
+    <textarea id="notes" placeholder="Notes"></textarea>
+    <button type="submit" class="add-btn">Add Customer</button>
+  </form>
+
+  <h2>Customer List</h2>
+  <table id="customerTable">
+    <thead>
+      <tr>
+        <th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Notes</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
 <script>
 async function getFirebaseConfig() {
-  const response = await fetch('/.netlify/functions/firebaseConfig');
-  return await response.json();
+  const res = await fetch('/.netlify/functions/firebaseConfig');
+  if (!res.ok) throw new Error('Failed to fetch Firebase config');
+  return await res.json();
 }
 
 async function initFirebase() {
-  const config = await getFirebaseConfig();
-  if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-  }
-}
-
-initFirebase();
-</script>
-
-  <div class="security-notice" id="securityNotice">UNAUTHORIZED ACCESS DETECTED - ACCESS RESTRICTED TO RODRIGUESHANDYMAN.COM</div>
-
-  <div class="top-nav">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="customers.html">Customers</a>
-    <a href="estimates.html">Estimates</a>
-    <a href="#">Expenses</a>
-    <a href="#">Reports</a>
-    <a href="#">Clientes</a>
-    <a href="#">Items</a>
-    <a href="#">Settings</a>
-    <a id="logoutBtn">Logout</a>
-  </div>
-
-  <div class="container">
-    <div class="security-status" id="securityStatus">🔒 Secure Connection - Domain Verified</div>
-    
-    <h1>Admin Dashboard - Rodrigues Handyman</h1>
-
-    <h2>Add Customer</h2>
-    <p id="msg" class="message"></p>
-    <form id="customerForm">
-      <input type="text" id="name" placeholder="Full Name" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="text" id="phone" placeholder="Phone" required>
-      <input type="text" id="address" placeholder="Address">
-      <textarea id="notes" placeholder="Notes"></textarea>
-      <button type="submit" class="add-btn">Add Customer</button>
-    </form>
-
-    <h2>Customer List</h2>
-    <table id="customerTable">
-      <thead>
-        <tr>
-          <th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Notes</th><th>Actions</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-
-  <script>
-    const SECURITY_CONFIG = {
-      allowedDomains: ['rodrigueshandyman.com', 'www.rodrigueshandyman.com']
-    };
-
-    function checkDomainSecurity() {
-      const currentDomain = window.location.hostname;
-      if (!SECURITY_CONFIG.allowedDomains.includes(currentDomain) && currentDomain !== 'localhost') {
-        document.getElementById('securityNotice').style.display = 'block';
-        document.body.style.marginTop = '40px';
-        setTimeout(() => window.location.href = 'https://rodrigueshandyman.com', 3000);
-        return false;
-      }
-      return true;
-    }
-
-    if (!checkDomainSecurity()) throw new Error('Domain security check failed');
-
-    // Hardcoded Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
-      authDomain: "handymanserviceadmin.firebaseapp.com",
-      projectId: "handymanserviceadmin",
-      storageBucket: "handymanserviceadmin.appspot.com",
-      messagingSenderId: "1073781663456",
-      appId: "1:1073781663456:web:588017b68ea3bcf6dcd285"
-    };
-
-    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  try {
+    const config = await getFirebaseConfig();
+    if (!firebase.apps.length) firebase.initializeApp(config);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // Auth state listener
+    // Redirect to login if not authenticated
     auth.onAuthStateChanged(user => {
-      if (!user) return window.location.href = '/login.html';
-      document.getElementById('securityStatus').textContent = `🔒 Secure - ${user.email}`;
+      if (!user) window.location.href = '/login.html';
+      else {
+        document.getElementById('securityStatus').textContent =
+          `🔒 Secure - ${user.email} (${window.location.hostname})`;
+      }
     });
 
     // Logout
@@ -148,13 +105,8 @@ initFirebase();
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
-      const user = auth.currentUser;
-      if (!user) {
-        msg.textContent = "Authentication expired. Please log in again.";
-        msg.className = "message error";
-        setTimeout(() => window.location.href = "/login.html", 2000);
-        return;
-      }
+      const currentUser = auth.currentUser;
+      if (!currentUser) { window.location.href = '/login.html'; return; }
 
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
@@ -166,17 +118,17 @@ initFirebase();
         await db.collection('customers').add({
           name, email, phone, address, notes,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          createdBy: user.uid,
-          createdByEmail: user.email,
+          createdBy: currentUser.uid,
+          createdByEmail: currentUser.email,
           domain: window.location.hostname
         });
         form.reset();
         msg.textContent = "Customer added successfully!";
         msg.className = "message success";
       } catch (err) {
+        console.error(err);
         msg.textContent = "Error adding customer.";
         msg.className = "message error";
-        console.error(err);
       }
     });
 
@@ -194,17 +146,22 @@ initFirebase();
           <td>${c.notes || ''}</td>
           <td><button class="delete-btn">Delete</button></td>
         `;
-        row.querySelector(".delete-btn").addEventListener('click', async () => {
-          if (!auth.currentUser) return window.location.href = '/login.html';
-          if (confirm(`Delete ${c.name}? This cannot be undone.`)) {
-            await db.collection('customers').doc(doc.id).delete();
-          }
+        row.querySelector('.delete-btn').addEventListener('click', async () => {
+          if (!auth.currentUser) { window.location.href = '/login.html'; return; }
+          if (confirm(`Delete ${c.name}?`)) await db.collection('customers').doc(doc.id).delete();
         });
         tableBody.appendChild(row);
       });
     });
 
-  </script>
+  } catch (err) {
+    console.error('Unable to initialize Firebase. Contact admin.', err);
+    alert('Unable to initialize Firebase. Contact admin.');
+  }
+}
+
+initFirebase();
+</script>
 
 </body>
 </html>
