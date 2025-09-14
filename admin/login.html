@@ -95,12 +95,19 @@
       }
     });
 
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        console.log("✅ Already logged in:", user.email);
-        window.location.href = '/admin/admin.html';
-      }
-    });
+   onAuthStateChanged(auth, user => {
+  if (user) {
+    // If logged in, go to admin dashboard
+    if (!window.location.pathname.includes('admin')) {
+      window.location.href = "/admin/admin.html";
+    }
+  } else {
+    // Only redirect to login if we are NOT already on login page
+    if (!window.location.pathname.includes('login')) {
+      window.location.href = "/login.html";
+    }
+  }
+});
   </script>
 </body>
 
