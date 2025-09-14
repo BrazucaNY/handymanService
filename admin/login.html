@@ -72,52 +72,38 @@
   </div>
 
   <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+ <script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+  import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
 
-    // ✅ Function returns Firebase config
-    function getFirebaseConfig() {
-      return {
-        apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
-        authDomain: "handymanserviceadmin.firebaseapp.com",
-        projectId: "handymanserviceadmin",
-        storageBucket: "handymanserviceadmin.appspot.com",
-        messagingSenderId: "1073781663456",
-        appId: "1:1073781663456:web:588017b68ea3bcf6dcd285"
-      };
+  const firebaseConfig = {
+    apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+    authDomain: "handymanserviceadmin.firebaseapp.com",
+    projectId: "handymanserviceadmin",
+    storageBucket: "handymanserviceadmin.appspot.com",
+    messagingSenderId: "1073781663456",
+    appId: "1:1073781663456:web:588017b68ea3bcf6dcd285"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  document.getElementById('email-login-btn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    console.log("🔑 Trying login with:", email);
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log("✅ Login successful:", userCredential.user);
+      window.location.href = "/admin/dashboard.html";
+    } catch (err) {
+      console.error("❌ Login failed:", err.code, err.message);
+      alert("Login failed: " + err.message);
     }
+  });
+</script>
 
-    const app = initializeApp(getFirebaseConfig());
-    const auth = getAuth(app);
-
-    const showError = msg => {
-      const div = document.getElementById('error-message');
-      console.error("Login Error:", msg); // 👈 also log to console
-      div.textContent = msg;
-      div.style.display = 'block';
-      setTimeout(() => div.style.display = 'none', 5000);
-    }
-
-    document.getElementById('email-login-btn').addEventListener('click', async () => {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      if(!email || !password) return showError('Please enter email and password.');
-      try {
-        const userCred = await signInWithEmailAndPassword(auth, email, password);
-        console.log("✅ Logged in:", userCred.user.email);
-        window.location.href = '/admin/dashboard.html';
-      } catch (err) {
-        showError(err.message);
-      }
-    });
-
-    onAuthStateChanged(auth, user => {
-      if(user) {
-        console.log("Already logged in:", user.email);
-        window.location.href = '/admin/dashboard.html';
-      }
-    });
-  </script>
 </body>
 </html>
