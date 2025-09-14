@@ -4,78 +4,74 @@
   <meta charset="UTF-8">
   <title>Login - Rodrigues Handyman</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-
   <style>
-    body { font-family: 'Roboto', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-    .login-container { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); width: 350px; text-align: center; }
-    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
-    button { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 8px; background: #4CAF50; color: #fff; font-size: 14px; cursor: pointer; transition: background 0.3s; }
+    body { font-family: 'Roboto', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .login-container { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 350px; text-align: center; }
+    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; }
+    button { padding: 12px; width: 100%; border: none; border-radius: 8px; background: #4CAF50; color: #fff; font-size: 16px; cursor: pointer; }
     button:hover { background: #388E3C; }
-    .message { color: red; margin-top: 10px; font-size: 14px; }
+    .error { color: red; margin-top: 10px; font-size: 14px; }
   </style>
 </head>
 <body>
 
-  <div class="login-container">
-    <h1>Login</h1>
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="password" id="password" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
-    <div id="msg" class="message"></div>
-  </div>
+<div class="login-container">
+  <h2>Login</h2>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button id="loginBtn">Login</button>
+  <p id="errorMsg" class="error"></p>
+</div>
 
-  <script>
-    async function initFirebase() {
-      try {
-        // Fetch Firebase config from Netlify function
-        const res = await fetch('/.netlify/functions/firebaseConfig');
-        const config = await res.json();
+<script>
+async function getFirebaseConfig() {
+  const res = await fetch('/.netlify/functions/firebaseConfig');
+  if (!res.ok) throw new Error('Failed to fetch Firebase config');
+  return await res.json();
+}
 
-        if (!firebase.apps.length) {
-          firebase.initializeApp(config);
-        }
-
-        const auth = firebase.auth();
-
-        // Redirect if already logged in
-        auth.onAuthStateChanged(user => {
-          if (user) {
-            window.location.href = '/admin/admin.html';
-          }
-        });
-
-        // Handle login form
-        const loginForm = document.getElementById('loginForm');
-        const msg = document.getElementById('msg');
-
-        loginForm.addEventListener('submit', async e => {
-          e.preventDefault();
-          const email = document.getElementById('email').value;
-          const password = document.getElementById('password').value;
-
-          try {
-            await auth.signInWithEmailAndPassword(email, password);
-            // onAuthStateChanged will redirect
-          } catch (err) {
-            console.error(err);
-            msg.textContent = 'Login failed: ' + err.message;
-          }
-        });
-
-      } catch (err) {
-        console.error('Failed to load Firebase config', err);
-        document.getElementById('msg').textContent = 'Unable to initialize Firebase. Contact admin.';
-      }
+async function initFirebase() {
+  try {
+    const config = await getFirebaseConfig();
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
     }
+    const auth = firebase.auth();
 
-    initFirebase();
-  </script>
+    // Redirect if already logged in
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        window.location.href = '/admin/admin.html';
+      }
+    });
+
+    const loginBtn = document.getElementById('loginBtn');
+    const errorMsg = document.getElementById('errorMsg');
+
+    loginBtn.addEventListener('click', async () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      errorMsg.textContent = '';
+
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        // Redirect will happen via onAuthStateChanged
+      } catch (err) {
+        console.error(err);
+        errorMsg.textContent = 'Login failed. Check credentials.';
+      }
+    });
+
+  } catch (err) {
+    console.error('Unable to initialize Firebase. Contact admin.', err);
+    alert('Unable to initialize Firebase. Contact admin.');
+  }
+}
+
+initFirebase();
+</script>
 
 </body>
 </html>
