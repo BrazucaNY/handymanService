@@ -190,22 +190,24 @@
     </div>
   </div>
 </header>
-<!-- ================= END HEADER ================= -->
-<!-- End main-wrapper -->
-      <!-- Service Intro Section Start -->
-<div class="breadcrumb-section section bg-black pt-25 pb-25 pt-sm-55 pb-sm-55 pt-xs-45 pb-xs-45">
-    <div class="container">
+<!-- 2. MOBILE HEADER -->
+<div class="mobile-header-area d-block d-lg-none">
+    <div class="container-fluid">
         <div class="row align-items-center">
-            <div class="col-md-12">
-                <div class="breadcrumb-title">
-                    <h2>Gallery</h2>
+            <!-- Left Side -->
+            <div class="col-7">
+                <div class="mobile-header-left-cluster">
+                    <div class="logo">
+                        <a href="index.html"><img src="assets/images/logo.png" alt="Handyman Logo"></a>
+                    </div>
+                    <div class="single-emergncy-contact">
+                        <div class="content">
+                            <h3>516 415 8918</h3>
+                            <span>Your Local NY Handyman</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<!-- Service Intro Section End -->
-
             <!-- Right Side -->
             <div class="col-5">
                 <div class="mobile-header-right-cluster">
@@ -217,10 +219,33 @@
     </div>
 </div>
 
+<!-- 3. OFFCANVAS (SLIDE-IN) MOBILE MENU -->
+<div class="offcanvas-mobile-menu d-block d-lg-none" id="mobile-menu-overlay">
+    <a href="javascript:void(0)" class="offcanvas-menu-close" id="mobile-menu-close-trigger"><i class="fa fa-times"></i></a>
+    <div class="offcanvas-wrapper">
+        <div class="offcanvas-inner-content">
+            <div class="offcanvas-mobile-search-area">
+                <form action="#">
+                    <input type="search" placeholder="Search ..." name="q" id="mobile-search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <nav class="offcanvas-navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="our-services.html">Our Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact-us.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
 
-<!-- ============================
-     END MOBILE HEADER AREA
-     ============================ -->
+<!-- ==========================================================
+     END: NEW UNIFIED HEADER
+     ========================================================== -->
 
 
 <!-- ============================
