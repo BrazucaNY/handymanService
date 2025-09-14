@@ -27,36 +27,48 @@
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-
 <script>
   async function initFirebase() {
     try {
       const res = await fetch('/.netlify/functions/firebaseConfig');
-      if (!res.ok) throw new Error('Failed to fetch config');
-      const config = await res.json();
-      firebase.initializeApp(config);
+      if (!res.ok) throw new Error('Failed to fetch Firebase config');
+
+      const firebaseConfig = await res.json();
+
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+
+      const auth = firebase.auth();
+
+      // Redirect logged-in users
+      auth.onAuthStateChanged(user => {
+        if (user) window.location.href = '/admin/admin.html';
+      });
+
+      // Example login handler
+      const loginForm = document.getElementById('loginForm');
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        try {
+          await auth.signInWithEmailAndPassword(email, password);
+          window.location.href = '/admin/admin.html';
+        } catch (err) {
+          alert('Login failed: ' + err.message);
+        }
+      });
+
     } catch (err) {
-      console.error('Failed to load Firebase config', err);
-      document.getElementById('msg').textContent = 'Unable to initialize Firebase. Contact admin.';
+      console.error(err);
+      alert('Unable to initialize Firebase. Contact admin.');
     }
   }
 
   initFirebase();
-
-  document.getElementById('loginBtn').addEventListener('click', async () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const msg = document.getElementById('msg');
-
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      window.location.href = '/admin/admin.html'; // redirect after login
-    } catch (err) {
-      console.error(err);
-      msg.textContent = 'Login failed. Check your credentials.';
-    }
-  });
 </script>
+
 
 </body>
 </html>
