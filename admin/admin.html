@@ -12,60 +12,12 @@
 
   <style>
     body { font-family: 'Roboto', sans-serif; margin: 0; background: #f0f2f5; }
-
-    /* Security Notice */
-    .security-notice {
-      background: #e74c3c;
-      color: white;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1001;
-      display: none;
-    }
-
-    /* Top Navigation Bar */
-    .top-nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      align-items: center;
-      background-color: #2c3e50;
-      padding: 12px 20px;
-      color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-    .top-nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 12px;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
+    .security-notice { background: #e74c3c; color: white; padding: 10px; text-align: center; font-weight: bold; position: fixed; top: 0; left: 0; width: 100%; z-index: 1001; display: none; }
+    .top-nav { display: flex; justify-content: center; flex-wrap: wrap; align-items: center; background-color: #2c3e50; padding: 12px 20px; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+    .top-nav a { color: white; text-decoration: none; margin: 0 12px; font-weight: 500; transition: color 0.3s; }
     .top-nav a:hover { color: #1abc9c; }
-
-    /* Main Container */
-    .container {
-      max-width: 800px;
-      margin: 100px auto 30px;
-      padding: 25px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    }
-
+    .container { max-width: 800px; margin: 100px auto 30px; padding: 25px; background: #fff; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
     h1, h2 { color: #333; text-align: center; }
-
-    /* Form Styles */
     form { display: flex; flex-direction: column; gap: 12px; }
     input, textarea { padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
     button { padding: 12px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; transition: background 0.3s; }
@@ -73,28 +25,13 @@
     button.add-btn:hover { background: #388E3C; }
     button.delete-btn { background: #f44336; color: #fff; }
     button.delete-btn:hover { background: #d32f2f; }
-
     .message { text-align: center; font-size: 14px; margin: 10px 0; }
     .success { color: green; }
     .error { color: red; }
-
-    /* Table Styles */
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
     th { background: #f8f8f8; }
-
-    /* Security Status */
-    .security-status {
-      background: #27ae60;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 4px;
-      font-size: 12px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    /* Responsive */
+    .security-status { background: #27ae60; color: white; padding: 8px 12px; border-radius: 4px; font-size: 12px; margin-bottom: 20px; text-align: center; }
     @media (max-width: 600px) {
       .top-nav { justify-content: center; gap: 8px; }
       input, textarea { font-size: 13px; padding: 10px; }
@@ -105,12 +42,8 @@
 </head>
 <body>
 
-  <!-- Security Notice -->
-  <div class="security-notice" id="securityNotice">
-    UNAUTHORIZED ACCESS DETECTED - ACCESS RESTRICTED TO RODRIGUESHANDYMAN.COM
-  </div>
+  <div class="security-notice" id="securityNotice">UNAUTHORIZED ACCESS DETECTED - ACCESS RESTRICTED TO RODRIGUESHANDYMAN.COM</div>
 
-  <!-- Integrated Top Navigation Bar -->
   <div class="top-nav">
     <a href="dashboard.html">Dashboard</a>
     <a href="customers.html">Customers</a>
@@ -124,13 +57,10 @@
   </div>
 
   <div class="container">
-    <div class="security-status" id="securityStatus">
-      🔒 Secure Connection - Domain Verified
-    </div>
+    <div class="security-status" id="securityStatus">🔒 Secure Connection - Domain Verified</div>
     
     <h1>Admin Dashboard - Rodrigues Handyman</h1>
 
-    <!-- Customer Registration Form -->
     <h2>Add Customer</h2>
     <p id="msg" class="message"></p>
     <form id="customerForm">
@@ -142,7 +72,6 @@
       <button type="submit" class="add-btn">Add Customer</button>
     </form>
 
-    <!-- Customers List -->
     <h2>Customer List</h2>
     <table id="customerTable">
       <thead>
@@ -155,155 +84,57 @@
   </div>
 
   <script>
-    // Security Configuration
     const SECURITY_CONFIG = {
-      allowedDomains: ['rodrigueshandyman.com', 'www.rodrigueshandyman.com'],
-      allowedEnvironments: ['production', 'staging'],
-      githubAuthEnabled: true,
-      requireDomainVerification: true
+      allowedDomains: ['rodrigueshandyman.com', 'www.rodrigueshandyman.com']
     };
 
-    // Domain Security Check
     function checkDomainSecurity() {
       const currentDomain = window.location.hostname;
-      const isLocalhost = currentDomain === 'localhost' || currentDomain === '127.0.0.1';
-      const isAllowedDomain = SECURITY_CONFIG.allowedDomains.includes(currentDomain);
-      
-      if (!isLocalhost && !isAllowedDomain) {
+      if (!SECURITY_CONFIG.allowedDomains.includes(currentDomain) && currentDomain !== 'localhost') {
         document.getElementById('securityNotice').style.display = 'block';
         document.body.style.marginTop = '40px';
-        setTimeout(() => {
-          window.location.href = 'https://rodrigueshandyman.com';
-        }, 3000);
+        setTimeout(() => window.location.href = 'https://rodrigueshandyman.com', 3000);
         return false;
       }
       return true;
     }
 
-    // Environment Detection
-    function getEnvironment() {
-      const hostname = window.location.hostname;
-      if (hostname.includes('localhost') || hostname.includes('127.0.0.1')) return 'development';
-      if (hostname.includes('staging') || hostname.includes('preview')) return 'staging';
-      return 'production';
-    }
+    if (!checkDomainSecurity()) throw new Error('Domain security check failed');
 
-    // Firebase Configuration (Environment-based)
-    function getFirebaseConfig() {
-      const env = getEnvironment();
-      
-      // Use environment variables in production (Netlify)
-      if (env === 'production' && typeof process !== 'undefined' && process.env) {
-        return {
-          apiKey: process.env.FIREBASE_API_KEY,
-          authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-          projectId: process.env.FIREBASE_PROJECT_ID,
-          storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-          messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-          appId: process.env.FIREBASE_APP_ID
-        };
-      }
-      
-      // Fallback config (should be moved to environment variables)
-      return {
-        apiKey: window.FIREBASE_CONFIG?.apiKey || "your_firebase_api_key_here",
-        authDomain: window.FIREBASE_CONFIG?.authDomain || "handymanserviceadmin.firebaseapp.com",
-        projectId: window.FIREBASE_CONFIG?.projectId || "handymanserviceadmin",
-        storageBucket: window.FIREBASE_CONFIG?.storageBucket || "handymanserviceadmin.appspot.com",
-        messagingSenderId: window.FIREBASE_CONFIG?.messagingSenderId || "your_sender_id",
-        appId: window.FIREBASE_CONFIG?.appId || "your_app_id"
-      };
-    }
+    // Hardcoded Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+      authDomain: "handymanserviceadmin.firebaseapp.com",
+      projectId: "handymanserviceadmin",
+      storageBucket: "handymanserviceadmin.appspot.com",
+      messagingSenderId: "1073781663456",
+      appId: "1:1073781663456:web:588017b68ea3bcf6dcd285"
+    };
 
-    // Initialize Security
-    if (!checkDomainSecurity()) {
-      throw new Error('Domain security check failed');
-    }
-
-    // Initialize Firebase
-    const firebaseConfig = getFirebaseConfig();
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // GitHub Authentication Setup
-    const githubProvider = new firebase.auth.GithubAuthProvider();
-    githubProvider.addScope('user:email');
-
-    // Enhanced Authentication Check
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user) {
-        window.location.href = "/login.html";
-        return;
-      }
-
-      // Additional security checks for authenticated users
-      if (SECURITY_CONFIG.githubAuthEnabled) {
-        // Verify GitHub authentication
-        const providerData = user.providerData;
-        const hasGithubAuth = providerData.some(provider => provider.providerId === 'github.com');
-        
-        if (!hasGithubAuth) {
-          console.warn('GitHub authentication required');
-          // Optionally redirect to re-authenticate with GitHub
-        }
-      }
-
-      // Update security status
-      const securityStatus = document.getElementById('securityStatus');
-      securityStatus.innerHTML = `🔒 Secure - ${user.email} (${getEnvironment()})`;
+    // Auth state listener
+    auth.onAuthStateChanged(user => {
+      if (!user) return window.location.href = '/login.html';
+      document.getElementById('securityStatus').textContent = `🔒 Secure - ${user.email}`;
     });
 
-    // Enhanced Logout with Security Cleanup
-    const logoutBtn = document.getElementById('logoutBtn');
-    logoutBtn.addEventListener('click', async () => {
-      try {
-        await firebase.auth().signOut();
-        // Clear any cached data
-        if ('caches' in window) {
-          const cacheNames = await caches.keys();
-          await Promise.all(cacheNames.map(name => caches.delete(name)));
-        }
-        window.location.href = "/login.html";
-      } catch (error) {
-        console.error('Logout error:', error);
-      }
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await auth.signOut();
+      window.location.href = '/login.html';
     });
-
-    // Security Headers Check (for Netlify deployment)
-    function checkSecurityHeaders() {
-      fetch(window.location.href, { method: 'HEAD' })
-        .then(response => {
-          const headers = response.headers;
-          const securityHeaders = [
-            'x-frame-options',
-            'x-content-type-options',
-            'x-xss-protection',
-            'strict-transport-security'
-          ];
-          
-          securityHeaders.forEach(header => {
-            if (!headers.get(header)) {
-              console.warn(`Missing security header: ${header}`);
-            }
-          });
-        })
-        .catch(error => console.error('Security headers check failed:', error));
-    }
-
-    // Initialize security checks
-    checkSecurityHeaders();
 
     const form = document.getElementById('customerForm');
     const tableBody = document.querySelector('#customerTable tbody');
     const msg = document.getElementById('msg');
 
-    // Add Customer with Enhanced Security
     form.addEventListener('submit', async e => {
       e.preventDefault();
-      
-      // Verify user is still authenticated
-      const currentUser = firebase.auth().currentUser;
-      if (!currentUser) {
+      const user = auth.currentUser;
+      if (!user) {
         msg.textContent = "Authentication expired. Please log in again.";
         msg.className = "message error";
         setTimeout(() => window.location.href = "/login.html", 2000);
@@ -320,8 +151,8 @@
         await db.collection('customers').add({
           name, email, phone, address, notes,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          createdBy: currentUser.uid,
-          createdByEmail: currentUser.email,
+          createdBy: user.uid,
+          createdByEmail: user.email,
           domain: window.location.hostname
         });
         form.reset();
@@ -334,13 +165,12 @@
       }
     });
 
-    // Display Customers with Security Context
+    // Display customers
     db.collection('customers').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
       tableBody.innerHTML = '';
       snapshot.forEach(doc => {
         const c = doc.data();
         const row = document.createElement('tr');
-
         row.innerHTML = `
           <td>${c.name}</td>
           <td>${c.email}</td>
@@ -349,37 +179,16 @@
           <td>${c.notes || ''}</td>
           <td><button class="delete-btn">Delete</button></td>
         `;
-
-        // Enhanced Delete with Security Check
         row.querySelector(".delete-btn").addEventListener('click', async () => {
-          const currentUser = firebase.auth().currentUser;
-          if (!currentUser) {
-            alert('Authentication expired. Please log in again.');
-            window.location.href = "/login.html";
-            return;
-          }
-
-          if (confirm(`Delete ${c.name}? This action cannot be undone.`)) {
-            try {
-              await db.collection('customers').doc(doc.id).delete();
-              console.log(`Customer ${c.name} deleted by ${currentUser.email}`);
-            } catch (error) {
-              console.error('Delete error:', error);
-              alert('Error deleting customer. Please try again.');
-            }
+          if (!auth.currentUser) return window.location.href = '/login.html';
+          if (confirm(`Delete ${c.name}? This cannot be undone.`)) {
+            await db.collection('customers').doc(doc.id).delete();
           }
         });
-
         tableBody.appendChild(row);
       });
     });
 
-    // Periodic Security Check
-    setInterval(() => {
-      if (!firebase.auth().currentUser) {
-        window.location.href = "/login.html";
-      }
-    }, 300000); // Check every 5 minutes
   </script>
 
 </body>
