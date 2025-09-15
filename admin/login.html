@@ -143,20 +143,57 @@
   <script>
     let firebaseConfig;
     let auth, db;
-
     async function loadFirebaseConfig() {
-      try {
-        const response = await fetch('/.netlify/functions/firebase-config');
-        firebaseConfig = await response.json();
-        initializeFirebase();
-      } catch (error) {
-        console.error('Error loading Firebase config:', error);
-        const errorMessage = document.getElementById('errorMessage');
-        if (errorMessage) {
-          errorMessage.textContent = 'Error initializing authentication. Please refresh.';
-        }
-      }
+  const errorMessage = document.getElementById('errorMessage');
+  
+  try {
+    // Show loading state
+    if (errorMessage) {
+      errorMessage.textContent = 'Loading configuration...';
+      errorMessage.style.color = '#666';
     }
+
+    const response = await fetch('/.netlify/functions/firebaseconfig');
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP ${response.status}: ${errorText || 'Failed to load configuration'}`);
+    }
+
+    firebaseConfig = await response.json();
+    
+    // Validate the configuration
+    const requiredKeys = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
+    const missingKeys = requiredKeys.filter(key => !firebaseConfig[key]);
+    
+    if (missingKeys.length > 0) {
+      throw new Error(`Missing required Firebase configuration: ${missingKeys.join(', ')}`);
+    }
+
+    console.log('Firebase configuration loaded successfully');
+    initializeFirebase();
+    
+  } catch (error) {
+    console.error('Error in loadFirebaseConfig:', error);
+    
+    if (errorMessage) {
+      let userMessage = 'Error initializing authentication. ';
+      
+      if (error.message.includes('Failed to fetch')) {
+        userMessage += 'Network error. Please check your connection.';
+      } else if (error.message.includes('JSON')) {
+        userMessage += 'Invalid configuration format.';
+      } else if (error.message.includes('Missing required')) {
+        userMessage += 'Server configuration is incomplete.';
+      } else {
+        userMessage += 'Please try again or contact support.';
+      }
+      
+      errorMessage.textContent = userMessage;
+      errorMessage.style.color = '#d32f2f';
+    }
+  }
+}
 
     function initializeFirebase() {
       // Initialize Firebase if not already initialized
