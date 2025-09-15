@@ -240,20 +240,7 @@ button.delete-btn:hover { background: #d32f2f; }
       });
     }
 
-    // Load saved From info
-    function loadFromInfo() {
-      fromInfoDoc.get().then(doc => {
-        if (doc.exists) {
-          const data = doc.data();
-          fromName.value = data.name || '';
-          fromEmail.value = data.email || '';
-          fromAddress.value = data.address || '';
-          fromPhone.value = data.phone || '';
-          if (data.logoUrl) logoPreview.src = data.logoUrl;
-        }
-      });
-    }
-
+    
     // Save From info
     saveFromInfoBtn.addEventListener('click', async () => {
       try {
@@ -270,28 +257,81 @@ button.delete-btn:hover { background: #d32f2f; }
       }
     });
 
-    // Logo upload
-    logoUpload.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+// Enhanced Logo Upload
+logoUpload.addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
 
-      const storageRef = storage.ref().child('logos/logo.png');
-      const uploadTask = storageRef.put(file);
+  // Validate file type
+  const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+  if (!validTypes.includes(file.type)) {
+    alert('Please upload a valid image file (JPEG, PNG, GIF, or WebP)');
+    return;
+  }
 
-      uploadTask.on('state_changed', 
-        snapshot => {},
-        error => {
-          console.error(error);
-          alert("Error uploading logo.");
-        },
-        async () => {
-          const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-          logoPreview.src = downloadURL;
-          await fromInfoDoc.set({ logoUrl: downloadURL }, { merge: true });
-          alert("Logo saved successfully!");
-        }
-      );
-    });
+  // Validate file size (max 2MB)
+  if (file.size > 2 * 1024 * 1024) {
+    alert('Image size should be less than 2MB');
+    return;
+  }
+
+  try {
+    // Show loading state
+    const originalButtonText = saveFromInfoBtn.innerHTML;
+    saveFromInfoBtn.disabled = true;
+    saveFromInfoBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Uploading...';
+
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      logoPreview.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+
+    // Upload to Firebase Storage with unique filename
+    const fileExt = file.name.split('.').pop();
+    const filename = `logo_${Date.now()}.${fileExt}`;
+    const storageRef = storage.ref().child(`logos/${filename}`);
+    const uploadTask = storageRef.put(file);
+
+    const snapshot = await uploadTask;
+    const downloadURL = await snapshot.ref.getDownloadURL();
+
+    // Save URL to Firestore
+    await fromInfoDoc.set({ 
+      logoUrl: downloadURL,
+      logoName: filename // Store the filename for future reference
+    }, { merge: true });
+
+    alert('Logo uploaded successfully!');
+  } catch (error) {
+    console.error('Error uploading logo:', error);
+    alert('Failed to upload logo. Please try again.');
+  } finally {
+    // Reset button state
+    saveFromInfoBtn.disabled = false;
+    saveFromInfoBtn.innerHTML = 'Save Info';
+  }
+});
+
+// Update the loadFromInfo function to handle logo loading
+function loadFromInfo() {
+  fromInfoDoc.get().then(doc => {
+    if (doc.exists) {
+      const data = doc.data();
+      fromName.value = data.name || '';
+      fromEmail.value = data.email || '';
+      fromAddress.value = data.address || '';
+      fromPhone.value = data.phone || '';
+      if (data.logoUrl) {
+        logoPreview.src = data.logoUrl;
+        logoPreview.style.display = 'block';
+      }
+    }
+  }).catch(error => {
+    console.error('Error loading company info:', error);
+  });
+}
 
     // Add new item row
     function addItem() {
