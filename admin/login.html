@@ -2,115 +2,235 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login - Rodrigues Handyman</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Rodrigues Handyman Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
     body {
-      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #4CAF50, #45a049);
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: #f0f2f5;
-      margin: 0;
+      justify-content: center;
+      padding: 20px;
     }
     .login-container {
-      background: #fff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 350px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      padding: 30px;
+    }
+    .logo {
       text-align: center;
+      margin-bottom: 20px;
     }
-    h1 { margin-bottom: 20px; }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
+    .logo h1 {
+      color: #333;
+      font-size: 24px;
       margin-top: 10px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-weight: 500;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
       border: none;
-      border-radius: 8px;
-      background: #4CAF50;
-      color: #fff;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
       cursor: pointer;
-      font-size: 14px;
-      transition: background 0.2s ease-in-out;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-    button:hover { background: #388E3C; }
-    .message {
-      font-size: 14px;
+    .btn-primary {
+      background: #4CAF50;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #45a049;
+    }
+    .btn-github {
+      background: #24292e;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .btn-github:hover {
+      background: #1a1e22;
+    }
+    .divider {
+      text-align: center;
+      margin: 20px 0;
+      color: #777;
+      position: relative;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #ddd;
+    }
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+    .error-message {
+      color: #d32f2f;
       margin-top: 10px;
-      color: red;
+      font-size: 14px;
+      text-align: center;
       min-height: 20px;
-    }
-    .loading {
-      opacity: 0.6;
-      pointer-events: none;
     }
   </style>
 </head>
 <body>
+  <div class="login-container">
+    <div class="logo">
+      <h1>Rodrigues Handyman</h1>
+    </div>
+    
+    <button class="btn btn-github" id="githubLoginBtn">
+      <i class="fab fa-github"></i> Sign in with GitHub
+    </button>
+    
+    <div class="divider">OR</div>
+    
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required placeholder="Enter your email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="Enter your password">
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-sign-in-alt"></i> Login with Email
+      </button>
+      <div class="error-message" id="errorMessage"></div>
+    </form>
+  </div>
 
-<div class="login-container">
-  <h1>Login</h1>
-  <p class="message" id="msg"></p>
-  <form id="loginForm">
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button type="submit" id="loginBtn">Login</button>
-  </form>
-</div>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+      authDomain: "handymanserviceadmin.firebaseapp.com",
+      projectId: "handymanserviceadmin",
+      storageBucket: "handymanserviceadmin.appspot.com",
+      messagingSenderId: "1073781663456",
+      appId: "1:1073781663456:web:1234567890abcdef123456"
+    };
 
-<script>
-const loginForm = document.getElementById('loginForm');
-const msg = document.getElementById('msg');
-const loginBtn = document.getElementById('loginBtn');
-
-loginForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  msg.textContent = "";
-  loginBtn.textContent = "Logging in...";
-  loginBtn.classList.add("loading");
-
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-
-  try {
-    const res = await fetch('/.netlify/functions/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      msg.textContent = data.error || "Login failed";
-      return;
+    // Only run this code if we're on the login page
+    if (window.location.pathname.includes('login.html')) {
+      document.addEventListener('DOMContentLoaded', () => {
+        try {
+          // Initialize Firebase if not already initialized
+          if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+          }
+          
+          const auth = firebase.auth();
+          
+          // Check if already logged in
+          auth.onAuthStateChanged(user => {
+            if (user) {
+              // Only redirect if not already on admin page
+              if (!window.location.href.includes('admin.html')) {
+                window.location.href = 'admin.html';
+              }
+            }
+          });
+          
+          // Initialize the login UI
+          initAuthUI();
+          
+        } catch (error) {
+          console.error('Login initialization error:', error);
+          const errorMessage = document.getElementById('errorMessage');
+          if (errorMessage) {
+            errorMessage.textContent = 'Error initializing authentication. Please refresh.';
+          }
+        }
+      });
     }
 
-    // Save token for later authenticated requests
-    sessionStorage.setItem("idToken", data.idToken);
+    function initAuthUI() {
+      const loginForm = document.getElementById('loginForm');
+      const githubLoginBtn = document.getElementById('githubLoginBtn');
+      const errorMessage = document.getElementById('errorMessage');
 
-    // Redirect to admin panel
-    window.location.href = '/admin/admin.html';
+      // Show error message
+      function showError(message) {
+        console.error('Auth Error:', message);
+        if (errorMessage) {
+          errorMessage.textContent = message;
+          setTimeout(() => {
+            errorMessage.textContent = '';
+          }, 5000);
+        }
+      }
 
-  } catch (err) {
-    console.error("Fetch error:", err);
-    msg.textContent = "Login failed: Server error.";
-  } finally {
-    loginBtn.textContent = "Login";
-    loginBtn.classList.remove("loading");
-  }
-});
-</script>
+      // Email/Password Login
+      if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
 
+          try {
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+            // Redirect will be handled by the auth state listener
+          } catch (error) {
+            showError(error.message);
+          }
+        });
+      }
+
+      // GitHub Login
+      if (githubLoginBtn) {
+        githubLoginBtn.addEventListener('click', async () => {
+          try {
+            const githubProvider = new firebase.auth.GithubAuthProvider();
+            await firebase.auth().signInWithPopup(githubProvider);
+            // Redirect will be handled by the auth state listener
+          } catch (error) {
+            showError(error.message);
+          }
+        });
+      }
+    }
+  </script>
 </body>
 </html>
