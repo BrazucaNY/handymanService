@@ -68,68 +68,33 @@
   </form>
 </div>
 
-<!-- Firebase SDK (Compat for older-style APIs) -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-
 <script>
-async function initFirebase() {
-  // Fallback config (hardcoded) in case Netlify function fails
-  const fallbackConfig = {
-    apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
-    authDomain: "handymanserviceadmin.firebaseapp.com",
-    projectId: "handymanserviceadmin",
-    storageBucket: "handymanserviceadmin.appspot.com",
-    messagingSenderId: "1073781663456",
-    appId: "1:1073781663456:web:588017b68ea3bcf6dcd285"
-  };
+const loginForm = document.getElementById('loginForm');
+const msg = document.getElementById('msg');
+const loginBtn = document.getElementById('loginBtn');
 
-  let firebaseConfig;
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.textContent = "";
+  loginBtn.textContent = "Logging in...";
+  loginBtn.classList.add("loading");
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
   try {
-    // Try fetching config from Netlify function
-    const res = await fetch('/.netlify/functions/firebaseConfig');
-    if (!res.ok) throw new Error('Failed to fetch Firebase config');
-    firebaseConfig = await res.json();
-  } catch (err) {
-    console.warn("Using fallback Firebase config:", err.message);
-    firebaseConfig = fallbackConfig;
-  }
+    // Call your Netlify function to log in (Admin SDK handles Firebase auth)
+    const res = await fetch('/.netlify/functions/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
 
-  // Debug: log config (without exposing full API key in production)
-  console.log("Firebase config loaded:", { ...firebaseConfig, apiKey: firebaseConfig.apiKey.slice(0, 5) + "..." });
+    const data = await res.json();
 
-  // Initialize Firebase (only once)
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
-  const auth = firebase.auth();
-
-  // Redirect logged-in users automatically
-  auth.onAuthStateChanged(user => {
-    if (user) window.location.href = '/admin/admin.html';
-  });
-
-  // Login form handler
-  const loginForm = document.getElementById('loginForm');
-  const msg = document.getElementById('msg');
-  const loginBtn = document.getElementById('loginBtn');
-
-  loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    msg.textContent = "";
-    loginBtn.textContent = "Logging in...";
-    loginBtn.classList.add("loading");
-
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      window.location.href = '/admin/admin.html';
-    } catch (err) {
-      console.error("Login error:", err);
-      // Friendlier messages
-      switch (err.code) {
+    if (!res.ok) {
+      // Show friendly error messages
+      switch (data.code) {
         case "auth/invalid-email":
           msg.textContent = "Invalid email format.";
           break;
@@ -140,17 +105,21 @@ async function initFirebase() {
           msg.textContent = "Incorrect password.";
           break;
         default:
-          msg.textContent = "Login failed: " + err.message;
+          msg.textContent = data.error || "Login failed.";
       }
-    } finally {
-      loginBtn.textContent = "Login";
-      loginBtn.classList.remove("loading");
+      return;
     }
-  });
-}
 
-// Initialize Firebase on page load
-initFirebase();
+    // Successful login → redirect
+    window.location.href = '/admin/admin.html';
+  } catch (err) {
+    console.error("Login error:", err);
+    msg.textContent = "Login failed: Server error.";
+  } finally {
+    loginBtn.textContent = "Login";
+    loginBtn.classList.remove("loading");
+  }
+});
 </script>
 
 </body>
