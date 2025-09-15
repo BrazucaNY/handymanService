@@ -5,55 +5,14 @@
   <title>Login - Rodrigues Handyman</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f0f2f5;
-      margin: 0;
-    }
-    .login-container {
-      background: #fff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 350px;
-      text-align: center;
-    }
+    body { font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f2f5; margin: 0; }
+    .login-container { background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 350px; text-align: center; }
     h1 { margin-bottom: 20px; }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #4CAF50;
-      color: #fff;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background 0.2s ease-in-out;
-    }
+    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
+    button { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 8px; background: #4CAF50; color: #fff; cursor: pointer; font-size: 14px; transition: background 0.2s ease-in-out; }
     button:hover { background: #388E3C; }
-    .message {
-      font-size: 14px;
-      margin-top: 10px;
-      color: red;
-      min-height: 20px;
-    }
-    .loading {
-      opacity: 0.6;
-      pointer-events: none;
-    }
+    .message { font-size: 14px; margin-top: 10px; color: red; min-height: 20px; }
+    .loading { opacity: 0.6; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -83,7 +42,6 @@ loginForm.addEventListener('submit', async (e) => {
   const password = document.getElementById('password').value;
 
   try {
-    // Call your Netlify function to log in (Admin SDK handles Firebase auth)
     const res = await fetch('/.netlify/functions/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -93,27 +51,28 @@ loginForm.addEventListener('submit', async (e) => {
     const data = await res.json();
 
     if (!res.ok) {
-      // Show friendly error messages
-      switch (data.code) {
-        case "auth/invalid-email":
-          msg.textContent = "Invalid email format.";
-          break;
-        case "auth/user-not-found":
+      // Show friendly messages
+      switch (data.error) {
+        case "EMAIL_NOT_FOUND":
           msg.textContent = "No account found with that email.";
           break;
-        case "auth/wrong-password":
+        case "INVALID_PASSWORD":
           msg.textContent = "Incorrect password.";
           break;
+        case "INVALID_EMAIL":
+          msg.textContent = "Invalid email format.";
+          break;
         default:
-          msg.textContent = data.error || "Login failed.";
+          msg.textContent = "Login failed: " + (data.error || "Server error");
       }
       return;
     }
 
-    // Successful login → redirect
+    // Successful login → store token & redirect
+    sessionStorage.setItem("idToken", data.idToken);
     window.location.href = '/admin/admin.html';
   } catch (err) {
-    console.error("Login error:", err);
+    console.error(err);
     msg.textContent = "Login failed: Server error.";
   } finally {
     loginBtn.textContent = "Login";
