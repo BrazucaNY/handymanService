@@ -1,10 +1,11 @@
 {
   "name": "handymanservice",
   "version": "1.0.0",
+  "description": "Handyman Service Website",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo 'Build complete'"
+    "build": "echo \"No build step required for static site\" && exit 0"
   },
   "repository": {
     "type": "git",
@@ -13,13 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/BrazucaNY/handymanService/issues"
-  },
-  "homepage": "https://github.com/BrazucaNY/handymanService#readme",
-  "description": "Handyman Service Website",
   "dependencies": {
-    "firebase": "^9.22.0",
-    "node-fetch": "^3.3.2"
+    "firebase": "^9.22.0"
   }
 }
