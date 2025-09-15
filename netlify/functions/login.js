@@ -1,60 +1,73 @@
-exports.handler = async (event) => {
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-  };
-
-  try {
-    if (event.httpMethod !== "POST") {
-      return { statusCode: 405, headers, body: "Method Not Allowed" };
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Rodrigues Handyman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f2f5;
+      margin: 0;
     }
-
-    const { email, password } = JSON.parse(event.body);
-
-    if (!email || !password) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: "Email and password are required." }),
-      };
+    .login-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
     }
-
-    const apiKey = process.env.FIREBASE_API_KEY;
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
-
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, returnSecureToken: true }),
-    });
-
-    const data = await response.json();
-
-    if (data.error) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: data.error.message || "Login failed" }),
-      };
+    h1 { margin-bottom: 20px; }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
     }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s ease-in-out;
+    }
+    button:hover { background: #388E3C; }
+    .message {
+      font-size: 14px;
+      margin-top: 10px;
+      color: red;
+      min-height: 20px;
+    }
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        idToken: data.idToken,
-        refreshToken: data.refreshToken,
-        email: data.email,
-      }),
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: err.message }),
-    };
-  }
-};
+<div class="login-container">
+  <h1>Login</h1>
+  <p class="message" id="msg"></p>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit" id="loginBtn">Login</button>
+  </form>
+</div>
+
 <script>
 const loginForm = document.getElementById('loginForm');
 const msg = document.getElementById('msg');
@@ -69,7 +82,6 @@ loginForm.addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
 
-  // <-- Replace the existing auth.signInWithEmailAndPassword code with this fetch -->
   try {
     const res = await fetch('/.netlify/functions/login', {
       method: 'POST',
@@ -77,18 +89,19 @@ loginForm.addEventListener('submit', async (e) => {
       body: JSON.stringify({ email, password })
     });
 
-    console.log("Response received:", res);
-
     const data = await res.json();
-    console.log("Data received:", data);
 
     if (!res.ok) {
       msg.textContent = data.error || "Login failed";
       return;
     }
 
+    // Save token for later authenticated requests
     sessionStorage.setItem("idToken", data.idToken);
+
+    // Redirect to admin panel
     window.location.href = '/admin/admin.html';
+
   } catch (err) {
     console.error("Fetch error:", err);
     msg.textContent = "Login failed: Server error.";
@@ -98,3 +111,6 @@ loginForm.addEventListener('submit', async (e) => {
   }
 });
 </script>
+
+</body>
+</html>

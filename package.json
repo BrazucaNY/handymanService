@@ -18,6 +18,7 @@
   "homepage": "https://github.com/BrazucaNY/handymanService#readme",
   "description": "",
   "dependencies": {
+    "firebase": "^12.2.1",
     "node-fetch": "^3.3.2"
   }
 }
