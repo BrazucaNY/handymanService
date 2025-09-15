@@ -12,3 +12,16 @@ exports.handler = async function(event, context) {
     })
   };
 };
+// netlify/functions/firebase-config.js
+const { FIREBASE_CONFIG } = process.env;
+
+exports.handler = async function() {
+  return {
+    statusCode: 200,
+    body: FIREBASE_CONFIG,
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    }
+  };
+}

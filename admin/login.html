@@ -134,52 +134,48 @@
       <div class="error-message" id="errorMessage"></div>
     </form>
   </div>
-
+  
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
   
   <script>
-    // Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
-      authDomain: "handymanserviceadmin.firebaseapp.com",
-      projectId: "handymanserviceadmin",
-      storageBucket: "handymanserviceadmin.appspot.com",
-      messagingSenderId: "1073781663456",
-      appId: "1:1073781663456:web:1234567890abcdef123456"
-    };
+    let firebaseConfig;
+    let auth, db;
 
-    // Only run this code if we're on the login page
-    if (window.location.pathname.includes('login.html')) {
-      document.addEventListener('DOMContentLoaded', () => {
-        try {
-          // Initialize Firebase if not already initialized
-          if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-          }
-          
-          const auth = firebase.auth();
-          
-          // Check if already logged in
-          auth.onAuthStateChanged(user => {
-            if (user) {
-              // Only redirect if not already on admin page
-              if (!window.location.href.includes('admin.html')) {
-                window.location.href = 'admin.html';
-              }
-            }
-          });
-          
-          // Initialize the login UI
-          initAuthUI();
-          
-        } catch (error) {
-          console.error('Login initialization error:', error);
-          const errorMessage = document.getElementById('errorMessage');
-          if (errorMessage) {
-            errorMessage.textContent = 'Error initializing authentication. Please refresh.';
+    async function loadFirebaseConfig() {
+      try {
+        const response = await fetch('/.netlify/functions/firebase-config');
+        firebaseConfig = await response.json();
+        initializeFirebase();
+      } catch (error) {
+        console.error('Error loading Firebase config:', error);
+        const errorMessage = document.getElementById('errorMessage');
+        if (errorMessage) {
+          errorMessage.textContent = 'Error initializing authentication. Please refresh.';
+        }
+      }
+    }
+
+    function initializeFirebase() {
+      // Initialize Firebase if not already initialized
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+      
+      auth = firebase.auth();
+      db = firebase.firestore();
+      
+      // Initialize the login UI
+      initAuthUI();
+      
+      // Check auth state
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          // Only redirect if not already on admin page
+          if (!window.location.href.includes('admin.html')) {
+            window.location.href = 'admin.html';
           }
         }
       });
@@ -211,7 +207,7 @@
 
           try {
             await firebase.auth().signInWithEmailAndPassword(email, password);
-            // Redirect will be handled by the auth state listener
+            // Redirect handled by auth state listener
           } catch (error) {
             showError(error.message);
           }
@@ -224,12 +220,19 @@
           try {
             const githubProvider = new firebase.auth.GithubAuthProvider();
             await firebase.auth().signInWithPopup(githubProvider);
-            // Redirect will be handled by the auth state listener
+            // Redirect handled by auth state listener
           } catch (error) {
             showError(error.message);
           }
         });
       }
+    }
+
+    // Initialize the app when the page loads
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadFirebaseConfig);
+    } else {
+      loadFirebaseConfig();
     }
   </script>
 </body>

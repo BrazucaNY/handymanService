@@ -33,3 +33,12 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Cache-Control = "no-cache, no-store, must-revalidate"
+[build]
+  functions = "netlify/functions"
+  command = "npm run build"
+
+[context.production.environment]
+  FIREBASE_CONFIG = '{"apiKey":"${FIREBASE_API_KEY}","authDomain":"${FIREBASE_AUTH_DOMAIN}","projectId":"${FIREBASE_PROJECT_ID}","storageBucket":"${FIREBASE_STORAGE_BUCKET}","messagingSenderId":"${FIREBASE_MESSAGING_SENDER_ID}","appId":"${FIREBASE_APP_ID}"}'
+  
+[functions]
+  node_bundler = "esbuild"
