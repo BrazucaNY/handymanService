@@ -1,7 +1,11 @@
+// netlify/functions/firebaseconfig.js
 exports.handler = async function(event, context) {
   return {
     statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    },
     body: JSON.stringify({
       apiKey: process.env.FIREBASE_API_KEY,
       authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -12,16 +16,3 @@ exports.handler = async function(event, context) {
     })
   };
 };
-// netlify/functions/firebase-config.js
-const { FIREBASE_CONFIG } = process.env;
-
-exports.handler = async function() {
-  return {
-    statusCode: 200,
-    body: FIREBASE_CONFIG,
-    headers: {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache'
-    }
-  };
-}
