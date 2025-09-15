@@ -28,6 +28,7 @@
     .message { text-align: center; font-size: 14px; margin: 10px 0; }
     .success { color: green; }
     .error { color: red; }
+    .loading { text-align: center; padding: 20px; }
   </style>
 </head>
 <body>
@@ -45,109 +46,111 @@
 </div>
 
 <div class="container">
-  <div class="security-status" id="securityStatus">🔒 Secure Connection - Domain Verified</div>
-  <h1>Admin Dashboard - Rodrigues Handyman</h1>
+  <div class="security-status" id="securityStatus">Loading configuration...</div>
+  <div id="loadingMessage" class="loading">Loading application, please wait...</div>
+  
+  <div id="appContent" style="display: none;">
+    <h1>Admin Dashboard - Rodrigues Handyman</h1>
 
-  <h2>Add Customer</h2>
-  <p id="msg" class="message"></p>
-  <form id="customerForm">
-    <input type="text" id="name" placeholder="Full Name" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="text" id="phone" placeholder="Phone" required>
-    <input type="text" id="address" placeholder="Address">
-    <textarea id="notes" placeholder="Notes"></textarea>
-    <button type="submit" class="add-btn">Add Customer</button>
-  </form>
+    <h2>Add Customer</h2>
+    <p id="msg" class="message"></p>
+    <form id="customerForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="phone" placeholder="Phone" required>
+      <input type="text" id="address" placeholder="Address">
+      <textarea id="notes" placeholder="Notes"></textarea>
+      <button type="submit" class="add-btn">Add Customer</button>
+    </form>
 
-  <h2>Customer List</h2>
-  <table id="customerTable">
-    <thead>
-      <tr>
-        <th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Notes</th><th>Actions</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+    <h2>Customer List</h2>
+    <table id="customerTable">
+      <thead>
+        <tr>
+          <th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Notes</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 </div>
 
 <script>
-  // Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
-    authDomain: "handymanserviceadmin.firebaseapp.com",
-    projectId: "handymanserviceadmin",
-    storageBucket: "handymanserviceadmin.appspot.com",
-    messagingSenderId: "1073781663456",
-    appId: "1:1073781663456:web:1234567890abcdef123456"
-  };
-
-  // Only run this code if we're on the admin page
-  if (window.location.pathname.includes('admin.html')) {
-    document.addEventListener('DOMContentLoaded', () => {
-      try {
-        // Initialize Firebase if not already initialized
-        if (!firebase.apps.length) {
-          firebase.initializeApp(firebaseConfig);
-        }
-        
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        
-        // Track redirect state to prevent loops
-        let isRedirecting = false;
-        
-        // Set up auth state change listener
-        const unsubscribe = auth.onAuthStateChanged(user => {
-          if (!user) {
-            // Only redirect if we're not already redirecting and not on login page
-            if (!isRedirecting && !window.location.href.includes('login.html')) {
-              isRedirecting = true;
-              window.location.href = 'login.html';
-            }
-            return;
-          }
-          
-          // User is logged in, update UI
-          updateUI(user);
-          
-          // Load data if we're on the admin page
-          if (window.location.pathname.includes('admin.html') && typeof loadCustomers === 'function') {
-            loadCustomers();
-          }
-        });
-        
-        // Setup logout button
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (logoutBtn) {
-          logoutBtn.onclick = () => {
-            auth.signOut().catch(console.error);
-          };
-        }
-        
-        // Clean up listener when page unloads
-        window.addEventListener('unload', () => {
-          unsubscribe();
-        });
-        
-      } catch (error) {
-        console.error('Admin initialization error:', error);
-        const statusEl = document.getElementById('securityStatus');
-        if (statusEl) {
-          statusEl.textContent = 'Error initializing admin. Please refresh.';
-          statusEl.className = 'error';
-        }
+  // Initialize Firebase with configuration from server
+  async function initializeFirebase() {
+    try {
+      // Show loading state
+      const loadingMessage = document.getElementById('loadingMessage');
+      const appContent = document.getElementById('appContent');
+      
+      // Fetch Firebase config from Netlify function
+      const response = await fetch('/.netlify/functions/firebaseconfig');
+      if (!response.ok) {
+        throw new Error('Failed to load Firebase configuration');
       }
-    });
+      
+      const firebaseConfig = await response.json();
+      
+      // Initialize Firebase
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+      
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+      
+      // Set up auth state change listener
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        if (!user) {
+          // Redirect to login if not authenticated
+          window.location.href = 'login.html';
+          return;
+        }
+        
+        // User is logged in, update UI
+        updateUI(user);
+        
+        // Show app content
+        loadingMessage.style.display = 'none';
+        appContent.style.display = 'block';
+        
+        // Load customers
+        loadCustomers();
+      });
+      
+      // Setup logout button
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.onclick = () => {
+          auth.signOut().catch(console.error);
+        };
+      }
+      
+      // Clean up listener when page unloads
+      window.addEventListener('unload', () => {
+        unsubscribe();
+      });
+      
+    } catch (error) {
+      console.error('Initialization error:', error);
+      const statusEl = document.getElementById('securityStatus');
+      if (statusEl) {
+        statusEl.textContent = 'Error initializing application. Please refresh.';
+        statusEl.className = 'error';
+      }
+    }
   }
 
   function updateUI(user) {
     const statusEl = document.getElementById('securityStatus');
     if (statusEl) {
       statusEl.textContent = `🔒 Logged in as: ${user.email}`;
+      statusEl.className = 'security-status';
     }
   }
 
-  async function loadCustomers() {
+  function loadCustomers() {
+    const db = firebase.firestore();
     const form = document.getElementById('customerForm');
     const tableBody = document.querySelector('#customerTable tbody');
     const msg = document.getElementById('msg');
@@ -155,7 +158,10 @@
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const currentUser = firebase.auth().currentUser;
-      if (!currentUser) { window.location.href = 'login.html'; return; }
+      if (!currentUser) { 
+        window.location.href = 'login.html'; 
+        return; 
+      }
 
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
@@ -165,7 +171,11 @@
 
       try {
         await db.collection('customers').add({
-          name, email, phone, address, notes,
+          name, 
+          email, 
+          phone, 
+          address, 
+          notes,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           createdBy: currentUser.uid,
           createdByEmail: currentUser.email,
@@ -176,32 +186,56 @@
         msg.className = "message success";
       } catch (err) {
         console.error(err);
-        msg.textContent = "Error adding customer.";
+        msg.textContent = "Error adding customer: " + err.message;
         msg.className = "message error";
       }
     });
 
     // Display customers
-    db.collection('customers').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
-      tableBody.innerHTML = '';
-      snapshot.forEach(doc => {
-        const c = doc.data();
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${c.name}</td>
-          <td>${c.email}</td>
-          <td>${c.phone}</td>
-          <td>${c.address || ''}</td>
-          <td>${c.notes || ''}</td>
-          <td><button class="delete-btn">Delete</button></td>
-        `;
-        row.querySelector('.delete-btn').addEventListener('click', async () => {
-          if (!firebase.auth().currentUser) { window.location.href = 'login.html'; return; }
-          if (confirm(`Delete ${c.name}?`)) await db.collection('customers').doc(doc.id).delete();
-        });
-        tableBody.appendChild(row);
-      });
-    });
+    db.collection('customers')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot(
+        snapshot => {
+          tableBody.innerHTML = '';
+          snapshot.forEach(doc => {
+            const c = doc.data();
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${c.name}</td>
+              <td>${c.email}</td>
+              <td>${c.phone}</td>
+              <td>${c.address || ''}</td>
+              <td>${c.notes || ''}</td>
+              <td><button class="delete-btn">Delete</button></td>
+            `;
+            row.querySelector('.delete-btn').addEventListener('click', async () => {
+              if (!firebase.auth().currentUser) { 
+                window.location.href = 'login.html'; 
+                return; 
+              }
+              if (confirm(`Delete ${c.name}?`)) {
+                try {
+                  await db.collection('customers').doc(doc.id).delete();
+                } catch (err) {
+                  console.error('Error deleting document:', err);
+                  alert('Error deleting customer: ' + err.message);
+                }
+              }
+            });
+            tableBody.appendChild(row);
+          });
+        },
+        error => {
+          console.error('Error loading customers:', error);
+          msg.textContent = "Error loading customers. Please refresh the page.";
+          msg.className = "message error";
+        }
+      );
+  }
+
+  // Start the application
+  if (window.location.pathname.includes('admin.html')) {
+    initializeFirebase();
   }
 </script>
 

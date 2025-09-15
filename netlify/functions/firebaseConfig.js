@@ -1,11 +1,6 @@
-// netlify/functions/firebaseconfig.js
-exports.handler = async function(event, context) {
+exports.handler = async (event, context) => {
   return {
     statusCode: 200,
-    headers: { 
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache'
-    },
     body: JSON.stringify({
       apiKey: process.env.FIREBASE_API_KEY,
       authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -13,6 +8,10 @@ exports.handler = async function(event, context) {
       storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       appId: process.env.FIREBASE_APP_ID
-    })
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store' // Prevent caching of sensitive data
+    }
   };
 };
