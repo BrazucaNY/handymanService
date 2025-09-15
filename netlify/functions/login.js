@@ -55,3 +55,46 @@ exports.handler = async (event) => {
     };
   }
 };
+<script>
+const loginForm = document.getElementById('loginForm');
+const msg = document.getElementById('msg');
+const loginBtn = document.getElementById('loginBtn');
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.textContent = "";
+  loginBtn.textContent = "Logging in...";
+  loginBtn.classList.add("loading");
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  // <-- Replace the existing auth.signInWithEmailAndPassword code with this fetch -->
+  try {
+    const res = await fetch('/.netlify/functions/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    console.log("Response received:", res);
+
+    const data = await res.json();
+    console.log("Data received:", data);
+
+    if (!res.ok) {
+      msg.textContent = data.error || "Login failed";
+      return;
+    }
+
+    sessionStorage.setItem("idToken", data.idToken);
+    window.location.href = '/admin/admin.html';
+  } catch (err) {
+    console.error("Fetch error:", err);
+    msg.textContent = "Login failed: Server error.";
+  } finally {
+    loginBtn.textContent = "Login";
+    loginBtn.classList.remove("loading");
+  }
+});
+</script>
