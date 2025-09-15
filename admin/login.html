@@ -5,13 +5,55 @@
   <title>Login - Rodrigues Handyman</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f2f5; }
-    .login-container { background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f2f5;
+      margin: 0;
+    }
+    .login-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
+    }
     h1 { margin-bottom: 20px; }
-    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
-    button { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 8px; background: #4CAF50; color: #fff; cursor: pointer; font-size: 14px; }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s ease-in-out;
+    }
     button:hover { background: #388E3C; }
-    .message { font-size: 14px; margin-top: 10px; color: red; }
+    .message {
+      font-size: 14px;
+      margin-top: 10px;
+      color: red;
+      min-height: 20px;
+    }
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -22,55 +64,89 @@
   <form id="loginForm">
     <input type="email" id="email" placeholder="Email" required>
     <input type="password" id="password" placeholder="Password" required>
-    <button type="submit">Login</button>
+    <button type="submit" id="loginBtn">Login</button>
   </form>
 </div>
 
-<!-- Firebase SDK -->
+<!-- Firebase SDK (Compat for older-style APIs) -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
 <script>
 async function initFirebase() {
+  // Fallback config (hardcoded) in case Netlify function fails
+  const fallbackConfig = {
+    apiKey: "AIzaSyDyP2rOO9RR3Il9fNIez0emcopjQr6-6TI",
+    authDomain: "handymanserviceadmin.firebaseapp.com",
+    projectId: "handymanserviceadmin",
+    storageBucket: "handymanserviceadmin.appspot.com",
+    messagingSenderId: "1073781663456",
+    appId: "1:1073781663456:web:588017b68ea3bcf6dcd285"
+  };
+
+  let firebaseConfig;
   try {
-    // Fetch Firebase config from Netlify function
+    // Try fetching config from Netlify function
     const res = await fetch('/.netlify/functions/firebaseConfig');
     if (!res.ok) throw new Error('Failed to fetch Firebase config');
-
-    const firebaseConfig = await res.json();
-
-    // Initialize Firebase
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-
-    const auth = firebase.auth();
-
-    // Redirect logged-in users automatically
-    auth.onAuthStateChanged(user => {
-      if (user) window.location.href = '/admin/admin.html';
-    });
-
-    // Login form handler
-    const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      try {
-        await auth.signInWithEmailAndPassword(email, password);
-        window.location.href = '/admin/admin.html';
-      } catch (err) {
-        const msg = document.getElementById('msg');
-        msg.textContent = 'Login failed: ' + err.message;
-      }
-    });
-
+    firebaseConfig = await res.json();
   } catch (err) {
-    console.error(err);
-    alert('Unable to initialize Firebase. Contact admin.');
+    console.warn("Using fallback Firebase config:", err.message);
+    firebaseConfig = fallbackConfig;
   }
+
+  // Debug: log config (without exposing full API key in production)
+  console.log("Firebase config loaded:", { ...firebaseConfig, apiKey: firebaseConfig.apiKey.slice(0, 5) + "..." });
+
+  // Initialize Firebase (only once)
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  const auth = firebase.auth();
+
+  // Redirect logged-in users automatically
+  auth.onAuthStateChanged(user => {
+    if (user) window.location.href = '/admin/admin.html';
+  });
+
+  // Login form handler
+  const loginForm = document.getElementById('loginForm');
+  const msg = document.getElementById('msg');
+  const loginBtn = document.getElementById('loginBtn');
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.textContent = "";
+    loginBtn.textContent = "Logging in...";
+    loginBtn.classList.add("loading");
+
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      window.location.href = '/admin/admin.html';
+    } catch (err) {
+      console.error("Login error:", err);
+      // Friendlier messages
+      switch (err.code) {
+        case "auth/invalid-email":
+          msg.textContent = "Invalid email format.";
+          break;
+        case "auth/user-not-found":
+          msg.textContent = "No account found with that email.";
+          break;
+        case "auth/wrong-password":
+          msg.textContent = "Incorrect password.";
+          break;
+        default:
+          msg.textContent = "Login failed: " + err.message;
+      }
+    } finally {
+      loginBtn.textContent = "Login";
+      loginBtn.classList.remove("loading");
+    }
+  });
 }
 
 // Initialize Firebase on page load
