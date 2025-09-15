@@ -84,7 +84,7 @@
       const appContent = document.getElementById('appContent');
       
       // Fetch Firebase config from Netlify function
-      const response = await fetch('/.netlify/functions/firebaseconfig');
+      const response = await fetch('/.netlify/functions/firebase-config');
       if (!response.ok) {
         throw new Error('Failed to load Firebase configuration');
       }

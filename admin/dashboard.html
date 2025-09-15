@@ -138,62 +138,63 @@
   </div>
 
   <script>
-// Firebase config using environment variables
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID
-};
+    (async function() {
+      try {
+        const response = await fetch('/.netlify/functions/firebase-config');
+        if (!response.ok) {
+          throw new Error('Failed to load Firebase configuration');
+        }
+        const firebaseConfig = await response.json();
+        
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
 
+        const logoutBtn = document.getElementById('logoutBtn');
+        const totalCustomersEl = document.getElementById('totalCustomers');
+        const totalEstimatesEl = document.getElementById('totalEstimates');
+        const recentCustomersBody = document.getElementById('recentCustomersBody');
 
-    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const auth = firebase.auth();
-
-    const logoutBtn = document.getElementById('logoutBtn');
-    const totalCustomersEl = document.getElementById('totalCustomers');
-    const totalEstimatesEl = document.getElementById('totalEstimates');
-    const recentCustomersBody = document.getElementById('recentCustomersBody');
-
-    // Auth protection
-    auth.onAuthStateChanged(user => {
-      if (!user) window.location.href = "login.html";
-      else loadDashboard();
-    });
-
-    logoutBtn.addEventListener('click', () => {
-      auth.signOut().then(() => window.location.href = "login.html");
-    });
-
-    async function loadDashboard() {
-      // Total Customers
-      const customersSnapshot = await db.collection('customers').get();
-      totalCustomersEl.textContent = customersSnapshot.size;
-
-      // Total Estimates
-      const estimatesSnapshot = await db.collection('estimates').get();
-      totalEstimatesEl.textContent = estimatesSnapshot.size;
-
-      // Recent Customers (last 5)
-      db.collection('customers').orderBy('createdAt', 'desc').limit(5)
-        .onSnapshot(snapshot => {
-          recentCustomersBody.innerHTML = '';
-          snapshot.forEach(doc => {
-            const c = doc.data();
-            const addedOn = c.createdAt ? c.createdAt.toDate().toLocaleDateString() : '';
-            const row = `<tr>
-              <td>${c.name}</td>
-              <td>${c.email}</td>
-              <td>${c.phone}</td>
-              <td>${addedOn}</td>
-            </tr>`;
-            recentCustomersBody.innerHTML += row;
-          });
+        // Auth protection
+        auth.onAuthStateChanged(user => {
+          if (!user) window.location.href = "login.html";
+          else loadDashboard();
         });
-    }
+
+        logoutBtn.addEventListener('click', () => {
+          auth.signOut().then(() => window.location.href = "login.html");
+        });
+
+        async function loadDashboard() {
+          // Total Customers
+          const customersSnapshot = await db.collection('customers').get();
+          totalCustomersEl.textContent = customersSnapshot.size;
+
+          // Total Estimates
+          const estimatesSnapshot = await db.collection('estimates').get();
+          totalEstimatesEl.textContent = estimatesSnapshot.size;
+
+          // Recent Customers (last 5)
+          db.collection('customers').orderBy('createdAt', 'desc').limit(5)
+            .onSnapshot(snapshot => {
+              recentCustomersBody.innerHTML = '';
+              snapshot.forEach(doc => {
+                const c = doc.data();
+                const addedOn = c.createdAt ? c.createdAt.toDate().toLocaleDateString() : '';
+                const row = `<tr>
+                  <td>${c.name}</td>
+                  <td>${c.email}</td>
+                  <td>${c.phone}</td>
+                  <td>${addedOn}</td>
+                </tr>`;
+                recentCustomersBody.innerHTML += row;
+              });
+            });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   </script>
 </body>
 </html>

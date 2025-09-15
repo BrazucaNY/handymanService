@@ -170,222 +170,225 @@ button.delete-btn:hover { background: #d32f2f; }
 </div>
 
 <script>
-// Firebase config using environment variables
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID
-};
-
-if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-const storage = firebase.storage();
-
-const customerSelect = document.getElementById('customerSelect');
-const estimateDate = document.getElementById('estimateDate');
-const itemsTableBody = document.querySelector('#itemsTable tbody');
-const subtotalEl = document.getElementById('subtotal');
-const totalEl = document.getElementById('total');
-const addItemBtn = document.getElementById('addItemBtn');
-const saveEstimateBtn = document.getElementById('saveEstimateBtn');
-
-// From info elements
-const fromName = document.getElementById('fromName');
-const fromEmail = document.getElementById('fromEmail');
-const fromAddress = document.getElementById('fromAddress');
-const fromPhone = document.getElementById('fromPhone');
-const fromBusinessNumber = document.getElementById('fromBusinessNumber');
-const saveFromInfoBtn = document.getElementById('saveFromInfoBtn');
-const logoUpload = document.getElementById('logoUpload');
-const logoPreview = document.getElementById('logoPreview');
-
-const fromInfoDoc = db.collection('settings').doc('fromInfo');
-
-// Set default date
-estimateDate.value = new Date().toISOString().split('T')[0];
-
-// Auth protection
-auth.onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = "login.html";
-  } else {
-    loadCustomers();
-    loadFromInfo();
-  }
-});
-
-// Logout
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  auth.signOut().then(() => window.location.href = "login.html");
-});
-
-// Load customers
-function loadCustomers() {
-  db.collection('customers').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
-    customerSelect.innerHTML = '<option value="">Select Customer</option>';
-    snapshot.forEach(doc => {
-      const c = doc.data();
-      if (!c.name) return;
-      const option = document.createElement('option');
-      option.value = doc.id;
-      option.textContent = c.name;
-      option.dataset.customerName = c.name; 
-      customerSelect.appendChild(option);
-    });
-    if (customerSelect.options.length === 1) {
-      const option = document.createElement('option');
-      option.value = "";
-      option.textContent = "No customers registered";
-      customerSelect.appendChild(option);
-    }
-  });
-}
-
-// Load saved From info
-function loadFromInfo() {
-  fromInfoDoc.get().then(doc => {
-    if (doc.exists) {
-      const data = doc.data();
-      fromName.value = data.name || '';
-      fromEmail.value = data.email || '';
-      fromAddress.value = data.address || '';
-      fromPhone.value = data.phone || '';
-      fromBusinessNumber.value = data.businessNumber || '';
-      if (data.logoUrl) logoPreview.src = data.logoUrl;
-    }
-  });
-}
-
-// Save From info
-saveFromInfoBtn.addEventListener('click', async () => {
+// Initialize Firebase
+(async function() {
   try {
-    await fromInfoDoc.set({
-      name: fromName.value.trim(),
-      email: fromEmail.value.trim(),
-      address: fromAddress.value.trim(),
-      phone: fromPhone.value.trim(),
-      businessNumber: fromBusinessNumber.value.trim()
-    }, { merge: true });
-    alert("Your info has been saved!");
+    const response = await fetch('/.netlify/functions/firebase-config');
+    if (!response.ok) {
+      throw new Error('Failed to load Firebase configuration');
+    }
+    const firebaseConfig = await response.json();
+    
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+    const storage = firebase.storage();
+
+    const customerSelect = document.getElementById('customerSelect');
+    const estimateDate = document.getElementById('estimateDate');
+    const itemsTableBody = document.querySelector('#itemsTable tbody');
+    const subtotalEl = document.getElementById('subtotal');
+    const totalEl = document.getElementById('total');
+    const addItemBtn = document.getElementById('addItemBtn');
+    const saveEstimateBtn = document.getElementById('saveEstimateBtn');
+
+    // From info elements
+    const fromName = document.getElementById('fromName');
+    const fromEmail = document.getElementById('fromEmail');
+    const fromAddress = document.getElementById('fromAddress');
+    const fromPhone = document.getElementById('fromPhone');
+    const fromBusinessNumber = document.getElementById('fromBusinessNumber');
+    const saveFromInfoBtn = document.getElementById('saveFromInfoBtn');
+    const logoUpload = document.getElementById('logoUpload');
+    const logoPreview = document.getElementById('logoPreview');
+
+    const fromInfoDoc = db.collection('settings').doc('fromInfo');
+
+    // Set default date
+    estimateDate.value = new Date().toISOString().split('T')[0];
+
+    // Auth protection
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        loadCustomers();
+        loadFromInfo();
+      }
+    });
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      auth.signOut().then(() => window.location.href = "login.html");
+    });
+
+    // Load customers
+    function loadCustomers() {
+      db.collection('customers').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+        customerSelect.innerHTML = '<option value="">Select Customer</option>';
+        snapshot.forEach(doc => {
+          const c = doc.data();
+          if (!c.name) return;
+          const option = document.createElement('option');
+          option.value = doc.id;
+          option.textContent = c.name;
+          option.dataset.customerName = c.name; 
+          customerSelect.appendChild(option);
+        });
+        if (customerSelect.options.length === 1) {
+          const option = document.createElement('option');
+          option.value = "";
+          option.textContent = "No customers registered";
+          customerSelect.appendChild(option);
+        }
+      });
+    }
+
+    // Load saved From info
+    function loadFromInfo() {
+      fromInfoDoc.get().then(doc => {
+        if (doc.exists) {
+          const data = doc.data();
+          fromName.value = data.name || '';
+          fromEmail.value = data.email || '';
+          fromAddress.value = data.address || '';
+          fromPhone.value = data.phone || '';
+          fromBusinessNumber.value = data.businessNumber || '';
+          if (data.logoUrl) logoPreview.src = data.logoUrl;
+        }
+      });
+    }
+
+    // Save From info
+    saveFromInfoBtn.addEventListener('click', async () => {
+      try {
+        await fromInfoDoc.set({
+          name: fromName.value.trim(),
+          email: fromEmail.value.trim(),
+          address: fromAddress.value.trim(),
+          phone: fromPhone.value.trim(),
+          businessNumber: fromBusinessNumber.value.trim()
+        }, { merge: true });
+        alert("Your info has been saved!");
+      } catch (err) {
+        console.error(err);
+        alert("Error saving your info.");
+      }
+    });
+
+    // Logo upload
+    logoUpload.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const storageRef = storage.ref().child('logos/logo.png');
+      const uploadTask = storageRef.put(file);
+
+      uploadTask.on('state_changed', 
+        snapshot => {},
+        error => {
+          console.error(error);
+          alert("Error uploading logo.");
+        },
+        async () => {
+          const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+          logoPreview.src = downloadURL;
+          await fromInfoDoc.set({ logoUrl: downloadURL }, { merge: true });
+          alert("Logo saved successfully!");
+        }
+      );
+    });
+
+    // Add new item row
+    function addItem() {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><input type="text" class="itemDesc" placeholder="Item Description"></td>
+        <td><input type="number" class="itemRate" value="0" min="0"></td>
+        <td><input type="number" class="itemQty" value="1" min="1"></td>
+        <td class="itemAmount">$0.00</td>
+        <td><button type="button" class="delete-btn">Delete</button></td>
+      `;
+      itemsTableBody.appendChild(row);
+
+      row.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', calculateTotals);
+      });
+      row.querySelector('.delete-btn').addEventListener('click', () => {
+        row.remove();
+        calculateTotals();
+      });
+
+      calculateTotals();
+    }
+
+    // Calculate totals
+    function calculateTotals() {
+      let subtotal = 0;
+      itemsTableBody.querySelectorAll('tr').forEach(row => {
+        const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
+        const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
+        const amount = rate * qty;
+        row.querySelector('.itemAmount').textContent = '$' + amount.toFixed(2);
+        subtotal += amount;
+      });
+      subtotalEl.textContent = subtotal.toFixed(2);
+      totalEl.textContent = subtotal.toFixed(2);
+    }
+
+    // Save estimate
+    saveEstimateBtn.addEventListener('click', async () => {
+      const customerId = customerSelect.value;
+      if (!customerId) return alert("Please select a customer");
+
+      const selectedOption = customerSelect.options[customerSelect.selectedIndex];
+      const customerName = selectedOption.dataset.customerName || "Unknown Customer";
+
+      const items = [];
+      itemsTableBody.querySelectorAll('tr').forEach(row => {
+        const desc = row.querySelector('.itemDesc').value.trim();
+        const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
+        const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
+        const amount = rate * qty;
+        if(desc) items.push({desc, rate, qty, amount});
+      });
+
+      if(items.length === 0) return alert("Add at least one item");
+
+      const estimateData = {
+        customerId,
+        customerName,
+        estimateNumber: document.getElementById('estimateNumber').value || 'EST-' + Date.now(),
+        date: estimateDate.value,
+        items,
+        subtotal: parseFloat(subtotalEl.textContent),
+        total: parseFloat(totalEl.textContent),
+        notes: document.getElementById('notes').value.trim(),
+        signature: document.getElementById('signature').value.trim(),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      try {
+        await db.collection('estimates').add(estimateData);
+        alert("Estimate saved successfully!");
+        customerSelect.value = "";
+        itemsTableBody.innerHTML = "";
+        addItem();
+        calculateTotals();
+        document.getElementById('notes').value = "";
+        document.getElementById('signature').value = "";
+      } catch(err) {
+        console.error(err);
+        alert("Error saving estimate.");
+      }
+    });
+
+    addItemBtn.addEventListener('click', addItem);
+    addItem();
   } catch (err) {
     console.error(err);
-    alert("Error saving your info.");
   }
-});
-
-// Logo upload
-logoUpload.addEventListener('change', async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  const storageRef = storage.ref().child('logos/logo.png');
-  const uploadTask = storageRef.put(file);
-
-  uploadTask.on('state_changed', 
-    snapshot => {},
-    error => {
-      console.error(error);
-      alert("Error uploading logo.");
-    },
-    async () => {
-      const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-      logoPreview.src = downloadURL;
-      await fromInfoDoc.set({ logoUrl: downloadURL }, { merge: true });
-      alert("Logo saved successfully!");
-    }
-  );
-});
-
-// Add new item row
-function addItem() {
-  const row = document.createElement('tr');
-  row.innerHTML = `
-    <td><input type="text" class="itemDesc" placeholder="Item Description"></td>
-    <td><input type="number" class="itemRate" value="0" min="0"></td>
-    <td><input type="number" class="itemQty" value="1" min="1"></td>
-    <td class="itemAmount">$0.00</td>
-    <td><button type="button" class="delete-btn">Delete</button></td>
-  `;
-  itemsTableBody.appendChild(row);
-
-  row.querySelectorAll('input').forEach(input => {
-    input.addEventListener('input', calculateTotals);
-  });
-  row.querySelector('.delete-btn').addEventListener('click', () => {
-    row.remove();
-    calculateTotals();
-  });
-
-  calculateTotals();
-}
-
-// Calculate totals
-function calculateTotals() {
-  let subtotal = 0;
-  itemsTableBody.querySelectorAll('tr').forEach(row => {
-    const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
-    const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
-    const amount = rate * qty;
-    row.querySelector('.itemAmount').textContent = '$' + amount.toFixed(2);
-    subtotal += amount;
-  });
-  subtotalEl.textContent = subtotal.toFixed(2);
-  totalEl.textContent = subtotal.toFixed(2);
-}
-
-// Save estimate
-saveEstimateBtn.addEventListener('click', async () => {
-  const customerId = customerSelect.value;
-  if (!customerId) return alert("Please select a customer");
-
-  const selectedOption = customerSelect.options[customerSelect.selectedIndex];
-  const customerName = selectedOption.dataset.customerName || "Unknown Customer";
-
-  const items = [];
-  itemsTableBody.querySelectorAll('tr').forEach(row => {
-    const desc = row.querySelector('.itemDesc').value.trim();
-    const rate = parseFloat(row.querySelector('.itemRate').value) || 0;
-    const qty = parseFloat(row.querySelector('.itemQty').value) || 0;
-    const amount = rate * qty;
-    if(desc) items.push({desc, rate, qty, amount});
-  });
-
-  if(items.length === 0) return alert("Add at least one item");
-
-  const estimateData = {
-    customerId,
-    customerName,
-    estimateNumber: document.getElementById('estimateNumber').value || 'EST-' + Date.now(),
-    date: estimateDate.value,
-    items,
-    subtotal: parseFloat(subtotalEl.textContent),
-    total: parseFloat(totalEl.textContent),
-    notes: document.getElementById('notes').value.trim(),
-    signature: document.getElementById('signature').value.trim(),
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  };
-
-  try {
-    await db.collection('estimates').add(estimateData);
-    alert("Estimate saved successfully!");
-    customerSelect.value = "";
-    itemsTableBody.innerHTML = "";
-    addItem();
-    calculateTotals();
-    document.getElementById('notes').value = "";
-    document.getElementById('signature').value = "";
-  } catch(err) {
-    console.error(err);
-    alert("Error saving estimate.");
-  }
-});
-
-addItemBtn.addEventListener('click', addItem);
-addItem();
+})();
 </script>
 
 </body>
