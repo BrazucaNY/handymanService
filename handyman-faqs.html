@@ -11,31 +11,39 @@
   </script>
   
   <!-- ================= Basic Setup ================= -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8"> <!-- Character encoding -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile responsive -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- IE compatibility -->
+
+  <!-- ================= Page Title & Meta (SEO Optimized) ================= -->
+  <title>Handyman NY | Home Maintenance & Repairs</title>
+  <meta name="description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs. Call +1 (516) 415-8918 today!">
+  <meta name="keywords" content="handyman NY, home maintenance New York, house repair NY, plumbing, electrical, carpentry, painting">
   <meta name="theme-color" content="#00b833">
   <meta name="robots" content="index, follow">
 
-  <!-- ================= Page Title & Meta ================= -->
-  <title>FAQs | Rodrigues Handyman - Frequently Asked Questions</title>
-  <meta name="description" content="Find answers to common questions about Rodrigues Handyman services, pricing, and booking process. Get all the information you need before hiring our professional handyman services in NYC.">
-  <meta name="keywords" content="handyman FAQs, home repair questions, service information, handyman services, maintenance queries">
-
   <!-- ================= Canonical URL ================= -->
-  <link rel="canonical" href="https://rodrigueshandyman.com/handyman-faqs.html">
+  <link rel="canonical" href="https://rodrigueshandyman.com/"> <!-- Tells search engines the official URL of this page -->
 
   <!-- ================= Open Graph / Social Sharing ================= -->
-  <meta property="og:title" content="FAQs | Rodrigues Handyman - Frequently Asked Questions">
-  <meta property="og:description" content="Get answers to common questions about our handyman services, pricing, and booking process in NYC.">
+  <meta property="og:title" content="Handyman NY | Home Maintenance & Repairs">
+  <meta property="og:description" content="Expert home maintenance, repair, and handyman services across all NYC boroughs. Call +1 (516) 415-8918 for service today!">
   <meta property="og:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://rodrigueshandyman.com/handyman-faqs.html">
+  <meta property="og:url" content="https://rodrigueshandyman.com">
 
-  <!-- ================= Twitter Card ================= -->
+  <!-- ================= Twitter Card Meta ================= -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FAQs | Rodrigues Handyman - Frequently Asked Questions">
-  <meta name="twitter:description" content="Find answers to common questions about our professional handyman services in NYC.">
+  <meta name="twitter:title" content="Handyman NY | Home Maintenance & Repairs">
+  <meta name="twitter:description" content="Expert home maintenance, repair, and handyman services across all NYC boroughs. Call +1 (516) 415-8918 for service today!">
+  <meta name="twitter:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
+  <meta name="twitter:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC">
+
+  <!-- ================= Favicon ================= -->
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/png">
 
   <!-- ================= CSS Files ================= -->
   <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
@@ -44,8 +52,42 @@
   <link rel="stylesheet" href="assets/css/plugins/plugins.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  
+
+  <!-- ================= JS for Older Browser Support ================= -->
+  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+
+  <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Rodrigues Handyman",
+    "image": "https://rodrigueshandyman.com/assets/images/rodrigueshandyman.jpg",
+    "@id": "https://rodrigueshandyman.com",
+    "url": "https://rodrigueshandyman.com",
+    "telephone": "+1-516-415-8918",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "N MacQuesten Pkwy",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "postalCode": "10451",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.9111,
+      "longitude": -73.8950
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "New York City"
+    },
+    "description": "Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs."
+  }
+  </script>
+
   <!-- FAQ Custom Styles -->
   <style>
     .faq-item {
@@ -317,83 +359,144 @@
     Frequently Asked Handyman Questions
   </h2>
   <p style="font-size: 18px; line-height: 1.6; color: #555; text-align: justify;">
-    At Rodrigues Handyman, we aim to address the most common questions you might have regarding home maintenance, repairs, and improvement projects. Whether you’re looking for info on plumbing, electrical work, carpentry, painting, or general handyman services, we’ve got you covered.
-  </p>
-  <p style="font-size: 18px; line-height: 1.6; color: #555; text-align: justify;">
-    Our experts have compiled a comprehensive resource to help you better understand and navigate the world of home repairs, ensuring your home stays safe, functional, and comfortable in New York City.
+    At Rodrigues Handyman, we aim to answer the most common questions about home repairs, maintenance, and improvement projects in New York City and Long Island. Whether it's plumbing, electrical, carpentry, painting, or general handyman services, we've got you covered.
   </p>
 </div>
 
+<div class="accordion" id="faqAccordion">
 
-    <div class="accordion" id="faqAccordion">
-      <!-- FAQ Item 1 -->
-      <div class="faq-item">
-        <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          <h4>Are you licensed and insured?</h4>
-          <span class="toggle-icon">+</span>
-        </button>
-        <div id="collapseOne" class="collapse" data-bs-parent="#faqAccordion">
-          <div class="faq-answer" style="text-align: justify;">
-            <p>It's crucial to ensure that the handyman is both licensed and insured. This protects you from potential liabilities in case of accidents or damages during the project. Always ask to see proof of their credentials.</p>
-          </div>
-        </div>
+  <!-- FAQ Item 1 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+      <h4>How do you charge for your services?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseOne" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>Most of the time, I charge <strong>per job, not by the hour</strong>, so you always know the cost upfront. For more complex projects, pricing may vary depending on the work required. I provide a clear estimate before starting any job.</p>
       </div>
-
-      <!-- FAQ Item 2 -->
-      <div class="faq-item">
-        <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          <h4>What types of projects do you specialize in?</h4>
-          <span class="toggle-icon">+</span>
-        </button>
-        <div id="collapseTwo" class="collapse" data-bs-parent="#faqAccordion">
-          <div class="faq-answer" style="text-align: justify;">
-            <p>Handymen often have specific areas of expertise. Clarify whether they can handle the particular tasks you need assistance with, such as plumbing, electrical work, or carpentry.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ Item 3 -->
-      <div class="faq-item">
-        <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          <h4>Can you provide references or reviews?</h4>
-          <span class="toggle-icon">+</span>
-        </button>
-        <div id="collapseThree" class="collapse" data-bs-parent="#faqAccordion">
-          <div class="faq-answer" style="text-align: justify;">
-            <p>Requesting references or reading online reviews can give you insight into the handyman's reliability and quality of work. A reputable professional should have positive feedback from previous clients.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ Item 4 -->
-      <div class="faq-item">
-        <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          <h4>How do you charge for your services?</h4>
-          <span class="toggle-icon">+</span>
-        </button>
-        <div id="collapseFour" class="collapse" data-bs-parent="#faqAccordion">
-          <div class="faq-answer" style="text-align: justify;">
-            <p>Understanding the pricing structure is essential. Some handymen charge by the hour, while others have flat rates for specific tasks. Ensure you get a clear estimate before work begins to avoid unexpected costs.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ Item 5 -->
-      <div class="faq-item">
-        <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          <h4>What is your availability?</h4>
-          <span class="toggle-icon">+</span>
-        </button>
-        <div id="collapseFive" class="collapse" data-bs-parent="#faqAccordion">
-          <div class="faq-answer" style="text-align: justify;">
-            <p>Discuss the handyman's schedule to ensure they can accommodate your timeline. It's important to know when they can start and how long the project is expected to take.</p>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
-</section>
+
+  <!-- FAQ Item 2 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+      <h4>What types of projects do you handle?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseTwo" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>I handle a wide range of home repairs and improvements, including carpentry, plumbing, electrical fixes, painting, flooring, kitchen/bathroom repairs, and general handyman tasks.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 3 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+      <h4>Are you licensed and insured?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseThree" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>Yes! I’m fully licensed and insured. This protects you from potential liabilities and ensures every job is done safely and professionally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 4 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+      <h4>How can I book your services?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseFour" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>You can book directly by phone, email, or via the contact form on my website. Once we discuss your project, I’ll provide a clear estimate and schedule a time that works for you.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 5 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+      <h4>Do you offer emergency repairs?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseFive" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>Yes! I provide same-day or next-day service for urgent repairs whenever possible. Just give me a call and I’ll prioritize your request.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 6 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+      <h4>Do you provide warranties or guarantees?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseSix" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>All work comes with a <strong>quality guarantee</strong>. I stand behind every repair or project to ensure it’s done right the first time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 7 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+      <h4>What areas do you serve?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseSeven" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>I provide handyman services throughout <strong>all NYC boroughs</strong>—Manhattan, Brooklyn, Queens, Bronx, Staten Island—as well as <strong>Long Island</strong> and nearby areas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 8 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+      <h4>How long does a typical project take?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseEight" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>Project time depends on the scope and complexity. Small repairs can often be done the same day, while larger renovations will have a detailed timeline discussed before we start.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 9 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+      <h4>Do I need to provide materials for my project?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseNine" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>Usually, I can source the materials needed, but I can also work with materials you provide. We’ll discuss the best option when creating your estimate.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 10 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+      <h4>Do I need to prepare my home before you arrive?</h4>
+      <span class="toggle-icon">+</span>
+    </button>
+    <div id="collapseTen" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify;">
+        <p>For most jobs, minimal preparation is needed. I’ll provide guidance on clearing the area or moving furniture if required, so the project goes smoothly and efficiently.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 
  
   
