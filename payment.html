@@ -10,31 +10,105 @@
     gtag('config', 'G-7QYNVWMYJJ');
   </script>
   
-  <!-- ================= Basic Setup ================= -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- ================= Page Title & Meta (SEO Optimized) ================= -->
   <title>Make a Payment | Rodrigues Handyman Services</title>
   <meta name="description" content="Make a secure payment for your handyman services. We accept all major credit cards and PayPal for your convenience.">
-  <meta name="keywords" content="handyman payment, pay for handyman services, online payment, credit card payment, PayPal">
   <meta name="theme-color" content="#00b833">
   <meta name="robots" content="noindex, nofollow">
 
-  <!-- ================= Canonical URL ================= -->
   <link rel="canonical" href="https://rodrigueshandyman.com/payment.html">
-
-  <!-- ================= CSS Files ================= -->
   <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css">
   <link rel="stylesheet" href="assets/css/vendor/helper.css">
   <link rel="stylesheet" href="assets/css/plugins/plugins.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <!-- ================= JS for Older Browser Support ================= -->
   <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+  
+  <style>
+    /* Custom styles for payment page */
+    .payment-section {
+      padding: 100px 0;
+      background-color: #f9f9f9;
+    }
+    .payment-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .payment-header {
+      background: #00b833;
+      color: #fff;
+      padding: 25px 30px;
+      text-align: center;
+    }
+    .payment-header h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    .payment-body {
+      padding: 40px;
+    }
+    .payment-amount {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .payment-amount .amount {
+      font-size: 36px;
+      font-weight: 700;
+      color: #333;
+    }
+    .payment-options {
+      margin-bottom: 30px;
+    }
+    .payment-methods {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .payment-methods img {
+      max-width: 300px;
+      height: auto;
+    }
+    .paypal-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .payment-note {
+      margin-top: 30px;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+    .payment-note a {
+      color: #00b833;
+      text-decoration: none;
+    }
+    .payment-note a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 767px) {
+      .payment-section {
+        padding: 50px 0;
+      }
+      .payment-body {
+        padding: 20px;
+      }
+      .payment-header h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
 <!-- START MAIN WRAPPER -->
@@ -162,32 +236,46 @@
   </div>
 
   <!-- Payment Section -->
-  <div class="page-section section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-70 pb-lg-50 pb-md-40 pb-sm-30 pb-xs-20">
+  <section class="payment-section section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-70 pb-lg-50 pb-md-40 pb-sm-30 pb-xs-20">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
-          <div class="payment-box">
-            <h2 class="text-center mb-40">Secure Payment</h2>
-            <div class="payment-methods text-center mb-30">
-              <img src="assets/images/payment-methods.png" alt="Accepted Payment Methods">
+          <div class="payment-container">
+            <div class="payment-header">
+              <h2>Secure Payment</h2>
             </div>
-            <div class="paypal-container">
-              <script src="https://www.paypal.com/sdk/js?client-id=BAANI6TKt8kg2vr8DPmWoYILflGpY_Pi1Tf10GUWa2UIdbKqIjjpnz4XnLq6Z_XkpZ3RnFuuhAE6tO7k-0&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
-              <div id="paypal-container-FCUHJM8XGDRCN"></div>
-              <script>
-                paypal.HostedButtons({
-                  hostedButtonId: "FCUHJM8XGDRCN",
-                }).render("#paypal-container-FCUHJM8XGDRCN");
-              </script>
-            </div>
-            <div class="payment-note text-center mt-30">
-              <p>Your payment is secure and encrypted. By submitting your payment, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+            <div class="payment-body">
+              <div class="payment-amount">
+                <p>Amount Due</p>
+                <div class="amount">$0.00</div>
+                <p>Enter amount in the payment form</p>
+              </div>
+              
+              <div class="payment-options">
+                <div class="payment-methods">
+                  <img src="assets/images/payment-methods.png" alt="Accepted Payment Methods" class="img-fluid">
+                </div>
+                
+                <div class="paypal-container">
+                  <script src="https://www.paypal.com/sdk/js?client-id=BAANI6TKt8kg2vr8DPmWoYILflGpY_Pi1Tf10GUWa2UIdbKqIjjpnz4XnLq6Z_XkpZ3RnFuuhAE6tO7k-0&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+                  <div id="paypal-container-FCUHJM8XGDRCN"></div>
+                  <script>
+                    paypal.HostedButtons({
+                      hostedButtonId: "FCUHJM8XGDRCN",
+                    }).render("#paypal-container-FCUHJM8XGDRCN");
+                  </script>
+                </div>
+                
+                <div class="payment-note">
+                  <p>Your payment is secure and encrypted. By submitting your payment, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </main>
 
 <!-- ================= FOOTER ================= -->
