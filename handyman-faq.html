@@ -106,9 +106,94 @@
   <script src="/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
+
+
+
+<!-- ================= MOBILE HEADER AREA START ================= -->
+<!-- This section is displayed only on mobile devices (d-block d-lg-none) -->
+<div class="mobile-header-area d-block d-lg-none">
+    <div class="container">
+        <div class="row align-items-center">
+            
+            <!-- LEFT COLUMN: LOGO -->
+            <div class="col-6">
+                <!-- Logo (currently hidden with d-none) -->
+                <div class="logo d-none">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.png" class="img-fluid" alt="Website Logo">
+                    </a>
+                </div>
+            </div>
+            
+            <!-- RIGHT COLUMN: MENU ICON AND CART -->
+            <div class="col-6 d-flex align-items-center justify-content-end">
+                
+                <!-- Mobile Cart (commented out for now) -->
+                <!--
+                <div class="mobile-cart">
+                    <a href="cart.html"><i class="fa fa-shopping-cart"></i></a>
+                </div>
+                -->
+
+                <!-- Mobile Navigation Icon / Hamburger Menu -->
+                <div class="mobile-navigation-icon" id="mobile-menu-trigger">
+                    <i></i> <!-- Icon lines are generated with CSS -->
+                </div>
+            </div>
+            
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div>
+<!-- ================= MOBILE HEADER AREA END ================= -->
+
+
+        <!-- offcanvas mobile menu -->
+        <div class="offcanvas-mobile-menu d-block d-lg-none" id="mobile-menu-overlay">
+            <a href="javascript:void(0)" class="offcanvas-menu-close" id="mobile-menu-close-trigger">
+                <i class="fa fa-times"></i>
+            </a>
+
+            <div class="offcanvas-wrapper">
+
+                <div class="offcanvas-inner-content">
+                    <div class="offcanvas-mobile-search-area">
+                        <form action="#">
+                            <input type="search" placeholder="Search ...">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+
+                    <nav class="offcanvas-navigation">
+                        <ul>
+                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="../about.html">About Us</a></li>
+                            <li><a href="../our-services.html">Our Services</a></li>
+                            <li><a href="../gallery.html">Gallery</a> </li>
+                            <li><a href="../contact-us.html">Contact</a> </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+        <!-- End of offcanvas mobile menu -->
+
+
+      <div class="breadcrumb-section section bg-black pt-25 pb-25 pt-sm-55 pb-sm-55 pt-xs-45 pb-xs-45">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="breadcrumb-title">
+                    <h2>Painting</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- START MAIN WRAPPER -->
 <div id="main-wrapper">
-
 <!-- ================= HEADER SECTION ================= -->
 <header class="header header-transparent header-sticky d-lg-block d-none">
   <div class="header-middle">
