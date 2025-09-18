@@ -9,23 +9,23 @@
     gtag('js', new Date());
     gtag('config', 'G-7QYNVWMYJJ');
   </script>
+  
+  <!-- ================= Basic Setup ================= -->
+  <meta charset="UTF-8"> <!-- Character encoding -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile responsive -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- IE compatibility -->
 
-  <!-- Basic Setup -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <!-- Page Title & Meta -->
+  <!-- ================= Page Title & Meta (SEO Optimized) ================= -->
   <title>Handyman NY | Home Maintenance & Repairs</title>
   <meta name="description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs. Call +1 (516) 415-8918 today!">
   <meta name="keywords" content="handyman NY, home maintenance New York, house repair NY, plumbing, electrical, carpentry, painting">
   <meta name="theme-color" content="#00b833">
   <meta name="robots" content="index, follow">
 
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://rodrigueshandyman.com/">
+  <!-- ================= Canonical URL ================= -->
+  <link rel="canonical" href="https://rodrigueshandyman.com/"> <!-- Tells search engines the official URL of this page -->
 
-  <!-- Open Graph / Social -->
+  <!-- ================= Open Graph / Social Sharing ================= -->
   <meta property="og:title" content="Handyman NY | Home Maintenance & Repairs">
   <meta property="og:description" content="Expert home maintenance, repair, and handyman services across all NYC boroughs. Call +1 (516) 415-8918 for service today!">
   <meta property="og:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
@@ -35,17 +35,17 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rodrigueshandyman.com">
 
-  <!-- Twitter Card -->
+  <!-- ================= Twitter Card Meta ================= -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Handyman NY | Home Maintenance & Repairs">
   <meta name="twitter:description" content="Expert home maintenance, repair, and handyman services across all NYC boroughs. Call +1 (516) 415-8918 for service today!">
   <meta name="twitter:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
   <meta name="twitter:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC">
 
-  <!-- Favicon -->
+  <!-- ================= Favicon ================= -->
   <link rel="icon" href="/assets/images/favicon.ico" type="image/png">
 
-  <!-- CSS Files -->
+  <!-- ================= CSS Files ================= -->
   <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css">
   <link rel="stylesheet" href="assets/css/vendor/helper.css">
@@ -53,10 +53,10 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- Modernizr -->
+  <!-- ================= JS for Older Browser Support ================= -->
   <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 
-  <!-- JSON-LD Structured Data -->
+  <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -88,122 +88,958 @@
   }
   </script>
 
+  <!-- FAQ Custom Styles -->
   <style>
-    .faq-section { max-width: 900px; margin: 0 auto; }
-    .accordion-button { font-weight: 600; color: #333; }
-    .accordion-button:not(.collapsed) { background-color: #f1f1f1; }
-    .c-btn-phone, .c-btn-whatsapp {
-      display: block; position: fixed; cursor: pointer; height: 45px; width: 45px; border-radius: 50%;
-      line-height: 45px; text-align: center; background: #00b833; z-index: 300; right: 15px;
+    .faq-item {
+      margin-bottom: 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
-    .c-btn-phone { bottom: 125px; }
-    .c-btn-whatsapp { bottom: 185px; }
-    .c-btn-phone::before, .c-btn-whatsapp::before {
-      content: ''; position: absolute; width: 55px; height: 55px; left: -5px; top: -5px; border-radius: 50%;
-      background: rgba(0, 184, 51, .6); animation: pulse 1.5s infinite;
-      z-index: -1; transition: all .2s linear;
+    
+    .faq-item:hover {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
-    @keyframes pulse { 0% {transform:scale(0);opacity:1;} 100% {transform:scale(1.5);opacity:0;} }
+    
+    .faq-question {
+      padding: 20px 25px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .faq-question h4 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      flex: 1;
+      padding-right: 20px;
+    }
+    
+    .toggle-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background-color: #00b300;
+      color: white;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    /* Rotate into × when open */
+    .toggle-icon.open {
+      transform: rotate(45deg);
+    }
+    
+    .faq-answer {
+      padding: 20px 25px;
+      background-color: #fff;
+      border-top: 1px solid #e0e0e0;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    
+    .faq-answer p {
+      margin: 0;
+      color: #555;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 767px) {
+      .faq-question h4 {
+        font-size: 16px;
+      }
+      
+      .faq-question {
+        padding: 15px 20px;
+      }
+      
+      .faq-answer {
+        padding: 15px 20px;
+      }
+    }
   </style>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  
+  <!-- ================= Favicon ================= -->
+  
+  <!-- ================= JS for Older Browser Support ================= -->
+  <script src="/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-
 <body>
+<!-- START MAIN WRAPPER -->
 <div id="main-wrapper">
-  <!-- HEADER -->
-  <header class="header header-transparent header-sticky d-lg-block d-none">
-    <!-- Header content omitted for brevity (same as original) -->
-  </header>
 
-  <!-- MOBILE HEADER -->
-  <div class="mobile-header-area d-block d-lg-none">
-    <!-- Mobile header content -->
-  </div>
+<!-- ================= HEADER SECTION ================= -->
+<header class="header header-transparent header-sticky d-lg-block d-none">
+  <!-- ========== HEADER MIDDLE ========== -->
+  <div class="header-middle">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- LOGO COLUMN -->
+        <div class="col-lg-2">
+          <div class="logo">
+            <a href="index.html"><img src="assets/images/logo.png" alt="Rodrigues Handyman Logo"></a>
+          </div>
+        </div>
 
-  <!-- OFFCANVAS MOBILE MENU -->
-  <div class="offcanvas-mobile-menu d-block d-lg-none" id="mobile-menu-overlay">
-    <!-- Mobile menu content -->
-  </div>
+        <!-- CONTACT INFO + SEARCH -->
+        <div class="col-lg-10">
+          <div class="header-middle-right">
+            <div class="row">
+              <!-- Contact info -->
+              <div class="col-lg-10">
+                <div class="emergncy-contact-area">
+                  <div class="row">
+                    <!-- Phone -->
+                    <div class="col-sm-5 col-lg-5 pl-85 pl-md-70">
+                      <div class="single-emergncy-contact">
+                        <div class="icon"><i class="fa fa-phone"></i></div>
+                        <div class="content">
+                          <h3>+ 516 415 8918</h3>
+                          <span>info@rodrigueshandyman.com</span>
+                        </div>
+                      </div>
+                    </div>
 
-  <!-- FAQ Section -->
-  <div class="section-title text-center" style="max-width: 800px; margin: 0 auto; padding-bottom: 40px;">
-    <h2 style="font-size: 42px; font-weight: 700; margin-bottom: 20px; color: #00b300;">
-      Frequently Asked Handyman Questions
-    </h2>
-    <p style="font-size: 18px; line-height: 1.6; color: #555; text-align: justify;">
-      At Rodrigues Handyman, we aim to answer the most common questions about home repairs, maintenance, and improvement projects in New York City and Long Island. Whether it's plumbing, electrical, carpentry, painting, or general handyman services, we've got you covered.
-    </p>
-  </div>
+                    <!-- Address -->
+                    <div class="col-sm-7 col-lg-6">
+                      <div class="single-emergncy-contact">
+                        <div class="icon"><i class="fa fa-home"></i></div>
+                        <div class="content">
+                          <h3>New York</h3>
+                          <span>Serving All Boroughs</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-  <div class="accordion faq-section" id="faqAccordion">
-    <!-- FAQ 1 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-          How do you charge for your services?
-        </button>
-      </h2>
-      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Most of the time, I charge <strong>per job, not by the hour</strong>, so you always know the cost upfront. For complex projects, pricing may vary depending on the work required.
+              <!-- Search Button -->
+              <div class="col-lg-2 d-flex align-items-center">
+                <div class="header-search">
+                  <button class="header-search-toggle"><i class="fa fa-search"></i></button>
+                  <div class="header-search-form">
+                    <form action="#">
+                      <input type="text" placeholder="Type and hit enter">
+                      <button><i class="fa fa-search"></i></button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- FAQ 2 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-          What types of projects do you handle?
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          I handle a wide range of home repairs and improvements, including carpentry, plumbing, electrical fixes, painting, flooring, kitchen/bathroom repairs, and general handyman tasks.
+    <!-- Social Links -->
+    <div class="social-menu">
+      <ul class="social-menu-top">
+        <li><a href="https://www.facebook.com/profile.php?id=61578693421538"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://www.instagram.com/rodrigueshandyman/"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="https://www.youtube.com/"><i class="fa fa-youtube-play"></i></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========== HEADER BOTTOM - MAIN MENU ========== -->
+  <div class="header-bottom menu-right">
+    <div class="container">
+      <div class="row">
+        <!-- Main Nav Menu -->
+        <div class="col-12 d-flex">
+          <nav class="main-menu">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="our-services.html">Our Services</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li class="active"><a href="handyman-faqs.html">FAQs</a></li>
+              <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
-
-    <!-- Add all remaining FAQ items here using the same accordion-item structure -->
-
   </div>
+</header>
 
-  <!-- CTA Section -->
-  <div class="cta-section section bg-gray-two">
-    <!-- CTA content (same as original) -->
+<!-- ============================
+     MOBILE HEADER AREA
+     ============================ -->
+<div class="mobile-header-area d-block d-lg-none">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-6">
+        <div class="logo">
+          <a href="index.html"><img src="assets/images/logo.png" alt="Rodrigues Handyman Logo"></a>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="mobile-menu-trigger text-right">
+          <a href="javascript:void(0)" id="mobile-menu-trigger"><i class="fa fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer class="footer-section section bg-image" data-bg="../assets/images/bg/footer-bg.jpg">
-    <!-- Footer content (same as original) -->
-  </footer>
-
-  <!-- FLOATING BUTTONS -->
-  <a class="c-btn-phone" href="tel:+15164158918">
-    <span class="fa fa-phone" style="color: #fff; font-size: 24px; padding-top: 8px;"></span>
-  </a>
-  <a class="c-btn-whatsapp" href="https://wa.me/15164158918?text=Hello!%20I'd%20like%20to%20book%20an%20appointment.">
-    <span class="fa fa-whatsapp" style="color: #fff; font-size: 24px; padding-top: 7px;"></span>
-  </a>
 </div>
 
-<!-- Bootstrap 5 JS -->
-<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+<!-- ============================
+     OFFCANVAS MOBILE MENU
+     ============================ -->
+<div class="offcanvas-mobile-menu d-block d-lg-none" id="mobile-menu-overlay">
+  <a href="javascript:void(0)" class="offcanvas-menu-close" id="mobile-menu-close-trigger">
+    <i class="fa fa-times"></i>
+  </a>
+  <div class="offcanvas-wrapper">
+    <div class="offcanvas-inner-content">
+      <!-- Search Box -->
+      <div class="offcanvas-mobile-search-area">
+        <form action="#">
+          <input type="text" placeholder="Search ..." name="q" id="mobile-search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
 
-<!-- FAQ + to × Toggle -->
-<script>
-document.querySelectorAll('.accordion-button').forEach(button => {
-  button.addEventListener('click', function () {
-    const expanded = this.classList.contains('collapsed');
-    document.querySelectorAll('.accordion-button').forEach(btn => {
-      btn.innerHTML = btn.innerHTML.replace('×', '+');
-    });
-    if (expanded) {
-      this.innerHTML = this.innerHTML.replace('+', '×');
-    } else {
-      this.innerHTML = this.innerHTML.replace('×', '+');
-    }
-  });
-});
+      <!-- Mobile Navigation -->
+      <nav class="offcanvas-navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="our-services.html">Our Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li class="active"><a href="handyman-faqs.html">FAQs</a></li>
+          <li><a href="contact-us.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- Mobile Contact Info -->
+      <div class="mobile-contact-info">
+        <div class="single-mobile-contact-info">
+          <i class="fa fa-phone"></i>
+          <a href="tel:5164158918">516 415 8918</a>
+        </div>
+        <div class="single-mobile-contact-info">
+          <i class="fa fa-envelope"></i>
+          <a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandyman.com</a>
+        </div>
+        <div class="single-mobile-contact-info">
+          <i class="fa fa-map-marker"></i>
+          <span>New York, Serving All Boroughs</span>
+        </div>
+      </div>
+
+      <!-- Mobile Social Links -->
+      <div class="mobile-social-links">
+        <a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a>
+        <a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FAQ Section -->
+<div class="section-title text-center" style="max-width: 800px; margin: 0 auto; padding-bottom: 40px;">
+  <h2 style="font-size: 42px; font-weight: 700; margin-bottom: 20px; color: #00b300;">
+    Frequently Asked Handyman Questions
+  </h2>
+  <p style="font-size: 18px; line-height: 1.6; color: #555; text-align: justify;">
+    At Rodrigues Handyman, we aim to answer the most common questions about home repairs, maintenance, and improvement projects in New York City and Long Island. Whether it's plumbing, electrical, carpentry, painting, or general handyman services, we've got you covered.
+  </p>
+</div>
+
+<div class="accordion" id="faqAccordion" style="max-width: 900px; margin: 0 auto;">
+
+  <!-- FAQ Item 1 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      How do you charge for your services?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseOne" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>Most of the time, I charge <strong>per job, not by the hour</strong>, so you always know the cost upfront. For more complex projects, pricing may vary depending on the work required. I provide a clear estimate before starting any job.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 2 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      What types of projects do you handle?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseTwo" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>I handle a wide range of home repairs and improvements, including carpentry, plumbing, electrical fixes, painting, flooring, kitchen/bathroom repairs, and general handyman tasks.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 3 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      Are you licensed and insured?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseThree" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>Yes! I’m fully licensed and insured. This protects you from potential liabilities and ensures every job is done safely and professionally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 4 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      How can I book your services?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseFour" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>You can book directly by phone, email, or via the contact form on my website. Once we discuss your project, I’ll provide a clear estimate and schedule a time that works for you.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 5 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      Do you offer emergency repairs?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseFive" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>Yes! I provide same-day or next-day service for urgent repairs whenever possible. Just give me a call and I’ll prioritize your request.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 6 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      Do you provide warranties or guarantees?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseSix" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>All work comes with a <strong>quality guarantee</strong>. I stand behind every repair or project to ensure it’s done right the first time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 7 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      What areas do you serve?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseSeven" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>I provide handyman services throughout <strong>all NYC boroughs</strong>—Manhattan, Brooklyn, Queens, Bronx, Staten Island—as well as <strong>Long Island</strong> and nearby areas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 8 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      How long does a typical project take?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseEight" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>Project time depends on the scope and complexity. Small repairs can often be done the same day, while larger renovations will have a detailed timeline discussed before we start.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 9 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      Do I need to provide materials for my project?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseNine" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>Usually, I can source the materials needed, but I can also work with materials you provide. We’ll discuss the best option when creating your estimate.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Item 10 -->
+  <div class="faq-item">
+    <button class="faq-question collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen" style="
+      display: block;
+      width: 100%;
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 15px 25px;
+      text-align: left;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+    ">
+      Do I need to prepare my home before you arrive?
+      <span class="toggle-icon" style="position: absolute; right: 20px; font-size: 24px;">+</span>
+    </button>
+    <div id="collapseTen" class="collapse" data-bs-parent="#faqAccordion">
+      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
+        <p>For most jobs, minimal preparation is needed. I’ll provide guidance on clearing the area or moving furniture if required, so the project goes smoothly and efficiently.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+   
+<!-- ============================
+     CTA (Call To Action) SECTION
+============================= -->
+<div class="cta-section section bg-gray-two"> <!-- 📌 Wrapper for CTA with gray background -->
+    <div class="container"> <!-- 📌 Bootstrap container for alignment -->
+        <div class="row no-gutters align-items-center"> <!-- 📌 Flex row, removes gutter spacing, vertically centers -->
+
+            <!-- ===== LEFT SIDE (ICON) ===== -->
+            <div class="col-md-1">
+                <div class="pentagon-icon cta-icon">
+                    <div class="icon">
+                        <i class="fa fa-phone"></i> <!-- 📞 Phone icon inside pentagon shape -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== MIDDLE CONTENT (TEXT) ===== -->
+            <div class="col-md-8">
+                <div class="cta-content">
+                    <h2>Book a Call Today!</h2> <!-- 📌 Strong headline -->
+                    <p>Let’s discuss your project and get things started. 
+                       Schedule your free consultation now!</p> <!-- 📌 Supporting text -->
+                </div>
+            </div>
+
+            <!-- ===== RIGHT SIDE (BUTTON) ===== -->
+            <div class="col-md-3">
+                <div class="cta-btn text-center">
+                    <a href="/contact-us.html" class="btn">
+                        Book a Call Today <i class="fa fa-angle-double-right"></i> <!-- ➡️ CTA Button with arrow -->
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ============================
+     END CTA SECTION
+============================= -->
+
+
+<!-- ============================
+     FOOTER SECTION START
+============================= -->
+<footer class="footer-section section bg-image" data-bg="../assets/images/bg/footer-bg.jpg"> 
+    <!-- 📌 Footer wrapper with background image -->
+
+    <!-- ===== FOOTER TOP AREA ===== -->
+    <div class="footer-top section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-85 pb-lg-65 pb-md-60 pb-sm-50 pb-xs-40">
+        <!-- 📌 Top footer area with responsive padding -->
+        <div class="container">
+            <div class="row">
+
+                <!-- ===== FOOTER WIDGET 1 (LOGO + MISSION) ===== -->
+                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+                    <div class="footer-logo">
+                        <a href="/index.html">
+                            <img src="/assets/images/logo-white.png" alt="Rodrigues Handyman"> <!-- 🖼 White logo -->
+                        </a>
+                    </div>
+                    <p>
+                        Our mission is to provide the best Home Maintenance Service at the most reasonable price without compromising on quality. You will be highly satisfied with our work, knowing we take the necessary steps to meet your needs and get the job done on time with quality assurance. <!-- 📌 Short mission statement -->
+                    </p>
+                </div>
+                <!-- ===== END FOOTER WIDGET 1 ===== -->
+
+                <!-- ===== FOOTER WIDGET 2 (OFFICE INFO) ===== -->
+                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+                    <h4 class="title"><span class="text">Office</span></h4> <!-- 📌 Widget title -->
+                    <ul>
+                        <!-- 📍 Address -->
+                        <li>
+                            <i class="fa fa-map-marker"></i>
+                            <span>
+                                <a href="https://www.google.com/maps/place/New+York,+NY" target="_blank">
+                                    New York City, NY – Serving All Boroughs
+                                </a>
+                            </span>
+                        </li>
+                        <!-- 📞 Phone -->
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            <span><a href="tel:+15164158918">+1 (516) 415-8918</a></span>
+                        </li>
+                        <!-- 📧 Email -->
+                        <li>
+                            <i class="fa fa-envelope-o"></i>
+                            <span><a href="mailto:info@rodrigueshandyman.com">info@rodrigueshandy.com</a></span>
+                        </li>
+                        <!-- ⏰ Hours -->
+                        <li>
+                            <i class="fa fa-clock-o"></i>
+                            <span><a href="#">Mon – Sat: 8:00 AM – 5:00 PM | Sunday & Emergency</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- ===== END FOOTER WIDGET 2 ===== -->
+
+                <!-- ===== FOOTER WIDGET 3 (NEWSLETTER) ===== -->
+                <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
+                    <h4 class="title"><span class="text">Newsletter</span></h4>
+                    <p>Subscribe to our newsletter for promotions, offers & discounts.</p>
+
+                    <!-- 📩 Netlify-powered Newsletter Form -->
+                    <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" 
+                          class="footer-newsletter" id="mc-form">
+                        <input type="hidden" name="form-name" value="newsletter">
+                        <p style="display:none">
+                            <label>Don’t fill this out if you're human: <input name="bot-field"></label>
+                        </p>
+                        <input type="email" name="email" placeholder="Email Here.." required /> <!-- 📧 Email input -->
+                        <button type="submit"><i class="fa fa-paper-plane-o"></i></button> <!-- 🚀 Submit -->
+                    </form>
+
+                    <!-- ✅ Success / ❌ Error messages -->
+                    <div class="mailchimp-alerts text-center">
+                        <div class="mailchimp-success" style="color:green; margin-top:10px;"></div>
+                        <div class="mailchimp-error" style="color:red; margin-top:10px;"></div>
+                    </div>
+                </div>
+                <!-- ===== END FOOTER WIDGET 3 ===== -->
+
+            </div>
+        </div>
+
+        <!-- ===== SOCIAL ICONS ===== -->
+        <div class="social-menu-right">
+            <ul class="social-menu-bottom">
+               <li><a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- 👍 FB -->
+                <li><a href="https://www.instagram.com/rodrigueshandyman/" target="_blank"><i class="fa fa-instagram"></i></a></li> <!-- 📸 IG -->
+                <li><a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li> <!-- ▶️ YT -->
+            </ul>
+        </div>
+    </div>
+    <!-- ===== END FOOTER TOP ===== -->
+
+    <!-- ===== FOOTER BOTTOM ===== -->
+    <div class="footer-bottom section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="copyright text-center">
+                        <p>Copyright &copy; 2025 Rodrigues Handyman</p> <!-- © Notice -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ===== END FOOTER BOTTOM ===== -->
+
+</footer>
+<!-- ============================
+     FOOTER SECTION END
+============================= -->
+
+<!-- ===== FLOATING ACTION BUTTONS ===== -->
+<a class="c-btn-phone" href="tel:+15164158918">
+    <span class="fa fa-phone" style="color: #fff; font-size: 24px; padding-top: 8px;"></span> <!-- 📞 Call button -->
+</a>
+<a class="c-btn-whatsapp" href="https://wa.me/15164158918?text=Hello!%20I'd%20like%20to%20book%20an%20appointment.">
+    <span class="fa fa-whatsapp" style="color: #fff; font-size: 24px; padding-top: 7px;"></span> <!-- 💬 WhatsApp button -->
+</a>
+
+    <style>
+        .c-btn-phone {
+            display: block;
+            position: fixed;
+            cursor: pointer;
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            line-height: 45px;
+            text-align: center;
+            background: #00b833;
+            z-index: 300;
+            right: 15px;
+            bottom: 125px;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+    
+        .c-btn-phone,
+        .c-social-links ul {
+            display: -ms-flexbox;
+            /*display: flex;*/
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 3px;
+        }
+    
+        .c-btn-phone::before {
+            background: rgba(0, 184, 51, .6);
+            width: 55px;
+            height: 55px;
+            left: -5px;
+            top: -5px;
+        }
+    
+        .c-btn-phone::after,
+        .c-btn-phone::before {
+            transition: all linear .2s 0s;
+            position: absolute;
+            display: block;
+            content: '';
+            border-radius: 50%;
+            z-index: -1;
+            animation: phonePulse 1.5s infinite;
+        }
+    
+        @keyframes phonePulse {
+            0% {
+                transform: scale(0);
+                opacity: 1
+            }
+    
+            to {
+                transform: scale(1.5);
+                opacity: 0
+            }
+        }
+    
+        @-webkit-keyframes phonePulse {
+            0% {
+                transform: scale(0);
+                opacity: 1
+            }
+    
+            to {
+                transform: scale(1.5);
+                opacity: 0
+            }
+        }
+        
+        
+        
+        .c-btn-whatsapp {
+            display: block;
+            position: fixed;
+            cursor: pointer;
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            line-height: 45px;
+            text-align: center;
+            background: #00b833;
+            z-index: 300;
+            right: 15px;
+            bottom: 185px;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+    
+        .c-btn-whatsapp,
+        .c-social-links ul {
+            display: -ms-flexbox;
+            /*display: flex;*/
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 3px;
+        }
+    
+        .c-btn-whatsapp::before {
+            background: rgba(0, 184, 51, .6);
+            width: 55px;
+            height: 55px;
+            left: -5px;
+            top: -5px;
+        }
+    
+        .c-btn-whatsapp::after,
+        .c-btn-whatsapp::before {
+            transition: all linear .2s 0s;
+            position: absolute;
+            display: block;
+            content: '';
+            border-radius: 50%;
+            z-index: -1;
+            animation: whatsAppPulse 1.5s infinite;
+        }
+    
+        @keyframes whatsAppPulse {
+            0% {
+                transform: scale(0);
+                opacity: 1
+            }
+    
+            to {
+                transform: scale(1.5);
+                opacity: 0
+            }
+        }
+    
+        @-webkit-keyframes whatsAppPulse {
+            0% {
+                transform: scale(0);
+                opacity: 1
+            }
+    
+            to {
+                transform: scale(1.5);
+                opacity: 0
+            }
+        }
+    </style>
+        
+<!-- ============================= -->
+<!-- Tawk.to Live Chat Widget -->
+<!-- ============================= -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/640afa364247f20fefe51753/1j1fvdu99';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
+<!-- ============================= -->
+<!-- Required JS Scripts -->
+<!-- ============================= -->
+
+<!-- jQuery library (needed before any plugin scripts) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- ============================= -->
+<!-- Vendor JS -->
+<!-- ============================= -->
+
+<!-- Popper.js (required by Bootstrap for dropdowns, tooltips, etc.) -->
+<script src="../assets/js/vendor/popper.min.js"></script>
+
+<!-- Bootstrap JS (dependent on jQuery and Popper.js) -->
+<script src="../assets/js/vendor/bootstrap.min.js"></script>
+
+<!-- Plugin scripts (custom or third-party plugins for your site) -->
+<script src="../assets/js/plugins/plugins.js"></script>
+
+<!-- Main site JS (your custom scripts controlling interactions and behavior) -->
+<script src="../assets/js/main.js"></script>
+
+<!-- Styles -->
+<style type="text/css">
+    header.header.header-transparent.header-sticky.d-lg-block.d-none {
+        position: relative !important;
+    }
+    .mailchimp-success {
+        color: #027502;
+    }
+    .mailchimp-error {
+        color: #f50707;
+    }
+    .sidebar-blog .image img {
+        width: 100%;
+        height: 60px;
+    }
+</style>
+
+<!-- Unified Form Handler -->
+<script>
+jQuery(function($) {
+
+    function handleAjaxForm(formSelector, actionUrl, successContainer, errorContainer, buttonSelector) {
+        $(formSelector).off("submit").on("submit", function(e) {
+            e.preventDefault();
+
+            // Prevent multiple submissions
+            if ($(this).data("submitting")) return;
+            $(this).data("submitting", true);
+
+            $(successContainer).empty();
+            $(errorContainer).empty();
+            var formData = new FormData(this);
+
+            if (buttonSelector) {
+                $(buttonSelector).prop('disabled', true).html('Sending...');
+            }
+
+            $.ajax({
+                url: actionUrl,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function(data) {
+                    if (data.status == 200 || data.status > 0) {
+                        $(successContainer).html(data.message);
+                        $(formSelector)[0].reset();
+                        $("#customFile").val('');
+                    } else {
+                        $(errorContainer).html(data.message);
+                    }
+                    if (buttonSelector) {
+                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
+                    }
+                },
+                error: function() {
+                    $(errorContainer).html("An error occurred. Please try again.");
+                    if (buttonSelector) {
+                        $(buttonSelector).prop('disabled', false).html('Book a Call Today');
+                    }
+                },
+                complete: function() {
+                    $(formSelector).data("submitting", false);
+                }
+            });
+        });
+    }
+
+
 </body>
 </html>
