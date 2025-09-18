@@ -195,23 +195,211 @@
     </div>
   </div>
 </header>
+ <!-- ========== HEADER BOTTOM - MAIN MENU ========== -->
+ <div class="header-bottom menu-right d-none d-lg-block">
+    <div class="container">
+      <div class="row">
 
-<!-- ============================ MOBILE HEADER AREA ============================ -->
-<div class="mobile-header-area d-block d-lg-none">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-6">
-        <div class="logo">
-          <a href="index.html"><img src="/assets/images/logo.png" alt="Rodrigues Handyman Logo"></a>
+        <!-- Main Nav Menu -->
+        <div class="col-12 d-flex">
+          <nav class="main-menu">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="our-services.html">Our Services</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+			  <li><a href="handyman-faqs.html">Faqs</a></li>
+              <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+          </nav>
         </div>
-      </div>
-      <div class="col-6">
-        <div class="mobile-menu-trigger text-right">
-          <a href="javascript:void(0)" id="mobile-menu-trigger"><i class="fa fa-bars"></i></a>
-        </div>
+
       </div>
     </div>
   </div>
+</header>
+<!-- ================= END HEADER ================= -->
+<!-- End main-wrapper -->
+</div>
+
+<!-- 2. MOBILE HEADER -->
+<div class="mobile-header-area d-block d-lg-none">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <!-- Left Side -->
+            <div class="col-7">
+                <div class="mobile-header-left-cluster">
+                    <div class="logo">
+                        <a href="index.html"><img src="assets/images/logo.png" alt="Handyman Logo"></a>
+                    </div>
+                    <div class="single-emergncy-contact">
+                        <div class="content">
+                            <h3>516 415 8918</h3>
+                            <span>Your Local NY Handyman</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Side -->
+            <div class="col-5">
+                <div class="mobile-header-right-cluster">
+                    <a href="tel:+15164158918" class="mobile-call-now-btn">Call Now</a>
+                    <div class="mobile-navigation-icon" id="mobile-menu-trigger"><i></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ============================
+     OFFCANVAS MOBILE MENU
+     Hidden by default, shown when triggered
+     ============================ -->
+<div class="offcanvas-mobile-menu d-block d-lg-none" id="mobile-menu-overlay">
+
+    <!-- Close Button -->
+    <a href="javascript:void(0)" class="offcanvas-menu-close" id="mobile-menu-close-trigger">
+        <i class="fa fa-times"></i> 
+    </a>
+
+    <!-- Wrapper for menu content -->
+    <div class="offcanvas-wrapper">
+
+        <div class="offcanvas-inner-content">
+
+            <!-- Search Box (Optional) -->
+          <div class="offcanvas-mobile-search-area">
+    <form action="#">
+        <input type="search" placeholder="Search ..." name="q" id="mobile-search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+
+            <!-- Navigation Links -->
+            <nav class="offcanvas-navigation">
+                <ul>
+                     <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="our-services.html">Our Services</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+			  <li><a href="handyman-faqs.html">Faqs</a></li>
+              <li><a href="contact-us.html">Contact Us</a></li>
+                 </ul>
+            </nav>
+
+        </div> 
+    </div> 
+</div>
+
+<!-- ============================
+     END OFFCANVAS MOBILE MENU
+     ============================ -->
+
+
+<!-- ===========================
+     HERO SLIDER SECTION START
+============================ -->
+<div class="hero-section section position-relative">
+    
+    <!-- This wrapper holds ALL slides (Slide 1, 2, 3, etc.) -->
+    <!-- The slider library (Slick/Owl/Swiper) will target this container -->
+    <div class="hero-slider section">
+
+        <!-- ===================
+             SLIDE 1 START
+        ====================== -->
+        <div class="hero-item bg-image" data-bg="/uploads/sliders/8f75ed9e88a9fbca6813079456b2a63d.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Slide Content (logo, titles, buttons, etc.) -->
+                        <div class="hero-content-2 center">
+                            <!-- Company Logo -->
+                            <div class="logo d-block d-lg-block">
+                                <a href="index.html">
+                                    <img src="/assets/images/logo.png" class="img-fluid" alt="Company Logo">
+                                </a>
+                            </div>
+                            <!-- Optional Title / Button (currently disabled) -->
+                            <!-- <h1 class="mid-size-white">Professional Services</h1> -->
+                            <!-- <a href="#" class="btn">FIND OUT MORE <i class="fa fa-angle-double-right"></i></a> -->
+                        </div>
+                        <!-- End Slide Content -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ===================
+             SLIDE 1 END
+        ====================== -->
+
+
+        <!-- ===================
+             SLIDE 2 START
+        ====================== -->
+        <div class="hero-item bg-image" data-bg="/uploads/sliders/66905764b1e369ba5a735399aa992bac.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Slide Content -->
+                        <div class="hero-content-2 center">
+                            <!-- Company Logo -->
+                            <div class="logo d-block d-lg-block">
+                                <a href="index.html">
+                                    <img src="/assets/images/logo.png" class="img-fluid" alt="Company Logo">
+                                </a>
+                            </div>
+                            <!-- Optional Title / Button (currently disabled) -->
+                            <!-- <h1 class="mid-size-white">We can do Anything!</h1> -->
+                            <!-- <a href="#" class="btn">FIND OUT MORE <i class="fa fa-angle-double-right"></i></a> -->
+                        </div>
+                        <!-- End Slide Content -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ===================
+             SLIDE 2 END
+        ====================== -->
+
+
+        <!-- ===================
+             SLIDE 3 START
+        ====================== -->
+        <div class="hero-item bg-image" data-bg="/uploads/sliders/73a47a73dff5522e0a31e93d1ba19b54.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Slide Content -->
+                        <div class="hero-content-2 center">
+                            <!-- Company Logo -->
+                            <div class="logo d-block d-lg-block">
+                                <a href="index.html">
+                                    <img src="/assets/images/logo.png" class="img-fluid" alt="Company Logo">
+                                </a>
+                            </div>
+                            <!-- Optional Title / Button (currently disabled) -->
+                            <!-- <h1 class="mid-size-white">Planned Maintenance</h1> -->
+                            <!-- <a href="#" class="btn">FIND OUT MORE <i class="fa fa-angle-double-right"></i></a> -->
+                        </div>
+                        <!-- End Slide Content -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ===================
+             SLIDE 3 END
+        ====================== -->
+
+    </div> <!-- End hero-slider -->
 </div>
 
 <!-- OFFCANVAS MOBILE MENU -->
