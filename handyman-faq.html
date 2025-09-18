@@ -178,6 +178,20 @@
 
 <!-- ================= START BODY ================= -->
 <body>
+<script>
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', function() {
+    const icon = this.querySelector('.toggle-icon');
+    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+    // Reset all other icons
+    document.querySelectorAll('.toggle-icon').forEach(i => i.textContent = '+');
+
+    // Update clicked icon
+    icon.textContent = isExpanded ? '+' : '−';
+  });
+});
+</script>
 
 <!-- ================= MOBILE HEADER ================= -->
 <div class="mobile-header-area d-block d-lg-none">
