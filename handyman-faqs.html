@@ -53,9 +53,6 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- ================= JS for Older Browser Support ================= -->
-  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
-
   <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
   <script type="application/ld+json">
   {
@@ -297,6 +294,15 @@
     </div>
   </div>
 </div>
+<script>
+document.getElementById('mobile-menu-trigger').addEventListener('click', () => {
+  document.getElementById('mobile-menu-overlay').style.display = 'block';
+});
+document.getElementById('mobile-menu-close-trigger').addEventListener('click', () => {
+  document.getElementById('mobile-menu-overlay').style.display = 'none';
+});
+</script>
+
 
 <!-- ============================
      OFFCANVAS MOBILE MENU
