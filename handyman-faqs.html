@@ -1027,6 +1027,20 @@ jQuery(function($) {
             });
         });
     }
+<script>
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', function() {
+    const icon = this.querySelector('.toggle-icon');
+    const isCollapsed = this.classList.contains('collapsed');
+
+    // Reset all icons
+    document.querySelectorAll('.faq-question .toggle-icon').forEach(i => i.textContent = '+');
+
+    // If it was collapsed, show ×
+    if (isCollapsed) icon.textContent = '×';
+  });
+});
+</script>
 
 
 </body>
