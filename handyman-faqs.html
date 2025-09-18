@@ -175,25 +175,6 @@
       </ul>
     </div>
   </div>
-
-  <div class="header-bottom menu-right">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 d-flex">
-          <nav class="main-menu">
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="our-services.html">Our Services</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li class="active"><a href="handyman-faqs.html">FAQs</a></li>
-              <li><a href="contact-us.html">Contact Us</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
 </header>
  <!-- ========== HEADER BOTTOM - MAIN MENU ========== -->
  <div class="header-bottom menu-right d-none d-lg-block">
@@ -253,6 +234,49 @@
 
 
 
+<!-- ============================
+     OFFCANVAS MOBILE MENU
+     Hidden by default, shown when triggered
+     ============================ -->
+<div class="offcanvas-mobile-menu d-block d-lg-none" id="mobile-menu-overlay">
+
+    <!-- Close Button -->
+    <a href="javascript:void(0)" class="offcanvas-menu-close" id="mobile-menu-close-trigger">
+        <i class="fa fa-times"></i> 
+    </a>
+
+    <!-- Wrapper for menu content -->
+    <div class="offcanvas-wrapper">
+
+        <div class="offcanvas-inner-content">
+
+            <!-- Search Box (Optional) -->
+          <div class="offcanvas-mobile-search-area">
+    <form action="#">
+        <input type="search" placeholder="Search ..." name="q" id="mobile-search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+
+            <!-- Navigation Links -->
+            <nav class="offcanvas-navigation">
+                <ul>
+                     <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="our-services.html">Our Services</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+			  <li><a href="handyman-faqs.html">Faqs</a></li>
+              <li><a href="contact-us.html">Contact Us</a></li>
+                 </ul>
+            </nav>
+
+        </div> 
+    </div> 
+</div>
+
+<!-- ============================
+     END OFFCANVAS MOBILE MENU
+     ============================ -->
 
 
 <!-- ===========================
