@@ -175,28 +175,6 @@
   <!-- ================= BROWSER COMPATIBILITY ================= -->
   <script src="/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-
-<!-- ================= START BODY ================= -->
-<script>
-document.querySelectorAll('.faq-question').forEach(button => {
-  const icon = button.querySelector('.toggle-icon');
-  const targetId = button.getAttribute('data-bs-target');
-  const target = document.querySelector(targetId);
-
-  // When an FAQ item is shown
-  target.addEventListener('shown.bs.collapse', () => {
-    // First, reset all icons to '+'
-    document.querySelectorAll('.toggle-icon').forEach(i => i.textContent = '+');
-    // Then, set the icon of the open item to '−'
-    icon.textContent = '−';
-  });
-
-  // When an FAQ item is hidden
-  target.addEventListener('hidden.bs.collapse', () => {
-    icon.textContent = '+';
-  });
-});
-</script>
 <body>
 
 
@@ -811,5 +789,37 @@ jQuery.event.special.touchmove = {
         display: none !important;
     }
 </style>
+<script src="/assets/js/main.js"></script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.faq-question').forEach(button => {
+      const icon = button.querySelector('.toggle-icon');
+      const targetId = button.getAttribute('data-bs-target');
+      const target = document.querySelector(targetId);
+
+      // This check prevents errors if a button exists without a target
+      if (target) {
+        // When an FAQ item is shown
+        target.addEventListener('shown.bs.collapse', () => {
+          // First, reset all icons to '+'
+          document.querySelectorAll('.toggle-icon').forEach(i => {
+            i.textContent = '+';
+          });
+          // Then, set the icon of the open item to '−'
+          icon.textContent = '−';
+        });
+
+        // When an FAQ item is hidden
+        target.addEventListener('hidden.bs.collapse', () => {
+          icon.textContent = '+';
+        });
+      }
+    });
+  });
+  </script>
+
+</body>
+</html>
 </body>
 </html>
