@@ -364,12 +364,17 @@ document.querySelectorAll('.faq-question').forEach(button => {
       How do you charge for your services?
       <span class="toggle-icon" style="position:absolute; right:20px; font-size:24px;">+</span>
     </button>
-    <div id="collapseOne" class="collapse" data-bs-parent="#faqAccordion">
-      <div class="faq-answer" style="text-align: justify; padding: 10px 20px;">
-        <p>Most of the time, I charge <strong>per job, not by the hour</strong>, so you always know the cost upfront. For more complex projects, pricing may vary depending on the work required. I provide a clear estimate before starting any job.</p>
-      </div>
+    <div class="faq-item">
+  <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+    <h4>How do you charge for your services?</h4>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div id="collapseOne" class="collapse" data-bs-parent="#faqAccordion">
+    <div class="faq-answer">
+      <p>Most of the time, I charge <strong>per job, not by the hour</strong>, so you always know the cost upfront...</p>
     </div>
   </div>
+</div>
 
   <!-- FAQ Item 2 -->
   <div class="faq-item">
