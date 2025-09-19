@@ -177,6 +177,26 @@
 </head>
 
 <!-- ================= START BODY ================= -->
+<script>
+document.querySelectorAll('.faq-question').forEach(button => {
+  const icon = button.querySelector('.toggle-icon');
+  const targetId = button.getAttribute('data-bs-target');
+  const target = document.querySelector(targetId);
+
+  // When an FAQ item is shown
+  target.addEventListener('shown.bs.collapse', () => {
+    // First, reset all icons to '+'
+    document.querySelectorAll('.toggle-icon').forEach(i => i.textContent = '+');
+    // Then, set the icon of the open item to '−'
+    icon.textContent = '−';
+  });
+
+  // When an FAQ item is hidden
+  target.addEventListener('hidden.bs.collapse', () => {
+    icon.textContent = '+';
+  });
+});
+</script>
 <body>
 
 
@@ -791,23 +811,5 @@ jQuery.event.special.touchmove = {
         display: none !important;
     }
 </style>
-<script>
-document.querySelectorAll('.faq-question').forEach(button => {
-  const icon = button.querySelector('.toggle-icon');
-  const targetId = button.getAttribute('data-bs-target');
-  const target = document.querySelector(targetId);
-
-  target.addEventListener('shown.bs.collapse', () => {
-    document.querySelectorAll('.toggle-icon').forEach(i => i.textContent = '+');
-    icon.textContent = '−';
-  });document.querySelectorAll('.f
-
-  target.addEventListener('hidden.bs.collapse', () => {
-    icon.textContent = '+';
-  });
-});
-</script>
-
-
 </body>
 </html>
