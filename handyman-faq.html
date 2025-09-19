@@ -791,22 +791,7 @@ jQuery.event.special.touchmove = {
         display: none !important;
     }
 </style>
-<script>
-document.querySelectorAll('.faq-question').forEach(button => {
-  const icon = button.querySelector('.toggle-icon');
-  const targetId = button.getAttribute('data-bs-target');
-  const target = document.querySelector(targetId);
 
-  target.addEventListener('shown.bs.collapse', () => {
-    document.querySelectorAll('.toggle-icon').forEach(i => i.textContent = '+');
-    icon.textContent = '−';
-  });
-
-  target.addEventListener('hidden.bs.collapse', () => {
-    icon.textContent = '+';
-  });
-});
-</script>
 
 
 </body>
