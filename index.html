@@ -1,72 +1,83 @@
 <head>
   <!-- ================= Google Analytics / Tag Manager ================= -->
-  <!-- Loads the gtag.js script asynchronously for tracking website visits -->
+  <!-- Loads gtag.js asynchronously for tracking website visits -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date()); // Initializes GA
-    gtag('config', 'G-7QYNVWMYJJ'); // Sets tracking ID
+    gtag('js', new Date());
+    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true }); // anonymize IP for privacy
   </script>
-  
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
   <!-- ================= Basic Page Setup ================= -->
-  <meta charset="UTF-8"> <!-- Character encoding -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design for mobile -->
-  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- Ensures IE uses the latest rendering engine -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <!-- ================= SEO Meta Tags ================= -->
-  <title>Handyman Plainfield IL</title> <!-- Browser tab title -->
-  <meta name="description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services in Plainfield, IL. Call +1 (516) 415-8918 today!">
+  <title>Handyman Plainfield IL | Home Repairs & Maintenance</title>
+  <meta name="description" content="Rodrigues Handyman provides expert plumbing, electrical, carpentry, painting, and general home repair services in Plainfield, IL. Call +1 (516) 415-8918 today!">
   <meta name="keywords" content="handyman Plainfield IL, home maintenance Plainfield, house repair Plainfield, plumbing, electrical, carpentry, painting">
-  <meta name="theme-color" content="#00b833"> <!-- Browser toolbar color on mobile -->
-  <meta name="robots" content="index, follow"> <!-- Search engines should index and follow links -->
+  <meta name="theme-color" content="#00b833">
+  <meta name="robots" content="index, follow">
 
   <!-- ================= Canonical URL ================= -->
-  <link rel="canonical" href="https://rodrigueshandyman.com/"> <!-- Prevents duplicate content issues -->
+  <link rel="canonical" href="https://rodrigueshandyman.com/">
 
   <!-- ================= Open Graph / Facebook ================= -->
-  <meta property="og:title" content="Handyman Plainfield IL | Home Maintenance & Repairs">
-  <meta property="og:description" content="Expert home maintenance, repair, and handyman services in Plainfield, IL. Call +1 (516) 415-8918 today!">
+  <meta property="og:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
+  <meta property="og:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL. Call +1 (516) 415-8918 today!">
   <meta property="og:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in Plainfield IL">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rodrigueshandyman.com">
+  <meta property="og:site_name" content="Rodrigues Handyman">
+  <meta property="og:locale" content="en_US">
 
   <!-- ================= Twitter Card ================= -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Handyman Plainfield IL | Home Maintenance & Repairs">
-  <meta name="twitter:description" content="Expert home maintenance, repair, and handyman services in Plainfield, IL. Call +1 (516) 415-8918 today!">
+  <meta name="twitter:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
+  <meta name="twitter:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL. Call +1 (516) 415-8918 today!">
   <meta name="twitter:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
+  <meta name="twitter:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in Plainfield IL">
+  <meta name="twitter:site" content="@RodriguesHandyman">
+  <meta name="twitter:creator" content="@RodriguesHandyman">
 
   <!-- ================= Favicon ================= -->
-  <link rel="icon" href="/assets/images/favicon.ico" type="image/png"> <!-- Browser tab icon -->
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 
   <!-- ================= CSS Files ================= -->
-  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"> <!-- Bootstrap framework -->
-  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css"> <!-- Icon font library -->
-  <link rel="stylesheet" href="assets/css/vendor/helper.css"> <!-- Helper CSS utilities -->
-  <link rel="stylesheet" href="assets/css/plugins/plugins.css"> <!-- Third-party plugins CSS -->
-  <link rel="stylesheet" href="assets/css/style.css"> <!-- Main website styles -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css">
+  <link rel="stylesheet" href="assets/css/vendor/helper.css">
+  <link rel="stylesheet" href="assets/css/plugins/plugins.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- ================= JS for Older Browser Support ================= -->
-  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script> <!-- Detects HTML5 and CSS3 support -->
+  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 
   <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
-    "name": "Rodrigues Handyman", <!-- Business name -->
-    "image": "https://rodrigueshandyman.com/assets/images/rodrigueshandyman.jpg", <!-- Main business image -->
-    "@id": "https://rodrigueshandyman.com", <!-- Unique identifier for SEO -->
-    "url": "https://rodrigueshandyman.com", <!-- Business website -->
+    "name": "Rodrigues Handyman",
+    "image": "https://rodrigueshandyman.com/assets/images/rodrigueshandyman.jpg",
+    "@id": "https://rodrigueshandyman.com",
+    "url": "https://rodrigueshandyman.com",
     "telephone": "+1-516-415-8918",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Whispering Woods Cir",
-      "addressLocality": "Plainfield", <!-- City -->
-      "addressRegion": "IL", <!-- State -->
+      "addressLocality": "Plainfield",
+      "addressRegion": "IL",
       "postalCode": "60585",
       "addressCountry": "US"
     },
@@ -75,28 +86,32 @@
       "latitude": 41.6322,
       "longitude": -88.2120
     },
-    "areaServed": [ <!-- Service areas for SEO -->
-       { "@type": "City", "name": "Plainfield" },
-    { "@type": "City", "name": "Naperville" },
-    { "@type": "City", "name": "Joliet" },
-    { "@type": "City", "name": "Bolingbrook" },
-    { "@type": "City", "name": "Romeoville" },
-    { "@type": "City", "name": "Woodridge" },
-    { "@type": "City", "name": "Shorewood" },
-    { "@type": "City", "name": "Lisle" },
-    { "@type": "City", "name": "Lockport" },
-    { "@type": "City", "name": "Bolingbrook" },
-    { "@type": "City", "name": "Homer Glen" },
-    { "@type": "City", "name": "Crest Hill" },
-    { "@type": "City", "name": "Willowbrook" },
-    { "@type": "City", "name": "Western Springs" },
-    { "@type": "City", "name": "Downers Grove" },
-    { "@type": "City", "name": "Lisle" },
-    { "@type": "City", "name": "Plainfield North" },
-    { "@type": "City", "name": "Naperville North" },
-    { "@type": "City", "name": "Bolingbrook South" }
+    "areaServed": [
+      {"@type": "City","name":"Plainfield"},
+      {"@type": "City","name":"Naperville"},
+      {"@type": "City","name":"Joliet"},
+      {"@type": "City","name":"Bolingbrook"},
+      {"@type": "City","name":"Romeoville"},
+      {"@type": "City","name":"Woodridge"},
+      {"@type": "City","name":"Shorewood"},
+      {"@type": "City","name":"Lisle"},
+      {"@type": "City","name":"Lockport"},
+      {"@type": "City","name":"Homer Glen"},
+      {"@type": "City","name":"Crest Hill"},
+      {"@type": "City","name":"Willowbrook"},
+      {"@type": "City","name":"Western Springs"},
+      {"@type": "City","name":"Downers Grove"},
+      {"@type": "City","name":"Plainfield North"},
+      {"@type": "City","name":"Naperville North"},
+      {"@type": "City","name":"Bolingbrook South"}
     ],
-    "description": "Rodrigues Handyman provides expert home maintenance, repairs, and handyman services in Plainfield, Illinois."
+    "sameAs": [
+      "https://www.facebook.com/RodriguesHandyman",
+      "https://www.yelp.com/biz/rodrigues-handyman-plainfield",
+      "https://www.google.com/maps/place/Rodrigues+Handyman"
+    ],
+    "serviceType": ["Plumbing","Electrical","Carpentry","Painting","General Home Repairs"],
+    "description": "Rodrigues Handyman provides expert plumbing, electrical, carpentry, painting, and general home repair services in Plainfield, Illinois."
   }
   </script>
 </head>
