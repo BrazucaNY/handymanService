@@ -1,60 +1,69 @@
 <!DOCTYPE html>
-<!-- ================= DOCUMENT TYPE & LANGUAGE ================= -->
-<html lang="en">
 <head>
-  <!-- ================= GOOGLE ANALYTICS TRACKING ================= -->
+  <!-- ================= Google Analytics / Tag Manager ================= -->
+  <!-- Loads gtag.js asynchronously for tracking website visits -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-7QYNVWMYJJ');
+    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true }); // anonymize IP for privacy
   </script>
+  <link rel="preconnect" href="https://www.googletagmanager.com">
 
-  <!-- ================= BASIC META TAGS ================= -->
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <!-- ================= Basic Page Setup ================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- ================= SEO META TAGS ================= -->
-  <title>Handyman | Home Maintenance & Repairs</title>
-  <meta name="description" content="Rodrigues Handyman provides expert home maintenance, repairs, and handyman services. Call +1 (516) 415-8918 today!">
-  <meta name="keywords" content="handyman NY, home maintenance, house repair, plumbing, electrical, carpentry, painting">
+  <!-- ================= SEO Meta Tags ================= -->
+  <title>Handyman Plainfield IL | Home Repairs & Maintenance</title>
+  <meta name="description" content="Rodrigues Handyman provides expert plumbing, electrical, carpentry, painting, and general home repair services in Plainfield, IL. Call +1 (516) 415-8918 today!">
+  <meta name="keywords" content="handyman Plainfield IL, home maintenance Plainfield, house repair Plainfield, plumbing, electrical, carpentry, painting">
   <meta name="theme-color" content="#00b833">
   <meta name="robots" content="index, follow">
 
-  <!-- ================= CANONICAL URL ================= -->
+  <!-- ================= Canonical URL ================= -->
   <link rel="canonical" href="https://rodrigueshandyman.com/">
 
-  <!-- ================= OPEN GRAPH META TAGS ================= -->
-  <meta property="og:title" content="Handyman NY | Home Maintenance & Repairs">
-  <meta property="og:description" content="Expert home maintenance, repair, and handyman services across all NYC boroughs. Call +1 (516) 415-8918 for service today!">
+  <!-- ================= Open Graph / Facebook ================= -->
+  <meta property="og:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
+  <meta property="og:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL. Call +1 (516) 415-8918 today!">
   <meta property="og:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC">
+  <meta property="og:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in Plainfield IL">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rodrigueshandyman.com">
+  <meta property="og:site_name" content="Rodrigues Handyman">
+  <meta property="og:locale" content="en_US">
 
-  <!-- ================= TWITTER CARD META TAGS ================= -->
+  <!-- ================= Twitter Card ================= -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Handyman NY | Home Maintenance & Repairs">
-  <meta name="twitter:description" content="Expert home maintenance, repair, and handyman services across all NYC boroughs. Call +1 (516) 415-8918 for service today!">
+  <meta name="twitter:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
+  <meta name="twitter:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL. Call +1 (516) 415-8918 today!">
   <meta name="twitter:image" content="https://rodrigueshandyman.com/assets/images/og-image.jpg">
-  <meta name="twitter:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in NYC">
+  <meta name="twitter:image:alt" content="Rodrigues Handyman providing home maintenance and repair services in Plainfield IL">
+  <meta name="twitter:site" content="@RodriguesHandyman">
+  <meta name="twitter:creator" content="@RodriguesHandyman">
 
-  <!-- ================= FAVICON ================= -->
-  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+  <!-- ================= Favicon ================= -->
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 
-  <!-- ================= CSS FILES ================= -->
-  <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css">
-  <link rel="stylesheet" href="/assets/css/vendor/iconfont.min.css">
-  <link rel="stylesheet" href="/assets/css/vendor/helper.css">
-  <link rel="stylesheet" href="/assets/css/plugins/plugins.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- ================= CSS Files ================= -->
+  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css">
+  <link rel="stylesheet" href="assets/css/vendor/helper.css">
+  <link rel="stylesheet" href="assets/css/plugins/plugins.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- ================= STRUCTURED DATA (JSON-LD) ================= -->
+  <!-- ================= JS for Older Browser Support ================= -->
+  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+
+  <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -67,114 +76,49 @@
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "N MacQuesten Pkwy",
-      "addressLocality": "New York",
-      "addressRegion": "NY",
-      "postalCode": "10451",
+      "streetAddress": "Whispering Woods Cir",
+      "addressLocality": "Plainfield",
+      "addressRegion": "IL",
+      "postalCode": "60585",
       "addressCountry": "US"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 40.9111,
-      "longitude": -73.8950
+      "latitude": 41.6322,
+      "longitude": -88.2120
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "New York City"
-    },
-    "description": "Rodrigues Handyman provides expert home maintenance, repairs, and handyman services across all New York City boroughs."
+    "areaServed": [
+      {"@type": "City","name":"Plainfield"},
+      {"@type": "City","name":"Naperville"},
+      {"@type": "City","name":"Joliet"},
+      {"@type": "City","name":"Bolingbrook"},
+      {"@type": "City","name":"Romeoville"},
+      {"@type": "City","name":"Woodridge"},
+      {"@type": "City","name":"Shorewood"},
+      {"@type": "City","name":"Lisle"},
+      {"@type": "City","name":"Lockport"},
+      {"@type": "City","name":"Homer Glen"},
+      {"@type": "City","name":"Crest Hill"},
+      {"@type": "City","name":"Willowbrook"},
+      {"@type": "City","name":"Western Springs"},
+      {"@type": "City","name":"Downers Grove"},
+      {"@type": "City","name":"Plainfield North"},
+      {"@type": "City","name":"Naperville North"},
+      {"@type": "City","name":"Bolingbrook South"}
+    ],
+    "sameAs": [
+      "https://www.facebook.com/RodriguesHandyman",
+      "https://www.yelp.com/biz/rodrigues-handyman-plainfield",
+      "https://www.google.com/maps/place/Rodrigues+Handyman"
+    ],
+    "serviceType": ["Plumbing","Electrical","Carpentry","Painting","General Home Repairs"],
+    "description": "Rodrigues Handyman provides expert plumbing, electrical, carpentry, painting, and general home repair services in Plainfield, Illinois."
   }
   </script>
-
-  <!-- ================= CUSTOM FAQ STYLES ================= -->
-  <style>
-    /* FAQ Item Container */
-    .faq-item { 
-      margin-bottom: 15px; 
-      border: 1px solid #e0e0e0; 
-      border-radius: 8px; 
-      overflow: hidden; 
-      transition: all 0.3s ease; 
-    }
-    
-    /* Hover Effect for FAQ Items */
-    .faq-item:hover { 
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-    }
-    
-    /* FAQ Question Styling */
-    .faq-question { 
-      padding: 20px 25px; 
-      background-color: #f9f9f9; 
-      cursor: pointer; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      transition: all 0.3s ease; 
-    }
-    
-    /* FAQ Question Text */
-    .faq-question h4 { 
-      margin: 0; 
-      font-size: 18px; 
-      font-weight: 600; 
-      color: #333; 
-      flex: 1; 
-      padding-right: 20px; 
-    }
-    
-    /* Toggle Icon for FAQ */
-    .toggle-icon { 
-      display: inline-flex; 
-      align-items: center; 
-      justify-content: center; 
-      width: 24px; 
-      height: 24px; 
-      background-color: #00b300; 
-      color: white; 
-      border-radius: 50%; 
-      font-size: 16px; 
-      font-weight: bold; 
-      transition: transform 0.3s ease; 
-    }
-    
-    /* Toggle Icon Open State */
-    .toggle-icon.open { 
-      transform: rotate(45deg); 
-    }
-    
-    /* FAQ Answer Styling */
-    .faq-answer { 
-      padding: 20px 25px; 
-      background-color: #fff; 
-      border-top: 1px solid #e0e0e0; 
-      font-size: 15px; 
-      line-height: 1.6; 
-    }
-    
-    /* FAQ Answer Paragraph */
-    .faq-answer p { 
-      margin: 0; 
-      color: #555; 
-    }
-    
-    /* Responsive Styles */
-    @media (max-width: 767px) {
-      .faq-question h4 { 
-        font-size: 16px; 
-      }
-      .faq-question { 
-        padding: 15px 20px; 
-      }
-      .faq-answer { 
-        padding: 15px 20px; 
-      }
-    }
-  </style>
-
-  <!-- ================= BROWSER COMPATIBILITY ================= -->
-  <script src="/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
+
+
+
 <body>
 
 
