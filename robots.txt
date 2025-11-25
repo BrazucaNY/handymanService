@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://rodrigueshandyman.com/sitemap.xml
