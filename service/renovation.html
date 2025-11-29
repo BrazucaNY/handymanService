@@ -1,85 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- ================= Basic Setup ================= -->
-  <meta charset="UTF-8"> <!-- Character encoding -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile responsive -->
-  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- IE compatibility -->
+  <!-- ================= Google Analytics / Tag Manager ================= -->
+  <!-- Loads gtag.js asynchronously to avoid blocking rendering -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true }); // anonymize IP for privacy
+  </script>
+  <!-- ================= Basic Meta Tags ================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- ================= SEO ================= -->
+  <title>Handyman Plainfield IL | Home Repairs & Maintenance</title>
+  <meta name="description" content="David Handyman provides expert plumbing, electrical, carpentry, painting, and general home repair services in Plainfield, IL. Call +1 516-350-0801 today!">
+  <meta name="keywords" content="handyman Plainfield IL, home maintenance Plainfield, house repair Plainfield, plumbing, electrical, carpentry, painting">
   <meta name="theme-color" content="#00b833">
   <meta name="robots" content="index, follow">
 
-  <!-- ================= Page Title & Meta (SEO Optimized) ================= -->
-  <title>Renovation Services NY | Home Remodeling & Improvements</title>
-  <meta name="description" content="Rodrigues Handyman provides expert home renovation and remodeling services across New York City including kitchen, bathroom, and full home renovations. Call +1 (516) 415-8918 today!">
-  <meta name="keywords" content="home renovation NY, remodeling NYC, kitchen renovation, bathroom remodeling, Rodrigues Handyman, home improvements">
+  <!-- ================= Canonical ================= -->
+  <link rel="canonical" href="https://www.herehandyman.com">
 
-  <!-- ================= Canonical URL ================= -->
-  <link rel="canonical" href="https://rodrigueshandyman.com/service/renovation">
-
-  <!-- ================= Open Graph / Social Sharing ================= -->
-  <meta property="og:title" content="Renovation Services NY | Home Remodeling & Improvements">
-  <meta property="og:description" content="Expert home renovation and remodeling services across NYC. Kitchen, bathroom, and full home renovations by Rodrigues Handyman. Call +1 (516) 415-8918 today!">
-  <meta property="og:image" content="https://rodrigueshandyman.com/assets/images/renovation-og.jpg">
+  <!-- ================= Open Graph / Facebook ================= -->
+  <meta property="og:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
+  <meta property="og:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL.">
+  <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Renovation services in NYC">
+  <meta property="og:image:alt" content="David Handyman providing home maintenance and repair services in Plainfield IL">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://rodrigueshandyman.com/service/renovation">
+  <meta property="og:url" content="https://www.herehandyman.com">
+  <meta property="og:site_name" content="David Handyman">
+  <meta property="og:locale" content="en_US">
 
-  <!-- ================= Twitter Card Meta ================= -->
+  <!-- ================= Twitter Card ================= -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Renovation Services NY | Home Remodeling & Improvements">
-  <meta name="twitter:description" content="Rodrigues Handyman provides professional home renovation services in NYC: kitchen, bathroom, and full home remodeling.">
-  <meta name="twitter:image" content="https://rodrigueshandyman.com/assets/images/renovation-og.jpg">
+  <meta name="twitter:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
+  <meta name="twitter:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL.">
+  <meta name="twitter:image" content="https://www.herehandyman.com/assets/images/og-image.jpg">
+  <meta name="twitter:image:alt" content="David Handyman providing home maintenance and repair services in Plainfield IL">
 
   <!-- ================= Favicon ================= -->
-  <link rel="icon" href="../assets/images/logo.png" type="image/png">
+  <link rel="icon" href="/assets/images/favicon.ico" type="image/png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 
-  <!-- ================= CSS Files ================= -->
-  <link rel="stylesheet" href="../assets/css/vendor/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/css/vendor/iconfont.min.css">
-  <link rel="stylesheet" href="../assets/css/vendor/helper.css">
-  <link rel="stylesheet" href="../assets/css/plugins/plugins.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- ================= Google Fonts (Non-blocking) ================= -->
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" as="style" onload="this.rel='stylesheet'" crossorigin>
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap">
+  </noscript>
 
-  <!-- ================= JS for Older Browser Support ================= -->
-  <script src="../assets/js/vendor/modernizr-2.8.3.min.js"></script>
+  <!-- ================= CSS (Non-blocking + Safe) ================= -->
+  <link rel="preload" href="assets/css/vendor/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"></noscript>
+
+  <link rel="preload" href="assets/css/vendor/iconfont.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/vendor/iconfont.min.css"></noscript>
+
+  <link rel="preload" href="assets/css/vendor/helper.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/vendor/helper.css"></noscript>
+
+  <link rel="preload" href="assets/css/plugins/plugins.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/plugins/plugins.css"></noscript>
+
+  <link rel="preload" href="assets/css/style.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript>
 
   <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
+ "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
-    "name": "Rodrigues Handyman Renovation",
-    "image": "https://rodrigueshandyman.com/assets/images/renovation-og.jpg",
-    "@id": "https://rodrigueshandyman.com/service/renovation",
-    "url": "https://rodrigueshandyman.com/service/renovation",
+    "name": "DAVID HANDYMAN PLAINFIELD IL",
+    "image": "https://rodrigueshandyman.com/assets/images/rodrigueshandyman.jpg",
+    "@id": "https://rodrigueshandyman.com",
+    "url": "https://rodrigueshandyman.com",
     "telephone": "+1-516-415-8918",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "N MacQuesten Pkwy",
-      "addressLocality": "New York",
-      "addressRegion": "NY",
-      "postalCode": "10451",
+      "streetAddress": "Whispering Woods Cir",
+      "addressLocality": "Plainfield",
+      "addressRegion": "IL",
+      "postalCode": "60585",
       "addressCountry": "US"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 40.9111,
-      "longitude": -73.8950
+      "latitude": 41.6322,
+      "longitude": -88.2120
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "New York City"
-    },
-    "sameAs": [
-      "https://www.facebook.com/rodrigueshandyman",
-      "https://www.instagram.com/rodrigueshandyman"
+    "areaServed": [
+      {"@type": "City","name":"Plainfield"},
+      {"@type": "City","name":"Naperville"},
+      {"@type": "City","name":"Joliet"},
+      {"@type": "City","name":"Bolingbrook"},
+      {"@type": "City","name":"Romeoville"},
+      {"@type": "City","name":"Woodridge"},
+      {"@type": "City","name":"Shorewood"},
+      {"@type": "City","name":"Lisle"},
+      {"@type": "City","name":"Lockport"},
+      {"@type": "City","name":"Homer Glen"},
+      {"@type": "City","name":"Crest Hill"},
+      {"@type": "City","name":"Willowbrook"},
+      {"@type": "City","name":"Western Springs"},
+      {"@type": "City","name":"Downers Grove"},
+      {"@type": "City","name":"Plainfield North"},
+      {"@type": "City","name":"Naperville North"},
+      {"@type": "City","name":"Bolingbrook South"}
     ],
-    "description": "Rodrigues Handyman provides expert home renovation and remodeling services across NYC including kitchen, bathroom, and full home renovations."
+    "sameAs": [
+      "https://www.facebook.com/RodriguesHandyman",
+      "https://www.google.com/maps/place/Rodrigues+Handyman"
+    ],
+    "serviceType": ["Plumbing","Electrical","Carpentry","Painting","General Home Repairs"],
+    "description": "DAVID HANDYMAN PLAINFIELD IL provides expert plumbing, electrical, carpentry, painting, and general home repair services in Plainfield, Illinois."
   }
   </script>
 </head>
