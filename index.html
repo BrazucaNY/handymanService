@@ -50,13 +50,28 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 
-  <!-- ================= CSS (Preloaded for faster LCP) ================= -->
-  <link rel="preload" href="assets/css/style.css" as="style">
-  <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css">
-  <link rel="stylesheet" href="assets/css/vendor/helper.css">
-  <link rel="stylesheet" href="assets/css/plugins/plugins.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+<!-- ================= CSS (Non-blocking + SAFE) ================= -->
+
+<!-- Bootstrap -->
+<link rel="preload" href="assets/css/vendor/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"></noscript>
+
+<!-- Icon Font -->
+<link rel="preload" href="assets/css/vendor/iconfont.min.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="assets/css/vendor/iconfont.min.css"></noscript>
+
+<!-- Helper -->
+<link rel="preload" href="assets/css/vendor/helper.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="assets/css/vendor/helper.css"></noscript>
+
+<!-- Plugins -->
+<link rel="preload" href="assets/css/plugins/plugins.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="assets/css/plugins/plugins.css"></noscript>
+
+<!-- Main Style -->
+<link rel="preload" href="assets/css/style.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+
 
   <!-- ================= Font Awesome ================= -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -103,9 +118,6 @@
   }
   </script>
 </head>
-
-
-
 
 
 
