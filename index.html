@@ -1,76 +1,78 @@
 <head>
   <!-- ================= Google Analytics / Tag Manager ================= -->
-  <!-- Loads gtag.js asynchronously for tracking website visits -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true }); // anonymize IP for privacy
+    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true });
   </script>
   <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  <!-- ================= Basic Page Setup ================= -->
+  <!-- ================= Basic Setup ================= -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- ================= SEO Meta Tags ================= -->
+  <!-- ================= SEO ================= -->
   <title>Handyman Plainfield IL | Home Repairs & Maintenance</title>
   <meta name="description" content="David Handyman provides expert plumbing, electrical, carpentry, painting, and general home repair services in Plainfield, IL. Call +1 516-350-0801 today!">
   <meta name="keywords" content="handyman Plainfield IL, home maintenance Plainfield, house repair Plainfield, plumbing, electrical, carpentry, painting">
   <meta name="theme-color" content="#00b833">
   <meta name="robots" content="index, follow">
 
-  <!-- ================= Canonical URL ================= -->
+  <!-- ================= Canonical ================= -->
   <link rel="canonical" href="https://www.herehandyman.com">
 
-  <!-- ================= Open Graph / Facebook ================= -->
+  <!-- ================= Open Graph ================= -->
   <meta property="og:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
-  <meta property="og:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL. Call +1 (516) 415-8918 today!">
-  <meta property="og:image" content="https://www.herehandyman.comassets/images/og-image.jpg">
+  <meta property="og:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL.">
+  <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="David Handyman providing home maintenance and repair services in Plainfield IL">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://herehandyman.com">
+  <meta property="og:url" content="https://www.herehandyman.com">
   <meta property="og:site_name" content="David Handyman">
   <meta property="og:locale" content="en_US">
 
-  <!-- ================= Twitter Card ================= -->
+  <!-- ================= Twitter ================= -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
-  <meta name="twitter:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL. Call +1 (516) 415-8918 today!">
-  <meta name="twitter:image" content="https://www.herehandyman.comassets/images/og-image.jpg">
+  <meta name="twitter:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL.">
+  <meta name="twitter:image" content="https://www.herehandyman.com/assets/images/og-image.jpg">
   <meta name="twitter:image:alt" content="David Handyman providing home maintenance and repair services in Plainfield IL">
-  <meta name="twitter:site" content="@HereHandyman">
-  <meta name="twitter:creator" content="@HereHandyman">
 
   <!-- ================= Favicon ================= -->
   <link rel="icon" href="/assets/images/favicon.ico" type="image/png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 
-  <!-- ================= CSS Files ================= -->
+  <!-- ================= CSS (Preloaded for faster LCP) ================= -->
+  <link rel="preload" href="assets/css/style.css" as="style">
   <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/vendor/iconfont.min.css">
   <link rel="stylesheet" href="assets/css/vendor/helper.css">
   <link rel="stylesheet" href="assets/css/plugins/plugins.css">
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- ================= Font Awesome ================= -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- ================= JS for Older Browser Support ================= -->
-  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+  <!-- ================= JS (moved to bottom later, not blocking) ================= -->
+  <!-- modernizr removed from here -->
 
-  <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
+  <!-- ================= JSON-LD ================= -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     "name": "Handyman Plainfield",
-    "image": "https://www.herehandyman.comassets/images/rodrigueshandyman.jpg",
-    "@id": "https://herehandyman.com",
-    "url": "https://hererodrigueshandyman.com",
+    "image": "https://www.herehandyman.com/assets/images/rodrigueshandyman.jpg",
+    "@id": "https://www.herehandyman.com",
+    "url": "https://www.herehandyman.com",
     "telephone": "+1-516-350-0801",
     "priceRange": "$$",
     "address": {
@@ -87,23 +89,10 @@
       "longitude": -88.2120
     },
     "areaServed": [
-      {"@type": "City","name":"Plainfield"},
-      {"@type": "City","name":"Naperville"},
-      {"@type": "City","name":"Joliet"},
-      {"@type": "City","name":"Bolingbrook"},
-      {"@type": "City","name":"Romeoville"},
-      {"@type": "City","name":"Woodridge"},
-      {"@type": "City","name":"Shorewood"},
-      {"@type": "City","name":"Lisle"},
-      {"@type": "City","name":"Lockport"},
-      {"@type": "City","name":"Homer Glen"},
-      {"@type": "City","name":"Crest Hill"},
-      {"@type": "City","name":"Willowbrook"},
-      {"@type": "City","name":"Western Springs"},
-      {"@type": "City","name":"Downers Grove"},
-      {"@type": "City","name":"Plainfield North"},
-      {"@type": "City","name":"Naperville North"},
-      {"@type": "City","name":"Bolingbrook South"}
+      "Plainfield","Naperville","Joliet","Bolingbrook","Romeoville",
+      "Woodridge","Shorewood","Lisle","Lockport","Homer Glen",
+      "Crest Hill","Willowbrook","Western Springs","Downers Grove",
+      "Plainfield North","Naperville North","Bolingbrook South"
     ],
     "sameAs": [
       "https://www.facebook.com/RodriguesHandyman",
@@ -114,6 +103,11 @@
   }
   </script>
 </head>
+
+
+
+
+
 
 <body>
 <!-- START MAIN WRAPPER -->
@@ -1196,6 +1190,7 @@ jQuery.event.special.touchmove = {
     }
 </style>
 
+<script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 
 </body>
 </html>
