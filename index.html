@@ -1,17 +1,22 @@
 <head>
   <!-- ================= Google Analytics / Tag Manager ================= -->
+  <!-- Loads gtag.js asynchronously to avoid blocking rendering -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ"></script>
   <script>
+    // Initialize Google Analytics
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true });
+    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true }); // anonymize IP for privacy
   </script>
+  
+  <!-- ================= Preconnects for Speed ================= -->
+  <!-- Preconnect to GA and font servers to speed up connections -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  <!-- ================= Basic Setup ================= -->
+  <!-- ================= Basic Meta Tags ================= -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,7 +31,7 @@
   <!-- ================= Canonical ================= -->
   <link rel="canonical" href="https://www.herehandyman.com">
 
-  <!-- ================= Open Graph ================= -->
+  <!-- ================= Open Graph / Facebook ================= -->
   <meta property="og:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
   <meta property="og:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL.">
   <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.jpg">
@@ -38,7 +43,7 @@
   <meta property="og:site_name" content="David Handyman">
   <meta property="og:locale" content="en_US">
 
-  <!-- ================= Twitter ================= -->
+  <!-- ================= Twitter Card ================= -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
   <meta name="twitter:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL.">
@@ -50,36 +55,47 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 
-<!-- ================= CSS (Non-blocking + SAFE) ================= -->
+  <!-- ================= Google Fonts (Non-blocking) ================= -->
+  <!-- Preload Lato and Montserrat fonts safely without blocking render -->
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" as="style" onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap">
+  </noscript>
 
-<!-- Bootstrap -->
-<link rel="preload" href="assets/css/vendor/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"></noscript>
+  <!-- ================= CSS (Non-blocking + Safe) ================= -->
+  <!-- Preload each CSS file and load via onload, includes noscript fallback -->
+  
+  <!-- Bootstrap CSS -->
+  <link rel="preload" href="assets/css/vendor/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"></noscript>
 
-<!-- Icon Font -->
-<link rel="preload" href="assets/css/vendor/iconfont.min.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="assets/css/vendor/iconfont.min.css"></noscript>
+  <!-- Icon Font CSS -->
+  <link rel="preload" href="assets/css/vendor/iconfont.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/vendor/iconfont.min.css"></noscript>
 
-<!-- Helper -->
-<link rel="preload" href="assets/css/vendor/helper.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="assets/css/vendor/helper.css"></noscript>
+  <!-- Helper CSS -->
+  <link rel="preload" href="assets/css/vendor/helper.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/vendor/helper.css"></noscript>
 
-<!-- Plugins -->
-<link rel="preload" href="assets/css/plugins/plugins.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="assets/css/plugins/plugins.css"></noscript>
+  <!-- Plugins CSS -->
+  <link rel="preload" href="assets/css/plugins/plugins.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/plugins/plugins.css"></noscript>
 
-<!-- Main Style -->
-<link rel="preload" href="assets/css/style.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+  <!-- Main Style CSS -->
+  <link rel="preload" href="assets/css/style.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
 
+  <!-- ================= Font Awesome (Non-blocking) ================= -->
+  <!-- Preload icons CSS safely -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </noscript>
 
-  <!-- ================= Font Awesome ================= -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- ================= JS (Moved to bottom to prevent render-block) ================= -->
+  <!-- Modernizr or other scripts can be loaded before </body> with defer -->
 
-  <!-- ================= JS (moved to bottom later, not blocking) ================= -->
-  <!-- modernizr removed from here -->
-
-  <!-- ================= JSON-LD ================= -->
+  <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
