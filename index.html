@@ -3,7 +3,6 @@
   <!-- Loads gtag.js asynchronously to avoid blocking rendering -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ"></script>
   <script>
-    // Initialize Google Analytics
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -11,10 +10,12 @@
   </script>
   
   <!-- ================= Preconnects for Speed ================= -->
-  <!-- Preconnect to GA and font servers to speed up connections -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://embed.tawk.to" crossorigin>
 
   <!-- ================= Basic Meta Tags ================= -->
   <meta charset="UTF-8">
@@ -56,50 +57,29 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 
   <!-- ================= Google Fonts (Non-blocking) ================= -->
-  <!-- Preload Lato and Montserrat fonts safely without blocking render -->
-  <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" as="style" onload="this.rel='stylesheet'" crossorigin>
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap">
   </noscript>
 
-<link rel="preconnect" href="https://code.jquery.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin> <!-- for CDN fonts -->
-
-
-
-
   <!-- ================= CSS (Non-blocking + Safe) ================= -->
-  <!-- Preload each CSS file and load via onload, includes noscript fallback -->
-  
-  <!-- Bootstrap CSS -->
   <link rel="preload" href="assets/css/vendor/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"></noscript>
 
-  <!-- Icon Font CSS -->
   <link rel="preload" href="assets/css/vendor/iconfont.min.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/vendor/iconfont.min.css"></noscript>
 
-  <!-- Helper CSS -->
   <link rel="preload" href="assets/css/vendor/helper.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/vendor/helper.css"></noscript>
 
-  <!-- Plugins CSS -->
   <link rel="preload" href="assets/css/plugins/plugins.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/plugins/plugins.css"></noscript>
 
-  <!-- Main Style CSS -->
   <link rel="preload" href="assets/css/style.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
 
-  <!-- ================= Font Awesome (Non-blocking) ================= -->
-  <!-- Preload icons CSS safely -->
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  </noscript>
-
-  <!-- ================= JS (Moved to bottom to prevent render-block) ================= -->
-  <!-- Modernizr or other scripts can be loaded before </body> with defer -->
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript>
 
   <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
   <script type="application/ld+json">
@@ -140,6 +120,7 @@
   }
   </script>
 </head>
+
 
 
 
@@ -1227,8 +1208,8 @@ jQuery.event.special.touchmove = {
         display: none !important;
     }
 </style>
+<script src="assets/js/vendor/modernizr-2.8.3.min.js" defer></script>
 
-<script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 
 </body>
 </html>
