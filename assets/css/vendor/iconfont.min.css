@@ -2350,6 +2350,7 @@
         url("../../fonts/Pe-icon-7-strokebb1d.svg?d7yf1v#Pe-icon-7-stroke") format("svg");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 [class^="pe-7s-"],
 [class*=" pe-7s-"] {
@@ -2970,7 +2971,6 @@
 .pe-7s-airplay:before {
     content: "\e67f";
 }
-
 @font-face {
     font-family: "renovation";
     src: url(../../fonts/renovation8ff2.eot?5x3vh0);
@@ -2981,6 +2981,7 @@
         url(../../fonts/renovation8ff2.svg?5x3vh0#renovation) format("svg");
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 [class^="rn-"],
 [class*=" rn-"] {
