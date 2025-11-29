@@ -1,4 +1,13 @@
 <head>
+  <!-- ================= Google Analytics / Tag Manager ================= -->
+  <!-- Loads gtag.js asynchronously to avoid blocking rendering -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true }); // anonymize IP for privacy
+  </script>
   <!-- ================= Basic Meta Tags ================= -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +19,11 @@
   <meta name="keywords" content="handyman Plainfield IL, home maintenance Plainfield, house repair Plainfield, plumbing, electrical, carpentry, painting">
   <meta name="theme-color" content="#00b833">
   <meta name="robots" content="index, follow">
+
+  <!-- ================= Canonical ================= -->
   <link rel="canonical" href="https://www.herehandyman.com">
 
-  <!-- ================= Open Graph / Twitter ================= -->
+  <!-- ================= Open Graph / Facebook ================= -->
   <meta property="og:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
   <meta property="og:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL.">
   <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.jpg">
@@ -23,6 +34,8 @@
   <meta property="og:url" content="https://www.herehandyman.com">
   <meta property="og:site_name" content="David Handyman">
   <meta property="og:locale" content="en_US">
+
+  <!-- ================= Twitter Card ================= -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Handyman Services in Plainfield IL | Home Repairs & Maintenance">
   <meta name="twitter:description" content="Expert plumbing, electrical, carpentry, painting, and general home repairs in Plainfield, IL.">
@@ -34,21 +47,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 
-  <!-- ================= Preconnects for Speed ================= -->
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="preconnect" href="https://embed.tawk.to" crossorigin>
-
-  <!-- ================= Google Fonts Preload ================= -->
-  <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" as="style" onload="this.rel='stylesheet'">
+  <!-- ================= Google Fonts (Non-blocking) ================= -->
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" as="style" onload="this.rel='stylesheet'" crossorigin>
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap">
   </noscript>
 
-  <!-- ================= CSS (Preload + Non-blocking) ================= -->
+  <!-- ================= CSS (Non-blocking + Safe) ================= -->
   <link rel="preload" href="assets/css/vendor/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"></noscript>
 
@@ -65,18 +70,7 @@
   <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
 
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  </noscript>
-
-  <!-- ================= Google Analytics / Tag Manager ================= -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true });
-  </script>
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript>
 
   <!-- ================= Local Business Structured Data (JSON-LD) ================= -->
   <script type="application/ld+json">
@@ -102,8 +96,16 @@
       "latitude": 41.6322,
       "longitude": -88.2120
     },
-    "areaServed": ["Plainfield","Naperville","Joliet","Bolingbrook","Romeoville","Woodridge","Shorewood","Lisle","Lockport","Homer Glen","Crest Hill","Willowbrook","Western Springs","Downers Grove","Plainfield North","Naperville North","Bolingbrook South"],
-    "sameAs": ["https://www.facebook.com/RodriguesHandyman","https://www.google.com/maps/place/Rodrigues+Handyman"],
+    "areaServed": [
+      "Plainfield","Naperville","Joliet","Bolingbrook","Romeoville",
+      "Woodridge","Shorewood","Lisle","Lockport","Homer Glen",
+      "Crest Hill","Willowbrook","Western Springs","Downers Grove",
+      "Plainfield North","Naperville North","Bolingbrook South"
+    ],
+    "sameAs": [
+      "https://www.facebook.com/RodriguesHandyman",
+      "https://www.google.com/maps/place/Rodrigues+Handyman"
+    ],
     "serviceType": ["Plumbing","Electrical","Carpentry","Painting","General Home Repairs"],
     "description": "Rodrigues Handyman provides expert plumbing, electrical, carpentry, painting, and general home repair services in Plainfield, Illinois."
   }
