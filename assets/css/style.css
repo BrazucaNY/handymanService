@@ -40,7 +40,8 @@
 /*  01. Theme default CSS
 /*----------------------------------------*/
 /*-- Google Font --*/
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700");
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap");
+
 /*-- Common Style --*/
 *, *::after, *::before {
   -webkit-box-sizing: border-box;
