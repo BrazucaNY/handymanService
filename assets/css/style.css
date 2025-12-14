@@ -9315,3 +9315,8 @@ label[for="logoUpload"]:hover {
     outline: none;
     box-shadow: none;
 }
+<link rel="preload" 
+      href="/path/to/lato-400.woff2" 
+      as="font" 
+      type="font/woff2" 
+      crossorigin>
