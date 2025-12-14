@@ -383,12 +383,19 @@
     <div class="offcanvas-wrapper">
 
         <div class="offcanvas-inner-content">
-
-            <!-- Search Box (Optional) -->
-          <div class="offcanvas-mobile-search-area">
-    <form action="#">
-        <input type="search" placeholder="Search ..." name="q" id="mobile-search">
-        <button type="submit"><i class="fa fa-search"></i></button>
+<!-- Search Box (Accessible) -->
+<div class="offcanvas-mobile-search-area">
+    <form action="#" role="search">
+        <label for="mobile-search" class="visually-hidden">Search website</label>
+        <input 
+            type="search" 
+            placeholder="Search ..." 
+            name="q" 
+            id="mobile-search"
+        >
+        <button type="submit" aria-label="Search">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
     </form>
 </div>
 
