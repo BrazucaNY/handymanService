@@ -9315,3 +9315,10 @@ label[for="logoUpload"]:hover {
     outline: none;
     box-shadow: none;
 }
+.img-fluid[width="300"][height="120"],
+.logo a img {
+    /* Set the intrinsic aspect ratio (Width / Height = 300 / 120 = 2.5) */
+    aspect-ratio: 2.5; 
+    /* Ensure the actual dimensions are used for the ratio calculation */
+    height: auto; 
+}
