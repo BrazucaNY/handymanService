@@ -2,16 +2,26 @@
 <html lang="en">
 <head>
 
-  <!-- ================= Google Analytics / Tag Manager ================= -->
-  <!-- Loads Google Analytics tag asynchronously -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ"></script>
-  <!-- Initializes Google Analytics and anonymizes IP -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true });
-  </script>
+<!-- ================= Optimized Google Analytics ================= -->
+<script>
+window.addEventListener('load', function () {
+  // Load GA after page is fully loaded (LCP-safe)
+  var gaScript = document.createElement('script');
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
+  gaScript.async = true;
+  document.head.appendChild(gaScript);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7QYNVWMYJJ', {
+    anonymize_ip: true,
+    send_page_view: true
+  });
+});
+</script>
+
 
   <!-- ================= Basic Meta Tags ================= -->
   <!-- Character encoding -->
