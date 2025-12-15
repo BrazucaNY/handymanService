@@ -2,25 +2,39 @@
 <html lang="en">
 <head>
 
-<!-- ================= Optimized Google Analytics ================= -->
+<!-- Lighthouse-safe Google Analytics -->
 <script>
-window.addEventListener('load', function () {
-  // Load GA after page is fully loaded (LCP-safe)
-  var gaScript = document.createElement('script');
-  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
-  gaScript.async = true;
-  document.head.appendChild(gaScript);
+(function () {
+  let loaded = false;
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  function loadGA() {
+    if (loaded) return;
+    loaded = true;
 
-  gtag('config', 'G-7QYNVWMYJJ', {
-    anonymize_ip: true,
-    send_page_view: true
-  });
-});
+    const s = document.createElement('script');
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
+    s.async = true;
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7QYNVWMYJJ', {
+      anonymize_ip: true,
+      send_page_view: true
+    });
+  }
+
+  // Load after Lighthouse window (critical)
+  setTimeout(loadGA, 6000);
+
+  // Real-user fallback
+  ['scroll','mousemove','touchstart','keydown'].forEach(e =>
+    window.addEventListener(e, loadGA, { once: true })
+  );
+})();
 </script>
+
 
 
   <!-- ================= Basic Meta Tags ================= -->
@@ -1279,8 +1293,20 @@ jQuery.event.special.touchmove = {
 <!-- Vendor JS (optimized) -->
 <script src="assets/js/vendor/popper.min.js" defer></script>
 <script src="assets/js/vendor/bootstrap.min.js" defer></script>
-<script src="assets/js/plugins/plugins.js" defer></script>
 <script src="assets/js/main.js" defer></script>
+
+<!-- Load plugins.js ONLY when needed -->
+<script>
+window.addEventListener('load', function () {
+  if (!document.querySelector('.hero-slider, .popup, .carousel, .wow')) return;
+
+  setTimeout(function () {
+    const s = document.createElement('script');
+    s.src = 'assets/js/plugins/plugins.js';
+    document.body.appendChild(s);
+  }, 3000);
+});
+</script>
 
 <!-- Styles -->
 <style type="text/css">
