@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Here Handyman</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+        }
+        .offline-container {
+            max-width: 500px;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #00b833;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #009e2c;
+        }
+        .icon {
+            font-size: 3rem;
+            color: #00b833;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="icon">
+            <i class="fas fa-wifi"></i>
+        </div>
+        <h1>You're Offline</h1>
+        <p>It seems you're not connected to the internet. Some features may not be available. Please check your connection and try again.</p>
+        <a href="/" class="btn">Try Again</a>
+    </div>
+</body>
+</html>

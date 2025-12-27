@@ -1,0 +1,44 @@
+{
+  "name": "Here Handyman",
+  "short_name": "Handyman",
+  "description": "Professional kitchen and bathroom remodeling, home repairs, and handyman services.",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00b833",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/images/screenshot1.webp",
+      "sizes": "1080x1920",
+      "type": "image/webp",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["home", "business", "repair"],
+  "shortcuts": [
+    {
+      "name": "Request a Quote",
+      "url": "/#contact",
+      "description": "Get a free estimate for your project"
+    },
+    {
+      "name": "Our Services",
+      "url": "/#services",
+      "description": "View our professional handyman services"
+    }
+  ]
+}
