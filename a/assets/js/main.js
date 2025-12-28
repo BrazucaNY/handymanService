@@ -7,18 +7,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. CATEGORY GALLERY SYSTEM
     // ==========================================
     const categories = {
-        "Plumbing Repairs": [
-            { src: 'assets/images/k1.webp', title: 'Modern Kitchen' },
-            { src: 'assets/images/k2.webp', title: 'Cabinet Refinishing' }
-        ],
-        "Electrical & Fixture Work": [
-            { src: 'assets/images/b1.webp', title: 'Tile Shower' },
-            { src: 'assets/images/b2.webp', title: 'Vanity Install' }
-        ],
-        "Painting & Drywall": [
-            { src: 'assets/images/f1.webp', title: 'Vinyl Plank' },
-            { src: 'assets/images/f2.webp', title: 'Hardwood Repair' }
-        ]
+        "Plumbing Repairs": {
+            highlightId: '17938622668793728',
+            fallback: [
+                { src: 'assets/images/k1.webp', title: 'Plumbing Work' },
+                { src: 'assets/images/k2.webp', title: 'Pipe Installation' }
+            ]
+        },
+        "Electrical & Fixture Work": {
+            highlightId: '17938622668793728',
+            fallback: [
+                { src: 'assets/images/b1.webp', title: 'Electrical Work' },
+                { src: 'assets/images/b2.webp', title: 'Fixture Installation' }
+            ]
+        },
+        "Painting & Drywall": {
+            highlightId: '17938622668793728',
+            fallback: [
+                { src: 'assets/images/f1.webp', title: 'Wall Painting' },
+                { src: 'assets/images/f2.webp', title: 'Drywall Repair' }
+            ]
+        }
     };
 
     const categoryGrid = document.getElementById('gallery-category-selection');
@@ -42,20 +51,47 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function showCategoryImages(category) {
+    async function showCategoryImages(category) {
         categoryGrid.style.display = 'none';
         imageDisplay.style.display = 'block';
-        galleryGrid.innerHTML = ''; // Clear previous
+        galleryGrid.innerHTML = '<div class="loading">Loading projects from Instagram...</div>';
 
-        categories[category].forEach(imgObj => {
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
-            item.innerHTML = `
-                <img src="${imgObj.src}" alt="${imgObj.title}" loading="lazy">
-                <div class="gallery-overlay"><h3>${imgObj.title}</h3></div>
-            `;
-            galleryGrid.appendChild(item);
-        });
+        try {
+            // First try to load from Instagram
+            const response = await fetch(`https://www.instagram.com/api/v1/highlights/${categories[category].highlightId}/`);
+            if (!response.ok) throw new Error('Failed to fetch from Instagram');
+            
+            const data = await response.json();
+            galleryGrid.innerHTML = ''; // Clear loading message
+            
+            // Display Instagram stories
+            data.story_media.forEach(story => {
+                const imgUrl = story.media[0].image_versions2.candidates[0].url;
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <img src="${imgUrl}" alt="${category} project" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>${category}</h3>
+                        <p>View on <a href="https://www.instagram.com/stories/highlights/17938622668793728/" target="_blank" rel="noopener">Instagram</a></p>
+                    </div>
+                `;
+                galleryGrid.appendChild(item);
+            });
+        } catch (error) {
+            console.error('Error loading Instagram highlights:', error);
+            // Fallback to local images
+            galleryGrid.innerHTML = '';
+            categories[category].fallback.forEach(item => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <img src="${item.src}" alt="${item.title}" loading="lazy">
+                    <div class="gallery-overlay"><h3>${item.title}</h3></div>
+                `;
+                galleryGrid.appendChild(item);
+            });
+        }
         window.scrollTo({ top: document.getElementById('gallery').offsetTop - 100, behavior: 'smooth' });
     }
 
