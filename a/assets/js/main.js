@@ -7,15 +7,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. CATEGORY GALLERY SYSTEM
     // ==========================================
     const categories = {
-        "Kitchens": [
+        "Plumbing Repairs": [
             { src: 'assets/images/k1.webp', title: 'Modern Kitchen' },
             { src: 'assets/images/k2.webp', title: 'Cabinet Refinishing' }
         ],
-        "Bathrooms": [
+        "Electrical & Fixture Work": [
             { src: 'assets/images/b1.webp', title: 'Tile Shower' },
             { src: 'assets/images/b2.webp', title: 'Vanity Install' }
         ],
-        "Flooring": [
+        "Painting & Drywall": [
             { src: 'assets/images/f1.webp', title: 'Vinyl Plank' },
             { src: 'assets/images/f2.webp', title: 'Hardwood Repair' }
         ]
