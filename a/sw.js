@@ -6,7 +6,6 @@ const PRECACHE_URLS = [
   './assets/css/style.css',
   './assets/js/main.js',
   './assets/images/logo.webp',
-  './assets/images/hero.webp',
   './assets/images/favicon-32x32.png',
   './assets/images/favicon-16x16.png',
   './assets/images/apple-touch-icon.png',
