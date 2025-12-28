@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     const categories = {
         "Plumbing Repairs": [
-            { src: 'assets/images/k1.webp', title: 'Modern Kitchen' },
+            { src: 'assets/images/k1.webp', title: 'Food Processor' },
             { src: 'assets/images/k2.webp', title: 'Cabinet Refinishing' }
         ],
         "Electrical & Fixture Work": [
