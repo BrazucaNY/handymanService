@@ -19,29 +19,6 @@
     box-sizing: border-box;
 }
 
-/* Skip link for keyboard navigation */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--secondary-color);
-    color: white;
-    padding: 8px 16px;
-    z-index: 100;
-    text-decoration: none;
-    transition: top 0.3s ease;
-}
-
-.skip-link:focus {
-    top: 0;
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
@@ -192,51 +169,63 @@ header .container {
 }
 
 /* ============================================================
-   HERO SECTION (Animated Slider)
+   STATIC BANNER
+   Simple, clean header with call-to-action
    ============================================================ */
-.hero-section {
+.static-banner {
+    background-color: var(--dark-bg);
+    color: #fff;
+    padding: 100px 0;
+    text-align: center;
     position: relative;
-    height: 80vh; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
-    margin-top: 0; /* body padding handles this */
 }
 
-.hero-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    z-index: -1;
-}
-
-.hero-layer.active { opacity: 1; }
-
-.hero-section::after {
+.static-banner::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); 
+    background: rgba(0, 0, 0, 0.7);
     z-index: 0;
 }
 
-.hero-content {
+.static-banner .container {
     position: relative;
     z-index: 1;
+}
+
+.static-banner h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
     color: #fff;
-    text-align: center;
-    max-width: 800px;
-    padding: 0 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.static-banner p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #f0f0f0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .static-banner {
+        padding: 70px 0;
+    }
+    
+    .static-banner h1 {
+        font-size: 2rem;
+    }
+    
+    .static-banner p {
+        font-size: 1rem;
+    }
 }
 
 /* ============================================================

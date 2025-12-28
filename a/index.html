@@ -12,13 +12,67 @@
     ====================================================== -->
     <title>Here Handyman | Kitchen & Bathroom Remodeling Specialists</title>
     <meta name="description" content="Here Handyman provides expert kitchen and bathroom remodeling, home repairs, and professional handyman services with quality craftsmanship you can trust.">
+    
+    <!-- Make touch events passive before any other scripts load -->
+    <script>
+    // This needs to run before any other scripts
+    (function() {
+        // Store original event handler properties
+        const originalAddEventListener = EventTarget.prototype.addEventListener;
+        const originalRemoveEventListener = EventTarget.prototype.removeEventListener;
+        
+        // Override addEventListener to make touch events passive
+        EventTarget.prototype.addEventListener = function(type, listener, options) {
+            const passiveEvents = ['touchstart', 'touchmove', 'touchend', 'touchcancel'];
+            
+            if (passiveEvents.includes(type.toLowerCase())) {
+                const passiveOptions = {
+                    passive: true,
+                    ...(typeof options === 'object' ? options : {})
+                };
+                return originalAddEventListener.call(this, type, listener, passiveOptions);
+            }
+            
+            return originalAddEventListener.apply(this, arguments);
+        };
+        
+        // Keep original removeEventListener
+        EventTarget.prototype.removeEventListener = originalRemoveEventListener;
+        
+        // Handle direct property assignments (like element.ontouchstart = ...)
+        const handlerProperties = ['ontouchstart', 'ontouchmove', 'ontouchend', 'ontouchcancel'];
+        
+        handlerProperties.forEach(prop => {
+            const descriptor = Object.getOwnPropertyDescriptor(HTMLElement.prototype, prop) || 
+                             Object.getOwnPropertyDescriptor(Element.prototype, prop);
+            
+            if (descriptor && descriptor.set) {
+                const originalSet = descriptor.set;
+                
+                Object.defineProperty(HTMLElement.prototype, prop, {
+                    set: function(fn) {
+                        const wrappedFn = function(e) {
+                            if (e && typeof e.preventDefault === 'function') {
+                                e.preventDefault = function() {};
+                            }
+                            return fn.call(this, e);
+                        };
+                        return originalSet.call(this, wrappedFn);
+                    },
+                    get: descriptor.get,
+                    configurable: true,
+                    enumerable: true
+                });
+            }
+        });
+    })();
+    </script>
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.herehandyman.com/">
     <meta name="theme-color" content="#00b833">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Here Handyman">
-    <link rel="manifest" href="site.webmanifest">
 
     <!-- =====================================================
          FAVICON
@@ -27,7 +81,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
+    <link rel="manifest" href="./site.webmanifest">
     <link rel="mask-icon" href="assets/images/safari-pinned-tab.svg" color="#00b833">
     <meta name="msapplication-TileColor" content="#00b833">
     <link rel="apple-touch-icon" href="assets/images/icon-192x192.png">
@@ -38,7 +92,7 @@
     ====================================================== -->
     <meta property="og:title" content="Here Handyman | Trusted Remodeling & Home Repair">
     <meta property="og:description" content="Professional kitchen and bathroom remodeling, home repairs, and handyman services done right.">
-    <meta property="og:image" content="https://www.herehandyman.com/assets/images/hero.webp">
+    <meta property="og:image" content="https://www.herehandyman.com/assets/images/logo.webp">
     <meta property="og:url" content="https://www.herehandyman.com/">
     <meta property="og:site_name" content="Here Handyman">
     <meta property="og:type" content="website">
@@ -50,7 +104,7 @@
     <meta name="twitter:site" content="@herehandyman">
     <meta name="twitter:title" content="Here Handyman | Remodeling & Home Repair">
     <meta name="twitter:description" content="Expert kitchen and bathroom remodeling with reliable handyman services.">
-    <meta name="twitter:image" content="https://www.herehandyman.com/assets/images/hero.webp">
+    <meta name="twitter:image" content="https://www.herehandyman.com/assets/images/logo.webp">
     <meta name="twitter:image:alt" content="Here Handyman - Professional Home Services">
 
     <!-- =====================================================
@@ -64,8 +118,6 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://www.googletagmanager.com">
 
-    <!-- Hero Image Preload (LCP Optimization) -->
-    <link rel="preload" as="image" href="assets/images/hero.webp" fetchpriority="high">
 
     <!-- =====================================================
          FONTS
@@ -83,11 +135,39 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
 
     <!-- =====================================================
-         MAIN STYLESHEET
-    ====================================================== -->
-    <!-- Preload critical CSS -->
+         CRITICAL CSS (INLINE)
+         ====================================================== -->
+    <style>
+    /* Critical CSS - Above the fold styles */
+    :root{--primary-color:#f5d71a;--primary-gradient-end:#dfc214;--primary-hover-end:#c9ae10;--secondary-color:#1a1a1a;--text-color:#333;--background-color:#fff;--light-gray-bg:#f7f7f7;--dark-bg:#1a1a1a;--transition:all .3s ease}*,:after,:before{box-sizing:border-box}body{font-family:Poppins,sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color);margin:0;padding-top:80px}.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}.static-banner{background-color:var(--dark-bg);color:#fff;padding:100px 0;text-align:center;position:relative;overflow:hidden}.static-banner::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:0}.static-banner .container{position:relative;z-index:1}.static-banner h1{font-size:2.5rem;margin-bottom:20px;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,.3);font-family:Oswald,sans-serif;line-height:1.2}.static-banner p{font-size:1.2rem;margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto;color:#f0f0f6}@media (max-width:768px){.static-banner{padding:70px 0}.static-banner h1{font-size:2rem}.static-banner p{font-size:1rem}}.cta-button{display:inline-block;background:linear-gradient(90deg,var(--primary-color),var(--primary-gradient-end));color:var(--secondary-color);padding:14px 35px;border-radius:5px;font-weight:700;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:var(--transition)}.cta-button:hover{background:linear-gradient(90deg,var(--primary-gradient-end),var(--primary-hover-end));transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,.2)}.skip-link{position:absolute;top:-40px;left:0;background:var(--primary-color);color:var(--secondary-color);padding:8px;z-index:100;transition:top .3s}.skip-link:focus{top:0}header{background-color:var(--dark-bg);padding:15px 0;position:fixed;width:100%;top:0;left:0;z-index:1000;transition:var(--transition)}.header-flex{display:flex;justify-content:space-between;align-items:center}.logo img{height:50px;width:auto}.desktop-nav ul{display:flex;gap:30px;list-style:none}.desktop-nav a{color:#fff;font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:500;letter-spacing:1px;padding:5px 0;position:relative;text-decoration:none}.desktop-nav a:hover,.desktop-nav a.active{color:var(--primary-color)}.header-buttons{display:flex;align-items:center;gap:15px}.header-phone-button{background:var(--primary-color);color:var(--secondary-color);padding:8px 15px;border-radius:5px;font-weight:600;font-family:Oswald,sans-serif;text-transform:uppercase;font-size:.9rem;display:flex;align-items:center;gap:8px;text-decoration:none}@media (max-width:992px){.desktop-nav{display:none}}#hamburger-btn{display:block;background:0 0;border:none;color:var(--primary-color);font-size:1.8rem;cursor:pointer;padding:10px;z-index:1002}#mobile-menu{position:fixed;top:0;right:-100%;width:280px;height:100vh;background-color:var(--dark-bg);z-index:1001;transition:right .4s ease-in-out;padding:80px 30px}#mobile-menu.active{right:0}.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:20px}.mobile-nav-links a{color:#fff;font-size:1.3rem;display:block;padding:10px 0;border-bottom:1px solid hsla(0,0%,100%,.1);text-decoration:none}@media (min-width:993px){#hamburger-btn{display:none}}@media (max-width:768px){.static-banner h1{font-size:2rem}.static-banner p{font-size:1rem}}@media (max-width:480px){.static-banner{padding:60px 0}.static-banner h1{font-size:1.8rem;margin-bottom:15px}.static-banner p{font-size:.95rem;margin-bottom:25px}.cta-button{padding:12px 25px;font-size:.9rem}}
+    </style>
+    
+    <!-- Load non-critical CSS asynchronously -->
     <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+    <script>
+    /*! Load CSS asynchronously */
+    function loadCSS(href, before, media) {
+        'use strict';
+        var ss = window.document.createElement('link');
+        var ref = before || window.document.getElementsByTagName('script')[0];
+        ss.rel = 'stylesheet';
+        ss.href = href;
+        ss.media = 'only x';
+        ref.parentNode.insertBefore(ss, ref);
+        setTimeout(function() {
+            ss.media = media || 'all';
+        });
+        return ss;
+    }
+    
+    /* Load non-critical styles */
+    if (window.addEventListener) {
+        window.addEventListener('load', function() {
+            loadCSS('assets/css/style.css');
+        });
+    }
+    </script>
 
     <!-- =====================================================
          STRUCTURED DATA (LOCAL BUSINESS)
@@ -178,13 +258,18 @@
 
             <!-- Company logo (high priority load for branding) -->
             <a href="#home" class="logo">
-                <img 
-                    src="assets/images/logo.webp"
-                    alt="Here Handyman Logo"
-                    width="180"
-                    height="60"
-                    loading="eager"
-                    fetchpriority="high">
+                <picture>
+                    <source srcset="assets/images/logo.webp" type="image/webp">
+                    <source srcset="assets/images/logo.png" type="image/png">
+                    <img 
+                        src="assets/images/logo.png"
+                        alt="Here Handyman Logo"
+                        width="180"
+                        height="60"
+                        decoding="async"
+                        loading="eager"
+                        fetchpriority="high">
+                </picture>
             </a>
 
             <!-- =================================================
@@ -255,24 +340,17 @@
     <main id="main-content" tabindex="-1">
 
         <!-- =================================================
-             HERO SECTION
-             Primary marketing message & CTA
+             STATIC HERO BANNER
+             Simple, clean header with call-to-action
         ================================================== -->
-        <section id="home" class="hero-section">
-
-            <!-- Background layer for image/animation effect -->
-            <div id="hero-layer-1" class="hero-layer active"></div>
-
-            <!-- Secondary hero background layer -->
-            <div id="hero-layer-2" class="hero-layer"></div>
-
-            <!-- Hero text content -->
-            <div class="container hero-content">
-                <h1>Quality Work. Honest Service. Real Results.</h1>
-                <p>Quality workmanship and reliable service for projects big and small</p>
-                <a href="#contact" class="cta-button">Get Your Free Estimate</a>
+        <section id="home" class="static-banner">
+            <div class="container">
+                <div class="banner-content">
+                    <h1>Quality Work. Honest Service. Real Results.</h1>
+                    <p>Quality workmanship and reliable service for projects big and small</p>
+                    <a href="#contact" class="cta-button">Get Your Free Estimate</a>
+                </div>
             </div>
-
         </section>
 
 <!-- =====================================================
@@ -340,7 +418,7 @@
         <h2 class="animate-on-scroll">Our Recent Projects</h2>
 
         <!-- Dynamic category buttons loaded via JavaScript -->
-        <div id="gallery-category-selection" class="services-grid"></div>
+        <div id="gallery-category-selection" class="services-grid" aria-live="polite"></div>
 
         <!-- Image display area for selected category -->
         <div id="category-image-display" style="display: none;">
@@ -351,7 +429,7 @@
             </button>
 
             <!-- Grid container for project images -->
-            <div class="gallery-grid"></div>
+            <div class="gallery-grid" aria-live="polite"></div>
         </div>
 
     </div>
@@ -435,6 +513,31 @@
         <!-- Wrapper for map and service locations -->
         <div class="service-area-content">
 
+            <!-- Make touch events passive before Google Maps loads -->
+    <script>
+    // Store original add/remove event listener functions
+    const originalAddEventListener = EventTarget.prototype.addEventListener;
+    const originalRemoveEventListener = EventTarget.prototype.removeEventListener;
+
+    // Override addEventListener to make touch events passive
+    EventTarget.prototype.addEventListener = function(type, listener, options) {
+        const passiveEvents = ['touchstart', 'touchmove', 'touchend', 'touchcancel'];
+        
+        if (passiveEvents.includes(type)) {
+            const passiveOptions = {
+                passive: true,
+                ...(typeof options === 'object' ? options : {})
+            };
+            return originalAddEventListener.call(this, type, listener, passiveOptions);
+        }
+        
+        return originalAddEventListener.apply(this, arguments);
+    };
+
+    // Keep original removeEventListener
+    EventTarget.prototype.removeEventListener = originalRemoveEventListener;
+    </script>
+
             <!-- Embedded Google Map showing primary service region -->
             <div class="map-container animate-on-scroll delay-1">
                 <iframe 
@@ -443,6 +546,32 @@
                     allowfullscreen>
                 </iframe>
             </div>
+
+            <!-- Make Google Maps touch events passive -->
+            <script>
+                // This script makes touch events passive to improve scroll performance
+                (function() {
+                    // Store original addEventListener
+                    const originalAddEventListener = EventTarget.prototype.addEventListener;
+                    
+                    EventTarget.prototype.addEventListener = function(type, listener, options) {
+                        // Only modify touch events
+                        const passiveEvents = ['touchstart', 'touchmove', 'touchend', 'touchcancel'];
+                        
+                        if (passiveEvents.includes(type)) {
+                            // If options is an object, we'll use it, otherwise create a new one
+                            const newOptions = (typeof options === 'object') ? 
+                                Object.assign({}, options, { passive: true }) : 
+                                { passive: true };
+                            
+                            return originalAddEventListener.call(this, type, listener, newOptions);
+                        }
+                        
+                        // For non-touch events, use the original addEventListener
+                        return originalAddEventListener.apply(this, arguments);
+                    };
+                })();
+            </script>
 
             <!-- Service area city and region list -->
             <div class="service-list animate-on-scroll delay-2">
@@ -552,10 +681,17 @@
             <div class="footer-column">
 
                 <!-- Footer logo (white version for dark background) -->
-                <img 
-                    src="assets/images/logo-white.webp"
-                    alt="Here Handyman Logo"
-                    class="footer-logo">
+                <picture>
+                    <source srcset="assets/images/logo-white.webp" type="image/webp">
+                    <source srcset="assets/images/logo-white.png" type="image/png">
+                    <img 
+                        src="assets/images/logo-white.png"
+                        alt="Here Handyman Logo"
+                        class="footer-logo"
+                        loading="lazy"
+                        width="200"
+                        height="67">
+                </picture>
 
                 <!-- Short brand description -->
                 <p>
@@ -565,14 +701,14 @@
 
                 <!-- Social media links -->
                 <div class="social-links">
-                    <a href="#" aria-label="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                         <i class="fab fa-facebook"></i>
                     </a>
-                    <a href="#" aria-label="Instagram">
+                    <a href="https://www.instagram.com/herehandyman" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" aria-label="Google">
-                        <i class="fab fa-google"></i>
+                    <a href="https://www.youtube.com/@herehandyman" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
                     </a>
                 </div>
             </div>

@@ -1,35 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ==========================================
-    // 1. HERO SLIDER LOGIC (The "Max" Look)
-    // ==========================================
-    const heroLayers = [document.getElementById('hero-layer-1'), document.getElementById('hero-layer-2')];
-    const heroImages = [
-        'assets/images/hero-kitchen.webp', 
-        'assets/images/hero-remodel.webp',
-        'assets/images/hero-handyman.webp'
-    ];
-    let currentIdx = 0;
-    let currentLayerIdx = 0;
-
-    function swapHeroImage() {
-        if (!heroLayers[0]) return; // Guard clause if layers don't exist
-        
-        const nextIdx = (currentIdx + 1) % heroImages.length;
-        const nextLayerIdx = (currentLayerIdx + 1) % 2;
-        
-        // Prepare next layer
-        heroLayers[nextLayerIdx].style.backgroundImage = `url('${heroImages[nextIdx]}')`;
-        heroLayers[nextLayerIdx].classList.add('active');
-        
-        // Remove current layer
-        heroLayers[currentLayerIdx].classList.remove('active');
-        
-        currentIdx = nextIdx;
-        currentLayerIdx = nextLayerIdx;
-    }
-    // Change image every 5 seconds
-    setInterval(swapHeroImage, 5000);
+    // Hero slider removed as per user request
 
 
     // ==========================================
@@ -66,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="view-btn">View Projects</span>
                 </div>
             `;
-            card.addEventListener('click', () => showCategoryImages(catName));
+            addPassiveEventListener(card, 'click', () => showCategoryImages(catName));
             categoryGrid.appendChild(card);
         });
     }
@@ -89,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (backBtn) {
-        backBtn.addEventListener('click', () => {
+        addPassiveEventListener(backBtn, 'click', () => {
             imageDisplay.style.display = 'none';
             categoryGrid.style.display = 'grid';
         });
@@ -125,16 +96,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Helper function to add passive event listeners
+    function addPassiveEventListener(element, eventName, handler, options) {
+        if (element && handler) {
+            const passiveOptions = {
+                passive: eventName === 'touchstart' || eventName === 'touchmove' || eventName === 'touchend' || eventName === 'touchcancel',
+                ...(typeof options === 'object' ? options : {})
+            };
+            element.addEventListener(eventName, handler, passiveOptions);
+        }
+    }
+
     // Event Listeners
     if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', (e) => {
+        addPassiveEventListener(hamburgerBtn, 'click', (e) => {
             e.stopPropagation();
             toggleMenu();
         });
     }
 
     if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
+        addPassiveEventListener(closeBtn, 'click', (e) => {
             e.stopPropagation();
             toggleMenu();
         });
@@ -142,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close menu when clicking on nav links
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        addPassiveEventListener(link, 'click', () => {
             if (mobileMenu.classList.contains('active')) {
                 toggleMenu();
             }
@@ -150,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Close menu when clicking outside
-    document.addEventListener('click', handleClickOutside);
+    addPassiveEventListener(document, 'click', handleClickOutside);
 
     // Close menu on window resize if it's larger than mobile
     function handleResize() {
@@ -159,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    window.addEventListener('resize', handleResize);
+    addPassiveEventListener(window, 'resize', handleResize);
 
 
     // ==========================================
@@ -169,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Sticky Header Scroll Effect
     let lastScroll = 0;
-    window.addEventListener('scroll', () => {
+    addPassiveEventListener(window, 'scroll', () => {
         const currentScroll = window.pageYOffset;
         if (currentScroll > 50) {
             header.classList.add('scrolled');
@@ -198,12 +180,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        addPassiveEventListener(contactForm, 'submit', async function(e) {
             e.preventDefault();
             
             // Honeypot check
-            if (contactForm.querySelector('[name="company"]').value !== "") return;
-
+            if (this.company.value) {
+                return; // Likely a bot
+            }
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
@@ -225,15 +208,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // SERVICE WORKER REGISTRATION
     // ==========================================
-    if ('serviceWorker' in navigator) {
+    // Register Service Worker
+    if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
-                .then(registration => {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                })
-                .catch(error => {
-                    console.error('ServiceWorker registration failed: ', error);
-                });
+            // Use relative path for service worker
+            const swUrl = './sw.js';
+            
+            // Only register if we're on HTTPS or localhost (for development)
+            if (window.location.hostname === 'localhost' || window.location.protocol === 'https:') {
+                navigator.serviceWorker.register(swUrl)
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.warn('ServiceWorker registration failed: ', err);
+                    });
+            }
         });
     }
 });
