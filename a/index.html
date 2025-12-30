@@ -6,7 +6,16 @@
     ====================================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="./">
+    <meta name="description" content="Professional handyman services for all your home repair and maintenance needs.">
+    <title>Here Handyman - Professional Home Repair Services</title>
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.google.com">
+    
+    <!-- Load main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- =====================================================
          SEO
@@ -134,6 +143,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
 
     <!-- =====================================================
          CRITICAL CSS (INLINE)
@@ -143,32 +153,8 @@
     :root{--primary-color:#f5d71a;--primary-gradient-end:#dfc214;--primary-hover-end:#c9ae10;--secondary-color:#1a1a1a;--text-color:#333;--background-color:#fff;--light-gray-bg:#f7f7f7;--dark-bg:#1a1a1a;--transition:all .3s ease}*,:after,:before{box-sizing:border-box}body{font-family:Poppins,sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color);margin:0;padding-top:80px}.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}.static-banner{background-color:var(--dark-bg);color:#fff;padding:100px 0;text-align:center;position:relative;overflow:hidden}.static-banner::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:0}.static-banner .container{position:relative;z-index:1}.static-banner h1{font-size:2.5rem;margin-bottom:20px;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,.3);font-family:Oswald,sans-serif;line-height:1.2}.static-banner p{font-size:1.2rem;margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto;color:#f0f0f6}@media (max-width:768px){.static-banner{padding:70px 0}.static-banner h1{font-size:2rem}.static-banner p{font-size:1rem}}.cta-button{display:inline-block;background:linear-gradient(90deg,var(--primary-color),var(--primary-gradient-end));color:var(--secondary-color);padding:14px 35px;border-radius:5px;font-weight:700;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:var(--transition)}.cta-button:hover{background:linear-gradient(90deg,var(--primary-gradient-end),var(--primary-hover-end));transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,.2)}.skip-link{position:absolute;top:-40px;left:0;background:var(--primary-color);color:var(--secondary-color);padding:8px;z-index:100;transition:top .3s}.skip-link:focus{top:0}header{background-color:var(--dark-bg);padding:15px 0;position:fixed;width:100%;top:0;left:0;z-index:1000;transition:var(--transition)}.header-flex{display:flex;justify-content:space-between;align-items:center}.logo img{height:50px;width:auto}.desktop-nav ul{display:flex;gap:30px;list-style:none}.desktop-nav a{color:#fff;font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:500;letter-spacing:1px;padding:5px 0;position:relative;text-decoration:none}.desktop-nav a:hover,.desktop-nav a.active{color:var(--primary-color)}.header-buttons{display:flex;align-items:center;gap:15px}.header-phone-button{background:var(--primary-color);color:var(--secondary-color);padding:8px 15px;border-radius:5px;font-weight:600;font-family:Oswald,sans-serif;text-transform:uppercase;font-size:.9rem;display:flex;align-items:center;gap:8px;text-decoration:none}@media (max-width:992px){.desktop-nav{display:none}}#hamburger-btn{display:block;background:0 0;border:none;color:var(--primary-color);font-size:1.8rem;cursor:pointer;padding:10px;z-index:1002}#mobile-menu{position:fixed;top:0;right:-100%;width:280px;height:100vh;background-color:var(--dark-bg);z-index:1001;transition:right .4s ease-in-out;padding:80px 30px}#mobile-menu.active{right:0}.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:20px}.mobile-nav-links a{color:#fff;font-size:1.3rem;display:block;padding:10px 0;border-bottom:1px solid hsla(0,0%,100%,.1);text-decoration:none}@media (min-width:993px){#hamburger-btn{display:none}}@media (max-width:768px){.static-banner h1{font-size:2rem}.static-banner p{font-size:1rem}}@media (max-width:480px){.static-banner{padding:60px 0}.static-banner h1{font-size:1.8rem;margin-bottom:15px}.static-banner p{font-size:.95rem;margin-bottom:25px}.cta-button{padding:12px 25px;font-size:.9rem}}
     </style>
     
-    <!-- Load non-critical CSS asynchronously -->
-    <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
-    <script>
-    /*! Load CSS asynchronously */
-    function loadCSS(href, before, media) {
-        'use strict';
-        var ss = window.document.createElement('link');
-        var ref = before || window.document.getElementsByTagName('script')[0];
-        ss.rel = 'stylesheet';
-        ss.href = href;
-        ss.media = 'only x';
-        ref.parentNode.insertBefore(ss, ref);
-        setTimeout(function() {
-            ss.media = media || 'all';
-        });
-        return ss;
-    }
-    
-    /* Load non-critical styles */
-    if (window.addEventListener) {
-        window.addEventListener('load', function() {
-            loadCSS('assets/css/style.css');
-        });
-    }
-    </script>
+    <!-- Load about section CSS -->
+    <link rel="stylesheet" href="assets/css/about-styles.css">
 
     <!-- =====================================================
          STRUCTURED DATA (LOCAL BUSINESS)
@@ -280,6 +266,7 @@
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About Us</a></li>
+            <li><a href="#why-choose">Why Choose Us</a></li>
                     <li><a href="#services">Our Services</a></li>
                     <li><a href="#gallery">Gallery</a></li>
                     <li><a href="#faq">FAQ</a></li>
@@ -327,6 +314,7 @@
         <ul class="mobile-nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About Us</a></li>
+            <li><a href="#why-choose">Why Choose Us</a></li>
             <li><a href="#services">Our Services</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#faq">FAQ</a></li>
@@ -358,7 +346,7 @@
      ABOUT / WHY CHOOSE US SECTION
      Highlights key reasons customers choose Here Handyman
 ====================================================== -->
-<section id="about" class="why-choose-us-section">
+<section id="why-choose" class="why-choose-us-section">
     <div class="container">
 
         <!-- Section heading with scroll animation -->
@@ -501,6 +489,76 @@
     </div>
 </section>
 <!-- ==================== END FAQ SECTION ==================== -->
+<section id="about" class="about-us-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-subtitle">Who We Are</span>
+            <h2 class="section-title animate-on-scroll">Trusted Handyman Services in Your Community</h2>
+            <div class="header-divider"></div>
+            <p class="section-intro">Serving homeowners with excellence since 2015, we take pride in transforming houses into dream homes.</p>
+        </div>
+        
+        <div class="about-us-content">
+            <div class="about-us-image">
+                <div class="experience-badge">
+                    <span class="years">10+</span>
+                    <span class="label">Years Experience</span>
+                </div>
+                <img src="assets/images/van.webp" alt="Our professional service van" loading="lazy">
+            </div>
+            
+            <div class="about-us-text">
+                <h3>Your Local Home Improvement Experts</h3>
+                <p>At <strong>Here Handyman</strong>, we combine traditional craftsmanship with modern techniques to deliver exceptional results on every project. Our journey began with a simple mission: to provide reliable, high-quality home improvement services that homeowners can trust.</p>
+                
+                <div class="about-features">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h4>Quality Guaranteed</h4>
+                        <p>We stand behind our work with a 100% satisfaction guarantee on all services.</p>
+                    </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>Skilled Professionals</h4>
+                        <p>Our team consists of licensed, insured, and background-checked technicians.</p>
+                    </div>
+                </div>
+                
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Licensed & Insured</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Free Estimates</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Same-Day Service</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Emergency Repairs</span>
+                    </div>
+                </div>
+                
+                <div class="cta-box">
+                    <a href="#contact" class="cta-button">Get Your Free Estimate</a>
+                    <a href="tel:5163500801" class="phone-link">
+                        <i class="fas fa-phone-alt"></i> (516) 350-0801
+                    </a>
+                </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <!-- ==================== SERVICE AREA SECTION ==================== -->
@@ -673,118 +731,43 @@
         </div>
     </div>
 </section>
-
-<!-- End of Main Content -->
-</main>
-
-    <!-- =====================================================
-     SITE FOOTER
-     Contains branding, navigation links, and contact info
-====================================================== -->
-<footer>
-    <div class="container">
-
-        <!-- =================================================
-             FOOTER MAIN CONTENT AREA
-             Three-column layout on desktop
-        ================================================== -->
-        <div class="footer-content">
-
-            <!-- =============================================
-                 FOOTER COLUMN 1: BRANDING & SOCIAL LINKS
-            ============================================== -->
-            <div class="footer-column">
-
-                <!-- Footer logo (white version for dark background) -->
-                <picture>
-                    <source srcset="assets/images/logo.webp" type="image/webp">
-                    <source srcset="assets/images/logo.png" type="image/png">
-                    <img 
-                        src="assets/images/logo.png"
-                        alt="Here Handyman Logo"
-                        class="footer-logo"
-                        loading="lazy"
-                        width="200"
-                        height="67">
-                </picture>
-
-                <!-- Short brand description -->
-                <p>
-                    Your trusted partner for professional home remodeling
-                    and renovation services.
-                </p>
-
-                <!-- Social media links -->
-                <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="https://www.instagram.com/herehandyman" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.youtube.com/@herehandyman" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
+<footer class="here-handyman-footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <img src="logo.png" alt="Here Handyman Logo" class="footer-logo">
+            <p>Your trusted partner for professional home remodeling and renovation services.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
-
-            <!-- =============================================
-                 FOOTER COLUMN 2: QUICK NAVIGATION LINKS
-            ============================================== -->
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-
-                <!-- Internal page navigation -->
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Our Services</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#gallery">Project Gallery</a></li>
-                    <li><a href="#contact">Free Estimate</a></li>
-                </ul>
-            </div>
-
-            <!-- =============================================
-                 FOOTER COLUMN 3: CONTACT INFORMATION
-            ============================================== -->
-            <div class="footer-column">
-                <h3>Contact Us</h3>
-
-                <!-- Phone number (click-to-call) -->
-                <div class="contact-detail">
-                    <i class="fas fa-phone"></i>
-                    <p>
-                        <a href="tel:5163500801">(516) 350-0801</a>
-                    </p>
-                </div>
-
-                <!-- Email address -->
-                <div class="contact-detail">
-                    <i class="fas fa-envelope"></i>
-                    <p>
-                        <a href="mailto:info@herehandyman.com">
-                            info@herehandyman.com
-                        </a>
-                    </p>
-                </div>
-
-                <!-- Service area location -->
-                <div class="contact-detail">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <p>Serving Plainfield, IL and surrounding areas</p>
-                </div>
-            </div>
-
         </div>
 
-        <!-- =================================================
-             FOOTER BOTTOM BAR
-             Copyright notice
-        ================================================== -->
-        <div class="footer-bottom">
-            <p>© 2025 Here Handyman. All Rights Reserved.</p>
+        <div class="footer-column">
+            <h4 class="footer-title">Quick Links</h4>
+            <div class="yellow-line"></div>
+            <nav class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#services">Our Services</a>
+                <a href="#about">About Us</a>
+                <a href="#gallery">Project Gallery</a>
+                <a href="#contact">Free Estimate</a>
+            </nav>
         </div>
 
+        <div class="footer-column">
+            <h4 class="footer-title">Contact Us</h4>
+            <div class="yellow-line"></div>
+            <div class="contact-details">
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:+15163500801">(516) 350-0801</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@herehandyman.com">info@herehandyman.com</a></p>
+                <p><i class="fa-solid fa-location-dot"></i> Serving Plainfield, IL and surrounding areas</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2025 Here Handyman. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
     </div>
 </footer>
 
@@ -799,16 +782,53 @@
 <!-- Behold Widget -->
 <div class="behold-container" style="display: none; padding: 20px 0;">
     <div class="container">
-        <h2 class="section-title text-center">Our Work on Instagram</h2>
-        <behold-widget feed-id="JCrjd6q1Ckb8Hi3ejN9a"></behold-widget>
-    </div>
 </div>
 
-<!-- =====================================================
-     MAIN JAVASCRIPT FILE
-     Controls animations, navigation, gallery, and UI logic
-====================================================== -->
-<script src="assets/js/main.js"></script>
+    <!-- =====================================================
+         MAIN JAVASCRIPT FILE
+         Controls animations, navigation, gallery, and UI logic
+    ====================================================== -->
+    <script>
+    // Simple smooth scroll implementation
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                        document.getElementById('hamburger-btn').setAttribute('aria-expanded', 'false');
+                    }
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 90, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL
+                    if (history.pushState) {
+                        history.pushState(null, null, targetId);
+                    } else {
+                        window.location.hash = targetId;
+                    }
+                }
+            });
+        });
+    });
+    </script>
+    
+    <!-- Load main.js after our inline script -->
+    <!-- Load main JavaScript -->
+    <script src="assets/js/main.js" defer></script>
 
 </body>
 </html>

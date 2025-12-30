@@ -107,6 +107,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function scrollToHash(hash) {
+        if (!hash || hash === '#') return;
+
+        const target = document.querySelector(hash);
+        if (!target) return;
+
+        const headerEl = document.querySelector('.main-header') || document.querySelector('header');
+        const headerOffset = headerEl ? headerEl.offsetHeight : 80;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - (headerOffset + 10);
+
+        window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        addPassiveEventListener(link, 'click', (e) => {
+            const href = link.getAttribute('href');
+            if (!href || href === '#') return;
+
+            const target = document.querySelector(href);
+            if (!target) return;
+
+            e.preventDefault();
+
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+
+            if (history && typeof history.pushState === 'function') {
+                history.pushState(null, '', href);
+            } else {
+                window.location.hash = href;
+            }
+
+            setTimeout(() => scrollToHash(href), 50);
+        });
+    });
+
     // Event Listeners
     if (hamburgerBtn) {
         addPassiveEventListener(hamburgerBtn, 'click', (e) => {
