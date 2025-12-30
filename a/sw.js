@@ -19,8 +19,13 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        return cache.addAll(PRECACHE_URLS)
-          .then(() => self.skipWaiting());
+        return Promise.all(
+          PRECACHE_URLS.map(url => {
+            return cache.add(url).catch(err => {
+              console.log('Failed to cache:', url, err);
+            });
+          })
+        ).then(() => self.skipWaiting());
       })
   );
 });
