@@ -268,30 +268,17 @@
          SITE HEADER
          Contains logo, navigation, and contact actions
     ====================================================== -->
-    <header class="main-header">
-        <div class="container header-flex">
-
-            <!-- Company logo (high priority load for branding) -->
-            <a href="#home" class="logo">
-                <picture>
-                    <source 
-                        srcset="assets/images/logo.webp" 
-                        type="image/webp"
-                        width="180"
-                        height="60">
-                    <img 
-                        src="assets/images/logo.webp"
-                        alt="Here Handyman Logo"
-                        width="180"
-                        height="60"
-                        decoding="async"
-                        loading="eager"
-                        fetchpriority="high">
-                </picture>
             </a>
 
-            <!-- =================================================
-                 DESKTOP NAVIGATION MENU
+            <!-- Mobile hamburger menu button -->
+            <button 
+                id="hamburger-btn"
+                class="mobile-menu-toggle"
+                aria-label="Toggle menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </button>
             ================================================== -->
             <nav class="desktop-nav" aria-label="Main Navigation">
                 <ul>
