@@ -37,10 +37,6 @@
     
     <!-- Load critical CSS inline -->
     <style id="critical-css">
-    /* Critical CSS - Minimal above-the-fold styles */
-    :root{--primary-color:#f5d71a;--primary-gradient-end:#dfc214;--primary-hover-end:#c9ae10;--secondary-color:#1a1a1a;--text-color:#333;--background-color:#fff;--light-gray-bg:#f7f7f7;--dark-bg:#1a1a1a;--transition:all .3s ease}*,:after,:before{box-sizing:border-box}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;line-height:1.6;color:var(--text-color);margin:0;padding:0}.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1)}.logo img{height:40px;width:auto}main{padding-top:80px}
-    </style>
-    
     <!-- Load non-critical CSS asynchronously -->
     <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
@@ -160,18 +156,21 @@
     <!-- =====================================================
          FONTS
     ====================================================== -->
-    <!-- Preload critical fonts -->
+    <!-- Preload critical fonts with font-display: swap -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
 
     <!-- =====================================================
          ICONS
     ====================================================== -->
     <!-- Font Awesome with preconnect -->
+    <!-- Preload Font Awesome with font-display: swap -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
 
     <!-- =====================================================
          CRITICAL CSS (INLINE)
@@ -181,8 +180,9 @@
     :root{--primary-color:#f5d71a;--primary-gradient-end:#dfc214;--primary-hover-end:#c9ae10;--secondary-color:#1a1a1a;--text-color:#333;--background-color:#fff;--light-gray-bg:#f7f7f7;--dark-bg:#1a1a1a;--transition:all .3s ease}*,:after,:before{box-sizing:border-box}body{font-family:Poppins,sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color);margin:0;padding-top:80px}.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}.static-banner{background-color:var(--dark-bg);color:#fff;padding:100px 0;text-align:center;position:relative;overflow:hidden}.static-banner::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:0}.static-banner .container{position:relative;z-index:1}.static-banner h1{font-size:2.5rem;margin-bottom:20px;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,.3);font-family:Oswald,sans-serif;line-height:1.2}.static-banner p{font-size:1.2rem;margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto;color:#f0f0f6}@media (max-width:768px){.static-banner{padding:70px 0}.static-banner h1{font-size:2rem}.static-banner p{font-size:1rem}}.cta-button{display:inline-block;background:linear-gradient(90deg,var(--primary-color),var(--primary-gradient-end));color:var(--secondary-color);padding:14px 35px;border-radius:5px;font-weight:700;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:var(--transition)}.cta-button:hover{background:linear-gradient(90deg,var(--primary-gradient-end),var(--primary-hover-end));transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,.2)}.skip-link{position:absolute;top:-40px;left:0;background:var(--primary-color);color:var(--secondary-color);padding:8px;z-index:100;transition:top .3s}.skip-link:focus{top:0}header{background-color:var(--dark-bg);padding:15px 0;position:fixed;width:100%;top:0;left:0;z-index:1000;transition:var(--transition)}.header-flex{display:flex;justify-content:space-between;align-items:center}.logo img{height:50px;width:auto}.desktop-nav ul{display:flex;gap:30px;list-style:none}.desktop-nav a{color:#fff;font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:500;letter-spacing:1px;padding:5px 0;position:relative;text-decoration:none}.desktop-nav a:hover,.desktop-nav a.active{color:var(--primary-color)}.header-buttons{display:flex;align-items:center;gap:15px}.header-phone-button{background:var(--primary-color);color:var(--secondary-color);padding:8px 15px;border-radius:5px;font-weight:600;font-family:Oswald,sans-serif;text-transform:uppercase;font-size:.9rem;display:flex;align-items:center;gap:8px;text-decoration:none}@media (max-width:992px){.desktop-nav{display:none}}#hamburger-btn{display:block;background:0 0;border:none;color:var(--primary-color);font-size:1.8rem;cursor:pointer;padding:10px;z-index:1002}#mobile-menu{position:fixed;top:0;right:-100%;width:280px;height:100vh;background-color:var(--dark-bg);z-index:1001;transition:right .4s ease-in-out;padding:80px 30px}#mobile-menu.active{right:0}.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:20px}.mobile-nav-links a{color:#fff;font-size:1.3rem;display:block;padding:10px 0;border-bottom:1px solid hsla(0,0%,100%,.1);text-decoration:none}@media (min-width:993px){#hamburger-btn{display:none}}@media (max-width:768px){.static-banner h1{font-size:2rem}.static-banner p{font-size:1rem}}@media (max-width:480px){.static-banner{padding:60px 0}.static-banner h1{font-size:1.8rem;margin-bottom:15px}.static-banner p{font-size:.95rem;margin-bottom:25px}.cta-button{padding:12px 25px;font-size:.9rem}}
     </style>
     
-    <!-- Load about section CSS -->
-    <link rel="stylesheet" href="assets/css/about-styles.css">
+    <!-- Load non-critical CSS asynchronously -->
+    <link rel="preload" href="assets/css/about-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="assets/css/about-styles.css"></noscript>
 
     <!-- =====================================================
          STRUCTURED DATA (LOCAL BUSINESS)
@@ -556,7 +556,28 @@
                     <span class="years">10+</span>
                     <span class="label">Years Experience</span>
                 </div>
-                <img src="assets/images/van.webp" alt="Our professional service van" loading="lazy">
+                <picture>
+                    <source 
+                        srcset="
+                            assets/images/van-400x411.webp 400w,
+                            assets/images/van-600x616.webp 600w,
+                            assets/images/van.webp 800w
+                        "
+                        sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
+                        type="image/webp">
+                    <img 
+                        src="assets/images/van.jpg"
+                        srcset="
+                            assets/images/van-400x411.jpg 400w,
+                            assets/images/van-600x616.jpg 600w,
+                            assets/images/van.jpg 800w
+                        "
+                        sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
+                        alt="Our professional service van" 
+                        loading="lazy"
+                        width="800"
+                        height="822">
+                </picture>
             </div>
             
             <div class="about-us-text">
@@ -650,17 +671,45 @@
     </script>
 
             <!-- Embedded Google Map showing primary service region -->
-            <div class="map-container animate-on-scroll delay-1">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d380715.5321370235!2d-88.39602895!3d41.83217725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fec6ad07ea3a9%3A0x8b8e9d205c803f93!2sPlainfield%2C%20IL!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-                    loading="lazy"
-                    allowfullscreen>
-                </iframe>
-            </div>
-
-            <!-- Make Google Maps touch events passive -->
-            <script>
-                // This script makes touch events passive to improve scroll performance
+                <div class="map-container" id="map-placeholder" style="background: #f7f7f7; min-height: 300px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: #666; margin-bottom: 1rem;"></i>
+                        <p>Click to load interactive map</p>
+                    </div>
+                </div>
+                <div id="map-container" style="display: none;">
+                    <iframe 
+                        src="" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        title="Our Service Area">
+                    </iframe>
+                </div>
+                <script>
+                // Load Google Maps when user interacts with the placeholder
+                document.getElementById('map-placeholder').addEventListener('click', function() {
+                    this.style.display = 'none';
+                    const mapContainer = document.getElementById('map-container');
+                    mapContainer.style.display = 'block';
+                    const iframe = mapContainer.querySelector('iframe');
+                    iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d380715.5321370235!2d-88.0121478!3d41.8333925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2c3cd0f4cbed%3A0xafe0a6ad09c0c000!2sChicago%2C%20IL%2C%20USA!5e0!3m2!1sen!2sbr!4v1620000000000!5m2!1sen!2sbr';
+                    
+                    // Preconnect to Google Maps domains
+                    const preconnect = document.createElement('link');
+                    preconnect.rel = 'preconnect';
+                    preconnect.href = 'https://maps.googleapis.com';
+                    document.head.appendChild(preconnect);
+                    
+                    const preconnect2 = document.createElement('link');
+                    preconnect2.rel = 'preconnect';
+                    preconnect2.href = 'https://maps.gstatic.com';
+                    preconnect2.crossOrigin = '';
+                    document.head.appendChild(preconnect2);
+                }, { once: true });
+                </script>/ This script makes touch events passive to improve scroll performance
                 (function() {
                     // Store original addEventListener
                     const originalAddEventListener = EventTarget.prototype.addEventListener;
@@ -831,10 +880,44 @@
     <i class="fas fa-arrow-up" aria-hidden="true"></i>
 </a>
 
-<!-- Behold Widget -->
-<div class="behold-container" style="display: none; padding: 20px 0;">
-    <div class="container">
+<!-- Behold Widget - Loaded on demand -->
+<div id="behold-placeholder" class="behold-placeholder" style="padding: 60px 0; background-color: #f9f9f9; text-align: center; cursor: pointer;">
+    <h2 class="section-title">View Our Work on Instagram</h2>
+    <p>Click to load Instagram feed</p>
 </div>
+<div id="behold-container" class="behold-container" style="display: none; padding: 20px 0;">
+    <div class="container">
+        <behold-widget feed-id="JCrjd6q1Ckb8Hi3ejN9a"></behold-widget>
+    </div>
+</div>
+<script>
+// Load Behold widget on user interaction
+document.getElementById('behold-placeholder').addEventListener('click', function() {
+    this.style.display = 'none';
+    const container = document.getElementById('behold-container');
+    container.style.display = 'block';
+    
+    // Load the widget script
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = 'https://w.behold.so/widget.js';
+    script.onload = function() {
+        // Preconnect to required domains after widget loads
+        const preconnects = [
+            'https://w.behold.so',
+            'https://feeds.behold.so'
+        ];
+        
+        preconnects.forEach(domain => {
+            const link = document.createElement('link');
+            link.rel = 'preconnect';
+            link.href = domain;
+            document.head.appendChild(link);
+        });
+    };
+    document.head.appendChild(script);
+}, { once: true });
+</script>
 
     <!-- =====================================================
          MAIN JAVASCRIPT FILE
