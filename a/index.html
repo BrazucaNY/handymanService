@@ -304,6 +304,40 @@
                     <span class="phone-text">(516) 350-0801</span>
                 </a>
 
+                <!-- Company logo with responsive loading -->
+                <a href="#home" class="logo">
+                    <picture>
+                        <!-- WebP format with density descriptors -->
+                        <source 
+                            srcset="
+                                assets/images/logo.webp 1x,
+                                assets/images/logo@2x.webp 2x
+                            " 
+                            type="image/webp">
+                        <!-- Fallback to original format -->
+                        <!-- Fallback to WebP format -->
+                        <source 
+                            srcset="
+                                assets/images/logo.webp 1x,
+                                assets/images/logo@2x.webp 2x
+                            "
+                            type="image/webp">
+                        <!-- Fallback img element with modern attributes -->
+                        <img 
+                            src="assets/images/logo.webp"
+                            srcset="
+                                assets/images/logo.webp 1x,
+                                assets/images/logo@2x.webp 2x
+                            "
+                            alt="Here Handyman Logo"
+                            width="180"
+                            height="60"
+                            decoding="async"
+                            loading="eager"
+                            fetchpriority="high">
+                    </picture>
+                </a>
+
                 <!-- Mobile hamburger menu button -->
                 <button 
                     id="hamburger-btn"
