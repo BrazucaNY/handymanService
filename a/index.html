@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://w.behold.so" fetchpriority="low">
     <link rel="preconnect" href="https://feeds.behold.so" fetchpriority="low">
     
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="assets/images/van-400x411.webp" imagesrcset="assets/images/van-400x411.webp 400w, assets/images/van-600x616.webp 600w, assets/images/van.webp 800w" imagesizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px" fetchpriority="high">
+    
     <!-- Preload critical fonts with display=swap -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -586,26 +589,35 @@
                     <span class="label">Years Experience</span>
                 </div>
                 <picture>
+                    <!-- WebP format with multiple resolutions -->
                     <source 
                         srcset="
                             assets/images/van-400x411.webp 400w,
                             assets/images/van-600x616.webp 600w,
-                            assets/images/van.webp 800w
+                            assets/images/van-800x822.webp 800w
                         "
                         sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
-                        type="image/webp">
+                        type="image/webp"
+                        loading="eager"
+                        fetchpriority="high"
+                        width="800"
+                        height="822">
+                    <!-- Fallback to JPG -->
                     <img 
-                        src="assets/images/van.jpg"
+                        src="assets/images/van-800x822.jpg" 
                         srcset="
                             assets/images/van-400x411.jpg 400w,
                             assets/images/van-600x616.jpg 600w,
-                            assets/images/van.jpg 800w
+                            assets/images/van-800x822.jpg 800w
                         "
                         sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
-                        alt="Our professional service van" 
-                        loading="lazy"
+                        alt="Our professional service van"
+                        loading="eager"
+                        fetchpriority="high"
                         width="800"
-                        height="822">
+                        height="822"
+                        decoding="async"
+                        style="content-visibility: auto;">
                 </picture>
             </div>
             

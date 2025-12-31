@@ -19,13 +19,29 @@
     box-sizing: border-box;
 }
 
+/* Basic typography with system font first */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
     padding: 0;
     margin: 0;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Load custom fonts after the page has rendered */
+html.fonts-loaded body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+html.fonts-loaded h1,
+html.fonts-loaded h2,
+html.fonts-loaded h3,
+html.fonts-loaded .desktop-nav a {
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .container {
@@ -35,16 +51,30 @@ body {
     padding: 0 20px;
 }
 
-/* Typography */
+/* Typography with fallbacks */
 h1, h2, h3 {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: var(--secondary-color);
     line-height: 1.2;
+    font-weight: 600;
+    text-rendering: optimizeLegibility;
 }
 
-h1 { font-size: 3rem; }
-h2 { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
-h3 { font-size: 1.5rem; margin-bottom: 15px; }
+h1 { 
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+}
+
+h2 { 
+    font-size: clamp(1.75rem, 4vw, 2.5rem); 
+    margin-bottom: 2rem; 
+    text-align: center;
+}
+
+h3 { 
+    font-size: clamp(1.25rem, 3vw, 1.5rem); 
+    margin-bottom: 1rem;
+}
 
 a {
     text-decoration: none;
@@ -53,8 +83,33 @@ a {
 }
 
 section {
-    padding: 80px 0;
+    padding: clamp(40px, 10vw, 80px) 0;
     scroll-margin-top: 90px;
+    position: relative;
+    overflow: hidden;
+    contain: content;
+}
+
+/* Optimize image loading */
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    content-visibility: auto;
+    font-style: italic;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Ensure images with width/height attributes maintain aspect ratio */
+img[width][height] {
+    aspect-ratio: attr(width) / attr(height);
+}
+
+/* Optimize iframe loading */
+iframe {
+    border: 0;
+    max-width: 100%;
 }
 
 /* ============================================================
@@ -68,17 +123,24 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
-    transition: var(--transition);
-    box-shadow: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    will-change: transform, background-color;
     margin: 0;
     border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    contain: content;
+}
+
+/* Hide header on scroll down, show on scroll up */
+header.hide {
+    transform: translateY(-100%);
 }
 
 header.scrolled {
     padding: 10px 0;
-    background-color: #000000;
-    box-shadow: none;
-    border: none;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 header .container {
@@ -86,16 +148,21 @@ header .container {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    contain: content;
 }
 
 .logo {
     flex-shrink: 0;
+    position: relative;
+    z-index: 1002;
 }
 
 .logo img {
     height: 50px;
     width: auto;
     display: block;
+    content-visibility: auto;
+    contain: layout style paint;
 }
 
 .desktop-nav {
