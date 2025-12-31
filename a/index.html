@@ -238,6 +238,29 @@
     ====================================================== -->
     <header class="site-header">
         <div class="container">
+            <!-- Logo on the left -->
+            <a href="#home" class="logo">
+                <picture>
+                    <!-- WebP format with multiple resolutions -->
+                    <source 
+                        srcset="
+                            assets/images/logo-180x60.webp 1x,
+                            assets/images/logo-360x120.webp 2x" 
+                        type="image/webp">
+                    <!-- Fallback to PNG -->
+                    <img 
+                        src="assets/images/logo-180x60.png"
+                        srcset="assets/images/logo-360x120.png 2x"
+                        alt="Here Handyman Logo"
+                        width="180"
+                        height="60"
+                        decoding="async"
+                        loading="eager"
+                        fetchpriority="high">
+                </picture>
+            </a>
+
+            <!-- Navigation in the middle -->
             <nav class="desktop-nav" aria-label="Main Navigation">
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -250,38 +273,12 @@
                 </ul>
             </nav>
 
-            <!-- =================================================
-                 HEADER ACTION BUTTONS
-                 Phone call CTA + mobile menu toggle
-            ================================================== -->
+            <!-- Phone and mobile menu on the right -->
             <div class="header-buttons">
-
                 <!-- Click-to-call phone button -->
                 <a href="tel:5163500801" class="header-phone-button">
                     <i class="fas fa-phone"></i>
                     <span class="phone-text">(516) 350-0801</span>
-                </a>
-
-                <!-- Company logo with responsive loading -->
-                <a href="#home" class="logo">
-                    <picture>
-                        <!-- WebP format with multiple resolutions -->
-                        <source 
-                            srcset="
-                                assets/images/logo-180x60.webp 1x,
-                                assets/images/logo-360x120.webp 2x" 
-                            type="image/webp">
-                        <!-- Fallback to PNG -->
-                        <img 
-                            src="assets/images/logo-180x60.png"
-                            srcset="assets/images/logo-360x120.png 2x"
-                            alt="Here Handyman Logo"
-                            width="180"
-                            height="60"
-                            decoding="async"
-                            loading="eager"
-                            fetchpriority="high">
-                    </picture>
                 </a>
 
                 <!-- Mobile hamburger menu button -->
