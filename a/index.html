@@ -55,50 +55,72 @@
             }
         </style>
     </noscript>
-    <style>
-        /* Local font declarations with font-display: swap */
-        @font-face {
-            font-family: 'Font Awesome 6 Brands';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: url('assets/wooff2/fa-brands-400.woff2') format('woff2');
-        }
-        @font-face {
-            font-family: 'Font Awesome 6 Solid';
-            font-style: normal;
-            font-weight: 900;
-            font-display: swap;
-            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2') format('woff2');
-        }
-    </style>
-    
-    <!-- Font Awesome - Using local files instead of kit -->
-    <link rel="preload" href="assets/wooff2/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="assets/wooff2/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- Preload critical fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    
-    <link rel="preload" href="https://fonts.gstatic.com/s/oswald/v49/TK3iWkUHHAIjg752HT8Ghe4.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXx-p7K4KLg.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- Preload critical CSS -->
+    <!-- Preload critical CSS first -->
     <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
     
-    <!-- Preload about page CSS for better navigation performance -->
-    <link rel="preload" href="assets/css/about-styles.css" as="style" onload="if(media!=='all')media='all'">
-    
-    <!-- Font Awesome with font-display: swap -->
+    <!-- Preconnect to required origins -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
-          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" 
-          crossorigin="anonymous" 
-          referrerpolicy="no-referrer" 
-          media="print" 
+    
+    <!-- Font face declarations with font-display: swap and size-adjust -->
+    <style>
+    /* System font stack for immediate text rendering */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    /* Font face declarations with size-adjust to prevent layout shifts */
+    @font-face {
+        font-family: 'Oswald';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('Oswald Regular'), local('Oswald-Regular'),
+             url('assets/wooff2/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYjMdZwl.woff2') format('woff2');
+        size-adjust: 95%;
+    }
+    
+    @font-face {
+        font-family: 'Font Awesome 6 Free';
+        font-style: normal;
+        font-weight: 900;
+        font-display: block;
+        src: url('assets/wooff2/fa-solid-900.woff2') format('woff2');
+    }
+    
+    @font-face {
+        font-family: 'Font Awesome 6 Brands';
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+        src: url('assets/wooff2/fa-brands-400.woff2') format('woff2');
+    }
+    
+    /* Apply web fonts after they load */
+    .fonts-loaded {
+        font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    }
+    
+    /* Preload critical fonts */
+    .preload-fonts {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+    </style>
+    
+    <!-- Preload critical fonts with proper attributes -->
+    <link rel="preload" as="font" href="assets/wooff2/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYjMdZwl.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="assets/wooff2/fa-solid-900.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="assets/wooff2/fa-brands-400.woff2" type="font/woff2" crossorigin>
+    
+    <!-- Preload about page CSS for better navigation performance -->
+    <link rel="preload" href="assets/css/about-styles.css" as="style" onload="if(media!=='all')media='all'" media="print"> 
           onload="this.media='all'; this.onload=null" />
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     
@@ -717,6 +739,52 @@ if (document.readyState === 'loading') {
             // Add your fallback analytics code here if needed
         }
     }, 2000);
+    </script>
+    
+    <!-- Font loading script with improved performance -->
+    <script>
+    // Font loading strategy
+    (function() {
+        // Add loading class to HTML
+        document.documentElement.classList.add('fonts-loading');
+        
+        // Function to load fonts
+        function loadFonts() {
+            if ('fonts' in document) {
+                // Check if fonts are already loaded
+                if (sessionStorage.fontsLoaded) {
+                    document.documentElement.classList.remove('fonts-loading');
+                    document.documentElement.classList.add('fonts-loaded');
+                    return;
+                }
+                
+                // Load critical fonts
+                Promise.all([
+                    document.fonts.load('1em Oswald'),
+                    document.fonts.load('900 1em "Font Awesome 6 Free"'),
+                    document.fonts.load('400 1em "Font Awesome 6 Brands"')
+                ]).then(function() {
+                    document.documentElement.classList.remove('fonts-loading');
+                    document.documentElement.classList.add('fonts-loaded');
+                    sessionStorage.fontsLoaded = true;
+                }).catch(function() {
+                    document.documentElement.classList.remove('fonts-loading');
+                });
+            } else {
+                document.documentElement.classList.remove('fonts-loading');
+            }
+        }
+        
+        // Start loading fonts after a short delay
+        setTimeout(loadFonts, 100);
+        
+        // Fallback in case the above times out
+        setTimeout(function() {
+            if (document.documentElement.classList.contains('fonts-loading')) {
+                document.documentElement.classList.remove('fonts-loading');
+            }
+        }, 3000);
+    })();
     </script>
     
     <!-- Load main JavaScript with defer -->
