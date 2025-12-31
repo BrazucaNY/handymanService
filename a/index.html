@@ -380,31 +380,38 @@
      Loads GTM after page is interactive to improve performance
 ====================================================== -->
 <script>
-    // Initialize dataLayer array
-    window.dataLayer = window.dataLayer || [];
+// Initialize dataLayer array
+window.dataLayer = window.dataLayer || [];
+
+// Load GTM script after a short delay
+function loadGTM() {
+    // Create and append GTM script
+    const gtmScript = document.createElement('script');
+    gtmScript.async = true;
+    gtmScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
+    document.head.appendChild(gtmScript);
     
-    <!-- Load optimized GTM script -->
-    <script>
-    // Preload GTM script with low priority
-    const gtmLink = document.createElement('link');
-    gtmLink.rel = 'preload';
-    gtmLink.as = 'script';
-    gtmLink.href = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
-    document.head.appendChild(gtmLink);
-            'gtm.start': new Date().getTime(),
-            event: 'gtm.js'
-        });
-    }
+    // Configure gtag function
+    window.gtag = function() {
+        window.dataLayer.push(arguments);
+    };
     
-    // Load GTM after a short delay if page is already interactive
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    gtag('js', new Date());
+    gtag('config', 'G-7QYNVWMYJJ', {
+        'transport_type': 'beacon',
+        'anonymize_ip': true
+    });
+}
+
+// Load GTM after a short delay if page is already interactive
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(loadGTM, 1000);
+} else {
+    // Otherwise wait for DOMContentLoaded
+    window.addEventListener('DOMContentLoaded', function() {
         setTimeout(loadGTM, 1000);
-    } else {
-        // Otherwise wait for DOMContentLoaded
-        window.addEventListener('DOMContentLoaded', function() {
-            setTimeout(loadGTM, 1000);
-        });
-    }
+    });
+}
 </script>
 </head>
 
