@@ -383,20 +383,14 @@
     // Initialize dataLayer array
     window.dataLayer = window.dataLayer || [];
     
-    // Function to load GTM
-    function loadGTM() {
-        // Create script element
-        var gtmScript = document.createElement('script');
-        gtmScript.async = true;
-        gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=G-7QYNVWMYJJ';
-        gtmScript.setAttribute('fetchpriority', 'low');
-        
-        // Insert before first script tag or at end of head
-        var firstScript = document.getElementsByTagName('script')[0];
-        firstScript.parentNode.insertBefore(gtmScript, firstScript);
-        
-        // Push to dataLayer
-        window.dataLayer.push({
+    <!-- Load optimized GTM script -->
+    <script>
+    // Preload GTM script with low priority
+    const gtmLink = document.createElement('link');
+    gtmLink.rel = 'preload';
+    gtmLink.as = 'script';
+    gtmLink.href = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
+    document.head.appendChild(gtmLink);
             'gtm.start': new Date().getTime(),
             event: 'gtm.js'
         });
