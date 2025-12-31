@@ -7,7 +7,8 @@
     <title>Here Handyman | Kitchen & Bathroom Remodeling Specialists</title>
     <meta name="description" content="Here Handyman provides expert kitchen and bathroom remodeling, home repairs, and professional handyman services with quality craftsmanship you can trust.">
     
-    <!-- Preconnect to external domains -->
+    <!-- Preconnect to external domains with priorities -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://w.behold.so" crossorigin>
@@ -200,33 +201,25 @@
      Loads Google Analytics after page load to improve performance
 ====================================================== -->
 <script>
-    // Wait until the entire page has fully loaded
-    window.addEventListener('load', function () {
-
-        // Delay Google Analytics loading by 2.5 seconds
-        setTimeout(function () {
-
-            // Dynamically create the Google Analytics script tag
-            var gtagScript = document.createElement('script');
-            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
-            gtagScript.async = true;
-
-            // Append the GA script to the document head
-            document.head.appendChild(gtagScript);
-
-            // Initialize Google Analytics data layer
+    // Load GTM after page is interactive
+    window.addEventListener('load', function() {
+        // Load GTM script
+        var gtmScript = document.createElement('script');
+        gtmScript.async = true;
+        gtmScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
+        
+        gtmScript.onload = function() {
             window.dataLayer = window.dataLayer || [];
-
-            // Define gtag function to push events into dataLayer
-            function gtag(){ dataLayer.push(arguments); }
-
-            // Track page load timestamp
+            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
-            // Configure GA with anonymized IP for privacy compliance
-            gtag('config', 'G-7QYNVWMYJJ', { 'anonymize_ip': true });
-
-        }, 2500);
+            gtag('config', 'G-7QYNVWMYJJ', { 
+                'anonymize_ip': true,
+                'transport_type': 'beacon',
+                'use_amp_client_id': true
+            });
+        };
+        
+        document.head.appendChild(gtmScript);
     });
 </script>
 </head>
@@ -833,30 +826,44 @@
 </div>
 <script>
 // Load Behold widget on user interaction
-document.getElementById('behold-placeholder').addEventListener('click', function() {
-    this.style.display = 'none';
+function loadBeholdWidget() {
+    if (window.beholdWidgetLoaded) return;
+    window.beholdWidgetLoaded = true;
+    
     const container = document.getElementById('behold-container');
     container.style.display = 'block';
     
-    // Load the widget script
+    // Create and load the widget script
     const script = document.createElement('script');
     script.src = 'https://w.behold.so/widget.js';
-    script.onload = function() {
-        // Preconnect to required domains after widget loads
-        const preconnects = [
-            'https://w.behold.so',
-            'https://feeds.behold.so'
-        ];
-        
-        preconnects.forEach(domain => {
-            const link = document.createElement('link');
-            link.rel = 'preconnect';
-            link.href = domain;
-            document.head.appendChild(link);
-        });
-    };
+    script.async = true;
+    script.fetchPriority = 'low';
+    
+    // Preconnect to required domains
+    ['https://w.behold.so', 'https://feeds.behold.so'].forEach(domain => {
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = domain;
+        document.head.appendChild(link);
+    });
+    
     document.head.appendChild(script);
+}
+    
+// Load on interaction or after delay
+const beholdPlaceholder = document.getElementById('behold-placeholder');
+beholdPlaceholder.addEventListener('click', function() {
+    this.style.display = 'none';
+    loadBeholdWidget();
 }, { once: true });
+    
+// Load after 5 seconds if no interaction
+setTimeout(() => {
+    if (!window.beholdWidgetLoaded && beholdPlaceholder.style.display !== 'none') {
+        beholdPlaceholder.style.display = 'none';
+        loadBeholdWidget();
+    }
+}, 5000);
 </script>
 
     <!-- =====================================================
@@ -908,8 +915,7 @@ document.getElementById('behold-placeholder').addEventListener('click', function
     <!-- Load main JavaScript with defer -->
     <script src="assets/js/main.js" defer></script>
     
-    <!-- Load third-party scripts with async -->
-    <script async src="https://w.behold.so/widget.js" type="text/javascript"></script>
+    <!-- Third-party scripts are loaded on demand -->
     
     <!-- Load non-critical scripts after page load -->
     <script>
