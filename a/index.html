@@ -20,10 +20,49 @@
     <!-- Preload LCP image -->
     <link rel="preload" as="image" href="assets/images/van-400x411.webp" imagesrcset="assets/images/van-400x411.webp 400w, assets/images/van-600x616.webp 600w, assets/images/van.webp 800w" imagesizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px" fetchpriority="high">
     
-    <!-- Preload critical fonts with display=swap -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap&display=swap" rel="stylesheet"></noscript>
+    <!-- Font Loading Strategy -->
+    <script>
+    // Load fonts after the page has rendered
+    document.documentElement.classList.add('fonts-loading');
+    
+    // Load fonts after critical rendering
+    const loadFonts = () => {
+        // Create link for Google Fonts
+        const fontLink = document.createElement('link');
+        fontLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap';
+        fontLink.rel = 'stylesheet';
+        fontLink.media = 'print';
+        fontLink.onload = () => {
+            fontLink.media = 'all';
+            document.documentElement.classList.remove('fonts-loading');
+            document.documentElement.classList.add('fonts-loaded');
+        };
+        document.head.appendChild(fontLink);
+    };
+
+    // Load fonts after a short delay
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadFonts);
+    } else {
+        setTimeout(loadFonts, 100);
+    }
+    </script>
+    
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+            /* Fallback styles when JavaScript is disabled */
+            html { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+            html.fonts-loaded { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+            html.fonts-loaded h1,
+            html.fonts-loaded h2,
+            html.fonts-loaded h3,
+            html.fonts-loaded .desktop-nav a {
+                font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            }
+        </style>
+    </noscript>
     <style>
         /* Font face declarations with font-display: swap */
         @font-face {
@@ -105,7 +144,11 @@
     </style>
     <!-- Load non-critical CSS asynchronously -->
     <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+    <link rel="preload" href="assets/css/optimization.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/optimization.css">
+    </noscript>
 
     <!-- SEO -->
     
@@ -237,6 +280,73 @@
     <!-- Load page-specific styles with media queries -->
     <link rel="preload" href="assets/css/about-styles.css" as="style" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="assets/css/about-styles.css"></noscript>
+    
+    <!-- Add a small script to handle image lazy loading -->
+    <script>
+    // Lazy load images with Intersection Observer
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lazy load images
+        const lazyImages = [].slice.call(document.querySelectorAll('img[data-src]'));
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        if (img.dataset.srcset) {
+                            img.srcset = img.dataset.srcset;
+                        }
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '200px 0px',
+                threshold: 0.01
+            });
+
+            lazyImages.forEach(function(img) {
+                imageObserver.observe(img);
+            });
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            let active = false;
+            const lazyLoad = function() {
+                if (active === false) {
+                    active = true;
+                    setTimeout(function() {
+                        lazyImages.forEach(function(img) {
+                            if ((img.getBoundingClientRect().top <= window.innerHeight + 200 && 
+                                 img.getBoundingClientRect().bottom >= 0) && 
+                                getComputedStyle(img).display !== 'none') {
+                                img.src = img.dataset.src;
+                                if (img.dataset.srcset) {
+                                    img.srcset = img.dataset.srcset;
+                                }
+                                img.classList.add('loaded');
+                                lazyImages.splice(lazyImages.indexOf(img), 1);
+                            }
+                        });
+                        
+                        if (lazyImages.length === 0) {
+                            document.removeEventListener('scroll', lazyLoad);
+                            window.removeEventListener('resize', lazyLoad);
+                            window.removeEventListener('orientationchange', lazyLoad);
+                        } else {
+                            active = false;
+                        }
+                    }, 200);
+                }
+            };
+            
+            document.addEventListener('scroll', lazyLoad);
+            window.addEventListener('resize', lazyLoad);
+            window.addEventListener('orientationchange', lazyLoad);
+            lazyLoad();
+        }
+    });
+    </script>
 
     <!-- =====================================================
          STRUCTURED DATA (LOCAL BUSINESS)
@@ -588,37 +698,52 @@
                     <span class="years">10+</span>
                     <span class="label">Years Experience</span>
                 </div>
-                <picture>
-                    <!-- WebP format with multiple resolutions -->
-                    <source 
-                        srcset="
-                            assets/images/van-400x411.webp 400w,
-                            assets/images/van-600x616.webp 600w,
-                            assets/images/van-800x822.webp 800w
-                        "
-                        sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
-                        type="image/webp"
-                        loading="eager"
-                        fetchpriority="high"
-                        width="800"
-                        height="822">
-                    <!-- Fallback to JPG -->
-                    <img 
-                        src="assets/images/van-800x822.jpg" 
-                        srcset="
-                            assets/images/van-400x411.jpg 400w,
-                            assets/images/van-600x616.jpg 600w,
-                            assets/images/van-800x822.jpg 800w
-                        "
-                        sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
-                        alt="Our professional service van"
-                        loading="eager"
-                        fetchpriority="high"
-                        width="800"
-                        height="822"
-                        decoding="async"
-                        style="content-visibility: auto;">
-                </picture>
+                <div class="image-container" style="position: relative; padding-top: 102.75%;">
+                    <picture>
+                        <!-- WebP format with multiple resolutions -->
+                        <source 
+                            srcset="
+                                assets/images/van-400x411.webp 400w,
+                                assets/images/van-600x616.webp 600w,
+                                assets/images/van-800x822.webp 800w
+                            "
+                            sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
+                            type="image/webp">
+                        <!-- Fallback to JPG -->
+                        <img 
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 822'%3E%3C/svg%3E"
+                            data-src="assets/images/van-800x822.jpg" 
+                            data-srcset="
+                                assets/images/van-400x411.jpg 400w,
+                                assets/images/van-600x616.jpg 600w,
+                                assets/images/van-800x822.jpg 800w
+                            "
+                            sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
+                            alt="Our professional service van"
+                            width="800"
+                            height="822"
+                            loading="eager"
+                            decoding="async"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease;"
+                            onload="this.style.opacity=1">
+                    </picture>
+                    <noscript>
+                        <img 
+                            src="assets/images/van-800x822.jpg" 
+                            srcset="
+                                assets/images/van-400x411.jpg 400w,
+                                assets/images/van-600x616.jpg 600w,
+                                assets/images/van-800x822.jpg 800w
+                            "
+                            sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
+                            alt="Our professional service van"
+                            width="800"
+                            height="822"
+                            loading="lazy"
+                            decoding="async"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </noscript>
+                </div>
             </div>
             
             <div class="about-us-text">
