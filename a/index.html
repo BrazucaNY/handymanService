@@ -105,6 +105,22 @@
 
     <!-- Critical CSS - Inline for above-the-fold content -->
     <style id="critical-css">
+    /* Font face with font-display: swap */
+    @font-face {
+        font-family: 'Oswald';
+        font-style: normal;
+        font-weight: 400;
+        src: url('https://fonts.gstatic.com/s/oswald/v49/TK3iWkUHHAIjg752HT8Ghe4.woff2') format('woff2');
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        src: url('https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXx-p7K4KLg.woff2') format('woff2');
+        font-display: swap;
+    }
     /*! Critical CSS - Optimized for above-the-fold content */
     :root {
         --primary-color: #f5d71a;
@@ -1197,6 +1213,32 @@ setTimeout(() => {
     <!-- Load main.js after our inline script -->
     <!-- Preload critical scripts -->
     <link rel="preload" href="assets/js/main.js" as="script">
+    
+    <!-- Font loading script -->
+    <script>
+    // Inline critical font loading logic
+    (function() {
+        // Add loading class to HTML
+        document.documentElement.classList.add('fonts-loading');
+        
+        // Load fonts after a short delay
+        setTimeout(function() {
+            if ('fonts' in document) {
+                Promise.all([
+                    document.fonts.load('1em Oswald'),
+                    document.fonts.load('1em Montserrat')
+                ]).then(function() {
+                    document.documentElement.classList.remove('fonts-loading');
+                    document.documentElement.classList.add('fonts-loaded');
+                }).catch(function() {
+                    document.documentElement.classList.remove('fonts-loading');
+                });
+            } else {
+                document.documentElement.classList.remove('fonts-loading');
+            }
+        }, 100);
+    })();
+    </script>
     
     <!-- Load main JavaScript with defer -->
     <script src="assets/js/main.js" defer></script>
