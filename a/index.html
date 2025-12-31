@@ -73,9 +73,9 @@
         }
     </style>
     
-    <!-- Font Awesome Kit (optimized) -->
-    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous" async></script>
-    <link rel="preconnect" href="https://kit.fontawesome.com">
+    <!-- Font Awesome - Using local files instead of kit -->
+    <link rel="preload" href="assets/wooff2/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/wooff2/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Preload critical fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,8 +86,11 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Preload critical CSS -->
-    <link rel="preload" href="/assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/css/style.css"></noscript>
+    <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+    
+    <!-- Preload about page CSS for better navigation performance -->
+    <link rel="preload" href="assets/css/about-styles.css" as="style" onload="if(media!=='all')media='all'">
     
     <!-- Font Awesome with font-display: swap -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -669,8 +672,8 @@ if (document.readyState === 'loading') {
     </script>
     
     <!-- Load main.js after our inline script -->
-    <!-- Preload critical scripts -->
-    <link rel="preload" href="assets/js/main.js" as="script">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/images/van.webp" as="image" type="image/webp" media="(min-width: 768px)">
     
     <!-- Font loading script -->
     <script>
@@ -696,6 +699,24 @@ if (document.readyState === 'loading') {
             }
         }, 100);
     })();
+    </script>
+    
+    <!-- Load main JavaScript with defer -->
+    <!-- Google Tag Manager with error handling -->
+    <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-7QYNVWMYJJ');
+    
+    // Fallback if GTM fails to load
+    setTimeout(function() {
+        if (!window.google_tag_manager) {
+            console.warn('GTM failed to load, using fallback analytics');
+            // Add your fallback analytics code here if needed
+        }
+    }, 2000);
     </script>
     
     <!-- Load main JavaScript with defer -->
