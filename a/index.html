@@ -466,9 +466,9 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
 
             <!-- Phone and mobile menu on the right -->
             <div class="header-buttons">
-                <!-- Click-to-call phone button -->
-                <a href="tel:5163500801" class="header-phone-button">
-                    <i class="fas fa-phone"></i>
+                <!-- Click-to-call phone button with improved touch target -->
+                <a href="tel:+15163500801" class="header-phone-button" aria-label="Call (516) 350-0801">
+                    <i class="fas fa-phone" aria-hidden="true"></i>
                     <span class="phone-text">(516) 350-0801</span>
                 </a>
 
@@ -523,7 +523,9 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
                 <div class="banner-content">
                     <h1>Quality Work. Honest Service. Real Results.</h1>
                     <p>Quality workmanship and reliable service for projects big and small</p>
-                    <a href="#contact" class="cta-button">Get Your Free Estimate</a>
+                    <a href="#contact" class="cta-button" aria-label="Get Your Free Estimate">
+                        <span>Get Your Free Estimate</span>
+                    </a>
                 </div>
             </div>
         </section>
