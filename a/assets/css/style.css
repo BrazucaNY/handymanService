@@ -83,19 +83,33 @@ header.scrolled {
 
 header .container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    flex-shrink: 0;
 }
 
 .logo img {
     height: 50px;
     width: auto;
+    display: block;
+}
+
+.desktop-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .desktop-nav ul {
     display: flex;
     gap: 30px;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .desktop-nav a {
@@ -117,6 +131,7 @@ header .container {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-left: auto;
 }
 
 .header-phone-button {
@@ -133,7 +148,7 @@ header .container {
     gap: 8px;
 }
 
-/* Mobile Menu Logic */
+/* Mobile Menu Toggle Button */
 #hamburger-btn {
     display: block;
     background: none;
