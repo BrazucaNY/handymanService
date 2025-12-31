@@ -657,27 +657,7 @@
                     preconnect2.crossOrigin = '';
                     document.head.appendChild(preconnect2);
                 }, { once: true });
-               <script>
-    // This script makes touch events passive to improve scroll performance
-    (function() {
-        // Use a unique name to avoid conflicts with scripts in the <head>
-        const gMapPassiveListener = EventTarget.prototype.addEventListener;
-        
-        EventTarget.prototype.addEventListener = function(type, listener, options) {
-            const passiveEvents = ['touchstart', 'touchmove', 'touchend', 'touchcancel'];
-            
-            if (passiveEvents.includes(type)) {
-                const newOptions = (typeof options === 'object') ? 
-                    Object.assign({}, options, { passive: true }) : 
-                    { passive: true };
-                
-                return gMapPassiveListener.call(this, type, listener, newOptions);
-            }
-            
-            return gMapPassiveListener.apply(this, arguments);
-        };
-    })();
-</script>
+                </script>
 
             <!-- Service area city and region list -->
             <div class="service-list animate-on-scroll delay-2">
