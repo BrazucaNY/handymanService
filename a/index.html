@@ -292,9 +292,32 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com">
     
-    <!-- Load Font Awesome with optimized loading -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+    <!-- Font Awesome with optimized loading -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" as="style" 
+         onload="this.onload=null;this.rel='stylesheet'"
+         media="print" 
+         onload="this.media='all'; this.onload=null" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
+    <style>
+    /* Font Awesome font-face with font-display: swap */
+    @font-face {
+        font-family: 'Font Awesome 5 Free';
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-solid-900.woff2") format("woff2");
+    }
+    @font-face {
+        font-family: 'Font Awesome 5 Brands';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-brands-400.woff2") format("woff2");
+    }
+    </style>
     
     <!-- Preload critical fonts with font-display: swap -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -1116,24 +1139,35 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
     <i class="fas fa-arrow-up" aria-hidden="true"></i>
 </a>
 
-<!-- Behold Widget - Loaded on demand -->
-<div id="behold-placeholder" class="behold-placeholder" style="padding: 60px 0; background-color: #f9f9f9; text-align: center; cursor: pointer;">
+<!-- Behold Widget - Loaded on demand with optimized caching -->
+<div id="behold-placeholder" class="behold-placeholder" style="padding: 60px 0; background-color: #f9f9f9; text-align: center; cursor: pointer; min-height: 200px;">
     <h2 class="section-title">View Our Work on Instagram</h2>
-    <p>Click to load Instagram feed</p>
+    <p><button class="cta-button" style="margin: 10px auto; display: inline-block;">Load Instagram Feed</button></p>
 </div>
-<div id="behold-container" class="behold-container" style="display: none; padding: 20px 0;">
+<div id="behold-container" class="behold-container" style="display: none; padding: 20px 0; min-height: 200px;">
     <div class="container">
         <behold-widget feed-id="JCrjd6q1Ckb8Hi3ejN9a"></behold-widget>
     </div>
 </div>
 <script>
+// Preconnect to required domains early
+['https://w.behold.so', 'https://feeds.behold.so'].forEach(domain => {
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = domain;
+    document.head.appendChild(link);
+});
+
 // Load Behold widget on user interaction
 function loadBeholdWidget() {
     if (window.beholdWidgetLoaded) return;
     window.beholdWidgetLoaded = true;
     
     const container = document.getElementById('behold-container');
-    container.style.display = 'block';
+    const placeholder = document.getElementById('behold-placeholder');
+    
+    // Show loading state
+    placeholder.innerHTML = '<p>Loading Instagram feed...</p><div class="loading-spinner"></div>';
     
     // Create and load the widget script
     const script = document.createElement('script');
@@ -1141,32 +1175,100 @@ function loadBeholdWidget() {
     script.async = true;
     script.fetchPriority = 'low';
     
-    // Preconnect to required domains
-    ['https://w.behold.so', 'https://feeds.behold.so'].forEach(domain => {
-        const link = document.createElement('link');
-        link.rel = 'preconnect';
-        link.href = domain;
-        document.head.appendChild(link);
-    });
+    // Add cache control headers for the script
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = script.src;
+    link.as = 'script';
+    document.head.appendChild(link);
+    
+    script.onload = function() {
+        // Widget loaded, show container and hide placeholder
+        container.style.display = 'block';
+        placeholder.style.display = 'none';
+        
+        // Cache the widget in localStorage for future visits
+        try {
+            localStorage.setItem('beholdWidgetLoaded', 'true');
+            localStorage.setItem('beholdWidgetLoadedAt', Date.now());
+        } catch (e) {
+            console.warn('Could not cache widget state:', e);
+        }
+    };
+    
+    script.onerror = function() {
+        // Handle loading error
+        placeholder.innerHTML = '<p>Could not load Instagram feed. <button class="cta-button" style="margin: 10px auto; display: inline-block;" onclick="loadBeholdWidget()">Try Again</button></p>';
+    };
     
     document.head.appendChild(script);
 }
+
+// Check if we should load the widget automatically
+function initBeholdWidget() {
+    const placeholder = document.getElementById('behold-placeholder');
     
-// Load on interaction or after delay
-const beholdPlaceholder = document.getElementById('behold-placeholder');
-beholdPlaceholder.addEventListener('click', function() {
-    this.style.display = 'none';
-    loadBeholdWidget();
-}, { once: true });
-    
-// Load after 5 seconds if no interaction
-setTimeout(() => {
-    if (!window.beholdWidgetLoaded && beholdPlaceholder.style.display !== 'none') {
-        beholdPlaceholder.style.display = 'none';
-        loadBeholdWidget();
+    // Check if widget was previously loaded and is still fresh (less than 1 hour old)
+    try {
+        const lastLoaded = parseInt(localStorage.getItem('beholdWidgetLoadedAt') || '0');
+        const oneHourAgo = Date.now() - (60 * 60 * 1000);
+        
+        if (localStorage.getItem('beholdWidgetLoaded') === 'true' && lastLoaded > oneHourAgo) {
+            // Widget was recently loaded, show it immediately
+            loadBeholdWidget();
+            return;
+        }
+    } catch (e) {
+        console.warn('Could not check widget cache:', e);
     }
-}, 5000);
+    
+    // Set up click handler for placeholder
+    placeholder.addEventListener('click', function(e) {
+        // Only trigger on the button or its children
+        if (e.target.matches('.cta-button, .cta-button *') || e.target === this) {
+            loadBeholdWidget();
+        }
+    }, { once: true });
+    
+    // Load after 10 seconds if no interaction
+    setTimeout(() => {
+        if (!window.beholdWidgetLoaded && !placeholder.classList.contains('clicked')) {
+            loadBeholdWidget();
+        }
+    }, 10000);
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBeholdWidget);
+} else {
+    initBeholdWidget();
+}
 </script>
+<style>
+/* Loading spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+/* Ensure container has a minimum height to prevent layout shifts */
+.behold-container[style*="display: none"] {
+    display: block !important;
+    visibility: hidden;
+    min-height: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+</style>
 
     <!-- =====================================================
          MAIN JAVASCRIPT FILE
