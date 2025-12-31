@@ -20,32 +20,23 @@
     <!-- Preload LCP image -->
     <link rel="preload" as="image" href="assets/images/van-400x411.webp" imagesrcset="assets/images/van-400x411.webp 400w, assets/images/van-600x616.webp 600w, assets/images/van.webp 800w" imagesizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px" fetchpriority="high">
     
-    <!-- Font Loading Strategy -->
+    <!-- Optimized Font Loading -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    
     <script>
-    // Load fonts after the page has rendered
+    // Add font loading class
     document.documentElement.classList.add('fonts-loading');
     
-    // Load fonts after critical rendering
-    const loadFonts = () => {
-        // Create link for Google Fonts
-        const fontLink = document.createElement('link');
-        fontLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap';
-        fontLink.rel = 'stylesheet';
-        fontLink.media = 'print';
-        fontLink.onload = () => {
-            fontLink.media = 'all';
-            document.documentElement.classList.remove('fonts-loading');
-            document.documentElement.classList.add('fonts-loaded');
-        };
-        document.head.appendChild(fontLink);
-    };
-
-    // Load fonts after a short delay
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadFonts);
-    } else {
-        setTimeout(loadFonts, 100);
-    }
+    // Check if fonts are loaded
+    document.fonts.ready.then(function() {
+        document.documentElement.classList.remove('fonts-loading');
+        document.documentElement.classList.add('fonts-loaded');
+    });
     </script>
     
     <!-- Fallback for users with JavaScript disabled -->
@@ -1024,9 +1015,18 @@
                 decoding="async">
             <p>Your trusted partner for professional home remodeling and renovation services.</p>
             <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://facebook.com/herehandyman" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    <span class="sr-only">Facebook</span>
+                </a>
+                <a href="https://instagram.com/herehandyman" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                    <span class="sr-only">Instagram</span>
+                </a>
+                <a href="https://yelp.com/biz/here-handyman-plainfield" target="_blank" rel="noopener noreferrer" aria-label="Yelp">
+                    <i class="fab fa-yelp" aria-hidden="true"></i>
+                    <span class="sr-only">Yelp</span>
+                </a>
             </div>
         </div>
 
