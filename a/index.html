@@ -641,7 +641,9 @@
                     const mapContainer = document.getElementById('map-container');
                     mapContainer.style.display = 'block';
                     const iframe = mapContainer.querySelector('iframe');
-                    iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d380715.5321370235!2d-88.35!3d41.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2c3cd0f4cbed%3A0xafe0a6ad09c0c000!2sChicago%2C%20IL%2C%20USA!5e0!3m2!1sen!2sbr!4v1620000000000!5m2!1sen!2sbr';
+                    
+                    // Plainfield, IL coordinates with marker
+                    iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d380715.5321370235!2d-88.35!3d41.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2c3cd0f4cbed%3A0xafe0a6ad09c0c000!2sPlainfield%2C%20IL%2C%20USA!5e0!3m2!1sen!2sus!4v1620000000000';
                     
                     // Preconnect to Google Maps domains
                     const preconnect = document.createElement('link');
@@ -655,29 +657,27 @@
                     preconnect2.crossOrigin = '';
                     document.head.appendChild(preconnect2);
                 }, { once: true });
-                </script>/ This script makes touch events passive to improve scroll performance
-                (function() {
-                    // Store original addEventListener
-                    const originalAddEventListener = EventTarget.prototype.addEventListener;
-                    
-                    EventTarget.prototype.addEventListener = function(type, listener, options) {
-                        // Only modify touch events
-                        const passiveEvents = ['touchstart', 'touchmove', 'touchend', 'touchcancel'];
-                        
-                        if (passiveEvents.includes(type)) {
-                            // If options is an object, we'll use it, otherwise create a new one
-                            const newOptions = (typeof options === 'object') ? 
-                                Object.assign({}, options, { passive: true }) : 
-                                { passive: true };
-                            
-                            return originalAddEventListener.call(this, type, listener, newOptions);
-                        }
-                        
-                        // For non-touch events, use the original addEventListener
-                        return originalAddEventListener.apply(this, arguments);
-                    };
-                })();
-            </script>
+               <script>
+    // This script makes touch events passive to improve scroll performance
+    (function() {
+        // Use a unique name to avoid conflicts with scripts in the <head>
+        const gMapPassiveListener = EventTarget.prototype.addEventListener;
+        
+        EventTarget.prototype.addEventListener = function(type, listener, options) {
+            const passiveEvents = ['touchstart', 'touchmove', 'touchend', 'touchcancel'];
+            
+            if (passiveEvents.includes(type)) {
+                const newOptions = (typeof options === 'object') ? 
+                    Object.assign({}, options, { passive: true }) : 
+                    { passive: true };
+                
+                return gMapPassiveListener.call(this, type, listener, newOptions);
+            }
+            
+            return gMapPassiveListener.apply(this, arguments);
+        };
+    })();
+</script>
 
             <!-- Service area city and region list -->
             <div class="service-list animate-on-scroll delay-2">
