@@ -11,25 +11,94 @@
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://w.behold.so" crossorigin>
-    <link rel="preconnect" href="https://feeds.behold.so" crossorigin>
     <link rel="dns-prefetch" href="https://www.google.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <!-- Behold.so connections - will be preconnected when needed -->
+    <link rel="preconnect" href="https://w.behold.so" fetchpriority="low">
+    <link rel="preconnect" href="https://feeds.behold.so" fetchpriority="low">
     
     <!-- Preload critical fonts with display=swap -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap&display=swap" rel="stylesheet"></noscript>
+    <style>
+        /* Font face declarations with font-display: swap */
+        @font-face {
+            font-family: 'Font Awesome 6 Brands';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-brands-400.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Font Awesome 6 Solid';
+            font-style: normal;
+            font-weight: 900;
+            font-display: swap;
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2') format('woff2');
+        }
+    </style>
     
     <!-- Font Awesome Kit (optimized) -->
     <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous" async></script>
     <link rel="preconnect" href="https://kit.fontawesome.com">
     
     
-    <!-- Load critical CSS inline -->
+    <!-- Critical CSS - Inline for above-the-fold content -->
     <style id="critical-css">
-    /* Critical CSS - Minimal above-the-fold styles */
-    :root{--primary-color:#f5d71a;--primary-gradient-end:#dfc214;--primary-hover-end:#c9ae10;--secondary-color:#1a1a1a;--text-color:#333;--background-color:#fff;--light-gray-bg:#f7f7f7;--dark-bg:#1a1a1a;--transition:all .3s ease}*,:after,:before{box-sizing:border-box}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;line-height:1.6;color:var(--text-color);margin:0;padding:0}.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1)}.logo img{height:40px;width:auto}main{padding-top:80px}
+    /*! Critical CSS - Optimized for above-the-fold content */
+    :root {
+        --primary-color: #f5d71a;
+        --secondary-color: #1a1a1a;
+        --text-color: #333;
+        --background-color: #fff;
+        --dark-bg: #1a1a1a;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+    }
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    }
+    .logo img {
+        height: 40px;
+        width: auto;
+        display: block;
+    }
+    main {
+        padding-top: 80px;
+    }
+    /* Ensure LCP image is visible */
+    .static-banner {
+        position: relative;
+        background: var(--dark-bg);
+        color: #fff;
+        padding: 100px 0;
+        text-align: center;
+    }
+    .static-banner h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2.5rem;
+        margin: 0 0 20px;
+        line-height: 1.2;
+    }
     </style>
     <!-- Load non-critical CSS asynchronously -->
     <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -144,9 +213,9 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com">
     
-    <!-- Load Font Awesome with data-auto-replace-svg and optimized loading -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" data-auto-replace-svg="nest">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" data-auto-replace-svg="nest"></noscript>
+    <!-- Load Font Awesome with optimized loading -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
     
     <!-- Preload critical fonts with font-display: swap -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -158,13 +227,13 @@
     :root{--primary-color:#f5d71a;--primary-gradient-end:#dfc214;--primary-hover-end:#c9ae10;--secondary-color:#1a1a1a;--text-color:#333;--background-color:#fff;--light-gray-bg:#f7f7f7;--dark-bg:#1a1a1a;--transition:all .3s ease}*,:after,:before{box-sizing:border-box}body{font-family:Poppins,sans-serif;line-height:1.6;color:var(--text-color);background-color:var(--background-color);margin:0;padding-top:80px}.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}.static-banner{background-color:var(--dark-bg);color:#fff;padding:100px 0;text-align:center;position:relative;overflow:hidden}.static-banner::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:0}.static-banner .container{position:relative;z-index:1}.static-banner h1{font-size:2.5rem;margin-bottom:20px;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,.3);font-family:Oswald,sans-serif;line-height:1.2}.static-banner p{font-size:1.2rem;margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto}.static-banner .cta-button{display:inline-block;padding:12px 30px;background-color:var(--primary-color);color:var(--secondary-color);text-decoration:none;border-radius:4px;font-weight:600;transition:all 0.3s ease}.static-banner .cta-button:hover{background-color:var(--primary-hover-end);transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,0.1)}@media (max-width:768px){.static-banner{padding:70px 0}.static-banner h1{font-size:2rem}.static-banner p{font-size:1rem}}.cta-button{display:inline-block;background:linear-gradient(90deg,var(--primary-color),var(--primary-gradient-end));color:var(--secondary-color);padding:14px 35px;border-radius:5px;font-weight:700;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:var(--transition)}.cta-button:hover{background:linear-gradient(90deg,var(--primary-gradient-end),var(--primary-hover-end));transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,.2)}.skip-link{position:absolute;top:-40px;left:0;background:var(--primary-color);color:var(--secondary-color);padding:8px;z-index:100;transition:top .3s}.skip-link:focus{top:0}header{background-color:var(--dark-bg);padding:15px 0;position:fixed;width:100%;top:0;left:0;z-index:1000;transition:var(--transition)}.header-flex{display:flex;justify-content:space-between;align-items:center}.logo img{height:50px;width:auto}.desktop-nav ul{display:flex;gap:30px;list-style:none}.desktop-nav a{color:#fff;font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:500;letter-spacing:1px;padding:5px 0;position:relative;text-decoration:none}.desktop-nav a:hover,.desktop-nav a.active{color:var(--primary-color)}.header-buttons{display:flex;align-items:center;gap:15px}.header-phone-button{background:var(--primary-color);color:var(--secondary-color);padding:8px 15px;border-radius:5px;font-weight:600;font-family:Oswald,sans-serif;text-transform:uppercase;font-size:.9rem;display:flex;align-items:center;gap:8px;text-decoration:none}@media (max-width:992px){.desktop-nav{display:none}}#hamburger-btn{display:block;background:0 0;border:none;color:var(--primary-color);font-size:1.8rem;cursor:pointer;padding:10px;z-index:1002}#mobile-menu{position:fixed;top:0;right:-100%;width:280px;height:100vh;background-color:var(--dark-bg);z-index:1001;transition:right .4s ease-in-out;padding:80px 30px}#mobile-menu.active{right:0}.mobile-nav-links{list-style:none;display:flex;flex-direction:column;gap:20px}.mobile-nav-links a{color:#fff;font-size:1.3rem;display:block;padding:10px 0;border-bottom:1px solid hsla(0,0%,100%,.1);text-decoration:none}@media (min-width:993px){#hamburger-btn{display:none}}@media (max-width:768px){.static-banner h1{font-size:2rem}.static-banner p{font-size:1rem}}@media (max-width:480px){.static-banner{padding:60px 0}.static-banner h1{font-size:1.8rem;margin-bottom:15px}.static-banner p{font-size:.95rem;margin-bottom:25px}.cta-button{padding:12px 25px;font-size:.9rem}}
     </style>
     
-    <!-- Load non-critical CSS asynchronously -->
-    <link rel="preload" href="assets/css/about-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/about-styles.css"></noscript>
-    
-    <!-- Load main stylesheet asynchronously -->
+    <!-- Load non-critical CSS asynchronously with media queries -->
     <link rel="preload" href="assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
+    
+    <!-- Load page-specific styles with media queries -->
+    <link rel="preload" href="assets/css/about-styles.css" as="style" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="assets/css/about-styles.css"></noscript>
 
     <!-- =====================================================
          STRUCTURED DATA (LOCAL BUSINESS)
@@ -203,36 +272,41 @@
 
    
 <!-- =====================================================
-     GOOGLE ANALYTICS (DELAYED LOAD)
-     Loads Google Analytics after page load to improve performance
+     GOOGLE TAG MANAGER (OPTIMIZED LOADING)
+     Loads GTM after page is interactive to improve performance
 ====================================================== -->
 <script>
-    // Load GTM after a short delay to avoid blocking main thread
-    setTimeout(function() {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;
-        // Add fetchpriority=low to reduce priority
-        j.setAttribute('fetchpriority', 'low');
-        f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','G-7QYNVWMYJJ');
-    }, 1000); // 1 second delay
-</script>
-<script>
+    // Initialize dataLayer array
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7QYNVWMYJJ', { 
-        'anonymize_ip': true,
-        'transport_type': 'beacon',
-        'use_amp_client_id': true
-                'use_amp_client_id': true
-            });
-        };
+    
+    // Function to load GTM
+    function loadGTM() {
+        // Create script element
+        var gtmScript = document.createElement('script');
+        gtmScript.async = true;
+        gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=G-7QYNVWMYJJ';
+        gtmScript.setAttribute('fetchpriority', 'low');
         
-        document.head.appendChild(gtmScript);
-    });
+        // Insert before first script tag or at end of head
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(gtmScript, firstScript);
+        
+        // Push to dataLayer
+        window.dataLayer.push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+        });
+    }
+    
+    // Load GTM after a short delay if page is already interactive
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        setTimeout(loadGTM, 1000);
+    } else {
+        // Otherwise wait for DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(loadGTM, 1000);
+        });
+    }
 </script>
 </head>
 
@@ -703,11 +777,43 @@
     <div class="container">
         <h2 class="section-title text-center">Our Work on Instagram</h2>
         <behold-widget feed-id="JCrjd6q1Ckb8Hi3ejN9a"></behold-widget>
+<!-- Behold widget will be loaded when in viewport -->
 <script>
-  (() => {
-    const d=document,s=d.createElement("script");s.type="module";
-    s.src="https://w.behold.so/widget.js";d.head.append(s);
-  })();
+  document.addEventListener('DOMContentLoaded', function() {
+    // Only load Behold widget when it's about to come into view
+    const loadBeholdWidget = function() {
+      // Remove the scroll event listener after loading
+      window.removeEventListener('scroll', loadBeholdWidget);
+      
+      // Create and load the widget script
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = 'https://w.behold.so/widget.js';
+      script.async = true;
+      script.fetchPriority = 'low';
+      document.head.appendChild(script);
+      
+      // Mark as loaded to prevent duplicate loading
+      window.beholdWidgetLoaded = true;
+    };
+    
+    // Load when user scrolls or after 3 seconds (whichever comes first)
+    const loadTimer = setTimeout(loadBeholdWidget, 3000);
+    
+    // Load when user interacts with the page
+    const userInteractionEvents = ['mousedown', 'touchstart', 'keydown'];
+    const loadOnInteraction = function() {
+      userInteractionEvents.forEach(event => {
+        document.removeEventListener(event, loadOnInteraction, { once: true });
+      });
+      clearTimeout(loadTimer);
+      loadBeholdWidget();
+    };
+    
+    userInteractionEvents.forEach(event => {
+      document.addEventListener(event, loadOnInteraction, { once: true });
+    });
+  });
 </script>
     </div>
 </section>
