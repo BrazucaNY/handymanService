@@ -137,14 +137,20 @@
     <link rel="preconnect" href="https://www.googletagmanager.com">
 
 
-    <!-- FONTS -->
-    <!-- Preload critical fonts with font-display: swap -->
-
-    <!-- ICONS -->
-    <!-- Optimized Font Awesome loading -->
+    <!-- FONTS & ICONS -->
+    <!-- Preconnect to required origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    
+    <!-- Load Font Awesome with data-auto-replace-svg and optimized loading -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" data-auto-replace-svg="nest">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" data-auto-replace-svg="nest"></noscript>
+    
+    <!-- Preload critical fonts with font-display: swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
 
     <!-- CRITICAL CSS -->
     <style id="above-the-fold">
@@ -201,20 +207,26 @@
      Loads Google Analytics after page load to improve performance
 ====================================================== -->
 <script>
-    // Load GTM after page is interactive
-    window.addEventListener('load', function() {
-        // Load GTM script
-        var gtmScript = document.createElement('script');
-        gtmScript.async = true;
-        gtmScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
-        
-        gtmScript.onload = function() {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-7QYNVWMYJJ', { 
-                'anonymize_ip': true,
-                'transport_type': 'beacon',
+    // Load GTM after a short delay to avoid blocking main thread
+    setTimeout(function() {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        // Add fetchpriority=low to reduce priority
+        j.setAttribute('fetchpriority', 'low');
+        f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','G-7QYNVWMYJJ');
+    }, 1000); // 1 second delay
+</script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7QYNVWMYJJ', { 
+        'anonymize_ip': true,
+        'transport_type': 'beacon',
+        'use_amp_client_id': true
                 'use_amp_client_id': true
             });
         };
