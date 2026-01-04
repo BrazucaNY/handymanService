@@ -23,7 +23,7 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Preload LCP image -->
-    <link rel="preload" as="image" href="assets/images/van-400x411.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/van.webp" fetchpriority="high">
     
     <!-- Font Loading Strategy -->
     <script>
@@ -723,14 +723,9 @@
                 </div>
                 <div class="image-container" style="position: relative; padding-top: 102.75%;">
                     <picture>
-                        <!-- WebP format with multiple resolutions -->
+                        <!-- WebP format -->
                         <source 
-                            srcset="
-                                assets/images/van-400x411.webp 400w,
-                                assets/images/van-600x616.webp 600w,
-                                assets/images/van-800x822.webp 800w
-                            "
-                            sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
+                            srcset="assets/images/van.webp"
                             type="image/webp">
                         <!-- Fallback to JPG -->
                         <img 
