@@ -9,14 +9,18 @@
     <meta name="description" content="Here Handyman provides expert kitchen and bathroom remodeling, home repairs, and professional handyman services with quality craftsmanship you can trust.">
     
     <!-- Preconnect to external domains with priorities -->
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" as="script">
+    <link rel="preconnect" href="https://fonts.googleapis.com" as="style">
+    <link rel="preconnect" href="https://fonts.gstatic.com" as="font" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" as="font" crossorigin>
     <link rel="dns-prefetch" href="https://www.google.com">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <!-- Behold.so connections - will be preconnected when needed -->
-    <link rel="preconnect" href="https://w.behold.so" fetchpriority="low">
-    <link rel="preconnect" href="https://feeds.behold.so" fetchpriority="low">
+    <link rel="preconnect" href="https://w.behold.so" as="script" fetchpriority="low">
+    <link rel="preconnect" href="https://feeds.behold.so" as="script" fetchpriority="low">
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Preload LCP image -->
     <link rel="preload" as="image" href="assets/images/van-400x411.webp" fetchpriority="high">
@@ -70,15 +74,35 @@
             font-family: 'Font Awesome 6 Brands';
             font-style: normal;
             font-weight: 400;
-            font-display: swap;
+            font-display: optional;
             src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-brands-400.woff2') format('woff2');
         }
         @font-face {
             font-family: 'Font Awesome 6 Solid';
             font-style: normal;
             font-weight: 900;
-            font-display: swap;
+            font-display: optional;
             src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2') format('woff2');
+        }
+        /* Prevent layout shifts during font loading */
+        html {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        /* Add font metrics overrides to prevent layout shifts */
+        h1, h2, h3, h4, h5, h6, .desktop-nav a {
+            font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* These values are approximate and should be adjusted based on your specific font metrics */
+            @supports (font-variation-settings: normal) {
+                font-size-adjust: 0.5;
+                line-height: 1.2;
+                letter-spacing: 0.02em;
+            }
+        }
+        
+        /* Ensure content is visible during font loading */
+        .fonts-loading * {
+            font-display: optional !important;
         }
     </style>
     
