@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://feeds.behold.so" fetchpriority="low">
     
     <!-- Preload LCP image -->
-    <link rel="preload" as="image" href="assets/images/van-400x411.webp" imagesrcset="assets/images/van-400x411.webp 400w, assets/images/van-600x616.webp 600w, assets/images/van.webp 800w" imagesizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/van-400x411.webp" fetchpriority="high">
     
     <!-- Font Loading Strategy -->
     <script>
@@ -82,9 +82,7 @@
         }
     </style>
     
-    <!-- Font Awesome Kit (optimized) -->
-    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous" async></script>
-    <link rel="preconnect" href="https://kit.fontawesome.com">
+    <!-- Font Awesome will be loaded from CDN in the non-critical CSS -->
     
     
     <!-- Critical CSS - Inline for above-the-fold content -->
