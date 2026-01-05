@@ -132,6 +132,200 @@
     <!-- Critical CSS - Inline for above-the-fold content -->
     <style id="critical-css">
     /*! Critical CSS - Optimized for above-the-fold content */
+    /* About Section */
+    .about-section {
+        padding: 80px 0;
+        background-color: #fff;
+        position: relative;
+    }
+
+    .about-container {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .about-image {
+        flex: 0 1 45%;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .experience-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: var(--primary-color);
+        color: #000;
+        padding: 8px 15px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        z-index: 2;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .about-content {
+        flex: 0 1 55%;
+    }
+
+    .about-content h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        color: #1a1a1a;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    .about-content p {
+        margin-bottom: 1.5rem;
+        color: #555;
+        line-height: 1.7;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin: 2rem 0;
+    }
+
+    .feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .feature i {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-top: 5px;
+    }
+
+    .feature h4 {
+        margin-bottom: 5px;
+        color: #1a1a1a;
+    }
+
+    .quick-facts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 1.5rem 0;
+    }
+
+    .quick-facts span {
+        background-color: #f8f9fa;
+        padding: 8px 15px;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #444;
+        border: 1px solid #eee;
+    }
+
+    .quick-facts i {
+        color: var(--primary-color);
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: #000;
+        display: inline-block;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .btn-primary:hover {
+        background-color: #e6c817;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(245, 215, 26, 0.3);
+    }
+
+    .btn-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #1a1a1a;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-text:hover {
+        color: var(--primary-color);
+    }
+
+    @media (max-width: 992px) {
+        .about-container {
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .about-image,
+        .about-content {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+        
+        .about-image {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+        }
+        
+        .btn-primary {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .about-section {
+            padding: 60px 0;
+        }
+        
+        .about-content h2 {
+            font-size: 1.8rem;
+        }
+        
+        .quick-facts {
+            flex-direction: column;
+        }
+    }
+
     :root {
         --primary-color: #f5d71a;
         --secondary-color: #1a1a1a;
@@ -760,7 +954,7 @@
                         <i class="fas fa-tools"></i>
                         <div>
                             <h4>Skilled Team</h4>
-                            <p>Licensed, insured, and background-checked professionals.</p>
+                            <p>insured, and background-checked professionals.</p>
                         </div>
                     </div>
                 </div>
