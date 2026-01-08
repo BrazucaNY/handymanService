@@ -23,11 +23,7 @@
 <!-- Image displayed when the site is shared (VERY important for clicks) -->
 <link rel="canonical" href="https://herehandyman.com/">
 <!-- Tells Google this is the official URL to avoid duplicate content issues -->
-
 </head>
-
-
-
     <!-- Preconnect to external domains with priorities -->
     <link rel="preconnect" href="https://www.googletagmanager.com" as="script">
     <link rel="preconnect" href="https://fonts.googleapis.com" as="style">
@@ -37,11 +33,9 @@
     <!-- Behold.so connections - will be preconnected when needed -->
     <link rel="preconnect" href="https://w.behold.so" as="script" fetchpriority="low">
     <link rel="preconnect" href="https://feeds.behold.so" as="script" fetchpriority="low">
-    
     <!-- Preload critical fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    
     <!-- Preload LCP image -->
     <link rel="preload" as="image" href="assets/images/van.webp" fetchpriority="high">
     
@@ -323,6 +317,201 @@
         
         .quick-facts {
             flex-direction: column;
+        }
+    }
+
+    /* Services Section */
+    .services-section {
+        padding: 80px 0;
+        background-color: #f9f9f9;
+        position: relative;
+    }
+
+    .section-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 50px;
+    }
+
+    .section-subtitle {
+        display: inline-block;
+        color: var(--primary-color);
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background-color: var(--primary-color);
+    }
+
+    .section-description {
+        color: #666;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin: 0 auto;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    .service-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 40px 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        border: 1px solid #eee;
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .service-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 25px;
+        background: rgba(245, 215, 26, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: var(--primary-color);
+        transition: all 0.3s ease;
+    }
+
+    .service-card:hover .service-icon {
+        background: var(--primary-color);
+        color: #fff;
+        transform: rotateY(180deg);
+    }
+
+    .service-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #1a1a1a;
+    }
+
+    .service-card p {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .service-cta {
+        display: inline-flex;
+        align-items: center;
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .service-cta i {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .service-cta:hover {
+        color: #d4b90f;
+    }
+
+    .service-cta:hover i {
+        transform: translateX(5px);
+    }
+
+    .service-cta-container {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .service-cta-container p {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .service-phone {
+        margin-top: 20px;
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    .service-phone a {
+        color: #1a1a1a;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .service-phone a:hover {
+        color: var(--primary-color);
+    }
+
+    .service-phone i {
+        margin-right: 10px;
+        color: var(--primary-color);
+    }
+
+    /* Responsive Styles for Services Section */
+    @media (max-width: 992px) {
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 2rem;
+        }
+        
+        .services-grid {
+            grid-template-columns: 1fr;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .service-card {
+            padding: 30px 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .section-title {
+            font-size: 1.8rem;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+        }
+        
+        .service-cta-container .btn {
+            width: 100%;
         }
     }
 
@@ -976,6 +1165,88 @@
     </div>
 </section>
 
+<!-- ==================== SERVICES SECTION ==================== -->
+<section id="services" class="services-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-subtitle">What We Offer</span>
+            <h2 class="section-title">Our Handyman Services</h2>
+            <p class="section-description">Quality workmanship and reliable service for all your home improvement needs in Plainfield, Illinois</p>
+        </div>
+
+        <div class="services-grid">
+            <!-- Service Card 1 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>General Repairs</h3>
+                <p>From leaky faucets to squeaky doors, we handle all your minor home repairs quickly and efficiently.</p>
+                <a href="#contact" class="service-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Service Card 2 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-paint-roller"></i>
+                </div>
+                <h3>Painting</h3>
+                <p>Interior and exterior painting services that will transform your space with quality finishes.</p>
+                <a href="#contact" class="service-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Service Card 3 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-toolbox"></i>
+                </div>
+                <h3>Home Maintenance</h3>
+                <p>Regular maintenance to keep your home in top condition and prevent costly repairs.</p>
+                <a href="#contact" class="service-cta">Schedule Service <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Service Card 4 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-hammer"></i>
+                </div>
+                <h3>Carpentry</h3>
+                <p>Custom woodworking, trim work, and carpentry solutions for your home.</p>
+                <a href="#contact" class="service-cta">View Projects <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Service Card 5 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3>Electrical</h3>
+                <p>Safe and reliable electrical repairs and installations for your home or business.</p>
+                <a href="#contact" class="service-cta">Get Help <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Service Card 6 -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-toilet"></i>
+                </div>
+                <h3>Plumbing</h3>
+                <p>Expert plumbing services for all your fixture installations, repairs, and maintenance needs.</p>
+                <a href="tel:5163500801" class="service-cta">Call Now <i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+
+        <div class="service-cta-container">
+            <p>Don't see what you're looking for? We do it all!</p>
+            <a href="#contact" class="btn btn-primary">Get a Free Estimate</a>
+            <div class="service-phone">
+                <i class="fas fa-phone"></i>
+                <a href="tel:5163500801">(516) 350-0801</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==================== END SERVICES SECTION ==================== -->
 
 <!-- ==================== SERVICE AREA SECTION ==================== -->
 <!-- Displays service coverage with a map and list of supported locations -->
