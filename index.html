@@ -123,79 +123,69 @@
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript>
 
-  <!-- ================= Structured Data: LocalBusiness ================= -->
-  <!-- JSON-LD schema for LocalBusiness enhances Google visibility -->
+ <!-- ================= Structured Data: LocalBusiness ================= -->
+  <!-- JSON-LD schema for LocalBusiness enhances Google and AI Search visibility -->
   <script type="application/ld+json">
   {
- {
-  "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  "@id": "https://www.herehandyman.com/#business",
-  "url": "https://www.herehandyman.com/",
-  "name": "Here Handyman",
-  "image": "https://www.herehandyman.com/assets/images/og-image.jpg",
-  "telephone": "+1-516-350-0801",
-  "priceRange": "$$",
-
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Whispering Woods Cir",
-    "addressLocality": "Plainfield",
-    "addressRegion": "IL",
-    "postalCode": "60585",
-    "addressCountry": "US"
-  },
-
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 41.6322,
-    "longitude": -88.2120
-  },
-
-  "areaServed": [
-    "White Plains NY 10607",
-    "Hartsdale NY",
-    "Scarsdale NY",
-    "Greenburgh NY",
-    "Elmsford NY",
-    "Tarrytown NY",
-    "Sleepy Hollow NY",
-    "Valhalla NY",
-    "Ardsley NY",
-    "Dobbs Ferry NY",
-    "Irvington NY",
-    "Hawthorne NY",
-    "Yonkers NY",
-    "Mount Vernon NY",
-    "New Rochelle NY",
-    "Bronx NY",
-
-    "Plainfield IL",
-    "Naperville IL",
-    "Joliet IL",
-    "Bolingbrook IL",
-    "Romeoville IL",
-    "Woodridge IL",
-    "Shorewood IL",
-    "Lisle IL",
-    "Lockport IL",
-    "Homer Glen IL",
-    "Crest Hill IL",
-    "Willowbrook IL",
-    "Western Springs IL",
-    "Downers Grove IL"
-  ],
-
-  "sameAs": [
-    "https://www.facebook.com/RodriguesHandyman",
-    "https://www.google.com/maps/place/here+Handyman",
-    "https://www.youtube.com/@herehandyman"
-  ],
-
-  "description": "Professional handyman services in White Plains NY (10607), Westchester County, and Plainfield IL. Offering plumbing, electrical, carpentry, painting, and general home repairs."
-}
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "@id": "https://www.herehandyman.com/#business",
+    "url": "https://www.herehandyman.com/",
+    "name": "Here Handyman",
+    "image": "https://www.herehandyman.com/assets/images/og-image.jpg",
+    "telephone": "+1-516-350-0801",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "White Plains",
+      "addressRegion": "NY",
+      "postalCode": "10607",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 41.0336,
+      "longitude": -73.8055
+    },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "White Plains, NY 10607" },
+      { "@type": "AdministrativeArea", "name": "Hartsdale, NY 10530" },
+      { "@type": "AdministrativeArea", "name": "Scarsdale, NY 10583" },
+      { "@type": "AdministrativeArea", "name": "Greenburgh, NY" },
+      { "@type": "AdministrativeArea", "name": "Elmsford, NY 10523" },
+      { "@type": "AdministrativeArea", "name": "Tarrytown, NY 10591" },
+      { "@type": "AdministrativeArea", "name": "Sleepy Hollow, NY 10591" },
+      { "@type": "AdministrativeArea", "name": "Valhalla, NY 10595" },
+      { "@type": "AdministrativeArea", "name": "Ardsley, NY 10502" },
+      { "@type": "AdministrativeArea", "name": "Dobbs Ferry, NY 10522" },
+      { "@type": "AdministrativeArea", "name": "Irvington, NY 10533" },
+      { "@type": "AdministrativeArea", "name": "Hawthorne, NY 10532" },
+      { "@type": "AdministrativeArea", "name": "Yonkers, NY" },
+      { "@type": "AdministrativeArea", "name": "Mount Vernon, NY" },
+      { "@type": "AdministrativeArea", "name": "New Rochelle, NY" },
+      { "@type": "AdministrativeArea", "name": "Bronx, NY" },
+      { "@type": "AdministrativeArea", "name": "Harrison, NY 10528" },
+      { "@type": "AdministrativeArea", "name": "Mamaroneck, NY 10543" },
+      { "@type": "AdministrativeArea", "name": "Rye, NY 10580" },
+      { "@type": "AdministrativeArea", "name": "Port Chester, NY 10573" }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61578693421538",
+      "https://www.google.com/maps/place/here+Handyman",
+      "https://www.youtube.com/@herehandyman"
+    ],
+    "description": "Professional local handyman services in White Plains, NY (10607) and throughout Westchester County. Offering expert plumbing, electrical, carpentry, painting, and general home repairs directly with no middlemen.",
+    "knowsAbout": [
+      "Handyman Services",
+      "Home Repairs",
+      "Plumbing Repairs",
+      "Electrical Repairs",
+      "Carpentry",
+      "Drywall Repair",
+      "Furniture Assembly",
+      "Smart Home Device Setup"
+    ],
     "makesOffer": [
-      /* All your offer items are here, untouched */
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plumbing Repairs" }},
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Faucet Installation & Repair" }},
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Toilet Installation & Repair" }},
@@ -239,37 +229,42 @@
   </script>
 
   <!-- ================= FAQ Schema (SEO Rich Results) ================= -->
-  <!-- Adds FAQ rich results in Google -->
+  <!-- Adds FAQ rich results in Google and clarifies regions for AI bots -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [{
       "@type": "Question",
-      "name": "What handyman services do you offer ?",
+      "name": "What handyman services do you offer and where?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We provide plumbing, electrical, carpentry, painting, drywall repair, and complete home maintenance services in Plainfield IL."
+        "text": "We provide expert plumbing, electrical, carpentry, painting, drywall repair, and smart home setup. We directly serve White Plains (10607) and surrounding towns across Westchester County within a 15-mile radius."
       }
     }, {
       "@type": "Question",
       "name": "Do you offer free estimates?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, we offer free estimates for all handyman repairs and installations within the Plainfield IL area."
+        "text": "Yes, we offer free estimates for local handyman repairs, assemblies, and home maintenance installations."
       }
     }]
   }
   </script>
-<link rel="canonical" href="https://www.herehandyman.com/" />
 
-<link
-  rel="preload"
-  as="image"
-  href="/uploads/sliders/8f75ed9e88a9fbca6813079456b2a63d.webp"
-  fetchpriority="high">
+  <link rel="canonical" href="https://www.herehandyman.com/" />
+
+  <link
+    rel="preload"
+    as="image"
+    href="/uploads/sliders/8f75ed9e88a9fbca6813079456b2a63d.webp"
+    fetchpriority="high">
 
 </head>
+
+
+
+
 
 
 
@@ -1011,7 +1006,7 @@
 					<!--Footer Widget start-->
                         <div class="footer-widget col-lg-4 col-md-6 col-sm-6 col-12 mb-30">
                             <div class="footer-logo">
-                                <a href="index.html"><img src="assets/images/logo-white.webp" alt="Rodrigues Handyman"></a>
+                                <a href="index.html"><img src="assets/images/logo-white.webp" alt="Here Handyman"></a>
                             </div>
                             <p> Our mission is to provide the best Home Maintenance Service at the most reasonable price without compromising on quality. You will be highly satisfied with our work, knowing we take the necessary steps to meet your needs and get the job done on time with quality assurance.</p>
                         </div>
