@@ -1,6 +1,6 @@
 # Services - Here Handyman
 
-Here Handyman provides comprehensive home repair and remodeling services with over 25 years of experience serving New York and Illinois communities.
+Here Handyman provides comprehensive home repair and remodeling services with over 25 years of independent, hands-on experience serving **White Plains, New York** and surrounding **Westchester County** communities.
 
 ## 🏠 Kitchen Remodeling
 
@@ -10,7 +10,7 @@ Transform your kitchen with professional remodeling services designed to enhance
 - Full kitchen gut and remodel projects
 - Custom layout design and optimization
 - Plumbing and electrical system updates
-- Permits and code compliance handling
+- Permits and local Westchester code compliance handling
 
 ### Cabinetry & Storage
 - Custom cabinet design and installation
@@ -51,13 +51,13 @@ Complete bathroom renovations that combine style, functionality, and durability.
 - Layout optimization and redesign
 - Plumbing system updates
 - Ventilation and moisture control
-- Code compliance and permits
+- Local code compliance and permits
 
 ### Shower & Tub Installation
 - Walk-in shower construction
 - Shower door installation (glass, framed, frameless)
 - Tub-to-shower conversions
-- Jacuzzi and soaking tub installation
+- Soaking tub installation
 - Waterproofing and membrane installation
 
 ### Vanities & Fixtures
@@ -231,7 +231,6 @@ Same-day emergency repair services for urgent home issues.
 - Major leak detection and repair
 - Water heater failure
 - Sewer line backups
-- Gas leak detection (coordination with gas company)
 - Fixture failure repair
 
 ### Electrical Emergencies
@@ -252,9 +251,7 @@ Same-day emergency repair services for urgent home issues.
 
 ### Urgent Repairs
 - Broken window replacement
-- Locksmith services coordination
 - Appliance failure impacts
-- HVAC system issues (coordination)
 - Security system repairs
 - Water damage emergency response
 
@@ -290,9 +287,9 @@ Same-day emergency repair services for urgent home issues.
 - Homeowner preparation checklist
 
 ### 5. Service Execution
-- Professional work completion
+- Professional, direct work completion (no middlemen)
 - Daily cleanup and organization
-- Progress updates and communication
+- Progress updates and direct communication
 - Quality control inspections
 - Final walkthrough and approval
 
@@ -309,7 +306,7 @@ Same-day emergency repair services for urgent home issues.
 ## 💰 Pricing & Payment
 
 ### Estimate Process
-- Free, no-obligation estimates
+- Free, no-obligation estimates for Westchester County residents
 - Detailed written proposals
 - Multiple options when available
 - Transparent pricing breakdown
@@ -326,7 +323,7 @@ Same-day emergency repair services for urgent home issues.
 - Project scope and complexity
 - Material quality and selection
 - Labor requirements
-- Permit and inspection fees
+- Local permit and inspection fees
 - Timeline and scheduling needs
 - Emergency service premiums
 
@@ -336,7 +333,7 @@ Same-day emergency repair services for urgent home issues.
 
 **Phone**: (516) 350-0801  
 **Email**: info@herehandyman.com  
-**Website**: https://www.herehandyman.com  
+**Website**: https://herehandyman.com  
 **Hours**: Monday-Saturday 8:00 AM - 5:00 PM, Sunday Emergency Only
 
-*Licensed • Insured • Professional • Reliable*
+*Westchester County Licensed • Insured • Professional • Reliable*
