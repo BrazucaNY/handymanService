@@ -2,70 +2,67 @@
 <html lang="en">
 <head>
 
-<!-- Lighthouse-safe Google Analytics -->
-<script>
-(function () {
-  let loaded = false;
-
-  function loadGA() {
-    if (loaded) return;
-    loaded = true;
-
-    const s = document.createElement('script');
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18119699321';
-    s.async = true;
-    document.head.appendChild(s);
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-18119699321');
-  }
-
-  // Load after Lighthouse window (critical)
-  setTimeout(loadGA, 6000);
-
-  // Real-user fallback
-  ['scroll','mousemove','touchstart','keydown'].forEach(e =>
-    window.addEventListener(e, loadGA, { once: true })
-  );
-})();
-</script>
+  <!-- Lighthouse-safe Google Analytics -->
+  <script>
+  (function () {
+    let loaded = false;
+    function loadGA() {
+      if (loaded) return;
+      loaded = true;
+      const s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
+      s.async = true;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7QYNVWMYJJ', {
+        anonymize_ip: true,
+        send_page_view: true
+      });
+    }
+    setTimeout(loadGA, 6000);
+    ['scroll','mousemove','touchstart','keydown'].forEach(e =>
+      window.addEventListener(e, loadGA, { once: true })
+    );
+  })();
+  </script>
 
   <!-- ================= Basic Meta Tags ================= -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- ================= SEO ================= -->
-  <title>Handyman Services in White Plains NY – Here Handyman</title>
-  <meta name="description" content="Here Handyman provides expert plumbing, electrical, carpentry, painting, and general home repair services in White Plains NY and within a 15-mile radius. Call +1 516-350-0801.">
+  <!-- ================= Local Search & AI Optimization ================= -->
+  <title>Here Handyman | Local Home Repairs & Assembly White Plains NY</title>
+  <meta name="description" content="Top-rated local handyman services within 15 miles of White Plains (10607). Expert furniture assembly, trampoline setup, TV mounting, plumbing, and electrical repairs across Greenburgh, Scarsdale, and Westchester County. Call or text +1 516-350-0801.">
+  <meta name="keywords" content="handyman white plains ny, local handyman 10607, furniture assembly greenburgh, trampoline setup westchester, tv mounting scarsdale, home repairs elmsford, electrical services hartsdale, plumbing repairs tarrytown, handyman near me westchester">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#00b833">
 
   <!-- ================= Canonical ================= -->
   <link rel="canonical" href="https://www.herehandyman.com/" />
 
-  <!-- ================= Preconnect (Performance) ================= -->
+  <!-- ================= Preconnect ================= -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- ================= Open Graph (Facebook & Social Media) ================= -->
-  <meta property="og:title" content="Here Handyman | Professional Home Repair & Maintenance">
-  <meta property="og:description" content="Expert plumbing, electrical, carpentry, painting, and home repair services in White Plains NY.">
+  <!-- ================= Open Graph (Social Media Optimization) ================= -->
+  <meta property="og:title" content="Here Handyman | 15-Mile Radius Home Repair Services White Plains NY">
+  <meta property="og:description" content="Professional residential assembly and home maintenance services across White Plains, Greenburgh, Scarsdale, and surrounding Westchester communities. No middlemen, direct expert care.">
   <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Here Handyman providing home repair services in White Plains NY">
+  <meta property="og:image:alt" content="Here Handyman professional local repair services in Westchester County NY">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.herehandyman.com">
-  <meta property="og:site_name" content="HereHandyman">
+  <meta property="og:site_name" content="Here Handyman">
   <meta property="og:locale" content="en_US">
 
   <!-- ================= Twitter Card ================= -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Handyman Services in White Plains NY | Home Repairs & Maintenance">
-  <meta name="twitter:description" content="Professional handyman for plumbing, electrical, carpentry, painting, and repairs in White Plains NY.">
+  <meta name="twitter:title" content="Local Handyman Services | White Plains & 15-Mile Surrounding Areas">
+  <meta name="twitter:description" content="Get fast quotes on furniture assembly, trampoline setup, and property maintenance in central Westchester. Call or text 516-350-0801.">
   <meta name="twitter:image" content="https://www.herehandyman.com/assets/images/og-image.jpg">
 
   <!-- ================= Favicon ================= -->
@@ -73,11 +70,10 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 
-  <!-- ================= Google Fonts (Non-blocking) ================= -->
+  <!-- ================= Fonts & CSS Preloads ================= -->
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" as="style" onload="this.rel='stylesheet'" crossorigin>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap"></noscript>
 
-  <!-- ================= CSS Files ================= -->
   <link rel="preload" href="assets/css/vendor/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"></noscript>
 
@@ -93,16 +89,16 @@
   <link rel="preload" href="assets/css/style.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
 
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+  <link class="lazyload" rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript>
 
- <!-- ================= Structured Data: LocalBusiness ================= -->
+  <!-- ================= Structured Data: 15-Mile Radius AI Targeting ================= -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     "@id": "https://www.herehandyman.com/#business",
-    "url": "https://www.herehandyman.com/",
+    "url": "https://www.herehandyman.com",
     "name": "Here Handyman",
     "image": "https://www.herehandyman.com/assets/images/og-image.jpg",
     "telephone": "+1-516-350-0801",
@@ -116,76 +112,67 @@
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 41.0336,
-      "longitude": -73.8055
+      "latitude": 41.0339,
+      "longitude": -73.7629
     },
-    "areaServed": {
-      "@type": "GeoCircle",
-      "geoCenter": {
-        "@type": "GeoCoordinates",
-        "latitude": 41.0336,
-        "longitude": -73.8055
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "08:00",
+      "closes": "20:00"
+    },
+    "areaServed": [
+      {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.0339,
+          "longitude": -73.7629
+        },
+        "geoRadius": "24140"
       },
-      "geoRadius": "24140.2"
-    },
+      { "@type": "Place", "name": "White Plains", "sameAs": "https://en.wikipedia.org/wiki/White_Plains,_New_York" },
+      { "@type": "Place", "name": "Greenburgh", "sameAs": "https://en.wikipedia.org/wiki/Greenburgh,_New_York" },
+      { "@type": "Place", "name": "Hartsdale", "sameAs": "https://en.wikipedia.org/wiki/Hartsdale,_New_York" },
+      { "@type": "Place", "name": "Elmsford", "sameAs": "https://en.wikipedia.org/wiki/Elmsford,_New_York" },
+      { "@type": "Place", "name": "Scarsdale", "sameAs": "https://en.wikipedia.org/wiki/Scarsdale,_New_York" },
+      { "@type": "Place", "name": "Valhalla", "sameAs": "https://en.wikipedia.org/wiki/Valhalla,_New_York" },
+      { "@type": "Place", "name": "Harrison", "sameAs": "https://en.wikipedia.org/wiki/Harrison,_New_York" },
+      { "@type": "Place", "name": "Tarrytown", "sameAs": "https://en.wikipedia.org/wiki/Tarrytown,_New_York" },
+      { "@type": "Place", "name": "Dobbs Ferry", "sameAs": "https://en.wikipedia.org/wiki/Dobbs_Ferry,_New_York" },
+      { "@type": "Place", "name": "Ardsley", "sameAs": "https://en.wikipedia.org/wiki/Ardsley,_New_York" },
+      { "@type": "Place", "name": "Yonkers", "sameAs": "https://en.wikipedia.org/wiki/Yonkers,_New_York" },
+      { "@type": "Place", "name": "New Rochelle", "sameAs": "https://en.wikipedia.org/wiki/New_Rochelle,_New_York" }
+    ],
     "sameAs": [
-      "https://www.facebook.com/profile.php?id=61578693421538",
-      "https://www.google.com/maps/place/here+Handyman",
-      "https://www.youtube.com/@herehandyman"
+      "https://www.facebook.com/HereHandyman",
+      "https://www.youtube.com/@herehandyman",
+      "https://www.instagram.com/herehandyman"
     ],
-    "description": "Professional local handyman services in White Plains, NY (10607) and surrounding communities within a 15-mile radius. Offering expert plumbing, electrical, carpentry, painting, and general home repairs directly with no middlemen.",
-    "knowsAbout": [
-      "Handyman Services",
-      "Home Repairs",
-      "Plumbing Repairs",
-      "Electrical Repairs",
-      "Carpentry",
-      "Drywall Repair",
-      "Furniture Assembly",
-      "Smart Home Device Setup"
-    ],
+    "description": "Top-rated local handyman service providing prompt, high-quality home maintenance within a strict 15-mile operating radius of White Plains, NY (10607). Specializing in professional home assembly services, complex carpentry fixes, fixture installations, and responsive local property upkeep.",
     "makesOffer": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plumbing Repairs" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Faucet Installation & Repair" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Toilet Installation & Repair" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Leak Detection & Pipe Repair" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Garbage Disposal Installation" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Shower & Bathtub Sealing" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electrical Repairs" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Light Fixture Installation" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ceiling Fan Installation" }},
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Furniture Assembly & Setup" }},
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Trampoline Assembly & Backyard Setup" }},
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "TV Wall Mounting & Cable Hiding" }},
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Light Fixture & Ceiling Fan Installation" }},
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plumbing Repairs & Faucet Replacement" }},
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Drywall Patching & Interior Painting" }},
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Outlet & Switch Replacement" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dimmer Switch Installation" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "GFCI Outlet Installation" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "TV Mounting & Wiring" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Carpentry Services" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Door Repair & Installation" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Trim & Molding Installation" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fence Repair" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Deck Repair" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Shelving & Closet Installation" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cabinet Installation" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Drywall Repair & Patching" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Interior Painting" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Exterior Painting (Small Jobs)" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tile Repair & Grout Work" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Flooring Installation (Small Areas)" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Caulking & Weatherproofing" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Window Repair" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Furniture Assembly" }},
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Smart Home Device Setup" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Appliance Installation (Small)" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Exterior Repairs" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gutter Cleaning & Repair" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pressure Washing" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Siding Repair (Minor)" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Garage Maintenance" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Small Remodeling Projects" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Basement Repairs" }},
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Maintenance Plans" }}
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gutter Cleaning & Pressure Washing" }},
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "General Home Maintenance & Handyman Services" }}
     ]
   }
   </script>
+</head>
 
   <!-- ================= FAQ Schema (SEO Rich Results) ================= -->
   <script type="application/ld+json">
