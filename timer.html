@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hourly Earnings Timer</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    text-align:center;
+    background:#111;
+    color:#fff;
+    margin-top:50px;
+}
+input{
+    font-size:24px;
+    width:120px;
+    text-align:center;
+}
+button{
+    font-size:22px;
+    padding:12px 25px;
+    margin:10px;
+}
+#money{
+    font-size:60px;
+    color:#00ff66;
+    margin-top:30px;
+    font-weight:bold;
+}
+#time{
+    font-size:28px;
+    margin-top:15px;
+}
+</style>
+</head>
+<body>
+
+<h1>Hourly Earnings Timer</h1>
+
+Hourly Rate: $
+<input id="rate" type="number" value="85">
+
+<br><br>
+
+<button onclick="startTimer()">Start</button>
+<button onclick="stopTimer()">Stop</button>
+<button onclick="resetTimer()">Reset</button>
+
+<div id="money">$0.00</div>
+<div id="time">00:00:00</div>
+
+<script>
+let startTime;
+let timer;
+
+function startTimer(){
+    if(timer) return;
+    startTime = Date.now();
+    timer = setInterval(update,1000);
+}
+
+function stopTimer(){
+    clearInterval(timer);
+    timer = null;
+}
+
+function resetTimer(){
+    stopTimer();
+    document.getElementById("money").innerHTML="$0.00";
+    document.getElementById("time").innerHTML="00:00:00";
+}
+
+function update(){
+    const rate=parseFloat(document.getElementById("rate").value)||0;
+    const elapsed=(Date.now()-startTime)/1000;
+
+    const earnings=(elapsed/3600)*rate;
+
+    const h=Math.floor(elapsed/3600);
+    const m=Math.floor((elapsed%3600)/60);
+    const s=Math.floor(elapsed%60);
+
+    document.getElementById("money").innerHTML="$"+earnings.toFixed(2);
+    document.getElementById("time").innerHTML=
+        String(h).padStart(2,"0")+":"+
+        String(m).padStart(2,"0")+":"+
+        String(s).padStart(2,"0");
+}
+</script>
+
+</body>
+</html>
