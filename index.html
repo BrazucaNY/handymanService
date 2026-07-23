@@ -1097,6 +1097,39 @@
     }
 
     /* ==========================================
+       GALLERY FILTERS & TABS
+       ========================================== */
+    .gallery-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+      margin-bottom: 40px;
+    }
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 10px 22px;
+      border-radius: 30px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    .filter-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--navy);
+    }
+
+    /* ==========================================
        LIGHTBOX STYLE
        ========================================== */
     .lightbox {
@@ -1412,6 +1445,16 @@
       <h2 class="section-title">See The Difference</h2>
       <p class="section-sub">Check us on Instagram: <a href="https://www.instagram.com/herehandyman/" target="_blank" rel="noopener" class="gallery-insta-link"><svg viewBox="0 0 24 24" fill="currentColor" style="display: inline-block; vertical-align: middle; width: 16px; height: 16px; margin-right: 4px; margin-top: -2px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>@herehandyman</a></p>
       
+      <!-- Gallery Filter Tabs -->
+      <div class="gallery-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="carpentry">Carpentry</button>
+        <button class="filter-btn" data-filter="painting">Painting</button>
+        <button class="filter-btn" data-filter="electrical">Electrical</button>
+        <button class="filter-btn" data-filter="plumbing">Plumbing</button>
+        <button class="filter-btn" data-filter="repairs">Repairs</button>
+      </div>
+
       <div class="gallery-grid">
         <div class="gallery-item tall">
           <div class="gallery-badge">Carpentry</div>
@@ -1939,9 +1982,10 @@
     });
 
     // ==========================================
-    // INTERACTIVE LIGHTBOX FOR GALLERY
+    // INTERACTIVE LIGHTBOX & DYNAMIC GALLERY LOADER
     // ==========================================
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const categories = ['carpentry', 'painting', 'electrical', 'plumbing', 'repairs'];
+    const galleryGrid = document.querySelector('.gallery-grid');
     const lightbox = document.getElementById('lightbox-modal');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
@@ -1950,29 +1994,199 @@
     const lightboxNext = document.querySelector('.lightbox-next');
     
     let currentIndex = 0;
-    const imagesList = [];
+    let imagesList = [];
+    const localGalleryImages = []; // Stores loaded images metadata
 
-    // Build the images list from the DOM
-    galleryItems.forEach((item, index) => {
+    // Check if image exists and return src path
+    function testImageSrc(category, index) {
+      return new Promise((resolve) => {
+        const imgWebP = new Image();
+        const webpSrc = `assets/images/${category}/${index}.webp`;
+        
+        imgWebP.onload = () => resolve({ success: true, src: webpSrc });
+        imgWebP.onerror = () => {
+          const imgJPG = new Image();
+          const jpgSrc = `assets/images/${category}/${index}.jpg`;
+          
+          imgJPG.onload = () => resolve({ success: true, src: jpgSrc });
+          imgJPG.onerror = () => {
+            // Also check for standard .jpeg
+            const imgJPEG = new Image();
+            const jpegSrc = `assets/images/${category}/${index}.jpeg`;
+            imgJPEG.onload = () => resolve({ success: true, src: jpegSrc });
+            imgJPEG.onerror = () => resolve({ success: false });
+            imgJPEG.src = jpegSrc;
+          };
+          imgJPG.src = jpgSrc;
+        };
+        imgWebP.src = webpSrc;
+      });
+    }
+
+    // Append image dynamically to DOM
+    function addGalleryItemDOM(category, src, index) {
+      const item = document.createElement('div');
+      item.className = `gallery-item ${category}`;
+      
+      // Make the first carpentry image tall for layout asymmetry
+      const isFirstCarpentry = (category === 'carpentry' && localGalleryImages.filter(img => img.category === 'carpentry').length === 0);
+      if (isFirstCarpentry) {
+        item.classList.add('tall');
+      }
+      
+      const badge = document.createElement('div');
+      badge.className = 'gallery-badge';
+      badge.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+      
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `${category} project photo ${index}`;
+      img.setAttribute('loading', 'lazy');
+      img.setAttribute('width', isFirstCarpentry ? '600' : '400');
+      img.setAttribute('height', isFirstCarpentry ? '900' : '267');
+      
+      const label = document.createElement('div');
+      label.className = 'gallery-label';
+      label.textContent = `${category.charAt(0).toUpperCase() + category.slice(1)} Project #${index}`;
+      
+      item.appendChild(badge);
+      item.appendChild(img);
+      item.appendChild(label);
+      galleryGrid.appendChild(item);
+      
+      // Track in list
+      localGalleryImages.push({
+        src: src,
+        alt: img.alt,
+        caption: label.textContent,
+        category: category
+      });
+    }
+
+    // Main loader loop
+    async function loadAllGalleryImages() {
+      // Clear static fallbacks
+      galleryGrid.innerHTML = '';
+      localGalleryImages.length = 0;
+      
+      let totalLoaded = 0;
+      
+      for (const category of categories) {
+        let index = 1;
+        let active = true;
+        
+        while (active && index <= 24) { // Checked up to 24 photos per category
+          const result = await testImageSrc(category, index);
+          if (result.success) {
+            addGalleryItemDOM(category, result.src, index);
+            totalLoaded++;
+            index++;
+          } else {
+            active = false;
+          }
+        }
+      }
+      
+      // If we loaded no images (e.g. offline or empty folders), reload fallback static items!
+      if (totalLoaded === 0) {
+        restoreStaticFallback();
+      } else {
+        updateLightboxList('all');
+      }
+    }
+
+    // Restore fallback items in case folders are completely empty
+    function restoreStaticFallback() {
+      galleryGrid.innerHTML = `
+        <div class="gallery-item carpentry tall">
+          <div class="gallery-badge">Carpentry</div>
+          <img src="assets/images/carpentry/1.webp" alt="Custom Built-in Bookshelves in a study" width="600" height="900" loading="lazy">
+          <div class="gallery-label">Custom Built-in Bookshelves</div>
+        </div>
+        <div class="gallery-item painting">
+          <div class="gallery-badge">Painting</div>
+          <img src="assets/images/painting/1.webp" alt="Living room paint job with crisp lines" width="400" height="267" loading="lazy">
+          <div class="gallery-label">Living Room Repaint & Trim</div>
+        </div>
+        <div class="gallery-item plumbing">
+          <div class="gallery-badge">Plumbing</div>
+          <img src="assets/images/plumbing/1.webp" alt="New modern stainless steel kitchen faucet installation" width="400" height="267" loading="lazy">
+          <div class="gallery-label">Modern Kitchen Sink Upgrade</div>
+        </div>
+        <div class="gallery-item electrical">
+          <div class="gallery-badge">Electrical</div>
+          <img src="assets/images/electrical/1.webp" alt="Elegant copper pendant lighting fixture in kitchen" width="400" height="267" loading="lazy">
+          <div class="gallery-label">Pendant Light Installation</div>
+        </div>
+        <div class="gallery-item repairs">
+          <div class="gallery-badge">Repairs</div>
+          <img src="assets/images/repairs/1.webp" alt="Fully repaired wall ready for painting" width="400" height="267" loading="lazy">
+          <div class="gallery-label">Seamless Drywall Patching</div>
+        </div>
+      `;
+      
+      // Initialize list from fallback
+      updateLightboxList('all');
+    }
+
+    // Update active array for lightbox navigation
+    function updateLightboxList(filter = 'all') {
+      imagesList = [];
+      const items = galleryGrid.querySelectorAll('.gallery-item');
+      items.forEach(item => {
+        const isVisible = (filter === 'all' || item.classList.contains(filter));
+        if (isVisible && item.style.display !== 'none') {
+          const img = item.querySelector('img');
+          const label = item.querySelector('.gallery-label');
+          imagesList.push({
+            src: img.getAttribute('src'),
+            alt: img.getAttribute('alt') || '',
+            caption: label ? label.textContent : ''
+          });
+        }
+      });
+    }
+
+    // Filter Buttons click handler
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const items = galleryGrid.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+          if (filter === 'all' || item.classList.contains(filter)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        
+        updateLightboxList(filter);
+      });
+    });
+
+    // Event delegation for opening Lightbox on image click
+    galleryGrid.addEventListener('click', (e) => {
+      const item = e.target.closest('.gallery-item');
+      if (!item) return;
+      
+      e.preventDefault();
       const img = item.querySelector('img');
-      const label = item.querySelector('.gallery-label');
-      imagesList.push({
-        src: img.getAttribute('src'),
-        alt: img.getAttribute('alt') || '',
-        caption: label ? label.textContent : ''
-      });
-
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-        currentIndex = index;
+      const clickedSrc = img.getAttribute('src');
+      
+      currentIndex = imagesList.findIndex(image => image.src === clickedSrc);
+      if (currentIndex !== -1) {
         openLightbox();
-      });
+      }
     });
 
     function openLightbox() {
       updateLightboxImage();
       lightbox.style.display = 'flex';
-      // Force reflow for opacity transition
       lightbox.offsetHeight;
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -1988,10 +2202,10 @@
 
     function updateLightboxImage() {
       const currentImage = imagesList[currentIndex];
-      // Load larger quality unsplash image for lightbox
+      if (!currentImage) return;
+      
       let src = currentImage.src;
       if (src.includes('images.unsplash.com')) {
-        // Upgrade size from thumbnail size to high quality preview size
         src = src.replace('w=400', 'w=1200').replace('w=600', 'w=1200');
       }
       lightboxImg.src = src;
@@ -2013,14 +2227,12 @@
       updateLightboxImage();
     });
 
-    // Close on overlay click
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) {
         closeLightbox();
       }
     });
 
-    // Keyboard controls
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('active')) return;
       if (e.key === 'Escape') closeLightbox();
@@ -2033,6 +2245,9 @@
         updateLightboxImage();
       }
     });
+
+    // Trigger dynamic images scan on page load
+    window.addEventListener('DOMContentLoaded', loadAllGalleryImages);
   </script>
 </body>
 </html>
