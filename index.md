@@ -45,7 +45,7 @@ To provide exceptional craftsmanship, honest pricing, and reliable service for p
 
 ### Service Areas
 - **New York**: White Plains, Scarsdale, Yonkers, Hartsdale, Westchester County
-
+- **Illinois**: Plainfield, Naperville, Joliet, Bolingbrook, Lisle, Will County
 
 ### Core Values
 - **Quality Workmanship**: Professional results on every project

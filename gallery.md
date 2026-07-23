@@ -1,291 +1,306 @@
-# Project Gallery | Here Handyman | Home Repairs & Furniture Assembly in Westchester County, NY
+# Project Gallery - Here Handyman
 
-Welcome to the Here Handyman Project Gallery. Every project represents our commitment to quality craftsmanship, attention to detail, and reliable service. We help homeowners throughout White Plains and Westchester County with furniture assembly, TV mounting, drywall repair, carpentry, plumbing fixture replacement, light fixture installation, home maintenance, and countless other home improvement projects.
+Browse our recent projects and see the quality craftsmanship we bring to every home renovation and repair project.
 
-Our gallery showcases the type of work we complete every week for homeowners across Westchester County.
+## 🏠 Kitchen Projects
 
----
+### Modern Kitchen Remodel
+**Location**: White Plains, NY  
+**Scope**: Complete kitchen renovation  
+**Features**: Custom cabinetry, quartz countertops, subway tile backsplash, under-cabinet lighting
 
-# Furniture Assembly Projects
+**Before & After Highlights**:
+- Removed outdated cabinets and appliances
+- Installed custom shaker-style cabinets
+- Added large kitchen island with electrical
+- Upgraded to stainless steel appliances
+- Installed recessed lighting system
 
-Furniture assembly is one of our most requested services.
+### Kitchen Island Installation
+**Location**: Plainfield, IL  
+**Scope**: Kitchen island addition with electrical work  
+**Features**: Custom island, pendant lighting, electrical outlets, butcher block countertop
 
-We professionally assemble furniture from:
+**Project Details**:
+- Designed and built custom island to fit space
+- Installed electrical outlets and USB charging ports
+- Added decorative pendant lighting
+- Integrated butcher block food prep surface
+- Coordinated with existing kitchen style
 
-- IKEA
-- Wayfair
-- Ashley Furniture
-- Pottery Barn
-- West Elm
-- Costco
-- Amazon
-- Crate & Barrel
-- Target
-- Walmart
+### Cabinet Refinishing
+**Location**: Scarsdale, NY  
+**Scope**: Cabinet refinishing and hardware update  
+**Features**: Painted cabinets, new hardware, soft-close hinges
 
-Recent projects include:
-
-- Beds
-- Murphy Beds
-- Dressers
-- Nightstands
-- Dining Tables
-- Office Desks
-- Bookcases
-- Entertainment Centers
-- Wardrobes
-- Cabinets
-- Nursery Furniture
-- Home Office Furniture
-- Patio Furniture
-- Garage Storage Systems
-
-Every piece is assembled according to the manufacturer's specifications and carefully inspected before completion.
+**Transformation**:
+- Sanded and primed existing oak cabinets
+- Applied professional paint finish
+- Installed modern brushed nickel hardware
+- Added soft-close door hinges
+- Updated crown molding and trim
 
 ---
 
-# TV Mounting Projects
+## 🚿 Bathroom Projects
 
-Our TV installation projects include:
+### Luxury Bathroom Update
+**Location**: Yonkers, NY  
+**Scope**: Full bathroom renovation  
+**Features**: Walk-in shower, floating vanity, tile flooring, modern fixtures
 
-- Fixed TV Mounts
-- Tilting TV Mounts
-- Full Motion TV Mounts
-- Fireplace TV Installation
-- Samsung Frame TV Installation
-- Soundbar Installation
-- Cable Concealment
-- Wire Management
-- Shelf Installation
-- Media Center Setup
+**Complete Renovation**:
+- Removed old tub and created walk-in shower
+- Installed frameless glass shower doors
+- Added floating vanity with vessel sink
+- Upgraded to water-saving fixtures
+- Installed heated tile flooring
 
-We mount televisions on:
+### Walk-in Shower Installation
+**Location**: Naperville, IL  
+**Scope**: Tub-to-shower conversion  
+**Features: Glass doors, niche storage, rainfall showerhead, tile walls
 
-- Drywall
-- Brick
-- Concrete
-- Stone
-- Metal Stud Walls
-- Wood Stud Walls
+**Conversion Details**:
+- Demolished existing tub and surround
+- Built custom shower pan with proper drainage
+- Installed waterproofing membrane
+- Added built-in shampoo niche
+- Installed rainfall and handheld showerheads
 
----
+### Vanity and Lighting Update
+**Location**: Bolingbrook, IL  
+**Scope**: Vanity replacement and lighting upgrade  
+**Features**: Double vanity, LED mirror, updated lighting, new fixtures
 
-# Drywall Repair Projects
-
-Professional drywall repairs include:
-
-- Small Holes
-- Large Holes
-- Water Damage
-- Ceiling Repairs
-- Stress Cracks
-- Nail Pops
-- Tape Repairs
-- Texture Matching
-- Skim Coating
-- Paint Preparation
-
-Our goal is to leave repairs virtually invisible.
+**Modern Updates**:
+- Replaced single vanity with double sink
+- Installed LED-backlit mirror
+- Updated vanity lighting fixtures
+- Added GFCI outlets for safety
+- Coordinated fixtures and finishes
 
 ---
 
-# Door Repair & Finish Carpentry
+## 🪟 Flooring Projects
 
-Completed projects include:
+### Hardwood Flooring Installation
+**Location**: Hartsdale, NY  
+**Scope**: Living room and hallway hardwood installation  
+**Features**: Solid oak flooring, custom transitions, baseboard installation
 
-- Interior Door Repairs
-- Exterior Door Repairs
-- Door Adjustments
-- Door Frame Repairs
-- Lock Replacement
-- Smart Lock Installation
-- Door Hardware Replacement
-- Baseboard Installation
-- Crown Molding
-- Window Trim
-- Custom Trim Work
+**Installation Process**:
+- Removed old carpet and padding
+- Installed solid oak hardwood planks
+- Added custom transition strips
+- Installed matching baseboards
+- Applied professional finish
 
----
+### Tile Flooring Installation
+**Location**: Joliet, IL  
+**Scope**: Kitchen and dining room tile  
+**Features**: Porcelain tile, grout sealing, custom patterns
 
-# Fixture Installation
+**Tile Work**:
+- Removed old vinyl flooring
+- Installed porcelain tile throughout
+- Created custom pattern for dining area
+- Applied and sealed grout
+- Added decorative border tiles
 
-Professional installation services include:
+### Vinyl Plank Flooring
+**Location**: Lisle, IL  
+**Scope**: Basement family room  
+**Features**: Luxury vinyl plank, waterproof, wood-look finish
 
-- Ceiling Fans
-- Chandeliers
-- Pendant Lights
-- Bathroom Vanity Lights
-- Flush Mount Lights
-- Wall Sconces
-- Bathroom Mirrors
-- Medicine Cabinets
-- Smoke Detectors
-- Carbon Monoxide Detectors
-- Video Doorbells
-- Smart Thermostats
-- House Numbers
-- Mailboxes
-
----
-
-# Bathroom Improvement Projects
-
-Popular bathroom projects include:
-
-- Vanity Installation
-- Faucet Replacement
-- Toilet Installation
-- Grab Bar Installation
-- Mirror Installation
-- Medicine Cabinet Installation
-- Towel Bars
-- Toilet Paper Holders
-- Caulking
-- Hardware Replacement
+**Basement Upgrade**:
+- Prepared concrete subfloor
+- Installed waterproof underlayment
+- Laid luxury vinyl planks
+- Added baseboards and transitions
+- Created moisture-resistant floor
 
 ---
 
-# Kitchen Improvement Projects
+## 🏡 Exterior Projects
 
-Kitchen services include:
+### Exterior Home Update
+**Location**: White Plains, NY  
+**Scope**: Complete exterior renovation  
+**Features**: New siding, exterior painting, window trim, landscaping coordination
 
-- Cabinet Hardware Installation
-- Faucet Replacement
-- Garbage Disposal Replacement
-- Shelving Installation
-- Under Cabinet Lighting
-- Backsplash Repairs
-- Trim Installation
-- Cabinet Door Adjustments
-- Drawer Repairs
+**Exterior Transformation**:
+- Replaced damaged siding sections
+- Power washed and prepped surfaces
+- Applied premium exterior paint
+- Updated window and door trim
+- Coordinated with landscaping company
 
----
+### Deck Repair and Staining
+**Location**: Plainfield, IL  
+**Scope**: Deck restoration  
+**Features: Structural repairs, new railings, professional staining
 
-# Outdoor Projects
+**Deck Restoration**:
+- Inspected and repaired structural supports
+- Replaced damaged deck boards
+- Installed new railings and balusters
+- Applied professional deck stain
+- Added waterproof sealant
 
-Exterior projects include:
+### Window and Door Installation
+**Location**: Scarsdale, NY  
+**Scope**: Window replacement and door installation  
+**Features: Energy-efficient windows, new entry door, proper sealing
 
-- Gazebo Assembly
-- Pergola Assembly
-- Playset Assembly
-- Basketball Hoop Installation
-- Shed Assembly
-- Fence Repairs
-- Gate Repairs
-- Mailbox Installation
-- Deck Repairs
-- Exterior Trim Repairs
-- Pressure Washing
-
----
-
-# Home Maintenance Services
-
-Regular maintenance projects include:
-
-- Picture Hanging
-- Curtain Rod Installation
-- Blind Installation
-- Shelving Installation
-- Weather Stripping
-- Cabinet Adjustments
-- Minor Plumbing Repairs
-- Minor Electrical Fixture Replacement
-- Seasonal Home Maintenance
-- General Household Repairs
+**Energy Efficiency Upgrade**:
+- Removed old single-pane windows
+- Installed energy-efficient double-pane windows
+- Added new fiberglass entry door
+- Applied proper weatherstripping
+- Sealed all openings and gaps
 
 ---
 
-# Areas We Serve
+## 🔧 General Projects
 
-Here Handyman proudly serves homeowners throughout Westchester County, New York, including:
+### Drywall Repair and Painting
+**Location**: Yonkers, NY  
+**Scope**: Water damage repair and painting  
+**Features: Drywall patching, texture matching, wall painting
 
-- White Plains
-- Scarsdale
-- Hartsdale
-- Greenburgh
-- Harrison
-- Purchase
-- Rye Brook
-- Elmsford
-- Tarrytown
-- Irvington
-- Dobbs Ferry
-- Ardsley
-- Yonkers
-- New Rochelle
-- Eastchester
-- Bronxville
-- Mamaroneck
-- Larchmont
-- Mount Vernon
-- Rye
-- Port Chester
-- Chappaqua
-- Mount Kisco
-- Briarcliff Manor
-- Pleasantville
-- Ossining
-- Sleepy Hollow
+**Damage Restoration**:
+- Removed water-damaged drywall
+- Installed new drywall patches
+- Matched existing wall texture
+- Applied primer and paint
+- Blended repairs seamlessly
 
-If you're located nearby, feel free to contact us—we're always expanding our service area.
+### Electrical Panel Upgrade
+**Location**: Naperville, IL  
+**Scope: Electrical system update  
+**Features: New circuit breaker panel, additional circuits, safety inspection
 
----
+**Electrical Safety**:
+- Upgraded to modern circuit breaker panel
+- Added dedicated appliance circuits
+- Installed GFCI outlets where required
+- Performed safety inspection
+- Updated electrical documentation
 
-# Why Homeowners Choose Here Handyman
+### Plumbing Fixture Updates
+**Location**: Bolingbrook, IL  
+**Scope: Multiple fixture replacements  
+**Features: New faucets, toilets, water heater, pipe updates
 
-✔ Professional Workmanship
-
-✔ Honest Pricing
-
-✔ Reliable Scheduling
-
-✔ Friendly Service
-
-✔ Attention to Detail
-
-✔ Clean Work Areas
-
-✔ Quality Repairs
-
-✔ Fully Equipped
-
-✔ Furniture Assembly Specialists
-
-✔ TV Mounting Experts
-
-✔ Trusted Throughout Westchester County
+**Plumbing Modernization**:
+- Replaced outdated faucets and fixtures
+- Installed water-efficient toilets
+- Updated water heater connections
+- Replaced old supply lines
+- Added shut-off valves for fixtures
 
 ---
 
-# Our Commitment to Quality
+## 📊 Project Categories
 
-Every project receives the same level of care regardless of size.
+### Kitchen Remodeling
+- Custom cabinetry and storage solutions
+- Countertop installation and replacement
+- Backsplash design and installation
+- Kitchen island construction
+- Appliance installation and connections
+- Lighting and electrical upgrades
 
-Whether we're assembling a dresser, mounting an 85-inch television, repairing drywall after water damage, installing a ceiling fan, or completing a full day of home repairs, our goal is to deliver workmanship that homeowners can trust.
+### Bathroom Renovation
+- Walk-in shower and tub conversions
+- Vanity and sink installation
+- Tile work and waterproofing
+- Fixture updates and modernization
+- Lighting and ventilation improvements
+- Accessibility modifications
 
-We believe in clear communication, dependable service, and completing every job with precision and care.
+### Flooring Installation
+- Hardwood installation and refinishing
+- Tile flooring and design work
+- Vinyl and laminate installation
+- Subfloor preparation and repair
+- Transition and molding installation
+- Floor repair and restoration
+
+### Exterior Services
+- Siding repair and replacement
+- Exterior painting and staining
+- Window and door installation
+- Deck and porch construction
+- Gutter maintenance and repair
+- Weatherproofing and sealing
+
+### General Services
+- Drywall repair and installation
+- Electrical work and upgrades
+- Plumbing repairs and installations
+- Interior and exterior painting
+- Carpentry and custom work
+- Emergency repairs
 
 ---
 
-# Schedule Your Next Project
+## 🎯 Project Highlights
 
-Need a reliable handyman in White Plains or anywhere in Westchester County?
+### Before & After Transformations
+Each project showcases our commitment to quality craftsmanship and attention to detail. Our before and after photos demonstrate:
 
-Here Handyman provides professional home repair, furniture assembly, TV mounting, drywall repair, carpentry, fixture installation, door repair, and general home maintenance.
+- **Space Optimization**: Better use of available space
+- **Modern Updates**: Current design trends and materials
+- **Quality Materials**: Premium products and installations
+- **Attention to Detail**: Precise finishing and craftsmanship
+- **Customer Satisfaction**: Results that exceed expectations
 
-### Contact Here Handyman
+### Technical Expertise
+Our projects demonstrate expertise in:
 
-**Phone:** (516) 350-0801
+- **Structural Work**: Proper construction and repair techniques
+- **Electrical Systems**: Safe and code-compliant installations
+- **Plumbing Integration**: Professional plumbing connections
+- **Finishing Work**: High-quality paint and trim work
+- **Problem Solving**: Creative solutions for challenging spaces
 
-**Email:** info@herehandyman.com
+### Service Area Coverage
+Projects completed across our service areas:
 
-**Website:** https://www.herehandyman.com
+**New York Locations**:
+- White Plains, NY
+- Scarsdale, NY
+- Yonkers, NY
+- Hartsdale, NY
+- Westchester County communities
 
-**Hours**
+**Illinois Locations**:
+- Plainfield, IL
+- Naperville, IL
+- Joliet, IL
+- Bolingbrook, IL
+- Lisle, IL
+- Will County communities
 
-Monday – Saturday: 8:00 AM – 5:00 PM
+---
 
-Sunday: By Appointment
+## 📞 Start Your Project
 
-We look forward to helping with your next home improvement project.
+Ready to transform your space? Contact us for a free estimate and consultation.
+
+**Phone**: (516) 350-0801  
+**Email**: info@herehandyman.com  
+**Website**: https://www.herehandyman.com  
+**Hours**: Monday-Saturday 8:00 AM - 5:00 PM, Sunday Emergency Only
+
+### Project Consultation Process
+1. **Initial Contact**: Call or submit online form
+2. **Site Visit**: On-site evaluation and measurements
+3. **Design Discussion**: Review your goals and preferences
+4. **Detailed Estimate**: Comprehensive proposal with pricing
+5. **Project Planning**: Timeline and material selection
+6. **Professional Execution**: Quality work from start to finish
+
+*Licensed • Insured • Professional • Reliable*
