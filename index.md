@@ -2,7 +2,7 @@
 
 Welcome to the comprehensive documentation for Here Handyman professional home services. This documentation provides detailed information about our services, processes, and what to expect when working with our team.
 
-## 📚 Documentation Contents
+## 📚  Documentation Contents
 
 ### [📖 README](README.md)
 - Company overview and quick start guide
