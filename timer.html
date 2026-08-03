@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hourly Earnings Tracker | Here Handyman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #071828;
+      --orange: #ff6f00;
+      --green: #00e676;
+      --white: #ffffff;
+      --gray: rgba(255, 255, 255, 0.7);
+      --glass: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at center, #112233 0%, var(--navy) 100%);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 25px;
+      letter-spacing: -0.5px;
+    }
+
+    .rate-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 15px;
+      margin-bottom: 25px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 15px;
+      color: var(--gray);
+      font-weight: 400;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .currency {
+      position: absolute;
+      left: 12px;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    input {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      width: 100px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 6px 10px 6px 28px;
+      text-align: center;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    input:focus {
+      border-color: var(--orange);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Remove arrows from number input */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    #money {
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--green);
+      margin: 20px 0 10px;
+      text-shadow: 0 0 25px rgba(0, 230, 118, 0.25);
+      letter-spacing: -1px;
+    }
+
+    #time {
+      font-size: 26px;
+      font-weight: 300;
+      color: var(--gray);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 30px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--gray);
+    }
+
+    .status-badge.running {
+      background: rgba(0, 230, 118, 0.15);
+      color: var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    .status-badge.paused {
+      background: rgba(255, 171, 0, 0.15);
+      color: #ffab00;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-start {
+      background: var(--green);
+      color: var(--navy);
+    }
+
+    .btn-start:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 230, 118, 0.4);
+    }
+
+    .btn-pause {
+      background: #ffab00;
+      color: var(--navy);
+    }
+
+    .btn-pause:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 171, 0, 0.4);
+    }
+
+    .btn-reset {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      border: 1px solid var(--glass-border);
+    }
+
+    .btn-reset:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .back-home {
+      margin-top: 35px;
+      display: inline-block;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+
+    .back-home:hover {
+      color: var(--orange);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="brand">Here Handyman</div>
+    <h1>Earnings Tracker</h1>
+
+    <div class="rate-box">
+      <label for="rate">Hourly Rate:</label>
+      <div class="input-wrapper">
+        <span class="currency">$</span>
+        <input id="rate" type="number" value="85" min="1" step="5">
+      </div>
+    </div>
+
+    <div>
+      <div id="status" class="status-badge">Stopped</div>
+      <div id="money">$0.00</div>
+      <div id="time">00:00:00</div>
+    </div>
+
+    <div class="controls">
+      <button id="start-btn" class="btn-start" onclick="startTimer()">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Start
+      </button>
+      <button id="pause-btn" class="btn-pause" onclick="pauseTimer()" style="display: none;">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg> Pause
+      </button>
+      <button class="btn-reset" onclick="resetTimer()">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg> Reset
+      </button>
+    </div>
+
+    <a href="index.html" class="back-home">← Back to Homepage</a>
+  </div>
+
+  <script>
+    let startTime = 0;
+    let accumulatedTime = 0; // Stores elapsed seconds from previous runs
+    let isRunning = false;
+    let timerInterval = null;
+
+    const moneyEl = document.getElementById("money");
+    const timeEl = document.getElementById("time");
+    const statusEl = document.getElementById("status");
+    const rateInput = document.getElementById("rate");
+    const startBtn = document.getElementById("start-btn");
+    const pauseBtn = document.getElementById("pause-btn");
+
+    // Load state from localStorage on startup
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedState = localStorage.getItem('handyman_timer_state');
+      if (savedState) {
+        try {
+          const state = JSON.parse(savedState);
+          rateInput.value = state.rate || 85;
+          accumulatedTime = state.accumulatedTime || 0;
+          isRunning = state.isRunning || false;
+          startTime = state.startTime || 0;
+
+          if (isRunning) {
+            // If it was running, calculate additional elapsed time since it was closed
+            const elapsedSinceClose = (Date.now() - startTime) / 1000;
+            accumulatedTime += elapsedSinceClose;
+            startTime = Date.now(); // Reset session start time to now
+            
+            // Resume timer interval
+            timerInterval = setInterval(updateDisplay, 1000);
+            updateUIState(true);
+          } else {
+            updateUIState(false);
+          }
+          updateDisplay();
+        } catch (e) {
+          console.error("Error parsing saved timer state", e);
+          clearStorage();
+        }
+      } else {
+        updateDisplay();
+      }
+    });
+
+    // Save current state to localStorage
+    function saveState() {
+      const state = {
+        rate: parseFloat(rateInput.value) || 85,
+        accumulatedTime: accumulatedTime,
+        isRunning: isRunning,
+        startTime: startTime
+      };
+      localStorage.setItem('handyman_timer_state', JSON.stringify(state));
+    }
+
+    function clearStorage() {
+      localStorage.removeItem('handyman_timer_state');
+    }
+
+    function startTimer() {
+      if (isRunning) return;
+      
+      startTime = Date.now();
+      isRunning = true;
+      timerInterval = setInterval(updateDisplay, 1000);
+      
+      updateUIState(true);
+      saveState();
+    }
+
+    function pauseTimer() {
+      if (!isRunning) return;
+      
+      // Add current session's elapsed time to accumulator
+      const sessionElapsed = (Date.now() - startTime) / 1000;
+      accumulatedTime += sessionElapsed;
+      
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isRunning = false;
+      
+      updateUIState(false);
+      saveState();
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isRunning = false;
+      accumulatedTime = 0;
+      startTime = 0;
+      
+      moneyEl.textContent = "$0.00";
+      timeEl.textContent = "00:00:00";
+      
+      statusEl.textContent = "Stopped";
+      statusEl.className = "status-badge";
+      
+      startBtn.style.display = "inline-flex";
+      pauseBtn.style.display = "none";
+      
+      clearStorage();
+    }
+
+    function updateUIState(running) {
+      if (running) {
+        statusEl.textContent = "Tracking";
+        statusEl.className = "status-badge running";
+        startBtn.style.display = "none";
+        pauseBtn.style.display = "inline-flex";
+      } else {
+        statusEl.textContent = "Paused";
+        statusEl.className = "status-badge paused";
+        startBtn.style.display = "inline-flex";
+        pauseBtn.style.display = "none";
+      }
+    }
+
+    function updateDisplay() {
+      const rate = parseFloat(rateInput.value) || 0;
+      
+      // Calculate total elapsed seconds
+      let totalSeconds = accumulatedTime;
+      if (isRunning) {
+        totalSeconds += (Date.now() - startTime) / 1000;
+      }
+      
+      // Calculate earnings
+      const earnings = (totalSeconds / 3600) * rate;
+      moneyEl.textContent = "$" + earnings.toFixed(2);
+      
+      // Format clock time
+      const h = Math.floor(totalSeconds / 3600);
+      const m = Math.floor((totalSeconds % 3600) / 60);
+      const s = Math.floor(totalSeconds % 60);
+      
+      timeEl.textContent = 
+        String(h).padStart(2, "0") + ":" +
+        String(m).padStart(2, "0") + ":" +
+        String(s).padStart(2, "0");
+    }
+
+    // Save state when rate input changes
+    rateInput.addEventListener('change', () => {
+      updateDisplay();
+      saveState();
+    });
+    rateInput.addEventListener('input', () => {
+      updateDisplay();
+    });
+  </script>
+</body>
+</html>
