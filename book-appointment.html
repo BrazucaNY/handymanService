@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics -->
+  <script>
+  (function(){
+    let loaded=false;
+    function loadGA(){
+      if(loaded)return;loaded=true;
+      const s=document.createElement('script');
+      s.src='https://www.googletagmanager.com/gtag/js?id=G-7QYNVWMYJJ';
+      s.async=true;document.head.appendChild(s);
+      window.dataLayer=window.dataLayer||[];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js',new Date());gtag('config','G-7QYNVWMYJJ',{anonymize_ip:true});
+    }
+    setTimeout(loadGA,4000);
+    ['scroll','mousemove','touchstart','keydown'].forEach(e=>window.addEventListener(e,loadGA,{once:true}));
+  })();
+  </script>
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <meta name="robots" content="noindex, nofollow"/>
-  <title>Book a Service | Here Handyman – Westchester County NY</title>
+  <meta name="robots" content="index, follow"/>
+  <title>Book a Handyman Service | Here Handyman – Westchester County NY</title>
+  <meta name="description" content="Book a professional handyman in Westchester County NY. Free estimates on furniture assembly, TV mounting, drywall, painting, electrical & more. Here Handyman serves White Plains, Scarsdale, Yonkers & all of Westchester."/>
+  <link rel="canonical" href="https://www.herehandyman.com/book-appointment"/>
+  <link rel="icon" href="/assets/images/favicon.ico"/>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Book a Handyman Service | Here Handyman"/>
+  <meta property="og:description" content="Schedule your handyman visit in Westchester County NY. Free estimates, same-day available. Licensed & insured."/>
+  <meta property="og:url" content="https://www.herehandyman.com/book-appointment"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+
+  <!-- Schema -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Book a Handyman Service","url":"https://www.herehandyman.com/book-appointment","description":"Schedule a professional handyman visit in Westchester County NY.","provider":{"@type":"LocalBusiness","name":"Here Handyman","telephone":"+15163500801"}}<\/script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
@@ -494,6 +527,7 @@
   <a href="https://www.herehandyman.com" class="logo">Here<span>Handyman</span></a>
   <div class="nav-right">
     <span class="nav-tag">Westchester County, NY</span>
+    <a href="https://www.herehandyman.com" class="nav-phone" style="background:transparent;border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.7);font-weight:600">← Main Site</a>
     <a href="tel:+15163500801" class="nav-phone">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       (516) 350-0801
