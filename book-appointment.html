@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Book a Service | Here Handyman – Westchester County NY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── Reset ──────────────────────────────────── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#071828;--navy2:#0b2a4a;--navy3:#0f2e50;
+      --orange:#eab308;--orange2:#facc15;--orange-dark:#ca8a04;
+      --white:#fff;--cream:#f9f5ef;--light:#f4f8fb;
+      --gray:#6b7280;--gray2:#94a3b8;--dark-text:#1e293b;
+      --border:rgba(160,190,218,0.6);--red:#dc2626;
+      --shadow-sm:0 2px 8px rgba(7,24,40,0.06);
+      --shadow-md:0 8px 30px rgba(7,24,40,0.09);
+      --shadow-lg:0 20px 60px rgba(7,24,40,0.14);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:#f7fafc;color:var(--navy);overflow-x:hidden;line-height:1.6}
+
+    /* ── Scrollbar ──────────────────────────────── */
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#f1f5f9}
+    ::-webkit-scrollbar-thumb{background:rgba(7,24,40,0.2);border-radius:3px}
+
+    /* ── Nav ──────────────────────────────────── */
+    nav{
+      position:sticky;top:0;z-index:999;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 5%;height:66px;
+      background:rgba(7,24,40,0.98);backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(255,255,255,0.07);
+    }
+    .logo{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--white);letter-spacing:2px;text-decoration:none;transition:opacity .2s}
+    .logo:hover{opacity:.85}
+    .logo span{color:var(--orange)}
+    .nav-right{display:flex;align-items:center;gap:16px}
+    .nav-tag{font-size:12px;color:rgba(255,255,255,0.45);font-weight:500;display:none}
+    @media(min-width:600px){.nav-tag{display:block}}
+    .nav-phone{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--orange);color:var(--navy);
+      padding:9px 20px;border-radius:8px;font-size:13px;font-weight:800;
+      text-decoration:none;transition:all .2s;letter-spacing:.3px;
+    }
+    .nav-phone:hover{background:var(--orange2);transform:translateY(-1px)}
+
+    /* ── Hero ──────────────────────────────────── */
+    .hero{
+      background:
+        radial-gradient(ellipse at 80% -10%,rgba(234,179,8,0.12),transparent 50%),
+        radial-gradient(ellipse at 5% 80%,rgba(15,46,80,0.8),transparent 45%),
+        linear-gradient(150deg,#040e1a 0%,#071828 40%,#0b2a4a 100%);
+      padding:70px 5% 90px;position:relative;overflow:hidden;
+    }
+    .hero-bg-grid{
+      position:absolute;inset:0;
+      background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+      background-size:60px 60px;pointer-events:none;
+    }
+    .hero-inner{
+      max-width:1140px;margin:0 auto;
+      display:grid;grid-template-columns:1fr 400px;gap:64px;
+      align-items:center;position:relative;z-index:1;
+    }
+    @media(max-width:960px){.hero-inner{grid-template-columns:1fr;gap:40px}}
+
+    .hero-eyebrow{
+      display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;
+      background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.3);
+      border-radius:999px;padding:6px 14px;
+      font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--orange2);
+    }
+    .hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);animation:blink 1.8s infinite}
+    @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+
+    .hero h1{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.8rem,5.5vw,4.2rem);
+      color:var(--white);line-height:.98;letter-spacing:1.5px;margin-bottom:20px;
+    }
+    .hero h1 em{color:var(--orange);font-style:normal;display:block}
+    .hero-sub{color:rgba(255,255,255,0.65);font-size:1.05rem;line-height:1.75;max-width:480px;margin-bottom:32px;font-weight:300}
+
+    /* Stats bar */
+    .hero-stats{display:flex;gap:0;margin-bottom:36px;border:1px solid rgba(255,255,255,0.1);border-radius:14px;overflow:hidden;background:rgba(255,255,255,0.04)}
+    .hero-stat{flex:1;padding:16px 14px;text-align:center;border-right:1px solid rgba(255,255,255,0.08)}
+    .hero-stat:last-child{border-right:none}
+    .hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--orange);letter-spacing:1px;line-height:1}
+    .hero-stat-label{font-size:.72rem;color:rgba(255,255,255,0.45);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+
+    .hero-cta{
+      display:inline-flex;align-items:center;gap:10px;
+      background:linear-gradient(135deg,var(--orange),var(--orange-dark));
+      color:var(--navy);padding:16px 32px;border-radius:999px;
+      font-size:1rem;font-weight:800;text-decoration:none;
+      box-shadow:0 16px 40px rgba(234,179,8,0.3);
+      transition:transform .2s,box-shadow .2s;
+    }
+    .hero-cta:hover{transform:translateY(-3px);box-shadow:0 22px 50px rgba(234,179,8,0.4)}
+    .hero-cta svg{transition:transform .2s}
+    .hero-cta:hover svg{transform:translateX(4px)}
+
+    .hero-proof{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px}
+    .proof-item{display:flex;align-items:center;gap:7px;font-size:.84rem;font-weight:600;color:rgba(255,255,255,0.6)}
+    .proof-item svg{color:var(--orange);flex-shrink:0}
+
+    /* Hero process card */
+    .hero-card{
+      background:rgba(255,255,255,0.055);border:1px solid rgba(255,255,255,0.12);
+      border-radius:24px;padding:32px;backdrop-filter:blur(10px);
+      animation:fadeUp .7s .1s ease both;
+    }
+    .hero-card-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+    .hero-card-icon{width:36px;height:36px;border-radius:10px;background:rgba(234,179,8,0.15);display:flex;align-items:center;justify-content:center}
+    .hero-card-icon svg{stroke:var(--orange);width:18px;height:18px}
+    .hero-card-title{color:var(--white);font-size:1rem;font-weight:800;letter-spacing:-.02em}
+    .hero-card-sub{font-size:.8rem;color:rgba(255,255,255,0.38);margin-bottom:24px;line-height:1.5}
+    .hero-steps{display:flex;flex-direction:column;gap:0}
+    .hero-step{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .hero-step:last-child{border-bottom:none;padding-bottom:0}
+    .step-circle{
+      width:32px;height:32px;border-radius:50%;flex-shrink:0;
+      background:linear-gradient(145deg,var(--orange),var(--orange-dark));
+      display:flex;align-items:center;justify-content:center;
+      font-size:.72rem;font-weight:900;color:var(--navy);margin-top:1px;
+      box-shadow:0 6px 16px rgba(234,179,8,0.3);
+    }
+    .step-body{flex:1}
+    .step-body strong{color:var(--white);font-size:.9rem;font-weight:700;display:block;margin-bottom:2px}
+    .step-body span{color:rgba(255,255,255,0.5);font-size:.8rem}
+
+    /* Notice pill */
+    .hero-notice{
+      display:inline-flex;align-items:flex-start;gap:10px;
+      background:rgba(234,179,8,0.08);border:1px solid rgba(234,179,8,0.2);
+      border-radius:12px;padding:12px 14px;margin-bottom:28px;
+      color:rgba(255,255,255,0.75);font-size:.84rem;line-height:1.55;
+    }
+    .hero-notice svg{flex-shrink:0;color:var(--orange2);margin-top:1px}
+
+    /* ── Progress tracker ───────────────────────── */
+    .progress-bar-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:16px 5%;position:sticky;top:66px;z-index:99}
+    .progress-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:0}
+    .prog-step{display:flex;align-items:center;gap:0;flex:1}
+    .prog-step:last-child{flex:none}
+    .prog-dot{
+      width:28px;height:28px;border-radius:50%;flex-shrink:0;
+      border:2px solid var(--border);background:var(--white);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.68rem;font-weight:800;color:var(--gray);
+      transition:all .35s ease;
+    }
+    .prog-dot.active{border-color:var(--orange);background:var(--orange);color:var(--navy)}
+    .prog-dot.done{border-color:var(--orange);background:var(--orange);color:var(--navy)}
+    .prog-dot.done::after{content:'✓';font-size:.8rem}
+    .prog-dot.done .prog-num{display:none}
+    .prog-line{flex:1;height:2px;background:var(--border);transition:background .35s ease;margin:0 2px}
+    .prog-line.done{background:var(--orange)}
+    .prog-label{display:none}
+    @media(min-width:600px){.prog-label{display:block;font-size:.72rem;font-weight:700;color:var(--gray);white-space:nowrap;position:absolute;top:34px;left:50%;transform:translateX(-50%)}}
+    .prog-step{position:relative}
+
+    /* ── Body layout ────────────────────────────── */
+    .page-body{
+      max-width:1140px;margin:0 auto;
+      padding:48px 5% 100px;
+      display:grid;grid-template-columns:1fr 320px;gap:48px;
+      align-items:start;
+    }
+    @media(max-width:960px){.page-body{grid-template-columns:1fr;gap:36px;padding:36px 5% 80px}}
+
+    /* ── Phase labels ───────────────────────────── */
+    .phase-label{padding:0 2px;margin-bottom:4px}
+    .phase-pill{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.28);
+      border-radius:999px;padding:4px 12px;
+      font-size:.7rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--orange-dark);
+    }
+    .phase-name{font-size:1.1rem;font-weight:800;color:var(--navy);margin-top:5px;letter-spacing:-.02em}
+    .phase-desc{font-size:.85rem;color:var(--gray);margin-top:3px;line-height:1.5}
+
+    /* ── Form ───────────────────────────────────── */
+    .ba-form{display:flex;flex-direction:column;gap:16px}
+
+    .form-section{
+      background:var(--white);
+      border:1.5px solid var(--border);
+      border-top:3px solid transparent;
+      border-radius:20px;
+      padding:28px 30px 30px;
+      box-shadow:var(--shadow-sm);
+      transition:box-shadow .3s,border-top-color .3s,transform .3s;
+    }
+    .form-section:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+    .form-section.focused{border-top-color:var(--orange);box-shadow:var(--shadow-md)}
+    @media(max-width:600px){.form-section{padding:20px 18px 22px;border-radius:16px}}
+
+    .section-heading{
+      display:flex;align-items:center;gap:10px;
+      font-size:.9rem;font-weight:900;color:var(--navy);letter-spacing:-.02em;
+      margin-bottom:20px;padding-bottom:14px;
+      border-bottom:1px solid rgba(160,190,218,0.3);
+    }
+    .section-num{
+      min-width:26px;height:20px;border-radius:999px;
+      background:linear-gradient(135deg,var(--orange),var(--orange-dark));
+      color:var(--navy);font-size:.68rem;font-weight:900;
+      display:inline-flex;align-items:center;justify-content:center;padding:0 7px;
+      box-shadow:0 4px 10px rgba(234,179,8,0.25);
+    }
+
+    /* Fields */
+    .fields-stack{display:flex;flex-direction:column;gap:18px}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:560px){.field-row{grid-template-columns:1fr}}
+    .field-group{display:flex;flex-direction:column;gap:6px}
+    .field-label{font-size:.8rem;font-weight:700;color:#374151;letter-spacing:.01em;display:flex;align-items:center;gap:4px}
+    .req{color:var(--red);font-size:.9em}
+    .field-hint{font-size:.75rem;color:var(--gray);margin-top:2px}
+
+    .field-input{
+      padding:12px 14px;width:100%;
+      background:#f8fbff;border:1.5px solid rgba(160,190,218,0.6);
+      border-radius:10px;font-size:.93rem;color:var(--navy);
+      font-family:'DM Sans',sans-serif;outline:none;
+      transition:border-color .2s,box-shadow .2s,background .2s;
+    }
+    .field-input::placeholder{color:rgba(107,114,128,0.45)}
+    .field-input:focus{border-color:rgba(234,179,8,0.75);box-shadow:0 0 0 3px rgba(234,179,8,0.13);background:var(--white)}
+    select.field-input{
+      appearance:none;cursor:pointer;padding-right:38px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 12px center;
+    }
+    textarea.field-input{resize:vertical;min-height:100px}
+
+    /* Validation */
+    .field-group.has-error .field-input{border-color:rgba(220,38,38,0.55);background:#fff8f8}
+    .field-group.has-error .field-input:focus{box-shadow:0 0 0 3px rgba(220,38,38,0.1)}
+    .field-error{font-size:.77rem;color:var(--red);font-weight:600;display:none;margin-top:1px}
+    .field-group.has-error .field-error{display:block}
+
+    /* Contact method pills */
+    .contact-pills{display:flex;gap:10px;flex-wrap:wrap}
+    .contact-pill{position:relative}
+    .contact-pill input{position:absolute;opacity:0;width:0;height:0}
+    .contact-pill label{
+      display:inline-flex;align-items:center;gap:7px;
+      padding:9px 18px;border-radius:999px;cursor:pointer;
+      border:1.5px solid var(--border);background:#f8fbff;
+      font-size:.88rem;font-weight:600;color:var(--gray);
+      transition:all .18s;
+    }
+    .contact-pill input:checked + label{border-color:var(--orange);background:rgba(234,179,8,0.1);color:var(--navy);box-shadow:0 0 0 3px rgba(234,179,8,0.12)}
+    .contact-pill label:hover{border-color:rgba(234,179,8,0.5);background:rgba(234,179,8,0.05)}
+
+    /* Service cards */
+    .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(max-width:480px){.services-grid{grid-template-columns:1fr}}
+    .service-card{position:relative}
+    .service-card input{position:absolute;opacity:0;width:0;height:0}
+    .service-card label{
+      display:flex;align-items:center;gap:12px;
+      padding:14px 16px;border-radius:12px;cursor:pointer;
+      border:1.5px solid var(--border);background:#f8fbff;
+      transition:all .2s;
+    }
+    .service-card label:hover{border-color:rgba(234,179,8,0.5);background:rgba(234,179,8,0.05)}
+    .service-card input:checked + label{border-color:var(--orange);background:rgba(234,179,8,0.09);box-shadow:0 0 0 3px rgba(234,179,8,0.12)}
+    .svc-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:rgba(7,24,40,0.06);flex-shrink:0;transition:background .2s}
+    .service-card input:checked + label .svc-icon{background:rgba(234,179,8,0.2)}
+    .svc-name{font-size:.88rem;font-weight:600;color:var(--navy);line-height:1.3}
+    .service-card-check{margin-left:auto;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .service-card input:checked + label .service-card-check{background:var(--orange);border-color:var(--orange);color:var(--navy)}
+    .error-msg{font-size:.78rem;color:var(--red);font-weight:600;margin-top:4px;display:none}
+
+    /* Time options */
+    .time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    @media(max-width:520px){.time-grid{grid-template-columns:repeat(2,1fr)}}
+    .time-opt{position:relative}
+    .time-opt input{position:absolute;opacity:0;width:0;height:0}
+    .time-opt label{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:16px 10px;border-radius:12px;cursor:pointer;text-align:center;
+      border:1.5px solid var(--border);background:#f8fbff;
+      transition:all .2s;
+    }
+    .time-opt label:hover{border-color:rgba(234,179,8,0.5);background:rgba(234,179,8,0.05)}
+    .time-opt input:checked + label{border-color:var(--orange);background:rgba(234,179,8,0.1);box-shadow:0 0 0 3px rgba(234,179,8,0.12)}
+    .time-emoji{font-size:1.4rem;margin-bottom:6px;display:block}
+    .time-name{font-size:.82rem;font-weight:700;color:var(--navy)}
+    .time-range{font-size:.72rem;color:var(--gray);margin-top:2px}
+
+    /* Photo upload */
+    .upload-zone{
+      border:2px dashed rgba(160,190,218,0.65);border-radius:14px;
+      padding:32px 16px;text-align:center;cursor:pointer;
+      transition:all .22s;background:#f8fbff;
+      position:relative;overflow:hidden;
+    }
+    .upload-zone::before{content:'';position:absolute;inset:0;background:rgba(234,179,8,0);transition:background .2s}
+    .upload-zone:hover,.upload-zone.dragover{border-color:rgba(234,179,8,0.7);background:rgba(234,179,8,0.04)}
+    .upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+    .upload-icon{font-size:2rem;margin-bottom:10px;display:block;transition:transform .2s}
+    .upload-zone:hover .upload-icon{transform:scale(1.1)}
+    .upload-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+    .upload-sub{font-size:.8rem;color:var(--gray)}
+    .upload-btn{
+      display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+      padding:8px 20px;border-radius:999px;background:var(--navy);
+      color:var(--white);font-size:.82rem;font-weight:700;
+      transition:background .2s;
+    }
+    .upload-zone:hover .upload-btn{background:var(--orange);color:var(--navy)}
+
+    .preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:10px;margin-top:16px}
+    .preview-item{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;border:1.5px solid var(--border);background:#f1f5f9}
+    .preview-item img{width:100%;height:100%;object-fit:cover}
+    .preview-remove{
+      position:absolute;top:4px;right:4px;width:20px;height:20px;
+      border-radius:50%;background:rgba(220,38,38,0.9);color:white;border:none;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      font-size:10px;font-weight:900;transition:all .15s;
+    }
+    .preview-remove:hover{background:var(--red);transform:scale(1.1)}
+
+    /* Agreement */
+    .agreement-box{
+      display:flex;align-items:flex-start;gap:12px;
+      padding:16px 18px;border-radius:12px;cursor:pointer;
+      background:#f8fbff;border:1.5px solid var(--border);transition:all .2s;
+    }
+    .agreement-box:has(input:checked){background:rgba(234,179,8,0.06);border-color:rgba(234,179,8,0.45)}
+    .agree-check{width:18px;height:18px;accent-color:var(--orange);cursor:pointer;flex-shrink:0;margin-top:2px}
+    .agree-text{font-size:.86rem;color:#374151;line-height:1.65}
+
+    /* Submit */
+    .btn-submit{
+      width:100%;padding:17px 28px;
+      background:linear-gradient(135deg,var(--orange) 0%,var(--orange-dark) 100%);
+      color:var(--navy);font-size:1.05rem;font-weight:900;letter-spacing:.01em;
+      border:none;border-radius:999px;cursor:pointer;font-family:'DM Sans',sans-serif;
+      box-shadow:0 16px 40px rgba(234,179,8,0.32),inset 0 1px 0 rgba(255,255,255,0.2);
+      transition:transform .2s,box-shadow .2s,opacity .2s;
+      display:flex;align-items:center;justify-content:center;gap:10px;
+    }
+    .btn-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 24px 52px rgba(234,179,8,0.4)}
+    .btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+    .submit-note{text-align:center;font-size:.8rem;color:var(--gray);margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px}
+    .submit-error{
+      background:#fff7ed;border:1px solid rgba(245,158,11,0.4);
+      border-radius:12px;padding:14px 16px;font-size:.88rem;
+      color:#7c2d12;line-height:1.6;display:none;margin-bottom:4px;
+    }
+
+    /* ── Sidebar ────────────────────────────────── */
+    .sidebar{display:flex;flex-direction:column;gap:18px}
+    @media(min-width:961px){.sidebar{position:sticky;top:130px;align-self:start}}
+
+    .scard{
+      background:var(--white);border:1.5px solid var(--border);
+      border-radius:18px;padding:24px;
+      box-shadow:var(--shadow-sm);
+      transition:box-shadow .3s;
+    }
+    .scard:hover{box-shadow:var(--shadow-md)}
+    .scard-title{font-size:.93rem;font-weight:900;color:var(--navy);letter-spacing:-.02em;margin-bottom:4px}
+    .scard-sub{font-size:.8rem;color:var(--gray);line-height:1.5;margin-bottom:16px}
+
+    .what-next{display:flex;flex-direction:column;gap:12px}
+    .wn-item{display:flex;gap:12px;align-items:flex-start}
+    .wn-num{
+      width:26px;height:26px;border-radius:50%;flex-shrink:0;margin-top:1px;
+      background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.35);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.7rem;font-weight:900;color:var(--orange-dark);
+    }
+    .wn-text{font-size:.87rem;color:#374151;line-height:1.55}
+    .wn-text strong{color:var(--navy);font-weight:700;display:block}
+
+    .call-card{
+      background:linear-gradient(145deg,#071828 0%,#0b2a4a 100%);
+      border:1px solid rgba(255,255,255,0.09);border-radius:18px;padding:24px;
+      box-shadow:0 16px 44px rgba(7,24,40,0.25);
+    }
+    .call-card-title{color:var(--white);font-size:.95rem;font-weight:800;margin-bottom:8px}
+    .call-card-copy{color:rgba(255,255,255,0.55);font-size:.84rem;line-height:1.6;margin-bottom:18px}
+    .call-btn{
+      display:flex;align-items:center;justify-content:center;gap:9px;
+      padding:13px 20px;border-radius:999px;text-decoration:none;
+      background:linear-gradient(135deg,var(--orange),var(--orange-dark));
+      color:var(--navy);font-size:.9rem;font-weight:900;
+      box-shadow:0 10px 28px rgba(234,179,8,0.3);transition:transform .18s;
+    }
+    .call-btn:hover{transform:translateY(-2px)}
+
+    /* Review card */
+    .review-card{
+      background:var(--white);border:1.5px solid var(--border);
+      border-radius:18px;padding:22px 24px;
+      box-shadow:var(--shadow-sm);
+    }
+    .review-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .review-g{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#4285F4}
+    .review-g svg{width:14px;height:14px}
+    .review-stars{color:var(--orange);font-size:14px;letter-spacing:1px;margin-left:auto}
+    .review-text{font-size:.87rem;color:#374151;line-height:1.7;font-style:italic;margin-bottom:14px}
+    .reviewer{display:flex;align-items:center;gap:10px}
+    .reviewer-avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--orange);font-family:'Bebas Neue',sans-serif;font-size:16px;display:flex;align-items:center;justify-content:center}
+    .reviewer-name{font-size:.85rem;font-weight:700;color:var(--navy)}
+    .reviewer-date{font-size:.75rem;color:var(--gray)}
+
+    .trust-list{display:flex;flex-direction:column;gap:9px}
+    .trust-item{display:flex;align-items:center;gap:9px;font-size:.86rem;color:#374151;font-weight:500}
+    .trust-item svg{color:var(--orange);flex-shrink:0}
+
+    /* ── FAQ ────────────────────────────────────── */
+    .faq-section{background:linear-gradient(180deg,#f4f8fb,#eef4f8);border-top:1px solid var(--border);padding:64px 5%}
+    .faq-inner{max-width:780px;margin:0 auto}
+    .faq-tag{font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+    .faq-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,2.8rem);color:var(--navy);letter-spacing:1px;margin-bottom:6px}
+    .faq-sub{color:var(--gray);font-size:.97rem;line-height:1.65;margin-bottom:32px}
+    .faq-item{border-bottom:1px solid rgba(160,190,218,0.4)}
+    .faq-item:last-child{border-bottom:none}
+    .faq-q{
+      width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:18px 0;background:none;border:none;cursor:pointer;text-align:left;
+      color:var(--navy);font-size:.96rem;font-weight:700;line-height:1.4;
+      font-family:'DM Sans',sans-serif;transition:color .2s;
+    }
+    .faq-q:hover{color:var(--orange)}
+    .faq-chevron{transition:transform .3s;color:var(--gray);flex-shrink:0;width:18px;height:18px}
+    .faq-item.open .faq-chevron{transform:rotate(180deg);color:var(--orange)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(0.4,0,0.2,1)}
+    .faq-a p{padding:0 0 18px;font-size:.92rem;color:var(--gray);line-height:1.72}
+
+    /* ── Success ────────────────────────────────── */
+    #success-screen{display:none;padding:80px 5% 100px;text-align:center}
+    #success-screen.show{display:block;animation:fadeUp .6s ease both}
+    .success-wrap{max-width:560px;margin:0 auto}
+    .success-icon{
+      width:86px;height:86px;border-radius:50%;margin:0 auto 28px;
+      background:linear-gradient(145deg,rgba(234,179,8,0.15),rgba(234,179,8,0.06));
+      border:1.5px solid rgba(234,179,8,0.4);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 20px 50px rgba(234,179,8,0.2);
+      animation:popIn .5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+    }
+    @keyframes popIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
+    .success-icon svg{width:38px;height:38px;stroke:var(--orange);stroke-width:2.5}
+    .success-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.2rem);color:var(--navy);letter-spacing:1px;margin-bottom:14px}
+    .success-copy{color:var(--gray);font-size:1rem;line-height:1.75;margin-bottom:32px}
+    .success-details{
+      background:var(--white);border:1.5px solid var(--border);border-top:3px solid var(--orange);
+      border-radius:18px;padding:24px;text-align:left;
+      box-shadow:var(--shadow-md);margin-bottom:32px;
+    }
+    .success-details-title{font-size:.75rem;font-weight:900;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+    .success-steps{display:flex;flex-direction:column;gap:12px}
+    .success-step{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:#374151;line-height:1.5}
+    .success-step svg{color:var(--orange);flex-shrink:0;margin-top:2px}
+    .success-btn{
+      display:inline-flex;align-items:center;gap:9px;
+      padding:14px 32px;border-radius:999px;text-decoration:none;
+      background:var(--navy);color:var(--white);font-size:.95rem;font-weight:700;
+      transition:background .2s,transform .2s;box-shadow:var(--shadow-md);
+    }
+    .success-btn:hover{background:var(--navy2);transform:translateY(-2px)}
+
+    /* ── Footer ─────────────────────────────────── */
+    footer{background:#040f18;color:rgba(255,255,255,0.35);padding:28px 5%;text-align:center;font-size:12.5px}
+    footer a{color:rgba(234,179,8,0.8);text-decoration:none}
+
+    /* ── Animations ─────────────────────────────── */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .hero-left{animation:fadeUp .65s ease both}
+    @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.herehandyman.com" class="logo">Here<span>Handyman</span></a>
+  <div class="nav-right">
+    <span class="nav-tag">Westchester County, NY</span>
+    <a href="tel:+15163500801" class="nav-phone">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      (516) 350-0801
+    </a>
+  </div>
+</nav>
+
+<div id="form-wrapper">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Book a Service</div>
+      <h1>Schedule Your<em>Handyman Visit</em></h1>
+      <p class="hero-sub">Fill out the short form below and we'll confirm your appointment, walk you through the plan, and give you a free estimate — all before any work starts.</p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">Free</div>
+          <div class="hero-stat-label">Estimates</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">Same</div>
+          <div class="hero-stat-label">Day Available</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">3 min</div>
+          <div class="hero-stat-label">To book</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">★ 5.0</div>
+          <div class="hero-stat-label">Google Rating</div>
+        </div>
+      </div>
+
+      <div class="hero-notice">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>This is a <strong>booking request</strong>, not an instant booking. We'll contact you to confirm availability and send your free estimate before any work begins.</span>
+      </div>
+
+      <a href="#booking-form" class="hero-cta">
+        Book My Appointment
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+
+      <div class="hero-proof">
+        <div class="proof-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Licensed &amp; insured
+        </div>
+        <div class="proof-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          No hidden fees
+        </div>
+        <div class="proof-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          English · Español · Português
+        </div>
+        <div class="proof-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          All of Westchester County
+        </div>
+      </div>
+    </div>
+
+    <!-- Process card -->
+    <div class="hero-card">
+      <div class="hero-card-header">
+        <div class="hero-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <span class="hero-card-title">How booking works</span>
+      </div>
+      <p class="hero-card-sub">From form to finished — here's the process.</p>
+      <div class="hero-steps">
+        <div class="hero-step">
+          <div class="step-circle">01</div>
+          <div class="step-body">
+            <strong>Submit your request</strong>
+            <span>Takes less than 3 minutes</span>
+          </div>
+        </div>
+        <div class="hero-step">
+          <div class="step-circle">02</div>
+          <div class="step-body">
+            <strong>We call or text you</strong>
+            <span>Usually within a few hours</span>
+          </div>
+        </div>
+        <div class="hero-step">
+          <div class="step-circle">03</div>
+          <div class="step-body">
+            <strong>You get a free estimate</strong>
+            <span>Firm price, no surprises</span>
+          </div>
+        </div>
+        <div class="hero-step">
+          <div class="step-circle">04</div>
+          <div class="step-body">
+            <strong>We show up &amp; get it done</strong>
+            <span>Clean, professional work</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-wrap" id="progress-bar">
+  <div class="progress-inner">
+    <div class="prog-step">
+      <div class="prog-dot active" id="pd1"><span class="prog-num">1</span></div>
+      <span class="prog-label">Contact</span>
+    </div>
+    <div class="prog-line" id="pl1"></div>
+    <div class="prog-step">
+      <div class="prog-dot" id="pd2"><span class="prog-num">2</span></div>
+      <span class="prog-label">Location</span>
+    </div>
+    <div class="prog-line" id="pl2"></div>
+    <div class="prog-step">
+      <div class="prog-dot" id="pd3"><span class="prog-num">3</span></div>
+      <span class="prog-label">Service</span>
+    </div>
+    <div class="prog-line" id="pl3"></div>
+    <div class="prog-step">
+      <div class="prog-dot" id="pd4"><span class="prog-num">4</span></div>
+      <span class="prog-label">Schedule</span>
+    </div>
+    <div class="prog-line" id="pl4"></div>
+    <div class="prog-step">
+      <div class="prog-dot" id="pd5"><span class="prog-num">5</span></div>
+      <span class="prog-label">Submit</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- FORM -->
+  <form id="booking-form" class="ba-form" novalidate>
+    <input type="hidden" name="access_key" value="5cd5e45a-9146-4c3a-ac2f-8b2904476cf0"/>
+    <input type="hidden" name="subject" value="New Booking Request - Here Handyman"/>
+    <input type="hidden" name="from_name" value="Here Handyman Booking Page"/>
+    <input type="text" name="hp_field" style="display:none" tabindex="-1" autocomplete="off"/>
+
+    <!-- ── PHASE 1 ── -->
+    <div class="phase-label">
+      <span class="phase-pill">Phase 1</span>
+      <div class="phase-name">Contact Information</div>
+      <div class="phase-desc">Tell us who you are so we can reach you quickly.</div>
+    </div>
+
+    <div class="form-section" id="sec-contact">
+      <h2 class="section-heading"><span class="section-num">01</span> Your Details</h2>
+      <div class="fields-stack">
+        <div class="field-row">
+          <div class="field-group" id="fg-firstname">
+            <label class="field-label" for="firstname">First Name <span class="req">*</span></label>
+            <input class="field-input" id="firstname" name="first_name" type="text" placeholder="David" required autocomplete="given-name"/>
+            <span class="field-error">Please enter your first name</span>
+          </div>
+          <div class="field-group" id="fg-lastname">
+            <label class="field-label" for="lastname">Last Name <span class="req">*</span></label>
+            <input class="field-input" id="lastname" name="last_name" type="text" placeholder="Smith" required autocomplete="family-name"/>
+            <span class="field-error">Please enter your last name</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group" id="fg-phone">
+            <label class="field-label" for="phone">Phone <span class="req">*</span></label>
+            <input class="field-input" id="phone" name="phone" type="tel" placeholder="(914) 555-0000" required autocomplete="tel"/>
+            <span class="field-error">Please enter a valid phone number</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="email">Email Address</label>
+            <input class="field-input" id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email"/>
+            <span class="field-hint">For booking confirmation email</span>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Preferred Contact Method</label>
+          <div class="contact-pills">
+            <div class="contact-pill">
+              <input type="radio" name="contact_method" id="cm-text" value="Text" checked/>
+              <label for="cm-text">💬 Text</label>
+            </div>
+            <div class="contact-pill">
+              <input type="radio" name="contact_method" id="cm-call" value="Call"/>
+              <label for="cm-call">📞 Call</label>
+            </div>
+            <div class="contact-pill">
+              <input type="radio" name="contact_method" id="cm-email" value="Email"/>
+              <label for="cm-email">✉️ Email</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PHASE 2 ── -->
+    <div class="phase-label" style="margin-top:12px">
+      <span class="phase-pill">Phase 2</span>
+      <div class="phase-name">Service Location</div>
+      <div class="phase-desc">Where do you need us? We serve all of Westchester County.</div>
+    </div>
+
+    <div class="form-section" id="sec-location">
+      <h2 class="section-heading"><span class="section-num">02</span> Your Address</h2>
+      <div class="fields-stack">
+        <div class="field-group" id="fg-address">
+          <label class="field-label" for="address">Street Address <span class="req">*</span></label>
+          <input class="field-input" id="address" name="address" type="text" placeholder="123 Main Street" required autocomplete="street-address"/>
+          <span class="field-error">Please enter your address</span>
+        </div>
+        <div class="field-row">
+          <div class="field-group" id="fg-city">
+            <label class="field-label" for="city">City <span class="req">*</span></label>
+            <input class="field-input" id="city" name="city" type="text" placeholder="White Plains" required autocomplete="address-level2"/>
+            <span class="field-error">Please enter your city</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="zip">ZIP Code</label>
+            <input class="field-input" id="zip" name="zip" type="text" placeholder="10601" maxlength="10" autocomplete="postal-code"/>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group" id="fg-property">
+            <label class="field-label" for="property-type">Property Type <span class="req">*</span></label>
+            <select class="field-input" id="property-type" name="property_type" required>
+              <option value="">Select type</option>
+              <option>House</option>
+              <option>Apartment</option>
+              <option>Condo / Townhouse</option>
+              <option>Commercial / Office</option>
+              <option>Other</option>
+            </select>
+            <span class="field-error">Please select a property type</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="floor">Floor / Unit # (optional)</label>
+            <input class="field-input" id="floor" name="floor_unit" type="text" placeholder="e.g. 2nd floor, Apt 4B"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PHASE 3 ── -->
+    <div class="phase-label" style="margin-top:12px">
+      <span class="phase-pill">Phase 3</span>
+      <div class="phase-name">Job Details</div>
+      <div class="phase-desc">What do you need done? Select all that apply.</div>
+    </div>
+
+    <div class="form-section" id="sec-services">
+      <h2 class="section-heading"><span class="section-num">03</span> Services Needed</h2>
+      <div class="fields-stack">
+        <div class="field-group">
+          <label class="field-label">Select all services you need <span class="req">*</span></label>
+          <div class="services-grid" id="services-grid">
+            <div class="service-card"><input type="checkbox" name="service" id="s1" value="Furniture Assembly"/><label for="s1"><div class="svc-icon">🪑</div><span class="svc-name">Furniture Assembly</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+            <div class="service-card"><input type="checkbox" name="service" id="s2" value="TV Mounting"/><label for="s2"><div class="svc-icon">📺</div><span class="svc-name">TV Mounting</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+            <div class="service-card"><input type="checkbox" name="service" id="s3" value="Drywall Repair"/><label for="s3"><div class="svc-icon">🔧</div><span class="svc-name">Drywall Repair</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+            <div class="service-card"><input type="checkbox" name="service" id="s4" value="Interior Painting"/><label for="s4"><div class="svc-icon">🎨</div><span class="svc-name">Interior Painting</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+            <div class="service-card"><input type="checkbox" name="service" id="s5" value="Electrical Repairs"/><label for="s5"><div class="svc-icon">⚡</div><span class="svc-name">Electrical Repairs</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+            <div class="service-card"><input type="checkbox" name="service" id="s6" value="Carpentry & Shelving"/><label for="s6"><div class="svc-icon">🪵</div><span class="svc-name">Carpentry &amp; Shelving</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+            <div class="service-card"><input type="checkbox" name="service" id="s7" value="Trampoline / Outdoor Setup"/><label for="s7"><div class="svc-icon">🌿</div><span class="svc-name">Outdoor / Trampoline Setup</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+            <div class="service-card"><input type="checkbox" name="service" id="s8" value="Smart Home Setup"/><label for="s8"><div class="svc-icon">📱</div><span class="svc-name">Smart Home Setup</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+            <div class="service-card"><input type="checkbox" name="service" id="s9" value="Plumbing Fixtures"/><label for="s9"><div class="svc-icon">🚿</div><span class="svc-name">Plumbing Fixtures</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+            <div class="service-card"><input type="checkbox" name="service" id="s10" value="General Repairs"/><label for="s10"><div class="svc-icon">🛠️</div><span class="svc-name">General Repairs</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+          </div>
+          <span class="error-msg" id="services-error">Please select at least one service</span>
+        </div>
+
+        <div class="field-group" id="fg-description">
+          <label class="field-label" for="description">Describe your project <span class="req">*</span></label>
+          <textarea class="field-input" id="description" name="project_details" rows="4" placeholder="e.g. I need two IKEA BILLY bookshelves assembled and a 65" TV mounted above the fireplace in the living room..." required></textarea>
+          <span class="field-error">Please describe your project</span>
+          <div class="field-hint" id="char-count">0 / 500 characters</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PHASE 4 ── -->
+    <div class="phase-label" style="margin-top:12px">
+      <span class="phase-pill">Phase 4</span>
+      <div class="phase-name">Scheduling &amp; Photos</div>
+      <div class="phase-desc">When works best for you? Photos help us prepare.</div>
+    </div>
+
+    <div class="form-section" id="sec-schedule">
+      <h2 class="section-heading"><span class="section-num">04</span> Preferred Date &amp; Time</h2>
+      <div class="fields-stack">
+        <div class="field-group" id="fg-date">
+          <label class="field-label" for="preferred-date">Preferred Date <span class="req">*</span></label>
+          <input class="field-input" id="preferred-date" name="preferred_date" type="date" required/>
+          <span class="field-error">Please select a date</span>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Preferred Time Window</label>
+          <div class="time-grid">
+            <div class="time-opt">
+              <input type="radio" name="preferred_time" id="t1" value="Morning (7AM–11AM)" checked/>
+              <label for="t1"><span class="time-emoji">🌅</span><span class="time-name">Morning</span><span class="time-range">7AM – 11AM</span></label>
+            </div>
+            <div class="time-opt">
+              <input type="radio" name="preferred_time" id="t2" value="Midday (11AM–2PM)"/>
+              <label for="t2"><span class="time-emoji">☀️</span><span class="time-name">Midday</span><span class="time-range">11AM – 2PM</span></label>
+            </div>
+            <div class="time-opt">
+              <input type="radio" name="preferred_time" id="t3" value="Afternoon (2PM–7PM)"/>
+              <label for="t3"><span class="time-emoji">🌤️</span><span class="time-name">Afternoon</span><span class="time-range">2PM – 7PM</span></label>
+            </div>
+            <div class="time-opt">
+              <input type="radio" name="preferred_time" id="t4" value="Any Time - Flexible"/>
+              <label for="t4"><span class="time-emoji">🕐</span><span class="time-name">Flexible</span><span class="time-range">Any time</span></label>
+            </div>
+            <div class="time-opt">
+              <input type="radio" name="preferred_time" id="t5" value="Weekend Only"/>
+              <label for="t5"><span class="time-emoji">📅</span><span class="time-name">Weekend</span><span class="time-range">Sat or Sun</span></label>
+            </div>
+            <div class="time-opt">
+              <input type="radio" name="preferred_time" id="t6" value="ASAP - Urgent"/>
+              <label for="t6"><span class="time-emoji">⚡</span><span class="time-name">ASAP</span><span class="time-range">Urgent job</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section" id="sec-photos">
+      <h2 class="section-heading">
+        <span class="section-num">05</span> Project Photos
+        <span style="font-size:.78rem;font-weight:500;color:var(--gray);margin-left:2px">(optional but very helpful)</span>
+      </h2>
+      <div class="upload-zone" id="upload-zone">
+        <input type="file" id="photo-input" accept="image/*" multiple/>
+        <span class="upload-icon">📸</span>
+        <div class="upload-title">Drag &amp; drop photos here</div>
+        <div class="upload-sub">JPG, PNG, WebP — up to 10 photos</div>
+        <div class="upload-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Browse files
+        </div>
+      </div>
+      <div class="preview-grid" id="preview-grid"></div>
+      <p style="font-size:.82rem;color:var(--gray);margin-top:14px;line-height:1.6">
+        📱 Prefer to text photos? Send them to <a href="sms:+15163500801" style="color:var(--orange);font-weight:700;text-decoration:none">(516) 350-0801</a> after submitting — that works great too.
+      </p>
+    </div>
+
+    <!-- ── PHASE 5 – Submit ── -->
+    <div class="phase-label" style="margin-top:12px">
+      <span class="phase-pill">Phase 5</span>
+      <div class="phase-name">Confirm &amp; Submit</div>
+      <div class="phase-desc">Review and send your booking request.</div>
+    </div>
+
+    <div class="form-section" id="sec-submit">
+      <h2 class="section-heading"><span class="section-num">06</span> Almost Done!</h2>
+      <div class="fields-stack">
+        <label class="agreement-box" id="agree-wrap">
+          <input type="checkbox" id="agree" name="agreement" class="agree-check" required/>
+          <span class="agree-text">
+            I understand this is a <strong>booking request</strong> — Here Handyman will contact me to confirm availability and provide a free estimate. No payment is required until work is approved. I agree to be contacted at the phone number I provided.
+          </span>
+        </label>
+        <div class="submit-error" id="submit-error">
+          ⚠️ Something went wrong. Please try again or call us at <strong>(516) 350-0801</strong>.
+        </div>
+        <button type="submit" class="btn-submit" id="submit-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Request My Appointment
+        </button>
+        <p class="submit-note">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Your info is private and never shared
+        </p>
+      </div>
+    </div>
+  </form>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="scard">
+      <p class="scard-title">What happens next</p>
+      <p class="scard-sub">After you submit, here's the process.</p>
+      <div class="what-next">
+        <div class="wn-item">
+          <div class="wn-num">1</div>
+          <div class="wn-text"><strong>We receive your request</strong>Instantly sent to our team</div>
+        </div>
+        <div class="wn-item">
+          <div class="wn-num">2</div>
+          <div class="wn-text"><strong>We call or text you</strong>Usually within a few hours</div>
+        </div>
+        <div class="wn-item">
+          <div class="wn-num">3</div>
+          <div class="wn-text"><strong>You get a free estimate</strong>Clear price, no surprises</div>
+        </div>
+        <div class="wn-item">
+          <div class="wn-num">4</div>
+          <div class="wn-text"><strong>We show up &amp; get it done</strong>On time, every time</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="call-card">
+      <p class="call-card-title">Need help right now?</p>
+      <p class="call-card-copy">Skip the form. Call or text us directly — we usually respond in minutes during business hours.</p>
+      <a href="tel:+15163500801" class="call-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call (516) 350-0801
+      </a>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-g">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+          Google Review
+        </div>
+        <div class="review-stars">★★★★★</div>
+      </div>
+      <p class="review-text">"Here Handyman was amazing. They arrived on time, assembled our furniture quickly and even fixed a loose door that we mentioned in passing. Highly recommend!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">S</div>
+        <div>
+          <div class="reviewer-name">Sandra M.</div>
+          <div class="reviewer-date">Scarsdale, NY · 2 weeks ago</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <p class="scard-title">Why Here Handyman?</p>
+      <div class="trust-list" style="margin-top:8px">
+        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free estimates, no obligation</div>
+        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Upfront pricing, no hidden fees</div>
+        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Licensed &amp; fully insured</div>
+        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>English · Spanish · Portuguese</div>
+        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Same-day service available</div>
+        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>100% satisfaction guaranteed</div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-tag">FAQ</div>
+    <h2 class="faq-heading">Booking Questions</h2>
+    <p class="faq-sub">Everything you need to know before submitting your request.</p>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">How quickly will you respond?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="faq-a"><p>We typically respond within 1–3 hours during business hours (Mon–Sat, 8AM–8PM). For urgent jobs, call or text us directly at (516) 350-0801.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">Is the estimate really free?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="faq-a"><p>Yes, 100% free — no strings attached. You get a firm price upfront before any work starts. You only pay if you decide to move forward.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">Do you offer same-day service?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="faq-a"><p>Yes — same-day and next-day are often available. Select "ASAP – Urgent" in the scheduling section, and we'll do our best to accommodate you quickly.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">What areas do you serve?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="faq-a"><p>We serve all of Westchester County, NY — White Plains, Scarsdale, Yonkers, Tarrytown, Hartsdale, Harrison, New Rochelle, Greenburgh, Valhalla, Elmsford, Dobbs Ferry, Ardsley, and more.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">What if I'm not sure what service I need?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="faq-a"><p>No problem — just select "General Repairs" and describe the issue in the project details box. We'll figure out the right solution when we call you.</p></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- #form-wrapper -->
+
+<!-- SUCCESS SCREEN -->
+<div id="success-screen">
+  <div class="success-wrap">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1 class="success-heading">Request Sent! 🎉</h1>
+    <p class="success-copy">Thank you, <strong id="success-name"></strong>! We received your booking request and will contact you at <strong id="success-phone"></strong> shortly to confirm your appointment and provide a free estimate.</p>
+    <div class="success-details">
+      <p class="success-details-title">What happens next</p>
+      <div class="success-steps">
+        <div class="success-step">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          We'll reach out within a few hours during business hours
+        </div>
+        <div class="success-step">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          You'll receive a free estimate before any work begins
+        </div>
+        <div class="success-step">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Have photos? Text them to <strong>(516) 350-0801</strong> anytime
+        </div>
+      </div>
+    </div>
+    <a href="https://www.herehandyman.com" class="success-btn">← Back to herehandyman.com</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 <a href="https://www.herehandyman.com">Here Handyman</a> · Westchester County, NY · <a href="tel:+15163500801">(516) 350-0801</a> · info@herehandyman.com</p>
+</footer>
+
+<script>
+/* ── Set min date to today ──────────────────────────── */
+document.getElementById('preferred-date').min = new Date().toISOString().split('T')[0];
+
+/* ── Phone auto-format ──────────────────────────────── */
+document.getElementById('phone').addEventListener('input', function(){
+  let val = this.value.replace(/\D/g,'').slice(0,10);
+  if(val.length>=6) val = '('+val.slice(0,3)+') '+val.slice(3,6)+'-'+val.slice(6);
+  else if(val.length>=3) val = '('+val.slice(0,3)+') '+val.slice(3);
+  this.value = val;
+});
+
+/* ── Character counter ──────────────────────────────── */
+const desc = document.getElementById('description');
+const charCount = document.getElementById('char-count');
+desc.addEventListener('input', () => {
+  const n = desc.value.length;
+  charCount.textContent = n + ' / 500 characters';
+  charCount.style.color = n > 450 ? '#dc2626' : '';
+});
+
+/* ── Progress bar tracking ──────────────────────────── */
+function updateProgress(){
+  const fn = document.getElementById('firstname').value.trim();
+  const ph = document.getElementById('phone').value.trim();
+  const ad = document.getElementById('address').value.trim();
+  const ct = document.getElementById('city').value.trim();
+  const sv = document.querySelectorAll('input[name="service"]:checked').length > 0;
+  const dsc= document.getElementById('description').value.trim();
+  const dt = document.getElementById('preferred-date').value;
+
+  const steps = [
+    fn && ph,       // phase 1 contact
+    ad && ct,       // phase 2 location
+    sv && dsc,      // phase 3 services
+    !!dt,           // phase 4 schedule
+  ];
+
+  steps.forEach((done, i) => {
+    const dot = document.getElementById('pd'+(i+1));
+    const line = document.getElementById('pl'+(i+1));
+    if(done){
+      dot.classList.add('done');
+      dot.classList.remove('active');
+      dot.innerHTML = '';
+      if(line) line.classList.add('done');
+      // activate next
+      const nextDot = document.getElementById('pd'+(i+2));
+      if(nextDot && !nextDot.classList.contains('done')){
+        nextDot.classList.add('active');
+      }
+    }
+  });
+
+  // Phase 5 active when all done
+  const allDone = steps.every(Boolean);
+  const pd5 = document.getElementById('pd5');
+  if(allDone) pd5.classList.add('active');
+}
+
+document.getElementById('booking-form').addEventListener('input', updateProgress);
+
+/* ── Focus highlight sections ───────────────────────── */
+document.querySelectorAll('.field-input').forEach(el => {
+  el.addEventListener('focus', () => {
+    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('focused'));
+    el.closest('.form-section')?.classList.add('focused');
+  });
+  el.addEventListener('blur', () => {
+    el.closest('.form-section')?.classList.remove('focused');
+  });
+});
+
+/* ── FAQ accordion ──────────────────────────────────── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-a');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = '0';
+      i.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
+
+/* ── Photo upload & preview ─────────────────────────── */
+const uploadZone = document.getElementById('upload-zone');
+const photoInput = document.getElementById('photo-input');
+const previewGrid = document.getElementById('preview-grid');
+let uploadedFiles = [];
+
+photoInput.addEventListener('change', e => addFiles(Array.from(e.target.files)));
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault(); uploadZone.classList.remove('dragover');
+  addFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+});
+
+function addFiles(files){
+  files.forEach(file => {
+    if(uploadedFiles.length >= 10) return;
+    const idx = uploadedFiles.push(file) - 1;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const item = document.createElement('div');
+      item.className = 'preview-item';
+      item.dataset.idx = idx;
+      item.innerHTML = `<img src="${e.target.result}" alt="Preview"/><button type="button" class="preview-remove" aria-label="Remove">✕</button>`;
+      item.querySelector('.preview-remove').onclick = () => {
+        uploadedFiles[idx] = null;
+        item.remove();
+      };
+      previewGrid.appendChild(item);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ── Validate helpers ───────────────────────────────── */
+function validateField(id, fgId){
+  const input = document.getElementById(id);
+  const fg = document.getElementById(fgId || 'fg-'+id);
+  if(!input || !fg) return true;
+  const valid = input.value.trim() !== '' && input.value !== '';
+  fg.classList.toggle('has-error', !valid);
+  return valid;
+}
+function validateServices(){
+  const checked = document.querySelectorAll('input[name="service"]:checked').length > 0;
+  document.getElementById('services-error').style.display = checked ? 'none' : 'block';
+  return checked;
+}
+
+/* ── Clear error on input ───────────────────────────── */
+document.querySelectorAll('.field-input').forEach(el => {
+  el.addEventListener('input', () => el.closest('.field-group')?.classList.remove('has-error'));
+});
+document.querySelectorAll('input[name="service"]').forEach(el => {
+  el.addEventListener('change', () => {
+    if(document.querySelectorAll('input[name="service"]:checked').length > 0)
+      document.getElementById('services-error').style.display = 'none';
+  });
+});
+
+/* ── Form submit ────────────────────────────────────── */
+const form = document.getElementById('booking-form');
+const submitBtn = document.getElementById('submit-btn');
+const submitError = document.getElementById('submit-error');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  submitError.style.display = 'none';
+
+  const ok1 = validateField('firstname');
+  const ok2 = validateField('lastname');
+  const ok3 = validateField('phone');
+  const ok4 = validateField('address');
+  const ok5 = validateField('city');
+  const ok6 = validateField('property-type','fg-property');
+  const ok7 = validateServices();
+  const ok8 = validateField('description','fg-description');
+  const ok9 = validateField('preferred-date','fg-date');
+  const agreeOk = document.getElementById('agree').checked;
+
+  if(!agreeOk){
+    document.getElementById('agree-wrap').style.borderColor='rgba(220,38,38,0.55)';
+    document.getElementById('agree-wrap').style.background='#fff8f8';
+  }
+
+  if(!ok1||!ok2||!ok3||!ok4||!ok5||!ok6||!ok7||!ok8||!ok9||!agreeOk){
+    const firstError = document.querySelector('.has-error, [style*="rgb(220"]');
+    firstError?.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+
+  // Animate button
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 0.9s linear infinite"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg> Sending your request…`;
+
+  const services = [...form.querySelectorAll('input[name="service"]:checked')].map(c => c.value).join(', ');
+  const photoCount = uploadedFiles.filter(Boolean).length;
+
+  const payload = {
+    access_key: '5cd5e45a-9146-4c3a-ac2f-8b2904476cf0',
+    subject: 'New Booking Request - Here Handyman',
+    from_name: 'Here Handyman Booking Page',
+    'First Name': form.first_name.value.trim(),
+    'Last Name': form.last_name.value.trim(),
+    'Phone': form.phone.value.trim(),
+    'Email': form.email.value.trim() || 'Not provided',
+    'Contact Preference': form.contact_method.value,
+    'Address': form.address.value.trim(),
+    'City': form.city.value.trim(),
+    'ZIP': form.zip.value.trim() || 'Not provided',
+    'Property Type': form.property_type.value,
+    'Floor/Unit': form.floor_unit.value.trim() || 'N/A',
+    'Services Requested': services,
+    'Project Details': form.project_details.value.trim(),
+    'Preferred Date': form.preferred_date.value,
+    'Preferred Time': form.preferred_time.value,
+    'Photos': photoCount > 0 ? `Customer selected ${photoCount} photo(s) — they will text to (516) 350-0801` : 'No photos selected',
+  };
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const json = await res.json();
+    if(json.success){
+      document.getElementById('form-wrapper').style.display = 'none';
+      const ss = document.getElementById('success-screen');
+      ss.classList.add('show');
+      document.getElementById('success-name').textContent = payload['First Name'];
+      document.getElementById('success-phone').textContent = payload['Phone'];
+      window.scrollTo({top:0,behavior:'smooth'});
+    } else {
+      throw new Error('API error');
+    }
+  } catch {
+    submitError.style.display = 'block';
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Request My Appointment`;
+    submitError.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+});
+</script>
+</body>
+</html>
