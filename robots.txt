@@ -4,21 +4,113 @@ Disallow: /timer.html
 
 Sitemap: https://www.herehandyman.com/sitemap.xml
 
-# AI Search Crawlers
+# ============================================
+# GOOGLE
+# ============================================
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+# ============================================
+# BING / MICROSOFT
+# ============================================
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# ============================================
+# OPENAI / CHATGPT
+# ============================================
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: Google-Extended
+User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: PerplexityBot
-Allow: /
-
+# ============================================
+# ANTHROPIC / CLAUDE
+# ============================================
 User-agent: ClaudeBot
 Allow: /
 
 User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# ============================================
+# PERPLEXITY
+# ============================================
+User-agent: PerplexityBot
+Allow: /
+
+# ============================================
+# META / FACEBOOK AI
+# ============================================
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# ============================================
+# APPLE
+# ============================================
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# ============================================
+# YOU.COM
+# ============================================
+User-agent: YouBot
+Allow: /
+
+# ============================================
+# COHERE AI
+# ============================================
+User-agent: cohere-ai
+Allow: /
+
+# ============================================
+# AMAZON / ALEXA
+# ============================================
+User-agent: Amazonbot
+Allow: /
+
+# ============================================
+# COMMON CRAWL (used by AI training datasets)
+# ============================================
+User-agent: CCBot
+Allow: /
+
+# ============================================
+# DUCKDUCKGO
+# ============================================
+User-agent: DuckDuckBot
+Allow: /
+
+# ============================================
+# YAHOO
+# ============================================
+User-agent: Slurp
 Allow: /
