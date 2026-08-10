@@ -1,301 +1,464 @@
-# Project Gallery - Here Handyman
+# Project Gallery – Here Handyman
 
-Browse our recent projects and see the quality craftsmanship we bring to every home renovation and repair project.
+Browse recent handyman projects and see the quality craftsmanship we bring to homes throughout White Plains and Westchester County, NY.
 
-## 🏠 Kitchen Projects
+From home repairs and painting to furniture assembly, TV mounting, carpentry, drywall, fixtures, and general maintenance, Here Handyman helps homeowners get their projects completed properly and efficiently.
 
-### Modern Kitchen Remodel
-**Location**: White Plains, NY  
-**Scope**: Complete kitchen renovation  
-**Features**: Custom cabinetry, quartz countertops, subway tile backsplash, under-cabinet lighting
+## 🔧 Home Repair & Handyman Projects
 
-**Before & After Highlights**:
-- Removed outdated cabinets and appliances
-- Installed custom shaker-style cabinets
-- Added large kitchen island with electrical
-- Upgraded to stainless steel appliances
-- Installed recessed lighting system
+### Drywall Repair & Painting
 
-### Kitchen Island Installation
-**Location**: Harrison, NY  
-**Scope**: Kitchen island addition with electrical work  
-**Features**: Custom island, pendant lighting, electrical outlets, butcher block countertop
+**Location:** Yonkers, NY
+**Scope:** Drywall repair and interior painting
 
-**Project Details**:
-- Designed and built custom island to fit space
-- Installed electrical outlets and USB charging ports
-- Added decorative pendant lighting
-- Integrated butcher block food prep surface
-- Coordinated with existing kitchen style
+**Project Details:**
 
-### Cabinet Refinishing
-**Location**: Scarsdale, NY  
-**Scope**: Cabinet refinishing and hardware update  
-**Features**: Painted cabinets, new hardware, soft-close hinges
+* Repaired damaged drywall and wall surfaces
+* Patched holes, cracks, and damaged areas
+* Prepared surfaces for painting
+* Primed repaired areas
+* Matched existing wall color and finish
+* Completed clean, professional touch-ups
 
-**Transformation**:
-- Sanded and primed existing oak cabinets
-- Applied professional paint finish
-- Installed modern brushed nickel hardware
-- Added soft-close door hinges
-- Updated crown molding and trim
+### Door Repair & Painting
 
----
+**Location:** White Plains, NY
+**Scope:** Door repair, patching, and painting
 
-## 🚿 Bathroom Projects
+**Project Details:**
 
-### Luxury Bathroom Update
-**Location**: Yonkers, NY  
-**Scope**: Full bathroom renovation  
-**Features**: Walk-in shower, floating vanity, tile flooring, modern fixtures
+* Repaired damaged door surfaces
+* Filled holes and imperfections
+* Sanded and prepared the doors
+* Applied primer and paint
+* Adjusted door alignment and hardware
+* Completed finishing work for a clean appearance
 
-**Complete Renovation**:
-- Removed old tub and created walk-in shower
-- Installed frameless glass shower doors
-- Added floating vanity with vessel sink
-- Upgraded to water-saving fixtures
-- Installed heated tile flooring
+### Trim & Molding Installation
 
-### Walk-in Shower Installation
-**Location**: Scarsdale, NY  
-**Scope**: Tub-to-shower conversion  
-**Features: Glass doors, niche storage, rainfall showerhead, tile walls
+**Location:** Scarsdale, NY
+**Scope:** Interior trim installation and finishing
 
-**Conversion Details**:
-- Demolished existing tub and surround
-- Built custom shower pan with proper drainage
-- Installed waterproofing membrane
-- Added built-in shampoo niche
-- Installed rainfall and handheld showerheads
+**Project Details:**
 
-### Vanity and Lighting Update
-**Location**: White Plains, NY  
-**Scope**: Vanity replacement and lighting upgrade  
-**Features**: Double vanity, LED mirror, updated lighting, new fixtures
-
-**Modern Updates**:
-- Replaced single vanity with double sink
-- Installed LED-backlit mirror
-- Updated vanity lighting fixtures
-- Added GFCI outlets for safety
-- Coordinated fixtures and finishes
+* Measured and cut trim to fit
+* Installed baseboards and molding
+* Repaired existing trim
+* Filled nail holes and seams
+* Caulked gaps and joints
+* Primed and painted the finished trim
 
 ---
 
-## 🪟 Flooring Projects
+## 📺 TV Mounting & Wall Installation
 
-### Hardwood Flooring Installation
-**Location**: Hartsdale, NY  
-**Scope**: Living room and hallway hardwood installation  
-**Features**: Solid oak flooring, custom transitions, baseboard installation
+### TV Mounting
 
-**Installation Process**:
-- Removed old carpet and padding
-- Installed solid oak hardwood planks
-- Added custom transition strips
-- Installed matching baseboards
-- Applied professional finish
+**Location:** White Plains, NY
+**Scope:** Professional TV mounting and installation
 
-### Tile Flooring Installation
-**Location**: Yonkers, NY  
-**Scope**: Kitchen and dining room tile  
-**Features**: Porcelain tile, grout sealing, custom patterns
+**Project Details:**
 
-**Tile Work**:
-- Removed old vinyl flooring
-- Installed porcelain tile throughout
-- Created custom pattern for dining area
-- Applied and sealed grout
-- Added decorative border tiles
+* Located suitable mounting points
+* Installed the TV mounting hardware
+* Secured the television safely to the wall
+* Leveled and positioned the TV
+* Organized visible cables where possible
+* Completed final installation and setup
 
-### Vinyl Plank Flooring
-**Location**: New Rochelle, NY  
-**Scope**: Basement family room  
-**Features**: Luxury vinyl plank, waterproof, wood-look finish
+### Mirror Installation
 
-**Basement Upgrade**:
-- Prepared concrete subfloor
-- Installed waterproof underlayment
-- Laid luxury vinyl planks
-- Added baseboards and transitions
-- Created moisture-resistant floor
+**Location:** Scarsdale, NY
+**Scope:** Mirror removal and replacement
 
----
+**Project Details:**
 
-## 🏡 Exterior Projects
+* Carefully removed the existing mirror
+* Prepared the wall surface
+* Installed the new mirror
+* Used appropriate mounting hardware
+* Checked alignment and level
+* Completed surrounding touch-up work where needed
 
-### Exterior Home Update
-**Location**: White Plains, NY  
-**Scope**: Complete exterior renovation  
-**Features**: New siding, exterior painting, window trim, landscaping coordination
+### Wall Art & Picture Hanging
 
-**Exterior Transformation**:
-- Replaced damaged siding sections
-- Power washed and prepped surfaces
-- Applied premium exterior paint
-- Updated window and door trim
-- Coordinated with landscaping company
+**Location:** Harrison, NY
+**Scope:** Multiple wall-mounted items
 
-### Deck Repair and Staining
-**Location**: Tarrytown, NY  
-**Scope**: Deck restoration  
-**Features: Structural repairs, new railings, professional staining
+**Project Details:**
 
-**Deck Restoration**:
-- Inspected and repaired structural supports
-- Replaced damaged deck boards
-- Installed new railings and balusters
-- Applied professional deck stain
-- Added waterproof sealant
-
-### Window and Door Installation
-**Location**: Scarsdale, NY  
-**Scope**: Window replacement and door installation  
-**Features: Energy-efficient windows, new entry door, proper sealing
-
-**Energy Efficiency Upgrade**:
-- Removed old single-pane windows
-- Installed energy-efficient double-pane windows
-- Added new fiberglass entry door
-- Applied proper weatherstripping
-- Sealed all openings and gaps
+* Measured and planned placement
+* Located appropriate mounting points
+* Installed wall anchors and hardware
+* Hung artwork and decorative pieces
+* Checked spacing and alignment
+* Completed a clean finished installation
 
 ---
 
-## 🔧 General Projects
+## 🪑 Furniture Assembly
 
-### Drywall Repair and Painting
-**Location**: Yonkers, NY  
-**Scope**: Water damage repair and painting  
-**Features: Drywall patching, texture matching, wall painting
+### Furniture Assembly & Installation
 
-**Damage Restoration**:
-- Removed water-damaged drywall
-- Installed new drywall patches
-- Matched existing wall texture
-- Applied primer and paint
-- Blended repairs seamlessly
+**Location:** White Plains, NY
+**Scope:** Home furniture assembly
 
-### Electrical Panel Upgrade
-**Location**: Scarsdale, NY  
-**Scope: Electrical system update  
-**Features: New circuit breaker panel, additional circuits, safety inspection
+**Project Details:**
 
-**Electrical Safety**:
-- Upgraded to modern circuit breaker panel
-- Added dedicated appliance circuits
-- Installed GFCI outlets where required
-- Performed safety inspection
-- Updated electrical documentation
+* Assembled furniture according to manufacturer instructions
+* Carefully installed hardware and components
+* Leveled and adjusted completed furniture
+* Secured furniture when appropriate
+* Cleaned up packaging and work area
 
-### Plumbing Fixture Updates
-**Location**: Hartsdale, NY  
-**Scope: Multiple fixture replacements  
-**Features: New faucets, toilets, water heater, pipe updates
+### Murphy Bed Assembly
 
-**Plumbing Modernization**:
-- Replaced outdated faucets and fixtures
-- Installed water-efficient toilets
-- Updated water heater connections
-- Replaced old supply lines
-- Added shut-off valves for fixtures
+**Location:** Westchester County, NY
+**Scope:** Murphy bed assembly and installation
+
+**Project Details:**
+
+* Assembled the Murphy bed components
+* Installed the frame and hardware
+* Carefully followed manufacturer specifications
+* Checked alignment and operation
+* Secured the unit properly
+* Completed final adjustments
 
 ---
 
-## 📊 Project Categories
+## 🛠️ Carpentry & Home Improvements
 
-### Kitchen Remodeling
-- Custom cabinetry and storage solutions
-- Countertop installation and replacement
-- Backsplash design and installation
-- Kitchen island construction
-- Appliance installation and connections
-- Lighting and electrical upgrades
+### Shelving Installation
 
-### Bathroom Renovation
-- Walk-in shower and tub conversions
-- Vanity and sink installation
-- Tile work and waterproofing
-- Fixture updates and modernization
-- Lighting and ventilation improvements
-- Accessibility modifications
+**Location:** White Plains, NY
+**Scope:** Wall shelving installation
 
-### Flooring Installation
-- Hardwood installation and refinishing
-- Tile flooring and design work
-- Vinyl and laminate installation
-- Subfloor preparation and repair
-- Transition and molding installation
-- Floor repair and restoration
+**Project Details:**
 
-### Exterior Services
-- Siding repair and replacement
-- Exterior painting and staining
-- Window and door installation
-- Deck and porch construction
-- Gutter maintenance and repair
-- Weatherproofing and sealing
+* Measured available wall space
+* Planned shelf placement
+* Located appropriate mounting points
+* Installed shelving hardware
+* Leveled and secured shelves
+* Completed final adjustments
 
-### General Services
-- Drywall repair and installation
-- Electrical work and upgrades
-- Plumbing repairs and installations
-- Interior and exterior painting
-- Carpentry and custom work
-- Emergency repairs
+### Cabinet Hardware Update
 
----
+**Location:** Scarsdale, NY
+**Scope:** Cabinet hardware replacement
 
-## 🎯 Project Highlights
+**Project Details:**
 
-### Before & After Transformations
-Each project showcases our commitment to quality craftsmanship and attention to detail. Our before and after photos demonstrate:
+* Removed existing cabinet hardware
+* Measured and marked new locations
+* Installed new handles and pulls
+* Adjusted cabinet doors and drawers
+* Checked alignment throughout the installation
 
-- **Space Optimization**: Better use of available space
-- **Modern Updates**: Current design trends and materials
-- **Quality Materials**: Premium products and installations
-- **Attention to Detail**: Precise finishing and craftsmanship
-- **Customer Satisfaction**: Results that exceed expectations
+### Interior Home Repairs
 
-### Technical Expertise
-Our projects demonstrate expertise in:
+**Location:** Hartsdale, NY
+**Scope:** Multiple small home repairs
 
-- **Structural Work**: Proper construction and repair techniques
-- **Electrical Systems**: Safe and code-compliant installations
-- **Plumbing Integration**: Professional plumbing connections
-- **Finishing Work**: High-quality paint and trim work
-- **Problem Solving**: Creative solutions for challenging spaces
+**Project Details:**
 
-### Service Area Coverage
-Projects completed across our service areas:
-
-**Westchester County Locations**:
-- White Plains, NY
-- Scarsdale, NY
-- Yonkers, NY
-- Hartsdale, NY
-- Harrison, NY
-- New Rochelle, NY
-- Tarrytown, NY
-- Westchester County communities
+* Repaired doors and hardware
+* Replaced damaged trim
+* Installed wall-mounted items
+* Completed drywall repairs
+* Performed painting and touch-ups
+* Addressed multiple maintenance items during one visit
 
 ---
 
-## 📞 Start Your Project
+## 🎨 Painting Projects
 
-Ready to transform your space? Contact us for a free estimate and consultation.
+### Interior Room Painting
 
-**Phone**: (516) 350-0801  
-**Email**: info@herehandyman.com  
-**Website**: https://www.herehandyman.com  
-**Hours**: Monday-Saturday 8:00 AM - 5:00 PM, Sunday Emergency Only
+**Location:** White Plains, NY
+**Scope:** Interior painting and wall preparation
 
-### Project Consultation Process
-1. **Initial Contact**: Call or submit online form
-2. **Site Visit**: On-site evaluation and measurements
-3. **Design Discussion**: Review your goals and preferences
-4. **Detailed Estimate**: Comprehensive proposal with pricing
-5. **Project Planning**: Timeline and material selection
-6. **Professional Execution**: Quality work from start to finish
+**Project Details:**
 
-*Licensed • Insured • Professional • Reliable*
+* Protected floors and surrounding areas
+* Prepared walls and surfaces
+* Patched holes and imperfections
+* Sanded repaired areas
+* Applied primer where needed
+* Applied finish coats for a clean, even appearance
+
+### Trim & Door Painting
+
+**Location:** New Rochelle, NY
+**Scope:** Door and trim painting
+
+**Project Details:**
+
+* Prepared doors and trim
+* Sanded surfaces as needed
+* Repaired small imperfections
+* Applied primer
+* Applied finish paint
+* Completed detailed touch-ups
+
+### Exterior Maintenance Painting
+
+**Location:** Westchester County, NY
+**Scope:** Exterior maintenance and painting
+
+**Project Details:**
+
+* Prepared exterior surfaces
+* Removed loose or peeling paint
+* Cleaned surfaces
+* Performed minor repairs
+* Applied exterior paint or maintenance coating
+* Completed detailed finishing work
+
+---
+
+## 🚿 Bathroom & Plumbing Fixture Projects
+
+### Bathroom Fixture Replacement
+
+**Location:** White Plains, NY
+**Scope:** Bathroom fixture installation and updates
+
+**Project Details:**
+
+* Removed existing fixtures
+* Installed new faucets and fixtures
+* Replaced hardware where needed
+* Installed bathroom accessories
+* Checked connections for proper operation
+* Completed final adjustments and cleanup
+
+### Grab Bar Installation
+
+**Location:** Scarsdale, NY
+**Scope:** Bathroom safety improvements
+
+**Project Details:**
+
+* Determined appropriate mounting locations
+* Installed grab bars using suitable mounting methods
+* Checked stability and alignment
+* Completed a clean, secure installation
+
+### Under-Sink Organizer Installation
+
+**Location:** Yonkers, NY
+**Scope:** Kitchen and bathroom organization
+
+**Project Details:**
+
+* Measured available cabinet space
+* Assembled the organizer
+* Installed the hardware
+* Adjusted doors and clearances
+* Tested operation
+
+---
+
+## 💡 Lighting & Electrical Fixture Projects
+
+### Light Fixture Replacement
+
+**Location:** White Plains, NY
+**Scope:** Existing light fixture replacement
+
+**Project Details:**
+
+* Removed the existing fixture
+* Installed the new fixture
+* Connected the fixture as appropriate
+* Secured and leveled the installation
+* Tested the finished fixture
+
+### Under-Cabinet Lighting
+
+**Location:** Harrison, NY
+**Scope:** Under-cabinet lighting replacement
+
+**Project Details:**
+
+* Removed the existing lighting
+* Installed the replacement fixture
+* Secured wiring and components
+* Installed the new cover and hardware
+* Tested the completed installation
+
+### Outdoor Light Installation
+
+**Location:** Westchester County, NY
+**Scope:** Exterior light fixture replacement
+
+**Project Details:**
+
+* Removed the existing fixture
+* Installed the replacement fixture
+* Secured the fixture and hardware
+* Checked alignment
+* Tested the completed installation
+
+---
+
+## 🏡 Exterior & Outdoor Projects
+
+### Deck Repair & Maintenance
+
+**Location:** Tarrytown, NY
+**Scope:** Deck repairs and maintenance
+
+**Project Details:**
+
+* Inspected visible areas of the deck
+* Replaced damaged boards where appropriate
+* Repaired loose components
+* Completed minor carpentry repairs
+* Prepared surfaces for maintenance coating
+* Applied stain or protective coating as requested
+
+### Outdoor Structure Assembly
+
+**Location:** Westchester County, NY
+**Scope:** Outdoor furniture and structure assembly
+
+**Project Details:**
+
+* Assembled outdoor structures according to manufacturer instructions
+* Checked components and hardware
+* Leveled the structure
+* Secured components as appropriate
+* Completed final adjustments
+
+### Trampoline & Playset Assembly
+
+**Location:** Westchester County, NY
+**Scope:** Residential trampoline and playset assembly
+
+**Project Details:**
+
+* Organized components and hardware
+* Followed manufacturer assembly instructions
+* Built and assembled the structure
+* Checked connections and fasteners
+* Leveled the completed installation
+* Completed final safety checks
+
+---
+
+## 🧰 General Home Maintenance
+
+### Multiple-Item Home Repair Visit
+
+**Location:** White Plains, NY
+**Scope:** Multiple handyman repairs completed during one visit
+
+**Project Details:**
+
+* Repaired doors and hardware
+* Installed fixtures and accessories
+* Completed drywall patches
+* Performed painting touch-ups
+* Installed wall-mounted items
+* Addressed general maintenance needs
+
+One of the advantages of hiring a handyman is being able to take care of several smaller projects during the same visit.
+
+---
+
+# Our Handyman Services
+
+Here Handyman provides practical home repair, installation, assembly, and maintenance services throughout White Plains and Westchester County.
+
+### Home Repairs
+
+* Drywall repair
+* Door repair
+* Trim and molding repair
+* Cabinet repairs
+* Hardware replacement
+* General home maintenance
+
+### Installation Services
+
+* TV mounting
+* Mirror installation
+* Shelving installation
+* Grab bar installation
+* Light fixture replacement
+* Bathroom accessories
+* Cabinet hardware
+* Wall art and picture hanging
+
+### Assembly Services
+
+* Furniture assembly
+* Murphy beds
+* Trampolines
+* Playsets
+* Gazebos
+* Outdoor furniture
+* Home organization products
+
+### Painting
+
+* Interior painting
+* Exterior maintenance painting
+* Door painting
+* Trim painting
+* Drywall repair and painting
+* Touch-ups
+
+### Carpentry
+
+* Trim installation
+* Baseboards
+* Shelving
+* Door repairs
+* Cabinet repairs
+* Minor carpentry projects
+
+---
+
+# Serving White Plains & Westchester County
+
+Here Handyman serves homeowners throughout White Plains and surrounding Westchester County communities, including:
+
+* White Plains
+* Scarsdale
+* Yonkers
+* Hartsdale
+* Harrison
+* New Rochelle
+* Tarrytown
+* Mount Vernon
+* And nearby Westchester communities
+
+---
+
+# Start Your Project
+
+Have a home repair, installation, assembly, or maintenance project?
+
+Contact Here Handyman to discuss your project and schedule an estimate.
+
+**Phone:** (516) 350-0801
+**Email:** [info@herehandyman.com](mailto:info@herehandyman.com)
+**Website:** [https://www.herehandyman.com](https://www.herehandyman.com)
+
+**Service Hours:** Monday–Saturday, 8:00 AM–5:00 PM
+**Sunday:** Emergency service only
+
+## How It Works
+
+1. **Contact Us** – Call or submit your project details online.
+2. **Discuss Your Project** – Tell us what you need done and provide photos when helpful.
+3. **Estimate** – We review the work and provide pricing.
+4. **Schedule** – Choose a convenient date and time.
+5. **Complete the Work** – We arrive prepared and complete the agreed-upon work.
+6. **Final Walk-Through** – We review the completed project with you.
+
+**Here Handyman – Home Repairs, Installation, Assembly & Maintenance in White Plains and Westchester County, NY.**
