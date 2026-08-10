@@ -13,7 +13,7 @@ Common questions about our services, process, and what to expect when working wi
 - Emergency repairs and same-day service
 
 ### Q: How long has Here Handyman been in business?
-**A:** We have over 25 years of experience in the handyman and remodeling industry, serving homeowners in Westchester County, NY.
+**A:** We have over 15+ years of experience in the handyman and remodeling industry, serving homeowners in Westchester County, NY.
 
 ### Q: Are you licensed and insured?
 **A:** Yes, we are fully licensed, bonded, and insured for your protection. All our work meets local building codes and safety standards.
@@ -74,7 +74,7 @@ Common questions about our services, process, and what to expect when working wi
 - **Large renovations**: 4-8 weeks
 
 ### Q: Do you work weekends?
-**A:** Yes, we work Monday through Saturday 8:00 AM - 5:00 PM. Sunday service is available for emergencies only.
+**A:** Yes, we work Monday through Saturday 7:00 AM - 8:00 PM. Sunday service is available for emergencies only.
 
 ### Q: What if I need to reschedule?
 **A:** We understand that plans change. Please provide at least 24 hours' notice for rescheduling. Emergency rescheduling is accommodated when possible.
@@ -222,7 +222,7 @@ Common questions about our services, process, and what to expect when working wi
 
 ### Q: What are your business hours?
 **A:** 
-- **Monday-Saturday**: 8:00 AM - 5:00 PM
+- **Monday-Saturday**: 7:00 AM - 8:00 PM
 - **Sunday**: Emergency services only
 - **Emergency hotline**: Available 24/7
 
@@ -302,7 +302,7 @@ If you don't see your question answered here, please don't hesitate to contact u
 **Phone**: (516) 350-0801  
 **Email**: info@herehandyman.com  
 **Website**: https://www.herehandyman.com  
-**Hours**: Monday-Saturday 8:00 AM - 5:00 PM, Sunday Emergency Only
+**Hours**: Monday-Saturday 7:00 AM - 8:00 PM | Sunday: Emergency service available
 
 *We're here to help with all your home repair and remodeling needs!*
 

@@ -10,8 +10,7 @@ Get in touch with Here Handyman for professional home repair and remodeling serv
 - **Website**: https://www.herehandyman.com
 
 ### Business Hours
-- **Monday - Friday**: 8:00 AM - 5:00 PM
-- **Saturday**: 8:00 AM - 5:00 PM
+- **Monday - Saturday**: 7:00 AM - 8:00 PM
 - **Sunday**: Emergency services only
 - **Emergency Hotline**: Available 24/7
 
@@ -284,7 +283,7 @@ Contact Here Handyman today to begin your home improvement journey:
 
 ## 🏆 Why Choose Here Handyman?
 
-- ✅ **25+ Years Experience** in home repair and remodeling
+- ✅ **15+ Years Experience** in home repair and remodeling
 - ✅ **Licensed & Insured** for your protection
 - ✅ **Free Estimates** with no obligation
 - ✅ **Same-Day Service** for emergency repairs
@@ -300,6 +299,6 @@ Contact Here Handyman today to begin your home improvement journey:
 **Phone**: (516) 350-0801  
 **Email**: info@herehandyman.com  
 **Website**: https://www.herehandyman.com  
-**Hours**: Monday-Saturday 8:00 AM - 5:00 PM, Sunday Emergency Only
+**Hours**: Monday-Saturday 7:00 AM - 8:00 PM | Sunday: Emergency service available
 
 *Licensed • Insured • Professional • Reliable*
