@@ -19,6 +19,83 @@
   to = "/404.html"
   status = 404
 
+# Clean URL redirects — city landing pages (no .html in URL)
+[[redirects]]
+  from = "/white-plains-handyman"
+  to = "/white-plains-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/scarsdale-handyman"
+  to = "/scarsdale-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/yonkers-handyman"
+  to = "/yonkers-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/tarrytown-handyman"
+  to = "/tarrytown-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/hartsdale-handyman"
+  to = "/hartsdale-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/harrison-handyman"
+  to = "/harrison-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/new-rochelle-handyman"
+  to = "/new-rochelle-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/dobbs-ferry-handyman"
+  to = "/dobbs-ferry-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/greenburgh-handyman"
+  to = "/greenburgh-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/ardsley-handyman"
+  to = "/ardsley-handyman.html"
+  status = 200
+
+# Clean URL redirects — blog articles
+[[redirects]]
+  from = "/blog/furniture-assembly-cost-westchester"
+  to = "/blog/furniture-assembly-cost-westchester.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/tv-mounting-cost-white-plains"
+  to = "/blog/tv-mounting-cost-white-plains.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/handyman-vs-contractor-westchester"
+  to = "/blog/handyman-vs-contractor-westchester.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/trampoline-assembly-westchester"
+  to = "/blog/trampoline-assembly-westchester.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/best-handyman-services-westchester"
+  to = "/blog/best-handyman-services-westchester.html"
+  status = 200
+
 # Security headers for admin
 [[headers]]
   for = "/admin/*"
