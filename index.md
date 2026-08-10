@@ -38,7 +38,7 @@ Welcome to the comprehensive documentation for Here Handyman professional home s
 
 ## 🏢 About Here Handyman
 
-Here Handyman is a professional home repair and remodeling service with over 25 years of experience serving homeowners in Westchester County, NY. We provide reliable, high-quality handyman services, kitchen and bathroom remodeling, flooring installation, and general home maintenance.
+Here Handyman is a professional home repair and remodeling service with over 15+ years of experience serving homeowners in Westchester County, NY. We provide reliable, high-quality handyman services, kitchen and bathroom remodeling, flooring installation, and general home maintenance.
 
 ### Our Mission
 To provide exceptional craftsmanship, honest pricing, and reliable service for projects big and small, while respecting our customers' homes and delivering results that last.
@@ -106,7 +106,7 @@ Same-day emergency repairs for plumbing leaks, electrical issues, and storm dama
 - **Website**: https://www.herehandyman.com
 
 ### Business Hours
-- **Monday-Saturday**: 8:00 AM - 5:00 PM
+- **Monday-Saturday**: 7:00 AM - 8:00 PM
 - **Sunday**: Emergency services only
 - **Emergency Hotline**: Available 24/7
 
@@ -119,7 +119,7 @@ Same-day emergency repairs for plumbing leaks, electrical issues, and storm dama
 
 ## 🏆 Why Choose Here Handyman
 
-✅ **25+ Years Experience** in home repair and remodeling  
+✅ **15+ Years Experience** in home repair and remodeling  
 ✅ **Licensed & Insured** for your protection  
 ✅ **Free Estimates** with no obligation  
 ✅ **Same-Day Service** for emergency repairs  
@@ -217,6 +217,6 @@ Ready to transform your home? Contact Here Handyman for professional service you
 **Phone**: (516) 350-0801  
 **Email**: info@herehandyman.com  
 **Website**: https://www.herehandyman.com  
-**Hours**: Monday-Saturday 8:00 AM - 5:00 PM, Sunday Emergency Only
+**Hours**: Monday-Saturday 7:00 AM - 8:00 PM | Sunday: Emergency service available
 
 *Licensed • Insured • Professional • Reliable*

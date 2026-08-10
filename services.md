@@ -1,6 +1,6 @@
 # Services - Here Handyman
 
-Here Handyman provides comprehensive home repair and remodeling services with over 25 years of independent, hands-on experience serving **White Plains, New York** and surrounding **Westchester County** communities.
+Here Handyman provides comprehensive home repair and remodeling services with over 15+ years of independent, hands-on experience serving **White Plains, New York** and surrounding **Westchester County** communities.
 
 ## 🏠 Kitchen Remodeling
 
@@ -333,7 +333,7 @@ Same-day emergency repair services for urgent home issues.
 
 **Phone**: (516) 350-0801  
 **Email**: info@herehandyman.com  
-**Website**: https://herehandyman.com  
-**Hours**: Monday-Saturday 8:00 AM - 5:00 PM, Sunday Emergency Only
+**Website**: https://www.herehandyman.com  
+**Hours**: Monday-Saturday 7:00 AM - 8:00 PM | Sunday: Emergency service available
 
 *Westchester County Licensed • Insured • Professional • Reliable*
