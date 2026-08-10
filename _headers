@@ -1,3 +1,41 @@
+# =============================================
+# SPEED OPTIMIZATION — Cache Headers
+# =============================================
+
+# Images — cache 1 year (huge speed boost for repeat visitors)
+/assets/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts — cache 1 year
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML pages — cache 1 hour, revalidate
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# City pages (no .html extension via redirect)
+/white-plains-handyman
+  Cache-Control: public, max-age=3600, must-revalidate
+/scarsdale-handyman
+  Cache-Control: public, max-age=3600, must-revalidate
+/yonkers-handyman
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Sitemap & robots — short cache so Google always gets fresh copy
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600
+/llms.txt
+  Cache-Control: public, max-age=3600
+
+# Security headers for ALL pages
+/*
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
 /admin/*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
