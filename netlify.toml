@@ -3,7 +3,7 @@
   functions = "netlify/functions"
 
 [build.environment]
-  NODE_VERSION = "16"
+  NODE_VERSION = "18"
 
 # Remove the [context.production.environment] section completely
 # Environment variables should be set in Netlify's UI
@@ -120,3 +120,32 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# Clean URL redirects — receipt manager
+[[redirects]]
+  from = "/receipts"
+  to = "/receipts/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/receipts/dashboard"
+  to = "/receipts/dashboard.html"
+  status = 200
+
+[[redirects]]
+  from = "/receipts/upload"
+  to = "/receipts/upload.html"
+  status = 200
+
+[[redirects]]
+  from = "/receipts/edit"
+  to = "/receipts/edit.html"
+  status = 200
+
+# Security headers for receipt manager
+[[headers]]
+  for = "/receipts/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"

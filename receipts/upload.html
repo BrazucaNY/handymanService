@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Receipt | Receipt Manager | Here Handyman</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#071828',
+            orange: '#eab308',
+            orange2: '#facc15',
+            cream: '#f9f5ef'
+          },
+          fontFamily: {
+            bebas: ['"Bebas Neue"', 'sans-serif'],
+            sans: ['"DM Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body class="bg-cream min-h-screen font-sans text-gray-800 pb-12">
+
+  <nav class="bg-navy text-white p-4 sticky top-0 z-10 shadow-md">
+    <div class="max-w-3xl mx-auto flex items-center">
+      <a href="/receipts/dashboard" class="flex items-center text-gray-300 hover:text-white mr-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      </a>
+      <div class="text-xl font-bebas tracking-wide">Upload Receipt</div>
+    </div>
+  </nav>
+
+  <main class="max-w-3xl mx-auto p-4 md:p-6 mt-4">
+    
+    <!-- Step 1: Upload -->
+    <div id="step-upload" class="bg-white rounded-[14px] shadow-sm border border-gray-100 overflow-hidden">
+      
+      <!-- Hidden file input -->
+      <input type="file" id="file-input" accept="image/*" class="hidden">
+      
+      <div id="drop-zone" class="p-8 md:p-16 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-gray-50 transition-colors min-h-[300px]">
+        <div class="bg-orange/10 p-6 rounded-full mb-4">
+          <svg class="w-12 h-12 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        </div>
+        <h2 class="text-2xl font-bold text-navy mb-2">Take a Photo or Upload</h2>
+        <p class="text-gray-500">Tap here to select an image from your device</p>
+      </div>
+
+      <!-- Image Preview -->
+      <div id="preview-container" class="hidden flex flex-col p-4 border-t border-gray-100 bg-gray-50">
+        <img id="image-preview" class="max-h-[300px] object-contain rounded-lg shadow-sm mx-auto mb-4" src="" alt="Receipt Preview">
+        <div class="flex gap-4">
+          <button id="retake-btn" class="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg font-medium text-gray-700">Change Image</button>
+          <button id="analyze-btn" class="flex-1 px-4 py-3 bg-orange hover:bg-orange2 text-navy font-bold rounded-lg flex justify-center items-center">
+            <span id="analyze-text">Analyze Receipt</span>
+            <svg id="analyze-loader" class="hidden animate-spin ml-2 h-5 w-5 text-navy" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div id="error-message" class="hidden mt-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-sm"></div>
+
+    <!-- Step 2: Form (Hidden initially) -->
+    <div id="step-form" class="hidden space-y-6">
+      
+      <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded shadow-sm text-blue-800 text-sm">
+        Review the extracted data below and make corrections if needed before saving.
+      </div>
+
+      <form id="receipt-form" class="bg-white p-4 md:p-6 rounded-[14px] shadow-sm border border-gray-100 space-y-4">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Vendor *</label>
+            <input type="text" id="f-vendor" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange outline-none">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+            <input type="date" id="f-date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Total Amount ($) *</label>
+            <input type="number" id="f-total" step="0.01" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange outline-none text-lg font-bold text-navy">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Tax ($)</label>
+            <input type="number" id="f-tax" step="0.01" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <select id="f-category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange outline-none">
+              <option value="Other">Other</option>
+              <option value="Materials">Materials</option>
+              <option value="Tools">Tools</option>
+              <option value="Plumbing">Plumbing</option>
+              <option value="Electrical">Electrical</option>
+              <option value="Painting">Painting</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Lumber">Lumber</option>
+              <option value="Vehicle">Vehicle</option>
+              <option value="Office">Office</option>
+              <option value="Advertising">Advertising</option>
+              <option value="Equipment">Equipment</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
+            <input type="text" id="f-payment" placeholder="e.g. Visa 1234, Cash" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+          <textarea id="f-notes" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange outline-none" placeholder="Job reference, project, etc."></textarea>
+        </div>
+
+        <div class="pt-4 flex gap-4">
+          <button type="button" id="discard-btn" class="px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50">Discard</button>
+          <button type="submit" id="save-btn" class="flex-1 px-6 py-3 bg-orange hover:bg-orange2 text-navy font-bold rounded-lg flex justify-center items-center">
+            <span id="save-text">Save Receipt</span>
+            <svg id="save-loader" class="hidden animate-spin ml-2 h-5 w-5 text-navy" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Step 3: Success -->
+    <div id="step-success" class="hidden text-center py-12 bg-white rounded-[14px] shadow-sm border border-gray-100">
+      <div class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-500">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+      </div>
+      <h3 class="text-2xl font-bold text-navy mb-2">Receipt Saved!</h3>
+      <p class="text-gray-500 mb-8">Your receipt has been securely stored.</p>
+      <div class="space-x-4">
+        <button id="upload-another-btn" class="px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50">Upload Another</button>
+        <a href="/receipts/dashboard" class="inline-block px-6 py-3 bg-orange hover:bg-orange2 text-navy font-bold rounded-lg">View Dashboard</a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const SUPABASE_URL = 'https://fclcikyctulmirjbksld.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_7oF3akslbBEFyuR0zfLcEw_h09E117h';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    
+    let currentFile = null;
+    let base64Data = null;
+    let rawAiData = null;
+    let currentUser = null;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Auth check
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        window.location.href = '/receipts/';
+        return;
+      }
+      currentUser = session.user;
+
+      setupUI();
+    });
+
+    function setupUI() {
+      const dropZone = document.getElementById('drop-zone');
+      const fileInput = document.getElementById('file-input');
+      const previewContainer = document.getElementById('preview-container');
+      const imgPreview = document.getElementById('image-preview');
+      const retakeBtn = document.getElementById('retake-btn');
+      const analyzeBtn = document.getElementById('analyze-btn');
+      const errorDiv = document.getElementById('error-message');
+
+      // File Selection
+      dropZone.addEventListener('click', () => fileInput.click());
+      
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          handleFile(e.target.files[0]);
+        }
+      });
+
+      // Drag and drop
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('bg-gray-100');
+      });
+      dropZone.addEventListener('dragleave', () => dropZone.classList.remove('bg-gray-100'));
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('bg-gray-100');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          handleFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      retakeBtn.addEventListener('click', () => {
+        currentFile = null;
+        base64Data = null;
+        fileInput.value = '';
+        dropZone.classList.remove('hidden');
+        previewContainer.classList.add('hidden');
+        errorDiv.classList.add('hidden');
+      });
+
+      analyzeBtn.addEventListener('click', analyzeReceipt);
+      
+      document.getElementById('discard-btn').addEventListener('click', resetAll);
+      document.getElementById('upload-another-btn').addEventListener('click', resetAll);
+      document.getElementById('receipt-form').addEventListener('submit', saveReceipt);
+
+      function handleFile(file) {
+        if (!file.type.startsWith('image/')) {
+          showError('Please select an image file.');
+          return;
+        }
+        
+        errorDiv.classList.add('hidden');
+        currentFile = file;
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          imgPreview.src = e.target.result;
+          // Extract base64 without prefix
+          base64Data = e.target.result.split(',')[1];
+          
+          dropZone.classList.add('hidden');
+          previewContainer.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    async function analyzeReceipt() {
+      if (!base64Data || !currentFile) return;
+
+      const btn = document.getElementById('analyze-btn');
+      const text = document.getElementById('analyze-text');
+      const loader = document.getElementById('analyze-loader');
+      const errorDiv = document.getElementById('error-message');
+
+      btn.disabled = true;
+      text.textContent = 'AI is reading...';
+      loader.classList.remove('hidden');
+      errorDiv.classList.add('hidden');
+
+      try {
+        const response = await fetch('/.netlify/functions/process-receipt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            image: base64Data,
+            mimeType: currentFile.type
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to process receipt. Please try again or enter manually.');
+        }
+
+        const data = await response.json();
+        rawAiData = data;
+        
+        populateForm(data);
+        
+        document.getElementById('step-upload').classList.add('hidden');
+        document.getElementById('step-form').classList.remove('hidden');
+        
+        // Scroll to form
+        window.scrollTo(0, 0);
+
+      } catch (err) {
+        showError(err.message);
+      } finally {
+        btn.disabled = false;
+        text.textContent = 'Analyze Receipt';
+        loader.classList.add('hidden');
+      }
+    }
+
+    function populateForm(data) {
+      document.getElementById('f-vendor').value = data.vendor || '';
+      document.getElementById('f-date').value = data.receipt_date || '';
+      document.getElementById('f-total').value = data.total || '';
+      document.getElementById('f-tax').value = data.tax || '';
+      document.getElementById('f-payment').value = data.payment_method || '';
+      
+      if (data.suggested_category) {
+        const select = document.getElementById('f-category');
+        // Ensure exact case match, fallback to 'Other' handled by default HTML
+        Array.from(select.options).forEach(opt => {
+          if (opt.value.toLowerCase() === data.suggested_category.toLowerCase()) {
+            select.value = opt.value;
+          }
+        });
+      }
+
+      let notes = data.notes || '';
+      // Append items to notes if present
+      if (data.items && data.items.length > 0) {
+        const itemsList = data.items.map(i => `${i.name || 'Item'} - $${i.price || 0}`).join('\n');
+        notes = notes ? `${notes}\n\nItems:\n${itemsList}` : `Items:\n${itemsList}`;
+      }
+      document.getElementById('f-notes').value = notes;
+    }
+
+    async function saveReceipt(e) {
+      e.preventDefault();
+
+      const btn = document.getElementById('save-btn');
+      const text = document.getElementById('save-text');
+      const loader = document.getElementById('save-loader');
+      const errorDiv = document.getElementById('error-message');
+
+      btn.disabled = true;
+      text.textContent = 'Saving...';
+      loader.classList.remove('hidden');
+      errorDiv.classList.add('hidden');
+
+      try {
+        let imageUrl = null;
+        let imagePath = null;
+
+        // 1. Upload image to Supabase Storage
+        if (currentFile) {
+          const fileExt = currentFile.name.split('.').pop();
+          const fileName = `${Date.now()}.${fileExt}`;
+          imagePath = `${currentUser.id}/${fileName}`;
+          
+          const { error: uploadError } = await supabase.storage
+            .from('receipts')
+            .upload(imagePath, currentFile);
+
+          if (uploadError) throw new Error('Failed to upload image');
+
+          const { data: { publicUrl } } = supabase.storage
+            .from('receipts')
+            .getPublicUrl(imagePath);
+            
+          imageUrl = publicUrl;
+        }
+
+        // 2. Save DB record
+        const record = {
+          user_id: currentUser.id,
+          vendor: document.getElementById('f-vendor').value,
+          receipt_date: document.getElementById('f-date').value || null,
+          total: parseFloat(document.getElementById('f-total').value) || 0,
+          tax: parseFloat(document.getElementById('f-tax').value) || null,
+          category: document.getElementById('f-category').value,
+          payment_method: document.getElementById('f-payment').value,
+          notes: document.getElementById('f-notes').value,
+          image_url: imageUrl,
+          image_path: imagePath,
+          raw_ai_response: rawAiData
+        };
+
+        const { error: dbError } = await supabase
+          .from('receipts')
+          .insert([record]);
+
+        if (dbError) throw new Error('Failed to save record to database');
+
+        // Success
+        document.getElementById('step-form').classList.add('hidden');
+        document.getElementById('step-success').classList.remove('hidden');
+
+      } catch (err) {
+        showError(err.message);
+        btn.disabled = false;
+        text.textContent = 'Save Receipt';
+        loader.classList.add('hidden');
+      }
+    }
+
+    function showError(msg) {
+      const errorDiv = document.getElementById('error-message');
+      errorDiv.textContent = msg;
+      errorDiv.classList.remove('hidden');
+      window.scrollTo(0, 0);
+    }
+
+    function resetAll() {
+      currentFile = null;
+      base64Data = null;
+      rawAiData = null;
+      document.getElementById('file-input').value = '';
+      document.getElementById('receipt-form').reset();
+      
+      document.getElementById('step-upload').classList.remove('hidden');
+      document.getElementById('drop-zone').classList.remove('hidden');
+      document.getElementById('preview-container').classList.add('hidden');
+      document.getElementById('step-form').classList.add('hidden');
+      document.getElementById('step-success').classList.add('hidden');
+      document.getElementById('error-message').classList.add('hidden');
+      
+      // Reset save button
+      const saveBtn = document.getElementById('save-btn');
+      saveBtn.disabled = false;
+      document.getElementById('save-text').textContent = 'Save Receipt';
+      document.getElementById('save-loader').classList.add('hidden');
+    }
+
+  </script>
+</body>
+</html>
