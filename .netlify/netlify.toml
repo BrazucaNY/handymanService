@@ -1,7 +1,22 @@
-functionsDirectory = "C:\\Users\\davi6\\.gemini\\antigravity\\scratch\\here-handyman\\netlify\\functions"
-functionsDirectoryOrigin = "config-v1"
 headersOrigin = "config"
 redirectsOrigin = "config"
+functionsDirectory = "C:\\Users\\davi6\\.gemini\\antigravity\\scratch\\here-handyman\\netlify\\functions"
+functionsDirectoryOrigin = "config-v1"
+
+[functions]
+
+[functions.emails]
+included_files = ["./emails/**"]
+
+[functions."*"]
+node_bundler = "esbuild"
+
+[[plugins]]
+origin = "ui"
+package = "@netlify/plugin-emails"
+pinned_version = "1"
+
+[plugins.inputs]
 
 [build]
 publish = "C:\\Users\\davi6\\.gemini\\antigravity\\scratch\\here-handyman"
@@ -23,21 +38,6 @@ NODE_VERSION = "18"
 
 [build.services]
 
-[functions]
-
-[functions.emails]
-included_files = ["./emails/**"]
-
-[functions."*"]
-node_bundler = "esbuild"
-
-[[plugins]]
-origin = "ui"
-package = "@netlify/plugin-emails"
-pinned_version = "1"
-
-[plugins.inputs]
-
 [[headers]]
 for = "/assets/images/*"
 
@@ -49,14 +49,6 @@ for = "/*.woff2"
 
 [headers.values]
 Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-for = "/receipts/*"
-
-[headers.values]
-Cache-Control = "no-cache, no-store, must-revalidate"
-Pragma = "no-cache"
-Expires = "0"
 
 [[headers]]
 for = "/*.html"
@@ -148,14 +140,6 @@ for = "/login.html"
 Content-Security-Policy = "default-src 'self' https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com https://*.firebaseapp.com https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://apis.google.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://*.firebaseapp.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://*.firebaseapp.com https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com;"
 X-Frame-Options = "DENY"
 Cache-Control = "no-cache, no-store, must-revalidate"
-X-Content-Type-Options = "nosniff"
-
-[[headers]]
-for = "/receipts/*"
-
-[headers.values]
-Cache-Control = "no-cache, no-store, must-revalidate"
-X-Frame-Options = "DENY"
 X-Content-Type-Options = "nosniff"
 
 [[redirects]]
@@ -353,66 +337,6 @@ force = false
 [[redirects]]
 from = "/blog/best-handyman-services-westchester"
 to = "/blog/best-handyman-services-westchester.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
-from = "/receipts"
-to = "/receipts/dashboard.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
-from = "/receipts/"
-to = "/receipts/dashboard.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
-from = "/receipts/dashboard"
-to = "/receipts/dashboard.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
-from = "/receipts/upload"
-to = "/receipts/upload.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
-from = "/receipts/edit"
-to = "/receipts/edit.html"
 status = 200.0
 force = false
 
