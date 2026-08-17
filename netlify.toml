@@ -119,38 +119,4 @@
     X-Content-Type-Options = "nosniff"
 
 [functions]
-  node_bundler = "esbuild"
-
-# Clean URL redirects — receipt manager
-[[redirects]]
-  from = "/receipts"
-  to = "/receipts/dashboard.html"
-  status = 200
-
-[[redirects]]
-  from = "/receipts/"
-  to = "/receipts/dashboard.html"
-  status = 200
-
-[[redirects]]
-  from = "/receipts/dashboard"
-  to = "/receipts/dashboard.html"
-  status = 200
-
-[[redirects]]
-  from = "/receipts/upload"
-  to = "/receipts/upload.html"
-  status = 200
-
-[[redirects]]
-  from = "/receipts/edit"
-  to = "/receipts/edit.html"
-  status = 200
-
-# Security headers for receipt manager
-[[headers]]
-  for = "/receipts/*"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
+  node_bundler = "esbuild"
