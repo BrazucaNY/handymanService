@@ -124,7 +124,7 @@
 # Clean URL redirects — receipt manager
 [[redirects]]
   from = "/receipts"
-  to = "/receipts/index.html"
+  to = "/receipts/dashboard.html"
   status = 200
 
 [[redirects]]
