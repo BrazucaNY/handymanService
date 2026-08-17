@@ -364,7 +364,7 @@ force = false
 
 [[redirects]]
 from = "/receipts"
-to = "/receipts/index.html"
+to = "/receipts/dashboard.html"
 status = 200.0
 force = false
 
