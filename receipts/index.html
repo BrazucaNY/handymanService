@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -70,7 +70,7 @@
   <script>
     const SUPABASE_URL = 'https://fclcikyctulmirjbksld.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_7oF3akslbBEFyuR0zfLcEw_h09E117h';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     document.addEventListener('DOMContentLoaded', async () => {
       // Check auth
