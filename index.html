@@ -1084,15 +1084,16 @@
       button.addEventListener('click', () => {
         const faqItem = button.parentElement;
         const isActive = faqItem.classList.contains('active');
+        // Read layout BEFORE DOM mutations to avoid forced reflow
+        const answer = faqItem.querySelector('.faq-answer');
+        const targetHeight = isActive ? 0 : answer.scrollHeight;
         document.querySelectorAll('.faq-item').forEach(item => {
           item.classList.remove('active');
           item.querySelector('.faq-answer').style.maxHeight = null;
         });
-        
         if (!isActive) {
           faqItem.classList.add('active');
-          const answer = faqItem.querySelector('.faq-answer');
-          answer.style.maxHeight = answer.scrollHeight + 'px';
+          answer.style.maxHeight = targetHeight + 'px';
         }
       });
     });
@@ -1960,8 +1961,10 @@
     function openLightbox() {
       updateLightboxImage();
       lightbox.style.display = 'flex';
-      lightbox.offsetHeight;
-      lightbox.classList.add('active');
+      // Double rAF instead of offsetHeight — triggers CSS transition without forced reflow
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        lightbox.classList.add('active');
+      }));
       document.body.style.overflow = 'hidden';
     }
 
