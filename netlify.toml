@@ -96,6 +96,31 @@
   to = "/blog/best-handyman-services-westchester.html"
   status = 200
 
+[[redirects]]
+  from = "/blog/handyman-cost-westchester-ny"
+  to = "/blog/handyman-cost-westchester-ny.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/ikea-furniture-assembly-westchester"
+  to = "/blog/ikea-furniture-assembly-westchester.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/drywall-repair-cost-westchester"
+  to = "/blog/drywall-repair-cost-westchester.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/smart-home-installation-westchester"
+  to = "/blog/smart-home-installation-westchester.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/find-reliable-handyman-westchester"
+  to = "/blog/find-reliable-handyman-westchester.html"
+  status = 200
+
 # Security headers for admin
 [[headers]]
   for = "/admin/*"
