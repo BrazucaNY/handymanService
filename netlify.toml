@@ -119,4 +119,4 @@
     X-Content-Type-Options = "nosniff"
 
 [functions]
-  node_bundler = "esbuild"
+  node_bundler = "esbuild"
