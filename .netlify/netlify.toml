@@ -345,3 +345,63 @@ force = false
 [redirects.conditions]
 
 [redirects.headers]
+
+[[redirects]]
+from = "/blog/handyman-cost-westchester-ny"
+to = "/blog/handyman-cost-westchester-ny.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/ikea-furniture-assembly-westchester"
+to = "/blog/ikea-furniture-assembly-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/drywall-repair-cost-westchester"
+to = "/blog/drywall-repair-cost-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/smart-home-installation-westchester"
+to = "/blog/smart-home-installation-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/find-reliable-handyman-westchester"
+to = "/blog/find-reliable-handyman-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
