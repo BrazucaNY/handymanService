@@ -77,6 +77,38 @@
     <priority>0.75</priority>
   </url>
 
+  <!-- Service Pages -->
+  <url>
+    <loc>https://www.herehandyman.com/tv-mounting</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.herehandyman.com/furniture-assembly</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.herehandyman.com/drywall-repair</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.herehandyman.com/interior-painting</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.herehandyman.com/smart-home-installation</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Blog Articles -->
   <url>
     <loc>https://www.herehandyman.com/blog/furniture-assembly-cost-westchester</loc>
