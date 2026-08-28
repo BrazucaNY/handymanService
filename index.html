@@ -3824,7 +3824,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // Append image dynamically to DOM
 
-    function addGalleryItemDOM(category, src, index) {
+    function addGalleryItemDOM(category, src, index, desc) {
 
       const item = document.createElement('div');
 
@@ -3858,7 +3858,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       img.src = src;
 
-      img.alt = `${category} project photo ${index}`;
+      img.alt = (desc || `${category} project photo ${index}`);
 
       img.setAttribute('loading', 'lazy');
 
@@ -3900,7 +3900,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       localGalleryImages.forEach(img => {
 
-        addGalleryItemDOM(img.category, img.src, img.index);
+        addGalleryItemDOM(img.category, img.src, img.index, img.desc);
 
       });
 
