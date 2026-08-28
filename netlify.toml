@@ -20,6 +20,12 @@
   to = "/blog/index.html"
   status = 200
 
+# /services hub page
+[[redirects]]
+  from = "/services"
+  to = "/services.html"
+  status = 200
+
 # Block access to sensitive files
 [[redirects]]
   from = "/.env*"
