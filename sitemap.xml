@@ -4,75 +4,83 @@
   <!-- Core Pages -->
   <url>
     <loc>https://www.herehandyman.com/</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/book-appointment</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Services Hub -->
+  <url>
+    <loc>https://www.herehandyman.com/services</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
   </url>
 
   <!-- City Landing Pages -->
   <url>
     <loc>https://www.herehandyman.com/white-plains-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/scarsdale-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/yonkers-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/tarrytown-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/hartsdale-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/harrison-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/new-rochelle-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/dobbs-ferry-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/greenburgh-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/ardsley-handyman</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
@@ -115,34 +123,42 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Blog Index -->
+  <url>
+    <loc>https://www.herehandyman.com/blog</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Blog Articles -->
   <url>
     <loc>https://www.herehandyman.com/blog/furniture-assembly-cost-westchester</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/blog/tv-mounting-cost-white-plains</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/blog/handyman-vs-contractor-westchester</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/blog/trampoline-assembly-westchester</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.herehandyman.com/blog/best-handyman-services-westchester</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
