@@ -60,7 +60,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PCT6SLV8');</script>
 <!-- End Google Tag Manager -->
     <style>
-        :root { --navy: #071828; --orange: #eab308; --cream: #f9f5ef; --white: #ffffff; --text: #333333; }
+        :root { --navy: #071828; --orange: #eab308; --orange-light: #e9a900; --orange-badge: #f2b500; --cream: #f9f5ef; --white: #ffffff; --text: #333333; --text-dark: #26364a; --text-medium: #34445a; --text-light: #4a5868; --border: #d9d9d9; --bg-light: #f7f7f7; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'DM Sans', sans-serif; color: var(--text); background-color: var(--cream); line-height: 1.6; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Bebas Neue', sans-serif; color: var(--navy); letter-spacing: 1px; text-transform: uppercase; }
@@ -78,17 +78,188 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .hero h1 { color: var(--white); font-size: 4rem; margin-bottom: 20px; }
         .hero h1 span { color: var(--orange); }
         .hero p { font-size: 1.2rem; max-width: 650px; margin: 0 auto 30px; opacity: 0.9; }
-        .about-section { padding: 80px 0; background: var(--white); }
-        .section-title { text-align: center; font-size: 3rem; margin-bottom: 60px; }
-        .owner-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 100px; }
-        .owner-photo { width: 100%; max-width: 500px; aspect-ratio: 1; background: var(--cream); border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 4px solid var(--navy); }
-        .owner-photo img { width: 100%; height: 100%; object-fit: cover; }
-        .owner-photo-placeholder { font-size: 1.5rem; color: var(--gray); text-align: center; padding: 40px; }
-        .owner-content h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--orange); }
-        .owner-content h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--navy); }
-        .owner-content p { margin-bottom: 15px; }
-        .languages { display: flex; gap: 15px; margin-top: 20px; }
-        .language-tag { background: var(--cream); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; }
+        
+        /* New About Section Styles */
+        .about-section {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            width: 100%;
+            max-width: 1536px;
+            margin: 0 auto;
+            background: var(--white);
+        }
+
+        .about-image {
+            position: relative;
+            min-height: 770px;
+            overflow: visible;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 0;
+        }
+
+        .about-content {
+            padding: 65px 55px 35px;
+        }
+
+        .about-eyebrow {
+            margin-bottom: 12px;
+            color: var(--orange-light);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .about-content h2 {
+            margin: 0 0 24px;
+            color: var(--navy);
+            font-size: clamp(48px, 4vw, 64px);
+            line-height: 0.95;
+            letter-spacing: -1.5px;
+            max-width: 850px;
+        }
+
+        .about-intro {
+            max-width: 850px;
+            color: var(--text-dark);
+            font-size: 18px;
+            line-height: 1.65;
+            margin-bottom: 35px;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 40px;
+        }
+
+        .trust-item {
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            gap: 18px;
+            padding: 18px 0;
+            border-bottom: 1px solid #d8d8d8;
+            background: transparent;
+            border-radius: 0;
+        }
+
+        .trust-icon {
+            width: 72px;
+            height: 72px;
+            border: 2px solid var(--orange-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--orange-light);
+            flex-shrink: 0;
+        }
+
+        .trust-icon svg {
+            width: 27px;
+            height: 27px;
+        }
+
+        .trust-item h3 {
+            margin: 4px 0 7px;
+            color: var(--navy);
+            font-size: 17px;
+            line-height: 1.1;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .trust-item p {
+            margin: 0;
+            color: var(--text-medium);
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .experience-badge {
+            position: absolute;
+            left: 45px;
+            bottom: 25px;
+            width: 155px;
+            height: 155px;
+            background: var(--orange-badge);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .experience-badge strong {
+            color: var(--navy);
+            font-size: 54px;
+            line-height: 1;
+        }
+
+        .experience-badge span {
+            margin-top: 8px;
+            color: var(--navy);
+            font-size: 14px;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .reviews-bar {
+            margin-top: 24px;
+            padding: 16px 20px;
+            background: #f6f6f6;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .stars {
+            color: var(--orange-badge);
+            font-size: 22px;
+            letter-spacing: 3px;
+        }
+
+        .reviews-text strong {
+            display: block;
+            color: var(--navy);
+            font-size: 16px;
+        }
+
+        .reviews-text span {
+            display: block;
+            margin-top: 4px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .reviews-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 22px;
+            background: var(--navy);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .reviews-button:hover {
+            background: var(--orange);
+            color: var(--navy);
+        }
+
+        /* Keep existing styles for other sections */
         .values-section { background: var(--cream); padding: 80px 0; }
         .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .value-card { background: var(--white); padding: 40px; border-radius: 8px; border: 2px solid var(--navy); text-align: center; }
@@ -107,8 +278,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .footer-column a { display: block; margin-bottom: 10px; opacity: 0.8; transition: opacity 0.3s; }
         .footer-column a:hover { opacity: 1; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.7; }
-        @media (max-width: 768px) {
-            .owner-section { grid-template-columns: 1fr; }
+        
+        @media (max-width: 900px) {
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                min-height: 550px;
+            }
+
+            .about-content {
+                padding: 45px 25px;
+            }
+
+            .about-content h2 {
+                font-size: 42px;
+            }
+
+            .trust-grid {
+                grid-template-columns: 1fr;
+                column-gap: 0;
+            }
+
+            .experience-badge {
+                left: 25px;
+                bottom: -30px;
+                width: 125px;
+                height: 125px;
+            }
+
+            .experience-badge strong {
+                font-size: 42px;
+            }
+
+            .reviews-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .reviews-button {
+                width: 100%;
+                text-align: center;
+            }
+            
             .hero h1 { font-size: 2.5rem; }
         }
     </style>
@@ -140,24 +353,109 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <section class="about-section">
-    <div class="container">
-        <div class="owner-section">
-            <div class="owner-photo">
-                <img src="/assets/images/herehandyman.webp" alt="David - Owner of Here Handyman" />
-            </div>
-            <div class="owner-content">
-                <h2>Meet David</h2>
-                <h3>Owner & Lead Technician</h3>
-                <p>I'm originally from Brazil and have lived and worked in different parts of the world before settling in Westchester County, New York.</p>
-                <p>Before focusing on handyman services, I worked in different fields and gained extensive hands-on experience with home repairs, maintenance, construction, and general problem-solving. Over the years, I developed the practical skills and attention to detail that led me to build Here Handyman.</p>
-                <p><strong>Experience:</strong> Over 15 years of hands-on experience in home repairs, maintenance, carpentry, painting, drywall, plumbing, electrical fixture replacement, furniture assembly, TV mounting, and general handyman work.</p>
-                <div class="languages">
-                    <span class="language-tag">🇺🇸 English</span>
-                    <span class="language-tag">🇧🇷 Português</span>
-                    <span class="language-tag">🇪🇸 Español</span>
+    <div class="about-image">
+        <img src="/assets/images/david.webp" alt="David, owner of Here Handyman">
+        
+        <div class="experience-badge">
+            <strong>15+</strong>
+            <span>YEARS OF<br>EXPERIENCE</span>
+        </div>
+    </div>
+
+    <div class="about-content">
+
+        <div class="about-eyebrow">
+            ABOUT HERE HANDYMAN
+        </div>
+
+        <h2>
+            BUILT ON RELIABILITY &amp; CRAFTSMANSHIP
+        </h2>
+
+        <p class="about-intro">
+            At Here Handyman, you work directly with the owner—not a
+            call center or middleman. David provides professional
+            handyman services for homeowners and businesses throughout
+            Westchester County, NY with clear communication, upfront
+            pricing, and quality work you can count on.
+        </p>
+
+        <div class="trust-grid">
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div>
+                    <h3>DIRECTLY WITH THE OWNER</h3>
+                    <p>You work directly with David from start to finish.</p>
                 </div>
             </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13L17 22l-5-3-5 3 1.5-9"/></svg>
+                </div>
+                <div>
+                    <h3>15+ YEARS OF EXPERIENCE</h3>
+                    <p>Hands-on experience across repairs, assembly, and installation.</p>
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L11 3H3v8l10.41 10.41a2 2 0 0 0 2.83 0l4.35-4.35a2 2 0 0 0 0-2.83z"/><circle cx="7" cy="7" r="1.5"/></svg>
+                </div>
+                <div>
+                    <h3>UPFRONT PRICING</h3>
+                    <p>Know the price before work begins.</p>
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                    <h3>LOCAL WESTCHESTER SERVICE</h3>
+                    <p>Serving White Plains and communities throughout Westchester.</p>
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <div>
+                    <h3>TRILINGUAL SUPPORT</h3>
+                    <p>English, Portuguese, and Spanish.</p>
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                </div>
+                <div>
+                    <h3>QUALITY YOU CAN COUNT ON</h3>
+                    <p>Careful workmanship and attention to detail.</p>
+                </div>
+            </div>
+
         </div>
+
+        <div class="reviews-bar">
+            <div class="reviews-text">
+                <div class="stars">★★★★★</div>
+                <strong>5-STAR REVIEWS FROM LOCAL HOMEOWNERS</strong>
+                <span>See what your neighbors are saying about Here Handyman.</span>
+            </div>
+
+            <a href="https://g.page/r/CcY8nHWkiRZ0EAE/review" target="_blank" rel="noopener" class="reviews-button">
+                View Google Reviews
+            </a>
+        </div>
+
     </div>
 </section>
 
