@@ -4064,19 +4064,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       const clickedCat = categories.find(c => item.classList.contains(c));
 
-      const catItems = [...galleryGrid.querySelectorAll('.gallery-item.' + clickedCat)]
+      if (!clickedCat) return;
 
-        .sort((a, b) => Number(a.getAttribute('data-index')) - Number(b.getAttribute('data-index')));
-
-      imagesList = catItems.map(it => {
-
-        const im = it.querySelector('img');
-
-        const lb = it.querySelector('.gallery-label');
-
-        return { src: im.getAttribute('src'), alt: im.getAttribute('alt') || '', caption: lb ? lb.textContent : '' };
-
-      });
+      
+      imagesList = localGalleryImages
+        .filter(img => img.category === clickedCat)
+        .sort((a, b) => a.index - b.index)
+        .map(img => ({
+          src: img.src,
+          alt: `${clickedCat} project photo ${img.index}`,
+          caption: `${clickedCat.charAt(0).toUpperCase() + clickedCat.slice(1)} Project #${img.index}`
+        }));
 
       currentIndex = imagesList.findIndex(image => image.src === clickedSrc);
 
