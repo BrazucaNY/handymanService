@@ -3850,31 +3850,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     function loadAllGalleryImages() {
 
-      // Clear static fallbacks
+      // Don't clear static HTML - keep the 5 showcase images
 
-      galleryGrid.innerHTML = '';
+      // localGalleryImages.forEach(img => {
+
+      //   addGalleryItemDOM(img.category, img.src, img.index, img.desc);
+
+      // });
 
       
 
-      localGalleryImages.forEach(img => {
+      // Just ensure all static items are visible
 
-        addGalleryItemDOM(img.category, img.src, img.index, img.desc);
+      const items = galleryGrid.querySelectorAll('.gallery-item');
+
+      items.forEach(item => {
+
+        item.style.display = 'block';
 
       });
-
-      
-
-      // If we loaded no images (e.g. offline or empty folders), reload fallback static items!
-
-      if (localGalleryImages.length === 0) {
-
-        restoreStaticFallback();
-
-      } else {
-
-        filterGalleryDOM('all');
-
-      }
 
     }
 
@@ -4078,7 +4072,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       currentIndex = imagesList.findIndex(image => image.src === clickedSrc);
 
-      if (currentIndex !== -1) {
+      if (currentIndex === -1 && imagesList.length > 0) {
+        currentIndex = 0;
+      }
+
+      if (imagesList.length > 0) {
 
         openLightbox();
 
