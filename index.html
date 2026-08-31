@@ -3850,25 +3850,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     function loadAllGalleryImages() {
 
-      // Don't clear static HTML - keep the 5 showcase images
+      // Clear static fallbacks
 
-      // localGalleryImages.forEach(img => {
+      galleryGrid.innerHTML = '';
 
-      //   addGalleryItemDOM(img.category, img.src, img.index, img.desc);
+      const gridCounts = {};
 
-      // });
+      localGalleryImages.forEach(img => {
+
+        gridCounts[img.category] = (gridCounts[img.category] || 0) + 1;
+
+        if (gridCounts[img.category] <= 8) {
+
+          addGalleryItemDOM(img.category, img.src, img.index, img.desc);
+
+        }
+
+      });
 
       
 
-      // Just ensure all static items are visible
+      // If we loaded no images (e.g. offline or empty folders), reload fallback static items!
 
-      const items = galleryGrid.querySelectorAll('.gallery-item');
+      if (localGalleryImages.length === 0) {
 
-      items.forEach(item => {
+        restoreStaticFallback();
 
-        item.style.display = 'block';
+      } else {
 
-      });
+        filterGalleryDOM('all');
+
+      }
 
     }
 
@@ -4058,25 +4070,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       const clickedCat = categories.find(c => item.classList.contains(c));
 
-      if (!clickedCat) return;
-
-      
       imagesList = localGalleryImages
-        .filter(img => img.category === clickedCat)
-        .sort((a, b) => a.index - b.index)
-        .map(img => ({
-          src: img.src,
-          alt: `${clickedCat} project photo ${img.index}`,
-          caption: `${clickedCat.charAt(0).toUpperCase() + clickedCat.slice(1)} Project #${img.index}`
+
+        .filter(gi => gi.category === clickedCat)
+
+        .sort((a, b) => Number(a.index) - Number(b.index))
+
+        .map(gi => ({
+
+          src: gi.src,
+
+          alt: (clickedCat.charAt(0).toUpperCase() + clickedCat.slice(1) + ' project photo ' + gi.index),
+
+          caption: clickedCat.charAt(0).toUpperCase() + clickedCat.slice(1) + ' Project #' + gi.index
+
         }));
 
       currentIndex = imagesList.findIndex(image => image.src === clickedSrc);
 
-      if (currentIndex === -1 && imagesList.length > 0) {
-        currentIndex = 0;
-      }
-
-      if (imagesList.length > 0) {
+      if (currentIndex !== -1) {
 
         openLightbox();
 
