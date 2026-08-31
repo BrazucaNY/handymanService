@@ -26,6 +26,43 @@
   to = "/services.html"
   status = 200
 
+# /about page
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+# Clean URL redirects — service pages
+[[redirects]]
+  from = "/furniture-assembly"
+  to = "/furniture-assembly.html"
+  status = 200
+
+[[redirects]]
+  from = "/tv-mounting"
+  to = "/tv-mounting.html"
+  status = 200
+
+[[redirects]]
+  from = "/drywall-repair"
+  to = "/drywall-repair.html"
+  status = 200
+
+[[redirects]]
+  from = "/interior-painting"
+  to = "/interior-painting.html"
+  status = 200
+
+[[redirects]]
+  from = "/smart-home-installation"
+  to = "/smart-home-installation.html"
+  status = 200
+
+[[redirects]]
+  from = "/plumbing-repairs"
+  to = "/plumbing-repairs.html"
+  status = 200
+
 # Block access to sensitive files
 [[redirects]]
   from = "/.env*"
