@@ -32,6 +32,12 @@
   to = "/about.html"
   status = 200
 
+# /property-managers page
+[[redirects]]
+  from = "/property-managers"
+  to = "/property-managers.html"
+  status = 200
+
 # Clean URL redirects — service pages
 [[redirects]]
   from = "/furniture-assembly"
