@@ -1660,25 +1660,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           d.style.transform=i===cur?'scale(1.3)':'scale(1)';
         });
       }
-      window.baMove=function(dir){goTo(cur+dir); resetAutoplay();};
-
-      // Auto-slide
-      var AUTOPLAY_MS = 7500;
-      var timer = null;
-      function startAutoplay(){
-        timer = setInterval(function(){ goTo(cur+1); }, AUTOPLAY_MS);
-      }
-      function stopAutoplay(){
-        if(timer){ clearInterval(timer); timer=null; }
-      }
-      function resetAutoplay(){ stopAutoplay(); startAutoplay(); }
-
-      var carouselEl = document.querySelector('.ba-carousel');
-      carouselEl.addEventListener('mouseenter', stopAutoplay);
-      carouselEl.addEventListener('mouseleave', startAutoplay);
-      dotsEl.addEventListener('click', resetAutoplay);
-
-      startAutoplay();
+      window.baMove=function(dir){goTo(cur+dir);};
     })();
     </script>
 
