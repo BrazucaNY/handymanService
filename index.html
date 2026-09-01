@@ -1497,6 +1497,88 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
 
+    <!-- ===== Before & After Carousel ===== -->
+    <section id="before-after" style="background:#071828;padding:70px 5%">
+      <div style="max-width:1000px;margin:0 auto">
+        <div class="section-tag" style="color:#eab308;border-color:rgba(234,179,8,.3);background:rgba(234,179,8,.08)">Before &amp; After</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Real Jobs. Real Results.</h2>
+        <p style="color:rgba(255,255,255,.65);font-size:0.95rem;margin-bottom:36px">Photos from actual jobs completed across Westchester County.</p>
+
+        <!-- Carousel -->
+        <div class="ba-carousel" style="position:relative">
+          <div class="ba-track" style="overflow:hidden;border-radius:14px">
+            <div class="ba-slides" style="display:flex;transition:transform .4s cubic-bezier(.16,1,.3,1)">
+
+              <!-- Job 1 Before — Dresser Assembly, Scarsdale -->
+              <figure class="ba-slide" style="min-width:100%;margin:0;position:relative;flex-shrink:0">
+                <img src="/assets/images/before-after/dresser-scarsdale-before.jpg"
+                     alt="6-drawer dresser parts spread across living room floor before assembly — Scarsdale NY"
+                     loading="lazy" style="width:100%;height:480px;object-fit:cover;display:block">
+                <span style="position:absolute;top:16px;left:16px;background:#071828;color:#fff;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:20px">Before</span>
+                <figcaption style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(7,24,40,.85));padding:20px 20px 16px;color:#fff;font-size:13px;font-weight:600">Dresser Assembly &mdash; Scarsdale, NY</figcaption>
+              </figure>
+
+              <!-- Job 1 After — Dresser Assembly, Scarsdale -->
+              <figure class="ba-slide" style="min-width:100%;margin:0;position:relative;flex-shrink:0">
+                <img src="/assets/images/before-after/dresser-scarsdale-after.jpg"
+                     alt="Modern black 6-drawer dresser fully assembled and placed against wall — Scarsdale NY"
+                     loading="lazy" style="width:100%;height:480px;object-fit:cover;display:block">
+                <span style="position:absolute;top:16px;left:16px;background:#eab308;color:#071828;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:20px">After</span>
+                <figcaption style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(7,24,40,.85));padding:20px 20px 16px;color:#fff;font-size:13px;font-weight:600">Dresser Assembly &mdash; Scarsdale, NY</figcaption>
+              </figure>
+
+            </div>
+          </div>
+
+          <!-- Prev / Next buttons -->
+          <button onclick="baMove(-1)" aria-label="Previous photo" style="position:absolute;top:50%;left:-20px;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:#fff;color:#071828;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s" onmouseover="this.style.background='#eab308'" onmouseout="this.style.background='#fff'">&#8592;</button>
+          <button onclick="baMove(1)"  aria-label="Next photo"     style="position:absolute;top:50%;right:-20px;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:#fff;color:#071828;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s" onmouseover="this.style.background='#eab308'" onmouseout="this.style.background='#fff'">&#8594;</button>
+        </div>
+
+        <!-- Dots -->
+        <div id="ba-dots" style="display:flex;justify-content:center;gap:8px;margin-top:20px"></div>
+
+        <!-- CTA -->
+        <div style="text-align:center;margin-top:30px">
+          <a href="/book-appointment" style="display:inline-flex;align-items:center;gap:8px;background:#eab308;color:#071828;padding:13px 28px;border-radius:8px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.04em;text-decoration:none">
+            Book a Service Like This →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    (function(){
+      var slides = document.querySelectorAll('.ba-slide');
+      var track  = document.querySelector('.ba-slides');
+      var dotsEl = document.getElementById('ba-dots');
+      var cur = 0;
+      var total = slides.length;
+
+      // Build dots
+      for(var i=0;i<total;i++){
+        var d = document.createElement('button');
+        d.style.cssText='width:10px;height:10px;border-radius:50%;border:none;cursor:pointer;padding:0;transition:background .2s,transform .2s';
+        d.style.background = i===0 ? '#eab308' : 'rgba(255,255,255,.3)';
+        d.style.transform  = i===0 ? 'scale(1.3)' : 'scale(1)';
+        d.setAttribute('aria-label','Photo '+(i+1));
+        (function(idx){d.onclick=function(){goTo(idx);};})(i);
+        dotsEl.appendChild(d);
+      }
+
+      function goTo(n){
+        cur = (n + total) % total;
+        track.style.transform = 'translateX(-'+cur*100+'%)';
+        var dots = dotsEl.querySelectorAll('button');
+        dots.forEach(function(d,i){
+          d.style.background = i===cur ? '#eab308' : 'rgba(255,255,255,.3)';
+          d.style.transform  = i===cur ? 'scale(1.3)' : 'scale(1)';
+        });
+      }
+
+      window.baMove = function(dir){ goTo(cur+dir); };
+    })();
+    </script>
 
     <!-- Testimonials Section -->
 
