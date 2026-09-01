@@ -1508,7 +1508,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="ba-carousel" style="position:relative;max-width:950px;margin:0 auto">
           <div class="ba-track" style="overflow:hidden;border-radius:14px">
-            <div class="ba-slides" style="display:flex;transition:transform .4s cubic-bezier(.16,1,.3,1)">
+            <div class="ba-slides" style="display:flex;transition:transform .6s cubic-bezier(.16,1,.3,1)">
 
               <!-- Job 1: Dresser Assembly — Scarsdale -->
               <figure class="ba-slide" style="min-width:100%;margin:0;flex-shrink:0;position:relative">
@@ -1654,7 +1654,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       window.baMove=function(dir){goTo(cur+dir); resetAutoplay();};
 
       // Auto-slide
-      var AUTOPLAY_MS = 4000;
+      var AUTOPLAY_MS = 7500;
       var timer = null;
       function startAutoplay(){
         timer = setInterval(function(){ goTo(cur+1); }, AUTOPLAY_MS);
