@@ -72,6 +72,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PCT6SLV8');</script>
 <!-- End Google Tag Manager -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    window.dataLayer = window.dataLayer || [];
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        window.dataLayer.push({ 'event': 'phone_call_click', 'event_category': 'conversion', 'event_label': el.getAttribute('href'), 'value': 1 });
+      });
+    });
+    document.querySelectorAll('a[href*="book-appointment"], .btn-primary').forEach(function(el) {
+      el.addEventListener('click', function() {
+        window.dataLayer.push({ 'event': 'book_appointment_click', 'event_category': 'conversion', 'event_label': el.getAttribute('href') || 'Booking Button', 'value': 1 });
+      });
+    });
+  });
+</script>
     <style>
         :root { --navy: #071828; --orange: #eab308; --cream: #f9f5ef; --white: #ffffff; --text: #333333; }
         * { margin: 0; padding: 0; box-sizing: border-box; }

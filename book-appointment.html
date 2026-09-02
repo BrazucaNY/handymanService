@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
+  <!-- Google Analytics & Conversion Event Tracking -->
   <script>
   (function(){
     let loaded=false;
@@ -17,6 +17,20 @@
     setTimeout(loadGA,4000);
     ['scroll','mousemove','touchstart','keydown'].forEach(e=>window.addEventListener(e,loadGA,{once:true}));
   })();
+
+  document.addEventListener('DOMContentLoaded', function() {
+    window.dataLayer = window.dataLayer || [];
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        window.dataLayer.push({ 'event': 'phone_call_click', 'event_category': 'conversion', 'event_label': el.getAttribute('href'), 'value': 1 });
+      });
+    });
+    document.querySelectorAll('form').forEach(function(form) {
+      form.addEventListener('submit', function() {
+        window.dataLayer.push({ 'event': 'generate_lead', 'event_category': 'conversion', 'event_label': 'Appointment Form Submission', 'value': 1 });
+      });
+    });
+  });
   </script>
 
   <meta charset="UTF-8"/>
