@@ -1727,26 +1727,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     </section>
 
-        <!-- Testimonials Section -->
+            <!-- Testimonials Section -->
     <section id="reviews" class="testimonials-bg">
       <div class="section-tag">Client Reviews</div>
       <h2 class="section-title">What Our Neighbors Say</h2>
 
-      <!-- Manual Slider Container -->
-      <div class="reviews-slider-wrap" style="position:relative;max-width:860px;margin:40px auto 0;padding:0 50px;">
-        <div class="reviews-slider-viewport" style="overflow:hidden;border-radius:14px;">
-          <div class="reviews-slider-track" id="revTrack" style="display:flex;transition:transform 0.4s ease-in-out;">
+      <style>
+        .rev-slide {
+          flex: 0 0 calc((100% - 40px) / 3);
+          box-sizing: border-box;
+        }
+        @media (max-width: 992px) {
+          .rev-slide {
+            flex: 0 0 calc((100% - 20px) / 2);
+          }
+        }
+        @media (max-width: 640px) {
+          .rev-slide {
+            flex: 0 0 100%;
+          }
+        }
+      </style>
+
+      <!-- 3-Card Manual Slider Container -->
+      <div class="reviews-slider-wrap" style="position:relative;max-width:1150px;margin:40px auto 0;padding:0 50px;">
+        <div class="reviews-slider-viewport" style="overflow:hidden;padding:10px 0;">
+          <div class="reviews-slider-track" id="revTrack" style="display:flex;gap:20px;transition:transform 0.4s ease-in-out;">
 
         <!-- Review 1: Dilani Wanasinghe -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Thank you so much, Dilani, for the 5-star review! I really appreciate you taking the time to share your experience."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Thank you so much, Dilani, for the 5-star review! I really appreciate you taking the time to share your experience."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">DW</div>
               <div class="reviewer-info">
                 <strong>Dilani Wanasinghe</strong>
@@ -1757,15 +1776,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 2: Franklin Miranda -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Awesome guy, he repaired my fence and it looks so much better now. Definitely recommend for any jobs you might have."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Awesome guy, he repaired my fence and it looks so much better now. Definitely recommend for any jobs you might have."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">FM</div>
               <div class="reviewer-info">
                 <strong>Franklin Miranda</strong>
@@ -1776,15 +1797,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 3: Carlos Ramirez -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"I called David after I couldn't get anyone to move my springfree trampoline. Within a day of reaching out to him, we got it moved!"</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"I called David after I couldn't get anyone to move my springfree trampoline. Within a day of reaching out to him, we got it moved!"</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">CR</div>
               <div class="reviewer-info">
                 <strong>Carlos Ramirez</strong>
@@ -1795,15 +1818,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 4: Beth Isenberg -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Reasonable price. Professional. Helpful. Quick."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Reasonable price. Professional. Helpful. Quick."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">BI</div>
               <div class="reviewer-info">
                 <strong>Beth Isenberg</strong>
@@ -1814,15 +1839,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 5: Lala Alla -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Reasonable price. David installed shelves in my daughter’s bedroom. He was very professional, communicated well, and was able to do the job the same day. I am very pleased with his work and my daughter was so happy with results."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Reasonable price. David installed shelves in my daughter’s bedroom. He was very professional, communicated well, and was able to do the job the same day. I am very pleased with his work and my daughter was so happy with results."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">LA</div>
               <div class="reviewer-info">
                 <strong>Lala Alla</strong>
@@ -1833,15 +1860,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 6: Kathy Roberts -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Great price. I highly recommend this handyman! He was professional, punctual, and arrived exactly on time. He efficiently hung two pieces of artwork and installed fixtures."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Great price. I highly recommend this handyman! He was professional, punctual, and arrived exactly on time. He efficiently hung two pieces of artwork and installed fixtures."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">KR</div>
               <div class="reviewer-info">
                 <strong>Kathy Roberts</strong>
@@ -1852,15 +1881,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 7: The Tiny Mess Club -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"David did a fantastic job assembling our play kitchen for our sensory play studio. He was professional, efficient, and paid great attention to detail. Everything was put together perfectly, feels incredibly sturdy, and looks great."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"David did a fantastic job assembling our play kitchen for our sensory play studio. He was professional, efficient, and paid great attention to detail. Everything was put together perfectly, feels incredibly sturdy, and looks great."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">TM</div>
               <div class="reviewer-info">
                 <strong>The Tiny Mess Club</strong>
@@ -1871,15 +1902,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 8: Nicole Poteat -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Prompt, professional, and reliable handyman service. Highly recommended for any home repair needs in Westchester!"</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Prompt, professional, and reliable handyman service. Highly recommended for any home repair needs in Westchester!"</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">NP</div>
               <div class="reviewer-info">
                 <strong>Nicole Poteat</strong>
@@ -1890,15 +1923,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 9: Escober Investments -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Great work!! David is very professional and responsive. Any type of work he can do with precision and care!!"</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Great work!! David is very professional and responsive. Any type of work he can do with precision and care!!"</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">EI</div>
               <div class="reviewer-info">
                 <strong>Escober Investments</strong>
@@ -1909,15 +1944,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 10: Randy Hecht -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Great price. David is fantastic! We’ve hired him for two different projects — TV mounting and custom closet shelving. He is professional, reliable, and made sure everything was perfect."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Great price. David is fantastic! We’ve hired him for two different projects — TV mounting and custom closet shelving. He is professional, reliable, and made sure everything was perfect."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">RH</div>
               <div class="reviewer-info">
                 <strong>Randy Hecht</strong>
@@ -1928,15 +1965,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 11: Neil Arnold -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Good work fix everything, that was put together wrong. Will use again."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Good work fix everything, that was put together wrong. Will use again."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">NA</div>
               <div class="reviewer-info">
                 <strong>Neil Arnold</strong>
@@ -1947,15 +1986,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 12: Pam Jaffee -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Reasonable price. David is AMAZING. I had an entirely botched job by another electrician and he came by twice to assess what went wrong and got it all fixed safely in Port Chester."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Reasonable price. David is AMAZING. I had an entirely botched job by another electrician and he came by twice to assess what went wrong and got it all fixed safely in Port Chester."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">PJ</div>
               <div class="reviewer-info">
                 <strong>Pam Jaffee</strong>
@@ -1966,15 +2007,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 13: Wolfgang von Loewenstein -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"David was incredibly easy to work with and very fair priced. He helped with the installation of a playset in White Plains, NY. He showed up on time and did great work."</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"David was incredibly easy to work with and very fair priced. He helped with the installation of a playset in White Plains, NY. He showed up on time and did great work."</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">WV</div>
               <div class="reviewer-info">
                 <strong>Wolfgang von Loewenstein</strong>
@@ -1985,15 +2028,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 14: Mandy -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Expert services received today. If you are really looking for someone that does fantastic work, call the Here Handyman!"</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Expert services received today. If you are really looking for someone that does fantastic work, call the Here Handyman!"</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">M</div>
               <div class="reviewer-info">
                 <strong>Mandy</strong>
@@ -2004,15 +2049,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 15: Nick Valsangkar -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"David is awesome. Honest, responsive and always does a great job. Highly recommend!"</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"David is awesome. Honest, responsive and always does a great job. Highly recommend!"</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">NV</div>
               <div class="reviewer-info">
                 <strong>Nick Valsangkar</strong>
@@ -2023,15 +2070,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Review 16: Anne Bryant -->
-        <div class="rev-slide" style="min-width:100%;box-sizing:border-box;padding:0 4px;">
-          <div class="review" style="margin:0;">
-            <div class="review-platform">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-              Google Review
+        <div class="rev-slide">
+          <div class="review" style="height:100%;display:flex;flex-direction:column;justify-content:space-between;margin:0;">
+            <div>
+              <div class="review-platform">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
+                Google Review
+              </div>
+              <div class="stars">★★★★★</div>
+              <p>"Dave was quick and fast with putting all 3 dressers together. It was amazing to watch him figure it all out. It was like magic watching him work!"</p>
             </div>
-            <div class="stars">★★★★★</div>
-            <p>"Dave was quick and fast with putting all 3 dressers together. It was amazing to watch him figure it all out. It was like magic watching him work!"</p>
-            <div class="reviewer">
+            <div class="reviewer" style="margin-top:auto;">
               <div class="avatar">AB</div>
               <div class="reviewer-info">
                 <strong>Anne Bryant</strong>
@@ -2044,13 +2093,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <!-- Left Arrow Button -->
-        <button onclick="moveRev(-1)" aria-label="Previous Review" style="position:absolute;left:0;top:50%;transform:translateY(-50%);background:var(--navy);color:var(--orange);border:none;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:10;transition:transform 0.2s,background 0.2s;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        <button onclick="moveRev(-1)" aria-label="Previous Reviews" style="position:absolute;left:0;top:50%;transform:translateY(-50%);background:var(--navy);color:var(--orange);border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(0,0,0,0.18);z-index:10;transition:transform 0.2s,background 0.2s;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
 
         <!-- Right Arrow Button -->
-        <button onclick="moveRev(1)" aria-label="Next Review" style="position:absolute;right:0;top:50%;transform:translateY(-50%);background:var(--navy);color:var(--orange);border:none;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:10;transition:transform 0.2s,background 0.2s;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        <button onclick="moveRev(1)" aria-label="Next Reviews" style="position:absolute;right:0;top:50%;transform:translateY(-50%);background:var(--navy);color:var(--orange);border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(0,0,0,0.18);z-index:10;transition:transform 0.2s,background 0.2s;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
 
@@ -2063,16 +2112,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
-    <!-- Manual-Only Slider Script (No Auto-Move) -->
+    <!-- Manual-Only 3-Card Slider Script (No Auto-Move) -->
     <script>
     (function(){
-      var currentIdx = 0;
-      var totalSlides = 16;
       var track = document.getElementById('revTrack');
+      var currentPos = 0;
+
       window.moveRev = function(dir) {
         if (!track) return;
-        currentIdx = (currentIdx + dir + totalSlides) % totalSlides;
-        track.style.transform = 'translateX(-' + (currentIdx * 100) + '%)';
+        var slide = track.querySelector('.rev-slide');
+        if (!slide) return;
+
+        var slideWidth = slide.getBoundingClientRect().width + 20; // card width + gap
+        var viewportWidth = track.parentElement.clientWidth;
+        var maxScroll = track.scrollWidth - viewportWidth;
+
+        currentPos += dir * slideWidth;
+        if (currentPos < 0) {
+          currentPos = maxScroll > 0 ? maxScroll : 0;
+        } else if (currentPos > maxScroll + 5) {
+          currentPos = 0;
+        }
+
+        track.style.transform = 'translateX(-' + currentPos + 'px)';
       };
     })();
     </script>
