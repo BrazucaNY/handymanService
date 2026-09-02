@@ -45,33 +45,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- ================= Local Search & AI Optimization ================= -->
-
   <title>Here Handyman | Premium Westchester Home Repairs</title>
 
  <meta name="description" content="Top-rated handyman in Westchester County NY. White Plains, Scarsdale & Yonkers. Furniture, TV mounting, drywall & electrical. Free quotes: (516) 350-0801.">
-
-  <meta name="keywords" content="handyman westchester county ny, handyman near me westchester, handyman white plains ny, handyman yonkers ny, handyman scarsdale ny, handyman tarrytown ny, handyman hartsdale ny, furniture assembly westchester, trampoline assembly westchester, tv mounting westchester ny, drywall repair westchester, painting contractor westchester, electrical repair westchester, home repair westchester ny, affordable handyman ny, handyman new rochelle ny, handyman harrison ny">
 
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
   <meta name="theme-color" content="#071828">
 
   <meta name="author" content="Here Handyman">
-
-  <meta name="geo.region" content="US-NY">
-
-  <meta name="geo.placename" content="Westchester County, New York">
-
-  <meta name="geo.position" content="41.0395;-73.8121">
-
-  <meta name="ICBM" content="41.0395, -73.8121">
-
-  <meta name="language" content="English">
-
-  <meta name="revisit-after" content="7 days">
-
-  <meta name="rating" content="general">
 
   <!-- ================= Canonical ================= -->
 
@@ -1563,7 +1545,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="lightbox-content">
 
-        <img id="lightbox-img" src="" alt="">
+        <img id="lightbox-img" alt="Here Handyman project photo">
 
         <div id="lightbox-caption"></div>
 
@@ -2453,6 +2435,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       }
 
+      const firstName = document.getElementById('first-name')?.value?.trim() || '';
+
       const showSuccess = () => {
 
         formCard.innerHTML = `
@@ -2461,7 +2445,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div style="font-size: 64px; color: var(--orange); margin-bottom: 20px; animation: scaleUp 0.5s ease both; display: inline-block;">✓</div>
 
-            <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--white); margin-bottom: 12px; letter-spacing: 1px;">Thank you, ${firstName}!</h2>
+            <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--white); margin-bottom: 12px; letter-spacing: 1px;">Thank You${firstName ? ', ' + firstName : ''}!</h2>
 
             <p style="font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 28px;">
 
