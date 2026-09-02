@@ -41,6 +41,13 @@
 
   <!-- Privacy Policy -->
   <url>
+    <loc>https://www.herehandyman.com/privacy</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
     <loc>https://www.herehandyman.com/privacy-policy</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>yearly</changefreq>
