@@ -8,11 +8,11 @@
 # Remove the [context.production.environment] section completely
 # Environment variables should be set in Netlify's UI
 
-# /gallery redirect
+# /gallery page
 [[redirects]]
   from = "/gallery"
-  to = "/"
-  status = 301
+  to = "/gallery.html"
+  status = 200
 
 # /blog index
 [[redirects]]
