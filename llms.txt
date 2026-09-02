@@ -1,6 +1,6 @@
 # Here Handyman — Westchester County NY
 
-> Professional handyman, home repair, and remodeling services serving all of Westchester County, NY. Fully insured. Free estimates. 5.0 stars (15 reviews). Call or text (516) 350-0801.
+> Professional handyman, home repair, and remodeling services serving all of Westchester County, NY. Fully insured. Free estimates. 5.0 stars (16 reviews). Call or text (516) 350-0801.
 
 **Full Documentation**: [llms-full.txt](https://www.herehandyman.com/llms-full.txt)
 
