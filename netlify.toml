@@ -32,6 +32,24 @@
   to = "/about.html"
   status = 200
 
+# /service-areas page
+[[redirects]]
+  from = "/service-areas"
+  to = "/service-areas.html"
+  status = 200
+
+# /privacy-policy page
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 200
+
+# /terms page
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
 # /property-managers page
 [[redirects]]
   from = "/property-managers"
