@@ -1,6 +1,6 @@
 # Here Handyman — Westchester County NY
 
-> Professional handyman, home repair, and remodeling services serving all of Westchester County, NY. Licensed & insured. Free estimates. 5.0 stars (20 reviews). Call or text (516) 350-0801.
+> Professional handyman, home repair, and remodeling services serving all of Westchester County, NY. Fully insured. Free estimates. 5.0 stars (15 reviews). Call or text (516) 350-0801.
 
 **Full Documentation**: [llms-full.txt](https://www.herehandyman.com/llms-full.txt)
 
@@ -57,7 +57,7 @@ White Plains · Scarsdale · Yonkers · Hartsdale · Harrison · New Rochelle ·
 
 - ✅ Free estimates — no obligation
 - ✅ Upfront pricing — no hidden fees
-- ✅ Licensed & fully insured
+- ✅ Fully insured
 - ✅ Same-day service available
 - ✅ English, Spanish & Portuguese spoken
 - ✅ 15+ years experience
@@ -125,4 +125,4 @@ Rates typically range from $75–$150/hour. We offer free, upfront quotes with n
 ---
 
 *Here Handyman — Quality Work. Honest Service. Real Results.*
-*Serving Westchester County, NY since 2010. Licensed • Insured • 5-Star Rated*
+*Serving Westchester County, NY since 2010. Fully Insured • 5-Star Rated*
