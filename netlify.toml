@@ -14,9 +14,14 @@
   to = "/gallery.html"
   status = 200
 
-# /blog index
+# /blog index (301 to /blog/)
 [[redirects]]
   from = "/blog"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/"
   to = "/blog/index.html"
   status = 200
 
@@ -38,11 +43,11 @@
   to = "/service-areas.html"
   status = 200
 
-# /privacy & /privacy-policy pages
+# /privacy 301 redirect to /privacy-policy
 [[redirects]]
   from = "/privacy"
-  to = "/privacy.html"
-  status = 200
+  to = "/privacy-policy"
+  status = 301
 
 [[redirects]]
   from = "/privacy-policy"

@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /timer.html
 
 Sitemap: https://www.herehandyman.com/sitemap.xml
 

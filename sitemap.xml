@@ -41,13 +41,6 @@
 
   <!-- Privacy Policy -->
   <url>
-    <loc>https://www.herehandyman.com/privacy</loc>
-    <lastmod>2026-09-02</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
     <loc>https://www.herehandyman.com/privacy-policy</loc>
     <lastmod>2026-09-02</lastmod>
     <changefreq>yearly</changefreq>
@@ -172,8 +165,8 @@
 
   <!-- Blog Index -->
   <url>
-    <loc>https://www.herehandyman.com/blog</loc>
-    <lastmod>2026-08-29</lastmod>
+    <loc>https://www.herehandyman.com/blog/</loc>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
