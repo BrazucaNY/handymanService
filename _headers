@@ -28,6 +28,13 @@
 /robots.txt
   Cache-Control: public, max-age=3600
 /llms.txt
+  Content-Type: text/markdown; charset=utf-8
+  Vary: Accept, Accept-Encoding
+  Cache-Control: public, max-age=3600
+
+/llms-full.txt
+  Content-Type: text/markdown; charset=utf-8
+  Vary: Accept, Accept-Encoding
   Cache-Control: public, max-age=3600
 
 # Security headers for ALL pages
