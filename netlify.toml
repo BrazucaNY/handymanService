@@ -12,12 +12,6 @@
 # Remove the [context.production.environment] section completely
 # Environment variables should be set in Netlify's UI
 
-# /index1 preview page
-[[redirects]]
-  from = "/index1"
-  to = "/index1.html"
-  status = 200
-
 # /gallery page
 [[redirects]]
   from = "/gallery"
