@@ -1,2 +1,7 @@
+# Direct 301 redirects to canonical HTTPS www domain (eliminates double-redirect chains)
+http://herehandyman.com/*  https://www.herehandyman.com/:splat  301!
+http://www.herehandyman.com/*  https://www.herehandyman.com/:splat  301!
+https://herehandyman.com/*  https://www.herehandyman.com/:splat  301!
+
 # Markdown Content Negotiation for AI Agents (acceptmarkdown.com)
 /*  /llms.txt  200!  Accept=*text/markdown*
