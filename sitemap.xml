@@ -165,7 +165,7 @@
 
   <!-- Blog Index -->
   <url>
-    <loc>https://www.herehandyman.com/blog</loc>
+    <loc>https://www.herehandyman.com/blog/</loc>
     <lastmod>2026-09-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
