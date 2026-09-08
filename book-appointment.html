@@ -1371,7 +1371,7 @@ function addFiles(files){
       const item = document.createElement('div');
       item.className = 'preview-item';
       item.dataset.idx = idx;
-      item.innerHTML = `<img src="${e.target.result}" alt="Preview"/><button type="button" class="preview-remove" aria-label="Remove">✕</button>`;
+      item.innerHTML = `<img src="${e.target.result}" alt="Preview" decoding="async" /><button type="button" class="preview-remove" aria-label="Remove">✕</button>`;
       item.querySelector('.preview-remove').onclick = () => {
         uploadedFiles[idx] = null;
         item.remove();
