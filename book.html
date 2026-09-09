@@ -47,20 +47,51 @@
   <meta name="description" content="Book a professional handyman in Westchester County NY. Free estimates on furniture assembly, TV mounting, drywall, painting, electrical & more. Here Handyman serves White Plains, Scarsdale, Yonkers & all of Westchester."/>
   <meta name="robots" content="index, follow"/>
   <title>Book Handyman Appointment | Here Handyman</title>
-  <link rel="canonical" href="https://www.herehandyman.com/book-appointment"/>
+  <link rel="canonical" href="https://www.herehandyman.com/book"/>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Book a Handyman Service | Here Handyman"/>
   <meta property="og:description" content="Schedule your handyman visit in Westchester County NY. Free estimates, same-day available."/>
-  <meta property="og:url" content="https://www.herehandyman.com/book-appointment"/>
+  <meta property="og:url" content="https://www.herehandyman.com/book"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.jpg"/>
   <meta name="twitter:card" content="summary_large_image"/>
 
   <!-- Schema -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Book a Handyman Service","url":"https://www.herehandyman.com/book-appointment","description":"Schedule a professional handyman visit in Westchester County NY.","provider":{"@type":"LocalBusiness","name":"Here Handyman","telephone":"+15163500801"}}</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Here Handyman",
+    "url": "https://www.herehandyman.com",
+    "telephone": "+15163500801",
+    "image": "https://www.herehandyman.com/assets/images/og-image.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "White Plains",
+      "addressRegion": "NY",
+      "postalCode": "10601",
+      "addressCountry": "US"
+    },
+    "potentialAction": {
+      "@type": "ReserveAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.herehandyman.com/book-appointment",
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform"
+        ]
+      },
+      "result": {
+        "@type": "Reservation",
+        "name": "Handyman Service Appointment"
+      }
+    }
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -418,6 +449,72 @@
       border-radius:12px;padding:14px 16px;font-size:.88rem;
       color:#7c2d12;line-height:1.6;display:none;margin-bottom:4px;
     }
+
+    /* ── 4-Step Slot Booking Wizard ── */
+    .wizard-card{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:32px;box-shadow:var(--shadow-md)}
+    .wizard-step-header{margin-bottom:24px}
+    .wizard-step-title{font-size:1.35rem;font-weight:800;color:var(--navy)}
+    .wizard-step-sub{font-size:0.9rem;color:var(--gray);margin-top:4px}
+    
+    .zip-box{display:flex;gap:12px;margin-top:16px}
+    .zip-box input{flex:1;padding:16px 20px;border-radius:14px;border:1.5px solid var(--border);font-size:1.05rem;font-weight:600}
+    .zip-box button{padding:16px 30px;border-radius:14px;background:var(--navy);color:var(--white);font-weight:800;border:none;cursor:pointer;transition:background .2s;font-size:0.95rem}
+    .zip-box button:hover{background:var(--orange);color:var(--navy)}
+
+    /* Spacious Service Cards */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px}
+    .service-card{
+      background:#ffffff;border:2px solid #e2e8f0;border-radius:16px;padding:20px;
+      cursor:pointer;display:flex;gap:16px;align-items:flex-start;
+      transition:all .25s ease;position:relative;
+    }
+    .service-card:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:0 12px 30px rgba(7,24,40,0.08)}
+    .service-card.selected{border-color:var(--orange);background:rgba(234,179,8,0.06);box-shadow:0 0 0 4px rgba(234,179,8,0.18)}
+    .svc-icon{width:52px;height:52px;border-radius:14px;background:rgba(7,24,40,0.06);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+    .svc-details{flex:1}
+    .svc-title-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+    .svc-title-row h3{font-size:1.05rem;font-weight:800;color:var(--navy);margin:0;line-height:1.3}
+    .svc-check{width:22px;height:22px;border-radius:50%;border:2px solid #cbd5e1;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:transparent;transition:all .2s;flex-shrink:0}
+    .service-card.selected .svc-check{background:var(--orange);border-color:var(--orange);color:var(--navy)}
+    .svc-desc{font-size:0.85rem;color:#64748b;line-height:1.5;margin-bottom:12px}
+    .svc-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+    .svc-duration{background:#f1f5f9;padding:4px 10px;border-radius:999px;font-size:0.78rem;font-weight:700;color:#475569}
+    .svc-badge{background:rgba(234,179,8,0.15);border:1px solid rgba(234,179,8,0.35);padding:4px 10px;border-radius:999px;font-size:0.78rem;font-weight:800;color:#ca8a04}
+
+    .slots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:20px}
+    .slot-pill{padding:14px;border-radius:12px;border:1.5px solid var(--border);background:#f8fbff;font-weight:700;color:var(--navy);font-size:0.95rem;cursor:pointer;text-align:center;transition:all .2s}
+    .slot-pill:hover{border-color:var(--orange);background:rgba(234,179,8,0.08)}
+    .slot-pill.selected{border-color:var(--orange);background:var(--orange);color:var(--navy);box-shadow:0 0 0 3px rgba(234,179,8,0.25)}
+
+    .back-btn{background:none;border:none;color:var(--gray);font-weight:700;font-size:0.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-bottom:14px}
+    .back-btn:hover{color:var(--navy)}
+
+    .confirmation-card{text-align:center;padding:40px 20px}
+    .confirm-icon{font-size:3rem;margin-bottom:12px}
+    .confirm-id{background:rgba(234,179,8,0.15);border:1px solid rgba(234,179,8,0.4);border-radius:12px;padding:10px 20px;display:inline-block;font-size:1.1rem;margin:16px 0;color:var(--navy)}
+    .summary-box{background:#f8fbff;border:1px solid var(--border);border-radius:14px;padding:20px;text-align:left;margin:20px 0;font-size:0.92rem;line-height:1.8}
+    .btn-review{display:inline-block;background:var(--orange);color:var(--navy);font-weight:800;padding:12px 24px;border-radius:999px;text-decoration:none;margin-top:16px}
+
+    /* Custom Time Fallback Callout */
+    .custom-time-callout{
+      margin-top:24px;background:#fefce8;border:1.5px solid #fde047;
+      border-radius:16px;padding:20px;display:flex;gap:16px;align-items:flex-start;
+    }
+    .callout-icon{font-size:1.8rem;flex-shrink:0;margin-top:2px}
+    .callout-body strong{color:var(--navy);font-size:0.95rem;display:block;margin-bottom:4px}
+    .callout-body p{color:#64748b;font-size:0.86rem;line-height:1.55;margin-bottom:14px}
+    .callout-btns{display:flex;flex-wrap:wrap;gap:10px}
+    .btn-callout-phone{
+      background:var(--navy);color:var(--white);font-weight:800;font-size:0.84rem;
+      padding:10px 18px;border-radius:999px;text-decoration:none;transition:background .2s;
+    }
+    .btn-callout-phone:hover{background:var(--orange);color:var(--navy)}
+    .btn-callout-sms{
+      background:rgba(234,179,8,0.18);border:1px solid rgba(234,179,8,0.5);
+      color:var(--navy);font-weight:800;font-size:0.84rem;
+      padding:10px 18px;border-radius:999px;text-decoration:none;transition:background .2s;
+    }
+    .btn-callout-sms:hover{background:var(--orange)}
 
     /* ── Sidebar ────────────────────────────────── */
     .sidebar{display:flex;flex-direction:column;gap:18px}
@@ -777,10 +874,10 @@
 
       <div class="hero-notice">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span>This is a <strong>booking request</strong>, not an instant booking. We'll contact you to confirm availability and send your free estimate before any work begins.</span>
+        <span>⚡ <strong>Real-Time Calendar Booking</strong>: Select your ZIP, pick an open time slot, and lock your handyman visit instantly — zero deposit required!</span>
       </div>
 
-      <a href="#booking-form" class="hero-cta">
+      <a href="#bookingWizard" class="hero-cta">
         Book My Appointment
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
@@ -794,7 +891,7 @@
 
         <div class="proof-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          No hidden fees
+          No deposit required
         </div>
         <div class="proof-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -815,34 +912,34 @@
         </div>
         <span class="hero-card-title">How booking works</span>
       </div>
-      <p class="hero-card-sub">From form to finished — here's the process.</p>
+      <p class="hero-card-sub">Reserve your slot in 4 simple steps.</p>
       <div class="hero-steps">
         <div class="hero-step">
           <div class="step-circle">01</div>
           <div class="step-body">
-            <strong>Submit your request</strong>
-            <span>Takes less than 3 minutes</span>
+            <strong>Enter your ZIP code</strong>
+            <span>Verify service availability in your town</span>
           </div>
         </div>
         <div class="hero-step">
           <div class="step-circle">02</div>
           <div class="step-body">
-            <strong>We call or text you</strong>
-            <span>Usually within a few hours</span>
+            <strong>Select service &amp; time slot</strong>
+            <span>Pick a live available arrival window</span>
           </div>
         </div>
         <div class="hero-step">
           <div class="step-circle">03</div>
           <div class="step-body">
-            <strong>You get a free estimate</strong>
-            <span>Firm price, no surprises</span>
+            <strong>Get instant confirmation code</strong>
+            <span>Slot is locked with zero deposit</span>
           </div>
         </div>
         <div class="hero-step">
           <div class="step-circle">04</div>
           <div class="step-body">
-            <strong>We show up &amp; get it done</strong>
-            <span>Clean, professional work</span>
+            <strong>David shows up &amp; gets it done</strong>
+            <span>Clean, professional, guaranteed work</span>
           </div>
         </div>
       </div>
@@ -855,27 +952,22 @@
   <div class="progress-inner">
     <div class="prog-step">
       <div class="prog-dot active" id="pd1"><span class="prog-num">1</span></div>
-      <span class="prog-label">Contact</span>
+      <span class="prog-label">ZIP Code</span>
     </div>
     <div class="prog-line" id="pl1"></div>
     <div class="prog-step">
       <div class="prog-dot" id="pd2"><span class="prog-num">2</span></div>
-      <span class="prog-label">Location</span>
+      <span class="prog-label">Service</span>
     </div>
     <div class="prog-line" id="pl2"></div>
     <div class="prog-step">
       <div class="prog-dot" id="pd3"><span class="prog-num">3</span></div>
-      <span class="prog-label">Service</span>
+      <span class="prog-label">Time Slot</span>
     </div>
     <div class="prog-line" id="pl3"></div>
     <div class="prog-step">
       <div class="prog-dot" id="pd4"><span class="prog-num">4</span></div>
-      <span class="prog-label">Schedule</span>
-    </div>
-    <div class="prog-line" id="pl4"></div>
-    <div class="prog-step">
-      <div class="prog-dot" id="pd5"><span class="prog-num">5</span></div>
-      <span class="prog-label">Submit</span>
+      <span class="prog-label">Confirm</span>
     </div>
   </div>
 </div>
@@ -883,248 +975,116 @@
 <!-- PAGE BODY -->
 <div class="page-body">
 
-  <!-- FORM -->
-  <form id="booking-form" class="ba-form" novalidate>
-    <input type="hidden" name="access_key" value="5cd5e45a-9146-4c3a-ac2f-8b2904476cf0"/>
-    <input type="hidden" name="subject" value="New Booking Request - Here Handyman"/>
-    <input type="hidden" name="from_name" value="Here Handyman Booking Page"/>
-    <input type="text" name="hp_field" style="display:none" tabindex="-1" autocomplete="off"/>
+  <!-- 4-STEP REAL-TIME SLOT BOOKING WIZARD -->
+  <div id="bookingWizard" class="wizard-card">
+    
+    <!-- STEP 1: ZIP Check -->
+    <div class="wizard-step" id="step-1">
+      <div class="wizard-step-header">
+        <div class="phase-pill">Step 1 of 4</div>
+        <h2 class="wizard-step-title">Enter Your ZIP Code</h2>
+        <p class="wizard-step-sub">We serve all of Westchester County. Verify service availability in your town.</p>
+      </div>
 
-    <!-- ── PHASE 1 ── -->
-    <div class="phase-label">
-      <span class="phase-pill">Phase 1</span>
-      <div class="phase-name">Contact Information</div>
-      <div class="phase-desc">Tell us who you are so we can reach you quickly.</div>
-    </div>
+      <div class="zip-box">
+        <input type="text" id="zipInput" placeholder="e.g. 10601 (White Plains)" maxlength="5" pattern="\d{5}"/>
+        <button type="button" id="zipSubmitBtn" onclick="window.handleZipCheck && window.handleZipCheck()">Check Availability →</button>
+      </div>
+      <div class="error-msg" id="zipError" style="margin-top:12px"></div>
 
-    <div class="form-section" id="sec-contact">
-      <h2 class="section-heading"><span class="section-num">01</span> Your Details</h2>
-      <div class="fields-stack">
-        <div class="field-row">
-          <div class="field-group" id="fg-firstname">
-            <label class="field-label" for="firstname">First Name <span class="req">*</span></label>
-            <input class="field-input" id="firstname" name="first_name" type="text" placeholder="David" required autocomplete="given-name"/>
-            <span class="field-error">Please enter your first name</span>
-          </div>
-          <div class="field-group" id="fg-lastname">
-            <label class="field-label" for="lastname">Last Name <span class="req">*</span></label>
-            <input class="field-input" id="lastname" name="last_name" type="text" placeholder="Smith" required autocomplete="family-name"/>
-            <span class="field-error">Please enter your last name</span>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field-group" id="fg-phone">
-            <label class="field-label" for="phone">Phone <span class="req">*</span></label>
-            <input class="field-input" id="phone" name="phone" type="tel" placeholder="(914) 555-0000" required autocomplete="tel"/>
-            <span class="field-error">Please enter a valid phone number</span>
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="email">Email Address</label>
-            <input class="field-input" id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email"/>
-            <span class="field-hint">For booking confirmation email</span>
-          </div>
-        </div>
-        <div class="field-group">
-          <label class="field-label">Preferred Contact Method</label>
-          <div class="contact-pills">
-            <div class="contact-pill">
-              <input type="radio" name="contact_method" id="cm-text" value="Text" checked/>
-              <label for="cm-text">💬 Text</label>
-            </div>
-            <div class="contact-pill">
-              <input type="radio" name="contact_method" id="cm-call" value="Call"/>
-              <label for="cm-call">📞 Call</label>
-            </div>
-            <div class="contact-pill">
-              <input type="radio" name="contact_method" id="cm-email" value="Email"/>
-              <label for="cm-email">✉️ Email</label>
-            </div>
-          </div>
+      <div style="margin-top:20px; padding:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
+        <p style="font-size:0.78rem; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">📍 Serving All Westchester Towns:</p>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">White Plains (10601)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Scarsdale (10583)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Yonkers (10701)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Tarrytown (10591)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Harrison (10528)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">New Rochelle (10801)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">&amp; All Surrounding ZIPs</span>
         </div>
       </div>
     </div>
 
-    <!-- ── PHASE 2 ── -->
-    <div class="phase-label" style="margin-top:12px">
-      <span class="phase-pill">Phase 2</span>
-      <div class="phase-name">Service Location</div>
-      <div class="phase-desc">Where do you need us? We serve all of Westchester County.</div>
-    </div>
-
-    <div class="form-section" id="sec-location">
-      <h2 class="section-heading"><span class="section-num">02</span> Your Address</h2>
-      <div class="fields-stack">
-        <div class="field-group" id="fg-address">
-          <label class="field-label" for="address">Street Address <span class="req">*</span></label>
-          <input class="field-input" id="address" name="address" type="text" placeholder="123 Main Street" required autocomplete="street-address"/>
-          <span class="field-error">Please enter your address</span>
-        </div>
-        <div class="field-row">
-          <div class="field-group" id="fg-city">
-            <label class="field-label" for="city">City <span class="req">*</span></label>
-            <input class="field-input" id="city" name="city" type="text" placeholder="White Plains" required autocomplete="address-level2"/>
-            <span class="field-error">Please enter your city</span>
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="zip">ZIP Code</label>
-            <input class="field-input" id="zip" name="zip" type="text" placeholder="10601" maxlength="10" autocomplete="postal-code"/>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field-group" id="fg-property">
-            <label class="field-label" for="property-type">Property Type <span class="req">*</span></label>
-            <select class="field-input" id="property-type" name="property_type" required>
-              <option value="">Select type</option>
-              <option>House</option>
-              <option>Apartment</option>
-              <option>Condo / Townhouse</option>
-              <option>Commercial / Office</option>
-              <option>Other</option>
-            </select>
-            <span class="field-error">Please select a property type</span>
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="floor">Floor / Unit # (optional)</label>
-            <input class="field-input" id="floor" name="floor_unit" type="text" placeholder="e.g. 2nd floor, Apt 4B"/>
-          </div>
-        </div>
+    <!-- STEP 2: Service Selection -->
+    <div class="wizard-step" id="step-2" style="display:none">
+      <button class="back-btn">← Back to ZIP</button>
+      <div class="wizard-step-header">
+        <div class="phase-pill">Step 2 of 4</div>
+        <h2 class="wizard-step-title">Select Your Handyman Service</h2>
+        <p class="wizard-step-sub">Choose a service to view live available arrival windows.</p>
       </div>
+
+      <div class="services-grid" id="servicesGrid"></div>
     </div>
 
-    <!-- ── PHASE 3 ── -->
-    <div class="phase-label" style="margin-top:12px">
-      <span class="phase-pill">Phase 3</span>
-      <div class="phase-name">Job Details</div>
-      <div class="phase-desc">What do you need done? Select all that apply.</div>
+    <!-- STEP 3: Real-Time Date & Time Picker -->
+    <div class="wizard-step" id="step-3" style="display:none">
+      <button class="back-btn">← Back to Services</button>
+      <div class="wizard-step-header">
+        <div class="phase-pill">Step 3 of 4</div>
+        <h2 class="wizard-step-title">Select Date & Time Window</h2>
+        <p class="wizard-step-sub">Pick an open time slot. We guarantee on-time arrival within your reserved window.</p>
+      </div>
+
+      <div class="field-group" style="margin-bottom:20px">
+        <label class="field-label" for="bookingDate">Select Appointment Date:</label>
+        <input type="date" id="bookingDate" class="field-input" style="max-width:240px"/>
+      </div>
+
+      <div id="slotsLoading" style="display:none;padding:20px;text-align:center;color:var(--gray)">Searching available open slots...</div>
+      <div class="slots-grid" id="slotsGrid"></div>
+
+      <button id="step3NextBtn" class="btn-submit" style="margin-top:24px" disabled>
+        Continue to Details →
+      </button>
     </div>
 
-    <div class="form-section" id="sec-services">
-      <h2 class="section-heading"><span class="section-num">03</span> Services Needed</h2>
+    <!-- STEP 4: Customer Contact & Direct Confirm -->
+    <div class="wizard-step" id="step-4" style="display:none">
+      <button class="back-btn">← Back to Time Slot</button>
+      <div class="wizard-step-header">
+        <div class="phase-pill">Step 4 of 4</div>
+        <h2 class="wizard-step-title">Contact & Location Details</h2>
+        <p class="wizard-step-sub">Enter your details to lock this appointment slot instantly.</p>
+      </div>
+
       <div class="fields-stack">
         <div class="field-group">
-          <label class="field-label">Select all services you need <span class="req">*</span></label>
-          <div class="services-grid" id="services-grid">
-            <div class="service-card"><input type="checkbox" name="service" id="s1" value="Furniture Assembly"/><label for="s1"><div class="svc-icon">🪑</div><span class="svc-name">Furniture Assembly</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
-            <div class="service-card"><input type="checkbox" name="service" id="s2" value="TV Mounting"/><label for="s2"><div class="svc-icon">📺</div><span class="svc-name">TV Mounting</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
-            <div class="service-card"><input type="checkbox" name="service" id="s3" value="Drywall Repair"/><label for="s3"><div class="svc-icon">🔧</div><span class="svc-name">Drywall Repair</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
-            <div class="service-card"><input type="checkbox" name="service" id="s4" value="Interior Painting"/><label for="s4"><div class="svc-icon">🎨</div><span class="svc-name">Interior Painting</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
-            <div class="service-card"><input type="checkbox" name="service" id="s5" value="Electrical Repairs"/><label for="s5"><div class="svc-icon">⚡</div><span class="svc-name">Electrical Repairs</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
-            <div class="service-card"><input type="checkbox" name="service" id="s6" value="Carpentry & Shelving"/><label for="s6"><div class="svc-icon">🪵</div><span class="svc-name">Carpentry &amp; Shelving</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
-            <div class="service-card"><input type="checkbox" name="service" id="s7" value="Trampoline / Outdoor Setup"/><label for="s7"><div class="svc-icon">🌿</div><span class="svc-name">Outdoor / Trampoline Setup</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
-            <div class="service-card"><input type="checkbox" name="service" id="s8" value="Smart Home Setup"/><label for="s8"><div class="svc-icon">📱</div><span class="svc-name">Smart Home Setup</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
-            <div class="service-card"><input type="checkbox" name="service" id="s9" value="Plumbing Fixtures"/><label for="s9"><div class="svc-icon">🚿</div><span class="svc-name">Plumbing Fixtures</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
-            <div class="service-card"><input type="checkbox" name="service" id="s10" value="General Repairs"/><label for="s10"><div class="svc-icon">🛠️</div><span class="svc-name">General Repairs</span><div class="service-card-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div></label></div>
+          <label class="field-label" for="custName">Full Name <span class="req">*</span></label>
+          <input type="text" id="custName" class="field-input" placeholder="David Smith" required/>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="custPhone">Phone Number <span class="req">*</span></label>
+            <input type="tel" id="custPhone" class="field-input" placeholder="(914) 555-0000" required/>
           </div>
-          <span class="error-msg" id="services-error">Please select at least one service</span>
+          <div class="field-group">
+            <label class="field-label" for="custEmail">Email Address</label>
+            <input type="email" id="custEmail" class="field-input" placeholder="you@example.com"/>
+          </div>
         </div>
 
-        <div class="field-group" id="fg-description">
-          <label class="field-label" for="description">Describe your project <span class="req">*</span></label>
-          <textarea class="field-input" id="description" name="project_details" rows="4" placeholder="e.g. I need two IKEA BILLY bookshelves assembled and a 65" TV mounted above the fireplace in the living room..." required></textarea>
-          <span class="field-error">Please describe your project</span>
-          <div class="field-hint" id="char-count">0 / 500 characters</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── PHASE 4 ── -->
-    <div class="phase-label" style="margin-top:12px">
-      <span class="phase-pill">Phase 4</span>
-      <div class="phase-name">Scheduling &amp; Photos</div>
-      <div class="phase-desc">When works best for you? Photos help us prepare.</div>
-    </div>
-
-    <div class="form-section" id="sec-schedule">
-      <h2 class="section-heading"><span class="section-num">04</span> Preferred Date &amp; Time</h2>
-      <div class="fields-stack">
-        <div class="field-group" id="fg-date">
-          <label class="field-label" for="preferred-date">Preferred Date <span class="req">*</span></label>
-          <input class="field-input" id="preferred-date" name="preferred_date" type="date" required/>
-          <span class="field-error">Please select a date</span>
-        </div>
         <div class="field-group">
-          <label class="field-label">Preferred Time Window</label>
-          <div class="time-grid">
-            <div class="time-opt">
-              <input type="radio" name="preferred_time" id="t1" value="Morning (8AM–11AM)" checked/>
-              <label for="t1"><span class="time-emoji">🌅</span><span class="time-name">Morning</span><span class="time-range">8AM – 11AM</span></label>
-            </div>
-            <div class="time-opt">
-              <input type="radio" name="preferred_time" id="t2" value="Midday (11AM–2PM)"/>
-              <label for="t2"><span class="time-emoji">☀️</span><span class="time-name">Midday</span><span class="time-range">11AM – 2PM</span></label>
-            </div>
-            <div class="time-opt">
-              <input type="radio" name="preferred_time" id="t3" value="Afternoon (2PM–7PM)"/>
-              <label for="t3"><span class="time-emoji">🌤️</span><span class="time-name">Afternoon</span><span class="time-range">2PM – 7PM</span></label>
-            </div>
-            <div class="time-opt">
-              <input type="radio" name="preferred_time" id="t4" value="Any Time - Flexible"/>
-              <label for="t4"><span class="time-emoji">🕐</span><span class="time-name">Flexible</span><span class="time-range">Any time</span></label>
-            </div>
-            <div class="time-opt">
-              <input type="radio" name="preferred_time" id="t5" value="Weekend Only"/>
-              <label for="t5"><span class="time-emoji">📅</span><span class="time-name">Weekend</span><span class="time-range">Sat or Sun</span></label>
-            </div>
-            <div class="time-opt">
-              <input type="radio" name="preferred_time" id="t6" value="ASAP - Urgent"/>
-              <label for="t6"><span class="time-emoji">⚡</span><span class="time-name">ASAP</span><span class="time-range">Urgent job</span></label>
-            </div>
-          </div>
+          <label class="field-label" for="custAddress">Street Address <span class="req">*</span></label>
+          <input type="text" id="custAddress" class="field-input" placeholder="123 Main St, White Plains NY" required/>
         </div>
-      </div>
-    </div>
 
-    <div class="form-section" id="sec-photos">
-      <h2 class="section-heading">
-        <span class="section-num">05</span> Project Photos
-        <span style="font-size:.78rem;font-weight:500;color:var(--gray);margin-left:2px">(optional but very helpful)</span>
-      </h2>
-      <div class="upload-zone" id="upload-zone">
-        <input type="file" id="photo-input" accept="image/*" multiple/>
-        <span class="upload-icon">📸</span>
-        <div class="upload-title">Drag &amp; drop photos here</div>
-        <div class="upload-sub">JPG, PNG, WebP — up to 10 photos</div>
-        <div class="upload-btn">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Browse files
+        <div class="field-group">
+          <label class="field-label" for="custNotes">Project Details / Special Notes (optional)</label>
+          <textarea id="custNotes" class="field-input" rows="3" placeholder="Describe the job, e.g. 65 inch TV on drywall..."></textarea>
         </div>
-      </div>
-      <div class="preview-grid" id="preview-grid"></div>
-      <p style="font-size:.82rem;color:var(--gray);margin-top:14px;line-height:1.6">
-        📱 Prefer to text photos? Send them to <a href="sms:+15163500801" style="color:var(--orange);font-weight:700;text-decoration:none">(516) 350-0801</a> after submitting — that works great too.
-      </p>
-    </div>
 
-    <!-- ── PHASE 5 – Submit ── -->
-    <div class="phase-label" style="margin-top:12px">
-      <span class="phase-pill">Phase 5</span>
-      <div class="phase-name">Confirm &amp; Submit</div>
-      <div class="phase-desc">Review and send your booking request.</div>
-    </div>
+        <div class="submit-error" id="submitError"></div>
 
-    <div class="form-section" id="sec-submit">
-      <h2 class="section-heading"><span class="section-num">06</span> Almost Done!</h2>
-      <div class="fields-stack">
-        <label class="agreement-box" id="agree-wrap">
-          <input type="checkbox" id="agree" name="agreement" class="agree-check" required/>
-          <span class="agree-text">
-            I understand this is a <strong>booking request</strong> — Here Handyman will contact me to confirm availability and provide a free estimate. No payment is required until work is approved. I agree to be contacted at the phone number I provided.
-          </span>
-        </label>
-        <div class="submit-error" id="submit-error">
-          ⚠️ Something went wrong. Please try again or call us at <strong>(516) 350-0801</strong>.
-        </div>
-        <button type="submit" class="btn-submit" id="submit-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Request My Appointment
+        <button id="confirmBookingBtn" class="btn-submit" style="margin-top:12px">
+          🔒 Lock & Confirm Appointment
         </button>
-        <p class="submit-note">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Your info is private and never shared
-        </p>
       </div>
     </div>
-  </form>
+
+  </div>
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
@@ -1262,241 +1222,7 @@
   <p>© 2026 <a href="https://www.herehandyman.com">Here Handyman</a> · Westchester County, NY · <a href="tel:+15163500801">(516) 350-0801</a> · info@herehandyman.com</p>
 </footer>
 
-<script>
-/* ── Set min date to today ──────────────────────────── */
-document.getElementById('preferred-date').min = new Date().toISOString().split('T')[0];
-
-/* ── Phone auto-format ──────────────────────────────── */
-document.getElementById('phone').addEventListener('input', function(){
-  let val = this.value.replace(/\D/g,'').slice(0,10);
-  if(val.length>=6) val = '('+val.slice(0,3)+') '+val.slice(3,6)+'-'+val.slice(6);
-  else if(val.length>=3) val = '('+val.slice(0,3)+') '+val.slice(3);
-  this.value = val;
-});
-
-/* ── Character counter ──────────────────────────────── */
-const desc = document.getElementById('description');
-const charCount = document.getElementById('char-count');
-desc.addEventListener('input', () => {
-  const n = desc.value.length;
-  charCount.textContent = n + ' / 500 characters';
-  charCount.style.color = n > 450 ? '#dc2626' : '';
-});
-
-/* ── Progress bar tracking ──────────────────────────── */
-function updateProgress(){
-  const fn = document.getElementById('firstname').value.trim();
-  const ph = document.getElementById('phone').value.trim();
-  const ad = document.getElementById('address').value.trim();
-  const ct = document.getElementById('city').value.trim();
-  const sv = document.querySelectorAll('input[name="service"]:checked').length > 0;
-  const dsc= document.getElementById('description').value.trim();
-  const dt = document.getElementById('preferred-date').value;
-
-  const steps = [
-    fn && ph,       // phase 1 contact
-    ad && ct,       // phase 2 location
-    sv && dsc,      // phase 3 services
-    !!dt,           // phase 4 schedule
-  ];
-
-  steps.forEach((done, i) => {
-    const dot = document.getElementById('pd'+(i+1));
-    const line = document.getElementById('pl'+(i+1));
-    if(done){
-      dot.classList.add('done');
-      dot.classList.remove('active');
-      dot.innerHTML = '';
-      if(line) line.classList.add('done');
-      // activate next
-      const nextDot = document.getElementById('pd'+(i+2));
-      if(nextDot && !nextDot.classList.contains('done')){
-        nextDot.classList.add('active');
-      }
-    }
-  });
-
-  // Phase 5 active when all done
-  const allDone = steps.every(Boolean);
-  const pd5 = document.getElementById('pd5');
-  if(allDone) pd5.classList.add('active');
-}
-
-document.getElementById('booking-form').addEventListener('input', updateProgress);
-
-/* ── Focus highlight sections ───────────────────────── */
-document.querySelectorAll('.field-input').forEach(el => {
-  el.addEventListener('focus', () => {
-    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('focused'));
-    el.closest('.form-section')?.classList.add('focused');
-  });
-  el.addEventListener('blur', () => {
-    el.closest('.form-section')?.classList.remove('focused');
-  });
-});
-
-/* ── FAQ accordion ──────────────────────────────────── */
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const answer = item.querySelector('.faq-a');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-a').style.maxHeight = '0';
-      i.querySelector('.faq-q').setAttribute('aria-expanded','false');
-    });
-    if(!isOpen){
-      item.classList.add('open');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-      btn.setAttribute('aria-expanded','true');
-    }
-  });
-});
-
-/* ── Photo upload & preview ─────────────────────────── */
-const uploadZone = document.getElementById('upload-zone');
-const photoInput = document.getElementById('photo-input');
-const previewGrid = document.getElementById('preview-grid');
-let uploadedFiles = [];
-
-photoInput.addEventListener('change', e => addFiles(Array.from(e.target.files)));
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
-uploadZone.addEventListener('drop', e => {
-  e.preventDefault(); uploadZone.classList.remove('dragover');
-  addFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
-});
-
-function addFiles(files){
-  files.forEach(file => {
-    if(uploadedFiles.length >= 10) return;
-    const idx = uploadedFiles.push(file) - 1;
-    const reader = new FileReader();
-    reader.onload = e => {
-      const item = document.createElement('div');
-      item.className = 'preview-item';
-      item.dataset.idx = idx;
-      item.innerHTML = `<img src="${e.target.result}" alt="Preview" decoding="async" /><button type="button" class="preview-remove" aria-label="Remove">✕</button>`;
-      item.querySelector('.preview-remove').onclick = () => {
-        uploadedFiles[idx] = null;
-        item.remove();
-      };
-      previewGrid.appendChild(item);
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-/* ── Validate helpers ───────────────────────────────── */
-function validateField(id, fgId){
-  const input = document.getElementById(id);
-  const fg = document.getElementById(fgId || 'fg-'+id);
-  if(!input || !fg) return true;
-  const valid = input.value.trim() !== '' && input.value !== '';
-  fg.classList.toggle('has-error', !valid);
-  return valid;
-}
-function validateServices(){
-  const checked = document.querySelectorAll('input[name="service"]:checked').length > 0;
-  document.getElementById('services-error').style.display = checked ? 'none' : 'block';
-  return checked;
-}
-
-/* ── Clear error on input ───────────────────────────── */
-document.querySelectorAll('.field-input').forEach(el => {
-  el.addEventListener('input', () => el.closest('.field-group')?.classList.remove('has-error'));
-});
-document.querySelectorAll('input[name="service"]').forEach(el => {
-  el.addEventListener('change', () => {
-    if(document.querySelectorAll('input[name="service"]:checked').length > 0)
-      document.getElementById('services-error').style.display = 'none';
-  });
-});
-
-/* ── Form submit ────────────────────────────────────── */
-const form = document.getElementById('booking-form');
-const submitBtn = document.getElementById('submit-btn');
-const submitError = document.getElementById('submit-error');
-
-form.addEventListener('submit', async e => {
-  e.preventDefault();
-  submitError.style.display = 'none';
-
-  const ok1 = validateField('firstname');
-  const ok2 = validateField('lastname');
-  const ok3 = validateField('phone');
-  const ok4 = validateField('address');
-  const ok5 = validateField('city');
-  const ok6 = validateField('property-type','fg-property');
-  const ok7 = validateServices();
-  const ok8 = validateField('description','fg-description');
-  const ok9 = validateField('preferred-date','fg-date');
-  const agreeOk = document.getElementById('agree').checked;
-
-  if(!agreeOk){
-    document.getElementById('agree-wrap').style.borderColor='rgba(220,38,38,0.55)';
-    document.getElementById('agree-wrap').style.background='#fff8f8';
-  }
-
-  if(!ok1||!ok2||!ok3||!ok4||!ok5||!ok6||!ok7||!ok8||!ok9||!agreeOk){
-    const firstError = document.querySelector('.has-error, [style*="rgb(220"]');
-    firstError?.scrollIntoView({behavior:'smooth',block:'center'});
-    return;
-  }
-
-  // Animate button
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 0.9s linear infinite"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg> Sending your request…`;
-
-  const services = [...form.querySelectorAll('input[name="service"]:checked')].map(c => c.value).join(', ');
-  const photoCount = uploadedFiles.filter(Boolean).length;
-
-  const payload = {
-    access_key: '5cd5e45a-9146-4c3a-ac2f-8b2904476cf0',
-    subject: 'New Booking Request - Here Handyman',
-    from_name: 'Here Handyman Booking Page',
-    'First Name': form.first_name.value.trim(),
-    'Last Name': form.last_name.value.trim(),
-    'Phone': form.phone.value.trim(),
-    'Email': form.email.value.trim() || 'Not provided',
-    'Contact Preference': form.contact_method.value,
-    'Address': form.address.value.trim(),
-    'City': form.city.value.trim(),
-    'ZIP': form.zip.value.trim() || 'Not provided',
-    'Property Type': form.property_type.value,
-    'Floor/Unit': form.floor_unit.value.trim() || 'N/A',
-    'Services Requested': services,
-    'Project Details': form.project_details.value.trim(),
-    'Preferred Date': form.preferred_date.value,
-    'Preferred Time': form.preferred_time.value,
-    'Photos': photoCount > 0 ? `Customer selected ${photoCount} photo(s) — they will text to (516) 350-0801` : 'No photos selected',
-  };
-
-  try {
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify(payload)
-    });
-    const json = await res.json();
-    if(json.success){
-      document.getElementById('form-wrapper').style.display = 'none';
-      const ss = document.getElementById('success-screen');
-      ss.classList.add('show');
-      document.getElementById('success-name').textContent = payload['First Name'];
-      document.getElementById('success-phone').textContent = payload['Phone'];
-      window.scrollTo({top:0,behavior:'smooth'});
-    } else {
-      throw new Error('API error');
-    }
-  } catch {
-    submitError.style.display = 'block';
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Request My Appointment`;
-    submitError.scrollIntoView({behavior:'smooth',block:'center'});
-  }
-});
-</script>
+  <!-- Booking Module Script -->
+  <script type="module" src="/js/booking.js?v=7"></script>
 </body>
 </html>
