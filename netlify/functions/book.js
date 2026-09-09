@@ -2,6 +2,7 @@
 // Locks a booking slot atomically in PostgreSQL and triggers notification email
 
 import crypto from 'node:crypto';
+import { DB_CONFIG } from './dbConfig.js';
 
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
@@ -29,13 +30,12 @@ export async function handler(event) {
     const endTimeIso = new Date(endMs).toISOString();
     const bookingRangeStr = `[${startTimeIso},${endTimeIso})`;
 
-    // Generate unique ID: HH-XXXXXX using crypto
     const bookingId = "HH-" + crypto.randomUUID().slice(0, 8).toUpperCase();
 
-    const SUPABASE_URL = process.env.SUPABASE_URL;
-    const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const SUPABASE_URL = DB_CONFIG.SUPABASE_URL;
+    const SUPABASE_SERVICE_ROLE_KEY = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
+    if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
       const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
         method: "POST",
         headers: {
@@ -61,7 +61,6 @@ export async function handler(event) {
       });
 
       if (response.status === 409 || response.status === 400) {
-        // Exclusion constraint violation or conflict
         return {
           statusCode: 409,
           headers: { "Content-Type": "application/json" },
@@ -83,18 +82,16 @@ export async function handler(event) {
     }
 
     // Trigger notification email post-save (Web3Forms side-effect)
-    if (process.env.WEB3FORMS_ACCESS_KEY) {
-      fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          access_key: process.env.WEB3FORMS_ACCESS_KEY,
-          subject: `⚡ NEW APPOINTMENT BOOKED #${bookingId}`,
-          from_name: "Here Handyman Direct Booking",
-          message: `NEW APPOINTMENT CONFIRMED!\n\nBooking ID: ${bookingId}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nZIP: ${zip}\nService: ${serviceId}\nStart Time: ${startTimeIso}\nNotes: ${notes || 'None'}`
-        })
-      }).catch(err => console.error("Web3Forms email background error:", err));
-    }
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        access_key: "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0",
+        subject: `⚡ NEW APPOINTMENT BOOKED #${bookingId}`,
+        from_name: "Here Handyman Direct Booking",
+        message: `NEW APPOINTMENT CONFIRMED!\n\nBooking ID: ${bookingId}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nZIP: ${zip}\nService: ${serviceId}\nStart Time: ${startTimeIso}\nNotes: ${notes || 'None'}`
+      })
+    }).catch(err => console.error("Web3Forms email background error:", err));
 
     return {
       statusCode: 200,

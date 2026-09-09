@@ -1,6 +1,8 @@
 // Netlify Serverless Function: GET /.netlify/functions/availability
 // Queries Supabase DB for confirmed bookings on a date and returns open time slots
 
+import { DB_CONFIG } from './dbConfig.js';
+
 export async function handler(event) {
   if (event.httpMethod !== "GET") {
     return { statusCode: 405, body: JSON.stringify({ error: "Method Not Allowed" }) };
@@ -16,13 +18,13 @@ export async function handler(event) {
     };
   }
 
-  const SUPABASE_URL = process.env.SUPABASE_URL;
-  const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const SUPABASE_URL = DB_CONFIG.SUPABASE_URL;
+  const SUPABASE_SERVICE_ROLE_KEY = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY;
 
   let bookedRanges = [];
 
-  // If Supabase credentials are set in environment variables, query actual database bookings
-  if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
+  // If Supabase credentials are valid, query actual database bookings
+  if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
     try {
       const dayStart = `${date}T00:00:00-04:00`;
       const dayEnd = `${date}T23:59:59-04:00`;
@@ -39,7 +41,6 @@ export async function handler(event) {
         const rows = await response.json();
         bookedRanges = rows.map(r => ({
           start: new Date(r.start_time).getTime(),
-          // end_time includes the 30m travel buffer stored in DB
           end: new Date(r.end_time).getTime()
         }));
       }
@@ -51,7 +52,6 @@ export async function handler(event) {
   // Calculate open slots using range overlap logic
   const durationMinutes = serviceId === "drywall" || serviceId === "painting" ? 120 : (serviceId === "general" ? 180 : 60);
   
-  // Slot builder logic
   const slots = [];
   const bufferMs = 30 * 60 * 1000; // 30m buffer
   const durationMs = durationMinutes * 60 * 1000;
@@ -64,7 +64,6 @@ export async function handler(event) {
   for (let currentStart = workStartMs; currentStart + durationMs <= workEndMs; currentStart += stepMs) {
     const candidateTotalEnd = currentStart + durationMs + bufferMs;
 
-    // Minimum 2 hours advance booking
     if (currentStart <= nowMs + 2 * 3600 * 1000) continue;
 
     const isBlocked = bookedRanges.some(b => currentStart < b.end && b.start < candidateTotalEnd);
