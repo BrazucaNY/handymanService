@@ -15,9 +15,11 @@ const state = {
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
   initApp();
-});
+}
 
 function initApp() {
   renderServices();
@@ -30,10 +32,18 @@ function setupEventListeners() {
   const zipInput = document.getElementById('zipInput');
   const zipBtn = document.getElementById('zipSubmitBtn');
   
-  if (zipBtn && zipInput) {
-    zipBtn.addEventListener('click', handleZipCheck);
+  if (zipBtn) {
+    zipBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleZipCheck();
+    });
+  }
+  if (zipInput) {
     zipInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') handleZipCheck();
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleZipCheck();
+      }
     });
   }
 
@@ -79,12 +89,12 @@ function handleZipCheck() {
   const cleanZip = (input.value || '').replace(/\D/g, '').slice(0, 5);
 
   if (!/^\d{5}$/.test(cleanZip)) {
-    showError(errorEl, 'Please enter a valid 5-digit Westchester ZIP code.');
+    showError(errorEl, 'Please enter a valid 5-digit ZIP code.');
     return;
   }
 
-  if (!CONFIG.zips.includes(cleanZip)) {
-    showError(errorEl, `Sorry, ${cleanZip} is outside our current Westchester service area. Contact us for custom requests!`);
+  if (!cleanZip.startsWith('10') && !cleanZip.startsWith('11') && !CONFIG.zips.includes(cleanZip)) {
+    showError(errorEl, `Sorry, ${cleanZip} is outside our service area. Contact us at (516) 350-0801 for custom requests!`);
     return;
   }
 
