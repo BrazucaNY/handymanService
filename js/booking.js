@@ -246,6 +246,21 @@ async function handleFinalSubmit() {
       throw new Error(data.error || 'Booking failed');
     }
 
+    // Trigger Instant Email Notification to David (Web3Forms Client-Side API)
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        access_key: "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0",
+        subject: `⚡ NEW APPOINTMENT BOOKED #${data.id}`,
+        from_name: "Here Handyman Online Booking",
+        name: name,
+        phone: phone,
+        email: email || "Not provided",
+        message: `NEW APPOINTMENT CONFIRMED!\n\nBooking ID: ${data.id}\nCustomer: ${name}\nPhone: ${phone}\nAddress: ${address}\nZIP: ${state.zip}\nService: ${state.service.name}\nDate/Time Slot: ${state.date} at ${state.slot.label}\nNotes: ${notes || 'None'}`
+      })
+    }).catch(err => console.error("Web3Forms email error:", err));
+
     // Success! Show confirmation screen
     renderConfirmationScreen(data.id, data.start);
 
