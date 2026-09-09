@@ -495,18 +495,23 @@
     /* ── 5-Star Reviews Carousel ── */
     .reviews-section{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:54px 22px}
     .reviews-inner{max-width:1180px;margin:0 auto}
-    .reviews-header-wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:28px;flex-wrap:wrap}
+    .reviews-header-wrap{margin-bottom:28px}
     .reviews-title-box h2{font-size:clamp(32px,5vw,46px);margin-bottom:6px}
     .reviews-rating-badge{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:700;color:var(--navy)}
     .stars-gold{color:#eab308;font-size:1.1rem;letter-spacing:2px}
-    .reviews-nav-btns{display:flex;align-items:center;gap:10px}
+    .reviews-carousel-outer{position:relative;width:100%;padding:0 54px}
+    .reviews-viewport{overflow:hidden;width:100%}
+    @media (max-width:600px){.reviews-carousel-outer{padding:0 44px}}
     .rev-arrow-btn{
       width:44px;height:44px;border-radius:50%;border:1.5px solid var(--navy);background:var(--navy);
-      color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;
-      cursor:pointer;transition:all .2s ease;box-shadow:0 4px 14px rgba(7,24,40,.15)
+      color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;
+      cursor:pointer;transition:all .2s ease;box-shadow:0 6px 16px rgba(7,24,40,.2);position:absolute;top:40%;z-index:10
     }
-    .rev-arrow-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);transform:scale(1.06)}
-    .reviews-carousel-outer{overflow:hidden;position:relative;width:100%}
+    .rev-prev-side{left:0;transform:translateY(-50%)}
+    .rev-next-side{right:0;transform:translateY(-50%)}
+    .rev-arrow-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+    .rev-prev-side:hover{transform:translateY(-50%) scale(1.08)}
+    .rev-next-side:hover{transform:translateY(-50%) scale(1.08)}
     .reviews-track{display:flex;gap:16px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
     .rev-card-item{
       flex:0 0 calc(33.333% - 11px);min-width:280px;background:#f9f5ef;
@@ -778,14 +783,14 @@
             <span>4.9 / 5.0 Rating based on verified Google Reviews</span>
           </div>
         </div>
-        <div class="reviews-nav-btns">
-          <button id="reviewPrev" class="rev-arrow-btn" aria-label="Previous review">‹</button>
-          <button id="reviewNext" class="rev-arrow-btn" aria-label="Next review">›</button>
-        </div>
       </div>
 
       <div class="reviews-carousel-outer">
-        <div class="reviews-track" id="reviewTrack">
+        <button id="reviewPrev" class="rev-arrow-btn rev-prev-side" aria-label="Previous review">‹</button>
+        <button id="reviewNext" class="rev-arrow-btn rev-next-side" aria-label="Next review">›</button>
+
+        <div class="reviews-viewport">
+          <div class="reviews-track" id="reviewTrack">
           
           <div class="rev-card-item">
             <div>
@@ -905,12 +910,11 @@
                 <span>Tarrytown, NY</span>
               </div>
             </div>
-          </div>
-
         </div>
       </div>
+    </div>
 
-      <div class="reviews-dots" id="reviewDots"></div>
+    <div class="reviews-dots" id="reviewDots"></div>
     </div>
   </section>
 
