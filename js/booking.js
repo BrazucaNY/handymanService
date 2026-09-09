@@ -28,7 +28,77 @@ function initApp() {
   renderServices();
   setupEventListeners();
   setupFAQAccordion();
+  initReviewCarousel();
   updateStepUI();
+}
+
+function initReviewCarousel() {
+  const track = document.getElementById('reviewTrack');
+  const prevBtn = document.getElementById('reviewPrev');
+  const nextBtn = document.getElementById('reviewNext');
+  const dotsContainer = document.getElementById('reviewDots');
+  if (!track) return;
+
+  const cards = Array.from(track.children);
+  if (cards.length === 0) return;
+
+  let currentIndex = 0;
+
+  function getCardsPerPage() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 960) return 2;
+    return 3;
+  }
+
+  function maxIndex() {
+    return Math.max(0, cards.length - getCardsPerPage());
+  }
+
+  function updateCarousel() {
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 16;
+    const moveAmount = (cardWidth + gap) * currentIndex;
+    track.style.transform = `translateX(-${moveAmount}px)`;
+
+    if (dotsContainer) {
+      const dots = Array.from(dotsContainer.children);
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentIndex);
+      });
+    }
+  }
+
+  if (dotsContainer) {
+    dotsContainer.innerHTML = cards.map((_, idx) => `
+      <button class="rev-dot ${idx === 0 ? 'active' : ''}" data-index="${idx}" aria-label="Go to review ${idx + 1}"></button>
+    `).join('');
+
+    dotsContainer.querySelectorAll('.rev-dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        currentIndex = Math.min(parseInt(dot.getAttribute('data-index'), 10), maxIndex());
+        updateCarousel();
+      });
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex > 0) ? currentIndex - 1 : maxIndex();
+      updateCarousel();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex < maxIndex()) ? currentIndex + 1 : 0;
+      updateCarousel();
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    if (currentIndex > maxIndex()) currentIndex = maxIndex();
+    updateCarousel();
+  });
 }
 
 function setupFAQAccordion() {
