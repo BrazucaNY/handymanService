@@ -265,24 +265,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <section class="gallery-wrap">
     <div class="container">
       
-      <!-- DUAL TOOLBAR FILTERS -->
-      <div class="toolbar-stack">
-        <!-- Trade Filter Bar -->
-        <div class="toolbar-row">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span class="filter-label">Trade:</span>
-            <div class="filters" id="tradeFilters"></div>
-          </div>
-          <input class="search" id="search" type="search" placeholder="Search town, job, or trade…" />
-        </div>
-
-        <!-- Town Filter Bar -->
-        <div class="toolbar-row" style="border-top: 1px solid var(--line); padding-top: 12px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span class="filter-label">Town:</span>
-            <div class="filters" id="townFilters"></div>
-          </div>
-        </div>
+      <!-- TOOLBAR FILTERS (TRADE ONLY) -->
+      <div class="toolbar" style="display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:20px;">
+        <div class="filters" id="tradeFilters"></div>
+        <input class="search" id="search" type="search" placeholder="Search town, job, or trade…" />
       </div>
 
       <p class="count" id="count"></p>
@@ -401,10 +387,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     ];
 
     const TRADE_FILTERS = ["All Trades", "Outdoor", "Assembly", "Carpentry", "Exterior", "Paint", "Plumbing", "Electrical", "Custom", "Repair"];
-    const TOWN_FILTERS = ["All Towns", "Scarsdale", "White Plains", "Yonkers", "Harrison", "Hartsdale", "Tarrytown", "Mamaroneck", "Rye", "Eastchester", "New Rochelle", "Mount Vernon"];
 
     let currentTrade = "All Trades";
-    let currentTown = "All Towns";
     let query = "";
     let openIndex = 0;
     let visible = PROJECTS.slice();
@@ -445,9 +429,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const q = query.trim().toLowerCase();
       return PROJECTS.filter((p) => {
         const tradeOk = currentTrade === "All Trades" || p.tag === currentTrade;
-        const townOk = currentTown === "All Towns" || p.town === currentTown;
         const qOk = !q || [p.title, p.place, p.desc, p.tag, p.town].join(" ").toLowerCase().includes(q);
-        return tradeOk && townOk && qOk;
+        return tradeOk && qOk;
       });
     }
 
@@ -455,7 +438,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       visible = filtered();
       let statusStr = `Showing ${visible.length} of ${PROJECTS.length} documented jobs`;
       if (currentTrade !== "All Trades") statusStr += ` in ${currentTrade}`;
-      if (currentTown !== "All Towns") statusStr += ` in ${currentTown}, NY`;
       document.getElementById("count").textContent = statusStr;
       
       document.getElementById("empty").hidden = visible.length > 0;
@@ -531,27 +513,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       return `<button data-trade="${f}" class="${f === "All Trades" ? "on" : ""}">${f}${n}</button>`;
     }).join("");
 
-    // Render Town Filter Buttons
-    document.getElementById("townFilters").innerHTML = TOWN_FILTERS.map((f) => {
-      const n = f === "All Towns" ? "" : `<small>${PROJECTS.filter((p) => p.town === f).length}</small>`;
-      return `<button data-town="${f}" class="${f === "All Towns" ? "on" : ""}">${f}${n}</button>`;
-    }).join("");
-
     // Event Listeners for Trade Filters
     document.getElementById("tradeFilters").addEventListener("click", (e) => {
       const btn = e.target.closest("[data-trade]");
       if (!btn) return;
       currentTrade = btn.dataset.trade;
       document.querySelectorAll("#tradeFilters button").forEach((b) => b.classList.toggle("on", b === btn));
-      render();
-    });
-
-    // Event Listeners for Town Filters
-    document.getElementById("townFilters").addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-town]");
-      if (!btn) return;
-      currentTown = btn.dataset.town;
-      document.querySelectorAll("#townFilters button").forEach((b) => b.classList.toggle("on", b === btn));
       render();
     });
 
