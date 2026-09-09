@@ -1027,9 +1027,22 @@
         <p class="wizard-step-sub">Pick an open time slot. We guarantee on-time arrival within your reserved window.</p>
       </div>
 
-      <div class="field-group" style="margin-bottom:20px">
+      <div class="field-group" style="margin-bottom:16px">
         <label class="field-label" for="bookingDate">Select Appointment Date:</label>
         <input type="date" id="bookingDate" class="field-input" style="max-width:240px"/>
+      </div>
+
+      <!-- Custom Time Callout Box directly below Date Box -->
+      <div class="custom-time-callout" style="margin-bottom:20px">
+        <div class="callout-icon">💬</div>
+        <div class="callout-body">
+          <strong>Don't see a time slot that fits your schedule?</strong>
+          <p>We're happy to accommodate early mornings, evenings, or custom windows!</p>
+          <div class="callout-btns">
+            <a href="tel:+15163500801" class="btn-callout-phone">📞 Call (516) 350-0801</a>
+            <a href="sms:+15163500801" class="btn-callout-sms">💬 Text David</a>
+          </div>
+        </div>
       </div>
 
       <div id="slotsLoading" style="display:none;padding:20px;text-align:center;color:var(--gray)">Searching available open slots...</div>
@@ -1223,6 +1236,6 @@
 </footer>
 
   <!-- Booking Module Script -->
-  <script type="module" src="/js/booking.js?v=7"></script>
+  <script type="module" src="/js/booking.js?v=8"></script>
 </body>
 </html>

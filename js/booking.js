@@ -181,22 +181,8 @@ async function fetchAndRenderSlots() {
     
     if (loadingEl) loadingEl.style.display = 'none';
 
-    const calloutHTML = `
-      <div class="custom-time-callout">
-        <div class="callout-icon">💬</div>
-        <div class="callout-body">
-          <strong>Don't see a time slot that fits your schedule?</strong>
-          <p>We're happy to accommodate early mornings, evenings, or custom windows!</p>
-          <div class="callout-btns">
-            <a href="tel:+15163500801" class="btn-callout-phone">📞 Call (516) 350-0801</a>
-            <a href="sms:+15163500801" class="btn-callout-sms">💬 Text David</a>
-          </div>
-        </div>
-      </div>
-    `;
-
     if (!res.ok || !data.slots || data.slots.length === 0) {
-      container.innerHTML = `<div class="no-slots">No open slots available on ${state.date}. Select another date or contact us below!</div>` + calloutHTML;
+      container.innerHTML = `<div class="no-slots" style="grid-column:1/-1;padding:16px;background:#fff8ed;border:1px solid #fde68a;border-radius:12px;color:#7c2d12;font-size:0.9rem;">No open slots available on ${state.date}. Please select another date above or contact us!</div>`;
       return;
     }
 
@@ -204,7 +190,7 @@ async function fetchAndRenderSlots() {
       <button class="slot-pill" data-iso="${slot.iso}" data-label="${slot.label}">
         ${slot.label}
       </button>
-    `).join('') + calloutHTML;
+    `).join('');
 
     container.querySelectorAll('.slot-pill').forEach(btn => {
       btn.addEventListener('click', () => {
