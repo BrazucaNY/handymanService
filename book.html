@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18119699321"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-18119699321');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18119699321"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18119699321');
+  </script>
   <!-- Google Analytics & Conversion Event Tracking -->
   <script>
   (function(){
@@ -44,20 +43,19 @@
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <meta name="description" content="Book a professional handyman in Westchester County NY. Free estimates on furniture assembly, TV mounting, drywall, painting, electrical & more. Here Handyman serves White Plains, Scarsdale, Yonkers & all of Westchester."/>
+  <meta name="description" content="Book a professional handyman in Westchester County NY. Instant online scheduling with live open time slots."/>
   <meta name="robots" content="index, follow"/>
-  <title>Book Handyman Appointment | Here Handyman</title>
+  <title>Book a Handyman Visit | Here Handyman</title>
   <link rel="canonical" href="https://www.herehandyman.com/book"/>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Book a Handyman Service | Here Handyman"/>
-  <meta property="og:description" content="Schedule your handyman visit in Westchester County NY. Free estimates, same-day available."/>
+  <meta property="og:title" content="Book a Handyman Visit | Here Handyman"/>
+  <meta property="og:description" content="Schedule your handyman visit in Westchester County NY. Instant calendar booking."/>
   <meta property="og:url" content="https://www.herehandyman.com/book"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.jpg"/>
-  <meta name="twitter:card" content="summary_large_image"/>
 
   <!-- Schema -->
   <script type="application/ld+json">
@@ -79,7 +77,7 @@
       "@type": "ReserveAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://www.herehandyman.com/book-appointment",
+        "urlTemplate": "https://www.herehandyman.com/book",
         "actionPlatform": [
           "http://schema.org/DesktopWebPlatform",
           "http://schema.org/MobileWebPlatform"
@@ -95,1147 +93,587 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
+  
   <style>
-    /* ── Reset ──────────────────────────────────── */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --navy:#071828;--navy2:#0b2a4a;--navy3:#0f2e50;
-      --orange:#eab308;--orange2:#facc15;--orange-dark:#ca8a04;
-      --white:#fff;--cream:#f9f5ef;--light:#f4f8fb;
-      --gray:#6b7280;--gray2:#94a3b8;--dark-text:#1e293b;
-      --border:rgba(160,190,218,0.6);--red:#dc2626;
-      --shadow-sm:0 2px 8px rgba(7,24,40,0.06);
-      --shadow-md:0 8px 30px rgba(7,24,40,0.09);
-      --shadow-lg:0 20px 60px rgba(7,24,40,0.14);
+      --navy:#071828;
+      --navy-light:#0e2a47;
+      --orange:#eab308;
+      --orange2:#facc15;
+      --white:#ffffff;
+      --bg:#f4f7fb;
+      --border:#e2e8f0;
+      --text-dark:#0f172a;
+      --text-muted:#64748b;
+      --red:#dc2626;
+      --radius:16px;
     }
-    html{scroll-behavior:smooth}
-    body{font-family:'DM Sans',sans-serif;background:#f7fafc;color:var(--navy);overflow-x:hidden;line-height:1.6}
+    body{
+      font-family:'DM Sans',sans-serif;
+      background:var(--bg);
+      color:var(--text-dark);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
 
-    /* ── Scrollbar ──────────────────────────────── */
-    ::-webkit-scrollbar{width:6px}
-    ::-webkit-scrollbar-track{background:#f1f5f9}
-    ::-webkit-scrollbar-thumb{background:rgba(7,24,40,0.2);border-radius:3px}
-
-    /* ── Nav ──────────────────────────────────── */
-    nav{
-      position:sticky;top:0;z-index:999;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0 5%;height:66px;
-      background:rgba(7,24,40,0.98);backdrop-filter:blur(16px);
-      border-bottom:1px solid rgba(255,255,255,0.07);
+    /* ── Top Bar ── */
+    header.standalone-header{
+      background:var(--navy);
+      height:64px;
+      padding:0 5%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
     }
-    .logo{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--white);letter-spacing:2px;text-decoration:none;transition:opacity .2s}
-    .logo:hover{opacity:.85}
-    .logo span{color:var(--orange)}
-    .nav-right{display:flex;align-items:center;gap:16px}
-    .nav-tag{font-size:12px;color:rgba(255,255,255,0.45);font-weight:500;display:none}
-    @media(min-width:600px){.nav-tag{display:block}}
-    .nav-phone{
-      display:inline-flex;align-items:center;gap:8px;
-      background:var(--orange);color:var(--navy);
-      padding:9px 20px;border-radius:8px;font-size:13px;font-weight:800;
-      text-decoration:none;transition:all .2s;letter-spacing:.3px;
-    }
-    .nav-phone:hover{background:var(--orange2);transform:translateY(-1px)}
-
-    /* ── Hero ──────────────────────────────────── */
-    .hero{
-      background:
-        radial-gradient(ellipse at 80% -10%,rgba(234,179,8,0.12),transparent 50%),
-        radial-gradient(ellipse at 5% 80%,rgba(15,46,80,0.8),transparent 45%),
-        linear-gradient(150deg,#040e1a 0%,#071828 40%,#0b2a4a 100%);
-      padding:70px 5% 90px;position:relative;overflow:hidden;
-    }
-    .hero-bg-grid{
-      position:absolute;inset:0;
-      background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
-      background-size:60px 60px;pointer-events:none;
-    }
-    .hero-inner{
-      max-width:1140px;margin:0 auto;
-      display:grid;grid-template-columns:1fr 400px;gap:64px;
-      align-items:center;position:relative;z-index:1;
-    }
-    @media(max-width:960px){.hero-inner{grid-template-columns:1fr;gap:40px}}
-
-    .hero-eyebrow{
-      display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;
-      background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.3);
-      border-radius:999px;padding:6px 14px;
-      font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--orange2);
-    }
-    .hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);animation:blink 1.8s infinite}
-    @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
-
-    .hero h1{
+    .brand-logo{
       font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(2.8rem,5.5vw,4.2rem);
-      color:var(--white);line-height:.98;letter-spacing:1.5px;margin-bottom:20px;
+      font-size:24px;
+      color:var(--white);
+      letter-spacing:1.5px;
+      text-decoration:none;
     }
-    .hero h1 em{color:var(--orange);font-style:normal;display:block}
-    .hero-sub{color:rgba(255,255,255,0.65);font-size:1.05rem;line-height:1.75;max-width:480px;margin-bottom:32px;font-weight:300}
-
-    /* Stats bar */
-    .hero-stats{display:flex;gap:0;margin-bottom:36px;border:1px solid rgba(255,255,255,0.1);border-radius:14px;overflow:hidden;background:rgba(255,255,255,0.04)}
-    .hero-stat{flex:1;padding:16px 14px;text-align:center;border-right:1px solid rgba(255,255,255,0.08)}
-    .hero-stat:last-child{border-right:none}
-    .hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--orange);letter-spacing:1px;line-height:1}
-    .hero-stat-label{font-size:.72rem;color:rgba(255,255,255,0.45);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
-
-    .hero-cta{
-      display:inline-flex;align-items:center;gap:10px;
-      background:linear-gradient(135deg,var(--orange),var(--orange-dark));
-      color:var(--navy);padding:16px 32px;border-radius:999px;
-      font-size:1rem;font-weight:800;text-decoration:none;
-      box-shadow:0 16px 40px rgba(234,179,8,0.3);
-      transition:transform .2s,box-shadow .2s;
+    .brand-logo span{color:var(--orange)}
+    .header-phone{
+      background:var(--orange);
+      color:var(--navy);
+      font-weight:800;
+      font-size:13px;
+      padding:8px 18px;
+      border-radius:999px;
+      text-decoration:none;
+      transition:transform 0.2s,background 0.2s;
     }
-    .hero-cta:hover{transform:translateY(-3px);box-shadow:0 22px 50px rgba(234,179,8,0.4)}
-    .hero-cta svg{transition:transform .2s}
-    .hero-cta:hover svg{transform:translateX(4px)}
+    .header-phone:hover{background:var(--orange2);transform:scale(1.03)}
 
-    .hero-proof{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px}
-    .proof-item{display:flex;align-items:center;gap:7px;font-size:.84rem;font-weight:600;color:rgba(255,255,255,0.6)}
-    .proof-item svg{color:var(--orange);flex-shrink:0}
-
-    /* Hero process card */
-    .hero-card{
-      background:rgba(255,255,255,0.055);border:1px solid rgba(255,255,255,0.12);
-      border-radius:24px;padding:32px;backdrop-filter:blur(10px);
-      animation:fadeUp .7s .1s ease both;
+    /* ── Main Container ── */
+    main.standalone-main{
+      flex:1;
+      max-width:800px;
+      width:100%;
+      margin:0 auto;
+      padding:40px 20px 60px;
     }
-    .hero-card-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-    .hero-card-icon{width:36px;height:36px;border-radius:10px;background:rgba(234,179,8,0.15);display:flex;align-items:center;justify-content:center}
-    .hero-card-icon svg{stroke:var(--orange);width:18px;height:18px}
-    .hero-card-title{color:var(--white);font-size:1rem;font-weight:800;letter-spacing:-.02em}
-    .hero-card-sub{font-size:.8rem;color:rgba(255,255,255,0.38);margin-bottom:24px;line-height:1.5}
-    .hero-steps{display:flex;flex-direction:column;gap:0}
-    .hero-step{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
-    .hero-step:last-child{border-bottom:none;padding-bottom:0}
-    .step-circle{
-      width:32px;height:32px;border-radius:50%;flex-shrink:0;
-      background:linear-gradient(145deg,var(--orange),var(--orange-dark));
-      display:flex;align-items:center;justify-content:center;
-      font-size:.72rem;font-weight:900;color:var(--navy);margin-top:1px;
-      box-shadow:0 6px 16px rgba(234,179,8,0.3);
+
+    /* Heading Box */
+    .page-title-wrap{
+      text-align:center;
+      margin-bottom:28px;
     }
-    .step-body{flex:1}
-    .step-body strong{color:var(--white);font-size:.9rem;font-weight:700;display:block;margin-bottom:2px}
-    .step-body span{color:rgba(255,255,255,0.5);font-size:.8rem}
-
-    /* Notice pill */
-    .hero-notice{
-      display:inline-flex;align-items:flex-start;gap:10px;
-      background:rgba(234,179,8,0.08);border:1px solid rgba(234,179,8,0.2);
-      border-radius:12px;padding:12px 14px;margin-bottom:28px;
-      color:rgba(255,255,255,0.75);font-size:.84rem;line-height:1.55;
+    .demo-pill{
+      display:inline-block;
+      background:rgba(234,179,8,0.18);
+      border:1px solid rgba(234,179,8,0.4);
+      color:#b45309;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      padding:5px 14px;
+      border-radius:999px;
+      margin-bottom:12px;
     }
-    .hero-notice svg{flex-shrink:0;color:var(--orange2);margin-top:1px}
-
-    /* ── Progress tracker ───────────────────────── */
-    .progress-bar-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:16px 5%;position:sticky;top:66px;z-index:99}
-    .progress-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:0}
-    .prog-step{display:flex;align-items:center;gap:0;flex:1}
-    .prog-step:last-child{flex:none}
-    .prog-dot{
-      width:28px;height:28px;border-radius:50%;flex-shrink:0;
-      border:2px solid var(--border);background:var(--white);
-      display:flex;align-items:center;justify-content:center;
-      font-size:.68rem;font-weight:800;color:var(--gray);
-      transition:all .35s ease;
+    .page-title-wrap h1{
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.4rem,5vw,3.6rem);
+      color:var(--navy);
+      letter-spacing:1px;
+      line-height:1;
+      margin-bottom:8px;
     }
-    .prog-dot.active{border-color:var(--orange);background:var(--orange);color:var(--navy)}
-    .prog-dot.done{border-color:var(--orange);background:var(--orange);color:var(--navy)}
-    .prog-dot.done::after{content:'✓';font-size:.8rem}
-    .prog-dot.done .prog-num{display:none}
-    .prog-line{flex:1;height:2px;background:var(--border);transition:background .35s ease;margin:0 2px}
-    .prog-line.done{background:var(--orange)}
-    .prog-label{display:none}
-    @media(min-width:600px){.prog-label{display:block;font-size:.72rem;font-weight:700;color:var(--gray);white-space:nowrap;position:absolute;top:34px;left:50%;transform:translateX(-50%)}}
-    .prog-step{position:relative}
-
-    /* ── Body layout ────────────────────────────── */
-    .page-body{
-      max-width:1140px;margin:0 auto;
-      padding:48px 5% 100px;
-      display:grid;grid-template-columns:1fr 320px;gap:48px;
-      align-items:start;
+    .page-title-wrap p{
+      color:var(--text-muted);
+      font-size:0.95rem;
     }
-    @media(max-width:960px){.page-body{grid-template-columns:1fr;gap:36px;padding:36px 5% 80px}}
 
-    /* ── Phase labels ───────────────────────────── */
-    .phase-label{padding:0 2px;margin-bottom:4px}
-    .phase-pill{
-      display:inline-flex;align-items:center;gap:8px;
-      background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.28);
-      border-radius:999px;padding:4px 12px;
-      font-size:.7rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--orange-dark);
-    }
-    .phase-name{font-size:1.1rem;font-weight:800;color:var(--navy);margin-top:5px;letter-spacing:-.02em}
-    .phase-desc{font-size:.85rem;color:var(--gray);margin-top:3px;line-height:1.5}
-
-    /* ── Form ───────────────────────────────────── */
-    .ba-form{display:flex;flex-direction:column;gap:16px}
-
-    .form-section{
+    /* ── Standalone Card ── */
+    .standalone-card{
       background:var(--white);
-      border:1.5px solid var(--border);
-      border-top:3px solid transparent;
       border-radius:20px;
-      padding:28px 30px 30px;
-      box-shadow:var(--shadow-sm);
-      transition:box-shadow .3s,border-top-color .3s,transform .3s;
+      box-shadow:0 16px 45px rgba(7,24,40,0.08);
+      border:1px solid var(--border);
+      padding:32px;
     }
-    .form-section:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
-    .form-section.focused{border-top-color:var(--orange);box-shadow:var(--shadow-md)}
-    @media(max-width:600px){.form-section{padding:20px 18px 22px;border-radius:16px}}
-
-    .section-heading{
-      display:flex;align-items:center;gap:10px;
-      font-size:.9rem;font-weight:900;color:var(--navy);letter-spacing:-.02em;
-      margin-bottom:20px;padding-bottom:14px;
-      border-bottom:1px solid rgba(160,190,218,0.3);
-    }
-    .section-num{
-      min-width:26px;height:20px;border-radius:999px;
-      background:linear-gradient(135deg,var(--orange),var(--orange-dark));
-      color:var(--navy);font-size:.68rem;font-weight:900;
-      display:inline-flex;align-items:center;justify-content:center;padding:0 7px;
-      box-shadow:0 4px 10px rgba(234,179,8,0.25);
+    @media (max-width: 600px) {
+      .standalone-card{padding:20px 16px; border-radius:16px;}
     }
 
-    /* Fields */
-    .fields-stack{display:flex;flex-direction:column;gap:18px}
-    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media(max-width:560px){.field-row{grid-template-columns:1fr}}
-    .field-group{display:flex;flex-direction:column;gap:6px}
-    .field-label{font-size:.8rem;font-weight:700;color:#374151;letter-spacing:.01em;display:flex;align-items:center;gap:4px}
-    .req{color:var(--red);font-size:.9em}
-    .field-hint{font-size:.75rem;color:var(--gray);margin-top:2px}
-
-    .field-input{
-      padding:12px 14px;width:100%;
-      background:#f8fbff;border:1.5px solid rgba(160,190,218,0.6);
-      border-radius:10px;font-size:.93rem;color:var(--navy);
-      font-family:'DM Sans',sans-serif;outline:none;
-      transition:border-color .2s,box-shadow .2s,background .2s;
+    /* ── 4 Tabs Progress Header ── */
+    .tabs-header{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin-bottom:28px;
+      background:#f8fafc;
+      padding:6px;
+      border-radius:12px;
+      border:1px solid #e2e8f0;
     }
-    .field-input::placeholder{color:rgba(107,114,128,0.45)}
-    .field-input:focus{border-color:rgba(234,179,8,0.75);box-shadow:0 0 0 3px rgba(234,179,8,0.13);background:var(--white)}
-    select.field-input{
-      appearance:none;cursor:pointer;padding-right:38px;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat:no-repeat;background-position:right 12px center;
+    @media (max-width: 540px) {
+      .tabs-header{gap:4px; padding:4px;}
     }
-    textarea.field-input{resize:vertical;min-height:100px}
-
-    /* Validation */
-    .field-group.has-error .field-input{border-color:rgba(220,38,38,0.55);background:#fff8f8}
-    .field-group.has-error .field-input:focus{box-shadow:0 0 0 3px rgba(220,38,38,0.1)}
-    .field-error{font-size:.77rem;color:var(--red);font-weight:600;display:none;margin-top:1px}
-    .field-group.has-error .field-error{display:block}
-
-    /* Contact method pills */
-    .contact-pills{display:flex;gap:10px;flex-wrap:wrap}
-    .contact-pill{position:relative}
-    .contact-pill input{position:absolute;opacity:0;width:0;height:0}
-    .contact-pill label{
-      display:inline-flex;align-items:center;gap:7px;
-      padding:9px 18px;border-radius:999px;cursor:pointer;
-      border:1.5px solid var(--border);background:#f8fbff;
-      font-size:.88rem;font-weight:600;color:var(--gray);
-      transition:all .18s;
+    .prog-dot{
+      padding:10px 6px;
+      border-radius:8px;
+      text-align:center;
+      font-size:0.8rem;
+      font-weight:700;
+      color:var(--text-muted);
+      background:transparent;
+      transition:all 0.25s ease;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .contact-pill input:checked + label{border-color:var(--orange);background:rgba(234,179,8,0.1);color:var(--navy);box-shadow:0 0 0 3px rgba(234,179,8,0.12)}
-    .contact-pill label:hover{border-color:rgba(234,179,8,0.5);background:rgba(234,179,8,0.05)}
-
-    /* Service cards */
-    .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    @media(max-width:480px){.services-grid{grid-template-columns:1fr}}
-    .service-card{position:relative}
-    .service-card input{position:absolute;opacity:0;width:0;height:0}
-    .service-card label{
-      display:flex;align-items:center;gap:12px;
-      padding:14px 16px;border-radius:12px;cursor:pointer;
-      border:1.5px solid var(--border);background:#f8fbff;
-      transition:all .2s;
+    @media (max-width: 480px) {
+      .prog-dot{font-size:0.72rem; padding:8px 2px;}
     }
-    .service-card label:hover{border-color:rgba(234,179,8,0.5);background:rgba(234,179,8,0.05)}
-    .service-card input:checked + label{border-color:var(--orange);background:rgba(234,179,8,0.09);box-shadow:0 0 0 3px rgba(234,179,8,0.12)}
-    .svc-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:rgba(7,24,40,0.06);flex-shrink:0;transition:background .2s}
-    .service-card input:checked + label .svc-icon{background:rgba(234,179,8,0.2)}
-    .svc-name{font-size:.88rem;font-weight:600;color:var(--navy);line-height:1.3}
-    .service-card-check{margin-left:auto;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
-    .service-card input:checked + label .service-card-check{background:var(--orange);border-color:var(--orange);color:var(--navy)}
-    .error-msg{font-size:.78rem;color:var(--red);font-weight:600;margin-top:4px;display:none}
-
-    /* Time options */
-    .time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    @media(max-width:520px){.time-grid{grid-template-columns:repeat(2,1fr)}}
-    .time-opt{position:relative}
-    .time-opt input{position:absolute;opacity:0;width:0;height:0}
-    .time-opt label{
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      padding:16px 10px;border-radius:12px;cursor:pointer;text-align:center;
-      border:1.5px solid var(--border);background:#f8fbff;
-      transition:all .2s;
+    .prog-dot.active{
+      background:var(--navy);
+      color:var(--white);
+      box-shadow:0 4px 12px rgba(7,24,40,0.15);
     }
-    .time-opt label:hover{border-color:rgba(234,179,8,0.5);background:rgba(234,179,8,0.05)}
-    .time-opt input:checked + label{border-color:var(--orange);background:rgba(234,179,8,0.1);box-shadow:0 0 0 3px rgba(234,179,8,0.12)}
-    .time-emoji{font-size:1.4rem;margin-bottom:6px;display:block}
-    .time-name{font-size:.82rem;font-weight:700;color:var(--navy)}
-    .time-range{font-size:.72rem;color:var(--gray);margin-top:2px}
-
-    /* Photo upload */
-    .upload-zone{
-      border:2px dashed rgba(160,190,218,0.65);border-radius:14px;
-      padding:32px 16px;text-align:center;cursor:pointer;
-      transition:all .22s;background:#f8fbff;
-      position:relative;overflow:hidden;
-    }
-    .upload-zone::before{content:'';position:absolute;inset:0;background:rgba(234,179,8,0);transition:background .2s}
-    .upload-zone:hover,.upload-zone.dragover{border-color:rgba(234,179,8,0.7);background:rgba(234,179,8,0.04)}
-    .upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-    .upload-icon{font-size:2rem;margin-bottom:10px;display:block;transition:transform .2s}
-    .upload-zone:hover .upload-icon{transform:scale(1.1)}
-    .upload-title{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:4px}
-    .upload-sub{font-size:.8rem;color:var(--gray)}
-    .upload-btn{
-      display:inline-flex;align-items:center;gap:6px;margin-top:12px;
-      padding:8px 20px;border-radius:999px;background:var(--navy);
-      color:var(--white);font-size:.82rem;font-weight:700;
-      transition:background .2s;
-    }
-    .upload-zone:hover .upload-btn{background:var(--orange);color:var(--navy)}
-
-    .preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:10px;margin-top:16px}
-    .preview-item{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;border:1.5px solid var(--border);background:#f1f5f9}
-    .preview-item img{width:100%;height:100%;object-fit:cover}
-    .preview-remove{
-      position:absolute;top:4px;right:4px;width:20px;height:20px;
-      border-radius:50%;background:rgba(220,38,38,0.9);color:white;border:none;
-      cursor:pointer;display:flex;align-items:center;justify-content:center;
-      font-size:10px;font-weight:900;transition:all .15s;
-    }
-    .preview-remove:hover{background:var(--red);transform:scale(1.1)}
-
-    /* Agreement */
-    .agreement-box{
-      display:flex;align-items:flex-start;gap:12px;
-      padding:16px 18px;border-radius:12px;cursor:pointer;
-      background:#f8fbff;border:1.5px solid var(--border);transition:all .2s;
-    }
-    .agreement-box:has(input:checked){background:rgba(234,179,8,0.06);border-color:rgba(234,179,8,0.45)}
-    .agree-check{width:18px;height:18px;accent-color:var(--orange);cursor:pointer;flex-shrink:0;margin-top:2px}
-    .agree-text{font-size:.86rem;color:#374151;line-height:1.65}
-
-    /* Submit */
-    .btn-submit{
-      width:100%;padding:17px 28px;
-      background:linear-gradient(135deg,var(--orange) 0%,var(--orange-dark) 100%);
-      color:var(--navy);font-size:1.05rem;font-weight:900;letter-spacing:.01em;
-      border:none;border-radius:999px;cursor:pointer;font-family:'DM Sans',sans-serif;
-      box-shadow:0 16px 40px rgba(234,179,8,0.32),inset 0 1px 0 rgba(255,255,255,0.2);
-      transition:transform .2s,box-shadow .2s,opacity .2s;
-      display:flex;align-items:center;justify-content:center;gap:10px;
-    }
-    .btn-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 24px 52px rgba(234,179,8,0.4)}
-    .btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
-
-    .submit-note{text-align:center;font-size:.8rem;color:var(--gray);margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px}
-    .submit-error{
-      background:#fff7ed;border:1px solid rgba(245,158,11,0.4);
-      border-radius:12px;padding:14px 16px;font-size:.88rem;
-      color:#7c2d12;line-height:1.6;display:none;margin-bottom:4px;
+    .prog-dot.done{
+      background:rgba(234,179,8,0.2);
+      color:var(--navy);
+      font-weight:800;
     }
 
-    /* ── 4-Step Slot Booking Wizard ── */
-    .wizard-card{background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:32px;box-shadow:var(--shadow-md)}
-    .wizard-step-header{margin-bottom:24px}
-    .wizard-step-title{font-size:1.35rem;font-weight:800;color:var(--navy)}
-    .wizard-step-sub{font-size:0.9rem;color:var(--gray);margin-top:4px}
-    
-    .zip-box{display:flex;gap:12px;margin-top:16px}
-    .zip-box input{flex:1;padding:16px 20px;border-radius:14px;border:1.5px solid var(--border);font-size:1.05rem;font-weight:600}
-    .zip-box button{padding:16px 30px;border-radius:14px;background:var(--navy);color:var(--white);font-weight:800;border:none;cursor:pointer;transition:background .2s;font-size:0.95rem}
-    .zip-box button:hover{background:var(--orange);color:var(--navy)}
-
-    /* Spacious Service Cards */
-    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px}
-    .service-card{
-      background:#ffffff;border:2px solid #e2e8f0;border-radius:16px;padding:20px;
-      cursor:pointer;display:flex;gap:16px;align-items:flex-start;
-      transition:all .25s ease;position:relative;
+    /* Step Labels & Titles */
+    .step-label-title{
+      font-size:0.9rem;
+      font-weight:700;
+      color:var(--text-dark);
+      margin-bottom:12px;
     }
-    .service-card:hover{border-color:var(--orange);transform:translateY(-2px);box-shadow:0 12px 30px rgba(7,24,40,0.08)}
-    .service-card.selected{border-color:var(--orange);background:rgba(234,179,8,0.06);box-shadow:0 0 0 4px rgba(234,179,8,0.18)}
-    .svc-icon{width:52px;height:52px;border-radius:14px;background:rgba(7,24,40,0.06);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
-    .svc-details{flex:1}
-    .svc-title-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
-    .svc-title-row h3{font-size:1.05rem;font-weight:800;color:var(--navy);margin:0;line-height:1.3}
-    .svc-check{width:22px;height:22px;border-radius:50%;border:2px solid #cbd5e1;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:transparent;transition:all .2s;flex-shrink:0}
-    .service-card.selected .svc-check{background:var(--orange);border-color:var(--orange);color:var(--navy)}
-    .svc-desc{font-size:0.85rem;color:#64748b;line-height:1.5;margin-bottom:12px}
-    .svc-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-    .svc-duration{background:#f1f5f9;padding:4px 10px;border-radius:999px;font-size:0.78rem;font-weight:700;color:#475569}
-    .svc-badge{background:rgba(234,179,8,0.15);border:1px solid rgba(234,179,8,0.35);padding:4px 10px;border-radius:999px;font-size:0.78rem;font-weight:800;color:#ca8a04}
 
-    .slots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:20px}
-    .slot-pill{padding:14px;border-radius:12px;border:1.5px solid var(--border);background:#f8fbff;font-weight:700;color:var(--navy);font-size:0.95rem;cursor:pointer;text-align:center;transition:all .2s}
-    .slot-pill:hover{border-color:var(--orange);background:rgba(234,179,8,0.08)}
-    .slot-pill.selected{border-color:var(--orange);background:var(--orange);color:var(--navy);box-shadow:0 0 0 3px rgba(234,179,8,0.25)}
+    /* Inputs & Buttons */
+    .zip-input-field{
+      width:100%;
+      padding:16px 20px;
+      border-radius:12px;
+      border:1.5px solid var(--border);
+      font-size:1.1rem;
+      font-weight:600;
+      color:var(--navy);
+      outline:none;
+      transition:border-color 0.2s,box-shadow 0.2s;
+    }
+    .zip-input-field:focus{
+      border-color:var(--orange);
+      box-shadow:0 0 0 4px rgba(234,179,8,0.15);
+    }
+    .btn-full-navy{
+      width:100%;
+      padding:16px 24px;
+      background:var(--navy);
+      color:var(--white);
+      border-radius:12px;
+      font-size:1rem;
+      font-weight:800;
+      border:none;
+      cursor:pointer;
+      transition:background 0.2s,transform 0.15s;
+      margin-top:16px;
+    }
+    .btn-full-navy:hover:not(:disabled){
+      background:var(--navy-light);
+      transform:translateY(-1px);
+    }
+    .btn-full-navy:disabled{
+      opacity:0.5;
+      cursor:not-allowed;
+    }
 
-    .back-btn{background:none;border:none;color:var(--gray);font-weight:700;font-size:0.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-bottom:14px}
+    .step-footnote{
+      font-size:0.78rem;
+      color:var(--text-muted);
+      margin-top:14px;
+      text-align:center;
+      line-height:1.5;
+    }
+
+    /* Back Button */
+    .back-btn{
+      background:none;
+      border:none;
+      color:var(--text-muted);
+      font-weight:700;
+      font-size:0.85rem;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      margin-bottom:16px;
+    }
     .back-btn:hover{color:var(--navy)}
 
-    .confirmation-card{text-align:center;padding:40px 20px}
-    .confirm-icon{font-size:3rem;margin-bottom:12px}
-    .confirm-id{background:rgba(234,179,8,0.15);border:1px solid rgba(234,179,8,0.4);border-radius:12px;padding:10px 20px;display:inline-block;font-size:1.1rem;margin:16px 0;color:var(--navy)}
-    .summary-box{background:#f8fbff;border:1px solid var(--border);border-radius:14px;padding:20px;text-align:left;margin:20px 0;font-size:0.92rem;line-height:1.8}
-    .btn-review{display:inline-block;background:var(--orange);color:var(--navy);font-weight:800;padding:12px 24px;border-radius:999px;text-decoration:none;margin-top:16px}
+    /* Service Cards Grid */
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:14px;
+      margin-top:16px;
+    }
+    .service-card{
+      background:#ffffff;
+      border:2px solid #e2e8f0;
+      border-radius:14px;
+      padding:16px;
+      cursor:pointer;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      transition:all 0.2s ease;
+    }
+    .service-card:hover{
+      border-color:var(--orange);
+      transform:translateY(-2px);
+      box-shadow:0 8px 24px rgba(7,24,40,0.06);
+    }
+    .service-card.selected{
+      border-color:var(--orange);
+      background:rgba(234,179,8,0.06);
+      box-shadow:0 0 0 3px rgba(234,179,8,0.18);
+    }
+    .svc-icon{
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      background:rgba(7,24,40,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.4rem;
+      flex-shrink:0;
+    }
+    .svc-details{flex:1}
+    .svc-title-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:6px;
+      margin-bottom:4px;
+    }
+    .svc-title-row h3{
+      font-size:0.95rem;
+      font-weight:800;
+      color:var(--navy);
+      line-height:1.3;
+    }
+    .svc-check{
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      border:2px solid #cbd5e1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:11px;
+      color:transparent;
+      transition:all 0.2s;
+      flex-shrink:0;
+    }
+    .service-card.selected .svc-check{
+      background:var(--orange);
+      border-color:var(--orange);
+      color:var(--navy);
+    }
+    .svc-desc{
+      font-size:0.8rem;
+      color:#64748b;
+      line-height:1.45;
+      margin-bottom:8px;
+    }
+    .svc-meta{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:6px;
+    }
+    .svc-duration{
+      background:#f1f5f9;
+      padding:3px 8px;
+      border-radius:999px;
+      font-size:0.72rem;
+      font-weight:700;
+      color:#475569;
+    }
+    .svc-badge{
+      background:rgba(234,179,8,0.15);
+      border:1px solid rgba(234,179,8,0.35);
+      padding:3px 8px;
+      border-radius:999px;
+      font-size:0.72rem;
+      font-weight:800;
+      color:#ca8a04;
+    }
 
-    /* Custom Time Fallback Callout (Compact) */
+    /* Slots Grid */
+    .slots-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+      gap:10px;
+      margin-top:16px;
+    }
+    .slot-pill{
+      padding:12px 10px;
+      border-radius:10px;
+      border:1.5px solid var(--border);
+      background:#f8fbff;
+      font-weight:700;
+      color:var(--navy);
+      font-size:0.9rem;
+      cursor:pointer;
+      text-align:center;
+      transition:all 0.2s;
+    }
+    .slot-pill:hover{
+      border-color:var(--orange);
+      background:rgba(234,179,8,0.08);
+    }
+    .slot-pill.selected{
+      border-color:var(--orange);
+      background:var(--orange);
+      color:var(--navy);
+      box-shadow:0 0 0 3px rgba(234,179,8,0.25);
+    }
+
+    /* Custom Callout Box */
     .custom-time-callout{
-      margin-top:10px;background:#fefce8;border:1px solid #fde047;
-      border-radius:12px;padding:12px 14px;display:flex;gap:10px;align-items:center;
+      margin-top:16px;
+      background:#fefce8;
+      border:1px solid #fde047;
+      border-radius:12px;
+      padding:12px 14px;
+      display:flex;
+      gap:10px;
+      align-items:center;
     }
     .callout-icon{font-size:1.3rem;flex-shrink:0}
     .callout-body strong{color:var(--navy);font-size:0.84rem;display:block;margin-bottom:2px}
     .callout-body p{color:#64748b;font-size:0.78rem;line-height:1.4;margin-bottom:8px}
     .callout-btns{display:flex;flex-wrap:wrap;gap:8px}
     .btn-callout-phone{
-      background:var(--navy);color:var(--white);font-weight:700;font-size:0.76rem;
-      padding:6px 14px;border-radius:999px;text-decoration:none;transition:background .2s;
+      background:var(--navy);
+      color:var(--white);
+      font-weight:700;
+      font-size:0.76rem;
+      padding:6px 14px;
+      border-radius:999px;
+      text-decoration:none;
+      transition:background 0.2s;
     }
     .btn-callout-phone:hover{background:var(--orange);color:var(--navy)}
     .btn-callout-sms{
-      background:rgba(234,179,8,0.18);border:1px solid rgba(234,179,8,0.5);
-      color:var(--navy);font-weight:700;font-size:0.76rem;
-      padding:6px 14px;border-radius:999px;text-decoration:none;transition:background .2s;
+      background:rgba(234,179,8,0.18);
+      border:1px solid rgba(234,179,8,0.5);
+      color:var(--navy);
+      font-weight:700;
+      font-size:0.76rem;
+      padding:6px 14px;
+      border-radius:999px;
+      text-decoration:none;
+      transition:background 0.2s;
     }
     .btn-callout-sms:hover{background:var(--orange)}
 
-    /* ── Sidebar ────────────────────────────────── */
-    .sidebar{display:flex;flex-direction:column;gap:18px}
-    @media(min-width:961px){.sidebar{position:sticky;top:130px;align-self:start}}
-
-    .scard{
-      background:var(--white);border:1.5px solid var(--border);
-      border-radius:18px;padding:24px;
-      box-shadow:var(--shadow-sm);
-      transition:box-shadow .3s;
+    /* Form Fields Stack */
+    .fields-stack{display:flex;flex-direction:column;gap:14px;margin-top:16px}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width: 520px){.field-row{grid-template-columns:1fr}}
+    .field-group{display:flex;flex-direction:column;gap:5px}
+    .field-label{font-size:0.8rem;font-weight:700;color:#334155}
+    .req{color:var(--red)}
+    .field-input{
+      padding:12px 14px;
+      border-radius:10px;
+      border:1.5px solid var(--border);
+      font-size:0.95rem;
+      color:var(--navy);
+      font-family:'DM Sans',sans-serif;
+      outline:none;
+      transition:border-color 0.2s;
     }
-    .scard:hover{box-shadow:var(--shadow-md)}
-    .scard-title{font-size:.93rem;font-weight:900;color:var(--navy);letter-spacing:-.02em;margin-bottom:4px}
-    .scard-sub{font-size:.8rem;color:var(--gray);line-height:1.5;margin-bottom:16px}
+    .field-input:focus{border-color:var(--orange)}
+    textarea.field-input{resize:vertical;min-height:90px}
 
-    .what-next{display:flex;flex-direction:column;gap:12px}
-    .wn-item{display:flex;gap:12px;align-items:flex-start}
-    .wn-num{
-      width:26px;height:26px;border-radius:50%;flex-shrink:0;margin-top:1px;
-      background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.35);
-      display:flex;align-items:center;justify-content:center;
-      font-size:.7rem;font-weight:900;color:var(--orange-dark);
+    .error-msg{
+      font-size:0.8rem;
+      color:var(--red);
+      font-weight:700;
+      margin-top:8px;
+      display:none;
     }
-    .wn-text{font-size:.87rem;color:#374151;line-height:1.55}
-    .wn-text strong{color:var(--navy);font-weight:700;display:block}
 
-    .call-card{
-      background:linear-gradient(145deg,#071828 0%,#0b2a4a 100%);
-      border:1px solid rgba(255,255,255,0.09);border-radius:18px;padding:24px;
-      box-shadow:0 16px 44px rgba(7,24,40,0.25);
+    /* Confirmation Screen */
+    .confirmation-card{text-align:center;padding:24px 10px}
+    .confirm-icon{font-size:3rem;margin-bottom:12px}
+    .confirm-id{
+      background:rgba(234,179,8,0.15);
+      border:1px solid rgba(234,179,8,0.4);
+      border-radius:10px;
+      padding:8px 18px;
+      display:inline-block;
+      font-size:1rem;
+      margin:14px 0;
+      color:var(--navy);
     }
-    .call-card-title{color:var(--white);font-size:.95rem;font-weight:800;margin-bottom:8px}
-    .call-card-copy{color:rgba(255,255,255,0.55);font-size:.84rem;line-height:1.6;margin-bottom:18px}
-    .call-btn{
-      display:flex;align-items:center;justify-content:center;gap:9px;
-      padding:13px 20px;border-radius:999px;text-decoration:none;
-      background:linear-gradient(135deg,var(--orange),var(--orange-dark));
-      color:var(--navy);font-size:.9rem;font-weight:900;
-      box-shadow:0 10px 28px rgba(234,179,8,0.3);transition:transform .18s;
+    .summary-box{
+      background:#f8fbff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:16px;
+      text-align:left;
+      margin:16px 0;
+      font-size:0.9rem;
+      line-height:1.7;
     }
-    .call-btn:hover{transform:translateY(-2px)}
 
-    /* Review card */
-    .review-card{
-      background:var(--white);border:1.5px solid var(--border);
-      border-radius:18px;padding:22px 24px;
-      box-shadow:var(--shadow-sm);
+    footer.standalone-footer{
+      text-align:center;
+      padding:24px 20px;
+      font-size:0.8rem;
+      color:var(--text-muted);
     }
-    .review-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-    .review-g{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#4285F4}
-    .review-g svg{width:14px;height:14px}
-    .review-stars{color:var(--orange);font-size:14px;letter-spacing:1px;margin-left:auto}
-    .review-text{font-size:.87rem;color:#374151;line-height:1.7;font-style:italic;margin-bottom:14px}
-    .reviewer{display:flex;align-items:center;gap:10px}
-    .reviewer-avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--orange);font-family:'Bebas Neue',sans-serif;font-size:16px;display:flex;align-items:center;justify-content:center}
-    .reviewer-name{font-size:.85rem;font-weight:700;color:var(--navy)}
-    .reviewer-date{font-size:.75rem;color:var(--gray)}
-
-    .trust-list{display:flex;flex-direction:column;gap:9px}
-    .trust-item{display:flex;align-items:center;gap:9px;font-size:.86rem;color:#374151;font-weight:500}
-    .trust-item svg{color:var(--orange);flex-shrink:0}
-
-    /* ── FAQ ────────────────────────────────────── */
-    .faq-section{background:linear-gradient(180deg,#f4f8fb,#eef4f8);border-top:1px solid var(--border);padding:64px 5%}
-    .faq-inner{max-width:780px;margin:0 auto}
-    .faq-tag{font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
-    .faq-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,2.8rem);color:var(--navy);letter-spacing:1px;margin-bottom:6px}
-    .faq-sub{color:var(--gray);font-size:.97rem;line-height:1.65;margin-bottom:32px}
-    .faq-item{border-bottom:1px solid rgba(160,190,218,0.4)}
-    .faq-item:last-child{border-bottom:none}
-    .faq-q{
-      width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
-      padding:18px 0;background:none;border:none;cursor:pointer;text-align:left;
-      color:var(--navy);font-size:.96rem;font-weight:700;line-height:1.4;
-      font-family:'DM Sans',sans-serif;transition:color .2s;
-    }
-    .faq-q:hover{color:var(--orange)}
-    .faq-chevron{transition:transform .3s;color:var(--gray);flex-shrink:0;width:18px;height:18px}
-    .faq-item.open .faq-chevron{transform:rotate(180deg);color:var(--orange)}
-    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(0.4,0,0.2,1)}
-    .faq-a p{padding:0 0 18px;font-size:.92rem;color:var(--gray);line-height:1.72}
-
-    /* ── Success ────────────────────────────────── */
-    #success-screen{display:none;padding:80px 5% 100px;text-align:center}
-    #success-screen.show{display:block;animation:fadeUp .6s ease both}
-    .success-wrap{max-width:560px;margin:0 auto}
-    .success-icon{
-      width:86px;height:86px;border-radius:50%;margin:0 auto 28px;
-      background:linear-gradient(145deg,rgba(234,179,8,0.15),rgba(234,179,8,0.06));
-      border:1.5px solid rgba(234,179,8,0.4);
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 20px 50px rgba(234,179,8,0.2);
-      animation:popIn .5s cubic-bezier(0.175,0.885,0.32,1.275) both;
-    }
-    @keyframes popIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
-    .success-icon svg{width:38px;height:38px;stroke:var(--orange);stroke-width:2.5}
-    .success-heading{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.2rem);color:var(--navy);letter-spacing:1px;margin-bottom:14px}
-    .success-copy{color:var(--gray);font-size:1rem;line-height:1.75;margin-bottom:32px}
-    .success-details{
-      background:var(--white);border:1.5px solid var(--border);border-top:3px solid var(--orange);
-      border-radius:18px;padding:24px;text-align:left;
-      box-shadow:var(--shadow-md);margin-bottom:32px;
-    }
-    .success-details-title{font-size:.75rem;font-weight:900;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
-    .success-steps{display:flex;flex-direction:column;gap:12px}
-    .success-step{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:#374151;line-height:1.5}
-    .success-step svg{color:var(--orange);flex-shrink:0;margin-top:2px}
-    .success-btn{
-      display:inline-flex;align-items:center;gap:9px;
-      padding:14px 32px;border-radius:999px;text-decoration:none;
-      background:var(--navy);color:var(--white);font-size:.95rem;font-weight:700;
-      transition:background .2s,transform .2s;box-shadow:var(--shadow-md);
-    }
-    .success-btn:hover{background:var(--navy2);transform:translateY(-2px)}
-
-    /* ── Footer ─────────────────────────────────── */
-    footer{background:#040f18;color:rgba(255,255,255,0.35);padding:28px 5%;text-align:center;font-size:12.5px}
-    footer a{color:rgba(234,179,8,0.8);text-decoration:none}
-
-    /* ── Animations ─────────────────────────────── */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .hero-left{animation:fadeUp .65s ease both}
-    @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-  
-/* Enhanced Mobile Navigation & Phone UX Optimization */
-@media (max-width: 768px) {
-  nav {
-    padding: 0 4% !important;
-    height: 64px !important;
-  }
-  .logo {
-    font-size: 24px !important;
-  }
-  .mobile-header-call {
-    display: inline-flex !important;
-    align-items: center;
-    gap: 6px;
-    background: rgba(234,179,8,0.18);
-    border: 1px solid rgba(234,179,8,0.5);
-    color: #facc15;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 7px 13px;
-    border-radius: 20px;
-    text-decoration: none;
-    margin-left: auto;
-    margin-right: 10px;
-    transition: background 0.2s;
-  }
-  .mobile-header-call:active {
-    background: #eab308;
-    color: #071828;
-  }
-  .mobile-nav-toggle {
-    display: flex !important;
-    padding: 10px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.08);
-  }
-  .nav-links {
-    position: fixed !important;
-    top: 0 !important;
-    right: -100% !important;
-    width: 85% !important;
-    max-width: 320px !important;
-    height: 100vh !important;
-    background: rgba(7,24,40,0.98) !important;
-    backdrop-filter: blur(20px) !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: stretch !important;
-    gap: 12px !important;
-    transition: right 0.35s cubic-bezier(0.16,1,0.3,1) !important;
-    box-shadow: -10px 0 35px rgba(0,0,0,0.5) !important;
-    border-left: 1px solid rgba(255,255,255,0.15) !important;
-    z-index: 9998 !important;
-    padding: 80px 20px 40px !important;
-    overflow-y: auto !important;
-  }
-  .nav-links.active {
-    right: 0 !important;
-  }
-  .nav-links li {
-    width: 100% !important;
-    list-style: none !important;
-  }
-  .nav-links a {
-    display: flex !important;
-    align-items: center;
-    font-size: 17px !important;
-    font-weight: 600 !important;
-    padding: 14px 18px !important;
-    color: #ffffff !important;
-    border-radius: 10px !important;
-    background: rgba(255,255,255,0.05) !important;
-    text-decoration: none !important;
-    transition: background 0.2s;
-  }
-  .nav-links a:hover, .nav-links a:active {
-    background: rgba(234,179,8,0.2) !important;
-    color: #facc15 !important;
-  }
-  .mobile-drawer-cta {
-    margin-top: 15px !important;
-    padding-top: 15px !important;
-    border-top: 1px solid rgba(255,255,255,0.12) !important;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .nav-cta {
-    display: none !important;
-  }
-
-  /* Hero Section Phone Tuning */
-  .hero {
-    min-height: auto !important;
-    padding: 105px 5% 75px !important;
-  }
-  .hero h1 {
-    font-size: clamp(38px, 10.5vw, 56px) !important;
-    line-height: 1.05 !important;
-    margin-bottom: 18px !important;
-  }
-  .hero p {
-    font-size: 16px !important;
-    line-height: 1.6 !important;
-    margin-bottom: 28px !important;
-  }
-
-  /* Section Padding for Mobile */
-  section {
-    padding: 55px 5% !important;
-  }
-
-  /* Gallery Grid & Filters for Mobile */
-  .gallery-filters {
-    display: flex !important;
-    overflow-x: auto !important;
-    justify-content: flex-start !important;
-    padding-bottom: 12px !important;
-    gap: 8px !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    margin-bottom: 28px !important;
-  }
-  .gallery-filters::-webkit-scrollbar {
-    display: none !important;
-  }
-  .filter-btn {
-    flex-shrink: 0 !important;
-    padding: 9px 18px !important;
-    font-size: 13px !important;
-    border-radius: 20px !important;
-  }
-  .gallery-grid {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto !important;
-    gap: 20px !important;
-  }
-
-  /* Sticky Bottom Quick Action Bar */
-  body {
-    padding-bottom: 72px !important;
-  }
-  .mobile-bottom-bar {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 9999 !important;
-    display: flex !important;
-    gap: 10px !important;
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important;
-    background: rgba(7,24,40,0.97) !important;
-    backdrop-filter: blur(16px) !important;
-    border-top: 1px solid rgba(255,255,255,0.15) !important;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.4) !important;
-  }
-  .mobile-bottom-btn {
-    flex: 1 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    padding: 13px !important;
-    border-radius: 10px !important;
-    font-size: 15px !important;
-    font-weight: 700 !important;
-    text-decoration: none !important;
-    transition: transform 0.2s !important;
-  }
-  .mobile-call-btn {
-    background: #ffffff !important;
-    color: #071828 !important;
-  }
-  .mobile-book-btn {
-    background: #eab308 !important;
-    color: #071828 !important;
-  }
-  .floating-actions {
-    display: none !important;
-  }
-}
-@media (min-width: 769px) {
-  .mobile-header-call, .mobile-bottom-bar {
-    display: none !important;
-  }
-}
-</style>
+    footer.standalone-footer a{color:var(--navy);text-decoration:none;font-weight:700}
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="https://www.herehandyman.com" class="logo">Here<span>Handyman</span></a>
-  <div class="nav-right">
-    <span class="nav-tag">Westchester County, NY</span>
-    <a href="https://www.herehandyman.com" class="nav-phone" style="background:transparent;border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.7);font-weight:600">← Main Site</a>
-    <a href="tel:+15163500801" class="nav-phone">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-      (516) 350-0801
-    </a>
-  </div>
-</nav>
+  <!-- Top Bar -->
+  <header class="standalone-header">
+    <a href="https://www.herehandyman.com" class="brand-logo">HERE <span>HANDYMAN</span></a>
+    <a href="tel:+15163500801" class="header-phone">(516) 350-0801</a>
+  </header>
 
-<div id="form-wrapper">
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg-grid"></div>
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-eyebrow">Book a Service</div>
-      <h1>Schedule Your<em>Handyman Visit</em></h1>
-      <p class="hero-sub">Fill out the short form below and we'll confirm your appointment, walk you through the plan, and give you a free estimate — all before any work starts.</p>
-
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num">Free</div>
-          <div class="hero-stat-label">Estimates</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">Same</div>
-          <div class="hero-stat-label">Day Available</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">3 min</div>
-          <div class="hero-stat-label">To book</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">★ 5.0</div>
-          <div class="hero-stat-label">Google Rating</div>
-        </div>
-      </div>
-
-      <div class="hero-notice">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span>⚡ <strong>Real-Time Calendar Booking</strong>: Select your ZIP, pick an open time slot, and lock your handyman visit instantly — zero deposit required!</span>
-      </div>
-
-      <a href="#bookingWizard" class="hero-cta">
-        Book My Appointment
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-
-      <a href="sms:+15163500801" style="display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.7);font-size:13px;font-weight:600;text-decoration:none;margin-top:14px;letter-spacing:.02em;transition:color .2s;" onmouseover="this.style.color='#eab308'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Prefer to text? Send photos to (516) 350-0801 →
-      </a>
-
-      <div class="hero-proof">
-
-        <div class="proof-item">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          No deposit required
-        </div>
-        <div class="proof-item">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          English · Español · Português
-        </div>
-        <div class="proof-item">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          All of Westchester County
-        </div>
-      </div>
-    </div>
-
-    <!-- Process card -->
-    <div class="hero-card">
-      <div class="hero-card-header">
-        <div class="hero-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
-        <span class="hero-card-title">How booking works</span>
-      </div>
-      <p class="hero-card-sub">Reserve your slot in 4 simple steps.</p>
-      <div class="hero-steps">
-        <div class="hero-step">
-          <div class="step-circle">01</div>
-          <div class="step-body">
-            <strong>Enter your ZIP code</strong>
-            <span>Verify service availability in your town</span>
-          </div>
-        </div>
-        <div class="hero-step">
-          <div class="step-circle">02</div>
-          <div class="step-body">
-            <strong>Select service &amp; time slot</strong>
-            <span>Pick a live available arrival window</span>
-          </div>
-        </div>
-        <div class="hero-step">
-          <div class="step-circle">03</div>
-          <div class="step-body">
-            <strong>Get instant confirmation code</strong>
-            <span>Slot is locked with zero deposit</span>
-          </div>
-        </div>
-        <div class="hero-step">
-          <div class="step-circle">04</div>
-          <div class="step-body">
-            <strong>David shows up &amp; gets it done</strong>
-            <span>Clean, professional, guaranteed work</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROGRESS BAR -->
-<div class="progress-bar-wrap" id="progress-bar">
-  <div class="progress-inner">
-    <div class="prog-step">
-      <div class="prog-dot active" id="pd1"><span class="prog-num">1</span></div>
-      <span class="prog-label">ZIP Code</span>
-    </div>
-    <div class="prog-line" id="pl1"></div>
-    <div class="prog-step">
-      <div class="prog-dot" id="pd2"><span class="prog-num">2</span></div>
-      <span class="prog-label">Service</span>
-    </div>
-    <div class="prog-line" id="pl2"></div>
-    <div class="prog-step">
-      <div class="prog-dot" id="pd3"><span class="prog-num">3</span></div>
-      <span class="prog-label">Time Slot</span>
-    </div>
-    <div class="prog-line" id="pl3"></div>
-    <div class="prog-step">
-      <div class="prog-dot" id="pd4"><span class="prog-num">4</span></div>
-      <span class="prog-label">Confirm</span>
-    </div>
-  </div>
-</div>
-
-<!-- PAGE BODY -->
-<div class="page-body">
-
-  <!-- 4-STEP REAL-TIME SLOT BOOKING WIZARD -->
-  <div id="bookingWizard" class="wizard-card">
+  <!-- Main Standalone Content -->
+  <main class="standalone-main">
     
-    <!-- STEP 1: ZIP Check -->
-    <div class="wizard-step" id="step-1">
-      <div class="wizard-step-header">
-        <div class="phase-pill">Step 1 of 4</div>
-        <h2 class="wizard-step-title">Enter Your ZIP Code</h2>
-        <p class="wizard-step-sub">We serve all of Westchester County. Verify service availability in your town.</p>
-      </div>
-
-      <div class="zip-box">
-        <input type="text" id="zipInput" placeholder="e.g. 10601 (White Plains)" maxlength="5" pattern="\d{5}"/>
-        <button type="button" id="zipSubmitBtn" onclick="window.handleZipCheck && window.handleZipCheck()">Check Availability →</button>
-      </div>
-      <div class="error-msg" id="zipError" style="margin-top:12px"></div>
-
-      <div style="margin-top:20px; padding:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
-        <p style="font-size:0.78rem; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">📍 Serving All Westchester Towns:</p>
-        <div style="display:flex; flex-wrap:wrap; gap:6px;">
-          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">White Plains (10601)</span>
-          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Scarsdale (10583)</span>
-          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Yonkers (10701)</span>
-          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Tarrytown (10591)</span>
-          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Harrison (10528)</span>
-          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">New Rochelle (10801)</span>
-          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">&amp; All Surrounding ZIPs</span>
-        </div>
-      </div>
+    <div class="page-title-wrap">
+      <span class="demo-pill">LIVE BOOKING DEMO</span>
+      <h1>BOOK A HANDYMAN VISIT</h1>
+      <p>Westchester County, NY · same-day and next-day slots when available</p>
     </div>
 
-    <!-- STEP 2: Service Selection -->
-    <div class="wizard-step" id="step-2" style="display:none">
-      <button class="back-btn">← Back to ZIP</button>
-      <div class="wizard-step-header">
-        <div class="phase-pill">Step 2 of 4</div>
-        <h2 class="wizard-step-title">Select Your Handyman Service</h2>
-        <p class="wizard-step-sub">Choose a service to view live available arrival windows.</p>
+    <!-- Centered Standalone Card -->
+    <div id="bookingWizard" class="standalone-card">
+      
+      <!-- 4 Tabs Progress Header -->
+      <div class="tabs-header">
+        <div class="prog-dot active" id="pd1"><span class="prog-num">1. Zip code</span></div>
+        <div class="prog-dot" id="pd2"><span class="prog-num">2. Service</span></div>
+        <div class="prog-dot" id="pd3"><span class="prog-num">3. Date &amp; time</span></div>
+        <div class="prog-dot" id="pd4"><span class="prog-num">4. Your details</span></div>
       </div>
 
-      <div class="services-grid" id="servicesGrid"></div>
-    </div>
+      <!-- STEP 1: ZIP Code -->
+      <div class="wizard-step" id="step-1">
+        <div class="step-label-title">Enter your zip code to get started</div>
+        
+        <input type="text" id="zipInput" class="zip-input-field" placeholder="10601" maxlength="5" pattern="\d{5}"/>
+        
+        <div class="error-msg" id="zipError"></div>
 
-    <!-- STEP 3: Real-Time Date & Time Picker -->
-    <div class="wizard-step" id="step-3" style="display:none">
-      <button class="back-btn">← Back to Services</button>
-      <div class="wizard-step-header">
-        <div class="phase-pill">Step 3 of 4</div>
-        <h2 class="wizard-step-title">Select Date & Time Window</h2>
-        <p class="wizard-step-sub">Pick an open time slot. We guarantee on-time arrival within your reserved window.</p>
+        <button type="button" id="zipSubmitBtn" class="btn-full-navy" onclick="window.handleZipCheck &amp;&amp; window.handleZipCheck()">
+          Check availability
+        </button>
+
+        <p class="step-footnote">
+          This is how Jobber / Reserve with Google starts: confirm the job is in the service area, then book a real slot.
+        </p>
       </div>
 
-      <div class="field-group" style="margin-bottom:20px">
-        <label class="field-label" for="bookingDate">Select Appointment Date:</label>
-        <input type="date" id="bookingDate" class="field-input" style="max-width:240px"/>
+      <!-- STEP 2: Service Selection -->
+      <div class="wizard-step" id="step-2" style="display:none">
+        <button class="back-btn">← Back to ZIP</button>
+        <div class="step-label-title">Select your handyman service</div>
+        <div class="services-grid" id="servicesGrid"></div>
       </div>
 
-      <div id="slotsLoading" style="display:none;padding:20px;text-align:center;color:var(--gray)">Searching available open slots...</div>
-      <div class="slots-grid" id="slotsGrid"></div>
+      <!-- STEP 3: Date & Time Picker -->
+      <div class="wizard-step" id="step-3" style="display:none">
+        <button class="back-btn">← Back to Services</button>
+        <div class="step-label-title">Select date &amp; arrival window</div>
 
-      <!-- Custom Time Callout Box (below available time, above Continue button) -->
-      <div class="custom-time-callout" style="margin-top:20px; margin-bottom:16px">
-        <div class="callout-icon">💬</div>
-        <div class="callout-body">
-          <strong>Don't see a time slot that fits your schedule?</strong>
-          <p>We're happy to accommodate early mornings, evenings, or custom windows!</p>
-          <div class="callout-btns">
-            <a href="tel:+15163500801" class="btn-callout-phone">📞 Call (516) 350-0801</a>
-            <a href="sms:+15163500801" class="btn-callout-sms">💬 Text David</a>
-          </div>
-        </div>
-      </div>
-
-      <button id="step3NextBtn" class="btn-submit" style="margin-top:12px" disabled>
-        Continue to Details →
-      </button>
-    </div>
-
-    <!-- STEP 4: Customer Contact & Direct Confirm -->
-    <div class="wizard-step" id="step-4" style="display:none">
-      <button class="back-btn">← Back to Time Slot</button>
-      <div class="wizard-step-header">
-        <div class="phase-pill">Step 4 of 4</div>
-        <h2 class="wizard-step-title">Contact & Location Details</h2>
-        <p class="wizard-step-sub">Enter your details to lock this appointment slot instantly.</p>
-      </div>
-
-      <div class="fields-stack">
-        <div class="field-group">
-          <label class="field-label" for="custName">Full Name <span class="req">*</span></label>
-          <input type="text" id="custName" class="field-input" placeholder="David Smith" required/>
+        <div class="field-group" style="margin-bottom:16px">
+          <label class="field-label" for="bookingDate">Select Appointment Date:</label>
+          <input type="date" id="bookingDate" class="field-input" style="max-width:240px"/>
         </div>
 
-        <div class="field-row">
-          <div class="field-group">
-            <label class="field-label" for="custPhone">Phone Number <span class="req">*</span></label>
-            <input type="tel" id="custPhone" class="field-input" placeholder="(914) 555-0000" required/>
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="custEmail">Email Address</label>
-            <input type="email" id="custEmail" class="field-input" placeholder="you@example.com"/>
+        <div id="slotsLoading" style="display:none;padding:16px;text-align:center;color:var(--text-muted)">Searching open arrival slots...</div>
+        <div class="slots-grid" id="slotsGrid"></div>
+
+        <!-- Custom Time Callout Box -->
+        <div class="custom-time-callout">
+          <div class="callout-icon">💬</div>
+          <div class="callout-body">
+            <strong>Don't see a time slot that fits your schedule?</strong>
+            <p>We're happy to accommodate early mornings, evenings, or custom windows!</p>
+            <div class="callout-btns">
+              <a href="tel:+15163500801" class="btn-callout-phone">📞 Call (516) 350-0801</a>
+              <a href="sms:+15163500801" class="btn-callout-sms">💬 Text David</a>
+            </div>
           </div>
         </div>
 
-        <div class="field-group">
-          <label class="field-label" for="custAddress">Street Address <span class="req">*</span></label>
-          <input type="text" id="custAddress" class="field-input" placeholder="123 Main St, White Plains NY" required/>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label" for="custNotes">Project Details / Special Notes (optional)</label>
-          <textarea id="custNotes" class="field-input" rows="3" placeholder="Describe the job, e.g. 65 inch TV on drywall..."></textarea>
-        </div>
-
-        <div class="submit-error" id="submitError"></div>
-
-        <button id="confirmBookingBtn" class="btn-submit" style="margin-top:12px">
-          🔒 Lock & Confirm Appointment
+        <button id="step3NextBtn" class="btn-full-navy" style="margin-top:16px" disabled>
+          Continue to Details →
         </button>
       </div>
-    </div>
 
-  </div>
+      <!-- STEP 4: Details & Confirm -->
+      <div class="wizard-step" id="step-4" style="display:none">
+        <button class="back-btn">← Back to Time Slot</button>
+        <div class="step-label-title">Enter your contact &amp; address details</div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="scard">
-      <p class="scard-title">What happens next</p>
-      <p class="scard-sub">After you submit, here's the process.</p>
-      <div class="what-next">
-        <div class="wn-item">
-          <div class="wn-num">1</div>
-          <div class="wn-text"><strong>We receive your request</strong>Instantly sent to our team</div>
-        </div>
-        <div class="wn-item">
-          <div class="wn-num">2</div>
-          <div class="wn-text"><strong>We call or text you</strong>Usually within a few hours</div>
-        </div>
-        <div class="wn-item">
-          <div class="wn-num">3</div>
-          <div class="wn-text"><strong>You get a free estimate</strong>Clear price, no surprises</div>
-        </div>
-        <div class="wn-item">
-          <div class="wn-num">4</div>
-          <div class="wn-text"><strong>We show up &amp; get it done</strong>On time, every time</div>
-        </div>
-      </div>
-    </div>
+        <div class="fields-stack">
+          <div class="field-group">
+            <label class="field-label" for="custName">Full Name <span class="req">*</span></label>
+            <input type="text" id="custName" class="field-input" placeholder="David Smith" required/>
+          </div>
 
-    <div class="call-card">
-      <p class="call-card-title">Need help right now?</p>
-      <p class="call-card-copy">Skip the form. Call or text us directly — we usually respond in minutes during business hours.</p>
-      <a href="tel:+15163500801" class="call-btn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        Call (516) 350-0801
-      </a>
-    </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="custPhone">Phone Number <span class="req">*</span></label>
+              <input type="tel" id="custPhone" class="field-input" placeholder="(914) 555-0000" required/>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="custEmail">Email Address</label>
+              <input type="email" id="custEmail" class="field-input" placeholder="you@example.com"/>
+            </div>
+          </div>
 
-    <div class="review-card">
-      <div class="review-header">
-        <div class="review-g">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.113-5.136 4.113-3.267 0-5.914-2.617-5.914-5.845 0-3.228 2.647-5.846 5.914-5.846 1.493 0 2.855.567 3.894 1.488l3.144-3.144C19.062 3.238 15.932 2 12.24 2 6.584 2 2 6.584 2 12.24c0 5.656 4.584 10.24 10.24 10.24 8.9 0 10.3-7.869 9.68-12.195H12.24z"/></svg>
-          Google Review
-        </div>
-        <div class="review-stars">★★★★★</div>
-      </div>
-      <p class="review-text">"Here Handyman was amazing. They arrived on time, assembled our furniture quickly and even fixed a loose door that we mentioned in passing. Highly recommend!"</p>
-      <div class="reviewer" style="margin-bottom:12px;">
-        <div class="reviewer-avatar">S</div>
-        <div>
-          <div class="reviewer-name">Sandra M.</div>
-          <div class="reviewer-date">Scarsdale, NY · 2 weeks ago</div>
+          <div class="field-group">
+            <label class="field-label" for="custAddress">Street Address <span class="req">*</span></label>
+            <input type="text" id="custAddress" class="field-input" placeholder="123 Main St, White Plains NY" required/>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="custNotes">Project Details / Special Notes (optional)</label>
+            <textarea id="custNotes" class="field-input" rows="3" placeholder="Describe the job, e.g. 65 inch TV on drywall..."></textarea>
+          </div>
+
+          <div class="error-msg" id="submitError"></div>
+
+          <button id="confirmBookingBtn" class="btn-full-navy">
+            🔒 Lock &amp; Confirm Appointment
+          </button>
         </div>
       </div>
-      <a href="https://g.page/r/CcY8nHWkiRZ0EAE/review" target="_blank" rel="noopener" style="display:block; text-align:center; background:#eab308; color:#071828; font-weight:700; padding:8px 12px; border-radius:6px; text-decoration:none; font-size:0.85rem;">⭐ Write a Google Review</a>
-    </div>
 
-    <div class="scard">
-      <p class="scard-title">Why Here Handyman?</p>
-      <div class="trust-list" style="margin-top:8px">
-        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free estimates, no obligation</div>
-        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Upfront pricing, no hidden fees</div>
+    </div>
+  </main>
 
-        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>English · Spanish · Portuguese</div>
-        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Same-day service available</div>
-        <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>100% satisfaction guaranteed</div>
-      </div>
-    </div>
-  </aside>
-</div>
+  <!-- Standalone Footer -->
+  <footer class="standalone-footer">
+    <p>© 2026 <a href="https://www.herehandyman.com">Here Handyman</a> · Westchester County, NY · <a href="tel:+15163500801">(516) 350-0801</a> · info@herehandyman.com</p>
+  </footer>
 
-<!-- FAQ -->
-<section class="faq-section">
-  <div class="faq-inner">
-    <div class="faq-tag">FAQ</div>
-    <h2 class="faq-heading">Booking Questions</h2>
-    <p class="faq-sub">Everything you need to know before submitting your request.</p>
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">How quickly will you respond?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-      <div class="faq-a"><p>We typically respond within 1–3 hours during business hours (Mon–Sat, 8AM–8PM). For urgent jobs, call or text us directly at (516) 350-0801.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">Is the estimate really free?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-      <div class="faq-a"><p>Yes, 100% free — no strings attached. You get a firm price upfront before any work starts. You only pay if you decide to move forward.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">Do you offer same-day service?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-      <div class="faq-a"><p>Yes — same-day and next-day are often available. Select "ASAP – Urgent" in the scheduling section, and we'll do our best to accommodate you quickly.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">What areas do you serve?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-      <div class="faq-a"><p>We serve all of Westchester County, NY — White Plains, Scarsdale, Yonkers, Tarrytown, Hartsdale, Harrison, New Rochelle, Greenburgh, Valhalla, Elmsford, Dobbs Ferry, Ardsley, and more.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false">What if I'm not sure what service I need?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-      <div class="faq-a"><p>No problem — just select "General Repairs" and describe the issue in the project details box. We'll figure out the right solution when we call you.</p></div>
-    </div>
-  </div>
-</section>
-
-</div><!-- #form-wrapper -->
-
-<!-- SUCCESS SCREEN -->
-<div id="success-screen">
-  <div class="success-wrap">
-    <div class="success-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    <div class="success-heading">Request Sent!</div>
-    <p class="success-copy">Thank you, <strong id="success-name"></strong>! We received your booking request and will contact you at <strong id="success-phone"></strong> shortly to confirm your appointment and provide a free estimate.</p>
-    <div class="success-details">
-      <p class="success-details-title">What happens next</p>
-      <div class="success-steps">
-        <div class="success-step">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          We'll reach out within a few hours during business hours
-        </div>
-        <div class="success-step">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          You'll receive a free estimate before any work begins
-        </div>
-        <div class="success-step">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Have photos? Text them to <strong>(516) 350-0801</strong> anytime
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:20px; padding:20px; background:#fff8eb; border:1px solid #fde68a; border-radius:12px; text-align:center;">
-      <p style="font-weight:700; color:#071828; margin-bottom:6px; font-size:1.05rem;">⭐ Loved working with Here Handyman?</p>
-      <p style="font-size:0.9rem; color:#4b5563; margin-bottom:14px;">If you're a returning client or had a great experience with David, leaving a 5-star Google review helps fellow Westchester families find us!</p>
-      <a href="https://g.page/r/CcY8nHWkiRZ0EAE/review" target="_blank" rel="noopener" style="display:inline-block; background:#eab308; color:#071828; font-weight:700; padding:10px 22px; border-radius:6px; text-decoration:none; font-size:0.95rem;">⭐ Write a Google Review</a>
-    </div>
-    <a href="https://www.herehandyman.com" class="success-btn" style="margin-top:18px;">← Back to herehandyman.com</a>
-  </div>
-</div>
-
-<footer>
-  <p>© 2026 <a href="https://www.herehandyman.com">Here Handyman</a> · Westchester County, NY · <a href="tel:+15163500801">(516) 350-0801</a> · info@herehandyman.com</p>
-</footer>
-
-  <!-- Booking Module Script -->
+  <!-- Booking Engine Script -->
   <script type="module" src="/js/booking.js?v=8"></script>
 </body>
 </html>
