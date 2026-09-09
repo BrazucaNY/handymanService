@@ -21,6 +21,9 @@ if (document.readyState === 'loading') {
   initApp();
 }
 
+// Expose globally for direct inline fallback execution
+window.handleZipCheck = handleZipCheck;
+
 function initApp() {
   renderServices();
   setupEventListeners();

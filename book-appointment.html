@@ -952,7 +952,7 @@
 
       <div class="zip-box">
         <input type="text" id="zipInput" placeholder="e.g. 10601" maxlength="5" pattern="\d{5}"/>
-        <button id="zipSubmitBtn">Check Availability</button>
+        <button type="button" id="zipSubmitBtn" onclick="window.handleZipCheck && window.handleZipCheck()">Check Availability</button>
       </div>
       <div class="error-msg" id="zipError" style="margin-top:12px"></div>
     </div>
@@ -1327,6 +1327,6 @@ document.querySelectorAll('input[name="service"]').forEach(el => {
 
 /* ── Form submit ────────────────────────────────────── */
   <!-- Booking Module Script -->
-  <script type="module" src="/js/booking.js"></script>
+  <script type="module" src="/js/booking.js?v=3"></script>
 </body>
 </html>
