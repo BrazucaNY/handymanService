@@ -1,8 +1,7 @@
 // Server-Side Database Configuration (Netlify Functions Serverless Container)
-// 100% Free - No Netlify UI environment variable configuration or paid upgrade required!
+// 100% Free - Server-side database access for Here Handyman slot engine
 
 export const DB_CONFIG = {
-  // Replace these strings with your free Supabase project values when created:
-  SUPABASE_URL: process.env.SUPABASE_URL || "YOUR_SUPABASE_URL_HERE",
-  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || "YOUR_SUPABASE_SERVICE_ROLE_KEY_HERE"
+  SUPABASE_URL: process.env.SUPABASE_URL || "https://vvwnmiffuaxiazlskeya.supabase.co",
+  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc"
 };
