@@ -874,10 +874,10 @@
 
       <div class="hero-notice">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span>This is a <strong>booking request</strong>, not an instant booking. We'll contact you to confirm availability and send your free estimate before any work begins.</span>
+        <span>⚡ <strong>Real-Time Calendar Booking</strong>: Select your ZIP, pick an open time slot, and lock your handyman visit instantly — zero deposit required!</span>
       </div>
 
-      <a href="#booking-form" class="hero-cta">
+      <a href="#bookingWizard" class="hero-cta">
         Book My Appointment
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
@@ -891,7 +891,7 @@
 
         <div class="proof-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          No hidden fees
+          No deposit required
         </div>
         <div class="proof-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -912,34 +912,34 @@
         </div>
         <span class="hero-card-title">How booking works</span>
       </div>
-      <p class="hero-card-sub">From form to finished — here's the process.</p>
+      <p class="hero-card-sub">Reserve your slot in 4 simple steps.</p>
       <div class="hero-steps">
         <div class="hero-step">
           <div class="step-circle">01</div>
           <div class="step-body">
-            <strong>Submit your request</strong>
-            <span>Takes less than 3 minutes</span>
+            <strong>Enter your ZIP code</strong>
+            <span>Verify service availability in your town</span>
           </div>
         </div>
         <div class="hero-step">
           <div class="step-circle">02</div>
           <div class="step-body">
-            <strong>We call or text you</strong>
-            <span>Usually within a few hours</span>
+            <strong>Select service &amp; time slot</strong>
+            <span>Pick a live available arrival window</span>
           </div>
         </div>
         <div class="hero-step">
           <div class="step-circle">03</div>
           <div class="step-body">
-            <strong>You get a free estimate</strong>
-            <span>Firm price, no surprises</span>
+            <strong>Get instant confirmation code</strong>
+            <span>Slot is locked with zero deposit</span>
           </div>
         </div>
         <div class="hero-step">
           <div class="step-circle">04</div>
           <div class="step-body">
-            <strong>We show up &amp; get it done</strong>
-            <span>Clean, professional work</span>
+            <strong>David shows up &amp; gets it done</strong>
+            <span>Clean, professional, guaranteed work</span>
           </div>
         </div>
       </div>
@@ -952,27 +952,22 @@
   <div class="progress-inner">
     <div class="prog-step">
       <div class="prog-dot active" id="pd1"><span class="prog-num">1</span></div>
-      <span class="prog-label">Contact</span>
+      <span class="prog-label">ZIP Code</span>
     </div>
     <div class="prog-line" id="pl1"></div>
     <div class="prog-step">
       <div class="prog-dot" id="pd2"><span class="prog-num">2</span></div>
-      <span class="prog-label">Location</span>
+      <span class="prog-label">Service</span>
     </div>
     <div class="prog-line" id="pl2"></div>
     <div class="prog-step">
       <div class="prog-dot" id="pd3"><span class="prog-num">3</span></div>
-      <span class="prog-label">Service</span>
+      <span class="prog-label">Time Slot</span>
     </div>
     <div class="prog-line" id="pl3"></div>
     <div class="prog-step">
       <div class="prog-dot" id="pd4"><span class="prog-num">4</span></div>
-      <span class="prog-label">Schedule</span>
-    </div>
-    <div class="prog-line" id="pl4"></div>
-    <div class="prog-step">
-      <div class="prog-dot" id="pd5"><span class="prog-num">5</span></div>
-      <span class="prog-label">Submit</span>
+      <span class="prog-label">Confirm</span>
     </div>
   </div>
 </div>
@@ -992,10 +987,23 @@
       </div>
 
       <div class="zip-box">
-        <input type="text" id="zipInput" placeholder="e.g. 10601" maxlength="5" pattern="\d{5}"/>
-        <button type="button" id="zipSubmitBtn" onclick="window.handleZipCheck && window.handleZipCheck()">Check Availability</button>
+        <input type="text" id="zipInput" placeholder="e.g. 10601 (White Plains)" maxlength="5" pattern="\d{5}"/>
+        <button type="button" id="zipSubmitBtn" onclick="window.handleZipCheck && window.handleZipCheck()">Check Availability →</button>
       </div>
       <div class="error-msg" id="zipError" style="margin-top:12px"></div>
+
+      <div style="margin-top:20px; padding:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;">
+        <p style="font-size:0.78rem; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">📍 Serving All Westchester Towns:</p>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">White Plains (10601)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Scarsdale (10583)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Yonkers (10701)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Tarrytown (10591)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">Harrison (10528)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">New Rochelle (10801)</span>
+          <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:600; padding:3px 9px; border-radius:999px;">&amp; All Surrounding ZIPs</span>
+        </div>
+      </div>
     </div>
 
     <!-- STEP 2: Service Selection -->
@@ -1215,6 +1223,6 @@
 </footer>
 
   <!-- Booking Module Script -->
-  <script type="module" src="/js/booking.js?v=6"></script>
+  <script type="module" src="/js/booking.js?v=7"></script>
 </body>
 </html>

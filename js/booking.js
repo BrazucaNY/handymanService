@@ -27,7 +27,29 @@ window.handleZipCheck = handleZipCheck;
 function initApp() {
   renderServices();
   setupEventListeners();
+  setupFAQAccordion();
   updateStepUI();
+}
+
+function setupFAQAccordion() {
+  document.querySelectorAll('.faq-q').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        const answer = i.querySelector('.faq-a');
+        if (answer) answer.style.maxHeight = null;
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        const answer = item.querySelector('.faq-a');
+        if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
 }
 
 function setupEventListeners() {
