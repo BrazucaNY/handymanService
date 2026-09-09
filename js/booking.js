@@ -115,19 +115,31 @@ function renderServices() {
     <div class="service-card" data-id="${svc.id}">
       <div class="svc-icon">${svc.icon}</div>
       <div class="svc-details">
-        <h3>${svc.name}</h3>
-        <p class="svc-price">${svc.price} • ~${svc.duration} mins</p>
+        <div class="svc-title-row">
+          <h3>${svc.name}</h3>
+          <span class="svc-check">✓</span>
+        </div>
+        <p class="svc-desc">${svc.desc}</p>
+        <div class="svc-meta">
+          <span class="svc-duration">⏱️ ~${svc.duration} mins</span>
+          <span class="svc-badge">✨ Free On-Site Estimate</span>
+        </div>
       </div>
     </div>
   `).join('');
 
   container.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('click', () => {
+      container.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
       const id = card.getAttribute('data-id');
       state.service = CONFIG.services.find(s => s.id === id);
-      state.step = 3;
-      updateStepUI();
-      fetchAndRenderSlots();
+      
+      setTimeout(() => {
+        state.step = 3;
+        updateStepUI();
+        fetchAndRenderSlots();
+      }, 150);
     });
   });
 }
@@ -278,11 +290,29 @@ function updateStepUI() {
     el.style.display = (idx + 1 === state.step) ? 'block' : 'none';
   });
 
-  // Step Indicators
-  document.querySelectorAll('.step-dot').forEach((dot, idx) => {
-    dot.classList.toggle('active', idx + 1 === state.step);
-    dot.classList.toggle('completed', idx + 1 < state.step);
-  });
+  // Step Indicators in Progress Tracker Bar
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('pd' + i);
+    const line = document.getElementById('pl' + i);
+    if (!dot) continue;
+
+    if (i < state.step) {
+      dot.className = 'prog-dot done';
+      if (line) line.className = 'prog-line done';
+    } else if (i === state.step) {
+      dot.className = 'prog-dot active';
+      if (line) line.className = 'prog-line';
+    } else {
+      dot.className = 'prog-dot';
+      if (line) line.className = 'prog-line';
+    }
+  }
+
+  // Scroll to top of wizard on step change
+  const wizard = document.getElementById('bookingWizard');
+  if (wizard) {
+    wizard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 function showError(el, msg) {

@@ -21,14 +21,56 @@ export const CONFIG = {
     "10708"                                                // Bronxville
   ],
 
-  // Handyman Services & Job Durations
+  // Handyman Services with Descriptions & Durations (No rigid prices shown)
   services: [
-    { id: "tv", name: "TV Mounting & Cable Management", duration: 60, price: "From $99", icon: "📺" },
-    { id: "furniture", name: "Furniture Assembly (IKEA, Wayfair)", duration: 60, price: "From $85", icon: "🛋️" },
-    { id: "drywall", name: "Drywall & Hole Repair", duration: 120, price: "From $150", icon: "🔨" },
-    { id: "painting", name: "Interior Painting & Patching", duration: 120, price: "From $175", icon: "🎨" },
-    { id: "electrical", name: "Light Fixture & Dimmer Replacement", duration: 60, price: "From $95", icon: "💡" },
-    { id: "plumbing", name: "Faucet, Toilet & Sink Repair", duration: 60, price: "From $95", icon: "🔧" },
-    { id: "general", name: "General Handyman Punch-List", duration: 180, price: "From $180", icon: "🧰" }
+    { 
+      id: "tv", 
+      name: "TV Mounting & Cable Management", 
+      desc: "Flat-screen TV mounting on drywall, brick, or studs with in-wall wire hiding & soundbars.",
+      duration: 60, 
+      icon: "📺" 
+    },
+    { 
+      id: "furniture", 
+      name: "Furniture Assembly", 
+      desc: "IKEA, Wayfair, Target & Amazon flat-pack beds, dressers, tables, desks & bookshelves.",
+      duration: 60, 
+      icon: "🛋️" 
+    },
+    { 
+      id: "drywall", 
+      name: "Drywall & Hole Repair", 
+      desc: "Wall hole patching, spackling, seam taping, water stain prep, and smooth sanding.",
+      duration: 120, 
+      icon: "🔨" 
+    },
+    { 
+      id: "painting", 
+      name: "Interior Painting & Touch-ups", 
+      desc: "Accent walls, room painting, baseboard trim, door refinishing, and dent repair.",
+      duration: 120, 
+      icon: "🎨" 
+    },
+    { 
+      id: "electrical", 
+      name: "Light Fixture & Dimmer Replacement", 
+      desc: "Ceiling light fixtures, chandeliers, smart switches, outlets, and ceiling fans.",
+      duration: 60, 
+      icon: "💡" 
+    },
+    { 
+      id: "plumbing", 
+      name: "Faucet, Toilet & Sink Repair", 
+      desc: "Bathroom faucet upgrades, leak fixes, toilet valve replacement, and garbage disposals.",
+      duration: 60, 
+      icon: "🔧" 
+    },
+    { 
+      id: "general", 
+      name: "General Handyman Punch-List", 
+      desc: "Multi-item repair list: door adjustment, curtain rods, picture hanging & general fixes.",
+      duration: 180, 
+      icon: "🧰" 
+    }
   ]
 };
