@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18119699321"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -9,7 +8,6 @@
     gtag('js', new Date());
     gtag('config', 'AW-18119699321');
   </script>
-  <!-- Google Analytics & Conversion Event Tracking -->
   <script>
   (function(){
     let loaded=false;
@@ -25,17 +23,16 @@
     setTimeout(loadGA,4000);
     ['scroll','mousemove','touchstart','keydown'].forEach(e=>window.addEventListener(e,loadGA,{once:true}));
   })();
-
   document.addEventListener('DOMContentLoaded', function() {
     window.dataLayer = window.dataLayer || [];
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
       el.addEventListener('click', function() {
-        window.dataLayer.push({ 'event': 'phone_call_click', 'event_category': 'conversion', 'event_label': el.getAttribute('href'), 'value': 1 });
+        window.dataLayer.push({ event: 'phone_call_click', event_category: 'conversion', event_label: el.getAttribute('href'), value: 1 });
       });
     });
     document.querySelectorAll('form').forEach(function(form) {
       form.addEventListener('submit', function() {
-        window.dataLayer.push({ 'event': 'generate_lead', 'event_category': 'conversion', 'event_label': 'Appointment Form Submission', 'value': 1 });
+        window.dataLayer.push({ event: 'generate_lead', event_category: 'conversion', event_label: 'Appointment Form Submission', value: 1 });
       });
     });
   });
@@ -43,637 +40,780 @@
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <meta name="description" content="Book a professional handyman in Westchester County NY. Instant online scheduling with live open time slots."/>
-  <meta name="robots" content="index, follow"/>
-  <title>Book a Handyman Visit | Here Handyman</title>
+  <title>Book a Handyman in Westchester NY | Online Appointment | Here Handyman</title>
+  <meta name="description" content="Book a licensed-quality handyman visit in Westchester County, NY. Instant online scheduling, same-day slots, free on-site estimate. Call (516) 350-0801."/>
+  <meta name="robots" content="index, follow, max-image-preview:large"/>
+  <meta name="author" content="Here Handyman"/>
+  <meta name="geo.region" content="US-NY"/>
+  <meta name="geo.placename" content="White Plains, Westchester County"/>
   <link rel="canonical" href="https://www.herehandyman.com/book"/>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
+  <link rel="alternate" hreflang="en" href="https://www.herehandyman.com/book"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/favicon.png"/>
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Book a Handyman Visit | Here Handyman"/>
-  <meta property="og:description" content="Schedule your handyman visit in Westchester County NY. Instant calendar booking."/>
+  <meta property="og:description" content="Schedule your Westchester County handyman visit online. Same-day and next-day arrival windows when available."/>
   <meta property="og:url" content="https://www.herehandyman.com/book"/>
   <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="Here Handyman"/>
   <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Book a Handyman Visit | Here Handyman"/>
+  <meta name="twitter:description" content="Instant online booking for Westchester County, NY. Call (516) 350-0801."/>
+  <meta name="twitter:image" content="https://www.herehandyman.com/assets/images/og-image.jpg"/>
 
-  <!-- Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "name": "Here Handyman",
-    "url": "https://www.herehandyman.com",
-    "telephone": "+15163500801",
-    "image": "https://www.herehandyman.com/assets/images/og-image.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "White Plains",
-      "addressRegion": "NY",
-      "postalCode": "10601",
-      "addressCountry": "US"
-    },
-    "potentialAction": {
-      "@type": "ReserveAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://www.herehandyman.com/book",
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform"
+    "@graph": [
+      {
+        "@type": ["HomeAndConstructionBusiness", "LocalBusiness"],
+        "@id": "https://www.herehandyman.com/#business",
+        "name": "Here Handyman",
+        "legalName": "Here Handyman",
+        "url": "https://www.herehandyman.com",
+        "image": "https://www.herehandyman.com/assets/images/og-image.jpg",
+        "logo": "https://www.herehandyman.com/favicon.png",
+        "telephone": "+15163500801",
+        "email": "info@herehandyman.com",
+        "currenciesAccepted": "USD",
+        "paymentAccepted": "Cash, Check, Credit Card, Zelle, Venmo",
+        "foundingDate": "2003",
+        "description": "Owner-operated handyman serving Westchester County, NY. Furniture assembly, TV mounting, drywall, painting, fixture-level electrical and plumbing, outdoor assembly, and general home repairs.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "White Plains",
+          "addressRegion": "NY",
+          "postalCode": "10601",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          {"@type": "AdministrativeArea", "name": "Westchester County, NY"},
+          {"@type": "City", "name": "White Plains, NY"},
+          {"@type": "City", "name": "Scarsdale, NY"},
+          {"@type": "City", "name": "Hartsdale, NY"},
+          {"@type": "City", "name": "Harrison, NY"},
+          {"@type": "City", "name": "Bronxville, NY"},
+          {"@type": "City", "name": "Eastchester, NY"},
+          {"@type": "City", "name": "Larchmont, NY"},
+          {"@type": "City", "name": "Rye, NY"},
+          {"@type": "City", "name": "Mamaroneck, NY"},
+          {"@type": "City", "name": "Tarrytown, NY"},
+          {"@type": "City", "name": "Dobbs Ferry, NY"},
+          {"@type": "City", "name": "Ardsley, NY"},
+          {"@type": "City", "name": "Elmsford, NY"}
+        ],
+        "openingHoursSpecification": [
+          {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "07:00", "closes": "20:00"}
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "bestRating": "5",
+          "worstRating": "1",
+          "reviewCount": "18"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Handyman services",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Furniture Assembly"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "TV Mounting"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Drywall Repair and Interior Painting"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Carpentry and Shelving"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Electrical Fixture Installation"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Plumbing Fixture Installation"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Outdoor Assembly"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Gutter Cleaning and Guards"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Smart Home Setup"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "General Home Repairs"}}
+          ]
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+15163500801",
+          "contactType": "customer service",
+          "availableLanguage": ["English", "Spanish", "Portuguese"],
+          "areaServed": "US-NY",
+          "hoursAvailable": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "07:00",
+            "closes": "20:00"
+          }
+        },
+        "potentialAction": {
+          "@type": "ReserveAction",
+          "name": "Book a handyman appointment",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.herehandyman.com/book",
+            "inLanguage": "en-US",
+            "actionPlatform": [
+              "http://schema.org/DesktopWebPlatform",
+              "http://schema.org/MobileWebPlatform"
+            ]
+          },
+          "result": {
+            "@type": "Reservation",
+            "name": "Handyman Service Appointment"
+          }
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.herehandyman.com/book#webpage",
+        "url": "https://www.herehandyman.com/book",
+        "name": "Book a Handyman Visit | Here Handyman",
+        "description": "Instant online booking for handyman visits across Westchester County, NY.",
+        "isPartOf": {"@id": "https://www.herehandyman.com/#business"},
+        "about": {"@id": "https://www.herehandyman.com/#business"},
+        "primaryImageOfPage": "https://www.herehandyman.com/assets/images/og-image.jpg",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": [".hero-copy h1", ".nap-block"]
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.herehandyman.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Book Appointment", "item": "https://www.herehandyman.com/book"}
         ]
       },
-      "result": {
-        "@type": "Reservation",
-        "name": "Handyman Service Appointment"
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I book a handyman appointment in Westchester County?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Enter your ZIP code on this page, choose a service, pick an open arrival window, and confirm your name, phone, and address. You can also call or text (516) 350-0801."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer same-day handyman service?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Same-day and next-day arrival windows are often available. Live slots show on this booking calendar. For urgent work, call (516) 350-0801."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the estimate free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You get a free on-site estimate and a firm quote before work starts. No hidden fees."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What towns does Here Handyman serve?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "White Plains, Scarsdale, Hartsdale, Harrison, Bronxville, Eastchester, Larchmont, Rye, Mamaroneck, Tarrytown, Dobbs Ferry, Ardsley, Elmsford, and nearby Westchester County communities."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are your hours?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Monday through Sunday, 7:00 AM to 8:00 PM. Call or text (516) 350-0801 anytime during those hours."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who will come to my house?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Owner David comes himself. 23-plus years on the tools. Fully insured. English, Spanish, and Portuguese spoken."
+            }
+          }
+        ]
       }
-    }
+    ]
   }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
-  
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --navy:#071828;
       --navy-light:#0e2a47;
-      --orange:#eab308;
-      --orange2:#facc15;
+      --gold:#eab308;
+      --gold-2:#facc15;
       --white:#ffffff;
-      --bg:#f4f7fb;
-      --border:#e2e8f0;
-      --text-dark:#0f172a;
-      --text-muted:#64748b;
+      --bg:#f6f0e6;
+      --cream:#f9f5ef;
+      --border:rgba(7,24,40,.1);
+      --text-dark:#243040;
+      --text-muted:#5b6774;
       --red:#dc2626;
       --radius:16px;
     }
+    html{scroll-behavior:smooth}
     body{
       font-family:'DM Sans',sans-serif;
       background:var(--bg);
       color:var(--text-dark);
       min-height:100vh;
-      display:flex;
-      flex-direction:column;
+      line-height:1.55;
     }
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font-family:inherit}
+    h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);line-height:.95}
 
-    /* ── Top Bar ── */
-    header.standalone-header{
-      background:var(--navy);
-      height:64px;
-      padding:0 5%;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .brand-logo{
-      font-family:'Bebas Neue',sans-serif;
-      font-size:24px;
-      color:var(--white);
-      letter-spacing:1.5px;
-      text-decoration:none;
-    }
-    .brand-logo span{color:var(--orange)}
-    .header-phone{
-      background:var(--orange);
-      color:var(--navy);
-      font-weight:800;
-      font-size:13px;
-      padding:8px 18px;
-      border-radius:999px;
-      text-decoration:none;
-      transition:transform 0.2s,background 0.2s;
-    }
-    .header-phone:hover{background:var(--orange2);transform:scale(1.03)}
+    nav{position:sticky;top:0;z-index:40;background:var(--navy);color:#fff;border-bottom:3px solid var(--gold);box-shadow:0 10px 30px rgba(7,24,40,.28)}
+    .nav-inner{max-width:1180px;margin:0 auto;padding:16px 22px;display:flex;align-items:center;gap:16px}
+    .logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.06em;color:#fff}
+    .logo span{color:var(--gold)}
+    .nav-links{margin-left:auto;display:flex;align-items:center;gap:8px}
+    .nav-links a{color:rgba(255,255,255,.86);padding:8px 12px;font-weight:600;font-size:14px}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold-2)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;background:var(--gold);color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:4px;font-size:13px;border:0;cursor:pointer;box-shadow:0 8px 18px rgba(234,179,8,.28)}
+    .btn:hover{background:var(--gold-2)}
+    .btn.light{background:#fff;color:var(--navy);box-shadow:none}
+    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.28);box-shadow:none}
+    .mobile-call,.burger,.mobile-bar{display:none}
 
-    /* ── Main Container ── */
-    main.standalone-main{
-      flex:1;
-      max-width:800px;
-      width:100%;
-      margin:0 auto;
-      padding:40px 20px 60px;
+    .hero{
+      position:relative;overflow:hidden;color:#fff;padding:64px 22px 56px;
+      background:
+        linear-gradient(115deg,rgba(7,24,40,.92) 0%,rgba(7,24,40,.78) 48%,rgba(7,24,40,.55) 100%),
+        url("https://www.herehandyman.com/assets/images/before-after/herehandyman_garage_after.webp") center/cover no-repeat,
+        var(--navy);
     }
+    .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18px;background:linear-gradient(90deg,var(--gold),transparent 40%,var(--gold) 80%,transparent)}
+    .hero-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;position:relative;z-index:1}
+    .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:14px}
+    .hero h1{font-size:clamp(46px,7vw,86px);color:#fff}
+    .hero h1 em{color:var(--gold);font-style:normal}
+    .lede{max-width:560px;margin-top:16px;color:rgba(255,255,255,.86);font-size:18px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+    .hero-stats{display:flex;gap:22px;margin-top:32px;flex-wrap:wrap}
+    .hero-stats div{min-width:110px;padding:12px 0 0;border-top:2px solid rgba(234,179,8,.55)}
+    .hero-stats b{display:block;font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);letter-spacing:.04em}
+    .hero-stats span{font-size:13px;color:rgba(255,255,255,.7)}
+    .hero-aside{display:flex;flex-direction:column;gap:14px}
+    .nap-card{
+      background:rgba(7,24,40,.72);border:1px solid rgba(234,179,8,.35);border-radius:18px;
+      padding:24px 24px 20px;backdrop-filter:blur(10px);box-shadow:0 18px 40px rgba(0,0,0,.28)
+    }
+    .nap-card h2{color:var(--gold);font-size:26px;margin-bottom:10px}
+    .nap-phone{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.04em;color:#fff;display:block;margin:6px 0 10px}
+    .nap-block p,.nap-card p{color:rgba(255,255,255,.86);font-size:14.5px;margin-bottom:8px}
+    .nap-card a{color:var(--gold-2);font-weight:700}
+    .hero-shots{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .hero-shots img{height:118px;width:100%;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.18)}
 
-    /* Heading Box */
-    .page-title-wrap{
-      text-align:center;
-      margin-bottom:28px;
-    }
+    .trust-strip{background:#fff;border-bottom:1px solid var(--border);box-shadow:0 10px 24px rgba(7,24,40,.04)}
+    .trust-inner{max-width:1180px;margin:0 auto;padding:18px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .trust-item{display:flex;gap:10px;align-items:center;font-size:13px;font-weight:800;color:var(--navy);letter-spacing:.02em;text-transform:uppercase}
+    .trust-dot{width:28px;height:28px;border-radius:50%;background:rgba(234,179,8,.2);border:1px solid rgba(234,179,8,.55);color:#8a6500;display:grid;place-items:center;font-size:13px;flex-shrink:0;font-weight:900}
+
+    .layout{max-width:1180px;margin:0 auto;padding:42px 22px 72px;display:grid;grid-template-columns:minmax(0,1.15fr) 340px;gap:28px;align-items:start}
+    .page-title-wrap{margin-bottom:18px}
     .demo-pill{
-      display:inline-block;
-      background:rgba(234,179,8,0.18);
-      border:1px solid rgba(234,179,8,0.4);
-      color:#b45309;
-      font-size:11px;
-      font-weight:800;
-      letter-spacing:1.5px;
-      text-transform:uppercase;
-      padding:5px 14px;
-      border-radius:999px;
-      margin-bottom:12px;
+      display:inline-block;background:rgba(234,179,8,.18);border:1px solid rgba(234,179,8,.4);
+      color:#8a6500;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+      padding:5px 14px;border-radius:999px;margin-bottom:10px
     }
-    .page-title-wrap h1{
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(2.4rem,5vw,3.6rem);
-      color:var(--navy);
-      letter-spacing:1px;
-      line-height:1;
-      margin-bottom:8px;
-    }
-    .page-title-wrap p{
-      color:var(--text-muted);
-      font-size:0.95rem;
-    }
+    .page-title-wrap h2{font-size:clamp(2.1rem,4vw,3.1rem);margin-bottom:6px}
+    .page-title-wrap p{color:var(--text-muted);font-size:.95rem}
 
-    /* ── Standalone Card ── */
     .standalone-card{
-      background:var(--white);
-      border-radius:20px;
-      box-shadow:0 16px 45px rgba(7,24,40,0.08);
-      border:1px solid var(--border);
-      padding:32px;
+      background:var(--white);border-radius:22px;box-shadow:0 24px 55px rgba(7,24,40,.1);
+      border:1px solid var(--border);padding:32px;position:relative;overflow:hidden
     }
-    @media (max-width: 600px) {
-      .standalone-card{padding:20px 16px; border-radius:16px;}
-    }
+    .standalone-card::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--gold-2),var(--gold))}
 
-    /* ── 4 Tabs Progress Header ── */
     .tabs-header{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:8px;
-      margin-bottom:28px;
-      background:#f8fafc;
-      padding:6px;
-      border-radius:12px;
-      border:1px solid #e2e8f0;
-    }
-    @media (max-width: 540px) {
-      .tabs-header{gap:4px; padding:4px;}
+      display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:28px;
+      background:#f8f5ef;padding:6px;border-radius:12px;border:1px solid var(--border)
     }
     .prog-dot{
-      padding:10px 6px;
-      border-radius:8px;
-      text-align:center;
-      font-size:0.8rem;
-      font-weight:700;
-      color:var(--text-muted);
-      background:transparent;
-      transition:all 0.25s ease;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      padding:10px 6px;border-radius:8px;text-align:center;font-size:.8rem;font-weight:700;
+      color:var(--text-muted);background:transparent;transition:all .25s ease;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis
     }
-    @media (max-width: 480px) {
-      .prog-dot{font-size:0.72rem; padding:8px 2px;}
-    }
-    .prog-dot.active{
-      background:var(--navy);
-      color:var(--white);
-      box-shadow:0 4px 12px rgba(7,24,40,0.15);
-    }
-    .prog-dot.done{
-      background:rgba(234,179,8,0.2);
-      color:var(--navy);
-      font-weight:800;
-    }
+    .prog-dot.active{background:var(--navy);color:var(--white);box-shadow:0 4px 12px rgba(7,24,40,.15)}
+    .prog-dot.done{background:rgba(234,179,8,.2);color:var(--navy);font-weight:800}
 
-    /* Step Labels & Titles */
-    .step-label-title{
-      font-size:0.9rem;
-      font-weight:700;
-      color:var(--text-dark);
-      margin-bottom:12px;
-    }
-
-    /* Inputs & Buttons */
+    .step-label-title{font-size:.9rem;font-weight:700;color:var(--text-dark);margin-bottom:12px}
     .zip-input-field{
-      width:100%;
-      padding:16px 20px;
-      border-radius:12px;
-      border:1.5px solid var(--border);
-      font-size:1.1rem;
-      font-weight:600;
-      color:var(--navy);
-      outline:none;
-      transition:border-color 0.2s,box-shadow 0.2s;
+      width:100%;padding:16px 20px;border-radius:12px;border:1.5px solid var(--border);
+      font-size:1.1rem;font-weight:600;color:var(--navy);outline:none;background:#fffaf3
     }
-    .zip-input-field:focus{
-      border-color:var(--orange);
-      box-shadow:0 0 0 4px rgba(234,179,8,0.15);
-    }
+    .zip-input-field:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(234,179,8,.15)}
     .btn-full-navy{
-      width:100%;
-      padding:16px 24px;
-      background:var(--navy);
-      color:var(--white);
-      border-radius:12px;
-      font-size:1rem;
-      font-weight:800;
-      border:none;
-      cursor:pointer;
-      transition:background 0.2s,transform 0.15s;
-      margin-top:16px;
+      width:100%;padding:16px 24px;background:var(--navy);color:var(--white);border-radius:12px;
+      font-size:1rem;font-weight:800;border:none;cursor:pointer;margin-top:16px
     }
-    .btn-full-navy:hover:not(:disabled){
-      background:var(--navy-light);
-      transform:translateY(-1px);
-    }
-    .btn-full-navy:disabled{
-      opacity:0.5;
-      cursor:not-allowed;
-    }
-
-    .step-footnote{
-      font-size:0.78rem;
-      color:var(--text-muted);
-      margin-top:14px;
-      text-align:center;
-      line-height:1.5;
-    }
-
-    /* Back Button */
+    .btn-full-navy:hover:not(:disabled){background:var(--navy-light);transform:translateY(-1px)}
+    .btn-full-navy:disabled{opacity:.5;cursor:not-allowed}
+    .step-footnote{font-size:.78rem;color:var(--text-muted);margin-top:14px;text-align:center;line-height:1.5}
     .back-btn{
-      background:none;
-      border:none;
-      color:var(--text-muted);
-      font-weight:700;
-      font-size:0.85rem;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:4px;
-      margin-bottom:16px;
+      background:none;border:none;color:var(--text-muted);font-weight:700;font-size:.85rem;
+      cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-bottom:16px
     }
     .back-btn:hover{color:var(--navy)}
 
-    /* Service Cards Grid */
-    .services-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:14px;
-      margin-top:16px;
-    }
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px}
     .service-card{
-      background:#ffffff;
-      border:2px solid #e2e8f0;
-      border-radius:14px;
-      padding:16px;
-      cursor:pointer;
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
-      transition:all 0.2s ease;
+      background:#fff;border:2px solid #e2e8f0;border-radius:14px;padding:16px;cursor:pointer;
+      display:flex;gap:14px;align-items:flex-start;transition:all .2s ease
     }
-    .service-card:hover{
-      border-color:var(--orange);
-      transform:translateY(-2px);
-      box-shadow:0 8px 24px rgba(7,24,40,0.06);
-    }
-    .service-card.selected{
-      border-color:var(--orange);
-      background:rgba(234,179,8,0.06);
-      box-shadow:0 0 0 3px rgba(234,179,8,0.18);
-    }
+    .service-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px rgba(7,24,40,.06)}
+    .service-card.selected{border-color:var(--gold);background:rgba(234,179,8,.06);box-shadow:0 0 0 3px rgba(234,179,8,.18)}
     .svc-icon{
-      width:44px;
-      height:44px;
-      border-radius:12px;
-      background:rgba(7,24,40,0.06);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:1.4rem;
-      flex-shrink:0;
+      width:44px;height:44px;border-radius:12px;background:rgba(7,24,40,.06);
+      display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0
     }
     .svc-details{flex:1}
-    .svc-title-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:6px;
-      margin-bottom:4px;
-    }
-    .svc-title-row h3{
-      font-size:0.95rem;
-      font-weight:800;
-      color:var(--navy);
-      line-height:1.3;
-    }
+    .svc-title-row{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:4px}
+    .svc-title-row h3{font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:800;color:var(--navy);line-height:1.3;text-transform:none;letter-spacing:0}
     .svc-check{
-      width:20px;
-      height:20px;
-      border-radius:50%;
-      border:2px solid #cbd5e1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:900;
-      font-size:11px;
-      color:transparent;
-      transition:all 0.2s;
-      flex-shrink:0;
+      width:20px;height:20px;border-radius:50%;border:2px solid #cbd5e1;display:flex;
+      align-items:center;justify-content:center;font-weight:900;font-size:11px;color:transparent;flex-shrink:0
     }
-    .service-card.selected .svc-check{
-      background:var(--orange);
-      border-color:var(--orange);
-      color:var(--navy);
-    }
-    .svc-desc{
-      font-size:0.8rem;
-      color:#64748b;
-      line-height:1.45;
-      margin-bottom:8px;
-    }
-    .svc-meta{
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      gap:6px;
-    }
-    .svc-duration{
-      background:#f1f5f9;
-      padding:3px 8px;
-      border-radius:999px;
-      font-size:0.72rem;
-      font-weight:700;
-      color:#475569;
-    }
-    .svc-badge{
-      background:rgba(234,179,8,0.15);
-      border:1px solid rgba(234,179,8,0.35);
-      padding:3px 8px;
-      border-radius:999px;
-      font-size:0.72rem;
-      font-weight:800;
-      color:#ca8a04;
-    }
+    .service-card.selected .svc-check{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+    .svc-desc{font-size:.8rem;color:#64748b;line-height:1.45;margin-bottom:8px}
+    .svc-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+    .svc-duration{background:#f1f5f9;padding:3px 8px;border-radius:999px;font-size:.72rem;font-weight:700;color:#475569}
+    .svc-badge{background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.35);padding:3px 8px;border-radius:999px;font-size:.72rem;font-weight:800;color:#ca8a04}
 
-    /* Slots Grid */
-    .slots-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
-      gap:10px;
-      margin-top:16px;
-    }
+    .slots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:16px}
     .slot-pill{
-      padding:12px 10px;
-      border-radius:10px;
-      border:1.5px solid var(--border);
-      background:#f8fbff;
-      font-weight:700;
-      color:var(--navy);
-      font-size:0.9rem;
-      cursor:pointer;
-      text-align:center;
-      transition:all 0.2s;
+      padding:12px 10px;border-radius:10px;border:1.5px solid var(--border);background:#fffaf3;
+      font-weight:700;color:var(--navy);font-size:.9rem;cursor:pointer;text-align:center
     }
-    .slot-pill:hover{
-      border-color:var(--orange);
-      background:rgba(234,179,8,0.08);
-    }
-    .slot-pill.selected{
-      border-color:var(--orange);
-      background:var(--orange);
-      color:var(--navy);
-      box-shadow:0 0 0 3px rgba(234,179,8,0.25);
-    }
+    .slot-pill:hover{border-color:var(--gold);background:rgba(234,179,8,.08)}
+    .slot-pill.selected{border-color:var(--gold);background:var(--gold);color:var(--navy);box-shadow:0 0 0 3px rgba(234,179,8,.25)}
 
-    /* Custom Callout Box */
     .custom-time-callout{
-      margin-top:16px;
-      background:#fefce8;
-      border:1px solid #fde047;
-      border-radius:12px;
-      padding:12px 14px;
-      display:flex;
-      gap:10px;
-      align-items:center;
+      margin-top:16px;background:#fefce8;border:1px solid #fde047;border-radius:12px;
+      padding:12px 14px;display:flex;gap:10px;align-items:center
     }
-    .callout-icon{font-size:1.3rem;flex-shrink:0}
-    .callout-body strong{color:var(--navy);font-size:0.84rem;display:block;margin-bottom:2px}
-    .callout-body p{color:#64748b;font-size:0.78rem;line-height:1.4;margin-bottom:8px}
+    .callout-icon{font-size:1.1rem;flex-shrink:0;font-weight:800;color:var(--navy)}
+    .callout-body strong{color:var(--navy);font-size:.84rem;display:block;margin-bottom:2px}
+    .callout-body p{color:#64748b;font-size:.78rem;line-height:1.4;margin-bottom:8px}
     .callout-btns{display:flex;flex-wrap:wrap;gap:8px}
     .btn-callout-phone{
-      background:var(--navy);
-      color:var(--white);
-      font-weight:700;
-      font-size:0.76rem;
-      padding:6px 14px;
-      border-radius:999px;
-      text-decoration:none;
-      transition:background 0.2s;
+      background:var(--navy);color:#fff;font-weight:700;font-size:.76rem;padding:6px 14px;
+      border-radius:999px;text-decoration:none
     }
-    .btn-callout-phone:hover{background:var(--orange);color:var(--navy)}
+    .btn-callout-phone:hover{background:var(--gold);color:var(--navy)}
     .btn-callout-sms{
-      background:rgba(234,179,8,0.18);
-      border:1px solid rgba(234,179,8,0.5);
-      color:var(--navy);
-      font-weight:700;
-      font-size:0.76rem;
-      padding:6px 14px;
-      border-radius:999px;
-      text-decoration:none;
-      transition:background 0.2s;
+      background:rgba(234,179,8,.18);border:1px solid rgba(234,179,8,.5);color:var(--navy);
+      font-weight:700;font-size:.76rem;padding:6px 14px;border-radius:999px
     }
-    .btn-callout-sms:hover{background:var(--orange)}
+    .btn-callout-sms:hover{background:var(--gold)}
 
-    /* Form Fields Stack */
     .fields-stack{display:flex;flex-direction:column;gap:14px;margin-top:16px}
     .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width: 520px){.field-row{grid-template-columns:1fr}}
     .field-group{display:flex;flex-direction:column;gap:5px}
-    .field-label{font-size:0.8rem;font-weight:700;color:#334155}
+    .field-label{font-size:.8rem;font-weight:700;color:#334155}
     .req{color:var(--red)}
     .field-input{
-      padding:12px 14px;
-      border-radius:10px;
-      border:1.5px solid var(--border);
-      font-size:0.95rem;
-      color:var(--navy);
-      font-family:'DM Sans',sans-serif;
-      outline:none;
-      transition:border-color 0.2s;
+      padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:.95rem;
+      color:var(--navy);outline:none;background:#fffaf3
     }
-    .field-input:focus{border-color:var(--orange)}
+    .field-input:focus{border-color:var(--gold)}
     textarea.field-input{resize:vertical;min-height:90px}
+    .error-msg{font-size:.8rem;color:var(--red);font-weight:700;margin-top:8px;display:none}
 
-    .error-msg{
-      font-size:0.8rem;
-      color:var(--red);
-      font-weight:700;
-      margin-top:8px;
-      display:none;
-    }
-
-    /* Confirmation Screen */
     .confirmation-card{text-align:center;padding:24px 10px}
-    .confirm-icon{font-size:3rem;margin-bottom:12px}
+    .confirm-icon{font-size:2rem;margin-bottom:12px;font-weight:800;color:#15803d}
     .confirm-id{
-      background:rgba(234,179,8,0.15);
-      border:1px solid rgba(234,179,8,0.4);
-      border-radius:10px;
-      padding:8px 18px;
-      display:inline-block;
-      font-size:1rem;
-      margin:14px 0;
-      color:var(--navy);
+      background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.4);border-radius:10px;
+      padding:8px 18px;display:inline-block;font-size:1rem;margin:14px 0;color:var(--navy)
     }
     .summary-box{
-      background:#f8fbff;
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:16px;
-      text-align:left;
-      margin:16px 0;
-      font-size:0.9rem;
-      line-height:1.7;
+      background:#fffaf3;border:1px solid var(--border);border-radius:12px;padding:16px;
+      text-align:left;margin:16px 0;font-size:.9rem;line-height:1.7
+    }
+    .next-steps{margin-top:12px}
+    .btn-review{
+      display:inline-flex;margin-top:14px;background:var(--gold);color:var(--navy);
+      font-weight:800;padding:12px 18px;border-radius:10px
     }
 
-    footer.standalone-footer{
-      text-align:center;
-      padding:24px 20px;
-      font-size:0.8rem;
-      color:var(--text-muted);
+    .side-stack{display:flex;flex-direction:column;gap:16px;position:sticky;top:92px}
+    .side-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px 22px;box-shadow:0 12px 28px rgba(7,24,40,.05);position:relative;overflow:hidden}
+    .side-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--gold)}
+    .side-card h3{font-size:22px;margin-bottom:12px}
+    .side-card p,.side-card li{font-size:14px;color:var(--text-muted);margin-bottom:8px}
+    .side-card a{color:var(--navy);font-weight:700}
+    .side-card ul{list-style:none}
+    .side-card li{padding-left:14px;position:relative}
+    .side-card li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+    .hours-row{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:6px 0;border-bottom:1px solid var(--border);color:var(--navy);font-weight:700}
+    .hours-row:last-child{border-bottom:0}
+    .towns{display:flex;flex-wrap:wrap;gap:6px}
+    .towns span{background:#fff6d6;border:1px solid rgba(234,179,8,.35);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;color:var(--navy)}
+
+    .work{padding:0 22px 56px;max-width:1180px;margin:0 auto}
+    .work h2{font-size:42px;margin-bottom:8px}
+    .work .sub{color:var(--text-muted);margin-bottom:22px}
+    .work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .work-grid a{display:block;position:relative;overflow:hidden;border-radius:14px;min-height:170px;background:#0c2438}
+    .work-grid img{width:100%;height:170px;object-fit:cover;transition:transform .35s ease}
+    .work-grid a:hover img{transform:scale(1.06)}
+    .work-grid span{position:absolute;left:10px;bottom:10px;background:rgba(7,24,40,.82);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:4px}
+
+    .how{background:#fff;border-bottom:1px solid var(--border);padding:18px 22px 16px}
+    .how-top{box-shadow:0 8px 18px rgba(7,24,40,.04)}
+    .how-inner{max-width:1180px;margin:0 auto}
+    .how h2{font-size:26px;margin-bottom:4px}
+    .how .sub{color:var(--text-muted);margin-bottom:10px;font-size:13px}
+    .how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .how-card{border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:var(--cream);position:relative;overflow:hidden}
+    .how-card::after{display:none}
+    .how-card b{display:inline-block;width:auto;height:auto;border-radius:0;background:none;color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:16px;margin-bottom:2px;place-items:unset}
+    .how-card h3{font-size:16px;margin-bottom:3px}
+    .how-card p{font-size:12px;color:var(--text-muted);line-height:1.35}
+
+    .faq{max-width:1180px;margin:0 auto;padding:12px 22px 72px}
+    .faq h2{font-size:42px;margin-bottom:18px}
+    .faq-item{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;box-shadow:0 8px 18px rgba(7,24,40,.04)}
+    .faq-q{
+      width:100%;text-align:left;background:none;border:0;padding:16px 18px;font-weight:800;
+      color:var(--navy);cursor:pointer;font-size:15px
     }
-    footer.standalone-footer a{color:var(--navy);text-decoration:none;font-weight:700}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .28s ease;padding:0 18px;color:var(--text-muted);font-size:14.5px}
+    .faq-item.open .faq-a{padding-bottom:16px}
+
+    .cta{background:radial-gradient(700px 280px at 80% -20%,rgba(234,179,8,.2),transparent 55%),var(--navy);color:#fff;text-align:center;padding:72px 22px;position:relative}
+    .cta::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--gold)}
+    .cta h2{color:#fff;font-size:48px;margin-bottom:10px}
+    .cta p{opacity:.85;margin-bottom:26px}
+    .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+    footer{background:#041018;color:rgba(255,255,255,.8);padding:48px 22px 96px}
+    .foot-grid{max-width:1180px;margin:0 auto 28px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px}
+    footer h4{color:var(--gold);font-size:20px;margin-bottom:10px}
+    footer a{color:#fff}
+    footer li{list-style:none;margin-bottom:8px}
+    .copy{text-align:center;opacity:.55;font-size:13px}
+
+    @media (max-width: 960px){
+      .hero-inner,.layout,.how-grid,.foot-grid,.trust-inner,.work-grid{grid-template-columns:1fr 1fr}
+      .layout{grid-template-columns:1fr}
+      .side-stack{position:static}
+    }
+    @media (max-width: 720px){
+      .nav-links{position:fixed;inset:0 0 0 auto;width:min(320px,86vw);background:rgba(7,24,40,.98);flex-direction:column;align-items:stretch;padding:84px 18px 24px;transform:translateX(110%);transition:transform .28s ease;gap:8px}
+      .nav-links.on{transform:none}
+      .nav-links a{text-align:left;background:rgba(255,255,255,.05);border-radius:10px;padding:14px 16px}
+      .burger{display:flex;flex-direction:column;gap:5px;margin-left:8px;padding:10px}
+      .burger i{width:18px;height:2px;background:#fff;display:block}
+      .mobile-call{display:inline-flex;margin-left:auto;border:1px solid rgba(234,179,8,.5);color:var(--gold-2);padding:7px 13px;border-radius:999px;font-weight:700;font-size:13px}
+      .hero-inner,.how-grid,.foot-grid,.trust-inner,.field-row,.work-grid{grid-template-columns:1fr}
+      .hero{padding:40px 18px 36px}
+      .hero-shots{display:none}
+      .standalone-card{padding:20px 16px;border-radius:16px}
+      .tabs-header{gap:4px;padding:4px}
+      .prog-dot{font-size:.72rem;padding:8px 2px}
+      .mobile-bar{display:flex;position:fixed;left:0;right:0;bottom:0;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(7,24,40,.96);z-index:50}
+      .mobile-bar a{flex:1;height:46px;display:grid;place-items:center;border-radius:10px;font-weight:800;text-transform:uppercase}
+      .mobile-bar .call{background:#fff;color:var(--navy)}
+      .mobile-bar .book{background:var(--gold);color:var(--navy)}
+      footer{padding-bottom:110px}
+    }
   </style>
 </head>
 <body>
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="logo">Here<span>Handyman</span></a>
+      <a class="mobile-call" href="tel:+15163500801">Call</a>
+      <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/gallery">Gallery</a>
+        <a href="/about">About</a>
+        <a href="/service-areas">Service Areas</a>
+        <a href="/book" class="btn active">Book Now</a>
+      </div>
+    </div>
+  </nav>
 
-  <!-- Top Bar -->
-  <header class="standalone-header">
-    <a href="https://www.herehandyman.com" class="brand-logo">HERE <span>HANDYMAN</span></a>
-    <a href="tel:+15163500801" class="header-phone">(516) 350-0801</a>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="kicker">Westchester County, NY · online scheduling</p>
+        <h1>Book a <em>handyman visit</em></h1>
+        <p class="lede">Pick a ZIP, choose the job, lock a live arrival window. Owner David comes himself. Free on-site estimate. Same-day when the calendar is open.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#bookingWizard">Reserve a time</a>
+          <a class="btn ghost" href="tel:+15163500801">Call (516) 350-0801</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>5.0</b><span>Google rating</span></div>
+          <div><b>23+</b><span>years on the tools</span></div>
+          <div><b>7am–8pm</b><span>seven days a week</span></div>
+        </div>
+      </div>
+      <div class="hero-aside">
+        <aside class="nap-card nap-block" aria-label="Business contact">
+          <h2>Here Handyman</h2>
+          <a class="nap-phone" href="tel:+15163500801">(516) 350-0801</a>
+          <p>Owner-operated · White Plains, NY 10601 and nearby Westchester towns</p>
+          <p>Email: <a href="mailto:info@herehandyman.com">info@herehandyman.com</a></p>
+          <p>Hours: Monday–Sunday, 7:00 AM – 8:00 PM</p>
+        </aside>
+      </div>
+    </div>
   </header>
 
-  <!-- Main Standalone Content -->
-  <main class="standalone-main">
-    
-    <div class="page-title-wrap">
-      <span class="demo-pill">⚡ INSTANT ONLINE BOOKING</span>
-      <h1>BOOK A HANDYMAN VISIT</h1>
-      <p>Westchester County, NY · same-day and next-day slots when available</p>
+  <section class="how how-top">
+    <div class="how-inner">
+      <h2>How booking works</h2>
+      <p class="sub">Four steps. Live calendar. Confirmation on the spot.</p>
+      <div class="how-grid">
+        <article class="how-card"><b>01</b><h3>ZIP check</h3><p>We confirm you are in the Westchester service area before showing open windows.</p></article>
+        <article class="how-card"><b>02</b><h3>Pick the job</h3><p>Choose assembly, TV mount, drywall, fixtures, outdoor, or general repair.</p></article>
+        <article class="how-card"><b>03</b><h3>Lock a window</h3><p>Choose a date and arrival window. Same-day shows when David has an opening.</p></article>
+        <article class="how-card"><b>04</b><h3>Confirm</h3><p>Name, phone, and address. You get a confirmation code. David arrives in that window.</p></article>
+      </div>
     </div>
+  </section>
 
-    <!-- Centered Standalone Card -->
-    <div id="bookingWizard" class="standalone-card">
-      
-      <!-- 4 Tabs Progress Header -->
-      <div class="tabs-header">
-        <div class="prog-dot active" id="pd1"><span class="prog-num">1. Zip code</span></div>
-        <div class="prog-dot" id="pd2"><span class="prog-num">2. Service</span></div>
-        <div class="prog-dot" id="pd3"><span class="prog-num">3. Date &amp; time</span></div>
-        <div class="prog-dot" id="pd4"><span class="prog-num">4. Your details</span></div>
+  <div class="layout">
+    <div>
+      <div class="page-title-wrap">
+        <span class="demo-pill">Instant online booking</span>
+        <h2>Reserve your arrival window</h2>
+        <p>Westchester County, NY · same-day and next-day slots when available</p>
       </div>
 
-      <!-- STEP 1: ZIP Code -->
-      <div class="wizard-step" id="step-1">
-        <div class="step-label-title">Enter your zip code to get started</div>
-        
-        <input type="text" id="zipInput" class="zip-input-field" placeholder="10601" maxlength="5" pattern="\d{5}"/>
-        
-        <div class="error-msg" id="zipError"></div>
-
-        <button type="button" id="zipSubmitBtn" class="btn-full-navy" onclick="window.handleZipCheck &amp;&amp; window.handleZipCheck()">
-          Check availability
-        </button>
-
-        <p class="step-footnote">
-          ⚡ Confirm your service area ZIP code to unlock live open arrival windows.
-        </p>
-      </div>
-
-      <!-- STEP 2: Service Selection -->
-      <div class="wizard-step" id="step-2" style="display:none">
-        <button class="back-btn">← Back to ZIP</button>
-        <div class="step-label-title">Select your handyman service</div>
-        <div class="services-grid" id="servicesGrid"></div>
-      </div>
-
-      <!-- STEP 3: Date & Time Picker -->
-      <div class="wizard-step" id="step-3" style="display:none">
-        <button class="back-btn">← Back to Services</button>
-        <div class="step-label-title">Select date &amp; arrival window</div>
-
-        <div class="field-group" style="margin-bottom:16px">
-          <label class="field-label" for="bookingDate">Select Appointment Date:</label>
-          <input type="date" id="bookingDate" class="field-input" style="max-width:240px"/>
+      <div id="bookingWizard" class="standalone-card">
+        <div class="tabs-header">
+          <div class="prog-dot active" id="pd1"><span class="prog-num">1. Zip code</span></div>
+          <div class="prog-dot" id="pd2"><span class="prog-num">2. Service</span></div>
+          <div class="prog-dot" id="pd3"><span class="prog-num">3. Date &amp; time</span></div>
+          <div class="prog-dot" id="pd4"><span class="prog-num">4. Your details</span></div>
         </div>
 
-        <div id="slotsLoading" style="display:none;padding:16px;text-align:center;color:var(--text-muted)">Searching open arrival slots...</div>
-        <div class="slots-grid" id="slotsGrid"></div>
-
-        <!-- Custom Time Callout Box -->
-        <div class="custom-time-callout">
-          <div class="callout-icon">💬</div>
-          <div class="callout-body">
-            <strong>Don't see a time slot that fits your schedule?</strong>
-            <p>We're happy to accommodate early mornings, evenings, or custom windows!</p>
-            <div class="callout-btns">
-              <a href="tel:+15163500801" class="btn-callout-phone">📞 Call (516) 350-0801</a>
-              <a href="sms:+15163500801" class="btn-callout-sms">💬 Text David</a>
-            </div>
-          </div>
-        </div>
-
-        <button id="step3NextBtn" class="btn-full-navy" style="margin-top:16px" disabled>
-          Continue to Details →
-        </button>
-      </div>
-
-      <!-- STEP 4: Details & Confirm -->
-      <div class="wizard-step" id="step-4" style="display:none">
-        <button class="back-btn">← Back to Time Slot</button>
-        <div class="step-label-title">Enter your contact &amp; address details</div>
-
-        <div class="fields-stack">
-          <div class="field-group">
-            <label class="field-label" for="custName">Full Name <span class="req">*</span></label>
-            <input type="text" id="custName" class="field-input" placeholder="David Smith" required/>
-          </div>
-
-          <div class="field-row">
-            <div class="field-group">
-              <label class="field-label" for="custPhone">Phone Number <span class="req">*</span></label>
-              <input type="tel" id="custPhone" class="field-input" placeholder="(914) 555-0000" required/>
-            </div>
-            <div class="field-group">
-              <label class="field-label" for="custEmail">Email Address</label>
-              <input type="email" id="custEmail" class="field-input" placeholder="you@example.com"/>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label" for="custAddress">Street Address <span class="req">*</span></label>
-            <input type="text" id="custAddress" class="field-input" placeholder="123 Main St, White Plains NY" required/>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label" for="custNotes">Project Details / Special Notes (optional)</label>
-            <textarea id="custNotes" class="field-input" rows="3" placeholder="Describe the job, e.g. 65 inch TV on drywall..."></textarea>
-          </div>
-
-          <div class="error-msg" id="submitError"></div>
-
-          <button id="confirmBookingBtn" class="btn-full-navy">
-            🔒 Lock &amp; Confirm Appointment
+        <div class="wizard-step" id="step-1">
+          <div class="step-label-title">Enter your zip code to get started</div>
+          <input type="text" id="zipInput" class="zip-input-field" placeholder="10601" maxlength="5" pattern="\d{5}" inputmode="numeric" autocomplete="postal-code" aria-label="ZIP code"/>
+          <div class="error-msg" id="zipError"></div>
+          <button type="button" id="zipSubmitBtn" class="btn-full-navy" onclick="window.handleZipCheck &amp;&amp; window.handleZipCheck()">
+            Check availability
           </button>
+          <p class="step-footnote">Confirm your service-area ZIP to unlock live open arrival windows.</p>
+        </div>
+
+        <div class="wizard-step" id="step-2" style="display:none">
+          <button class="back-btn" type="button">Back to ZIP</button>
+          <div class="step-label-title">Select your handyman service</div>
+          <div class="services-grid" id="servicesGrid"></div>
+        </div>
+
+        <div class="wizard-step" id="step-3" style="display:none">
+          <button class="back-btn" type="button">Back to Services</button>
+          <div class="step-label-title">Select date &amp; arrival window</div>
+          <div class="field-group" style="margin-bottom:16px">
+            <label class="field-label" for="bookingDate">Select appointment date</label>
+            <input type="date" id="bookingDate" class="field-input" style="max-width:240px"/>
+          </div>
+          <div id="slotsLoading" style="display:none;padding:16px;text-align:center;color:var(--text-muted)">Searching open arrival slots...</div>
+          <div class="slots-grid" id="slotsGrid"></div>
+          <div class="custom-time-callout">
+            <div class="callout-icon">!</div>
+            <div class="callout-body">
+              <strong>Need an early morning, evening, or custom window?</strong>
+              <p>Call or text and we will try to fit you in.</p>
+              <div class="callout-btns">
+                <a href="tel:+15163500801" class="btn-callout-phone">Call (516) 350-0801</a>
+                <a href="sms:+15163500801" class="btn-callout-sms">Text David</a>
+              </div>
+            </div>
+          </div>
+          <button id="step3NextBtn" class="btn-full-navy" style="margin-top:16px" disabled>Continue to Details</button>
+        </div>
+
+        <div class="wizard-step" id="step-4" style="display:none">
+          <button class="back-btn" type="button">Back to Time Slot</button>
+          <div class="step-label-title">Enter your contact and address details</div>
+          <div class="fields-stack">
+            <div class="field-group">
+              <label class="field-label" for="custName">Full Name <span class="req">*</span></label>
+              <input type="text" id="custName" class="field-input" placeholder="David Smith" required autocomplete="name"/>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label" for="custPhone">Phone Number <span class="req">*</span></label>
+                <input type="tel" id="custPhone" class="field-input" placeholder="(914) 555-0000" required autocomplete="tel"/>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="custEmail">Email Address</label>
+                <input type="email" id="custEmail" class="field-input" placeholder="you@example.com" autocomplete="email"/>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="custAddress">Street Address <span class="req">*</span></label>
+              <input type="text" id="custAddress" class="field-input" placeholder="123 Main St, White Plains NY" required autocomplete="street-address"/>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="custNotes">Project details / special notes (optional)</label>
+              <textarea id="custNotes" class="field-input" rows="3" placeholder="Describe the job, e.g. 65 inch TV on drywall..."></textarea>
+            </div>
+            <div class="error-msg" id="submitError"></div>
+            <button id="confirmBookingBtn" class="btn-full-navy" type="button">Lock and confirm appointment</button>
+          </div>
         </div>
       </div>
-
     </div>
-  </main>
 
-  <!-- Standalone Footer -->
-  <footer class="standalone-footer">
-    <p>© 2026 <a href="https://www.herehandyman.com">Here Handyman</a> · Westchester County, NY · <a href="tel:+15163500801">(516) 350-0801</a> · info@herehandyman.com</p>
+    <aside class="side-stack">
+      <div class="side-card">
+        <h3>Hours</h3>
+        <div class="hours-row"><span>Monday – Sunday</span><span>7:00 AM – 8:00 PM</span></div>
+        <p style="margin-top:12px">Open 7 days. Call or text during hours for same-day work.</p>
+        <a class="btn" style="width:100%;margin-top:8px" href="tel:+15163500801">(516) 350-0801</a>
+      </div>
+      <div class="side-card">
+        <h3>What we book</h3>
+        <ul>
+          <li>Home Repairs &amp; General Maintenance</li>
+          <li>Furniture, IKEA &amp; Home Assembly</li>
+          <li>TV Mounting &amp; Cable Concealment</li>
+          <li>Drywall Repair &amp; Interior Painting</li>
+          <li>Carpentry, Shelving, Trim &amp; Closets</li>
+          <li>Doors, Locks, Hardware &amp; Window Repairs</li>
+          <li>Light Fixtures, Ceiling Fans, Outlets &amp; Switches</li>
+          <li>Toilets, Faucets, Sinks &amp; Minor Plumbing</li>
+          <li>Flooring, Tile, Caulking &amp; Grout Repairs</li>
+          <li>Gutters, Pressure Washing &amp; Exterior Repairs</li>
+          <li>Trampolines, Playsets, Gazebos &amp; Grills</li>
+          <li>Smart Home Devices, Cameras &amp; Doorbells</li>
+          <li>Safety &amp; Accessibility Installations</li>
+          <li>Punch Lists, Move-In &amp; Move-Out Repairs</li>
+          <li>Commercial Repairs &amp; Maintenance</li>
+          <li>And Other Small Home Projects</li>
+        </ul>
+      </div>
+      <div class="side-card">
+        <h3>Towns we cover</h3>
+        <div class="towns">
+          <span>White Plains</span><span>Scarsdale</span><span>Hartsdale</span><span>Harrison</span>
+          <span>Bronxville</span><span>Eastchester</span><span>Larchmont</span><span>Rye</span>
+          <span>Mamaroneck</span><span>Tarrytown</span><span>Dobbs Ferry</span><span>Ardsley</span>
+          <span>Elmsford</span>
+        </div>
+        <p style="margin-top:12px">Not listed? Call anyway. Nearby Westchester jobs are often a yes.</p>
+      </div>
+      <div class="side-card">
+        <h3>Why book here</h3>
+        <p>Work with the owner, not a dispatch board. 23+ years. Fully insured. Real before-and-after jobs in the <a href="/gallery">gallery</a>.</p>
+      </div>
+    </aside>
+  </div>
+
+  <section class="work">
+    <h2>Real Westchester jobs</h2>
+    <p class="sub">Same crew. Same standard. Drag-to-compare more work in the gallery.</p>
+    <div class="work-grid">
+      <a href="/gallery"><img src="https://www.herehandyman.com/assets/images/before-after/PAINT_HEREHANDYMAN_AFTER.webp" alt="Interior painting in White Plains"/><span>Painting</span></a>
+      <a href="/gallery"><img src="https://www.herehandyman.com/assets/images/before-after/toiler_herehandyman_after.webp" alt="Bathroom fixture replacement"/><span>Plumbing</span></a>
+      <a href="/gallery"><img src="https://www.herehandyman.com/assets/images/before-after/gazebo-hartsdale-after.webp" alt="Gazebo assembly in Hartsdale"/><span>Outdoor</span></a>
+      <a href="/gallery"><img src="https://www.herehandyman.com/assets/images/before-after/gutter_cleaning_guards_after.webp" alt="Gutter cleaning and guards"/><span>Exterior</span></a>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2>Booking questions</h2>
+    <div class="faq-item">
+      <button class="faq-q" type="button">How do I book a handyman appointment in Westchester County?</button>
+      <div class="faq-a">Enter your ZIP code on this page, choose a service, pick an open arrival window, and confirm your name, phone, and address. You can also call or text (516) 350-0801.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button">Do you offer same-day handyman service?</button>
+      <div class="faq-a">Yes. Same-day and next-day arrival windows are often available. Live slots show on this calendar. For urgent work, call (516) 350-0801.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button">Is the estimate free?</button>
+      <div class="faq-a">Yes. Free on-site estimate and a firm quote before work starts. No hidden fees.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button">What towns does Here Handyman serve?</button>
+      <div class="faq-a">White Plains, Scarsdale, Hartsdale, Harrison, Bronxville, Eastchester, Larchmont, Rye, Mamaroneck, Tarrytown, Dobbs Ferry, Ardsley, Elmsford, and nearby Westchester County communities.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button">What are your hours?</button>
+      <div class="faq-a">Monday through Sunday, 7:00 AM to 8:00 PM. Call or text (516) 350-0801 during those hours.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" type="button">Who will come to my house?</button>
+      <div class="faq-a">Owner David comes himself. 23-plus years on the tools. Fully insured. English, Spanish, and Portuguese spoken.</div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Rather talk it through?</h2>
+    <p>Call or text David. Most quotes are same-day. No trip charge to hear the job.</p>
+    <div class="cta-row">
+      <a class="btn" href="tel:+15163500801">Call (516) 350-0801</a>
+      <a class="btn light" href="sms:+15163500801">Text this number</a>
+      <a class="btn ghost" href="/gallery">See real jobs</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <h4>Here Handyman</h4>
+        <p>Home repairs and improvements across Westchester County, NY. Fully insured. Owner-operated.</p>
+        <p style="margin-top:10px">White Plains, NY 10601<br><a href="tel:+15163500801">(516) 350-0801</a><br><a href="mailto:info@herehandyman.com">info@herehandyman.com</a></p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/tv-mounting">TV Mounting</a></li>
+          <li><a href="/furniture-assembly">Furniture Assembly</a></li>
+          <li><a href="/drywall-repair">Drywall Repair</a></li>
+          <li><a href="/interior-painting">Interior Painting</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/gallery">Gallery</a></li>
+          <li><a href="/book">Book Appointment</a></li>
+          <li><a href="/service-areas">Service Areas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="tel:+15163500801">(516) 350-0801</a><br>Mon–Sun 7 AM – 8 PM<br>Westchester County, NY</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Here Handyman. All rights reserved.</p>
   </footer>
 
-  <!-- Booking Engine Script -->
+  <div class="mobile-bar">
+    <a class="call" href="tel:+15163500801">Call</a>
+    <a class="book" href="#bookingWizard">Book</a>
+  </div>
+
+  <script>
+    document.getElementById('burger').onclick = function(){
+      document.getElementById('navLinks').classList.toggle('on');
+    };
+  </script>
   <script type="module" src="/js/booking.js?v=8"></script>
 </body>
 </html>
