@@ -108,6 +108,22 @@
         "openingHoursSpecification": [
           {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "07:00", "closes": "20:00"}
         ],
+        "potentialAction": {
+          "@type": "ReserveAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.herehandyman.com/book",
+            "actionPlatform": [
+              "http://schema.org/DesktopWebPlatform",
+              "http://schema.org/IOSPlatform",
+              "http://schema.org/AndroidPlatform"
+            ]
+          },
+          "result": {
+            "@type": "Reservation",
+            "name": "Book Online Handyman Visit"
+          }
+        },
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "5.0",
