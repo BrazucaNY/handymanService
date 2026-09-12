@@ -27,12 +27,28 @@
     window.dataLayer = window.dataLayer || [];
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
       el.addEventListener('click', function() {
-        window.dataLayer.push({ event: 'phone_call_click', event_category: 'conversion', event_label: el.getAttribute('href'), value: 1 });
+        var href = el.getAttribute('href');
+        window.dataLayer.push({ event: 'phone_call_click', event_category: 'conversion', event_label: href, value: 1 });
+        if(typeof gtag === 'function') {
+          gtag('event', 'phone_call_click', { 'event_category': 'conversion', 'event_label': href });
+        }
+      });
+    });
+    document.querySelectorAll('a[href^="sms:"]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var href = el.getAttribute('href');
+        window.dataLayer.push({ event: 'text_us_click', event_category: 'conversion', event_label: href, value: 1 });
+        if(typeof gtag === 'function') {
+          gtag('event', 'text_us_click', { 'event_category': 'conversion', 'event_label': href });
+        }
       });
     });
     document.querySelectorAll('form').forEach(function(form) {
       form.addEventListener('submit', function() {
         window.dataLayer.push({ event: 'generate_lead', event_category: 'conversion', event_label: 'Appointment Form Submission', value: 1 });
+        if(typeof gtag === 'function') {
+          gtag('event', 'generate_lead', { 'event_category': 'conversion', 'event_label': 'Appointment Form Submission' });
+        }
       });
     });
   });

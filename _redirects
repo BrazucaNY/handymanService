@@ -3,9 +3,15 @@ http://herehandyman.com/*  https://www.herehandyman.com/:splat  301!
 http://www.herehandyman.com/*  https://www.herehandyman.com/:splat  301!
 https://herehandyman.com/*  https://www.herehandyman.com/:splat  301!
 
+# 301 Redirect direct .html requests to clean URLs for GA4 & Google Search Index consolidation
+/book.html             /book                    301!
+/book-appointment.html /book                    301!
+/index.html            /                        301!
+
 # Explicit clean URL rewrites for Google crawler & GBP links
 /book               /book.html               200
 /book-appointment   /book-appointment.html   200
 
 # Markdown Content Negotiation for AI Agents (acceptmarkdown.com)
 /*  /llms.txt  200!  Accept=*text/markdown*
+
