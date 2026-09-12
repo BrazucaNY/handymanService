@@ -4643,71 +4643,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // SEO Title & Alt Text Generator for Gallery Items
     const seoTitlesMap = {
       carpentry: [
-        "Custom Built-In Storage Cabinets — Scarsdale, NY",
-        "Fireplace Mantle & Custom Wall Shelving — White Plains, NY",
-        "Crown Molding & Baseboard Trim Installation — Bronxville, NY",
-        "Custom Alcove Bookshelves & Storage — Rye, NY",
-        "Closet Organizer & Built-In Wood Shelving — Larchmont, NY",
-        "Staircase Handrail & Safety Railing Mounting — Harrison, NY",
-        "Finish Carpentry & Door Frame Repair — Mamaroneck, NY",
-        "Custom Wood Trim & Wall Paneling — Purchase, NY",
-        "Floating Shelves & Accent Wall Build — Hartsdale, NY",
-        "Architectural Trim & Built-In Cabinets — Eastchester, NY"
+        "Custom Built-In Storage Cabinets",
+        "Fireplace Mantle & Custom Wall Shelving",
+        "Crown Molding & Baseboard Trim Installation",
+        "Custom Alcove Bookshelves & Storage",
+        "Closet Organizer & Built-In Wood Shelving",
+        "Staircase Handrail & Safety Railing Mounting",
+        "Finish Carpentry & Door Frame Repair",
+        "Custom Wood Trim & Wall Paneling",
+        "Floating Shelves & Accent Wall Build",
+        "Architectural Trim & Built-In Cabinets"
       ],
       painting: [
         "Interior Wall Painting & Surface Prep",
-        "Drywall Patching & Ceiling Painting — White Plains, NY",
-        "Cabinet Refinishing & Interior Painting — Bronxville, NY",
-        "Trim, Baseboard & Accent Wall Painting — Rye, NY",
-        "Low-VOC Living Room Interior Painting — Larchmont, NY",
-        "Hallway & Foyer Painting Restoration — Harrison, NY",
-        "Bedroom Wall Patch & Custom Paint — Mamaroneck, NY"
+        "Drywall Patching & Ceiling Painting",
+        "Cabinet Refinishing & Interior Painting",
+        "Trim, Baseboard & Accent Wall Painting",
+        "Low-VOC Living Room Interior Painting",
+        "Hallway & Foyer Painting Restoration",
+        "Bedroom Wall Patch & Custom Paint"
       ],
       tv: [
-        "75-Inch TV Stud Mounting & Wire Hiding — Scarsdale, NY",
-        "Fireplace Over-Mantle TV Installation — White Plains, NY",
-        "Full-Motion Articulating TV Wall Mount — Bronxville, NY",
-        "Soundbar & Media Center Mounting — Rye, NY",
-        "Drywall & Plaster Heavy TV Wall Anchoring — Larchmont, NY",
-        "Bedroom TV Wall Mounting & Wire Concealment — Harrison, NY"
+        "75-Inch TV Stud Mounting & Wire Hiding",
+        "Fireplace Over-Mantle TV Installation",
+        "Full-Motion Articulating TV Wall Mount",
+        "Soundbar & Media Center Mounting",
+        "Drywall & Plaster Heavy TV Wall Anchoring",
+        "Bedroom TV Wall Mounting & Wire Concealment"
       ],
       assembly: [
-        "IKEA PAX Wardrobe & Closet Assembly — Scarsdale, NY",
-        "Wayfair Bedroom Set & Dresser Assembly — White Plains, NY",
-        "West Elm Dining Table & Seating Setup — Bronxville, NY",
-        "Home Office Desk & Bookcase Assembly — Rye, NY",
-        "Heavy-Duty Storage Bed Frame Assembly — Larchmont, NY",
-        "Outdoor Patio Furniture & Pergola Build — Harrison, NY"
+        "IKEA PAX Wardrobe & Closet Assembly",
+        "Wayfair Bedroom Set & Dresser Assembly",
+        "West Elm Dining Table & Seating Setup",
+        "Home Office Desk & Bookcase Assembly",
+        "Heavy-Duty Storage Bed Frame Assembly",
+        "Outdoor Patio Furniture & Pergola Build"
       ],
       plumbing: [
-        "Bathroom Vanity Faucet Upgrade — Scarsdale, NY",
-        "Low-Flow Toilet Replacement & Shutoff Valves — White Plains, NY",
-        "Kitchen Sink Drain & Garbage Disposal Repair — Bronxville, NY",
-        "Showerhead & Bathroom Fixture Installation — Rye, NY",
-        "Supply Line Leak Repair & Pipe Testing — Larchmont, NY"
+        "Bathroom Vanity Faucet Upgrade",
+        "Low-Flow Toilet Replacement & Shutoff Valves",
+        "Kitchen Sink Drain & Garbage Disposal Repair",
+        "Showerhead & Bathroom Fixture Installation",
+        "Supply Line Leak Repair & Pipe Testing"
       ],
       repairs: [
-        "Sliding Closet Door Repair & Track Tuning — Scarsdale, NY",
-        "Drywall Hole Patching & Texture Matching — White Plains, NY",
-        "Front Entry Door Weatherstripping & Lockset — Bronxville, NY",
-        "Exterior Deck Board Repair & Power Wash — Rye, NY",
-        "Interior Door Sticking Fix & Jamb Alignment — Larchmont, NY",
-        "General Home Maintenance Punch-List Fixes — Harrison, NY"
+        "Sliding Closet Door Repair & Track Tuning",
+        "Drywall Hole Patching & Texture Matching",
+        "Front Entry Door Weatherstripping & Lockset",
+        "Exterior Deck Board Repair & Power Wash",
+        "Interior Door Sticking Fix & Jamb Alignment",
+        "General Home Maintenance Punch-List Fixes"
       ],
       electrical: [
-        "Modern Pendant Light Fixture Installation — Scarsdale, NY",
-        "Ceiling Fan Assembly & Box Support Mounting — White Plains, NY",
-        "Smart Dimmer Switch & Outlet Upgrade — Bronxville, NY",
-        "Hardwired 10-Year Smoke & CO Detector Replacement — Rye, NY",
-        "Ring Video Doorbell & Security Camera Mounting — Larchmont, NY"
+        "Modern Pendant Light Fixture Installation",
+        "Ceiling Fan Assembly & Box Support Mounting",
+        "Smart Dimmer Switch & Outlet Upgrade",
+        "Hardwired 10-Year Smoke & CO Detector Replacement",
+        "Ring Video Doorbell & Security Camera Mounting"
       ]
     };
-
-    const townList = [
-      "Scarsdale, NY", "White Plains, NY", "Bronxville, NY", "Rye, NY",
-      "Larchmont, NY", "Harrison, NY", "Mamaroneck, NY", "Purchase, NY",
-      "Hartsdale, NY", "Eastchester, NY", "Greenburgh, NY", "Tarrytown, NY"
-    ];
 
     function getSEOTitle(category, index, desc) {
       if (desc) return desc;
@@ -4715,7 +4709,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (list && list[index - 1]) {
         return list[index - 1];
       }
-      const town = townList[(index - 1) % townList.length];
       const categoryNames = {
         carpentry: "Custom Carpentry & Built-In Shelving",
         painting: "Interior Painting & Wall Prep",
@@ -4725,8 +4718,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         repairs: "Door Repair & Home Maintenance",
         electrical: "Light Fixture & Fan Installation"
       };
-      const catTitle = categoryNames[category] || (category.charAt(0).toUpperCase() + category.slice(1) + " Repair");
-      return `${catTitle} — ${town}`;
+      return categoryNames[category] || (category.charAt(0).toUpperCase() + category.slice(1) + " Service");
     }
 
     // Append image dynamically to DOM
