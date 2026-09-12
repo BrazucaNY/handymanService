@@ -793,114 +793,76 @@
     </aside>
   </div>
 
-  <section class="work" style="padding:48px 22px 56px;max-width:1180px;margin:0 auto">
-    <div style="text-align:center;margin-bottom:28px">
-      <h2 style="font-size:42px;margin-bottom:8px">Real Westchester jobs</h2>
-      <p class="sub" style="color:var(--text-muted);font-size:1.1rem;margin-bottom:0">Same crew. Same standard. Drag-to-compare more work in the gallery.</p>
-    </div>
+  <section class="work" style="padding:0 22px 56px;max-width:1180px;margin:0 auto">
+    <h2>Real Westchester jobs</h2>
+    <p class="sub">Same crew. Same standard. Drag-to-compare more work in the gallery.</p>
 
-    <!-- Automated Passing Before & After Slideshow (No manual arrows or selection buttons) -->
-    <div id="book-work-carousel" style="max-width:960px;margin:0 auto">
-      <div class="book-ba-carousel" style="position:relative;overflow:hidden;border-radius:18px;box-shadow:0 15px 40px rgba(0,0,0,0.18);border:1px solid rgba(7,24,40,0.12)">
-        <div class="book-ba-viewport" style="overflow:hidden">
-          <div class="book-ba-slides" style="display:flex;transition:transform 0.8s ease-in-out">
+    <!-- Automated Small-Picture Passing Carousel -->
+    <div class="work-carousel-outer" style="overflow:hidden;position:relative;border-radius:16px;padding:4px 0">
+      <div class="work-carousel-track" style="display:flex;gap:16px;transition:transform 0.6s ease-in-out">
+        <!-- Card 1: Painting -->
+        <a href="/gallery" style="min-width:260px;flex-shrink:0;display:block;position:relative;overflow:hidden;border-radius:14px;height:170px;background:#0c2438;text-decoration:none">
+          <img src="https://www.herehandyman.com/assets/images/before-after/PAINT_HEREHANDYMAN_AFTER.webp" alt="Interior painting in White Plains" style="width:100%;height:170px;object-fit:cover;display:block" loading="lazy" decoding="async"/>
+          <span style="position:absolute;left:10px;bottom:10px;background:rgba(7,24,40,.85);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.15)">Painting — White Plains</span>
+        </a>
 
-            <!-- Job 1: Dining Room Table & Chairs Assembly -->
-            <figure class="book-ba-slide" style="min-width:100%;margin:0;flex-shrink:0;position:relative">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#000">
-                <div style="position:relative"><img src="/assets/images/before-after/dining_table_assembly_before.webp" alt="Dining table unboxed before assembly" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:rgba(7,24,40,0.9);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.2)">Before</span></div>
-                <div style="position:relative"><img src="/assets/images/before-after/dining_table_assembly_after.webp" alt="Dining table fully assembled" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:#eab308;color:#071828;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px">After</span></div>
-              </div>
-              <figcaption style="background:#0b2a4a;padding:14px 20px;color:#fff;font-size:14px;font-weight:700;text-align:center;letter-spacing:0.5px">Dining Room Table &amp; Chairs Assembly — Yorktown Heights, NY</figcaption>
-            </figure>
+        <!-- Card 2: Plumbing -->
+        <a href="/gallery" style="min-width:260px;flex-shrink:0;display:block;position:relative;overflow:hidden;border-radius:14px;height:170px;background:#0c2438;text-decoration:none">
+          <img src="https://www.herehandyman.com/assets/images/before-after/toiler_herehandyman_after.webp" alt="Bathroom fixture replacement" style="width:100%;height:170px;object-fit:cover;display:block" loading="lazy" decoding="async"/>
+          <span style="position:absolute;left:10px;bottom:10px;background:rgba(7,24,40,.85);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.15)">Plumbing — Scarsdale</span>
+        </a>
 
-            <!-- Job 2: Large Flat Screen TV Wall Mounting -->
-            <figure class="book-ba-slide" style="min-width:100%;margin:0;flex-shrink:0;position:relative">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#000">
-                <div style="position:relative"><img src="/assets/images/before-after/tv_mounting_white_plains_before.webp" alt="Wall prepped for TV mounting" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:rgba(7,24,40,0.9);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.2)">Before</span></div>
-                <div style="position:relative"><img src="/assets/images/before-after/tv_mounting_white_plains_after.webp" alt="Flat screen TV mounted level on wall" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:#eab308;color:#071828;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px">After</span></div>
-              </div>
-              <figcaption style="background:#0b2a4a;padding:14px 20px;color:#fff;font-size:14px;font-weight:700;text-align:center;letter-spacing:0.5px">Large Flat Screen TV Wall Mounting — White Plains, NY</figcaption>
-            </figure>
+        <!-- Card 3: Outdoor -->
+        <a href="/gallery" style="min-width:260px;flex-shrink:0;display:block;position:relative;overflow:hidden;border-radius:14px;height:170px;background:#0c2438;text-decoration:none">
+          <img src="https://www.herehandyman.com/assets/images/before-after/gazebo-hartsdale-after.webp" alt="Gazebo assembly in Hartsdale" style="width:100%;height:170px;object-fit:cover;display:block" loading="lazy" decoding="async"/>
+          <span style="position:absolute;left:10px;bottom:10px;background:rgba(7,24,40,.85);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.15)">Outdoor Gazebo — Hartsdale</span>
+        </a>
 
-            <!-- Job 3: Full Modern Bathroom Remodel -->
-            <figure class="book-ba-slide" style="min-width:100%;margin:0;flex-shrink:0;position:relative">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#000">
-                <div style="position:relative"><img src="/assets/images/before-after/bathroom_remodel_scarsdale_before.webp" alt="Bathroom before renovation" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:rgba(7,24,40,0.9);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.2)">Before</span></div>
-                <div style="position:relative"><img src="/assets/images/before-after/bathroom_remodel_scarsdale_after.webp" alt="Modern luxury bathroom remodel" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:#eab308;color:#071828;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px">After</span></div>
-              </div>
-              <figcaption style="background:#0b2a4a;padding:14px 20px;color:#fff;font-size:14px;font-weight:700;text-align:center;letter-spacing:0.5px">Full Modern Bathroom Remodel &amp; Vanity — Scarsdale, NY</figcaption>
-            </figure>
+        <!-- Card 4: Exterior -->
+        <a href="/gallery" style="min-width:260px;flex-shrink:0;display:block;position:relative;overflow:hidden;border-radius:14px;height:170px;background:#0c2438;text-decoration:none">
+          <img src="https://www.herehandyman.com/assets/images/before-after/gutter_cleaning_guards_after.webp" alt="Gutter cleaning and guards" style="width:100%;height:170px;object-fit:cover;display:block" loading="lazy" decoding="async"/>
+          <span style="position:absolute;left:10px;bottom:10px;background:rgba(7,24,40,.85);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.15)">Exterior &amp; Gutters — Westchester</span>
+        </a>
 
-            <!-- Job 4: Interior Wall Painting & Patching -->
-            <figure class="book-ba-slide" style="min-width:100%;margin:0;flex-shrink:0;position:relative">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#000">
-                <div style="position:relative"><img src="/assets/images/before-after/PAINT_HEREHANDYMAN_BEFORE.webp" alt="Wall prep before painting" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:rgba(7,24,40,0.9);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.2)">Before</span></div>
-                <div style="position:relative"><img src="/assets/images/before-after/PAINT_HEREHANDYMAN_AFTER.webp" alt="Wall freshly painted" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:#eab308;color:#071828;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px">After</span></div>
-              </div>
-              <figcaption style="background:#0b2a4a;padding:14px 20px;color:#fff;font-size:14px;font-weight:700;text-align:center;letter-spacing:0.5px">Interior Wall Painting &amp; Patching — White Plains, NY</figcaption>
-            </figure>
+        <!-- Card 5: TV Mounting -->
+        <a href="/gallery" style="min-width:260px;flex-shrink:0;display:block;position:relative;overflow:hidden;border-radius:14px;height:170px;background:#0c2438;text-decoration:none">
+          <img src="https://www.herehandyman.com/assets/images/before-after/tv_mounting_white_plains_after.webp" alt="TV Wall Mounting in White Plains" style="width:100%;height:170px;object-fit:cover;display:block" loading="lazy" decoding="async"/>
+          <span style="position:absolute;left:10px;bottom:10px;background:rgba(7,24,40,.85);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.15)">TV Mounting — White Plains</span>
+        </a>
 
-            <!-- Job 5: Outdoor Gazebo Assembly & Anchoring -->
-            <figure class="book-ba-slide" style="min-width:100%;margin:0;flex-shrink:0;position:relative">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#000">
-                <div style="position:relative"><img src="/assets/images/before-after/gazebo-hartsdale-before.webp" alt="Patio before gazebo installation" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:rgba(7,24,40,0.9);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.2)">Before</span></div>
-                <div style="position:relative"><img src="/assets/images/before-after/gazebo-hartsdale-after.webp" alt="Gazebo fully built and anchored" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:#eab308;color:#071828;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px">After</span></div>
-              </div>
-              <figcaption style="background:#0b2a4a;padding:14px 20px;color:#fff;font-size:14px;font-weight:700;text-align:center;letter-spacing:0.5px">Outdoor Gazebo Assembly &amp; Anchoring — Hartsdale, NY</figcaption>
-            </figure>
+        <!-- Card 6: Furniture Assembly -->
+        <a href="/gallery" style="min-width:260px;flex-shrink:0;display:block;position:relative;overflow:hidden;border-radius:14px;height:170px;background:#0c2438;text-decoration:none">
+          <img src="https://www.herehandyman.com/assets/images/before-after/dining_table_assembly_after.webp" alt="Furniture Assembly in Yorktown Heights" style="width:100%;height:170px;object-fit:cover;display:block" loading="lazy" decoding="async"/>
+          <span style="position:absolute;left:10px;bottom:10px;background:rgba(7,24,40,.85);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.15)">Furniture Assembly — Yorktown</span>
+        </a>
 
-            <!-- Job 6: Springfree Trampoline Relocation & Assembly -->
-            <figure class="book-ba-slide" style="min-width:100%;margin:0;flex-shrink:0;position:relative">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#000">
-                <div style="position:relative"><img src="/assets/images/before-after/trampoline_assembly_before.webp" alt="Trampoline parts before assembly" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:rgba(7,24,40,0.9);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.2)">Before</span></div>
-                <div style="position:relative"><img src="/assets/images/before-after/trampoline_assembly_after.webp" alt="Springfree trampoline assembled" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:#eab308;color:#071828;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px">After</span></div>
-              </div>
-              <figcaption style="background:#0b2a4a;padding:14px 20px;color:#fff;font-size:14px;font-weight:700;text-align:center;letter-spacing:0.5px">Springfree Trampoline Relocation &amp; Assembly — Scarsdale, NY</figcaption>
-            </figure>
+        <!-- Card 7: Bathroom Remodel -->
+        <a href="/gallery" style="min-width:260px;flex-shrink:0;display:block;position:relative;overflow:hidden;border-radius:14px;height:170px;background:#0c2438;text-decoration:none">
+          <img src="https://www.herehandyman.com/assets/images/before-after/bathroom_remodel_scarsdale_after.webp" alt="Bathroom Remodel in Scarsdale" style="width:100%;height:170px;object-fit:cover;display:block" loading="lazy" decoding="async"/>
+          <span style="position:absolute;left:10px;bottom:10px;background:rgba(7,24,40,.85);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.15)">Bathroom Remodel — Scarsdale</span>
+        </a>
 
-            <!-- Job 7: Custom Walk-In Closet Shelving & Wall Prep -->
-            <figure class="book-ba-slide" style="min-width:100%;margin:0;flex-shrink:0;position:relative">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#000">
-                <div style="position:relative"><img src="/assets/images/before-after/closet_shelving_before.webp" alt="Closet wall patching before shelving" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:rgba(7,24,40,0.9);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.2)">Before</span></div>
-                <div style="position:relative"><img src="/assets/images/before-after/closet_shelving_after.webp" alt="Custom white wire shelving installed" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:#eab308;color:#071828;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px">After</span></div>
-              </div>
-              <figcaption style="background:#0b2a4a;padding:14px 20px;color:#fff;font-size:14px;font-weight:700;text-align:center;letter-spacing:0.5px">Custom Walk-In Closet Shelving &amp; Wall Prep — White Plains, NY</figcaption>
-            </figure>
-
-            <!-- Job 8: Roof Gutter Cleaning & Guard Installation -->
-            <figure class="book-ba-slide" style="min-width:100%;margin:0;flex-shrink:0;position:relative">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#000">
-                <div style="position:relative"><img src="/assets/images/before-after/gutter_cleaning_guards_before.webp" alt="Roof debris before gutter guards" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:rgba(7,24,40,0.9);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.2)">Before</span></div>
-                <div style="position:relative"><img src="/assets/images/before-after/gutter_cleaning_guards_after.webp" alt="Gutter guards installed" loading="lazy" style="width:100%;height:380px;object-fit:cover;display:block" decoding="async"><span style="position:absolute;top:12px;left:12px;background:#eab308;color:#071828;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:16px">After</span></div>
-              </div>
-              <figcaption style="background:#0b2a4a;padding:14px 20px;color:#fff;font-size:14px;font-weight:700;text-align:center;letter-spacing:0.5px">Roof Gutter Cleaning &amp; Guard Installation — Westchester, NY</figcaption>
-            </figure>
-
-          </div>
-        </div>
+        <!-- Card 8: Closet Shelving -->
+        <a href="/gallery" style="min-width:260px;flex-shrink:0;display:block;position:relative;overflow:hidden;border-radius:14px;height:170px;background:#0c2438;text-decoration:none">
+          <img src="https://www.herehandyman.com/assets/images/before-after/closet_shelving_after.webp" alt="Closet Shelving in White Plains" style="width:100%;height:170px;object-fit:cover;display:block" loading="lazy" decoding="async"/>
+          <span style="position:absolute;left:10px;bottom:10px;background:rgba(7,24,40,.85);color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.15)">Custom Shelving — White Plains</span>
+        </a>
       </div>
     </div>
   </section>
 
   <script>
   (function(){
-    var slides = document.querySelectorAll('.book-ba-slide');
-    var track = document.querySelector('.book-ba-slides');
-    if (!slides.length || !track) return;
-
+    var track = document.querySelector('.work-carousel-track');
+    if (!track) return;
     var cur = 0;
-    track.style.transition = 'transform 0.8s ease-in-out';
+    var cardWidth = 276;
+    var totalCards = track.children.length;
 
-    function goTo(i){
-      cur = (i + slides.length) % slides.length;
-      track.style.transform = 'translateX(-' + (cur * 100) + '%)';
-    }
-
-    // Automatically passes every 3.5 seconds with no manual select or arrows
     setInterval(function(){
-      goTo(cur + 1);
-    }, 3500);
+      cur = (cur + 1) % (totalCards - 2);
+      track.style.transform = 'translateX(-' + (cur * cardWidth) + 'px)';
+    }, 3000);
   })();
   </script>
 
