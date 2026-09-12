@@ -9,9 +9,12 @@ https://herehandyman.com/*  https://www.herehandyman.com/:splat  301!
 /book.html             /book                    301!
 /index.html            /                        301!
 
-# Explicit clean URL rewrite for /book
+# Explicit clean URL rewrites
 /book               /book.html               200
+/door-repair-installation  /door-repair-installation.html 200
+/handrail-installation     /handrail-installation.html    200
+/lighting-fixture-installation /lighting-fixture-installation.html 200
+/carpentry-shelving     /carpentry-shelving.html     200
 
 # Markdown Content Negotiation for AI Agents (acceptmarkdown.com)
 /*  /llms.txt  200!  Accept=*text/markdown*
-
