@@ -3112,34 +3112,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>
 
     const mobileToggle = document.getElementById('mobile-toggle');
-
     const navMenu = document.getElementById('nav-menu');
-
     const navLinks = document.querySelectorAll('.nav-links a');
 
-    mobileToggle.addEventListener('click', () => {
-
-      const isActive = mobileToggle.classList.toggle('active');
-
-      navMenu.classList.toggle('active', isActive);
-
-      document.body.style.overflow = isActive ? 'hidden' : '';
-
-    });
-
-    navLinks.forEach(link => {
-
-      link.addEventListener('click', () => {
-
-        mobileToggle.classList.remove('active');
-
-        navMenu.classList.remove('active');
-
-        document.body.style.overflow = '';
-
+    if (mobileToggle && navMenu) {
+      mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = mobileToggle.classList.toggle('active');
+        navMenu.classList.toggle('active', isActive);
+        document.body.style.overflow = isActive ? 'hidden' : '';
       });
 
-    });
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+          mobileToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    }
 
     // ==========================================
 
@@ -5286,41 +5285,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   </script>
 
-<script>
-(function(){
-  var toggleBtn = document.getElementById('mobile-toggle');
-  var navMenu = document.getElementById('nav-menu');
-  if (!toggleBtn || !navMenu) return;
 
-  function toggleMenu(){
-    toggleBtn.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-  }
-
-  toggleBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    toggleMenu();
-  });
-
-  // Close menu when clicking any nav link
-  var navLinks = navMenu.querySelectorAll('a');
-  navLinks.forEach(function(link){
-    link.addEventListener('click', function(){
-      if (navMenu.classList.contains('active')) {
-        toggleMenu();
-      }
-    });
-  });
-
-  // Close menu when clicking outside
-  document.addEventListener('click', function(e){
-    if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
-      toggleMenu();
-    }
-  });
-})();
-</script>
 
 <script>
 (function initReviewCarousel() {
