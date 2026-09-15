@@ -29,6 +29,7 @@ function initApp() {
   setupEventListeners();
   setupFAQAccordion();
   initReviewCarousel();
+  setupCancelModal();
   updateStepUI();
 }
 
@@ -448,3 +449,91 @@ function hideError(el) {
     el.style.display = 'none';
   }
 }
+
+function setupCancelModal() {
+  const openBtn = document.getElementById('openCancelModalBtn');
+  const closeBtn = document.getElementById('closeCancelModalBtn');
+  const modal = document.getElementById('cancelModal');
+  const submitBtn = document.getElementById('submitCancelBtn');
+  const errorEl = document.getElementById('cancelError');
+  const successEl = document.getElementById('cancelSuccessMsg');
+
+  if (!modal) return;
+
+  if (openBtn) {
+    openBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.style.display = 'flex';
+      hideError(errorEl);
+      if (successEl) successEl.style.display = 'none';
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  if (submitBtn) {
+    submitBtn.addEventListener('click', handleCancelSubmit);
+  }
+}
+
+async function handleCancelSubmit() {
+  const bookingIdInput = document.getElementById('cancelBookingId');
+  const emailInput = document.getElementById('cancelEmail');
+  const errorEl = document.getElementById('cancelError');
+  const successEl = document.getElementById('cancelSuccessMsg');
+  const submitBtn = document.getElementById('submitCancelBtn');
+
+  const bookingId = (bookingIdInput ? bookingIdInput.value : '').trim().toUpperCase();
+  const email = (emailInput ? emailInput.value : '').trim();
+
+  if (!bookingId || !email) {
+    showError(errorEl, 'Please enter both your Booking ID and Email Address.');
+    return;
+  }
+
+  hideError(errorEl);
+  if (successEl) successEl.style.display = 'none';
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Processing Cancellation...';
+
+  try {
+    const res = await fetch('/.netlify/functions/cancel', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ bookingId, email })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      showError(errorEl, data.error || 'Cancellation failed. Please check your details.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Confirm Cancellation';
+      return;
+    }
+
+    // Cancellation Succeeded!
+    if (successEl) {
+      successEl.textContent = data.message || `Appointment ${bookingId} cancelled successfully.`;
+      successEl.style.display = 'block';
+    }
+    submitBtn.style.display = 'none';
+
+  } catch (err) {
+    showError(errorEl, err.message || 'Error processing cancellation. Please try again.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Confirm Cancellation';
+  }
+}
+

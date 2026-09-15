@@ -150,3 +150,62 @@ export async function createGoogleCalendarEvent({
     return null;
   }
 }
+
+/**
+ * Searches for and deletes a booking event from David's Google Calendar by Booking ID and matching Email.
+ */
+export async function deleteGoogleCalendarEventByBookingId(bookingId, email) {
+  try {
+    const token = await getAccessToken();
+    if (!token || !GOOGLE_CALENDAR_ID) return false;
+
+    // Search for event containing the booking ID
+    const searchRes = await fetch(
+      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events?q=${encodeURIComponent(bookingId)}`,
+      {
+        headers: { 'Authorization': `Bearer ${token}` }
+      }
+    );
+
+    if (!searchRes.ok) {
+      console.error('Google Calendar Event Search Error:', await searchRes.text());
+      return false;
+    }
+
+    const searchData = await searchRes.json();
+    const items = searchData.items || [];
+
+    let deletedAny = false;
+    for (const item of items) {
+      if (item.summary && item.summary.includes(bookingId)) {
+        if (email) {
+          const desc = (item.description || '').toLowerCase();
+          const cleanEmail = String(email).trim().toLowerCase();
+          if (!desc.includes(cleanEmail)) {
+            console.warn(`Email mismatch for event ${bookingId}: ${cleanEmail} not found in event description.`);
+            continue;
+          }
+        }
+
+        const delRes = await fetch(
+          `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events/${encodeURIComponent(item.id)}`,
+          {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          }
+        );
+        if (delRes.ok || delRes.status === 410) {
+          deletedAny = true;
+        } else {
+          console.error(`Failed to delete Google Calendar event ${item.id}:`, await delRes.text());
+        }
+      }
+    }
+
+    return deletedAny;
+  } catch (err) {
+    console.error('Error deleting Google Calendar event:', err);
+    return false;
+  }
+}
+

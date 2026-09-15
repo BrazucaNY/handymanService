@@ -683,6 +683,9 @@
           <button type="button" id="zipSubmitBtn" class="btn-full-navy" onclick="window.handleZipCheck &amp;&amp; window.handleZipCheck()">
             Check availability
           </button>
+          <div style="margin-top:14px;text-align:center;">
+            <a href="javascript:void(0)" id="openCancelModalBtn" style="color:var(--text-muted);font-size:0.85rem;font-weight:700;text-decoration:underline;">Already booked? Cancel an appointment</a>
+          </div>
           <p class="step-footnote">Confirm your service-area ZIP to unlock live open arrival windows.</p>
         </div>
 
@@ -743,10 +746,32 @@
             </div>
             <div class="error-msg" id="submitError"></div>
             <button id="confirmBookingBtn" class="btn-full-navy" type="button">Lock and confirm appointment</button>
+      </div>
+    </div>
+
+    <!-- Cancellation Modal -->
+    <div id="cancelModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(7,24,40,0.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px;">
+      <div style="background:#fff;border-radius:18px;max-width:440px;width:100%;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,0.3);position:relative;">
+        <button id="closeCancelModalBtn" type="button" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;font-weight:900;cursor:pointer;color:var(--text-muted);">&times;</button>
+        <h3 style="font-size:1.6rem;color:var(--navy);margin-bottom:6px;">Cancel Appointment</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:18px;">Enter your Booking ID and the Email Address used when booking.</p>
+        
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="field-group">
+            <label class="field-label" for="cancelBookingId">Booking ID <span class="req">*</span></label>
+            <input type="text" id="cancelBookingId" class="field-input" placeholder="e.g. HH-27ED3187" style="text-transform:uppercase;"/>
           </div>
+          <div class="field-group">
+            <label class="field-label" for="cancelEmail">Email Address <span class="req">*</span></label>
+            <input type="email" id="cancelEmail" class="field-input" placeholder="you@example.com"/>
+          </div>
+          <div class="error-msg" id="cancelError"></div>
+          <div id="cancelSuccessMsg" style="display:none;background:#f0fdf4;border:1px solid #86efac;color:#166534;font-size:0.85rem;padding:12px;border-radius:10px;font-weight:600;margin-top:6px;"></div>
+          <button type="button" id="submitCancelBtn" class="btn-full-navy" style="margin-top:6px;">Confirm Cancellation</button>
         </div>
       </div>
     </div>
+
 
     <aside class="side-stack">
       <div class="side-card">

@@ -120,7 +120,7 @@ export async function handler(event) {
     }
 
     // 6. Post Event directly to David's Google Calendar (Single Source of Truth)
-    createGoogleCalendarEvent({
+    await createGoogleCalendarEvent({
       bookingId,
       startIso: startTimeIso,
       endIso: endTimeIso,
@@ -133,34 +133,38 @@ export async function handler(event) {
       notes
     }).catch(gErr => console.error("Google Calendar Event Creation Error:", gErr));
 
-    // 7. Background Log to Supabase DB for audit records (non-blocking)
+    // 7. Background Log to Supabase DB for audit records
     const SUPABASE_URL = DB_CONFIG.SUPABASE_URL;
     const SUPABASE_SERVICE_ROLE_KEY = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY;
 
     if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
-      fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
-        method: "POST",
-        headers: {
-          "apikey": SUPABASE_SERVICE_ROLE_KEY,
-          "Authorization": `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
-          "Content-Type": "application/json",
-          "Prefer": "return=minimal"
-        },
-        body: JSON.stringify({
-          id: bookingId,
-          booking_range: bookingRangeStr,
-          start_time: startTimeIso,
-          end_time: endTimeIso,
-          service_id: serviceId,
-          zip: cleanZip,
-          customer_name: name,
-          customer_phone: phone,
-          customer_address: address || "",
-          customer_email: email || "",
-          notes: notes || "",
-          status: "confirmed"
-        })
-      }).catch(dbErr => console.error("Supabase DB log background warning:", dbErr));
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
+          method: "POST",
+          headers: {
+            "apikey": SUPABASE_SERVICE_ROLE_KEY,
+            "Authorization": `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({
+            id: bookingId,
+            booking_range: bookingRangeStr,
+            start_time: startTimeIso,
+            end_time: endTimeIso,
+            service_id: serviceId,
+            zip: cleanZip,
+            customer_name: name,
+            customer_phone: phone,
+            customer_address: address || "",
+            customer_email: email || "",
+            notes: notes || "",
+            status: "confirmed"
+          })
+        });
+      } catch (dbErr) {
+        console.error("Supabase DB log warning:", dbErr);
+      }
     }
 
     // 8. Send Instant Notification Email via Web3Forms (non-blocking)
