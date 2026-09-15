@@ -23,8 +23,11 @@ export async function handler(event) {
   const SUPABASE_SERVICE_ROLE_KEY = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY;
 
   let bookedRanges = [];
-  const dayStart = `${date}T00:00:00-04:00`;
-  const dayEnd = `${date}T23:59:59-04:00`;
+  const [yr, mo, dy] = date.split('-').map(Number);
+  // 00:00 EDT (UTC-4) = 04:00 UTC
+  const dayStart = new Date(Date.UTC(yr, mo - 1, dy, 4, 0, 0)).toISOString();
+  // 23:59:59 EDT (UTC-4) = 03:59:59 UTC next day
+  const dayEnd = new Date(Date.UTC(yr, mo - 1, dy + 1, 3, 59, 59)).toISOString();
 
   // 1. Query Google Calendar API for real-time busy ranges (Single Source of Truth)
   try {
@@ -71,8 +74,9 @@ export async function handler(event) {
   const durationMs = durationMinutes * 60 * 1000;
   const stepMs = 60 * 60 * 1000;
 
-  const workStartMs = new Date(`${date}T07:00:00-04:00`).getTime();
-  const workEndMs = new Date(`${date}T20:00:00-04:00`).getTime();
+  // 7:00 AM EDT = 11:00 UTC, 8:00 PM EDT = 00:00 UTC next day (24:00 UTC)
+  const workStartMs = Date.UTC(yr, mo - 1, dy, 11, 0, 0);
+  const workEndMs = Date.UTC(yr, mo - 1, dy, 24, 0, 0);
   const nowMs = Date.now();
 
   for (let currentStart = workStartMs; currentStart + durationMs <= workEndMs; currentStart += stepMs) {
