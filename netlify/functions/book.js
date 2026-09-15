@@ -61,7 +61,7 @@ export async function handler(event) {
         })
       });
 
-      if (response.status === 409 || response.status === 400) {
+      if (response.status === 409) {
         return {
           statusCode: 409,
           headers: { "Content-Type": "application/json" },
@@ -76,7 +76,7 @@ export async function handler(event) {
           return {
             statusCode: 409,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ error: "This time slot is no longer available." })
+            body: JSON.stringify({ error: "This time slot is no longer available. Please select a different time." })
           };
         }
       }
