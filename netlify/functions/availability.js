@@ -106,6 +106,6 @@ export async function handler(event) {
       "Content-Type": "application/json",
       "Cache-Control": "no-cache, no-store, must-revalidate"
     },
-    body: JSON.stringify({ date, serviceId, slots, bookedRanges })
+    body: JSON.stringify({ date, serviceId, slots })
   };
 }

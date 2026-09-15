@@ -2,8 +2,8 @@ export default async (request, context) => {
   const accept = request.headers.get("accept") || "";
   const url = new URL(request.url);
 
-  // Exclude static assets (images, css, js, fonts, favicon)
-  if (/\.(png|jpg|jpeg|webp|gif|svg|ico|css|js|woff|woff2|ttf|eot)$/i.test(url.pathname)) {
+  // Exclude static assets and serverless functions (/.netlify/*)
+  if (url.pathname.startsWith("/.netlify") || /\.(png|jpg|jpeg|webp|gif|svg|ico|css|js|woff|woff2|ttf|eot)$/i.test(url.pathname)) {
     return context.next();
   }
 
