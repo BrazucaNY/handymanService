@@ -33,57 +33,23 @@ export async function handler(event) {
 
     const bookingId = "HH-" + crypto.randomUUID().slice(0, 8).toUpperCase();
 
-    const SUPABASE_URL = DB_CONFIG.SUPABASE_URL;
-    const SUPABASE_SERVICE_ROLE_KEY = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
-        method: "POST",
-        headers: {
-          "apikey": SUPABASE_SERVICE_ROLE_KEY,
-          "Authorization": `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
-          "Content-Type": "application/json",
-          "Prefer": "return=minimal"
-        },
-        body: JSON.stringify({
-          id: bookingId,
-          booking_range: bookingRangeStr,
-          start_time: startTimeIso,
-          end_time: endTimeIso,
-          service_id: serviceId,
-          zip,
-          customer_name: name,
-          customer_phone: phone,
-          customer_address: address || "",
-          customer_email: email || "",
-          notes: notes || "",
-          status: "confirmed"
-        })
-      });
-
-      if (response.status === 409) {
+    // 1. Google Calendar as Single Source of Truth: check for busy events on Google Calendar
+    try {
+      const gBusy = await getGoogleCalendarBusyRanges(startTimeIso, endTimeIso);
+      const isGoogleBusy = gBusy.some(b => startMs < b.end && b.start < endMs);
+      if (isGoogleBusy) {
         return {
           statusCode: 409,
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ error: "This time slot was just booked by another customer. Please select a different time." })
+          body: JSON.stringify({ error: "This time slot is busy on David's Google Calendar. Please select a different time." })
         };
       }
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Supabase insert error:", errorText);
-        if (errorText.includes("exclusion") || errorText.includes("overlap") || errorText.includes("duplicate")) {
-          return {
-            statusCode: 409,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ error: "This time slot is no longer available. Please select a different time." })
-          };
-        }
-      }
+    } catch (gCheckErr) {
+      console.error("Google Calendar check warning:", gCheckErr);
     }
 
-    // Insert Event directly onto David's Google Calendar (Single Source of Truth)
-    createGoogleCalendarEvent({
+    // 2. Insert Event directly onto David's Google Calendar
+    const googleEventId = await createGoogleCalendarEvent({
       bookingId,
       startIso: startTimeIso,
       endIso: endTimeIso,
@@ -94,7 +60,44 @@ export async function handler(event) {
       customerAddress: address,
       zip,
       notes
-    }).catch(gErr => console.error("Google Calendar Event Creation Background Error:", gErr));
+    }).catch(gErr => {
+      console.error("Google Calendar Event Creation Background Error:", gErr);
+      return null;
+    });
+
+    // 3. Log to Supabase DB for record keeping (does not block booking if DB has old row)
+    const SUPABASE_URL = DB_CONFIG.SUPABASE_URL;
+    const SUPABASE_SERVICE_ROLE_KEY = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
+          method: "POST",
+          headers: {
+            "apikey": SUPABASE_SERVICE_ROLE_KEY,
+            "Authorization": `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({
+            id: bookingId,
+            booking_range: bookingRangeStr,
+            start_time: startTimeIso,
+            end_time: endTimeIso,
+            service_id: serviceId,
+            zip,
+            customer_name: name,
+            customer_phone: phone,
+            customer_address: address || "",
+            customer_email: email || "",
+            notes: notes || "",
+            status: "confirmed"
+          })
+        });
+      } catch (dbErr) {
+        console.error("Supabase DB log warning:", dbErr);
+      }
+    }
 
     // Trigger notification email post-save (Web3Forms side-effect)
     fetch("https://api.web3forms.com/submit", {
