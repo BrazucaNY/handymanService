@@ -76,7 +76,8 @@ export async function handler(event) {
   for (let currentStart = workStartMs; currentStart + durationMs <= workEndMs; currentStart += stepMs) {
     const candidateTotalEnd = currentStart + durationMs + bufferMs;
 
-    if (currentStart <= nowMs + 2 * 3600 * 1000) continue;
+    // Exclude past slots or slots less than 1 hour away for same-day bookings
+    if (currentStart <= nowMs + 1 * 3600 * 1000) continue;
 
     const isBlocked = bookedRanges.some(b => currentStart < b.end && b.start < candidateTotalEnd);
 
