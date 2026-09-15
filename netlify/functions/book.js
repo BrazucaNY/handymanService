@@ -3,6 +3,7 @@
 
 import crypto from 'node:crypto';
 import { DB_CONFIG } from './dbConfig.js';
+import { createGoogleCalendarEvent } from './googleCalendar.js';
 
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
@@ -80,6 +81,20 @@ export async function handler(event) {
         }
       }
     }
+
+    // Insert Event directly onto David's Google Calendar (Single Source of Truth)
+    createGoogleCalendarEvent({
+      bookingId,
+      startIso: startTimeIso,
+      endIso: endTimeIso,
+      serviceName: serviceId,
+      customerName: name,
+      customerPhone: phone,
+      customerEmail: email,
+      customerAddress: address,
+      zip,
+      notes
+    }).catch(gErr => console.error("Google Calendar Event Creation Background Error:", gErr));
 
     // Trigger notification email post-save (Web3Forms side-effect)
     fetch("https://api.web3forms.com/submit", {

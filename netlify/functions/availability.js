@@ -2,6 +2,7 @@
 // Queries Supabase DB for confirmed bookings on a date and returns open time slots
 
 import { DB_CONFIG } from './dbConfig.js';
+import { getGoogleCalendarBusyRanges } from './googleCalendar.js';
 
 export async function handler(event) {
   if (event.httpMethod !== "GET") {
@@ -22,12 +23,22 @@ export async function handler(event) {
   const SUPABASE_SERVICE_ROLE_KEY = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY;
 
   let bookedRanges = [];
+  const dayStart = `${date}T00:00:00-04:00`;
+  const dayEnd = `${date}T23:59:59-04:00`;
 
-  // If Supabase credentials are valid, query actual database bookings
+  // 1. Query Google Calendar API for real-time busy ranges (Single Source of Truth)
+  try {
+    const googleBusy = await getGoogleCalendarBusyRanges(dayStart, dayEnd);
+    if (googleBusy && googleBusy.length > 0) {
+      bookedRanges.push(...googleBusy);
+    }
+  } catch (gErr) {
+    console.error("Google Calendar API check warning:", gErr);
+  }
+
+  // 2. If Supabase credentials are valid, query database bookings
   if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
     try {
-      const dayStart = `${date}T00:00:00-04:00`;
-      const dayEnd = `${date}T23:59:59-04:00`;
       const url = `${SUPABASE_URL}/rest/v1/bookings?start_time=gte.${encodeURIComponent(dayStart)}&start_time=lte.${encodeURIComponent(dayEnd)}&status=eq.confirmed&select=start_time,end_time`;
 
       const response = await fetch(url, {
@@ -39,10 +50,11 @@ export async function handler(event) {
 
       if (response.ok) {
         const rows = await response.json();
-        bookedRanges = rows.map(r => ({
+        const supabaseRanges = rows.map(r => ({
           start: new Date(r.start_time).getTime(),
           end: new Date(r.end_time).getTime()
         }));
+        bookedRanges.push(...supabaseRanges);
       }
     } catch (err) {
       console.error("Database query error:", err);

@@ -365,12 +365,25 @@ async function handleFinalSubmit() {
 
 function renderConfirmationScreen(id, startIso) {
   const wizardContainer = document.getElementById('bookingWizard');
-  const dateFormatted = new Date(startIso).toLocaleDateString('en-US', {
+  const startDate = new Date(startIso);
+  const durationMs = (state.service.duration || 60) * 60 * 1000;
+  const endDate = new Date(startDate.getTime() + durationMs);
+
+  const dateFormatted = startDate.toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   });
+
+  const formatGCalDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
+  const gcalStart = formatGCalDate(startDate);
+  const gcalEnd = formatGCalDate(endDate);
+
+  const title = encodeURIComponent(`🔨 Handyman Appointment (${state.service.name})`);
+  const details = encodeURIComponent(`Booking Confirmation Code: ${id}\nService: ${state.service.name}\nHandyman: David (Here Handyman)\nPhone: (516) 350-0801`);
+  const location = encodeURIComponent(`${document.getElementById('custAddress').value}, ZIP ${state.zip}`);
+  const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${gcalStart}/${gcalEnd}&details=${details}&location=${location}`;
 
   wizardContainer.innerHTML = `
     <div class="confirmation-card">
@@ -384,9 +397,10 @@ function renderConfirmationScreen(id, startIso) {
         <p><strong>Location:</strong> ${document.getElementById('custAddress').value}, ZIP ${state.zip}</p>
       </div>
 
-      <div class="next-steps">
+      <div class="next-steps" style="display:flex;flex-direction:column;gap:10px;align-items:center;">
         <p>🎉 We have received your booking and reserved this slot. David will arrive within the appointment window!</p>
-        <a href="https://g.page/r/herehandyman/review" target="_blank" rel="noopener" class="btn-review">⭐ Leave a Google Review</a>
+        <a href="${gcalUrl}" target="_blank" rel="noopener" class="btn-full-navy" style="max-width:280px;text-align:center;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:600;">📅 Add to Google Calendar</a>
+        <a href="https://g.page/r/CcY8nHWkiRZ0EAE" target="_blank" rel="noopener" class="btn-review" style="margin-top:4px;">⭐ Leave a Google Review</a>
       </div>
     </div>
   `;
