@@ -8,6 +8,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  SECRETS_SCAN_OMIT_PATHS = "netlify/functions/googleCalendar.js"
 
 # Remove the [context.production.environment] section completely
 # Environment variables should be set in Netlify's UI
