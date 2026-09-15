@@ -106,6 +106,6 @@ export async function handler(event) {
       "Content-Type": "application/json",
       "Cache-Control": "no-cache, no-store, must-revalidate"
     },
-    body: JSON.stringify({ date, serviceId, slots, debug: { bookedRanges, nowIso: new Date(nowMs).toISOString(), workStartIso: new Date(workStartMs).toISOString(), workEndIso: new Date(workEndMs).toISOString() } })
+    body: JSON.stringify({ date, serviceId, slots, bookedRanges })
   };
 }
