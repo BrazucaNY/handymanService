@@ -153,6 +153,21 @@ function setupEventListeners() {
     });
   });
 
+  // Progress Bar Header Tabs (Click to jump to any completed step)
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('pd' + i);
+    if (dot) {
+      dot.style.cursor = 'pointer';
+      dot.addEventListener('click', () => {
+        if (i < state.step) {
+          state.step = i;
+          updateStepUI();
+        }
+      });
+    }
+  }
+
+
   // Step 3: Date Picker Change
   const dateInput = document.getElementById('bookingDate');
   if (dateInput) {
