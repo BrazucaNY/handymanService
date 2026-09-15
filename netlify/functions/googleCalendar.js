@@ -3,7 +3,7 @@ import crypto from 'node:crypto';
 
 const GOOGLE_SA_EMAIL = process.env.GOOGLE_SA_EMAIL;
 const GOOGLE_SA_PRIVATE_KEY = (process.env.GOOGLE_SA_PRIVATE_KEY || '').replace(/\\n/g, '\n');
-const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || GOOGLE_SA_EMAIL;
+const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'davi65@gmail.com';
 
 /**
  * Generates an OAuth2 access token for Google API using a Service Account JWT signature.
