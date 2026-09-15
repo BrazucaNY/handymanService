@@ -455,17 +455,57 @@ function setupCancelModal() {
   const closeBtn = document.getElementById('closeCancelModalBtn');
   const modal = document.getElementById('cancelModal');
   const submitBtn = document.getElementById('submitCancelBtn');
+  const submitRescheduleBtn = document.getElementById('submitRescheduleBtn');
   const errorEl = document.getElementById('cancelError');
   const successEl = document.getElementById('cancelSuccessMsg');
 
+  const tabReschedule = document.getElementById('tabRescheduleBtn');
+  const tabCancel = document.getElementById('tabCancelBtn');
+  const rescheduleSection = document.getElementById('rescheduleFormSection');
+  const cancelSection = document.getElementById('cancelFormSection');
+  const rescheduleDateInput = document.getElementById('rescheduleDate');
+
   if (!modal) return;
+
+  // Set min date on reschedule date picker to tomorrow
+  if (rescheduleDateInput) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split('T')[0];
+    rescheduleDateInput.min = tomorrowStr;
+    rescheduleDateInput.value = tomorrowStr;
+  }
+
+  if (tabReschedule && tabCancel && rescheduleSection && cancelSection) {
+    tabReschedule.addEventListener('click', () => {
+      tabReschedule.style.background = 'var(--navy)';
+      tabReschedule.style.color = '#fff';
+      tabCancel.style.background = '#f1f5f9';
+      tabCancel.style.color = 'var(--navy)';
+      rescheduleSection.style.display = 'flex';
+      cancelSection.style.display = 'none';
+    });
+
+    tabCancel.addEventListener('click', () => {
+      tabCancel.style.background = 'var(--navy)';
+      tabCancel.style.color = '#fff';
+      tabReschedule.style.background = '#f1f5f9';
+      tabReschedule.style.color = 'var(--navy)';
+      cancelSection.style.display = 'flex';
+      rescheduleSection.style.display = 'none';
+    });
+  }
 
   if (openBtn) {
     openBtn.addEventListener('click', (e) => {
       e.preventDefault();
       modal.style.display = 'flex';
       hideError(errorEl);
+      const reschError = document.getElementById('rescheduleError');
+      if (reschError) hideError(reschError);
       if (successEl) successEl.style.display = 'none';
+      const reschSuccess = document.getElementById('rescheduleSuccessMsg');
+      if (reschSuccess) reschSuccess.style.display = 'none';
     });
   }
 
@@ -483,6 +523,74 @@ function setupCancelModal() {
 
   if (submitBtn) {
     submitBtn.addEventListener('click', handleCancelSubmit);
+  }
+
+  if (submitRescheduleBtn) {
+    submitRescheduleBtn.addEventListener('click', handleRescheduleSubmit);
+  }
+}
+
+async function handleRescheduleSubmit() {
+  const bookingIdInput = document.getElementById('rescheduleBookingId');
+  const emailInput = document.getElementById('rescheduleEmail');
+  const dateInput = document.getElementById('rescheduleDate');
+  const slotSelect = document.getElementById('rescheduleSlot');
+  const errorEl = document.getElementById('rescheduleError');
+  const successEl = document.getElementById('rescheduleSuccessMsg');
+  const submitBtn = document.getElementById('submitRescheduleBtn');
+
+  const bookingId = (bookingIdInput ? bookingIdInput.value : '').trim().toUpperCase();
+  const email = (emailInput ? emailInput.value : '').trim();
+  const dateStr = dateInput ? dateInput.value : '';
+  const slotTime = slotSelect ? slotSelect.value : '08:00';
+
+  if (!bookingId || !email || !dateStr) {
+    showError(errorEl, 'Please enter your Booking ID, Email Address, and select a New Date.');
+    return;
+  }
+
+  const newStartDate = new Date(`${dateStr}T${slotTime}:00`);
+  if (isNaN(newStartDate.getTime())) {
+    showError(errorEl, 'Please select a valid future date.');
+    return;
+  }
+
+  hideError(errorEl);
+  if (successEl) successEl.style.display = 'none';
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Processing Reschedule...';
+
+  try {
+    const res = await fetch('/.netlify/functions/reschedule', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bookingId,
+        email,
+        newStart: newStartDate.toISOString()
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      showError(errorEl, data.error || 'Reschedule failed. Please check your details.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Confirm New Date & Time';
+      return;
+    }
+
+    if (successEl) {
+      successEl.textContent = data.message || `Appointment ${bookingId} rescheduled successfully.`;
+      successEl.style.display = 'block';
+    }
+    submitBtn.style.display = 'none';
+
+  } catch (err) {
+    showError(errorEl, err.message || 'Error processing reschedule. Please try again.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Confirm New Date & Time';
   }
 }
 
@@ -536,4 +644,5 @@ async function handleCancelSubmit() {
     submitBtn.textContent = 'Confirm Cancellation';
   }
 }
+
 

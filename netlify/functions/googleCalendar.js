@@ -209,3 +209,74 @@ export async function deleteGoogleCalendarEventByBookingId(bookingId, email) {
   }
 }
 
+/**
+ * Searches for and updates a booking event's start/end times in David's Google Calendar by Booking ID.
+ */
+export async function updateGoogleCalendarEventByBookingId(bookingId, email, newStartIso, newEndIso) {
+  try {
+    const token = await getAccessToken();
+    if (!token || !GOOGLE_CALENDAR_ID) return false;
+
+    // Search for event containing the booking ID
+    const searchRes = await fetch(
+      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events?q=${encodeURIComponent(bookingId)}`,
+      {
+        headers: { 'Authorization': `Bearer ${token}` }
+      }
+    );
+
+    if (!searchRes.ok) {
+      console.error('Google Calendar Event Search Error:', await searchRes.text());
+      return false;
+    }
+
+    const searchData = await searchRes.json();
+    const items = searchData.items || [];
+
+    let updatedAny = false;
+    for (const item of items) {
+      if (item.summary && item.summary.includes(bookingId)) {
+        if (email) {
+          const desc = (item.description || '').toLowerCase();
+          const cleanEmail = String(email).trim().toLowerCase();
+          if (!desc.includes(cleanEmail)) {
+            console.warn(`Email mismatch for event ${bookingId}: ${cleanEmail} not found in event description.`);
+            continue;
+          }
+        }
+
+        const currentDesc = item.description || '';
+        const updatedDesc = `${currentDesc}\n\n[RESCHEDULED ONLINE to ${newStartIso}]`;
+
+        const patchRes = await fetch(
+          `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events/${encodeURIComponent(item.id)}`,
+          {
+            method: 'PATCH',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              start: { dateTime: newStartIso, timeZone: 'America/New_York' },
+              end: { dateTime: newEndIso, timeZone: 'America/New_York' },
+              description: updatedDesc
+            })
+          }
+        );
+
+        if (patchRes.ok) {
+          updatedAny = true;
+        } else {
+          console.error(`Failed to update Google Calendar event ${item.id}:`, await patchRes.text());
+        }
+      }
+    }
+
+    return updatedAny;
+  } catch (err) {
+    console.error('Error updating Google Calendar event:', err);
+    return false;
+  }
+}
+
+
