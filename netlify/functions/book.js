@@ -1,5 +1,5 @@
 // Netlify Serverless Function: POST /.netlify/functions/book
-// Full Server-Side Validation, Atomic Conflict Lock (Google Calendar + Supabase DB) and Event Creation
+// Full Server-Side Validation, Google Calendar Single Source of Truth Lock and Event Creation
 
 import crypto from 'node:crypto';
 import { DB_CONFIG } from './dbConfig.js';
@@ -104,10 +104,10 @@ export async function handler(event) {
 
     const bookingId = "HH-" + crypto.randomUUID().slice(0, 8).toUpperCase();
 
-    // 5. Check Google Calendar API for busy conflicts
+    // 5. Google Calendar Single Source of Truth: Check for busy events on davi65@gmail.com
     try {
       const gBusy = await getGoogleCalendarBusyRanges(startTimeIso, endTimeIso);
-      const isGoogleBusy = gBusy.some(b => startMs < b.end && b.start < endMs);
+      const isGoogleBusy = (gBusy || []).some(b => startMs < b.end && b.start < endMs);
       if (isGoogleBusy) {
         return {
           statusCode: 409,
@@ -116,35 +116,29 @@ export async function handler(event) {
         };
       }
     } catch (gCheckErr) {
-      console.error("Google Calendar freebusy warning:", gCheckErr);
+      console.error("Google Calendar freebusy check warning:", gCheckErr);
     }
 
-    // 6. Check Supabase DB for atomic double-booking exclusion & insert
+    // 6. Post Event directly to David's Google Calendar (Single Source of Truth)
+    createGoogleCalendarEvent({
+      bookingId,
+      startIso: startTimeIso,
+      endIso: endTimeIso,
+      serviceName: serviceId,
+      customerName: name,
+      customerPhone: phone,
+      customerEmail: email,
+      customerAddress: address,
+      zip: cleanZip,
+      notes
+    }).catch(gErr => console.error("Google Calendar Event Creation Error:", gErr));
+
+    // 7. Background Log to Supabase DB for audit records (non-blocking)
     const SUPABASE_URL = DB_CONFIG.SUPABASE_URL;
     const SUPABASE_SERVICE_ROLE_KEY = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY;
 
     if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
-      const dbCheckUrl = `${SUPABASE_URL}/rest/v1/bookings?start_time=lt.${encodeURIComponent(endTimeIso)}&end_time=gt.${encodeURIComponent(startTimeIso)}&status=eq.confirmed&select=id`;
-      const dbCheckRes = await fetch(dbCheckUrl, {
-        headers: {
-          "apikey": SUPABASE_SERVICE_ROLE_KEY,
-          "Authorization": `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`
-        }
-      });
-
-      if (dbCheckRes.ok) {
-        const overlappingRows = await dbCheckRes.json();
-        if (overlappingRows && overlappingRows.length > 0) {
-          return {
-            statusCode: 409,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ error: "This time slot is no longer available. Please select a different time." })
-          };
-        }
-      }
-
-      // Insert into Supabase DB with exclusion constraint
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
+      fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
         method: "POST",
         headers: {
           "apikey": SUPABASE_SERVICE_ROLE_KEY,
@@ -166,44 +160,10 @@ export async function handler(event) {
           notes: notes || "",
           status: "confirmed"
         })
-      });
-
-      if (response.status === 409) {
-        return {
-          statusCode: 409,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ error: "This time slot was just booked by another customer. Please select a different time." })
-        };
-      }
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Supabase insert error:", errorText);
-        if (errorText.includes("exclusion") || errorText.includes("overlap") || errorText.includes("duplicate")) {
-          return {
-            statusCode: 409,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ error: "This time slot is no longer available. Please select a different time." })
-          };
-        }
-      }
+      }).catch(dbErr => console.error("Supabase DB log background warning:", dbErr));
     }
 
-    // 7. Insert Event directly onto David's Google Calendar
-    createGoogleCalendarEvent({
-      bookingId,
-      startIso: startTimeIso,
-      endIso: endTimeIso,
-      serviceName: serviceId,
-      customerName: name,
-      customerPhone: phone,
-      customerEmail: email,
-      customerAddress: address,
-      zip: cleanZip,
-      notes
-    }).catch(gErr => console.error("Google Calendar Event Creation Error:", gErr));
-
-    // 8. Send Notification Email via Web3Forms
+    // 8. Send Instant Notification Email via Web3Forms (non-blocking)
     fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -215,6 +175,7 @@ export async function handler(event) {
       })
     }).catch(err => console.error("Web3Forms email background error:", err));
 
+    // 9. Return HTTP 200 Success Confirmation
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
