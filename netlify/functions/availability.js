@@ -36,10 +36,10 @@ export async function handler(event) {
     console.error("Google Calendar API check warning:", gErr);
   }
 
-  // 2. If Supabase credentials are valid, query database bookings
+  // 2. If Supabase credentials are valid, query database bookings (excluding test bookings by David)
   if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
     try {
-      const url = `${SUPABASE_URL}/rest/v1/bookings?start_time=gte.${encodeURIComponent(dayStart)}&start_time=lte.${encodeURIComponent(dayEnd)}&status=eq.confirmed&select=start_time,end_time`;
+      const url = `${SUPABASE_URL}/rest/v1/bookings?start_time=gte.${encodeURIComponent(dayStart)}&start_time=lte.${encodeURIComponent(dayEnd)}&status=eq.confirmed&customer_name=neq.David&select=start_time,end_time,customer_name`;
 
       const response = await fetch(url, {
         headers: {
@@ -50,10 +50,12 @@ export async function handler(event) {
 
       if (response.ok) {
         const rows = await response.json();
-        const supabaseRanges = rows.map(r => ({
-          start: new Date(r.start_time).getTime(),
-          end: new Date(r.end_time).getTime()
-        }));
+        const supabaseRanges = (rows || [])
+          .filter(r => r.customer_name !== 'David' && r.customer_name !== 'Test')
+          .map(r => ({
+            start: new Date(r.start_time).getTime(),
+            end: new Date(r.end_time).getTime()
+          }));
         bookedRanges.push(...supabaseRanges);
       }
     } catch (err) {
