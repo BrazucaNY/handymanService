@@ -7,18 +7,21 @@ export const CONFIG = {
   travelBufferMinutes: 30,        // Buffer time required after each job for travel/cleanup
   leadDays: 14,                   // Allow booking up to 14 days in advance
   
-  // Westchester County Service ZIP Codes
+  // Westchester County 20-Mile Radius Service ZIP Codes (Center: White Plains 10607)
   zips: [
-    "10601", "10603", "10604", "10605", "10606", "10607", // White Plains
+    "10601", "10603", "10604", "10605", "10606", "10607", // White Plains / Greenburgh
     "10583",                                               // Scarsdale
-    "10701", "10703", "10704", "10705", "10710",           // Yonkers
-    "10591",                                               // Tarrytown
-    "10530",                                               // Hartsdale
-    "10528",                                               // Harrison
-    "10801", "10804", "10805",                             // New Rochelle
-    "10522",                                               // Dobbs Ferry
-    "10502",                                               // Ardsley
-    "10708"                                                // Bronxville
+    "10528", "10577",                                     // Harrison & Purchase
+    "10580", "10573",                                     // Rye, Rye Brook & Port Chester
+    "10538", "10543",                                     // Larchmont & Mamaroneck
+    "10504", "10514",                                     // Armonk & Chappaqua
+    "10506", "10536", "10549",                             // Bedford, Katonah & Mount Kisco
+    "10570", "10510", "10562",                             // Pleasantville, Briarcliff Manor & Ossining
+    "10591", "10533", "10522", "10706",                   // Tarrytown, Irvington, Dobbs Ferry & Hastings
+    "10530", "10502", "10523", "10595",                   // Hartsdale, Ardsley, Elmsford & Valhalla
+    "10708", "10707", "10709",                             // Bronxville, Tuckahoe & Eastchester
+    "10803", "10801", "10804", "10805",                   // Pelham & New Rochelle
+    "10701", "10703", "10704", "10705", "10710"            // Yonkers
   ],
 
   // Handyman Services with Descriptions & Durations (No rigid prices shown)
