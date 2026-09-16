@@ -19,10 +19,10 @@
   to = "/gallery.html"
   status = 200
 
-# /blog index (301 to /blog/)
+# /blog index (301 to https://www.herehandyman.com/blog/)
 [[redirects]]
   from = "/blog"
-  to = "/blog/"
+  to = "https://www.herehandyman.com/blog/"
   status = 301
 
 [[redirects]]
@@ -48,16 +48,16 @@
   to = "/service-areas.html"
   status = 200
 
-# /privacy 301 redirect to /privacy-policy
+# /privacy 301 redirect to https://www.herehandyman.com/privacy-policy
 [[redirects]]
   from = "/privacy"
-  to = "/privacy-policy"
+  to = "https://www.herehandyman.com/privacy-policy"
   status = 301
   force = true
 
 [[redirects]]
   from = "/privacy.html"
-  to = "/privacy-policy"
+  to = "https://www.herehandyman.com/privacy-policy"
   status = 301
   force = true
 
