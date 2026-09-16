@@ -4,6 +4,7 @@
 import crypto from 'node:crypto';
 import { DB_CONFIG } from './dbConfig.js';
 import { createGoogleCalendarEvent, getGoogleCalendarBusyRanges } from './googleCalendar.js';
+import { createSetmoreAppointment } from './setmore.js';
 
 // Server-derived service durations (ignores client-passed durationMinutes)
 const SERVICE_DURATIONS = {
@@ -132,6 +133,19 @@ export async function handler(event) {
       zip: cleanZip,
       notes
     }).catch(gErr => console.error("Google Calendar Event Creation Error:", gErr));
+
+    // 6b. Sync appointment directly to Setmore API
+    createSetmoreAppointment({
+      name,
+      email,
+      phone,
+      startISO: startTimeIso,
+      endISO: endTimeIso,
+      serviceId,
+      notes,
+      address,
+      zip: cleanZip
+    }).catch(sErr => console.error("Setmore API Sync Error:", sErr));
 
     // 7. Background Log to Supabase DB for audit records
     const SUPABASE_URL = DB_CONFIG.SUPABASE_URL;
