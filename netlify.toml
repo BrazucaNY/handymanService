@@ -224,6 +224,26 @@
   to = "/blog/find-reliable-handyman-westchester.html"
   status = 200
 
+[[redirects]]
+  from = "/blog/deck-sealing-staining-westchester"
+  to = "/blog/deck-sealing-staining-westchester.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/fall-gutter-cleaning-westchester"
+  to = "/blog/fall-gutter-cleaning-westchester.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/holiday-lights-installation-westchester"
+  to = "/blog/holiday-lights-installation-westchester.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/move-in-handyman-checklist-westchester"
+  to = "/blog/move-in-handyman-checklist-westchester.html"
+  status = 200
+
 # Security headers for admin
 [[headers]]
   for = "/admin/*"
