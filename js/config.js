@@ -5,7 +5,7 @@ export const CONFIG = {
   hours: { start: 7, end: 20 },   // 7:00 AM - 8:00 PM (7:00 - 20:00)
   slotMinutes: 60,                // Granularity of start times (every 60 mins)
   travelBufferMinutes: 30,        // Buffer time required after each job for travel/cleanup
-  leadDays: 14,                   // Allow booking up to 14 days in advance
+  leadDays: 60,                   // Allow booking up to 60 days (2 months) in advance
   
   // Westchester County 20-Mile Radius Service ZIP Codes (Center: White Plains 10607)
   zips: [
