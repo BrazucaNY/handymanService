@@ -230,7 +230,6 @@ function renderServices() {
         <p class="svc-desc">${svc.desc}</p>
         <div class="svc-meta">
           <span class="svc-duration">⏱️ ~${svc.duration} mins</span>
-          <span class="svc-badge">✨ Free On-Site Estimate</span>
         </div>
       </div>
     </div>
