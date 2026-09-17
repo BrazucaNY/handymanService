@@ -54,7 +54,10 @@ export async function handler(event) {
       if (response.ok) {
         const rows = await response.json();
         const supabaseRanges = (rows || [])
-          .filter(r => r.customer_name !== 'David' && r.customer_name !== 'Test')
+          .filter(r => {
+            const name = (r.customer_name || '').toLowerCase();
+            return !name.includes('david') && !name.includes('test');
+          })
           .map(r => ({
             start: new Date(r.start_time).getTime(),
             end: new Date(r.end_time).getTime()
