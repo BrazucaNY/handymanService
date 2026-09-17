@@ -77,12 +77,12 @@ export async function handler(event) {
   const durationMs = durationMinutes * 60 * 1000;
   const stepMs = 60 * 60 * 1000;
 
-  // 7:00 AM EDT = 11:00 UTC, 8:00 PM EDT = 00:00 UTC next day (24:00 UTC)
+  // 7:00 AM EDT = 11:00 UTC, Last start time slot 7:00 PM EDT = 23:00 UTC
   const workStartMs = Date.UTC(yr, mo - 1, dy, 11, 0, 0);
-  const workEndMs = Date.UTC(yr, mo - 1, dy, 24, 0, 0);
+  const lastStartMs = Date.UTC(yr, mo - 1, dy, 23, 0, 0);
   const nowMs = Date.now();
 
-  for (let currentStart = workStartMs; currentStart + durationMs <= workEndMs; currentStart += stepMs) {
+  for (let currentStart = workStartMs; currentStart <= lastStartMs; currentStart += stepMs) {
     const candidateTotalEnd = currentStart + durationMs + bufferMs;
 
     // Exclude past slots or slots less than 1 hour away for same-day bookings
