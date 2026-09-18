@@ -41,17 +41,32 @@ def to_exif_deg(val):
     return ((d, 1), (m, 1), (s, 100))
 
 def build_exif_dict(title, city, lat, lon):
+    tags_str = f"handyman; {city} NY; TV mounting; furniture assembly; drywall repair; Westchester County; Here Handyman; home repair; local handyman"
+    
+    # Encode Windows XP metadata fields (UTF-16LE with null terminator)
+    xp_title = f"{title}\0".encode('utf-16le')
+    xp_comment = f"Here Handyman local repair services in {city} NY. Visit https://www.herehandyman.com or Call (516) 350-0801\0".encode('utf-16le')
+    xp_author = f"David - Here Handyman\0".encode('utf-16le')
+    xp_keywords = f"{tags_str}\0".encode('utf-16le')
+    xp_subject = f"{title}\0".encode('utf-16le')
+
     zeroth_ifd = {
         piexif.ImageIFD.ImageDescription: f"{title}. Professional handyman services in {city}, NY by Here Handyman. Call (516) 350-0801 or visit https://www.herehandyman.com.".encode('utf-8'),
         piexif.ImageIFD.Make: b"Here Handyman",
-        piexif.ImageIFD.Model: b"Here Handyman SEO Metadata Engine",
+        piexif.ImageIFD.Model: b"Here Handyman Local SEO Engine",
         piexif.ImageIFD.Artist: b"David - Here Handyman",
         piexif.ImageIFD.Copyright: b"Copyright (c) 2026 Here Handyman (https://www.herehandyman.com). All Rights Reserved.",
-        piexif.ImageIFD.Software: b"Here Handyman Image Geotagger"
+        piexif.ImageIFD.Software: b"Here Handyman Image Geotagger",
+        # Windows File Explorer Specific Tags (XPTitle, XPComment, XPAuthor, XPKeywords, XPSubject)
+        40091: xp_title,
+        40092: xp_comment,
+        40093: xp_author,
+        40094: xp_keywords,
+        40095: xp_subject
     }
     
     exif_ifd = {
-        piexif.ExifIFD.UserComment: f"Title: {title} | Author: Here Handyman | Keywords: handyman, {city} NY, TV mounting, furniture assembly, drywall repair, Westchester County | URL: https://www.herehandyman.com".encode('utf-8')
+        piexif.ExifIFD.UserComment: f"Title: {title} | Author: Here Handyman | Tags: {tags_str} | URL: https://www.herehandyman.com".encode('utf-8')
     }
     
     gps_ifd = {
@@ -65,7 +80,7 @@ def build_exif_dict(title, city, lat, lon):
 
 def process_images(target_dir):
     print("=====================================================================")
-    print("📍 ENHANCED EXIF & METADATA EMBEDDER FOR HERE HANDYMAN")
+    print("📍 WINDOWS TAGS & EXIF EMBEDDER FOR HERE HANDYMAN IMAGES")
     print(f"Target Directory: {target_dir}")
     print("=====================================================================\n")
 
@@ -74,7 +89,7 @@ def process_images(target_dir):
     for ext in extensions:
         files.extend(glob.glob(os.path.join(target_dir, '**', ext), recursive=True))
 
-    print(f"Found {len(files)} total images to process...\n")
+    print(f"Found {len(files)} total images to add Tags...\n")
 
     success_count = 0
     for path in files:
@@ -106,26 +121,24 @@ def process_images(target_dir):
             
             if path.lower().endswith(('.jpg', '.jpeg')):
                 img.save(path, "jpeg", exif=exif_bytes, quality=95)
-                print(f"  ✓ Embedded EXIF (JPEG): {os.path.basename(path):<40} ➔ {title}")
+                print(f"  ✓ Added Windows Tags (JPEG): {os.path.basename(path):<40} ➔ Tags: handyman, {city_data['city']} NY")
                 success_count += 1
             else:
-                # For WebP/PNG, re-save with metadata
                 img.save(path, exif=exif_bytes, quality=95)
-                print(f"  ✓ Embedded Metadata:  {os.path.basename(path):<40} ➔ {title}")
+                print(f"  ✓ Added Windows Tags:        {os.path.basename(path):<40} ➔ Tags: handyman, {city_data['city']} NY")
                 success_count += 1
                 
         except Exception as e:
-            # Re-try basic save if EXIF byte packing complains
             try:
                 img = Image.open(path)
                 img.save(path, quality=95)
-                print(f"  ✓ Refreshed Image:    {os.path.basename(path):<40} ➔ {title}")
+                print(f"  ✓ Refreshed Image:          {os.path.basename(path):<40}")
                 success_count += 1
             except Exception as e2:
                 print(f"  ❌ Error on {os.path.basename(path)}: {e2}")
 
     print(f"\n=====================================================================")
-    print(f"🎉 COMPLETED: {success_count}/{len(files)} images updated with EXIF Title, Author, Copyright, Keywords & GPS Coordinates!")
+    print(f"🎉 COMPLETED: {success_count}/{len(files)} images updated with Windows Tags, Keywords, Subject & Title!")
     print(f"=====================================================================")
 
 if __name__ == "__main__":
