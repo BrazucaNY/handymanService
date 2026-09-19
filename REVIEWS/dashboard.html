@@ -696,6 +696,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <th>Email Address</th>
                 <th>Street Address</th>
                 <th>Town</th>
+                <th>Lead Source</th>
                 <th>Service Completed</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -735,16 +736,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <input class="form-control" id="newCustAddress" placeholder="e.g. 142 Main St, Apt 4B">
           </div>
           <div class="form-group">
-            <label>Westchester Town *</label>
-            <select class="form-control" id="newCustTown">
-              <option value="White Plains">White Plains</option>
-              <option value="Scarsdale">Scarsdale</option>
-              <option value="Harrison">Harrison</option>
-              <option value="Rye">Rye</option>
-              <option value="Yonkers">Yonkers</option>
-              <option value="Mamaroneck">Mamaroneck</option>
-              <option value="New Rochelle">New Rochelle</option>
-            </select>
+            <label>Town / City *</label>
+            <input class="form-control" id="newCustTown" placeholder="e.g. Scarsdale, White Plains" required>
+          </div>
+          <div class="form-group">
+            <label>Lead Source (e.g. APP, FACEBOOK, GOOGLE)</label>
+            <input class="form-control" id="newCustLead" placeholder="e.g. Facebook, App, Google, Referral">
           </div>
           <div class="form-group">
             <label>Service Completed</label>
@@ -1258,12 +1255,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var STORAGE_CONTACTS_KEY = "hh_crm_contacts";
 
     var defaultContacts = [
-      { name: "Jessica Miller", phone: "(914) 555-0192", email: "jessica@example.com", address: "142 Main St, Apt 4B", town: "White Plains", service: "Door Lock & Handle Installation", status: "Active", date: "2026-09-18" },
-      { name: "Tim Wilderman", phone: "(914) 555-0841", email: "tim.w@example.com", address: "88 Mamaroneck Ave", town: "White Plains", service: "TV Mounting & Cable Concealing", status: "Completed", date: "2025-09-24" },
-      { name: "Mary Pagano", phone: "(914) 555-0322", email: "mary.p@example.com", address: "45 Post Rd", town: "Scarsdale", service: "Handrail & Stair Safety Repairs", status: "Completed", date: "2025-09-24" },
-      { name: "Melissa K.", phone: "(914) 555-0914", email: "melissa.k@example.com", address: "12 Halstead Ave", town: "Harrison", service: "Lighting Fixture Replacement", status: "Completed", date: "2025-09-24" },
-      { name: "David Vance", phone: "(914) 555-0118", email: "david.vance@example.com", address: "210 Central Park Ave", town: "Yonkers", service: "Garage Exterior Painting", status: "Active", date: "2026-09-15" },
-      { name: "Sandra Thompson", phone: "(914) 555-0772", email: "sandra@example.com", address: "78 Purchase St", town: "Rye", service: "Carpentry & Floating Shelves", status: "Completed", date: "2025-09-22" }
+      { name: "Jessica Miller", phone: "(914) 555-0192", email: "jessica@example.com", address: "142 Main St, Apt 4B", town: "White Plains", lead: "Facebook", service: "Door Lock & Handle Installation", status: "Active", date: "2026-09-18" },
+      { name: "Tim Wilderman", phone: "(914) 555-0841", email: "tim.w@example.com", address: "88 Mamaroneck Ave", town: "White Plains", lead: "App", service: "TV Mounting & Cable Concealing", status: "Completed", date: "2025-09-24" },
+      { name: "Mary Pagano", phone: "(914) 555-0322", email: "mary.p@example.com", address: "45 Post Rd", town: "Scarsdale", lead: "Google", service: "Handrail & Stair Safety Repairs", status: "Completed", date: "2025-09-24" },
+      { name: "Melissa K.", phone: "(914) 555-0914", email: "melissa.k@example.com", address: "12 Halstead Ave", town: "Harrison", lead: "Referral", service: "Lighting Fixture Replacement", status: "Completed", date: "2025-09-24" },
+      { name: "David Vance", phone: "(914) 555-0118", email: "david.vance@example.com", address: "210 Central Park Ave", town: "Yonkers", lead: "Facebook", service: "Garage Exterior Painting", status: "Active", date: "2026-09-15" },
+      { name: "Sandra Thompson", phone: "(914) 555-0772", email: "sandra@example.com", address: "78 Purchase St", town: "Rye", lead: "App", service: "Carpentry & Floating Shelves", status: "Completed", date: "2025-09-22" }
     ];
 
     // Load contacts from localStorage or initialize defaults
@@ -1296,7 +1293,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       var tbody = document.querySelector("#contactsTable tbody");
       tbody.innerHTML = "";
       if (list.length === 0) {
-        tbody.innerHTML = "<tr><td colspan='8' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts found. Use Add Contacts to create your first client.</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='9' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts found. Use Add Contacts to create your first client.</td></tr>";
       } else {
         list.forEach(function (c, index) {
           var tr = document.createElement("tr");
@@ -1304,7 +1301,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                          "<td>" + c.phone + "</td>" +
                          "<td>" + (c.email || '—') + "</td>" +
                          "<td>" + (c.address || '—') + "</td>" +
-                         "<td><span class='badge-town'>" + c.town + "</span></td>" +
+                         "<td><span class='badge-town'>" + (c.town || 'Westchester') + "</span></td>" +
+                         "<td><span style='background:#eff6ff;color:#1d4ed8;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:600;display:inline-block;'>⚡ " + (c.lead || 'Direct') + "</span></td>" +
                          "<td>" + c.service + "</td>" +
                          "<td><span style='color:var(--green);font-weight:700;'>● " + (c.status || 'Active') + "</span></td>" +
                          "<td><button data-index='" + index + "' class='btn-delete-cust' style='background:none;border:none;color:#dc2626;cursor:pointer;font-weight:700;font-size:13px;'>🗑️ Delete</button></td>";
@@ -1338,6 +1336,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                (c.email && c.email.toLowerCase().includes(query)) ||
                (c.address && c.address.toLowerCase().includes(query)) ||
                (c.town && c.town.toLowerCase().includes(query)) ||
+               (c.lead && c.lead.toLowerCase().includes(query)) ||
                (c.service && c.service.toLowerCase().includes(query));
       });
       renderContacts(filtered);
@@ -1345,9 +1344,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     // 1-Click Secure CSV Export
     document.getElementById('exportCsvBtn').addEventListener('click', function () {
-      var csvContent = "data:text/csv;charset=utf-8,Name,Phone,Email,Address,Town,Service,Status\n";
+      var csvContent = "data:text/csv;charset=utf-8,Name,Phone,Email,Address,Town,Lead Source,Service,Status\n";
       contacts.forEach(function (c) {
-        csvContent += '"' + c.name + '","' + c.phone + '","' + (c.email || '') + '","' + (c.address || '') + '","' + (c.town || '') + '","' + (c.service || '') + '","' + (c.status || 'Active') + '"\n';
+        csvContent += '"' + c.name + '","' + c.phone + '","' + (c.email || '') + '","' + (c.address || '') + '","' + (c.town || '') + '","' + (c.lead || 'Direct') + '","' + (c.service || '') + '","' + (c.status || 'Active') + '"\n';
       });
       var encodedUri = encodeURI(csvContent);
       var link = document.createElement("a");
@@ -1365,7 +1364,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       var phone = document.getElementById('newCustPhone').value.trim();
       var email = document.getElementById('newCustEmail').value.trim();
       var address = document.getElementById('newCustAddress') ? document.getElementById('newCustAddress').value.trim() : '';
-      var town = document.getElementById('newCustTown').value;
+      var town = document.getElementById('newCustTown') ? document.getElementById('newCustTown').value.trim() : 'Westchester';
+      var lead = document.getElementById('newCustLead') ? document.getElementById('newCustLead').value.trim() || 'Direct' : 'Direct';
       var service = document.getElementById('newCustService').value.trim() || 'General Repairs';
 
       if (name && phone) {
@@ -1375,6 +1375,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           email: email,
           address: address,
           town: town,
+          lead: lead,
           service: service,
           status: "Active",
           date: new Date().toISOString().slice(0, 10)
@@ -1400,6 +1401,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             email: email,
             address: address,
             town: town,
+            leadSource: lead,
             service: service,
             rating: 5,
             reviewText: "Direct contact added via Admin CRM Dashboard",
