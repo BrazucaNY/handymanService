@@ -320,6 +320,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </form>
         </div>
 
+        <!-- Reset Password Request View -->
+        <div id="resetRequestView" style="display:none;">
+          <h2>Reset Password</h2>
+          <p class="sub">Enter your account email below to receive your password reset link.</p>
+          <form id="resetRequestForm">
+            <div class="field">
+              <label for="resetEmail">Email Address</label>
+              <input id="resetEmail" type="email" placeholder="you@herehandyman.com" required>
+            </div>
+            <button type="submit" class="submit-btn" id="sendResetBtn">Send Reset Link →</button>
+            <div class="msg" id="resetMsg"></div>
+          </form>
+          <button type="button" id="backToLoginBtn" style="background:none;border:none;color:var(--muted);font-weight:600;font-size:14px;margin-top:20px;cursor:pointer;text-decoration:underline;">&larr; Back to Sign In</button>
+        </div>
+
+        <!-- Set New Password View (User types new password) -->
+        <div id="updatePasswordView" style="display:none;">
+          <h2>Set New Password</h2>
+          <p class="sub">Type your new password below to update your account access.</p>
+          <form id="updatePasswordForm">
+            <div class="field">
+              <label for="newPassword">New Password</label>
+              <input id="newPassword" type="password" placeholder="Type new password" required minlength="6">
+            </div>
+            <div class="field">
+              <label for="confirmPassword">Confirm New Password</label>
+              <input id="confirmPassword" type="password" placeholder="Re-enter new password" required minlength="6">
+            </div>
+            <button type="submit" class="submit-btn" id="saveNewPasswordBtn">Update Password &amp; Sign In →</button>
+            <div class="msg" id="updateMsg"></div>
+          </form>
+        </div>
+
         <!-- Signed In Welcome View -->
         <div id="welcomeView" class="welcome-box" style="display:none;">
           <div class="ok-icon">✓</div>
@@ -403,29 +436,132 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       return (data && data.msg) ? data.msg : "Something went wrong. Please try again.";
     }
 
-    var forgotBtn = document.getElementById("forgotBtn");
+    var resetRequestView = document.getElementById("resetRequestView");
+    var updatePasswordView = document.getElementById("updatePasswordView");
+    var resetRequestForm = document.getElementById("resetRequestForm");
+    var resetEmailEl = document.getElementById("resetEmail");
+    var resetMsg = document.getElementById("resetMsg");
+    var sendResetBtn = document.getElementById("sendResetBtn");
+    var backToLoginBtn = document.getElementById("backToLoginBtn");
+    var updatePasswordForm = document.getElementById("updatePasswordForm");
+    var newPasswordEl = document.getElementById("newPassword");
+    var confirmPasswordEl = document.getElementById("confirmPassword");
+    var saveNewPasswordBtn = document.getElementById("saveNewPasswordBtn");
+    var updateMsg = document.getElementById("updateMsg");
 
-    togglePw.addEventListener("click", function () {
-      var showing = passwordEl.type === "text";
-      passwordEl.type = showing ? "password" : "text";
-      togglePw.textContent = showing ? "Show" : "Hide";
-      passwordEl.focus();
-    });
+    function hideAllViews() {
+      loginView.style.display = "none";
+      welcomeView.style.display = "none";
+      resetRequestView.style.display = "none";
+      updatePasswordView.style.display = "none";
+    }
 
     forgotBtn.addEventListener("click", function () {
-      var email = emailEl.value.trim() || "davi65@gmail.com";
-      setMsg("Sending password reset email to " + email + "...", "ok");
+      hideAllViews();
+      resetRequestView.style.display = "block";
+      if (emailEl.value) resetEmailEl.value = emailEl.value;
+    });
+
+    backToLoginBtn.addEventListener("click", function () {
+      hideAllViews();
+      loginView.style.display = "block";
+    });
+
+    resetRequestForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var email = resetEmailEl.value.trim();
+      if (!email) return;
+      sendResetBtn.disabled = true;
+      sendResetBtn.textContent = "Sending...";
+      resetMsg.textContent = "Sending reset link to " + email + "...";
+      resetMsg.className = "msg ok";
+      resetMsg.style.display = "block";
+
       fetch(SUPABASE_URL + "/auth/v1/recover", {
         method: "POST",
         headers: { "apikey": SUPABASE_PUBLISHABLE_KEY, "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, redirectTo: "https://www.herehandyman.com/login" })
       })
         .then(function () {
-          setMsg("Password reset email sent to " + email + "! Check your inbox.", "ok");
+          resetMsg.textContent = "Reset link sent! Check your email (" + email + ").";
         })
         .catch(function () {
-          setMsg("Error sending reset email. Please try again.", "error");
+          resetMsg.textContent = "Error sending reset email. Please try again.";
+          resetMsg.className = "msg error";
+        })
+        .then(function () {
+          sendResetBtn.disabled = false;
+          sendResetBtn.textContent = "Send Reset Link →";
         });
+    });
+
+    // Check URL hash for Recovery Access Token (When user clicks reset email link)
+    var hash = window.location.hash || "";
+    var recoveryToken = null;
+    if (hash.indexOf("access_token=") !== -1) {
+      var match = hash.match(/access_token=([^&]+)/);
+      if (match) recoveryToken = match[1];
+    }
+
+    if (recoveryToken) {
+      hideAllViews();
+      updatePasswordView.style.display = "block";
+
+      updatePasswordForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var p1 = newPasswordEl.value;
+        var p2 = confirmPasswordEl.value;
+        if (p1 !== p2) {
+          updateMsg.textContent = "Passwords do not match. Please re-type.";
+          updateMsg.className = "msg error";
+          updateMsg.style.display = "block";
+          return;
+        }
+        saveNewPasswordBtn.disabled = true;
+        saveNewPasswordBtn.textContent = "Updating Password...";
+
+        fetch(SUPABASE_URL + "/auth/v1/user", {
+          method: "PUT",
+          headers: {
+            "apikey": SUPABASE_PUBLISHABLE_KEY,
+            "Authorization": "Bearer " + recoveryToken,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ password: p1 })
+        })
+          .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+          .then(function (r) {
+            if (!r.ok) {
+              updateMsg.textContent = r.data && r.data.msg ? r.data.msg : "Error updating password.";
+              updateMsg.className = "msg error";
+              updateMsg.style.display = "block";
+              return;
+            }
+            updateMsg.textContent = "Password updated successfully! Signing you in...";
+            updateMsg.className = "msg ok";
+            updateMsg.style.display = "block";
+            setTimeout(function () {
+              window.location.hash = "";
+              window.location.reload();
+            }, 1500);
+          })
+          .catch(function () {
+            updateMsg.textContent = "Network error. Please try again.";
+            updateMsg.className = "msg error";
+            updateMsg.style.display = "block";
+          })
+          .then(function () {
+            saveNewPasswordBtn.disabled = false;
+            saveNewPasswordBtn.textContent = "Update Password & Sign In →";
+          });
+      });
+    }
+
+    togglePw.addEventListener("click", function () {
+      var showing = passwordEl.type === "text";
+      passwordEl.type = showing ? "password" : "text";
+      togglePw.textContent = showing ? "Show" : "Hide";
+      passwordEl.focus();
     });
 
     form.addEventListener("submit", function (e) {
