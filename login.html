@@ -600,7 +600,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           };
           saveSession(session, rememberEl.checked);
           passwordEl.value = "";
-          showWelcome(session);
+          window.location.href = "/dashboard";
         })
         .catch(function () {
           setMsg("Network error. Check your connection and try again.", "error");

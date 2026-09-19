@@ -19,6 +19,10 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /admin/                    /login.html                     200
 /CRM                       /login.html                     200
 /CRM/                      /login.html                     200
+/dashboard                 /dashboard.html                 200
+/dashboard/                /dashboard.html                 200
+/admin/dashboard           /dashboard.html                 200
+/CRM/dashboard             /dashboard.html                 200
 /door-repair-installation  /door-repair-installation.html  200
 /handrail-installation     /handrail-installation.html     200
 /lighting-fixture-installation /lighting-fixture-installation.html 200
