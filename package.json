@@ -1,0 +1,12 @@
+{
+  "name": "here-handyman-crm",
+  "version": "2.0.0",
+  "description": "Here Handyman SaaS CRM & Review Harvester",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Build step complete.'"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

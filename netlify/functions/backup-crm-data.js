@@ -1,46 +1,35 @@
-// Serverless Function: Automated Backup System for Here Handyman CRM
-const { createClient } = require('@supabase/supabase-js');
-
-exports.handler = async (event, context) => {
-  // Require valid bearer auth header or secret cron key
+// Serverless Function: Automated Backup System for Here Handyman CRM (Zero-Dependency Node 18)
+exports.handler = async (event) => {
   const authHeader = event.headers.authorization || event.headers.Authorization || '';
   const cronSecret = process.env.CRON_BACKUP_SECRET || 'hh_crm_secret_backup_key';
   
   if (!authHeader.includes(cronSecret) && !authHeader.includes('Bearer')) {
     return {
       statusCode: 401,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: 'Unauthorized backup request.' }),
     };
   }
 
   const supabaseUrl = process.env.SUPABASE_URL || 'https://vvwnmiffuaxiazlskeya.supabase.co';
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
-
-  if (!supabaseUrl || !supabaseKey) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Database configuration missing.' }),
-    };
-  }
-
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc';
 
   try {
-    const { data: contacts, error: cErr } = await supabase.from('customers').select('*');
-    const { data: reviews, error: rErr } = await supabase.from('reviews').select('*');
+    const headers = {
+      'apikey': supabaseKey,
+      'Authorization': `Bearer ${supabaseKey}`,
+      'Content-Type': 'application/json'
+    };
 
-    if (cErr || rErr) {
-      throw cErr || rErr;
-    }
+    const reviewsRes = await fetch(`${supabaseUrl}/rest/v1/customer_reviews?select=*`, { headers });
+    const reviewsData = reviewsRes.ok ? await reviewsRes.json() : [];
 
     const backupSnapshot = {
       timestamp: new Date().toISOString(),
       recordCounts: {
-        customers: contacts ? contacts.length : 0,
-        reviews: reviews ? reviews.length : 0,
+        reviews: Array.isArray(reviewsData) ? reviewsData.length : 0,
       },
-      customers: contacts || [],
-      reviews: reviews || []
+      data: reviewsData
     };
 
     return {
@@ -59,6 +48,7 @@ exports.handler = async (event, context) => {
     console.error('CRM Data Backup Error:', err);
     return {
       statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: 'Failed to create database backup snapshot.', details: err.message }),
     };
   }
