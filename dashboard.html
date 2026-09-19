@@ -19,6 +19,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
   <title>Admin CRM Dashboard | Here Handyman</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
   <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png"/>
@@ -694,6 +697,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <th>Town</th>
                 <th>Service Completed</th>
                 <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -711,6 +715,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <p style="color:var(--muted);font-size:14px;margin-bottom:20px;">
           Enter client details below to log new completed jobs and send automated review requests.
         </p>
+        <div id="addContactSuccessMsg" style="display:none;background:#dcfce7;color:#16a34a;padding:14px;border-radius:8px;font-weight:700;margin-bottom:16px;font-size:14px;border:1px solid #bbf7d0;"></div>
         <form id="addContactForm">
           <div class="form-group">
             <label>Customer Full Name *</label>
@@ -1138,16 +1143,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     function renderContacts(list) {
       var tbody = document.querySelector("#contactsTable tbody");
       tbody.innerHTML = "";
-      list.forEach(function (c) {
-        var tr = document.createElement("tr");
-        tr.innerHTML = "<td><strong>" + c.name + "</strong></td>" +
-                       "<td>" + c.phone + "</td>" +
-                       "<td>" + (c.email || '—') + "</td>" +
-                       "<td><span class='badge-town'>" + c.town + "</span></td>" +
-                       "<td>" + c.service + "</td>" +
-                       "<td><span style='color:var(--green);font-weight:700;'>● " + (c.status || 'Active') + "</span></td>";
-        tbody.appendChild(tr);
-      });
+      if (list.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='7' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts found. Use Add Contacts to create your first client.</td></tr>";
+      } else {
+        list.forEach(function (c, index) {
+          var tr = document.createElement("tr");
+          tr.innerHTML = "<td><strong>" + c.name + "</strong></td>" +
+                         "<td>" + c.phone + "</td>" +
+                         "<td>" + (c.email || '—') + "</td>" +
+                         "<td><span class='badge-town'>" + c.town + "</span></td>" +
+                         "<td>" + c.service + "</td>" +
+                         "<td><span style='color:var(--green);font-weight:700;'>● " + (c.status || 'Active') + "</span></td>" +
+                         "<td><button data-index='" + index + "' class='btn-delete-cust' style='background:none;border:none;color:#dc2626;cursor:pointer;font-weight:700;font-size:13px;'>🗑️ Delete</button></td>";
+          tbody.appendChild(tr);
+        });
+
+        // Delete Row Event Handlers
+        document.querySelectorAll('.btn-delete-cust').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var idx = parseInt(this.getAttribute('data-index'));
+            if (confirm("Are you sure you want to delete this customer contact from your CRM?")) {
+              contacts.splice(idx, 1);
+              saveContacts(contacts);
+              renderContacts(contacts);
+            }
+          });
+        });
+      }
       document.getElementById('statContacts').textContent = contacts.length;
       document.getElementById('statRequests').textContent = contacts.length;
     }
@@ -1207,7 +1229,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         saveContacts(contacts);
         renderContacts(contacts);
 
-        // 2. Sync asynchronously with Supabase/Netlify Function
+        // 2. Display success status banner
+        var statusBox = document.getElementById('addContactSuccessMsg');
+        statusBox.textContent = "✅ Customer " + name + " saved to CRM! Total contacts updated: " + contacts.length;
+        statusBox.style.display = "block";
+
+        // 3. Sync asynchronously with Supabase/Netlify Function
         fetch('/.netlify/functions/submit-review', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1225,11 +1252,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           console.log("Background DB sync note:", err);
         });
 
-        alert('✓ Customer recorded successfully in CRM & Database!');
         this.reset();
 
-        // Switch to contacts tab
-        document.querySelector('.menu-item[data-tab="contacts"]').click();
+        setTimeout(function() {
+          // Switch to contacts tab
+          document.querySelector('.menu-item[data-tab="contacts"]').click();
+        }, 800);
       }
     });
 
