@@ -325,7 +325,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
 
       <!-- Step 2: Contact Info & Review Form -->
-      <form id="harvestForm">
+      <form id="reviewForm">
         <input type="hidden" id="selectedRating" value="5">
 
         <div class="row-2">
@@ -429,7 +429,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const starContainer = document.getElementById('starContainer');
       const stars = starContainer.querySelectorAll('.star');
       const selectedRatingInput = document.getElementById('selectedRating');
-      const form = document.getElementById('harvestForm');
+      const form = document.getElementById('reviewForm');
       const formCard = document.getElementById('formCard');
       const positiveScreen = document.getElementById('positiveScreen');
       const feedbackScreen = document.getElementById('feedbackScreen');
@@ -499,9 +499,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }
         }
 
-        // Send to Netlify Serverless Harvest API
+        // Send to Netlify Serverless Review API
         try {
-          await fetch('/.netlify/functions/harvest-review', {
+          await fetch('/.netlify/functions/submit-review', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)

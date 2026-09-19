@@ -1,5 +1,5 @@
-// Netlify Serverless Function: POST /.netlify/functions/harvest-review
-// Review Harvest Data Collection & Supabase Database Storage Engine
+// Netlify Serverless Function: POST /.netlify/functions/submit-review
+// Verified Customer Review & Contact Intake Engine
 
 import { DB_CONFIG } from './dbConfig.js';
 
@@ -35,9 +35,9 @@ export const handler = async (event) => {
       };
     }
 
-    console.log(`[REVIEW HARVEST] New ${rating}-Star Review from ${name} (${phone}) in ${town || 'Westchester'}: "${reviewText}"`);
+    console.log(`[CUSTOMER REVIEW] New ${rating}-Star Review from ${name} (${phone}) in ${town || 'Westchester'}: "${reviewText}"`);
 
-    // Store in Supabase REST API (leads / customer_reviews table)
+    // Store in Supabase REST API (customer_reviews table)
     const supabaseEndpoint = `${DB_CONFIG.SUPABASE_URL}/rest/v1/customer_reviews`;
     
     try {
@@ -75,13 +75,13 @@ export const handler = async (event) => {
       },
       body: JSON.stringify({
         success: true,
-        message: 'Review harvested and saved successfully.',
+        message: 'Review saved successfully.',
         rating: parseInt(rating)
       })
     };
 
   } catch (error) {
-    console.error('[HARVEST ERROR]', error);
+    console.error('[REVIEW ERROR]', error);
     return {
       statusCode: 500,
       headers: { 'Content-Type': 'application/json' },
