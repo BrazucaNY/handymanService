@@ -1,13 +1,29 @@
-// Netlify Serverless Function: POST /.netlify/functions/submit-review
-// Verified Customer Review & Contact Intake Engine
+// Netlify Serverless Function: /.netlify/functions/submit-review
+// Customer Contact & Review Intake Engine with Full CORS & Supabase Integration
 
 import { DB_CONFIG } from './dbConfig.js';
 
 export const handler = async (event) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, apikey',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Content-Type': 'application/json'
+  };
+
+  // Handle CORS OPTIONS preflight request from browser
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({ ok: true, message: 'CORS Preflight Allowed' })
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ error: 'Method Not Allowed' })
     };
   }
@@ -27,18 +43,31 @@ export const handler = async (event) => {
       submittedAt
     } = data;
 
-    if (!name || !phone || !rating || !reviewText) {
+    if (!name || !phone) {
       return {
         statusCode: 400,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ error: 'Missing required fields (name, phone, rating, reviewText)' })
+        headers,
+        body: JSON.stringify({ error: 'Missing required fields (name, phone)' })
       };
     }
 
-    console.log(`[CUSTOMER REVIEW] New ${rating}-Star Review from ${name} (${phone}) in ${town || 'Westchester'}: "${reviewText}"`);
+    const payload = {
+      name: String(name).trim(),
+      phone: String(phone).trim(),
+      email: email ? String(email).trim() : null,
+      town: town ? String(town).trim() : 'Westchester',
+      address: address ? String(address).trim() : null,
+      service: service ? String(service).trim() : 'General Repairs',
+      rating: parseInt(rating) || 5,
+      review_text: reviewText || 'Direct contact submitted',
+      submitted_at: submittedAt || new Date().toISOString()
+    };
 
-    // Store in Supabase REST API (customer_reviews table)
+    console.log(`[CONTACT INTAKE] ${payload.name} (${payload.phone}) in ${payload.town}: ${payload.service}`);
+
+    // Store in Supabase REST API
     const supabaseEndpoint = `${DB_CONFIG.SUPABASE_URL}/rest/v1/customer_reviews`;
+    let dbSuccess = false;
     
     try {
       const dbRes = await fetch(supabaseEndpoint, {
@@ -49,43 +78,37 @@ export const handler = async (event) => {
           'Authorization': `Bearer ${DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY}`,
           'Prefer': 'return=minimal'
         },
-        body: JSON.stringify({
-          name,
-          phone,
-          email: email || null,
-          town: town || null,
-          address: address || null,
-          service: service || null,
-          rating: parseInt(rating),
-          review_text: reviewText,
-          submitted_at: submittedAt || new Date().toISOString()
-        })
+        body: JSON.stringify(payload)
       });
 
-      console.log(`[SUPABASE] Save status: ${dbRes.status}`);
+      if (dbRes.ok) {
+        dbSuccess = true;
+        console.log(`[SUPABASE SUCCESS] Saved contact ID to Supabase DB: ${dbRes.status}`);
+      } else {
+        const errTxt = await dbRes.text();
+        console.warn(`[SUPABASE NOTE] Status ${dbRes.status}: ${errTxt}`);
+      }
     } catch (dbErr) {
-      console.error('[SUPABASE ERROR]', dbErr);
+      console.error('[SUPABASE FETCH ERROR]', dbErr);
     }
 
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
+      headers,
       body: JSON.stringify({
         success: true,
-        message: 'Review saved successfully.',
-        rating: parseInt(rating)
+        message: 'Contact and review received and processed successfully by server.',
+        dbSaved: dbSuccess,
+        contact: payload
       })
     };
 
   } catch (error) {
-    console.error('[REVIEW ERROR]', error);
+    console.error('[SERVERLESS INTAKE ERROR]', error);
     return {
       statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Internal Server Error' })
+      headers,
+      body: JSON.stringify({ error: 'Internal Server Error', details: error.message })
     };
   }
 };

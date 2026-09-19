@@ -2,6 +2,7 @@
   "name": "here-handyman-crm",
   "version": "2.0.0",
   "description": "Here Handyman SaaS CRM & Review Harvester",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "echo 'Build step complete.'"
