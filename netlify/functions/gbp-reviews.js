@@ -1,7 +1,7 @@
 // Netlify Serverless Function: Google Business Profile (GBP) Live Reviews & AI Review Responder
 import crypto from 'node:crypto';
 
-const client_email = process.env.GOOGLE_SA_EMAIL || 'search-console-reader@handymanserviceadmin.iam.gserviceaccount.com';
+const client_email = process.env.GOOGLE_SA_EMAIL || '';
 const private_key = (process.env.GOOGLE_SA_PRIVATE_KEY || '').replace(/\\n/g, '\n');
 
 async function getAccessToken() {
