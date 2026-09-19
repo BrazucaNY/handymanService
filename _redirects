@@ -9,10 +9,7 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /book.html             https://www.herehandyman.com/book        301!
 /index.html            https://www.herehandyman.com/            301!
 
-# Explicit clean URL rewrites
-/book                      /book.html                      200
-/reviews                   /reviews.html                   200
-/reviews/                  /reviews.html                   200
+# Admin & System Portal Rewrites
 /login                     /login.html                     200
 /login/                    /login.html                     200
 /admin                     /login.html                     200
@@ -23,10 +20,266 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /dashboard/                /dashboard.html                 200
 /admin/dashboard           /dashboard.html                 200
 /CRM/dashboard             /dashboard.html                 200
-/door-repair-installation  /door-repair-installation.html  200
-/handrail-installation     /handrail-installation.html     200
-/lighting-fixture-installation /lighting-fixture-installation.html 200
-/carpentry-shelving        /carpentry-shelving.html        200
+
+# Explicit Clean URL Rewrites for All Service, Town & Blog Pages
+/about                                       /about.html                        200
+/about/                                      /about.html                        200
+/ardsley-handyman                            /ardsley-handyman.html             200
+/ardsley-handyman/                           /ardsley-handyman.html             200
+/bathroom-renovation                         /bathroom-renovation.html          200
+/bathroom-renovation/                        /bathroom-renovation.html          200
+/blog/best-handyman-services-westchester     /blog/best-handyman-services-westchester.html200
+/blog/best-handyman-services-westchester/    /blog/best-handyman-services-westchester.html200
+/blog/deck-sealing-staining-westchester      /blog/deck-sealing-staining-westchester.html200
+/blog/deck-sealing-staining-westchester/     /blog/deck-sealing-staining-westchester.html200
+/blog/drywall-repair-cost-westchester        /blog/drywall-repair-cost-westchester.html200
+/blog/drywall-repair-cost-westchester/       /blog/drywall-repair-cost-westchester.html200
+/blog/fall-gutter-cleaning-westchester       /blog/fall-gutter-cleaning-westchester.html200
+/blog/fall-gutter-cleaning-westchester/      /blog/fall-gutter-cleaning-westchester.html200
+/blog/find-reliable-handyman-westchester     /blog/find-reliable-handyman-westchester.html200
+/blog/find-reliable-handyman-westchester/    /blog/find-reliable-handyman-westchester.html200
+/blog/furniture-assembly-cost-westchester    /blog/furniture-assembly-cost-westchester.html200
+/blog/furniture-assembly-cost-westchester/   /blog/furniture-assembly-cost-westchester.html200
+/blog/handyman-cost-westchester-ny           /blog/handyman-cost-westchester-ny.html200
+/blog/handyman-cost-westchester-ny/          /blog/handyman-cost-westchester-ny.html200
+/blog/handyman-vs-contractor-westchester     /blog/handyman-vs-contractor-westchester.html200
+/blog/handyman-vs-contractor-westchester/    /blog/handyman-vs-contractor-westchester.html200
+/blog/holiday-lights-installation-westchester/blog/holiday-lights-installation-westchester.html200
+/blog/holiday-lights-installation-westchester//blog/holiday-lights-installation-westchester.html200
+/blog/ikea-furniture-assembly-westchester    /blog/ikea-furniture-assembly-westchester.html200
+/blog/ikea-furniture-assembly-westchester/   /blog/ikea-furniture-assembly-westchester.html200
+/blog/index                                  /blog/index.html                   200
+/blog/index/                                 /blog/index.html                   200
+/blog/move-in-handyman-checklist-westchester /blog/move-in-handyman-checklist-westchester.html200
+/blog/move-in-handyman-checklist-westchester//blog/move-in-handyman-checklist-westchester.html200
+/blog/smart-home-installation-westchester    /blog/smart-home-installation-westchester.html200
+/blog/smart-home-installation-westchester/   /blog/smart-home-installation-westchester.html200
+/blog/trampoline-assembly-westchester        /blog/trampoline-assembly-westchester.html200
+/blog/trampoline-assembly-westchester/       /blog/trampoline-assembly-westchester.html200
+/blog/tv-mounting-cost-white-plains          /blog/tv-mounting-cost-white-plains.html200
+/blog/tv-mounting-cost-white-plains/         /blog/tv-mounting-cost-white-plains.html200
+/book                                        /book.html                         200
+/book/                                       /book.html                         200
+/briarcliff-manor-handyman                   /briarcliff-manor-handyman.html    200
+/briarcliff-manor-handyman/                  /briarcliff-manor-handyman.html    200
+/bronxville-handyman                         /bronxville-handyman.html          200
+/bronxville-handyman/                        /bronxville-handyman.html          200
+/carpentry-shelving                          /carpentry-shelving.html           200
+/carpentry-shelving/                         /carpentry-shelving.html           200
+/dobbs-ferry-handyman                        /dobbs-ferry-handyman.html         200
+/dobbs-ferry-handyman/                       /dobbs-ferry-handyman.html         200
+/door-repair-installation                    /door-repair-installation.html     200
+/door-repair-installation/                   /door-repair-installation.html     200
+/drywall-repair-eastchester                  /drywall-repair-eastchester.html   200
+/drywall-repair-eastchester/                 /drywall-repair-eastchester.html   200
+/drywall-repair-mamaroneck                   /drywall-repair-mamaroneck.html    200
+/drywall-repair-mamaroneck/                  /drywall-repair-mamaroneck.html    200
+/drywall-repair-mount-vernon                 /drywall-repair-mount-vernon.html  200
+/drywall-repair-mount-vernon/                /drywall-repair-mount-vernon.html  200
+/drywall-repair-new-rochelle                 /drywall-repair-new-rochelle.html  200
+/drywall-repair-new-rochelle/                /drywall-repair-new-rochelle.html  200
+/drywall-repair-rye                          /drywall-repair-rye.html           200
+/drywall-repair-rye/                         /drywall-repair-rye.html           200
+/drywall-repair-scarsdale                    /drywall-repair-scarsdale.html     200
+/drywall-repair-scarsdale/                   /drywall-repair-scarsdale.html     200
+/drywall-repair-white-plains                 /drywall-repair-white-plains.html  200
+/drywall-repair-white-plains/                /drywall-repair-white-plains.html  200
+/drywall-repair-yonkers                      /drywall-repair-yonkers.html       200
+/drywall-repair-yonkers/                     /drywall-repair-yonkers.html       200
+/drywall-repair                              /drywall-repair.html               200
+/drywall-repair/                             /drywall-repair.html               200
+/eastchester-handyman                        /eastchester-handyman.html         200
+/eastchester-handyman/                       /eastchester-handyman.html         200
+/electrical-repairs-eastchester              /electrical-repairs-eastchester.html200
+/electrical-repairs-eastchester/             /electrical-repairs-eastchester.html200
+/electrical-repairs-mamaroneck               /electrical-repairs-mamaroneck.html200
+/electrical-repairs-mamaroneck/              /electrical-repairs-mamaroneck.html200
+/electrical-repairs-mount-vernon             /electrical-repairs-mount-vernon.html200
+/electrical-repairs-mount-vernon/            /electrical-repairs-mount-vernon.html200
+/electrical-repairs-new-rochelle             /electrical-repairs-new-rochelle.html200
+/electrical-repairs-new-rochelle/            /electrical-repairs-new-rochelle.html200
+/electrical-repairs-rye                      /electrical-repairs-rye.html       200
+/electrical-repairs-rye/                     /electrical-repairs-rye.html       200
+/electrical-repairs-scarsdale                /electrical-repairs-scarsdale.html 200
+/electrical-repairs-scarsdale/               /electrical-repairs-scarsdale.html 200
+/electrical-repairs-white-plains             /electrical-repairs-white-plains.html200
+/electrical-repairs-white-plains/            /electrical-repairs-white-plains.html200
+/electrical-repairs-yonkers                  /electrical-repairs-yonkers.html   200
+/electrical-repairs-yonkers/                 /electrical-repairs-yonkers.html   200
+/electrical-repairs                          /electrical-repairs.html           200
+/electrical-repairs/                         /electrical-repairs.html           200
+/elmsford-handyman                           /elmsford-handyman.html            200
+/elmsford-handyman/                          /elmsford-handyman.html            200
+/flooring-installation                       /flooring-installation.html        200
+/flooring-installation/                      /flooring-installation.html        200
+/furniture-assembly-eastchester              /furniture-assembly-eastchester.html200
+/furniture-assembly-eastchester/             /furniture-assembly-eastchester.html200
+/furniture-assembly-mamaroneck               /furniture-assembly-mamaroneck.html200
+/furniture-assembly-mamaroneck/              /furniture-assembly-mamaroneck.html200
+/furniture-assembly-mount-vernon             /furniture-assembly-mount-vernon.html200
+/furniture-assembly-mount-vernon/            /furniture-assembly-mount-vernon.html200
+/furniture-assembly-new-rochelle             /furniture-assembly-new-rochelle.html200
+/furniture-assembly-new-rochelle/            /furniture-assembly-new-rochelle.html200
+/furniture-assembly-rye                      /furniture-assembly-rye.html       200
+/furniture-assembly-rye/                     /furniture-assembly-rye.html       200
+/furniture-assembly-scarsdale                /furniture-assembly-scarsdale.html 200
+/furniture-assembly-scarsdale/               /furniture-assembly-scarsdale.html 200
+/furniture-assembly-white-plains             /furniture-assembly-white-plains.html200
+/furniture-assembly-white-plains/            /furniture-assembly-white-plains.html200
+/furniture-assembly-yonkers                  /furniture-assembly-yonkers.html   200
+/furniture-assembly-yonkers/                 /furniture-assembly-yonkers.html   200
+/furniture-assembly                          /furniture-assembly.html           200
+/furniture-assembly/                         /furniture-assembly.html           200
+/gallery                                     /gallery.html                      200
+/gallery/                                    /gallery.html                      200
+/general-repairs-eastchester                 /general-repairs-eastchester.html  200
+/general-repairs-eastchester/                /general-repairs-eastchester.html  200
+/general-repairs-mamaroneck                  /general-repairs-mamaroneck.html   200
+/general-repairs-mamaroneck/                 /general-repairs-mamaroneck.html   200
+/general-repairs-mount-vernon                /general-repairs-mount-vernon.html 200
+/general-repairs-mount-vernon/               /general-repairs-mount-vernon.html 200
+/general-repairs-new-rochelle                /general-repairs-new-rochelle.html 200
+/general-repairs-new-rochelle/               /general-repairs-new-rochelle.html 200
+/general-repairs-rye                         /general-repairs-rye.html          200
+/general-repairs-rye/                        /general-repairs-rye.html          200
+/general-repairs-scarsdale                   /general-repairs-scarsdale.html    200
+/general-repairs-scarsdale/                  /general-repairs-scarsdale.html    200
+/general-repairs-white-plains                /general-repairs-white-plains.html 200
+/general-repairs-white-plains/               /general-repairs-white-plains.html 200
+/general-repairs-yonkers                     /general-repairs-yonkers.html      200
+/general-repairs-yonkers/                    /general-repairs-yonkers.html      200
+/general-repairs                             /general-repairs.html              200
+/general-repairs/                            /general-repairs.html              200
+/greenburgh-handyman                         /greenburgh-handyman.html          200
+/greenburgh-handyman/                        /greenburgh-handyman.html          200
+/handrail-installation                       /handrail-installation.html        200
+/handrail-installation/                      /handrail-installation.html        200
+/harrison-handyman                           /harrison-handyman.html            200
+/harrison-handyman/                          /harrison-handyman.html            200
+/hartsdale-handyman                          /hartsdale-handyman.html           200
+/hartsdale-handyman/                         /hartsdale-handyman.html           200
+/interior-painting-eastchester               /interior-painting-eastchester.html200
+/interior-painting-eastchester/              /interior-painting-eastchester.html200
+/interior-painting-mamaroneck                /interior-painting-mamaroneck.html 200
+/interior-painting-mamaroneck/               /interior-painting-mamaroneck.html 200
+/interior-painting-mount-vernon              /interior-painting-mount-vernon.html200
+/interior-painting-mount-vernon/             /interior-painting-mount-vernon.html200
+/interior-painting-new-rochelle              /interior-painting-new-rochelle.html200
+/interior-painting-new-rochelle/             /interior-painting-new-rochelle.html200
+/interior-painting-rye                       /interior-painting-rye.html        200
+/interior-painting-rye/                      /interior-painting-rye.html        200
+/interior-painting-scarsdale                 /interior-painting-scarsdale.html  200
+/interior-painting-scarsdale/                /interior-painting-scarsdale.html  200
+/interior-painting-white-plains              /interior-painting-white-plains.html200
+/interior-painting-white-plains/             /interior-painting-white-plains.html200
+/interior-painting-yonkers                   /interior-painting-yonkers.html    200
+/interior-painting-yonkers/                  /interior-painting-yonkers.html    200
+/interior-painting                           /interior-painting.html            200
+/interior-painting/                          /interior-painting.html            200
+/irvington-handyman                          /irvington-handyman.html           200
+/irvington-handyman/                         /irvington-handyman.html           200
+/kitchen-remodeling-eastchester              /kitchen-remodeling-eastchester.html200
+/kitchen-remodeling-eastchester/             /kitchen-remodeling-eastchester.html200
+/kitchen-remodeling-mamaroneck               /kitchen-remodeling-mamaroneck.html200
+/kitchen-remodeling-mamaroneck/              /kitchen-remodeling-mamaroneck.html200
+/kitchen-remodeling-mount-vernon             /kitchen-remodeling-mount-vernon.html200
+/kitchen-remodeling-mount-vernon/            /kitchen-remodeling-mount-vernon.html200
+/kitchen-remodeling-new-rochelle             /kitchen-remodeling-new-rochelle.html200
+/kitchen-remodeling-new-rochelle/            /kitchen-remodeling-new-rochelle.html200
+/kitchen-remodeling-rye                      /kitchen-remodeling-rye.html       200
+/kitchen-remodeling-rye/                     /kitchen-remodeling-rye.html       200
+/kitchen-remodeling-scarsdale                /kitchen-remodeling-scarsdale.html 200
+/kitchen-remodeling-scarsdale/               /kitchen-remodeling-scarsdale.html 200
+/kitchen-remodeling-white-plains             /kitchen-remodeling-white-plains.html200
+/kitchen-remodeling-white-plains/            /kitchen-remodeling-white-plains.html200
+/kitchen-remodeling-yonkers                  /kitchen-remodeling-yonkers.html   200
+/kitchen-remodeling-yonkers/                 /kitchen-remodeling-yonkers.html   200
+/kitchen-remodeling                          /kitchen-remodeling.html           200
+/kitchen-remodeling/                         /kitchen-remodeling.html           200
+/larchmont-handyman                          /larchmont-handyman.html           200
+/larchmont-handyman/                         /larchmont-handyman.html           200
+/lighting-fixture-installation               /lighting-fixture-installation.html200
+/lighting-fixture-installation/              /lighting-fixture-installation.html200
+/mamaroneck-handyman                         /mamaroneck-handyman.html          200
+/mamaroneck-handyman/                        /mamaroneck-handyman.html          200
+/mount-vernon-handyman                       /mount-vernon-handyman.html        200
+/mount-vernon-handyman/                      /mount-vernon-handyman.html        200
+/new-rochelle-handyman                       /new-rochelle-handyman.html        200
+/new-rochelle-handyman/                      /new-rochelle-handyman.html        200
+/ossining-handyman                           /ossining-handyman.html            200
+/ossining-handyman/                          /ossining-handyman.html            200
+/pelham-handyman                             /pelham-handyman.html              200
+/pelham-handyman/                            /pelham-handyman.html              200
+/plumbing-repairs-eastchester                /plumbing-repairs-eastchester.html 200
+/plumbing-repairs-eastchester/               /plumbing-repairs-eastchester.html 200
+/plumbing-repairs-mamaroneck                 /plumbing-repairs-mamaroneck.html  200
+/plumbing-repairs-mamaroneck/                /plumbing-repairs-mamaroneck.html  200
+/plumbing-repairs-mount-vernon               /plumbing-repairs-mount-vernon.html200
+/plumbing-repairs-mount-vernon/              /plumbing-repairs-mount-vernon.html200
+/plumbing-repairs-new-rochelle               /plumbing-repairs-new-rochelle.html200
+/plumbing-repairs-new-rochelle/              /plumbing-repairs-new-rochelle.html200
+/plumbing-repairs-rye                        /plumbing-repairs-rye.html         200
+/plumbing-repairs-rye/                       /plumbing-repairs-rye.html         200
+/plumbing-repairs-scarsdale                  /plumbing-repairs-scarsdale.html   200
+/plumbing-repairs-scarsdale/                 /plumbing-repairs-scarsdale.html   200
+/plumbing-repairs-white-plains               /plumbing-repairs-white-plains.html200
+/plumbing-repairs-white-plains/              /plumbing-repairs-white-plains.html200
+/plumbing-repairs-yonkers                    /plumbing-repairs-yonkers.html     200
+/plumbing-repairs-yonkers/                   /plumbing-repairs-yonkers.html     200
+/plumbing-repairs                            /plumbing-repairs.html             200
+/plumbing-repairs/                           /plumbing-repairs.html             200
+/privacy-policy                              /privacy-policy.html               200
+/privacy-policy/                             /privacy-policy.html               200
+/property-managers                           /property-managers.html            200
+/property-managers/                          /property-managers.html            200
+/reviews                                     /reviews.html                      200
+/reviews/                                    /reviews.html                      200
+/rye-handyman                                /rye-handyman.html                 200
+/rye-handyman/                               /rye-handyman.html                 200
+/scarsdale-handyman                          /scarsdale-handyman.html           200
+/scarsdale-handyman/                         /scarsdale-handyman.html           200
+/schedule                                    /schedule.html                     200
+/schedule/                                   /schedule.html                     200
+/service-areas                               /service-areas.html                200
+/service-areas/                              /service-areas.html                200
+/services                                    /services.html                     200
+/services/                                   /services.html                     200
+/sleepy-hollow-handyman                      /sleepy-hollow-handyman.html       200
+/sleepy-hollow-handyman/                     /sleepy-hollow-handyman.html       200
+/smart-home-installation                     /smart-home-installation.html      200
+/smart-home-installation/                    /smart-home-installation.html      200
+/tarrytown-handyman                          /tarrytown-handyman.html           200
+/tarrytown-handyman/                         /tarrytown-handyman.html           200
+/terms                                       /terms.html                        200
+/terms/                                      /terms.html                        200
+/timer                                       /timer.html                        200
+/timer/                                      /timer.html                        200
+/trampoline-outdoor-assembly                 /trampoline-outdoor-assembly.html  200
+/trampoline-outdoor-assembly/                /trampoline-outdoor-assembly.html  200
+/tv-mounting-eastchester                     /tv-mounting-eastchester.html      200
+/tv-mounting-eastchester/                    /tv-mounting-eastchester.html      200
+/tv-mounting-mamaroneck                      /tv-mounting-mamaroneck.html       200
+/tv-mounting-mamaroneck/                     /tv-mounting-mamaroneck.html       200
+/tv-mounting-mount-vernon                    /tv-mounting-mount-vernon.html     200
+/tv-mounting-mount-vernon/                   /tv-mounting-mount-vernon.html     200
+/tv-mounting-new-rochelle                    /tv-mounting-new-rochelle.html     200
+/tv-mounting-new-rochelle/                   /tv-mounting-new-rochelle.html     200
+/tv-mounting-rye                             /tv-mounting-rye.html              200
+/tv-mounting-rye/                            /tv-mounting-rye.html              200
+/tv-mounting-scarsdale                       /tv-mounting-scarsdale.html        200
+/tv-mounting-scarsdale/                      /tv-mounting-scarsdale.html        200
+/tv-mounting-white-plains                    /tv-mounting-white-plains.html     200
+/tv-mounting-white-plains/                   /tv-mounting-white-plains.html     200
+/tv-mounting-yonkers                         /tv-mounting-yonkers.html          200
+/tv-mounting-yonkers/                        /tv-mounting-yonkers.html          200
+/tv-mounting                                 /tv-mounting.html                  200
+/tv-mounting/                                /tv-mounting.html                  200
+/valhalla-handyman                           /valhalla-handyman.html            200
+/valhalla-handyman/                          /valhalla-handyman.html            200
+/white-plains-handyman                       /white-plains-handyman.html        200
+/white-plains-handyman/                      /white-plains-handyman.html        200
+/yonkers-handyman                            /yonkers-handyman.html             200
+/yonkers-handyman/                           /yonkers-handyman.html             200
 
 # Markdown Content Negotiation for AI Agents (acceptmarkdown.com)
 /*  /llms.txt  200!  Accept=*text/markdown*
