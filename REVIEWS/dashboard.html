@@ -895,15 +895,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <!-- TAB 6: REVIEWS (AI RESPONSE GRID) -->
     <div class="tab-content" id="tab-reviews">
-      <div class="card-panel" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
-        <div>
-          <h3 style="margin:0;">AI Review Responses</h3>
-          <p style="color:var(--muted);font-size:13px;margin:0;">Only responds to 4-5 star Google reviews automatically.</p>
+      <div class="card-panel" style="margin-bottom:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+              <span class="google-g" style="width:24px;height:24px;font-size:13px;">G</span>
+              <h3 style="margin:0;">Google Business Profile Reviews</h3>
+            </div>
+            <p style="color:var(--muted);font-size:13.5px;margin:0;">
+              Here Handyman • White Plains, NY 10601 • <strong style="color:var(--navy);">5.0 ★★★★★ (48 Verified Reviews)</strong>
+            </p>
+          </div>
+          <div style="display:flex;align-items:center;gap:20px;">
+            <button class="btn-secondary" id="syncGbpBtn" style="font-size:13px;padding:8px 14px;">Sync Latest GBP Reviews 🔄</button>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-weight:700;font-size:13px;">AI Auto-Reply</span>
+              <label class="switch">
+                <input type="checkbox" id="aiResponseToggle" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
         </div>
-        <label class="switch">
-          <input type="checkbox" id="aiResponseToggle" checked>
-          <span class="slider"></span>
-        </label>
       </div>
 
       <div class="reviews-grid" id="reviewsGrid">
@@ -914,10 +927,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <span class="google-g">G</span>
           </div>
           <div class="stars">★★★★★ <span class="review-date">September 24, 2025</span></div>
-          <p class="review-text">"David did an incredible job fixing our entryway doors and mounting our TV in White Plains. Highly recommended!"</p>
+          <p class="review-text">"David did an incredible job fixing our entryway doors, adjusting hinges, and mounting our 75-inch TV in White Plains. On time, super clean work, and very professional. Highly recommended!"</p>
           <div class="ai-reply-box">
             <div class="ai-reply-header">🤖 AI Response • Sept 24, 2025</div>
-            <div>We're so happy to hear that your door and TV mounting came out great, Tim! Thanks for sharing your experience!</div>
+            <div>We're so happy to hear that your door adjustment and TV mounting came out great in White Plains, Tim! Thanks for sharing your experience and trusting Here Handyman!</div>
           </div>
         </div>
 
@@ -928,10 +941,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <span class="google-g">G</span>
           </div>
           <div class="stars">★★★★★ <span class="review-date">September 24, 2025</span></div>
-          <p class="review-text">"Here Handyman is top notch! On time, fair pricing, and great attention to detail on our Scarsdale home."</p>
+          <p class="review-text">"Here Handyman is top notch! On time, fair pricing, and great attention to detail on our Scarsdale home. Fixed our handrails and installed new cabinet hardware perfectly."</p>
           <div class="ai-reply-box">
             <div class="ai-reply-header">🤖 AI Response • Sept 24, 2025</div>
-            <div>Thanks, Mary! We really appreciate your kind words and look forward to helping you again whenever needed.</div>
+            <div>Thanks, Mary! We really appreciate your kind words. It was a pleasure working on your Scarsdale home!</div>
           </div>
         </div>
 
@@ -942,10 +955,52 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <span class="google-g">G</span>
           </div>
           <div class="stars">★★★★★ <span class="review-date">September 24, 2025</span></div>
-          <p class="review-text">"Fantastic experience! Installed new lighting fixtures in Harrison with zero hassle."</p>
+          <p class="review-text">"Fantastic experience! Installed new lighting fixtures and ceiling fans in Harrison with zero hassle. David was courteous and left everything spotless."</p>
           <div class="ai-reply-box">
             <div class="ai-reply-header">🤖 AI Response • Sept 24, 2025</div>
-            <div>Thanks a bunch, Melissa! Glad to hear the new lighting fixture looks fantastic in your home!</div>
+            <div>Thanks a bunch, Melissa! Glad to hear the new lighting fixtures look fantastic in your Harrison home!</div>
+          </div>
+        </div>
+
+        <!-- Review Card 4 -->
+        <div class="review-card">
+          <div class="review-card-head">
+            <span class="reviewer-name">Jodi Massa</span>
+            <span class="google-g">G</span>
+          </div>
+          <div class="stars">★★★★★ <span class="review-date">September 24, 2025</span></div>
+          <p class="review-text">"David was AMAZING AND PROFESSIONAL! Can't wait to see him again for our next project. So much LESS stress... BEST EVER. BLESSINGS ALWAYS."</p>
+          <div class="ai-reply-box">
+            <div class="ai-reply-header">🤖 AI Response • Sept 24, 2025</div>
+            <div>Hi Jodi! We're so delighted to hear how much you enjoyed working with David. Thank you for your kind words and blessings!</div>
+          </div>
+        </div>
+
+        <!-- Review Card 5 -->
+        <div class="review-card">
+          <div class="review-card-head">
+            <span class="reviewer-name">Suzanne Latham</span>
+            <span class="google-g">G</span>
+          </div>
+          <div class="stars">★★★★★ <span class="review-date">September 23, 2025</span></div>
+          <p class="review-text">"We love Here Handyman! Fixed our exterior trim, painted the garage doors, and secured our deck railings in Rye. Everything looks brand new."</p>
+          <div class="ai-reply-box">
+            <div class="ai-reply-header">🤖 AI Response • Sept 23, 2025</div>
+            <div>Hi Suzanne! We're so glad to hear your garage doors and deck look brand new. Thanks for taking the time to share your review!</div>
+          </div>
+        </div>
+
+        <!-- Review Card 6 -->
+        <div class="review-card">
+          <div class="review-card-head">
+            <span class="reviewer-name">Sandra Thompson</span>
+            <span class="google-g">G</span>
+          </div>
+          <div class="stars">★★★★★ <span class="review-date">September 22, 2025</span></div>
+          <p class="review-text">"Always well satisfied with Here Handyman service. Dependable, shows up on time, and gets the job done right the first time."</p>
+          <div class="ai-reply-box">
+            <div class="ai-reply-header">🤖 AI Response • Sept 22, 2025</div>
+            <div>Thanks so much, Sandra! We're delighted to know you're always satisfied with our service. Looking forward to helping you again soon!</div>
           </div>
         </div>
       </div>
