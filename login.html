@@ -313,6 +313,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
             <div class="row-check">
               <label><input type="checkbox" id="remember"> Keep me signed in</label>
+              <button type="button" id="forgotBtn" style="background:none;border:none;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline;">Forgot password?</button>
             </div>
             <button type="submit" class="submit-btn" id="submitBtn">Sign In →</button>
             <div class="msg" id="msg"></div>
@@ -402,11 +403,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       return (data && data.msg) ? data.msg : "Something went wrong. Please try again.";
     }
 
+    var forgotBtn = document.getElementById("forgotBtn");
+
     togglePw.addEventListener("click", function () {
       var showing = passwordEl.type === "text";
       passwordEl.type = showing ? "password" : "text";
       togglePw.textContent = showing ? "Show" : "Hide";
       passwordEl.focus();
+    });
+
+    forgotBtn.addEventListener("click", function () {
+      var email = emailEl.value.trim() || "davi65@gmail.com";
+      setMsg("Sending password reset email to " + email + "...", "ok");
+      fetch(SUPABASE_URL + "/auth/v1/recover", {
+        method: "POST",
+        headers: { "apikey": SUPABASE_PUBLISHABLE_KEY, "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, redirectTo: "https://www.herehandyman.com/login" })
+      })
+        .then(function () {
+          setMsg("Password reset email sent to " + email + "! Check your inbox.", "ok");
+        })
+        .catch(function () {
+          setMsg("Error sending reset email. Please try again.", "error");
+        });
     });
 
     form.addEventListener("submit", function (e) {
