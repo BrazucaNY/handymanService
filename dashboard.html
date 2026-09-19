@@ -23,6 +23,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
   <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png"/>
 
+  <script>
+    (function() {
+      var SESSION_KEY = "hh_system_session";
+      var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
+      if (!raw) {
+        window.location.replace("/login");
+        return;
+      }
+      try {
+        var s = JSON.parse(raw);
+        if (!s || !s.expires_at || s.expires_at <= Date.now()) {
+          localStorage.removeItem(SESSION_KEY);
+          sessionStorage.removeItem(SESSION_KEY);
+          window.location.replace("/login");
+        }
+      } catch (e) {
+        localStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(SESSION_KEY);
+        window.location.replace("/login");
+      }
+    })();
+  </script>
+
   <style>
     @font-face { font-family: "Bebas Neue"; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/bebas-neue.woff2") format("woff2"); }
     @font-face { font-family: "DM Sans"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/dm-sans.woff2") format("woff2"); }

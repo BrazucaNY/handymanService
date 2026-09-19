@@ -359,6 +359,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <h2>You're Signed In</h2>
           <p class="sub" id="welcomeEmail"></p>
           <div class="msg ok" style="display:block;margin-bottom:20px;">Your session is active. Connected to Supabase system database.</div>
+          <a href="/dashboard" class="submit-btn" style="display:inline-block;text-align:center;text-decoration:none;margin-bottom:12px;">Go to Dashboard →</a>
           <button type="button" class="submit-btn" id="logoutBtn" style="background:var(--navy);color:#fff;">Sign Out</button>
         </div>
 
@@ -628,7 +629,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     });
 
     var existing = getSession();
-    if (existing) { showWelcome(existing); } else { showLogin(); }
+    if (existing) {
+      showWelcome(existing);
+      // Auto-forward logged in user to dashboard
+      window.location.replace("/dashboard");
+    } else {
+      showLogin();
+    }
   })();
   </script>
 </body>
