@@ -653,7 +653,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="stat-card">
           <div class="stat-info">
             <div class="title">Review Requests</div>
-            <div class="num" id="statRequests">142</div>
+            <div class="num" id="statRequests">6</div>
             <div style="font-size:11px;color:var(--muted);margin-top:2px;">SMS & Link Invites Sent</div>
           </div>
           <div class="stat-icon">📲</div>
@@ -1124,6 +1124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         tbody.appendChild(tr);
       });
       document.getElementById('statContacts').textContent = contacts.length;
+      document.getElementById('statRequests').textContent = contacts.length;
     }
 
     renderContacts(contacts);
