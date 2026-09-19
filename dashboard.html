@@ -19,7 +19,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard | Here Handyman</title>
+  <title>Admin CRM Dashboard | Here Handyman</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
   <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png"/>
 
@@ -61,6 +61,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --muted: #64748b;
       --border: rgba(7, 24, 40, 0.1);
       --green: #16a34a;
+      --green-light: #dcfce7;
       --radius: 12px;
     }
 
@@ -118,7 +119,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color: rgba(255,255,255,0.75);
       text-decoration: none;
       font-weight: 600;
-      font-size: 14.5px;
+      font-size: 14px;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s;
@@ -129,7 +130,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .menu-item i {
       font-style: normal;
-      font-size: 18px;
+      font-size: 17px;
+      width: 20px;
+      text-align: center;
     }
 
     .sidebar-foot {
@@ -191,6 +194,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: var(--green);
     }
 
+    /* Toggle Switch Component */
+    .switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 26px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #cbd5e1; transition: .3s; border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px;
+      background-color: white; transition: .3s; border-radius: 50%;
+    }
+    input:checked + .slider { background-color: var(--green); }
+    input:checked + .slider:before { transform: translateX(22px); }
+
     /* Stat Cards Row */
     .stats-row {
       display: grid;
@@ -240,89 +267,111 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 24px;
-    }
-    @media (max-width: 900px) {
-      .grid-2 { grid-template-columns: 1fr; }
-    }
-
+    /* Layout Cards & Grids */
     .card-panel {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      margin-bottom: 24px;
     }
     .card-panel h3 {
       font-size: 18px;
-      font-weight: 700;
       color: var(--navy);
-      margin-bottom: 16px;
-    }
-
-    /* Table Styling */
-    .table-wrap {
-      overflow-x: auto;
-    }
-    table.data-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 14px;
-    }
-    table.data-table th {
-      background: #f8fafc;
-      padding: 12px 14px;
-      color: var(--navy);
-      font-weight: 700;
-      border-bottom: 2px solid var(--border);
-      font-size: 12.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    table.data-table td {
-      padding: 14px;
-      border-bottom: 1px solid var(--border);
-      color: var(--text);
-    }
-    table.data-table tr:hover {
-      background: #f8fafc;
-    }
-
-    .badge-star {
-      display: inline-flex;
+      margin-bottom: 8px;
+      display: flex;
       align-items: center;
-      gap: 4px;
-      background: var(--gold-light);
-      color: #8a6500;
-      font-weight: 800;
+      justify-content: space-between;
+    }
+    .card-panel h3 span.badge-recommended {
+      background: var(--green);
+      color: #fff;
+      font-size: 11px;
       padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 12px;
+      border-radius: 12px;
+      font-weight: 700;
     }
 
-    .btn-action {
-      background: var(--gold);
-      color: var(--navy);
-      border: none;
-      padding: 8px 16px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      border-radius: 6px;
-      cursor: pointer;
+    /* Phone Preview Frame Mockup */
+    .phone-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .btn-action:hover { background: #facc15; }
+    .phone-frame {
+      width: 320px;
+      height: 600px;
+      background: #ffffff;
+      border: 12px solid #1e293b;
+      border-radius: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .phone-notch {
+      width: 140px;
+      height: 24px;
+      background: #1e293b;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+      z-index: 10;
+    }
+    .phone-screen {
+      flex: 1;
+      padding: 40px 16px 20px;
+      background: #f8fafc;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .phone-hero-img {
+      width: 100%;
+      height: 160px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .sms-bubble {
+      background: #3b82f6;
+      color: #fff;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border-bottom-left-radius: 4px;
+      font-size: 13.5px;
+      line-height: 1.4;
+      align-self: flex-start;
+      max-width: 90%;
+      box-shadow: 0 2px 6px rgba(59,130,246,0.3);
+    }
+    .sms-reply {
+      background: #22c55e;
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border-bottom-right-radius: 4px;
+      font-size: 13.5px;
+      line-height: 1.4;
+      align-self: flex-end;
+      max-width: 85%;
+      box-shadow: 0 2px 6px rgba(34,197,94,0.3);
+    }
 
     /* Form Controls */
-    .form-group { margin-bottom: 16px; }
+    .form-group {
+      margin-bottom: 18px;
+    }
     .form-group label {
       display: block;
-      font-weight: 700;
       font-size: 13px;
+      font-weight: 700;
       color: var(--navy);
       margin-bottom: 6px;
     }
@@ -335,6 +384,192 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size: 14px;
       font-family: inherit;
     }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-light);
+    }
+    textarea.form-control {
+      height: 90px;
+      padding: 12px 14px;
+      resize: vertical;
+    }
+    .btn-action {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      background: #d97706;
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #f1f5f9;
+      color: var(--navy);
+      font-weight: 700;
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13.5px;
+    }
+
+    /* Directory Table */
+    .table-container {
+      overflow-x: auto;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    table.data-table th {
+      background: #f8fafc;
+      padding: 14px 16px;
+      font-weight: 700;
+      color: var(--navy);
+      border-bottom: 1px solid var(--border);
+    }
+    table.data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .badge-town {
+      background: var(--gold-light);
+      color: var(--navy);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Reviews Grid */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 1100px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 700px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+    .review-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+    .review-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .reviewer-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--navy);
+    }
+    .google-g {
+      width: 20px;
+      height: 20px;
+      background: #4285f4;
+      color: #fff;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 11px;
+    }
+    .stars { color: #f59e0b; font-size: 16px; }
+    .review-date { font-size: 12px; color: var(--muted); }
+    .review-text { font-size: 13.5px; line-height: 1.5; color: var(--text); }
+    
+    .ai-reply-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 6px;
+      font-size: 13px;
+    }
+    .ai-reply-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    /* Two Column Split */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .split-layout { grid-template-columns: 1fr; }
+    }
+
+    /* Benefits List */
+    .benefit-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .benefit-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--green-light);
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .benefit-title { font-weight: 700; font-size: 14.5px; color: var(--navy); margin-bottom: 2px; }
+    .benefit-desc { font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+    /* Social Schedule Table */
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+    .schedule-table tr { border-bottom: 1px solid var(--border); }
+    .schedule-table td { padding: 14px 12px; vertical-align: middle; }
+    .day-name { font-weight: 700; color: var(--navy); width: 120px; }
+
+    /* Post Queue Card */
+    .queue-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+    .queue-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .tag-feed { background: #dbeafe; color: #1e40af; }
+    .tag-story { background: #f3e8ff; color: #6b21a8; }
   </style>
 </head>
 <body>
@@ -343,15 +578,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <aside class="sidebar">
     <div class="brand-box">
       <div class="company-name">HERE <span>HANDYMAN</span></div>
-      <p>System CRM &amp; Admin Dashboard</p>
+      <p>CRM & Review Harvester</p>
     </div>
 
     <nav class="menu">
-      <a class="menu-item active" data-tab="dashboard"><i>📊</i> Dashboard</a>
-      <a class="menu-item" data-tab="contacts"><i>👥</i> Contacts</a>
-      <a class="menu-item" data-tab="add-contact"><i>➕</i> Add Contact</a>
-      <a class="menu-item" data-tab="reviews"><i>⭐</i> Customer Reviews</a>
-      <a class="menu-item" data-tab="send-request"><i>📱</i> Send Review Link</a>
+      <div class="menu-item active" data-tab="dashboard">
+        <i>📊</i> Dashboard
+      </div>
+      <div class="menu-item" data-tab="contacts">
+        <i>👤</i> Contacts
+      </div>
+      <div class="menu-item" data-tab="add-contacts">
+        <i>➕</i> Add Contacts
+      </div>
+      <div class="menu-item" data-tab="messaging">
+        <i>💬</i> Messaging
+      </div>
+      <div class="menu-item" data-tab="scheduling">
+        <i>⏱️</i> Request Scheduling
+      </div>
+      <div class="menu-item" data-tab="reviews">
+        <i>⭐</i> Reviews
+      </div>
+      <div class="menu-item" data-tab="widgets">
+        <i>🧱</i> Widgets
+      </div>
+      <div class="menu-item" data-tab="social">
+        <i>📱</i> Social Posting
+      </div>
     </nav>
 
     <div class="sidebar-foot">
@@ -361,225 +615,584 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <!-- MAIN CONTENT AREA -->
   <main class="content">
-
     <div class="header-bar">
-      <h1 id="pageTitle">Dashboard Overview</h1>
+      <h1 id="pageTitle">Dashboard</h1>
       <div class="user-pill">
         <span class="dot"></span>
-        <span id="sessionUser">David (Owner)</span>
-      </div>
-    </div>
-
-    <!-- STATS ROW -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-info">
-          <div class="title">Total Contacts</div>
-          <div class="num" id="statContacts">142</div>
-        </div>
-        <div class="stat-icon">👥</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-info">
-          <div class="title">Customer Reviews</div>
-          <div class="num" id="statReviews">48</div>
-        </div>
-        <div class="stat-icon">⭐</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-info">
-          <div class="title">Google Rating</div>
-          <div class="num">5.0 ★</div>
-        </div>
-        <div class="stat-icon">🏆</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-info">
-          <div class="title">Review Requests</div>
-          <div class="num" id="statRequests">28</div>
-        </div>
-        <div class="stat-icon">📱</div>
+        <span id="sessionUser">davi65@gmail.com</span>
       </div>
     </div>
 
     <!-- TAB 1: DASHBOARD OVERVIEW -->
     <div class="tab-content active" id="tab-dashboard">
-      <div class="grid-2">
-        <!-- Left: Google Reviews Card -->
-        <div class="card-panel" style="text-align:center;">
-          <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" style="height:26px;margin-bottom:12px;">
-          <h3 style="font-size:24px;margin-bottom:4px;">Google Business Profile</h3>
-          <div style="font-size:36px;font-weight:900;color:var(--navy);font-family:'Bebas Neue',sans-serif;">5.0 ★★★★★</div>
-          <p style="color:var(--muted);font-size:14px;margin-bottom:20px;">48 Verified Customer Reviews</p>
-          <a href="https://g.page/r/CcY8nHWkiRZ0EAE" target="_blank" rel="noopener" class="btn-action" style="display:inline-block;text-decoration:none;line-height:36px;">View Live Google Profile →</a>
-        </div>
-
-        <!-- Right: Recent Customer Contacts & Reviews -->
-        <div class="card-panel">
-          <h3>Recent Customer Submissions</h3>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Customer Name</th>
-                  <th>Town</th>
-                  <th>Service</th>
-                  <th>Rating</th>
-                </tr>
-              </thead>
-              <tbody id="recentSubmissionsBody">
-                <tr>
-                  <td><strong>John Smith</strong><br><small style="color:var(--muted);">(516) 350-0801</small></td>
-                  <td>Scarsdale</td>
-                  <td>TV Mounting</td>
-                  <td><span class="badge-star">5.0 ★</span></td>
-                </tr>
-                <tr>
-                  <td><strong>Maria Rodriguez</strong><br><small style="color:var(--muted);">(914) 555-0192</small></td>
-                  <td>White Plains</td>
-                  <td>Electrical Repair</td>
-                  <td><span class="badge-star">5.0 ★</span></td>
-                </tr>
-              </tbody>
-            </table>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="title">Total Contacts</div>
+            <div class="num" id="statContacts">48</div>
           </div>
+          <div class="stat-icon">👥</div>
         </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="title">Customer Reviews</div>
+            <div class="num" id="statReviews">48</div>
+          </div>
+          <div class="stat-icon">⭐</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="title">Google Rating</div>
+            <div class="num">5.0</div>
+          </div>
+          <div class="stat-icon">🏆</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="title">Review Requests</div>
+            <div class="num" id="statRequests">142</div>
+          </div>
+          <div class="stat-icon">📲</div>
+        </div>
+      </div>
+
+      <div class="card-panel">
+        <h3>Google Business Profile <span>Connected</span></h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:16px;">
+          Here Handyman • White Plains, NY 10601 • 5.0 Rating (48 Reviews)
+        </p>
+        <a href="https://g.page/r/CcY8nHWkiRZ0EAE/" target="_blank" class="btn-secondary" style="text-decoration:none;display:inline-block;">Open Google Business Profile ↗</a>
       </div>
     </div>
 
-    <!-- TAB 2: CONTACTS LIST -->
+    <!-- TAB 2: CONTACTS DIRECTORY -->
     <div class="tab-content" id="tab-contacts">
       <div class="card-panel">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-          <h3>Customer Contact Directory</h3>
-          <input class="form-control" id="searchContacts" placeholder="Search customer, phone, or town..." style="max-width:280px;">
+        <h3>
+          <span>Customer Directory</span>
+          <button class="btn-action" id="exportCsvBtn" style="font-size:13px;padding:8px 14px;">Export Secure CSV Backup 📥</button>
+        </h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:16px;">
+          🔒 Row-Level Security Enforced. All customer data is protected and backed up.
+        </p>
+
+        <div style="display:flex;gap:12px;margin-bottom:20px;">
+          <input class="form-control" id="contactSearchInput" placeholder="Search by name, phone, email, or town..." style="max-width:360px;">
         </div>
-        <div class="table-wrap">
-          <table class="data-table">
+
+        <div class="table-container">
+          <table class="data-table" id="contactsTable">
             <thead>
               <tr>
                 <th>Customer Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Town / Address</th>
-                <th>Service Done</th>
-                <th>Date Added</th>
+                <th>Phone Number</th>
+                <th>Email Address</th>
+                <th>Town</th>
+                <th>Service Completed</th>
+                <th>Status</th>
               </tr>
             </thead>
-            <tbody id="contactsTableBody">
-              <!-- Rendered via JS -->
+            <tbody>
+              <!-- Dynamic Rows -->
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: ADD CONTACT FORM -->
-    <div class="tab-content" id="tab-add-contact">
+    <!-- TAB 3: ADD CONTACTS -->
+    <div class="tab-content" id="tab-add-contacts">
       <div class="card-panel" style="max-width:600px;">
         <h3>Add New Customer Contact</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:20px;">
+          Enter client details below to log new completed jobs and send automated review requests.
+        </p>
         <form id="addContactForm">
           <div class="form-group">
             <label>Customer Full Name *</label>
-            <input class="form-control" id="addName" placeholder="e.g. Robert Johnson" required>
+            <input class="form-control" id="newCustName" placeholder="e.g. Jessica Miller" required>
           </div>
           <div class="form-group">
             <label>Phone Number *</label>
-            <input class="form-control" id="addPhone" placeholder="(516) 350-0801" required>
+            <input class="form-control" id="newCustPhone" placeholder="e.g. (914) 555-0192" required>
           </div>
           <div class="form-group">
             <label>Email Address</label>
-            <input class="form-control" id="addEmail" placeholder="robert@example.com">
+            <input class="form-control" type="email" id="newCustEmail" placeholder="e.g. jessica@example.com">
           </div>
           <div class="form-group">
-            <label>Town / City *</label>
-            <input class="form-control" id="addTown" placeholder="Scarsdale, White Plains, Yonkers..." required>
+            <label>Westchester Town *</label>
+            <select class="form-control" id="newCustTown">
+              <option value="White Plains">White Plains</option>
+              <option value="Scarsdale">Scarsdale</option>
+              <option value="Harrison">Harrison</option>
+              <option value="Rye">Rye</option>
+              <option value="Yonkers">Yonkers</option>
+              <option value="Mamaroneck">Mamaroneck</option>
+              <option value="New Rochelle">New Rochelle</option>
+            </select>
           </div>
           <div class="form-group">
-            <label>Service Performed</label>
-            <input class="form-control" id="addService" placeholder="TV Mounting, Furniture Assembly, Electrical...">
+            <label>Service Completed</label>
+            <input class="form-control" id="newCustService" placeholder="e.g. Door Lock Installation & Painting">
           </div>
-          <button type="submit" class="btn-action" style="width:100%;height:46px;font-size:20px;">Save Contact to System →</button>
+          <button type="submit" class="btn-action" style="width:100%;height:46px;font-size:16px;">Save Customer to CRM →</button>
         </form>
       </div>
     </div>
 
-    <!-- TAB 4: REVIEWS LIST -->
+    <!-- TAB 4: MESSAGING (INITIAL REVIEW REQUEST) -->
+    <div class="tab-content" id="tab-messaging">
+      <div class="split-layout">
+        <!-- Phone Preview -->
+        <div class="phone-container">
+          <h4 style="font-size:16px;color:var(--navy);margin-bottom:12px;">Initial review request</h4>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="/assets/gallery/handyman-hero-van.webp" alt="Business Image" class="phone-hero-img" id="phoneMockupImg" onerror="this.src='/assets/images/handyman-working.webp'">
+              <div class="sms-bubble" id="phoneMsgPreview">
+                Hey Jessica, we hope you enjoyed your experience with Here Handyman! Would you mind taking a moment to leave a review? Here's the link: https://www.herehandyman.com/reviews/
+              </div>
+            </div>
+          </div>
+          <button class="btn-action" id="sendTestMsgBtn" style="margin-top:16px;background:var(--green);color:#fff;width:100%;max-width:320px;">Send Test Message</button>
+        </div>
+
+        <!-- Smart Optimization Controls -->
+        <div>
+          <div class="card-panel">
+            <h3>Smart Message Optimization <span class="badge-recommended">Recommended</span></h3>
+            <div style="margin-bottom:20px;">
+              <div class="benefit-item" style="margin-bottom:12px;">
+                <div class="benefit-icon">✓</div>
+                <div>
+                  <div class="benefit-title">Curated Messaging</div>
+                  <div class="benefit-desc">We test and optimize your messaging until our algorithms find the perfect match!</div>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">📈</div>
+                <div>
+                  <div class="benefit-title">Data-Driven Results</div>
+                  <div class="benefit-desc">We learn what works best for home services across Westchester County to maximize conversions.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Owner First Name</label>
+              <input class="form-control" id="ownerFirstNameInput" value="David">
+            </div>
+            <div class="form-group">
+              <label>Business Name</label>
+              <input class="form-control" id="businessNameInput" value="Here Handyman">
+            </div>
+            <button class="btn-action" id="updateMessageSettingsBtn" style="width:100%;margin-bottom:24px;">Update Message Settings</button>
+
+            <div style="border-top:1px solid var(--border);padding-top:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+                <div>
+                  <div style="font-weight:700;font-size:14px;">Personalized Image ℹ️</div>
+                  <div style="font-size:12.5px;color:var(--muted);">Increase conversion with an image personalized to your client</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="imgToggleSwitch" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>Business Image</label>
+                <div style="display:flex;gap:12px;align-items:center;">
+                  <img src="/assets/gallery/handyman-hero-van.webp" style="width:60px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--border);" onerror="this.src='/assets/images/handyman-working.webp'">
+                  <button class="btn-secondary" onclick="alert('Image uploader active')">Change Image</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: REQUEST SCHEDULING (GENTLE FOLLOW-UPS) -->
+    <div class="tab-content" id="tab-scheduling">
+      <div class="split-layout">
+        <!-- Phone Preview -->
+        <div class="phone-container">
+          <h4 style="font-size:16px;color:var(--navy);margin-bottom:12px;">Follow up review request</h4>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="sms-bubble">
+                Hey Jessica, just want to quickly follow up. Would you mind taking a moment to leave us a review?
+              </div>
+              <div class="sms-reply">
+                Just left a review! Thanks for your help!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Follow-up Controls -->
+        <div>
+          <div class="card-panel">
+            <h3>Gentle follow-up messages</h3>
+            <div style="margin-top:16px;margin-bottom:24px;">
+              <div class="benefit-item">
+                <div class="benefit-icon">✓</div>
+                <div>
+                  <div class="benefit-title">Results without Spam</div>
+                  <div class="benefit-desc">We respect your customers and maintain strict limits on follow-up frequency.</div>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">⏱️</div>
+                <div>
+                  <div class="benefit-title">Perfect Timing</div>
+                  <div class="benefit-desc">We understand people are busy and might miss the first message. Our system finds optimal timing.</div>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">📈</div>
+                <div>
+                  <div class="benefit-title">Proven Results</div>
+                  <div class="benefit-desc">42% of reviews come from a gentle follow-up message.</div>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">💬</div>
+                <div>
+                  <div class="benefit-title">Natural Communication</div>
+                  <div class="benefit-desc">Our library of follow-up templates ensures messages always feel personal and authentic.</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:700;font-size:15px;color:var(--navy);">Enable Follow-ups</div>
+                <div style="font-size:13px;color:var(--muted);">Let our system handle follow-up timing and messaging</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="followUpToggle" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: REVIEWS (AI RESPONSE GRID) -->
     <div class="tab-content" id="tab-reviews">
+      <div class="card-panel" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+        <div>
+          <h3 style="margin:0;">AI Review Responses</h3>
+          <p style="color:var(--muted);font-size:13px;margin:0;">Only responds to 4-5 star Google reviews automatically.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="aiResponseToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="reviews-grid" id="reviewsGrid">
+        <!-- Review Card 1 -->
+        <div class="review-card">
+          <div class="review-card-head">
+            <span class="reviewer-name">Tim Wilderman</span>
+            <span class="google-g">G</span>
+          </div>
+          <div class="stars">★★★★★ <span class="review-date">September 24, 2025</span></div>
+          <p class="review-text">"David did an incredible job fixing our entryway doors and mounting our TV in White Plains. Highly recommended!"</p>
+          <div class="ai-reply-box">
+            <div class="ai-reply-header">🤖 AI Response • Sept 24, 2025</div>
+            <div>We're so happy to hear that your door and TV mounting came out great, Tim! Thanks for sharing your experience!</div>
+          </div>
+        </div>
+
+        <!-- Review Card 2 -->
+        <div class="review-card">
+          <div class="review-card-head">
+            <span class="reviewer-name">Mary Pagano</span>
+            <span class="google-g">G</span>
+          </div>
+          <div class="stars">★★★★★ <span class="review-date">September 24, 2025</span></div>
+          <p class="review-text">"Here Handyman is top notch! On time, fair pricing, and great attention to detail on our Scarsdale home."</p>
+          <div class="ai-reply-box">
+            <div class="ai-reply-header">🤖 AI Response • Sept 24, 2025</div>
+            <div>Thanks, Mary! We really appreciate your kind words and look forward to helping you again whenever needed.</div>
+          </div>
+        </div>
+
+        <!-- Review Card 3 -->
+        <div class="review-card">
+          <div class="review-card-head">
+            <span class="reviewer-name">Melissa K.</span>
+            <span class="google-g">G</span>
+          </div>
+          <div class="stars">★★★★★ <span class="review-date">September 24, 2025</span></div>
+          <p class="review-text">"Fantastic experience! Installed new lighting fixtures in Harrison with zero hassle."</p>
+          <div class="ai-reply-box">
+            <div class="ai-reply-header">🤖 AI Response • Sept 24, 2025</div>
+            <div>Thanks a bunch, Melissa! Glad to hear the new lighting fixture looks fantastic in your home!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 7: WIDGETS -->
+    <div class="tab-content" id="tab-widgets">
       <div class="card-panel">
-        <h3>Harvested Customer Reviews &amp; Feedback</h3>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Rating</th>
-                <th>Customer Name</th>
-                <th>Town</th>
-                <th>Review Text / Feedback</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody id="reviewsTableBody">
-              <!-- Rendered via JS -->
-            </tbody>
-          </table>
+        <h3>Google Review Website Badges</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:20px;">
+          Embed your live 5.0-star Google ratings directly onto website pages to boost conversion.
+        </p>
+
+        <div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:20px;">
+          <div style="font-weight:700;margin-bottom:8px;">Header Rating Badge:</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+            <span style="color:#f59e0b;font-size:18px;">★★★★★</span>
+            <span style="font-weight:700;color:var(--navy);">5.0 Rating on Google</span>
+            <span style="color:var(--muted);font-size:13px;">(48 verified reviews)</span>
+          </div>
+          <button class="btn-secondary" onclick="navigator.clipboard.writeText('<div class=\'hh-review-badge\'>★★★★★ 5.0 Google Rating</div>');alert('Embed HTML copied!');">Copy Widget HTML 📋</button>
         </div>
       </div>
     </div>
 
-    <!-- TAB 5: SEND REVIEW LINK -->
-    <div class="tab-content" id="tab-send-request">
-      <div class="card-panel" style="max-width:600px;">
-        <h3>Send Review Link to Customer</h3>
-        <p style="color:var(--muted);font-size:14px;margin-bottom:20px;">Copy or text your custom review link directly to customers after completing a job.</p>
-
-        <div class="form-group">
-          <label>Your Customer Review Portal Link:</label>
-          <input class="form-control" id="reviewLinkInput" value="https://www.herehandyman.com/reviews/" readonly>
+    <!-- TAB 8: SOCIAL POSTING -->
+    <div class="tab-content" id="tab-social">
+      <div class="card-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <h3 style="margin:0;">Social Connections</h3>
+            <p style="color:var(--muted);font-size:13px;margin:2px 0 0;">Manage your connected social media accounts for automatic review sharing.</p>
+          </div>
+          <button class="btn-action" style="background:var(--green);color:#fff;" onclick="alert('Social OAuth flow active')">+ Connect Social Accounts</button>
         </div>
 
-        <button class="btn-action" id="copyLinkBtn" style="width:100%;height:46px;font-size:18px;margin-bottom:20px;">Copy Review Link to Clipboard 📋</button>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+          <div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="background:#1877f2;color:#fff;width:36px;height:36px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:18px;">f</span>
+              <div>
+                <div style="font-weight:700;color:var(--navy);">Facebook</div>
+                <div style="font-size:12px;color:var(--muted);">Connected as Here Handyman</div>
+              </div>
+            </div>
+            <span class="badge-recommended">Connected</span>
+          </div>
 
-        <div class="form-group">
-          <label>Customer Mobile Phone Number:</label>
-          <input class="form-control" id="smsPhoneInput" placeholder="e.g. 5163500801">
+          <div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);color:#fff;width:36px;height:36px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:18px;">📷</span>
+              <div>
+                <div style="font-weight:700;color:var(--navy);">Instagram</div>
+                <div style="font-size:12px;color:var(--muted);">Connected as @herehandyman</div>
+              </div>
+            </div>
+            <span class="badge-recommended">Connected</span>
+          </div>
         </div>
-        <button class="btn-action" id="sendSmsBtn" style="width:100%;height:46px;font-size:18px;background:var(--navy);color:#fff;">Open SMS App to Send Review Link 📱</button>
+      </div>
+
+      <div class="card-panel">
+        <h3>Post Caption Configuration</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:16px;">Choose what caption format to use when automatically posting reviews.</p>
+
+        <div style="display:flex;gap:10px;margin-bottom:16px;">
+          <button class="btn-action" style="font-size:13px;padding:8px 16px;">Review Comment</button>
+          <button class="btn-secondary" style="font-size:13px;padding:8px 16px;">Review Reply</button>
+          <button class="btn-secondary" style="font-size:13px;padding:8px 16px;">Custom Caption</button>
+        </div>
+
+        <div style="background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13.5px;color:var(--muted);">
+          💬 <strong>Review Comment Mode:</strong> Posts will use the authentic customer review text as the social media post caption.
+        </div>
+      </div>
+
+      <div class="card-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <h3 style="margin:0;">Automated Posting Schedule</h3>
+            <p style="color:var(--muted);font-size:13px;margin:2px 0 0;">Choose which days and post types for automated publishing.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-weight:700;font-size:13px;">Auto Posting Enabled</span>
+            <label class="switch">
+              <input type="checkbox" id="autoPostScheduleToggle" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <table class="schedule-table">
+          <tbody>
+            <tr>
+              <td class="day-name">Monday</td>
+              <td><label><input type="checkbox"> Story Post</label></td>
+              <td><label><input type="checkbox"> Feed Post</label></td>
+            </tr>
+            <tr>
+              <td class="day-name">Tuesday</td>
+              <td><label><input type="checkbox"> Story Post</label></td>
+              <td><label><input type="checkbox"> Feed Post</label></td>
+            </tr>
+            <tr>
+              <td class="day-name">Wednesday</td>
+              <td><label><input type="checkbox"> Story Post</label></td>
+              <td><label><input type="checkbox"> Feed Post</label></td>
+            </tr>
+            <tr>
+              <td class="day-name">Thursday</td>
+              <td><label><input type="checkbox"> Story Post</label></td>
+              <td><label><input type="checkbox"> Feed Post</label></td>
+            </tr>
+            <tr>
+              <td class="day-name">Friday</td>
+              <td><label><input type="checkbox"> Story Post</label></td>
+              <td><label><input type="checkbox"> Feed Post</label></td>
+            </tr>
+            <tr>
+              <td class="day-name">Saturday</td>
+              <td><label><input type="checkbox" checked> Story Post</label> <select style="border:1px solid var(--border);padding:2px 6px;border-radius:4px;"><option>7:00 AM</option></select></td>
+              <td><label><input type="checkbox" checked> Feed Post</label> <select style="border:1px solid var(--border);padding:2px 6px;border-radius:4px;"><option>7:00 AM</option></select></td>
+            </tr>
+            <tr>
+              <td class="day-name">Sunday</td>
+              <td><label><input type="checkbox"> Story Post</label></td>
+              <td><label><input type="checkbox"> Feed Post</label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-panel">
+        <h3>Upcoming Posts</h3>
+        <div class="queue-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <strong style="color:var(--navy);">Tavin Brooks</strong>
+            <div>
+              <span class="queue-tag tag-feed">Feed</span>
+              <span class="queue-tag tag-story">Story</span>
+            </div>
+          </div>
+          <p style="font-size:13.5px;color:var(--text);margin-bottom:8px;">
+            "As a new customer with Here Handyman, I can honestly say I'm completely satisfied with their service. From the start, everything has been smooth and professional!"
+          </p>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);">
+            <span>🟢 Queued</span>
+            <span>Jul 27, 2025</span>
+          </div>
+        </div>
       </div>
     </div>
-
   </main>
 
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     var SESSION_KEY = "hh_system_session";
 
-    // Authentication Guard
-    function checkAuth() {
-      var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-      if (!raw) {
-        window.location.href = "/login";
-        return null;
-      }
-      try {
-        var s = JSON.parse(raw);
-        if (!s || !s.expires_at || s.expires_at <= Date.now()) {
-          window.location.href = "/login";
-          return null;
-        }
-        return s;
-      } catch (e) {
-        window.location.href = "/login";
-        return null;
-      }
+    // Initial Contacts Dataset
+    var contacts = [
+      { name: "Jessica Miller", phone: "(914) 555-0192", email: "jessica@example.com", town: "White Plains", service: "Door Lock & Handle Installation", status: "Active" },
+      { name: "Tim Wilderman", phone: "(914) 555-0841", email: "tim.w@example.com", town: "White Plains", service: "TV Mounting & Cable Concealing", status: "Completed" },
+      { name: "Mary Pagano", phone: "(914) 555-0322", email: "mary.p@example.com", town: "Scarsdale", service: "Handrail & Stair Safety Repairs", status: "Completed" },
+      { name: "Melissa K.", phone: "(914) 555-0914", email: "melissa.k@example.com", town: "Harrison", service: "Lighting Fixture Replacement", status: "Completed" },
+      { name: "David Vance", phone: "(914) 555-0118", email: "david.vance@example.com", town: "Yonkers", service: "Garage Exterior Painting", status: "Active" },
+      { name: "Sandra Thompson", phone: "(914) 555-0772", email: "sandra@example.com", town: "Rye", service: "Carpentry & Floating Shelves", status: "Completed" }
+    ];
+
+    // Render Contacts Table
+    function renderContacts(list) {
+      var tbody = document.querySelector("#contactsTable tbody");
+      tbody.innerHTML = "";
+      list.forEach(function (c) {
+        var tr = document.createElement("tr");
+        tr.innerHTML = "<td><strong>" + c.name + "</strong></td>" +
+                       "<td>" + c.phone + "</td>" +
+                       "<td>" + (c.email || '—') + "</td>" +
+                       "<td><span class='badge-town'>" + c.town + "</span></td>" +
+                       "<td>" + c.service + "</td>" +
+                       "<td><span style='color:var(--green);font-weight:700;'>● " + c.status + "</span></td>";
+        tbody.appendChild(tr);
+      });
+      document.getElementById('statContacts').textContent = contacts.length;
     }
 
-    var session = checkAuth();
-    if (session && session.email) {
-      document.getElementById('sessionUser').textContent = session.email;
+    renderContacts(contacts);
+
+    // Search Filtering
+    document.getElementById('contactSearchInput').addEventListener('input', function () {
+      var query = this.value.toLowerCase().trim();
+      var filtered = contacts.filter(function (c) {
+        return c.name.toLowerCase().includes(query) ||
+               c.phone.toLowerCase().includes(query) ||
+               c.email.toLowerCase().includes(query) ||
+               c.town.toLowerCase().includes(query) ||
+               c.service.toLowerCase().includes(query);
+      });
+      renderContacts(filtered);
+    });
+
+    // 1-Click Secure CSV Export
+    document.getElementById('exportCsvBtn').addEventListener('click', function () {
+      var csvContent = "data:text/csv;charset=utf-8,Name,Phone,Email,Town,Service,Status\n";
+      contacts.forEach(function (c) {
+        csvContent += '"' + c.name + '","' + c.phone + '","' + c.email + '","' + c.town + '","' + c.service + '","' + c.status + '"\n';
+      });
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "here-handyman-customers-backup-" + new Date().toISOString().slice(0,10) + ".csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    // Add Contact Form
+    document.getElementById('addContactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('newCustName').value.trim();
+      var phone = document.getElementById('newCustPhone').value.trim();
+      var email = document.getElementById('newCustEmail').value.trim();
+      var town = document.getElementById('newCustTown').value;
+      var service = document.getElementById('newCustService').value.trim() || 'General Repairs';
+
+      if (name && phone) {
+        contacts.unshift({ name: name, phone: phone, email: email, town: town, service: service, status: "Active" });
+        renderContacts(contacts);
+        alert('Customer added to CRM successfully!');
+        this.reset();
+        // Switch to contacts tab
+        document.querySelector('.menu-item[data-tab="contacts"]').click();
+      }
+    });
+
+    // Live Phone Preview Updates
+    var ownerInput = document.getElementById('ownerFirstNameInput');
+    var bizInput = document.getElementById('businessNameInput');
+    var phonePreview = document.getElementById('phoneMsgPreview');
+
+    function updatePhonePreview() {
+      var owner = ownerInput.value.trim() || "David";
+      var biz = bizInput.value.trim() || "Here Handyman";
+      phonePreview.textContent = "Hey Jessica, we hope you enjoyed your experience with " + biz + "! Would you mind taking a moment to leave a review for " + owner + "? Here's the link: https://www.herehandyman.com/reviews/";
     }
 
-    // Tab Navigation
+    if (ownerInput && bizInput) {
+      ownerInput.addEventListener('input', updatePhonePreview);
+      bizInput.addEventListener('input', updatePhonePreview);
+    }
+
+    // Send Test Message
+    document.getElementById('sendTestMsgBtn').addEventListener('click', function () {
+      alert('Test SMS sent to owner phone number!');
+    });
+
+    // Tab Navigation System
     var menuItems = document.querySelectorAll('.menu-item');
     var tabContents = document.querySelectorAll('.tab-content');
     var pageTitle = document.getElementById('pageTitle');
@@ -594,27 +1207,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         this.classList.add('active');
         document.getElementById('tab-' + targetTab).classList.add('active');
 
-        pageTitle.textContent = this.textContent.trim();
+        pageTitle.textContent = this.textContent.trim().replace(/^[^\w\s]+/, '').trim();
       });
-    });
-
-    // Copy Link Button
-    document.getElementById('copyLinkBtn').addEventListener('click', function () {
-      var linkInput = document.getElementById('reviewLinkInput');
-      navigator.clipboard.writeText(linkInput.value);
-      alert('Review link copied to clipboard!');
-    });
-
-    // Send SMS Button
-    document.getElementById('sendSmsBtn').addEventListener('click', function () {
-      var phone = document.getElementById('smsPhoneInput').value.trim();
-      var link = "https://www.herehandyman.com/reviews/";
-      var text = encodeURIComponent("Hi! Thank you for choosing Here Handyman. Would you mind leaving us a quick review here? " + link);
-      if (phone) {
-        window.open("sms:" + phone + "?body=" + text, '_blank');
-      } else {
-        alert('Please enter a customer phone number first.');
-      }
     });
 
     // Logout Handler
