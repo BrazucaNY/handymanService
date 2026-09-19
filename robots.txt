@@ -1,5 +1,15 @@
 User-agent: *
 Allow: /
+Disallow: /login
+Disallow: /login/
+Disallow: /login.html
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /dashboard.html
+Disallow: /admin
+Disallow: /admin/
+Disallow: /CRM
+Disallow: /CRM/
 
 Sitemap: https://www.herehandyman.com/sitemap.xml
 
