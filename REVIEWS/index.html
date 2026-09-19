@@ -343,7 +343,7 @@
     var SUPABASE_URL = "https://vvwnmiffuaxiazlskeya.supabase.co";
     var SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
     var SESSION_KEY = "hh_reviews_session";
-    var NEXT_PAGE = "";
+    var NEXT_PAGE = "dashboard.html";
 
     var loginView = document.getElementById("loginView");
     var welcomeView = document.getElementById("welcomeView");
@@ -483,6 +483,7 @@
     });
 
     var existing = getSession();
+    if (existing && NEXT_PAGE) { window.location.replace(NEXT_PAGE); return; }
     if (existing) { showWelcome(existing); } else { showLogin(); }
     if (window.location.hash === "#signedout") { setMsg("You have been signed out.", "ok"); }
   })();
