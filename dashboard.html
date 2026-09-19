@@ -1744,15 +1744,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .then(res => res.json())
             .then(data => {
               self.disabled = false;
-              self.textContent = '✅ Posted to Google!';
-              self.style.background = '#059669';
-              alert('✅ Reply successfully sent to Google Business Profile!');
+              if (data && data.success) {
+                self.textContent = '✅ Posted to Google!';
+                self.style.background = '#059669';
+                alert('✅ Reply successfully posted to Google Business Profile!');
+              } else {
+                self.textContent = '🚀 Post to Google';
+                alert('ℹ️ Reply saved! (Note: Connect your Google Business Profile Service Account credentials in Netlify Environment Variables to post directly to Google Maps).');
+              }
             })
             .catch(err => {
               console.log('Post error:', err);
               self.disabled = false;
               self.textContent = '🚀 Post to Google';
-              alert('✅ Reply saved and queued for Google Business Profile sync!');
+              alert('ℹ️ Reply saved locally!');
             });
           }
         });
