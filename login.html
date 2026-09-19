@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18119699321"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18119699321');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PCT6SLV8');</script>
+<!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff & Admin Login | Here Handyman</title>
+  <meta name="description" content="Secure staff sign in for Here Handyman administration & customer portal."/>
+  <link rel="canonical" href="https://www.herehandyman.com/login"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+
+  <style>
+    @font-face { font-family: "Bebas Neue"; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/bebas-neue.woff2") format("woff2"); }
+    @font-face { font-family: "DM Sans"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/dm-sans.woff2") format("woff2"); }
+
+    :root {
+      --navy: #071828;
+      --navy-light: #0e2a47;
+      --gold: #eab308;
+      --gold-hover: #facc15;
+      --cream: #f9f5ef;
+      --white: #ffffff;
+      --text: #243040;
+      --muted: #5b6774;
+      --border: rgba(7, 24, 40, 0.12);
+      --green: #16a34a;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    .wrapper {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      min-height: 100vh;
+    }
+    @media (max-width: 860px) {
+      .wrapper { grid-template-columns: 1fr; }
+      .brand-side { display: none; }
+    }
+
+    .brand-side {
+      background: linear-gradient(135deg, #071828 0%, #0e2a47 100%);
+      color: #fff;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-side::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 5px;
+      background: var(--gold);
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .logo span { color: var(--gold); }
+
+    .brand-copy {
+      max-width: 480px;
+    }
+    .eyebrow {
+      display: inline-block;
+      background: rgba(234, 179, 8, 0.2);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .brand-copy h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .brand-copy h1 span { color: var(--gold); }
+    .brand-copy p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 17px;
+    }
+
+    .brand-foot {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Form Side */
+    .form-side {
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 24px;
+    }
+    .login-box {
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .login-box h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38px;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .login-box p.sub {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+    .field label {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--navy);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .field input {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
+    }
+
+    .pw-wrap {
+      position: relative;
+    }
+    .pw-toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .row-check {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+    .row-check label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 52px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 8px 20px rgba(234, 179, 8, 0.3);
+    }
+    .submit-btn:hover {
+      background: var(--gold-hover);
+      transform: translateY(-1px);
+    }
+
+    .msg {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      display: none;
+    }
+    .msg.error {
+      display: block;
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+    .msg.ok {
+      display: block;
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .welcome-box {
+      text-align: center;
+    }
+    .ok-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #dcfce7;
+      color: var(--green);
+      font-size: 32px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 28px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .back-link:hover { color: var(--navy); }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <!-- Brand Side -->
+    <section class="brand-side">
+      <a class="logo" href="/">HERE <span>HANDYMAN</span></a>
+      <div class="brand-copy">
+        <span class="eyebrow">SYSTEM PORTAL</span>
+        <h1>STAFF &amp; ADMIN <span>SIGN IN</span></h1>
+        <p>Access customer review entries, lead logs, and appointment records powered by Supabase Auth.</p>
+      </div>
+      <div class="brand-foot">Insured Handyman Services &bull; Westchester County, NY</div>
+    </section>
+
+    <!-- Form Side -->
+    <section class="form-side">
+      <div class="login-box">
+        
+        <!-- Sign In View -->
+        <div id="loginView">
+          <h2>Sign In</h2>
+          <p class="sub">Welcome back. Enter your credentials to access the system.</p>
+
+          <form id="loginForm">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" autocomplete="username" placeholder="you@herehandyman.com" required>
+            </div>
+            <div class="field">
+              <label for="password">Password</label>
+              <div class="pw-wrap">
+                <input id="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+                <button type="button" class="pw-toggle" id="togglePw">Show</button>
+              </div>
+            </div>
+            <div class="row-check">
+              <label><input type="checkbox" id="remember"> Keep me signed in</label>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">Sign In →</button>
+            <div class="msg" id="msg"></div>
+          </form>
+        </div>
+
+        <!-- Signed In Welcome View -->
+        <div id="welcomeView" class="welcome-box" style="display:none;">
+          <div class="ok-icon">✓</div>
+          <h2>You're Signed In</h2>
+          <p class="sub" id="welcomeEmail"></p>
+          <div class="msg ok" style="display:block;margin-bottom:20px;">Your session is active. Connected to Supabase system database.</div>
+          <button type="button" class="submit-btn" id="logoutBtn" style="background:var(--navy);color:#fff;">Sign Out</button>
+        </div>
+
+        <a class="back-link" href="/">&larr; Back to herehandyman.com</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+  (function () {
+    var SUPABASE_URL = "https://vvwnmiffuaxiazlskeya.supabase.co";
+    var SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
+    var SESSION_KEY = "hh_system_session";
+
+    var loginView = document.getElementById("loginView");
+    var welcomeView = document.getElementById("welcomeView");
+    var welcomeEmail = document.getElementById("welcomeEmail");
+    var form = document.getElementById("loginForm");
+    var emailEl = document.getElementById("email");
+    var passwordEl = document.getElementById("password");
+    var rememberEl = document.getElementById("remember");
+    var togglePw = document.getElementById("togglePw");
+    var submitBtn = document.getElementById("submitBtn");
+    var msg = document.getElementById("msg");
+    var logoutBtn = document.getElementById("logoutBtn");
+
+    function setMsg(text, type) {
+      msg.textContent = text || "";
+      msg.className = "msg" + (type ? " " + type : "");
+    }
+
+    function getSession() {
+      var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
+      if (!raw) return null;
+      try {
+        var s = JSON.parse(raw);
+        if (!s || !s.expires_at || s.expires_at <= Date.now()) {
+          clearSession();
+          return null;
+        }
+        return s;
+      } catch (e) {
+        clearSession();
+        return null;
+      }
+    }
+
+    function saveSession(session, persist) {
+      clearSession();
+      (persist ? localStorage : sessionStorage).setItem(SESSION_KEY, JSON.stringify(session));
+    }
+
+    function clearSession() {
+      localStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem(SESSION_KEY);
+    }
+
+    function showWelcome(session) {
+      loginView.style.display = "none";
+      welcomeView.style.display = "block";
+      welcomeEmail.textContent = session && session.email ? session.email : "";
+    }
+
+    function showLogin() {
+      welcomeView.style.display = "none";
+      loginView.style.display = "block";
+    }
+
+    function friendlyError(data, status) {
+      var code = (data && (data.error_code || data.code)) || "";
+      if (code === "invalid_credentials") return "Invalid email or password.";
+      if (code === "email_not_confirmed") return "Please confirm your email address first.";
+      if (code === "over_request_rate_limit" || status === 429) return "Too many attempts. Please try again in a few minutes.";
+      if (code === "validation_failed") return "Please enter a valid email and password.";
+      return (data && data.msg) ? data.msg : "Something went wrong. Please try again.";
+    }
+
+    togglePw.addEventListener("click", function () {
+      var showing = passwordEl.type === "text";
+      passwordEl.type = showing ? "password" : "text";
+      togglePw.textContent = showing ? "Show" : "Hide";
+      passwordEl.focus();
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      setMsg("");
+      var email = emailEl.value.trim();
+      var password = passwordEl.value;
+      if (!email || !password) {
+        setMsg("Please enter your email and password.", "error");
+        return;
+      }
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Signing In...";
+
+      fetch(SUPABASE_URL + "/auth/v1/token?grant_type=password", {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_PUBLISHABLE_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email, password: password })
+      })
+        .then(function (res) {
+          return res.json().then(function (data) { return { ok: res.ok, status: res.status, data: data }; });
+        })
+        .then(function (r) {
+          if (!r.ok || !r.data.access_token) {
+            setMsg(friendlyError(r.data, r.status), "error");
+            return;
+          }
+          var session = {
+            access_token: r.data.access_token,
+            refresh_token: r.data.refresh_token || null,
+            expires_at: Date.now() + ((r.data.expires_in || 3600) * 1000),
+            email: (r.data.user && r.data.user.email) || email
+          };
+          saveSession(session, rememberEl.checked);
+          passwordEl.value = "";
+          showWelcome(session);
+        })
+        .catch(function () {
+          setMsg("Network error. Check your connection and try again.", "error");
+        })
+        .then(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Sign In →";
+        });
+    });
+
+    logoutBtn.addEventListener("click", function () {
+      var session = getSession();
+      clearSession();
+      if (session && session.access_token) {
+        fetch(SUPABASE_URL + "/auth/v1/logout", {
+          method: "POST",
+          headers: { "apikey": SUPABASE_PUBLISHABLE_KEY, "Authorization": "Bearer " + session.access_token }
+        }).catch(function () {});
+      }
+      form.reset();
+      passwordEl.type = "password";
+      togglePw.textContent = "Show";
+      setMsg("");
+      showLogin();
+    });
+
+    var existing = getSession();
+    if (existing) { showWelcome(existing); } else { showLogin(); }
+  })();
+  </script>
+</body>
+</html>
