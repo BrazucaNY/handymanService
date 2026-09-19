@@ -694,6 +694,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <th>Customer Name</th>
                 <th>Phone Number</th>
                 <th>Email Address</th>
+                <th>Street Address</th>
                 <th>Town</th>
                 <th>Service Completed</th>
                 <th>Status</th>
@@ -728,6 +729,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="form-group">
             <label>Email Address</label>
             <input class="form-control" type="email" id="newCustEmail" placeholder="e.g. jessica@example.com">
+          </div>
+          <div class="form-group">
+            <label>Street Address</label>
+            <input class="form-control" id="newCustAddress" placeholder="e.g. 142 Main St, Apt 4B">
           </div>
           <div class="form-group">
             <label>Westchester Town *</label>
@@ -1253,12 +1258,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var STORAGE_CONTACTS_KEY = "hh_crm_contacts";
 
     var defaultContacts = [
-      { name: "Jessica Miller", phone: "(914) 555-0192", email: "jessica@example.com", town: "White Plains", service: "Door Lock & Handle Installation", status: "Active", date: "2026-09-18" },
-      { name: "Tim Wilderman", phone: "(914) 555-0841", email: "tim.w@example.com", town: "White Plains", service: "TV Mounting & Cable Concealing", status: "Completed", date: "2025-09-24" },
-      { name: "Mary Pagano", phone: "(914) 555-0322", email: "mary.p@example.com", town: "Scarsdale", service: "Handrail & Stair Safety Repairs", status: "Completed", date: "2025-09-24" },
-      { name: "Melissa K.", phone: "(914) 555-0914", email: "melissa.k@example.com", town: "Harrison", service: "Lighting Fixture Replacement", status: "Completed", date: "2025-09-24" },
-      { name: "David Vance", phone: "(914) 555-0118", email: "david.vance@example.com", town: "Yonkers", service: "Garage Exterior Painting", status: "Active", date: "2026-09-15" },
-      { name: "Sandra Thompson", phone: "(914) 555-0772", email: "sandra@example.com", town: "Rye", service: "Carpentry & Floating Shelves", status: "Completed", date: "2025-09-22" }
+      { name: "Jessica Miller", phone: "(914) 555-0192", email: "jessica@example.com", address: "142 Main St, Apt 4B", town: "White Plains", service: "Door Lock & Handle Installation", status: "Active", date: "2026-09-18" },
+      { name: "Tim Wilderman", phone: "(914) 555-0841", email: "tim.w@example.com", address: "88 Mamaroneck Ave", town: "White Plains", service: "TV Mounting & Cable Concealing", status: "Completed", date: "2025-09-24" },
+      { name: "Mary Pagano", phone: "(914) 555-0322", email: "mary.p@example.com", address: "45 Post Rd", town: "Scarsdale", service: "Handrail & Stair Safety Repairs", status: "Completed", date: "2025-09-24" },
+      { name: "Melissa K.", phone: "(914) 555-0914", email: "melissa.k@example.com", address: "12 Halstead Ave", town: "Harrison", service: "Lighting Fixture Replacement", status: "Completed", date: "2025-09-24" },
+      { name: "David Vance", phone: "(914) 555-0118", email: "david.vance@example.com", address: "210 Central Park Ave", town: "Yonkers", service: "Garage Exterior Painting", status: "Active", date: "2026-09-15" },
+      { name: "Sandra Thompson", phone: "(914) 555-0772", email: "sandra@example.com", address: "78 Purchase St", town: "Rye", service: "Carpentry & Floating Shelves", status: "Completed", date: "2025-09-22" }
     ];
 
     // Load contacts from localStorage or initialize defaults
@@ -1291,13 +1296,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       var tbody = document.querySelector("#contactsTable tbody");
       tbody.innerHTML = "";
       if (list.length === 0) {
-        tbody.innerHTML = "<tr><td colspan='7' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts found. Use Add Contacts to create your first client.</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='8' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts found. Use Add Contacts to create your first client.</td></tr>";
       } else {
         list.forEach(function (c, index) {
           var tr = document.createElement("tr");
           tr.innerHTML = "<td><strong>" + c.name + "</strong></td>" +
                          "<td>" + c.phone + "</td>" +
                          "<td>" + (c.email || '—') + "</td>" +
+                         "<td>" + (c.address || '—') + "</td>" +
                          "<td><span class='badge-town'>" + c.town + "</span></td>" +
                          "<td>" + c.service + "</td>" +
                          "<td><span style='color:var(--green);font-weight:700;'>● " + (c.status || 'Active') + "</span></td>" +
@@ -1330,6 +1336,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         return c.name.toLowerCase().includes(query) ||
                c.phone.toLowerCase().includes(query) ||
                (c.email && c.email.toLowerCase().includes(query)) ||
+               (c.address && c.address.toLowerCase().includes(query)) ||
                (c.town && c.town.toLowerCase().includes(query)) ||
                (c.service && c.service.toLowerCase().includes(query));
       });
@@ -1338,9 +1345,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     // 1-Click Secure CSV Export
     document.getElementById('exportCsvBtn').addEventListener('click', function () {
-      var csvContent = "data:text/csv;charset=utf-8,Name,Phone,Email,Town,Service,Status\n";
+      var csvContent = "data:text/csv;charset=utf-8,Name,Phone,Email,Address,Town,Service,Status\n";
       contacts.forEach(function (c) {
-        csvContent += '"' + c.name + '","' + c.phone + '","' + (c.email || '') + '","' + (c.town || '') + '","' + (c.service || '') + '","' + (c.status || 'Active') + '"\n';
+        csvContent += '"' + c.name + '","' + c.phone + '","' + (c.email || '') + '","' + (c.address || '') + '","' + (c.town || '') + '","' + (c.service || '') + '","' + (c.status || 'Active') + '"\n';
       });
       var encodedUri = encodeURI(csvContent);
       var link = document.createElement("a");
@@ -1357,6 +1364,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       var name = document.getElementById('newCustName').value.trim();
       var phone = document.getElementById('newCustPhone').value.trim();
       var email = document.getElementById('newCustEmail').value.trim();
+      var address = document.getElementById('newCustAddress') ? document.getElementById('newCustAddress').value.trim() : '';
       var town = document.getElementById('newCustTown').value;
       var service = document.getElementById('newCustService').value.trim() || 'General Repairs';
 
@@ -1365,6 +1373,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           name: name,
           phone: phone,
           email: email,
+          address: address,
           town: town,
           service: service,
           status: "Active",
@@ -1389,6 +1398,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             name: name,
             phone: phone,
             email: email,
+            address: address,
             town: town,
             service: service,
             rating: 5,
