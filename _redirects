@@ -19,10 +19,6 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /dashboard/                /dashboard.html                 200
 /admin/dashboard           /dashboard.html                 200
 /CRM/dashboard             /dashboard.html                 200
-/ai-booking-test           /ai-booking-test.html           200
-/ai-booking-test/          /ai-booking-test.html           200
-/chat-booking              /ai-booking-test.html           200
-/chat-booking/             /ai-booking-test.html           200
 
 # Explicit Clean URL Rewrites for All Service, Town & Blog Pages
 /about                                       /about.html                        200
