@@ -1825,9 +1825,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     // Send Test Message
-    document.getElementById('sendTestMsgBtn').addEventListener('click', function () {
-      alert('Test SMS sent to owner phone number!');
-    });
+    var sendTestBtn = document.getElementById('sendTestMsgBtn');
+    if (sendTestBtn) {
+      sendTestBtn.addEventListener('click', function () {
+        alert('Test SMS sent to owner phone number!');
+      });
+    }
 
     // Tab Navigation System
     var menuItems = document.querySelectorAll('.menu-item');
@@ -1842,52 +1845,67 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         tabContents.forEach(t => t.classList.remove('active'));
 
         this.classList.add('active');
-        document.getElementById('tab-' + targetTab).classList.add('active');
+        var targetEl = document.getElementById('tab-' + targetTab);
+        if (targetEl) targetEl.classList.add('active');
 
-        pageTitle.textContent = this.textContent.trim().replace(/^[^\w\s]+/, '').trim();
+        if (pageTitle) {
+          pageTitle.textContent = this.textContent.trim().replace(/^[^\w\s]+/, '').trim();
+        }
       });
     });
 
     // Close Edit Modal
     function closeEditModal() {
-      document.getElementById('editContactModal').style.display = 'none';
+      var modal = document.getElementById('editContactModal');
+      if (modal) modal.style.display = 'none';
     }
-    document.getElementById('closeEditModalBtn').addEventListener('click', closeEditModal);
-    document.getElementById('cancelEditModalBtn').addEventListener('click', closeEditModal);
+    var closeModalBtn = document.getElementById('closeEditModalBtn');
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeEditModal);
+
+    var cancelModalBtn = document.getElementById('cancelEditModalBtn');
+    if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeEditModal);
 
     // Save Edit Form Changes
-    document.getElementById('editContactForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var idx = parseInt(document.getElementById('editCustIndex').value);
-      if (isNaN(idx) || idx < 0 || idx >= contacts.length) return;
+    var editForm = document.getElementById('editContactForm');
+    if (editForm) {
+      editForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var idxEl = document.getElementById('editCustIndex');
+        if (!idxEl) return;
+        var idx = parseInt(idxEl.value);
+        if (isNaN(idx) || idx < 0 || idx >= contacts.length) return;
 
-      contacts[idx].name = document.getElementById('editCustName').value.trim();
-      contacts[idx].phone = document.getElementById('editCustPhone').value.trim();
-      contacts[idx].email = document.getElementById('editCustEmail').value.trim();
-      contacts[idx].address = document.getElementById('editCustAddress').value.trim();
-      contacts[idx].town = document.getElementById('editCustTown').value.trim() || 'Westchester';
-      contacts[idx].lead = document.getElementById('editCustLead').value.trim() || 'Direct';
-      contacts[idx].service = document.getElementById('editCustService').value.trim() || 'General Repairs';
-      contacts[idx].status = document.getElementById('editCustStatus').value;
-      contacts[idx].hasGbpReview = document.getElementById('editCustGbpReview').checked;
+        contacts[idx].name = (document.getElementById('editCustName') ? document.getElementById('editCustName').value : '').trim();
+        contacts[idx].phone = (document.getElementById('editCustPhone') ? document.getElementById('editCustPhone').value : '').trim();
+        contacts[idx].email = (document.getElementById('editCustEmail') ? document.getElementById('editCustEmail').value : '').trim();
+        contacts[idx].address = (document.getElementById('editCustAddress') ? document.getElementById('editCustAddress').value : '').trim();
+        contacts[idx].town = (document.getElementById('editCustTown') ? document.getElementById('editCustTown').value : '').trim() || 'Westchester';
+        contacts[idx].lead = (document.getElementById('editCustLead') ? document.getElementById('editCustLead').value : '').trim() || 'Direct';
+        contacts[idx].service = (document.getElementById('editCustService') ? document.getElementById('editCustService').value : '').trim() || 'General Repairs';
+        contacts[idx].status = document.getElementById('editCustStatus') ? document.getElementById('editCustStatus').value : 'Active';
+        contacts[idx].hasGbpReview = document.getElementById('editCustGbpReview') ? document.getElementById('editCustGbpReview').checked : false;
 
-      saveContacts(contacts);
-      renderContacts(contacts);
-      closeEditModal();
+        saveContacts(contacts);
+        renderContacts(contacts);
+        closeEditModal();
 
-      var statusBox = document.getElementById('addContactSuccessMsg');
-      if (statusBox) {
-        statusBox.textContent = "✅ Contact details updated for " + contacts[idx].name + "!";
-        statusBox.style.display = "block";
-      }
-    });
+        var statusBox = document.getElementById('addContactSuccessMsg');
+        if (statusBox) {
+          statusBox.textContent = "✅ Contact details updated for " + contacts[idx].name + "!";
+          statusBox.style.display = "block";
+        }
+      });
+    }
 
     // Logout Handler
-    document.getElementById('logoutBtn').addEventListener('click', function () {
-      localStorage.removeItem(SESSION_KEY);
-      sessionStorage.removeItem(SESSION_KEY);
-      window.location.href = "/login";
-    });
+    var logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function () {
+        localStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(SESSION_KEY);
+        window.location.href = "/login";
+      });
+    }
   });
   </script>
 
