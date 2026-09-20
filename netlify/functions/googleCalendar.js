@@ -2,6 +2,7 @@
 import crypto from 'node:crypto';
 
 const saProject = process.env.FIREBASE_PROJECT_ID || ('handyman' + 'service' + 'admin');
+const GOOGLE_SA_EMAIL = process.env.GOOGLE_SA_EMAIL || `herehandyman-booking@${saProject}.iam.gserviceaccount.com`;
 const GOOGLE_SA_PRIVATE_KEY = (process.env.GOOGLE_SA_PRIVATE_KEY || '').replace(/\\n/g, '\n');
 const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || 'davi65@gmail.com';
 
