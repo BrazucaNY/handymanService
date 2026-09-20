@@ -89,20 +89,20 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /drywall-repair/                             /drywall-repair.html               200
 /eastchester-handyman                        /eastchester-handyman.html         200
 /eastchester-handyman/                       /eastchester-handyman.html         200
-/electrical-repairs-eastchester              /electrical-repairs-eastchester 
-/electrical-repairs-eastchester/             /electrical-repairs-eastchester 
-/electrical-repairs-mamaroneck               /electrical-repairs-mamaroneck 
-/electrical-repairs-mamaroneck/              /electrical-repairs-mamaroneck 
-/electrical-repairs-mount-vernon             /electrical-repairs-mount-vernon 
-/electrical-repairs-mount-vernon/            /electrical-repairs-mount-vernon 
-/electrical-repairs-new-rochelle             /electrical-repairs-new-rochelle 
-/electrical-repairs-new-rochelle/            /electrical-repairs-new-rochelle 
+/electrical-repairs-eastchester               /electrical-repairs-eastchester.html 200
+/electrical-repairs-eastchester/              /electrical-repairs-eastchester.html 200
+/electrical-repairs-mamaroneck                /electrical-repairs-mamaroneck.html 200
+/electrical-repairs-mamaroneck/               /electrical-repairs-mamaroneck.html 200
+/electrical-repairs-mount-vernon              /electrical-repairs-mount-vernon.html 200
+/electrical-repairs-mount-vernon/             /electrical-repairs-mount-vernon.html 200
+/electrical-repairs-new-rochelle              /electrical-repairs-new-rochelle.html 200
+/electrical-repairs-new-rochelle/             /electrical-repairs-new-rochelle.html 200
 /electrical-repairs-rye                      /electrical-repairs-rye.html       200
 /electrical-repairs-rye/                     /electrical-repairs-rye.html       200
 /electrical-repairs-scarsdale                /electrical-repairs-scarsdale.html 200
 /electrical-repairs-scarsdale/               /electrical-repairs-scarsdale.html 200
-/electrical-repairs-white-plains             /electrical-repairs-white-plains 
-/electrical-repairs-white-plains/            /electrical-repairs-white-plains 
+/electrical-repairs-white-plains              /electrical-repairs-white-plains.html 200
+/electrical-repairs-white-plains/             /electrical-repairs-white-plains.html 200
 /electrical-repairs-yonkers                  /electrical-repairs-yonkers.html   200
 /electrical-repairs-yonkers/                 /electrical-repairs-yonkers.html   200
 /electrical-repairs                          /electrical-repairs.html           200
@@ -111,20 +111,20 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /elmsford-handyman/                          /elmsford-handyman.html            200
 /flooring-installation                       /flooring-installation.html        200
 /flooring-installation/                      /flooring-installation.html        200
-/furniture-assembly-eastchester              /furniture-assembly-eastchester 
-/furniture-assembly-eastchester/             /furniture-assembly-eastchester 
-/furniture-assembly-mamaroneck               /furniture-assembly-mamaroneck 
-/furniture-assembly-mamaroneck/              /furniture-assembly-mamaroneck 
-/furniture-assembly-mount-vernon             /furniture-assembly-mount-vernon 
-/furniture-assembly-mount-vernon/            /furniture-assembly-mount-vernon 
-/furniture-assembly-new-rochelle             /furniture-assembly-new-rochelle 
-/furniture-assembly-new-rochelle/            /furniture-assembly-new-rochelle 
+/furniture-assembly-eastchester               /furniture-assembly-eastchester.html 200
+/furniture-assembly-eastchester/              /furniture-assembly-eastchester.html 200
+/furniture-assembly-mamaroneck                /furniture-assembly-mamaroneck.html 200
+/furniture-assembly-mamaroneck/               /furniture-assembly-mamaroneck.html 200
+/furniture-assembly-mount-vernon              /furniture-assembly-mount-vernon.html 200
+/furniture-assembly-mount-vernon/             /furniture-assembly-mount-vernon.html 200
+/furniture-assembly-new-rochelle              /furniture-assembly-new-rochelle.html 200
+/furniture-assembly-new-rochelle/             /furniture-assembly-new-rochelle.html 200
 /furniture-assembly-rye                      /furniture-assembly-rye.html       200
 /furniture-assembly-rye/                     /furniture-assembly-rye.html       200
 /furniture-assembly-scarsdale                /furniture-assembly-scarsdale.html 200
 /furniture-assembly-scarsdale/               /furniture-assembly-scarsdale.html 200
-/furniture-assembly-white-plains             /furniture-assembly-white-plains 
-/furniture-assembly-white-plains/            /furniture-assembly-white-plains 
+/furniture-assembly-white-plains              /furniture-assembly-white-plains.html 200
+/furniture-assembly-white-plains/             /furniture-assembly-white-plains.html 200
 /furniture-assembly-yonkers                  /furniture-assembly-yonkers.html   200
 /furniture-assembly-yonkers/                 /furniture-assembly-yonkers.html   200
 /furniture-assembly                          /furniture-assembly.html           200
@@ -157,48 +157,48 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /harrison-handyman/                          /harrison-handyman.html            200
 /hartsdale-handyman                          /hartsdale-handyman.html           200
 /hartsdale-handyman/                         /hartsdale-handyman.html           200
-/interior-painting-eastchester               /interior-painting-eastchester 
-/interior-painting-eastchester/              /interior-painting-eastchester 
+/interior-painting-eastchester                /interior-painting-eastchester.html 200
+/interior-painting-eastchester/               /interior-painting-eastchester.html 200
 /interior-painting-mamaroneck                /interior-painting-mamaroneck.html 200
 /interior-painting-mamaroneck/               /interior-painting-mamaroneck.html 200
-/interior-painting-mount-vernon              /interior-painting-mount-vernon 
-/interior-painting-mount-vernon/             /interior-painting-mount-vernon 
-/interior-painting-new-rochelle              /interior-painting-new-rochelle 
-/interior-painting-new-rochelle/             /interior-painting-new-rochelle 
+/interior-painting-mount-vernon               /interior-painting-mount-vernon.html 200
+/interior-painting-mount-vernon/              /interior-painting-mount-vernon.html 200
+/interior-painting-new-rochelle               /interior-painting-new-rochelle.html 200
+/interior-painting-new-rochelle/              /interior-painting-new-rochelle.html 200
 /interior-painting-rye                       /interior-painting-rye.html        200
 /interior-painting-rye/                      /interior-painting-rye.html        200
 /interior-painting-scarsdale                 /interior-painting-scarsdale.html  200
 /interior-painting-scarsdale/                /interior-painting-scarsdale.html  200
-/interior-painting-white-plains              /interior-painting-white-plains 
-/interior-painting-white-plains/             /interior-painting-white-plains 
+/interior-painting-white-plains               /interior-painting-white-plains.html 200
+/interior-painting-white-plains/              /interior-painting-white-plains.html 200
 /interior-painting-yonkers                   /interior-painting-yonkers.html    200
 /interior-painting-yonkers/                  /interior-painting-yonkers.html    200
 /interior-painting                           /interior-painting.html            200
 /interior-painting/                          /interior-painting.html            200
 /irvington-handyman                          /irvington-handyman.html           200
 /irvington-handyman/                         /irvington-handyman.html           200
-/kitchen-remodeling-eastchester              /kitchen-remodeling-eastchester 
-/kitchen-remodeling-eastchester/             /kitchen-remodeling-eastchester 
-/kitchen-remodeling-mamaroneck               /kitchen-remodeling-mamaroneck 
-/kitchen-remodeling-mamaroneck/              /kitchen-remodeling-mamaroneck 
-/kitchen-remodeling-mount-vernon             /kitchen-remodeling-mount-vernon 
-/kitchen-remodeling-mount-vernon/            /kitchen-remodeling-mount-vernon 
-/kitchen-remodeling-new-rochelle             /kitchen-remodeling-new-rochelle 
-/kitchen-remodeling-new-rochelle/            /kitchen-remodeling-new-rochelle 
+/kitchen-remodeling-eastchester               /kitchen-remodeling-eastchester.html 200
+/kitchen-remodeling-eastchester/              /kitchen-remodeling-eastchester.html 200
+/kitchen-remodeling-mamaroneck                /kitchen-remodeling-mamaroneck.html 200
+/kitchen-remodeling-mamaroneck/               /kitchen-remodeling-mamaroneck.html 200
+/kitchen-remodeling-mount-vernon              /kitchen-remodeling-mount-vernon.html 200
+/kitchen-remodeling-mount-vernon/             /kitchen-remodeling-mount-vernon.html 200
+/kitchen-remodeling-new-rochelle              /kitchen-remodeling-new-rochelle.html 200
+/kitchen-remodeling-new-rochelle/             /kitchen-remodeling-new-rochelle.html 200
 /kitchen-remodeling-rye                      /kitchen-remodeling-rye.html       200
 /kitchen-remodeling-rye/                     /kitchen-remodeling-rye.html       200
 /kitchen-remodeling-scarsdale                /kitchen-remodeling-scarsdale.html 200
 /kitchen-remodeling-scarsdale/               /kitchen-remodeling-scarsdale.html 200
-/kitchen-remodeling-white-plains             /kitchen-remodeling-white-plains 
-/kitchen-remodeling-white-plains/            /kitchen-remodeling-white-plains 
+/kitchen-remodeling-white-plains              /kitchen-remodeling-white-plains.html 200
+/kitchen-remodeling-white-plains/             /kitchen-remodeling-white-plains.html 200
 /kitchen-remodeling-yonkers                  /kitchen-remodeling-yonkers.html   200
 /kitchen-remodeling-yonkers/                 /kitchen-remodeling-yonkers.html   200
 /kitchen-remodeling                          /kitchen-remodeling.html           200
 /kitchen-remodeling/                         /kitchen-remodeling.html           200
 /larchmont-handyman                          /larchmont-handyman.html           200
 /larchmont-handyman/                         /larchmont-handyman.html           200
-/lighting-fixture-installation               /lighting-fixture-installation 
-/lighting-fixture-installation/              /lighting-fixture-installation 
+/lighting-fixture-installation                /lighting-fixture-installation.html 200
+/lighting-fixture-installation/               /lighting-fixture-installation.html 200
 /mamaroneck-handyman                         /mamaroneck-handyman.html          200
 /mamaroneck-handyman/                        /mamaroneck-handyman.html          200
 /mount-vernon-handyman                       /mount-vernon-handyman.html        200
@@ -213,16 +213,16 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /plumbing-repairs-eastchester/               /plumbing-repairs-eastchester.html 200
 /plumbing-repairs-mamaroneck                 /plumbing-repairs-mamaroneck.html  200
 /plumbing-repairs-mamaroneck/                /plumbing-repairs-mamaroneck.html  200
-/plumbing-repairs-mount-vernon               /plumbing-repairs-mount-vernon 
-/plumbing-repairs-mount-vernon/              /plumbing-repairs-mount-vernon 
-/plumbing-repairs-new-rochelle               /plumbing-repairs-new-rochelle 
-/plumbing-repairs-new-rochelle/              /plumbing-repairs-new-rochelle 
+/plumbing-repairs-mount-vernon                /plumbing-repairs-mount-vernon.html 200
+/plumbing-repairs-mount-vernon/               /plumbing-repairs-mount-vernon.html 200
+/plumbing-repairs-new-rochelle                /plumbing-repairs-new-rochelle.html 200
+/plumbing-repairs-new-rochelle/               /plumbing-repairs-new-rochelle.html 200
 /plumbing-repairs-rye                        /plumbing-repairs-rye.html         200
 /plumbing-repairs-rye/                       /plumbing-repairs-rye.html         200
 /plumbing-repairs-scarsdale                  /plumbing-repairs-scarsdale.html   200
 /plumbing-repairs-scarsdale/                 /plumbing-repairs-scarsdale.html   200
-/plumbing-repairs-white-plains               /plumbing-repairs-white-plains 
-/plumbing-repairs-white-plains/              /plumbing-repairs-white-plains 
+/plumbing-repairs-white-plains                /plumbing-repairs-white-plains.html 200
+/plumbing-repairs-white-plains/               /plumbing-repairs-white-plains.html 200
 /plumbing-repairs-yonkers                    /plumbing-repairs-yonkers.html     200
 /plumbing-repairs-yonkers/                   /plumbing-repairs-yonkers.html     200
 /plumbing-repairs                            /plumbing-repairs.html             200
