@@ -61,33 +61,75 @@ export async function getGoogleCalendarBusyRanges(dayStartIso, dayEndIso) {
     const token = await getAccessToken();
     if (!token || !GOOGLE_CALENDAR_ID) return [];
 
-    const res = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        timeMin: dayStartIso,
-        timeMax: dayEndIso,
-        timeZone: 'America/New_York',
-        items: [{ id: GOOGLE_CALENDAR_ID }]
-      })
-    });
+    const busyRanges = [];
 
-    if (!res.ok) {
-      console.error('Google FreeBusy error:', await res.text());
-      return [];
+    // 1. Query FreeBusy API
+    try {
+      const fbRes = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          timeMin: dayStartIso,
+          timeMax: dayEndIso,
+          timeZone: 'America/New_York',
+          items: [{ id: GOOGLE_CALENDAR_ID }]
+        })
+      });
+
+      if (fbRes.ok) {
+        const data = await fbRes.json();
+        const calendarData = data.calendars && data.calendars[GOOGLE_CALENDAR_ID];
+        const busyList = calendarData ? calendarData.busy || [] : [];
+        busyList.forEach(item => {
+          busyRanges.push({
+            start: new Date(item.start).getTime(),
+            end: new Date(item.end).getTime()
+          });
+        });
+      }
+    } catch (fbErr) {
+      console.error('FreeBusy fetch warning:', fbErr);
     }
 
-    const data = await res.json();
-    const calendarData = data.calendars && data.calendars[GOOGLE_CALENDAR_ID];
-    const busyList = calendarData ? calendarData.busy || [] : [];
+    // 2. Query Events List API (Catches all timed jobs, Angi/Thumbtack syncs, & all-day events)
+    try {
+      const evUrl = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events?timeMin=${encodeURIComponent(dayStartIso)}&timeMax=${encodeURIComponent(dayEndIso)}&singleEvents=true`;
+      const evRes = await fetch(evUrl, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
 
-    return busyList.map(item => ({
-      start: new Date(item.start).getTime(),
-      end: new Date(item.end).getTime()
-    }));
+      if (evRes.ok) {
+        const evData = await evRes.json();
+        const items = evData.items || [];
+        for (const item of items) {
+          if (item.status === 'cancelled') continue;
+
+          let startMs = null;
+          let endMs = null;
+
+          if (item.start && item.start.dateTime) {
+            startMs = new Date(item.start.dateTime).getTime();
+            endMs = item.end && item.end.dateTime ? new Date(item.end.dateTime).getTime() : startMs + (60 * 60 * 1000);
+          } else if (item.start && item.start.date) {
+            // All-day event blocks 7:00 AM to 7:00 PM EDT
+            const dateStr = item.start.date;
+            startMs = new Date(`${dateStr}T07:00:00-04:00`).getTime();
+            endMs = new Date(`${dateStr}T19:00:00-04:00`).getTime();
+          }
+
+          if (startMs && endMs) {
+            busyRanges.push({ start: startMs, end: endMs });
+          }
+        }
+      }
+    } catch (evErr) {
+      console.error('Events List fetch warning:', evErr);
+    }
+
+    return busyRanges;
   } catch (err) {
     console.error('Error fetching Google Calendar busy ranges:', err);
     return [];
