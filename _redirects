@@ -7,7 +7,6 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /book-appointment      https://www.herehandyman.com/book        301!
 /book-appointment.html https://www.herehandyman.com/book        301!
 /book.html             https://www.herehandyman.com/book        301!
-/index.html            https://www.herehandyman.com/            301!
 
 # Admin & System Portal Rewrites
 /login                     /login.html                     200
