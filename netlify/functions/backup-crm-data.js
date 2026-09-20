@@ -1,9 +1,33 @@
 // Serverless Function: Automated Backup System for Here Handyman CRM (Zero-Dependency Node 18)
+import crypto from 'node:crypto';
+
+function timingSafeEqualStr(a, b) {
+  const ab = Buffer.from(String(a));
+  const bb = Buffer.from(String(b));
+  if (ab.length !== bb.length) return false;
+  return crypto.timingSafeEqual(ab, bb);
+}
+
 export async function handler(event, context) {
+  const cronSecret = process.env.CRON_BACKUP_SECRET;
+
+  // Fail closed: never run with a missing/placeholder secret.
+  if (!cronSecret) {
+    console.error('[BACKUP] CRON_BACKUP_SECRET is not configured.');
+    return {
+      statusCode: 503,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Backup endpoint is not configured.' }),
+    };
+  }
+
   const authHeader = event.headers.authorization || event.headers.Authorization || '';
-  const cronSecret = process.env.CRON_BACKUP_SECRET || 'hh_crm_secret_backup_key';
-  
-  if (!authHeader.includes(cronSecret) && !authHeader.includes('Bearer')) {
+  const providedSecret =
+    event.headers['x-backup-secret'] ||
+    event.headers['X-Backup-Secret'] ||
+    (authHeader.startsWith('Bearer ') ? authHeader.slice(7).trim() : '');
+
+  if (!providedSecret || !timingSafeEqualStr(providedSecret, cronSecret)) {
     return {
       statusCode: 401,
       headers: { 'Content-Type': 'application/json' },

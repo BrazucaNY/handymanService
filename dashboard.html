@@ -1358,6 +1358,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   document.addEventListener('DOMContentLoaded', function () {
     var SESSION_KEY = "hh_system_session";
     var STORAGE_CONTACTS_KEY = "hh_crm_contacts";
+    var SUPABASE_URL = "https://vvwnmiffuaxiazlskeya.supabase.co";
+    var SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
+
+    function getSession() {
+      try {
+        var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
+        if (!raw) return null;
+        var s = JSON.parse(raw);
+        if (!s || !s.access_token) return null;
+        if (s.expires_at && s.expires_at <= Date.now()) return null;
+        return s;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Headers for owner-only Netlify functions: Supabase session token + publishable key.
+    function authHeaders(extra) {
+      var h = extra || {};
+      var s = getSession();
+      h['apikey'] = SUPABASE_PUBLISHABLE_KEY;
+      if (s && s.access_token) h['Authorization'] = 'Bearer ' + s.access_token;
+      return h;
+    }
 
     // Google Business Profile (GBP) Verified Reviewers List
     var GBP_REVIEWS_LIST = [
@@ -1616,7 +1640,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     });
 
     // Dynamic Review Tracking & GBP Sync
-    var BASE_GBP_REVIEWS = 22;
+    // Single source of truth: derive the verified count from GBP_REVIEWS_LIST above.
+    var BASE_GBP_REVIEWS = GBP_REVIEWS_LIST.length;
     var webReviews = [];
 
     function updateReviewStats() {
@@ -1639,7 +1664,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         self.disabled = true;
         self.textContent = 'Syncing GBP API...';
 
-        fetch('/.netlify/functions/gbp-reviews')
+        fetch('/.netlify/functions/gbp-reviews', { headers: authHeaders() })
           .then(function(res) { return res.json(); })
           .then(function(data) {
             syncLiveWebReviews();
@@ -1647,7 +1672,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             self.disabled = false;
             self.textContent = 'Sync Latest GBP Reviews 🔄';
             if (data && data.success) {
-              alert('✅ Google Business Profile Live API Connected!\n\nAuthenticated as: ' + data.clientEmail + '\n\n✓ Synced ' + (BASE_GBP_REVIEWS + webReviews.length) + ' verified Google Business Profile reviews!');
+              alert('✅ Google Business Profile Live API Connected!\n\n✓ Synced ' + (BASE_GBP_REVIEWS + webReviews.length) + ' verified Google Business Profile reviews!');
             } else {
               alert('✓ Synced ' + (BASE_GBP_REVIEWS + webReviews.length) + ' verified Google Business Profile reviews!');
             }
@@ -1659,6 +1684,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             self.disabled = false;
             self.textContent = 'Sync Latest GBP Reviews 🔄';
             alert('✓ Synced ' + (BASE_GBP_REVIEWS + webReviews.length) + ' verified Google Business Profile reviews!');
+          });
+      });
+    }
+
     // Setup interactive AI SEO reply buttons on review cards
     function setupReviewCardActions() {
       document.querySelectorAll('.review-card').forEach(function(card) {
@@ -1693,7 +1722,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           fetch('/.netlify/functions/ai-seo-reply', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: authHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({
               reviewerName: reviewerName,
               reviewText: reviewText,
@@ -1733,11 +1762,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             this.textContent = 'Posting to Google...';
             var self = this;
 
+            var gbpReviewName = card.getAttribute('data-review-name') || '';
+            if (!gbpReviewName) {
+              this.disabled = false;
+              alert('This review is not linked to a Google Business Profile review yet. Sync the GBP API first, then try again.');
+              return;
+            }
+
             fetch('/.netlify/functions/gbp-reviews', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: authHeaders({ 'Content-Type': 'application/json' }),
               body: JSON.stringify({
-                reviewName: 'accounts/105960944786626315708/locations/herehandyman/reviews/1',
+                reviewName: gbpReviewName,
                 replyComment: currentReply
               })
             })
@@ -1768,14 +1804,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     // Fetch live web reviews/contacts from Supabase to auto-populate CRM & Reviews
     function syncLiveWebReviews() {
-      fetch('https://vvwnmiffuaxiazlskeya.supabase.co/rest/v1/customer_reviews?select=*', {
-        headers: {
-          'apikey': 'sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc'
-        }
-      })
+      fetch('/.netlify/functions/crm-data', { headers: authHeaders() })
       .then(function(res) { return res.json(); })
-      .then(function(data) {
-        if (Array.isArray(data) && data.length > 0) {
+      .then(function(result) {
+        var data = result && Array.isArray(result.reviews) ? result.reviews : [];
+        if (data.length > 0) {
           webReviews = data;
           updateReviewStats();
 
