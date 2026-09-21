@@ -765,6 +765,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <th>Phone Number</th>
                 <th>Email Address</th>
                 <th>Street Address</th>
+                <th>Apt / Unit</th>
                 <th>Town</th>
                 <th>Lead Source</th>
                 <th>Service Completed</th>
@@ -804,7 +805,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
           <div class="form-group">
             <label>Street Address</label>
-            <input class="form-control" id="newCustAddress" placeholder="e.g. 142 Main St, Apt 4B">
+            <input class="form-control" id="newCustAddress" placeholder="e.g. 300 High Point Dr">
+          </div>
+          <div class="form-group">
+            <label>Apt / Suite / Unit</label>
+            <input class="form-control" id="newCustApt" placeholder="e.g. Apt 612, Unit B, Ste 100">
           </div>
           <div class="form-group">
             <label>Town / City *</label>
@@ -1407,11 +1412,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     var defaultContacts = [
-      { name: "Lori Ann Marcella", phone: "(914) 555-0192", email: "loriann@example.com", address: "142 Main St", town: "White Plains", lead: "Google", service: "General Home Emergency & Repairs", status: "Completed", date: "2026-09-10", hasGbpReview: true },
-      { name: "Jacob Marquez", phone: "(914) 555-0841", email: "jacob.m@example.com", address: "88 Mamaroneck Ave", town: "White Plains", lead: "Google", service: "Interior Door Repair & Installation", status: "Completed", date: "2026-09-09", hasGbpReview: true },
-      { name: "Carlos Ramirez", phone: "(914) 555-0322", email: "carlos.r@example.com", address: "45 Post Rd", town: "Scarsdale", lead: "Google", service: "Springfree Trampoline Move & Assembly", status: "Completed", date: "2026-08-21", hasGbpReview: true },
-      { name: "Kathy Roberts", phone: "(914) 555-0914", email: "kathy.r@example.com", address: "12 Halstead Ave", town: "Harrison", lead: "Google", service: "Artwork & Bathroom Curtain Hanging", status: "Completed", date: "2026-07-25", hasGbpReview: true },
-      { name: "Pam Jaffee", phone: "(914) 555-0118", email: "pam.j@example.com", address: "210 Central Park Ave", town: "Yonkers", lead: "Google", service: "Electrical Wiring Repair & Fixtures", status: "Completed", date: "2026-07-07", hasGbpReview: true }
+      { name: "Marsia Wisdom", phone: "914-325-1568", email: "", address: "300 High Point Dr", apt: "612", town: "White Plains", lead: "Tasker", service: "Handyman Service", status: "Active", date: "2026-09-20", hasGbpReview: true },
+      { name: "Lori Ann Marcella", phone: "(914) 420-4716", email: "", address: "275 Beechwood Ln", apt: "", town: "Yorktown Heights", lead: "Facebook", service: "General Handyman", status: "Active", date: "2026-09-10", hasGbpReview: true },
+      { name: "Benjamin Berkey", phone: "(914) 275-6075", email: "", address: "17 Sunset Dr", apt: "", town: "Chappaqua", lead: "Angi App", service: "TV Mounting (56 & 100)", status: "Active", date: "2026-09-15", hasGbpReview: true },
+      { name: "Darin Fass", phone: "(917) 686-0004", email: "", address: "44 Carlton Drive", apt: "", town: "Mount Kisco", lead: "Angi App", service: "Wayfair Wall Hanging", status: "Active", date: "2026-09-18", hasGbpReview: true },
+      { name: "Jacob Marquez", phone: "(914) 555-0841", email: "jacob.m@example.com", address: "88 Mamaroneck Ave", apt: "4B", town: "White Plains", lead: "Google", service: "Interior Door Repair & Installation", status: "Completed", date: "2026-09-09", hasGbpReview: true },
+      { name: "Carlos Ramirez", phone: "(914) 555-0322", email: "carlos.r@example.com", address: "45 Post Rd", apt: "", town: "Scarsdale", lead: "Google", service: "Springfree Trampoline Move & Assembly", status: "Completed", date: "2026-08-21", hasGbpReview: true },
+      { name: "Kathy Roberts", phone: "(914) 555-0914", email: "kathy.r@example.com", address: "12 Halstead Ave", apt: "", town: "Harrison", lead: "Google", service: "Artwork & Bathroom Curtain Hanging", status: "Completed", date: "2026-07-25", hasGbpReview: true },
+      { name: "Pam Jaffee", phone: "(914) 555-0118", email: "pam.j@example.com", address: "210 Central Park Ave", apt: "Apt 2", town: "Yonkers", lead: "Google", service: "Electrical Wiring Repair & Fixtures", status: "Completed", date: "2026-07-07", hasGbpReview: true }
     ];
 
     // Load contacts from localStorage or initialize defaults
@@ -1420,7 +1428,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var raw = localStorage.getItem(STORAGE_CONTACTS_KEY);
         if (raw) {
           var parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            // Auto-migration: extract apartment numbers embedded in town or address string
+            parsed.forEach(function(c) {
+              if (c.town && !c.apt) {
+                var match = c.town.match(/^(.*?)\s*[-,\s]+\s*(apt|unit|ste|suite|#)\s*\.?\s*(.*)$/i);
+                if (match) {
+                  c.town = match[1].trim();
+                  c.apt = match[3] ? (match[2] + " " + match[3]).trim() : match[2].trim();
+                }
+              }
+            });
+            saveContacts(parsed);
+            return parsed;
+          }
         }
       } catch (e) {
         console.warn("Error loading local contacts:", e);
@@ -1444,7 +1465,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       var tbody = document.querySelector("#contactsTable tbody");
       tbody.innerHTML = "";
       if (list.length === 0) {
-        tbody.innerHTML = "<tr><td colspan='10' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts found. Use Add Contacts to create your first client.</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='11' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts found. Use Add Contacts to create your first client.</td></tr>";
       } else {
         list.forEach(function (c, index) {
           var isReviewed = Boolean(c.hasGbpReview || isGbpReviewerMatch(c.name));
@@ -1453,11 +1474,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         : "<span style='background:#f1f5f9;color:#64748b;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:600;'>⏳ Pending</span>") +
             "</label></td>";
 
+          var aptDisplay = c.apt ? ("<span style='background:#f1f5f9;color:#475569;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600;display:inline-block;'>" + (c.apt.toLowerCase().startsWith('apt') || c.apt.toLowerCase().startsWith('unit') || c.apt.toLowerCase().startsWith('ste') || c.apt.startsWith('#') ? c.apt : 'Apt ' + c.apt) + "</span>") : '—';
+
           var tr = document.createElement("tr");
           tr.innerHTML = "<td><strong>" + c.name + "</strong></td>" +
                          "<td>" + c.phone + "</td>" +
                          "<td>" + (c.email || '—') + "</td>" +
                          "<td>" + (c.address || '—') + "</td>" +
+                         "<td>" + aptDisplay + "</td>" +
                          "<td><span class='badge-town'>" + (c.town || 'Westchester') + "</span></td>" +
                          "<td><span style='background:#eff6ff;color:#1d4ed8;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:600;display:inline-block;'>⚡ " + (c.lead || 'Direct') + "</span></td>" +
                          "<td>" + c.service + "</td>" +
@@ -1496,6 +1520,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             document.getElementById('editCustPhone').value = c.phone || '';
             document.getElementById('editCustEmail').value = c.email || '';
             document.getElementById('editCustAddress').value = c.address || '';
+            if (document.getElementById('editCustApt')) document.getElementById('editCustApt').value = c.apt || '';
             document.getElementById('editCustTown').value = c.town || '';
             document.getElementById('editCustLead').value = c.lead || '';
             document.getElementById('editCustService').value = c.service || '';
@@ -1536,6 +1561,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                c.phone.toLowerCase().includes(query) ||
                (c.email && c.email.toLowerCase().includes(query)) ||
                (c.address && c.address.toLowerCase().includes(query)) ||
+               (c.apt && c.apt.toLowerCase().includes(query)) ||
                (c.town && c.town.toLowerCase().includes(query)) ||
                (c.lead && c.lead.toLowerCase().includes(query)) ||
                (c.service && c.service.toLowerCase().includes(query));
@@ -1562,10 +1588,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     // 1-Click Secure CSV Export
     document.getElementById('exportCsvBtn').addEventListener('click', function () {
-      var csvContent = "data:text/csv;charset=utf-8,Name,Phone,Email,Address,Town,Lead Source,Service,Status,GBP Review Left\n";
+      var csvContent = "data:text/csv;charset=utf-8,Name,Phone,Email,Address,Apt/Unit,Town,Lead Source,Service,Status,GBP Review Left\n";
       contacts.forEach(function (c) {
         var reviewed = c.hasGbpReview || isGbpReviewerMatch(c.name) ? "YES" : "NO";
-        csvContent += '"' + c.name + '","' + c.phone + '","' + (c.email || '') + '","' + (c.address || '') + '","' + (c.town || '') + '","' + (c.lead || 'Direct') + '","' + (c.service || '') + '","' + (c.status || 'Active') + '","' + reviewed + '"\n';
+        csvContent += '"' + c.name + '","' + c.phone + '","' + (c.email || '') + '","' + (c.address || '') + '","' + (c.apt || '') + '","' + (c.town || '') + '","' + (c.lead || 'Direct') + '","' + (c.service || '') + '","' + (c.status || 'Active') + '","' + reviewed + '"\n';
       });
       var encodedUri = encodeURI(csvContent);
       var link = document.createElement("a");
@@ -1583,6 +1609,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       var phone = document.getElementById('newCustPhone').value.trim();
       var email = document.getElementById('newCustEmail').value.trim();
       var address = document.getElementById('newCustAddress') ? document.getElementById('newCustAddress').value.trim() : '';
+      var apt = document.getElementById('newCustApt') ? document.getElementById('newCustApt').value.trim() : '';
       var town = document.getElementById('newCustTown') ? document.getElementById('newCustTown').value.trim() : 'Westchester';
       var lead = document.getElementById('newCustLead') ? document.getElementById('newCustLead').value.trim() || 'Direct' : 'Direct';
       var service = document.getElementById('newCustService').value.trim() || 'General Repairs';
@@ -1594,6 +1621,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           phone: phone,
           email: email,
           address: address,
+          apt: apt,
           town: town,
           lead: lead,
           service: service,
@@ -1952,6 +1980,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         contacts[idx].phone = (document.getElementById('editCustPhone') ? document.getElementById('editCustPhone').value : '').trim();
         contacts[idx].email = (document.getElementById('editCustEmail') ? document.getElementById('editCustEmail').value : '').trim();
         contacts[idx].address = (document.getElementById('editCustAddress') ? document.getElementById('editCustAddress').value : '').trim();
+        contacts[idx].apt = (document.getElementById('editCustApt') ? document.getElementById('editCustApt').value : '').trim();
         contacts[idx].town = (document.getElementById('editCustTown') ? document.getElementById('editCustTown').value : '').trim() || 'Westchester';
         contacts[idx].lead = (document.getElementById('editCustLead') ? document.getElementById('editCustLead').value : '').trim() || 'Direct';
         contacts[idx].service = (document.getElementById('editCustService') ? document.getElementById('editCustService').value : '').trim() || 'General Repairs';
@@ -2006,6 +2035,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="form-group" style="margin-bottom:14px;">
           <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Street Address</label>
           <input class="form-control" id="editCustAddress" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Apt / Suite / Unit</label>
+          <input class="form-control" id="editCustApt" placeholder="e.g. Apt 612" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
         </div>
         <div class="form-group" style="margin-bottom:14px;">
           <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Town / City *</label>
