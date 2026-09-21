@@ -19,15 +19,36 @@
   to = "/gallery.html"
   status = 200
 
-# /blog index (301 to https://www.herehandyman.com/blog/)
+# /blog index (200 rewrite to /blog/index.html)
 [[redirects]]
   from = "/blog"
-  to = "https://www.herehandyman.com/blog/"
-  status = 301
+  to = "/blog/index.html"
+  status = 200
 
 [[redirects]]
   from = "/blog/"
   to = "/blog/index.html"
+  status = 200
+
+# /book & /book-appointment (200 rewrite to /book.html)
+[[redirects]]
+  from = "/book"
+  to = "/book.html"
+  status = 200
+
+[[redirects]]
+  from = "/book/"
+  to = "/book.html"
+  status = 200
+
+[[redirects]]
+  from = "/book-appointment"
+  to = "/book.html"
+  status = 200
+
+[[redirects]]
+  from = "/book-appointment/"
+  to = "/book.html"
   status = 200
 
 # /services hub page
@@ -48,18 +69,16 @@
   to = "/service-areas.html"
   status = 200
 
-# /privacy 301 redirect to https://www.herehandyman.com/privacy-policy
+# /privacy & /privacy-policy (200 rewrite to /privacy-policy.html)
 [[redirects]]
   from = "/privacy"
-  to = "https://www.herehandyman.com/privacy-policy"
-  status = 301
-  force = true
+  to = "/privacy-policy.html"
+  status = 200
 
 [[redirects]]
   from = "/privacy.html"
-  to = "https://www.herehandyman.com/privacy-policy"
-  status = 301
-  force = true
+  to = "/privacy-policy.html"
+  status = 200
 
 [[redirects]]
   from = "/privacy-policy"
