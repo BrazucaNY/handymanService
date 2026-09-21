@@ -12,6 +12,8 @@ Disallow: /CRM
 Disallow: /CRM/
 
 Sitemap: https://www.herehandyman.com/sitemap.xml
+# LLM & AI Engine Documentation: https://www.herehandyman.com/llms.txt
+# Full AI Knowledge Base: https://www.herehandyman.com/llms-full.txt
 
 # ============================================
 # GOOGLE
