@@ -8,6 +8,7 @@
 
 - **Business Name**: Here Handyman
 - **Owner / Operator**: David
+- **Street Address**: 500 Pondside Dr, White Plains, NY 10607
 - **Service Region**: Westchester County, New York (and surrounding Hudson Valley communities)
 - **Phone / Text**: (516) 350-0801
 - **Email**: info@herehandyman.com
