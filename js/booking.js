@@ -391,13 +391,20 @@ function renderConfirmationScreen(id, startIso) {
     day: 'numeric'
   });
 
+  const custName = document.getElementById('custName') ? document.getElementById('custName').value.trim() : 'Customer';
+  const custAddr = document.getElementById('custAddress') ? document.getElementById('custAddress').value.trim() : '';
+
+  const smsText = encodeURIComponent(`Hi David! I just booked an appointment on Here Handyman.\n\nBooking ID: ${id}\nName: ${custName}\nService: ${state.service.name}\nDate: ${dateFormatted} at ${state.slot.label}\nAddress: ${custAddr}`);
+  const smsUrl = `sms:15163500801?body=${smsText}`;
+  const waUrl = `https://wa.me/15163500801?text=${smsText}`;
+
   const formatGCalDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
   const gcalStart = formatGCalDate(startDate);
   const gcalEnd = formatGCalDate(endDate);
 
   const title = encodeURIComponent(`🔨 Handyman Appointment (${state.service.name})`);
   const details = encodeURIComponent(`Booking Confirmation Code: ${id}\nService: ${state.service.name}\nHandyman: David (Here Handyman)\nPhone: (516) 350-0801`);
-  const location = encodeURIComponent(`${document.getElementById('custAddress').value}, ZIP ${state.zip}`);
+  const location = encodeURIComponent(`${custAddr}, ZIP ${state.zip}`);
   const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${gcalStart}/${gcalEnd}&details=${details}&location=${location}`;
 
   wizardContainer.innerHTML = `
@@ -409,12 +416,20 @@ function renderConfirmationScreen(id, startIso) {
       <div class="summary-box">
         <p><strong>Service:</strong> ${state.service.name}</p>
         <p><strong>Date & Time:</strong> ${dateFormatted} at ${state.slot.label}</p>
-        <p><strong>Location:</strong> ${document.getElementById('custAddress').value}, ZIP ${state.zip}</p>
+        <p><strong>Location:</strong> ${custAddr}, ZIP ${state.zip}</p>
+      </div>
+
+      <div style="background:#e0f2fe;border:1px solid #bae6fd;color:#0369a1;padding:14px;border-radius:10px;font-size:13.5px;margin:16px 0;text-align:center;">
+        🔔 <strong>Automated Reminders Active!</strong> An automated 24-hour and 2-hour reminder has been set for your appointment. David will call or text prior to arrival.
       </div>
 
       <div class="next-steps" style="display:flex;flex-direction:column;gap:10px;align-items:center;">
-        <p>🎉 We have received your booking and reserved this slot. David will arrive within the appointment window!</p>
-        <a href="${gcalUrl}" target="_blank" rel="noopener" class="btn-full-navy" style="max-width:280px;text-align:center;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:600;">📅 Add to Google Calendar</a>
+        <p>🎉 We have reserved your time slot! Click below to send a text confirmation directly to David or add this to your calendar:</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;">
+          <a href="${smsUrl}" class="btn-full-navy" style="max-width:280px;text-align:center;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:700;background:#0284c7;color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:6px;">💬 Text David via SMS</a>
+          <a href="${waUrl}" target="_blank" rel="noopener" class="btn-full-navy" style="max-width:280px;text-align:center;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:700;background:#25d366;color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:6px;">📲 Message on WhatsApp</a>
+        </div>
+        <a href="${gcalUrl}" target="_blank" rel="noopener" class="btn-full-navy" style="max-width:280px;text-align:center;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:600;margin-top:6px;">📅 Add to Google Calendar</a>
         <a href="https://g.page/r/CcY8nHWkiRZ0EAE" target="_blank" rel="noopener" class="btn-review" style="margin-top:4px;">⭐ Leave a Google Review</a>
       </div>
     </div>
