@@ -1,0 +1,1237 @@
+{
+  "generated_at": "2026-09-20T11:19:37.566943",
+  "site_url": "sc-domain:herehandyman.com",
+  "start_date_28d": "2026-08-21",
+  "end_date": "2026-09-18",
+  "summary_28d": {
+    "clicks": 4,
+    "impressions": 734,
+    "avg_ctr": 0.544959128065395,
+    "avg_pos": 10.99591280653951
+  },
+  "summary_90d": {
+    "clicks": 9,
+    "impressions": 2669
+  },
+  "queries": [
+    {
+      "keys": [
+        "handyman"
+      ],
+      "clicks": 2,
+      "impressions": 280,
+      "ctr": 0.007142857142857143,
+      "position": 3.95
+    },
+    {
+      "keys": [
+        "handyman white plains"
+      ],
+      "clicks": 2,
+      "impressions": 60,
+      "ctr": 0.03333333333333333,
+      "position": 9.75
+    },
+    {
+      "keys": [
+        "10562"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "adjustable bed repair near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "affordable handyman near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 6
+    },
+    {
+      "keys": [
+        "affordable handyman services near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "alpine handyman"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "appliance repair westchester"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 61
+    },
+    {
+      "keys": [
+        "ardsley ny gutter company"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 36
+    },
+    {
+      "keys": [
+        "assemble furniture near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 85
+    },
+    {
+      "keys": [
+        "assembly furniture near me"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 68
+    },
+    {
+      "keys": [
+        "bathroom handyman"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 2
+    },
+    {
+      "keys": [
+        "bed assembly - storage bed by porch home services"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 22.5
+    },
+    {
+      "keys": [
+        "bed assembly near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "bedroom vanity assembly by porch home services"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 24
+    },
+    {
+      "keys": [
+        "best handyman"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 7.333333333333333
+    },
+    {
+      "keys": [
+        "best handyman near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "best plumber near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "briarcliff manor handyman"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "cabinet handyman near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5
+    },
+    {
+      "keys": [
+        "cable and \"echo\" and (\"meta\" or \"xl axiata\" or \"google\" or \"gu holdings\" or \"tata\" or \"telstra\" or \"edgeconnex\" or \"nec corp\") -\"amazon echo\" -\"echo dot\" -\"alexa\""
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 5.333333333333333
+    },
+    {
+      "keys": [
+        "cailing drywall repair scarsdale ny"
+      ],
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 16.57142857142857
+    },
+    {
+      "keys": [
+        "carpenters near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "ceiling repair near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "ceiling water damage repair near me"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 60.5
+    },
+    {
+      "keys": [
+        "cheshire handyman"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "chester handyman"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 39
+    },
+    {
+      "keys": [
+        "chester handyman services"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 39
+    },
+    {
+      "keys": [
+        "commercial handyman services rye, ny"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 28
+    },
+    {
+      "keys": [
+        "contractor vs handyman"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 21
+    },
+    {
+      "keys": [
+        "custom home remodeling scarsdale"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 15
+    },
+    {
+      "keys": [
+        "deck installation scarsdale"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "deck repair near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 15
+    },
+    {
+      "keys": [
+        "deck repair scarsdale"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "deck repair tarrytown ny"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "deck repair white plains"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "dining set assembly - 4 chair by porch home services"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "dining table assembly by porch home services"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 48
+    },
+    {
+      "keys": [
+        "dobbs leak"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "door contractor"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 16
+    },
+    {
+      "keys": [
+        "door installations"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 17
+    },
+    {
+      "keys": [
+        "door painting white plains"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 43
+    },
+    {
+      "keys": [
+        "drain repair tarrytown"
+      ],
+      "clicks": 0,
+      "impressions": 14,
+      "ctr": 0,
+      "position": 32.64285714285714
+    },
+    {
+      "keys": [
+        "drainage company ardsley ny"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 41.333333333333336
+    },
+    {
+      "keys": [
+        "dresser assembly by porch home services"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 38
+    },
+    {
+      "keys": [
+        "dry rot repair scarsdale ny"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 48
+    },
+    {
+      "keys": [
+        "dry wall repair near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "drywall ceiling repair white plains"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "drywall handyman"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 23
+    },
+    {
+      "keys": [
+        "drywall installation yonkers ny"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 21
+    },
+    {
+      "keys": [
+        "drywall repair"
+      ],
+      "clicks": 0,
+      "impressions": 61,
+      "ctr": 0,
+      "position": 3.3114754098360657
+    },
+    {
+      "keys": [
+        "drywall repair near me"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "drywall repair scarsdale ny"
+      ],
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 7.111111111111111
+    },
+    {
+      "keys": [
+        "drywall repair white plains"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 5.5
+    },
+    {
+      "keys": [
+        "drywall repair yonkers ny"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 21
+    },
+    {
+      "keys": [
+        "dywall repair white plains ny"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 8.2
+    },
+    {
+      "keys": [
+        "electrical panel upgrade hartsdale ny"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "electrical repair services tarrytown ny"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 37.666666666666664
+    },
+    {
+      "keys": [
+        "electrical repair tarrytown"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 47
+    },
+    {
+      "keys": [
+        "electrical repairs tarrytown ny"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 30.333333333333332
+    },
+    {
+      "keys": [
+        "electrician"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 36
+    },
+    {
+      "keys": [
+        "electrician braircliff, ny"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 41
+    },
+    {
+      "keys": [
+        "electrician hartsdale ny"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "electrician hartsdale, ny"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 21
+    },
+    {
+      "keys": [
+        "electrician jobs near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "electrician near me"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 41
+    },
+    {
+      "keys": [
+        "electrician scarsdale ny"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 41
+    },
+    {
+      "keys": [
+        "electrician scarsdale, ny"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 41
+    },
+    {
+      "keys": [
+        "electrician west harrison, ny"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 41
+    },
+    {
+      "keys": [
+        "electrician white plains ny"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 21
+    },
+    {
+      "keys": [
+        "electrician white plains, ny"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 31
+    },
+    {
+      "keys": [
+        "electricians elmsford"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "electricians near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 41
+    },
+    {
+      "keys": [
+        "fence repair near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 21
+    },
+    {
+      "keys": [
+        "find me a handyman near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5
+    },
+    {
+      "keys": [
+        "fixes doayods"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "keys": [
+        "front door replacement white plains"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "furniture assemblers near me"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 48
+    },
+    {
+      "keys": [
+        "furniture assembly"
+      ],
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 9.142857142857142
+    },
+    {
+      "keys": [
+        "furniture assembly by porch home services (up to 2hr)"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 35.5
+    },
+    {
+      "keys": [
+        "furniture assembly cost connecticut"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "keys": [
+        "furniture assembly cost per hour"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 8.25
+    },
+    {
+      "keys": [
+        "furniture assembly harrison ny"
+      ],
+      "clicks": 0,
+      "impressions": 24,
+      "ctr": 0,
+      "position": 11.416666666666666
+    },
+    {
+      "keys": [
+        "furniture assembly hourly rate"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 12
+    },
+    {
+      "keys": [
+        "furniture assembly near me"
+      ],
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 8.2
+    },
+    {
+      "keys": [
+        "furniture assembly rye ny"
+      ],
+      "clicks": 0,
+      "impressions": 7,
+      "ctr": 0,
+      "position": 18.285714285714285
+    },
+    {
+      "keys": [
+        "furniture assembly service near me"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 57
+    },
+    {
+      "keys": [
+        "furniture assembly services"
+      ],
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "furniture assembly white plains ny"
+      ],
+      "clicks": 0,
+      "impressions": 31,
+      "ctr": 0,
+      "position": 8.129032258064516
+    },
+    {
+      "keys": [
+        "furniture disassembly white plains ny"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 19
+    },
+    {
+      "keys": [
+        "general contractor handyman"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 17.666666666666668
+    },
+    {
+      "keys": [
+        "general contractor in elmsford"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "keys": [
+        "general contractor vs handyman"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 17.666666666666668
+    },
+    {
+      "keys": [
+        "general contractors tarrytown ny"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 50
+    },
+    {
+      "keys": [
+        "general repair services"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 3
+    },
+    {
+      "keys": [
+        "google handyman services"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "gutter cleaners near me"
+      ],
+      "clicks": 0,
+      "impressions": 23,
+      "ctr": 0,
+      "position": 27.956521739130434
+    },
+    {
+      "keys": [
+        "gutter cleaning"
+      ],
+      "clicks": 0,
+      "impressions": 13,
+      "ctr": 0,
+      "position": 30.23076923076923
+    },
+    {
+      "keys": [
+        "gutter cleaning near me"
+      ],
+      "clicks": 0,
+      "impressions": 25,
+      "ctr": 0,
+      "position": 16.68
+    },
+    {
+      "keys": [
+        "gutter cleaning nyack ny"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 21
+    }
+  ],
+  "pages": [
+    {
+      "keys": [
+        "http://herehandyman.com/"
+      ],
+      "clicks": 13,
+      "impressions": 1373,
+      "ctr": 0.009468317552804079,
+      "position": 8.966496722505463
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/"
+      ],
+      "clicks": 11,
+      "impressions": 498,
+      "ctr": 0.02208835341365462,
+      "position": 16.815261044176708
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/ardsley-handyman"
+      ],
+      "clicks": 1,
+      "impressions": 96,
+      "ctr": 0.010416666666666666,
+      "position": 25.083333333333332
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/best-handyman-services-westchester"
+      ],
+      "clicks": 1,
+      "impressions": 73,
+      "ctr": 0.0136986301369863,
+      "position": 22.164383561643834
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/find-reliable-handyman-westchester"
+      ],
+      "clicks": 1,
+      "impressions": 70,
+      "ctr": 0.014285714285714285,
+      "position": 11.1
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/furniture-assembly-cost-westchester"
+      ],
+      "clicks": 1,
+      "impressions": 256,
+      "ctr": 0.00390625,
+      "position": 8.45703125
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/handyman-cost-westchester-ny"
+      ],
+      "clicks": 1,
+      "impressions": 34,
+      "ctr": 0.029411764705882353,
+      "position": 6.4411764705882355
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/book-appointment"
+      ],
+      "clicks": 1,
+      "impressions": 53,
+      "ctr": 0.018867924528301886,
+      "position": 13.849056603773585
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/furniture-assembly"
+      ],
+      "clicks": 1,
+      "impressions": 63,
+      "ctr": 0.015873015873015872,
+      "position": 22.857142857142858
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/greenburgh-handyman"
+      ],
+      "clicks": 1,
+      "impressions": 163,
+      "ctr": 0.006134969325153374,
+      "position": 27.141104294478527
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/hartsdale-handyman"
+      ],
+      "clicks": 1,
+      "impressions": 172,
+      "ctr": 0.005813953488372093,
+      "position": 27.343023255813954
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/yonkers-handyman"
+      ],
+      "clicks": 1,
+      "impressions": 125,
+      "ctr": 0.008,
+      "position": 18.968
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/about"
+      ],
+      "clicks": 0,
+      "impressions": 24,
+      "ctr": 0,
+      "position": 5.666666666666667
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/bathroom-renovation"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 62
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/"
+      ],
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 3.3333333333333335
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/drywall-repair-cost-westchester"
+      ],
+      "clicks": 0,
+      "impressions": 30,
+      "ctr": 0,
+      "position": 11.8
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/handyman-vs-contractor-westchester"
+      ],
+      "clicks": 0,
+      "impressions": 30,
+      "ctr": 0,
+      "position": 14.8
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/ikea-furniture-assembly-westchester"
+      ],
+      "clicks": 0,
+      "impressions": 23,
+      "ctr": 0,
+      "position": 7.782608695652174
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/smart-home-installation-westchester"
+      ],
+      "clicks": 0,
+      "impressions": 99,
+      "ctr": 0,
+      "position": 10.848484848484848
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/trampoline-assembly-westchester"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/blog/tv-mounting-cost-white-plains"
+      ],
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 7.333333333333333
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/book"
+      ],
+      "clicks": 0,
+      "impressions": 54,
+      "ctr": 0,
+      "position": 15.351851851851851
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/dobbs-ferry-handyman"
+      ],
+      "clicks": 0,
+      "impressions": 54,
+      "ctr": 0,
+      "position": 12.537037037037036
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/door-repair-installation"
+      ],
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 13
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/drywall-repair"
+      ],
+      "clicks": 0,
+      "impressions": 28,
+      "ctr": 0,
+      "position": 43.75
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/harrison-handyman"
+      ],
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/interior-painting"
+      ],
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": 0,
+      "position": 17.75
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/new-rochelle-handyman"
+      ],
+      "clicks": 0,
+      "impressions": 95,
+      "ctr": 0,
+      "position": 14.452631578947368
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/our-services"
+      ],
+      "clicks": 0,
+      "impressions": 19,
+      "ctr": 0,
+      "position": 3.4210526315789473
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/scarsdale-handyman"
+      ],
+      "clicks": 0,
+      "impressions": 196,
+      "ctr": 0,
+      "position": 13.056122448979592
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/tarrytown-handyman"
+      ],
+      "clicks": 0,
+      "impressions": 254,
+      "ctr": 0,
+      "position": 22.4251968503937
+    },
+    {
+      "keys": [
+        "https://www.herehandyman.com/white-plains-handyman"
+      ],
+      "clicks": 0,
+      "impressions": 289,
+      "ctr": 0,
+      "position": 17.13840830449827
+    }
+  ],
+  "devices": [
+    {
+      "keys": [
+        "MOBILE"
+      ],
+      "clicks": 18,
+      "impressions": 1216,
+      "ctr": 0.014802631578947368,
+      "position": 13.87828947368421
+    },
+    {
+      "keys": [
+        "DESKTOP"
+      ],
+      "clicks": 15,
+      "impressions": 2151,
+      "ctr": 0.00697350069735007,
+      "position": 14.99488609948861
+    },
+    {
+      "keys": [
+        "TABLET"
+      ],
+      "clicks": 0,
+      "impressions": 13,
+      "ctr": 0,
+      "position": 4
+    }
+  ]
+}

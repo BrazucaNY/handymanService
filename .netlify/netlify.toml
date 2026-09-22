@@ -1,7 +1,33 @@
-headersOrigin = "config"
-redirectsOrigin = "config"
 functionsDirectory = "C:\\Users\\davi6\\.gemini\\antigravity\\scratch\\here-handyman\\netlify\\functions"
 functionsDirectoryOrigin = "config-v1"
+headersOrigin = "config"
+redirectsOrigin = "config"
+
+[build]
+edge_functions = "C:\\Users\\davi6\\.gemini\\antigravity\\scratch\\here-handyman\\netlify\\edge-functions"
+publish = "C:\\Users\\davi6\\.gemini\\antigravity\\scratch\\here-handyman"
+publishOrigin = "config"
+functions = "C:\\Users\\davi6\\.gemini\\antigravity\\scratch\\here-handyman\\netlify\\functions"
+
+[build.environment]
+NODE_VERSION = "18"
+SECRETS_SCAN_OMIT_PATHS = "netlify/functions/googleCalendar.js"
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[[edge_functions]]
+function = "content-negotiation"
+path = "/*"
 
 [functions]
 
@@ -17,26 +43,6 @@ package = "@netlify/plugin-emails"
 pinned_version = "1"
 
 [plugins.inputs]
-
-[build]
-publish = "C:\\Users\\davi6\\.gemini\\antigravity\\scratch\\here-handyman"
-publishOrigin = "config"
-functions = "C:\\Users\\davi6\\.gemini\\antigravity\\scratch\\here-handyman\\netlify\\functions"
-
-[build.environment]
-NODE_VERSION = "18"
-
-[build.processing]
-
-[build.processing.css]
-
-[build.processing.html]
-
-[build.processing.images]
-
-[build.processing.js]
-
-[build.services]
 
 [[headers]]
 for = "/assets/images/*"
@@ -90,6 +96,16 @@ Cache-Control = "public, max-age=3600"
 for = "/llms.txt"
 
 [headers.values]
+Content-Type = "text/markdown; charset=utf-8"
+Vary = "Accept, Accept-Encoding"
+Cache-Control = "public, max-age=3600"
+
+[[headers]]
+for = "/llms-full.txt"
+
+[headers.values]
+Content-Type = "text/markdown; charset=utf-8"
+Vary = "Accept, Accept-Encoding"
 Cache-Control = "public, max-age=3600"
 
 [[headers]]
@@ -99,6 +115,7 @@ for = "/*"
 X-Content-Type-Options = "nosniff"
 X-XSS-Protection = "1; mode=block"
 Referrer-Policy = "strict-origin-when-cross-origin"
+Vary = "Accept, Accept-Encoding"
 
 [[headers]]
 for = "/admin/*"
@@ -119,6 +136,30 @@ for = "/login.html"
 [headers.values]
 X-Frame-Options = "DENY"
 Content-Security-Policy = "default-src 'self' https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com https://*.firebaseapp.com https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://apis.google.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://apis.google.com https://*.firebaseapp.com https://*.firebase.com; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https: data:; connect-src 'self' wss://*.firebaseio.com https://*.firebaseapp.com https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://*.firebaseio.com https://www.gstatic.com; media-src *; object-src 'none';"
+
+[[headers]]
+for = "/dashboard"
+
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
+Pragma = "no-cache"
+Expires = "0"
+
+[[headers]]
+for = "/dashboard/"
+
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
+Pragma = "no-cache"
+Expires = "0"
+
+[[headers]]
+for = "/dashboard.html"
+
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
+Pragma = "no-cache"
+Expires = "0"
 
 [[headers]]
 for = "/admin/*"
@@ -143,9 +184,2830 @@ Cache-Control = "no-cache, no-store, must-revalidate"
 X-Content-Type-Options = "nosniff"
 
 [[redirects]]
-from = "/gallery"
-to = "/"
+from = "http://herehandyman.com/*"
+to = "https://www.herehandyman.com/:splat"
 status = 301.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "http://www.herehandyman.com/*"
+to = "https://www.herehandyman.com/:splat"
+status = 301.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "https://herehandyman.com/*"
+to = "https://www.herehandyman.com/:splat"
+status = 301.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/book-appointment.html"
+to = "/book.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/book.html"
+to = "/book.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/login"
+to = "/login.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/login/"
+to = "/login.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/admin"
+to = "/login.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/admin/"
+to = "/login.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/CRM"
+to = "/login.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/CRM/"
+to = "/login.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/dashboard"
+to = "/dashboard.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/dashboard/"
+to = "/dashboard.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/admin/dashboard"
+to = "/dashboard.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/CRM/dashboard"
+to = "/dashboard.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/about/"
+to = "/about.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/ardsley-handyman/"
+to = "/ardsley-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/bathroom-renovation"
+to = "/bathroom-renovation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/bathroom-renovation/"
+to = "/bathroom-renovation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/best-handyman-services-westchester/"
+to = "/blog/best-handyman-services-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/deck-sealing-staining-westchester/"
+to = "/blog/deck-sealing-staining-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/drywall-repair-cost-westchester/"
+to = "/blog/drywall-repair-cost-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/fall-gutter-cleaning-westchester/"
+to = "/blog/fall-gutter-cleaning-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/find-reliable-handyman-westchester/"
+to = "/blog/find-reliable-handyman-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/furniture-assembly-cost-westchester/"
+to = "/blog/furniture-assembly-cost-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/handyman-cost-westchester-ny/"
+to = "/blog/handyman-cost-westchester-ny.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/handyman-vs-contractor-westchester/"
+to = "/blog/handyman-vs-contractor-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/holiday-lights-installation-westchester/"
+to = "/blog/holiday-lights-installation-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/ikea-furniture-assembly-westchester/"
+to = "/blog/ikea-furniture-assembly-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/index"
+to = "/blog/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/index/"
+to = "/blog/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/move-in-handyman-checklist-westchester/"
+to = "/blog/move-in-handyman-checklist-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/smart-home-installation-westchester/"
+to = "/blog/smart-home-installation-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/trampoline-assembly-westchester/"
+to = "/blog/trampoline-assembly-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/tv-mounting-cost-white-plains/"
+to = "/blog/tv-mounting-cost-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/briarcliff-manor-handyman"
+to = "/briarcliff-manor-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/briarcliff-manor-handyman/"
+to = "/briarcliff-manor-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/bronxville-handyman"
+to = "/bronxville-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/bronxville-handyman/"
+to = "/bronxville-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/carpentry-shelving"
+to = "/carpentry-shelving.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/carpentry-shelving/"
+to = "/carpentry-shelving.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/dobbs-ferry-handyman/"
+to = "/dobbs-ferry-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/door-repair-installation"
+to = "/door-repair-installation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/door-repair-installation/"
+to = "/door-repair-installation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-eastchester"
+to = "/drywall-repair-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-eastchester/"
+to = "/drywall-repair-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-mamaroneck"
+to = "/drywall-repair-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-mamaroneck/"
+to = "/drywall-repair-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-mount-vernon"
+to = "/drywall-repair-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-mount-vernon/"
+to = "/drywall-repair-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-new-rochelle"
+to = "/drywall-repair-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-new-rochelle/"
+to = "/drywall-repair-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-rye"
+to = "/drywall-repair-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-rye/"
+to = "/drywall-repair-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-scarsdale"
+to = "/drywall-repair-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-scarsdale/"
+to = "/drywall-repair-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-white-plains"
+to = "/drywall-repair-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-white-plains/"
+to = "/drywall-repair-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-yonkers"
+to = "/drywall-repair-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair-yonkers/"
+to = "/drywall-repair-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/drywall-repair/"
+to = "/drywall-repair.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/eastchester-handyman"
+to = "/eastchester-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/eastchester-handyman/"
+to = "/eastchester-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-eastchester"
+to = "/electrical-repairs-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-eastchester/"
+to = "/electrical-repairs-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-mamaroneck"
+to = "/electrical-repairs-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-mamaroneck/"
+to = "/electrical-repairs-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-mount-vernon"
+to = "/electrical-repairs-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-mount-vernon/"
+to = "/electrical-repairs-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-new-rochelle"
+to = "/electrical-repairs-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-new-rochelle/"
+to = "/electrical-repairs-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-rye"
+to = "/electrical-repairs-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-rye/"
+to = "/electrical-repairs-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-scarsdale"
+to = "/electrical-repairs-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-scarsdale/"
+to = "/electrical-repairs-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-white-plains"
+to = "/electrical-repairs-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-white-plains/"
+to = "/electrical-repairs-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-yonkers"
+to = "/electrical-repairs-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs-yonkers/"
+to = "/electrical-repairs-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs"
+to = "/electrical-repairs.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/electrical-repairs/"
+to = "/electrical-repairs.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/elmsford-handyman"
+to = "/elmsford-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/elmsford-handyman/"
+to = "/elmsford-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/flooring-installation"
+to = "/flooring-installation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/flooring-installation/"
+to = "/flooring-installation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-eastchester"
+to = "/furniture-assembly-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-eastchester/"
+to = "/furniture-assembly-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-mamaroneck"
+to = "/furniture-assembly-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-mamaroneck/"
+to = "/furniture-assembly-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-mount-vernon"
+to = "/furniture-assembly-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-mount-vernon/"
+to = "/furniture-assembly-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-new-rochelle"
+to = "/furniture-assembly-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-new-rochelle/"
+to = "/furniture-assembly-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-rye"
+to = "/furniture-assembly-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-rye/"
+to = "/furniture-assembly-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-scarsdale"
+to = "/furniture-assembly-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-scarsdale/"
+to = "/furniture-assembly-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-white-plains"
+to = "/furniture-assembly-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-white-plains/"
+to = "/furniture-assembly-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-yonkers"
+to = "/furniture-assembly-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly-yonkers/"
+to = "/furniture-assembly-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/furniture-assembly/"
+to = "/furniture-assembly.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/gallery/"
+to = "/gallery.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-eastchester"
+to = "/general-repairs-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-eastchester/"
+to = "/general-repairs-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-mamaroneck"
+to = "/general-repairs-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-mamaroneck/"
+to = "/general-repairs-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-mount-vernon"
+to = "/general-repairs-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-mount-vernon/"
+to = "/general-repairs-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-new-rochelle"
+to = "/general-repairs-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-new-rochelle/"
+to = "/general-repairs-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-rye"
+to = "/general-repairs-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-rye/"
+to = "/general-repairs-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-scarsdale"
+to = "/general-repairs-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-scarsdale/"
+to = "/general-repairs-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-white-plains"
+to = "/general-repairs-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-white-plains/"
+to = "/general-repairs-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-yonkers"
+to = "/general-repairs-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs-yonkers/"
+to = "/general-repairs-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs"
+to = "/general-repairs.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/general-repairs/"
+to = "/general-repairs.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/greenburgh-handyman/"
+to = "/greenburgh-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/handrail-installation"
+to = "/handrail-installation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/handrail-installation/"
+to = "/handrail-installation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/harrison-handyman/"
+to = "/harrison-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/hartsdale-handyman/"
+to = "/hartsdale-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-eastchester"
+to = "/interior-painting-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-eastchester/"
+to = "/interior-painting-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-mamaroneck"
+to = "/interior-painting-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-mamaroneck/"
+to = "/interior-painting-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-mount-vernon"
+to = "/interior-painting-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-mount-vernon/"
+to = "/interior-painting-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-new-rochelle"
+to = "/interior-painting-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-new-rochelle/"
+to = "/interior-painting-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-rye"
+to = "/interior-painting-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-rye/"
+to = "/interior-painting-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-scarsdale"
+to = "/interior-painting-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-scarsdale/"
+to = "/interior-painting-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-white-plains"
+to = "/interior-painting-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-white-plains/"
+to = "/interior-painting-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-yonkers"
+to = "/interior-painting-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting-yonkers/"
+to = "/interior-painting-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/interior-painting/"
+to = "/interior-painting.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/irvington-handyman"
+to = "/irvington-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/irvington-handyman/"
+to = "/irvington-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-eastchester"
+to = "/kitchen-remodeling-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-eastchester/"
+to = "/kitchen-remodeling-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-mamaroneck"
+to = "/kitchen-remodeling-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-mamaroneck/"
+to = "/kitchen-remodeling-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-mount-vernon"
+to = "/kitchen-remodeling-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-mount-vernon/"
+to = "/kitchen-remodeling-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-new-rochelle"
+to = "/kitchen-remodeling-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-new-rochelle/"
+to = "/kitchen-remodeling-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-rye"
+to = "/kitchen-remodeling-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-rye/"
+to = "/kitchen-remodeling-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-scarsdale"
+to = "/kitchen-remodeling-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-scarsdale/"
+to = "/kitchen-remodeling-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-white-plains"
+to = "/kitchen-remodeling-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-white-plains/"
+to = "/kitchen-remodeling-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-yonkers"
+to = "/kitchen-remodeling-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling-yonkers/"
+to = "/kitchen-remodeling-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling"
+to = "/kitchen-remodeling.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/kitchen-remodeling/"
+to = "/kitchen-remodeling.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/larchmont-handyman"
+to = "/larchmont-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/larchmont-handyman/"
+to = "/larchmont-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/lighting-fixture-installation"
+to = "/lighting-fixture-installation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/lighting-fixture-installation/"
+to = "/lighting-fixture-installation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/mamaroneck-handyman"
+to = "/mamaroneck-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/mamaroneck-handyman/"
+to = "/mamaroneck-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/mount-vernon-handyman"
+to = "/mount-vernon-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/mount-vernon-handyman/"
+to = "/mount-vernon-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/new-rochelle-handyman/"
+to = "/new-rochelle-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/ossining-handyman"
+to = "/ossining-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/ossining-handyman/"
+to = "/ossining-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/pelham-handyman"
+to = "/pelham-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/pelham-handyman/"
+to = "/pelham-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-eastchester"
+to = "/plumbing-repairs-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-eastchester/"
+to = "/plumbing-repairs-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-mamaroneck"
+to = "/plumbing-repairs-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-mamaroneck/"
+to = "/plumbing-repairs-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-mount-vernon"
+to = "/plumbing-repairs-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-mount-vernon/"
+to = "/plumbing-repairs-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-new-rochelle"
+to = "/plumbing-repairs-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-new-rochelle/"
+to = "/plumbing-repairs-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-rye"
+to = "/plumbing-repairs-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-rye/"
+to = "/plumbing-repairs-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-scarsdale"
+to = "/plumbing-repairs-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-scarsdale/"
+to = "/plumbing-repairs-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-white-plains"
+to = "/plumbing-repairs-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-white-plains/"
+to = "/plumbing-repairs-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-yonkers"
+to = "/plumbing-repairs-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs-yonkers/"
+to = "/plumbing-repairs-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/plumbing-repairs/"
+to = "/plumbing-repairs.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/privacy-policy/"
+to = "/privacy-policy.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/property-managers/"
+to = "/property-managers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/reviews"
+to = "/reviews.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/reviews/"
+to = "/reviews.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/rye-handyman"
+to = "/rye-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/rye-handyman/"
+to = "/rye-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/scarsdale-handyman/"
+to = "/scarsdale-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/schedule"
+to = "/schedule.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/schedule/"
+to = "/schedule.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/service-areas/"
+to = "/service-areas.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/services/"
+to = "/services.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/sleepy-hollow-handyman"
+to = "/sleepy-hollow-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/sleepy-hollow-handyman/"
+to = "/sleepy-hollow-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/smart-home-installation/"
+to = "/smart-home-installation.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tarrytown-handyman/"
+to = "/tarrytown-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/terms/"
+to = "/terms.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/timer"
+to = "/timer.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/timer/"
+to = "/timer.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/trampoline-outdoor-assembly"
+to = "/trampoline-outdoor-assembly.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/trampoline-outdoor-assembly/"
+to = "/trampoline-outdoor-assembly.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-eastchester"
+to = "/tv-mounting-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-eastchester/"
+to = "/tv-mounting-eastchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-mamaroneck"
+to = "/tv-mounting-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-mamaroneck/"
+to = "/tv-mounting-mamaroneck.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-mount-vernon"
+to = "/tv-mounting-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-mount-vernon/"
+to = "/tv-mounting-mount-vernon.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-new-rochelle"
+to = "/tv-mounting-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-new-rochelle/"
+to = "/tv-mounting-new-rochelle.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-rye"
+to = "/tv-mounting-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-rye/"
+to = "/tv-mounting-rye.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-scarsdale"
+to = "/tv-mounting-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-scarsdale/"
+to = "/tv-mounting-scarsdale.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-white-plains"
+to = "/tv-mounting-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-white-plains/"
+to = "/tv-mounting-white-plains.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-yonkers"
+to = "/tv-mounting-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting-yonkers/"
+to = "/tv-mounting-yonkers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/tv-mounting/"
+to = "/tv-mounting.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/valhalla-handyman"
+to = "/valhalla-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/valhalla-handyman/"
+to = "/valhalla-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/white-plains-handyman/"
+to = "/white-plains-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/yonkers-handyman/"
+to = "/yonkers-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/*"
+to = "/llms.txt"
+status = 200.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+Accept = "*text/markdown*"
+
+[redirects.headers]
+
+[[redirects]]
+from = "/gallery"
+to = "/gallery.html"
+status = 200.0
 force = false
 
 [redirects.query]
@@ -157,6 +3019,66 @@ force = false
 [[redirects]]
 from = "/blog"
 to = "/blog/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/"
+to = "/blog/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/book"
+to = "/book.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/book/"
+to = "/book.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/book-appointment"
+to = "/book.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/book-appointment/"
+to = "/book.html"
 status = 200.0
 force = false
 
@@ -181,6 +3103,66 @@ force = false
 [[redirects]]
 from = "/about"
 to = "/about.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/service-areas"
+to = "/service-areas.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/privacy"
+to = "/privacy-policy.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/privacy.html"
+to = "/privacy-policy.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/privacy-policy"
+to = "/privacy-policy.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/terms"
+to = "/terms.html"
 status = 200.0
 force = false
 
@@ -529,6 +3511,54 @@ force = false
 [[redirects]]
 from = "/blog/find-reliable-handyman-westchester"
 to = "/blog/find-reliable-handyman-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/deck-sealing-staining-westchester"
+to = "/blog/deck-sealing-staining-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/fall-gutter-cleaning-westchester"
+to = "/blog/fall-gutter-cleaning-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/holiday-lights-installation-westchester"
+to = "/blog/holiday-lights-installation-westchester.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/blog/move-in-handyman-checklist-westchester"
+to = "/blog/move-in-handyman-checklist-westchester.html"
 status = 200.0
 force = false
 
