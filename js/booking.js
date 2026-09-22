@@ -396,7 +396,6 @@ function renderConfirmationScreen(id, startIso) {
 
   const smsText = encodeURIComponent(`Hi David! I just booked an appointment on Here Handyman.\n\nBooking ID: ${id}\nName: ${custName}\nService: ${state.service.name}\nDate: ${dateFormatted} at ${state.slot.label}\nAddress: ${custAddr}`);
   const smsUrl = `sms:15163500801?body=${smsText}`;
-  const waUrl = `https://wa.me/15163500801?text=${smsText}`;
 
   const formatGCalDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
   const gcalStart = formatGCalDate(startDate);
@@ -427,7 +426,6 @@ function renderConfirmationScreen(id, startIso) {
         <p>🎉 We have reserved your time slot! Click below to send a text confirmation directly to David or add this to your calendar:</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;">
           <a href="${smsUrl}" class="btn-full-navy" style="max-width:280px;text-align:center;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:700;background:#0284c7;color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:6px;">💬 Text David via SMS</a>
-          <a href="${waUrl}" target="_blank" rel="noopener" class="btn-full-navy" style="max-width:280px;text-align:center;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:700;background:#25d366;color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:6px;">📲 Message on WhatsApp</a>
         </div>
         <a href="${gcalUrl}" target="_blank" rel="noopener" class="btn-full-navy" style="max-width:280px;text-align:center;text-decoration:none;padding:12px 16px;border-radius:8px;font-weight:600;margin-top:6px;">📅 Add to Google Calendar</a>
         <a href="https://g.page/r/CcY8nHWkiRZ0EAE" target="_blank" rel="noopener" class="btn-review" style="margin-top:4px;">⭐ Leave a Google Review</a>
