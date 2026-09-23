@@ -1409,13 +1409,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div>
               <label style="font-size:13px;font-weight:700;color:var(--navy);display:block;margin-bottom:6px;">Job Town / Location</label>
               <select id="fieldPhotoTown" class="form-control" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);font-size:14px;">
-                <option value="White Plains">White Plains, NY (41.033987, -73.762910)</option>
-                <option value="Scarsdale">Scarsdale, NY (41.005100, -73.784600)</option>
-                <option value="Harrison">Harrison, NY (41.045100, -73.714600)</option>
-                <option value="Rye">Rye, NY (40.980700, -73.683700)</option>
-                <option value="Yonkers">Yonkers, NY (40.931200, -73.898700)</option>
-                <option value="Mamaroneck">Mamaroneck, NY (40.948700, -73.734600)</option>
-                <option value="New Rochelle">New Rochelle, NY (40.911500, -73.782400)</option>
+                <option value="White Plains">White Plains, NY (10607 - Center)</option>
+                <option value="Scarsdale">Scarsdale, NY</option>
+                <option value="Harrison">Harrison, NY</option>
+                <option value="Rye">Rye, NY</option>
+                <option value="Rye Brook">Rye Brook, NY</option>
+                <option value="Armonk">Armonk, NY</option>
+                <option value="Chappaqua">Chappaqua, NY</option>
+                <option value="Greenwich">Greenwich, CT</option>
+                <option value="Bronxville">Bronxville, NY</option>
+                <option value="Larchmont">Larchmont, NY</option>
+                <option value="Mamaroneck">Mamaroneck, NY</option>
+                <option value="New Rochelle">New Rochelle, NY</option>
+                <option value="Eastchester">Eastchester, NY</option>
+                <option value="Yonkers">Yonkers, NY</option>
+                <option value="Tarrytown">Tarrytown, NY</option>
+                <option value="Dobbs Ferry">Dobbs Ferry, NY</option>
+                <option value="Mount Kisco">Mount Kisco, NY</option>
+                <option value="Bedford">Bedford, NY</option>
               </select>
               <button type="button" onclick="window.detectCurrentGpsLocation()" style="background:none;border:none;color:#2563eb;font-weight:700;font-size:12px;cursor:pointer;margin-top:6px;display:block;">
                 📍 Detect My Current Field GPS
@@ -2866,6 +2877,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     var defaultPhotos = [
       {
+        id: "photo-cabinet-after",
+        title: "Cabinet Back Wall Repair & Plywood Closure",
+        stage: "after",
+        town: "White Plains",
+        lat: 41.033987,
+        lon: -73.762910,
+        photo_url: "/assets/images/cabinet-wall-repair-after.jpg",
+        created_at: "2026-09-22"
+      },
+      {
+        id: "photo-cabinet-before",
+        title: "Cabinet Back Wall Cutout & Stud Exposure",
+        stage: "before",
+        town: "White Plains",
+        lat: 41.033987,
+        lon: -73.762910,
+        photo_url: "/assets/images/cabinet-wall-repair-before.jpg",
+        created_at: "2026-09-22"
+      },
+      {
         id: "photo-1",
         title: "75-inch TV Mounting & Cable Concealment",
         stage: "after",
@@ -3015,9 +3046,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "Scarsdale": { lat: 41.005100, lon: -73.784600 },
         "Harrison": { lat: 41.045100, lon: -73.714600 },
         "Rye": { lat: 40.980700, lon: -73.683700 },
-        "Yonkers": { lat: 40.931200, lon: -73.898700 },
+        "Rye Brook": { lat: 41.018400, lon: -73.693700 },
+        "Armonk": { lat: 41.126500, lon: -73.713500 },
+        "Chappaqua": { lat: 41.159800, lon: -73.764900 },
+        "Greenwich": { lat: 41.026200, lon: -73.628200 },
+        "Bronxville": { lat: 40.938200, lon: -73.832100 },
+        "Larchmont": { lat: 40.927900, lon: -73.750700 },
         "Mamaroneck": { lat: 40.948700, lon: -73.734600 },
-        "New Rochelle": { lat: 40.911500, lon: -73.782400 }
+        "New Rochelle": { lat: 40.911500, lon: -73.782400 },
+        "Eastchester": { lat: 40.957600, lon: -73.807900 },
+        "Yonkers": { lat: 40.931200, lon: -73.898700 },
+        "Tarrytown": { lat: 41.076200, lon: -73.858700 },
+        "Dobbs Ferry": { lat: 41.014300, lon: -73.872400 },
+        "Mount Kisco": { lat: 41.204300, lon: -73.727400 },
+        "Bedford": { lat: 41.204300, lon: -73.643700 }
       }[town] || { lat: 41.033987, lon: -73.762910 };
 
       var newPhoto = {
