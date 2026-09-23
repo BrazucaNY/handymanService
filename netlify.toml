@@ -2,9 +2,9 @@
   publish = "."
   functions = "netlify/functions"
 
-[[edge_functions]]
-  function = "content-negotiation"
-  path = "/*"
+# [[edge_functions]]
+#   function = "content-negotiation"
+#   path = "/*"
 
 [build.environment]
   NODE_VERSION = "18"
