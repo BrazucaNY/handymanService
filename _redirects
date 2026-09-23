@@ -32,6 +32,11 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /invoice/                  /invoice.html                   200
 /invoices                  /invoice.html                   200
 /invoices/                 /invoice.html                   200
+
+# Explicit Clean URL Rewrites for All Service, Town & Blog Pages
+/about                                       /about.html                        200
+/about/                                      /about.html                        200
+/ardsley-handyman                            /ardsley-handyman.html             200
 /ardsley-handyman/                           /ardsley-handyman.html             200
 /bathroom-renovation                         /bathroom-renovation.html          200
 /bathroom-renovation/                        /bathroom-renovation.html          200
