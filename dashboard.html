@@ -2168,7 +2168,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <td>${statusBadge}</td>
             <td style="font-weight:700;color:var(--navy);">$${amount.toFixed(2)}</td>
             <td style="text-align:right;">
-              <a href="/invoice.html?id=${inv.id}" target="_blank" class="btn-secondary" style="font-size:12px;padding:4px 10px;text-decoration:none;display:inline-block;">🖨️ View/Print</a>
+              <button onclick="window.openInvoiceView('${inv.id}')" class="btn-secondary" style="font-size:12px;padding:4px 10px;cursor:pointer;">🖨️ View/Print</button>
               ${inv.status !== 'paid' ? `<button onclick="window.markInvoicePaid('${inv.id}')" class="btn-action" style="font-size:12px;padding:4px 10px;background:#16a34a;color:#fff;margin-left:4px;">Mark Paid</button>` : ''}
               ${inv.status !== 'sent' && inv.status !== 'paid' ? `<button onclick="window.sendInvoiceEmail('${inv.id}')" class="btn-secondary" style="font-size:12px;padding:4px 10px;margin-left:4px;">📤 Email</button>` : ''}
             </td>
@@ -2189,6 +2189,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       if (dEl) dEl.textContent = drafts;
       if (sEl) sEl.textContent = sent;
     }
+
+    window.openInvoiceView = function(invId) {
+      var inv = localInvoices.find(function(x) { return String(x.id) === String(invId) || String(x.number) === String(invId); });
+      if (inv) {
+        try {
+          sessionStorage.setItem("preview_invoice_" + (inv.id || inv.number), JSON.stringify(inv));
+        } catch(e) {}
+      }
+      var targetUrl = "/invoice.html?" + (inv && inv.id ? "id=" + inv.id : "number=" + invId);
+      window.open(targetUrl, "_blank");
+    };
 
     window.markInvoicePaid = async function(invId) {
       if (!confirm("Mark this invoice as PAID?")) return;

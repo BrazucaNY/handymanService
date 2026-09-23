@@ -229,18 +229,35 @@
       return;
     }
 
-    let filter = invoiceId ? `id=eq.${invoiceId}` : `number=eq.${invoiceNumber}`;
+    // Check if staff token exists in session
+    let authToken = SUPABASE_KEY;
+    try {
+      const raw = localStorage.getItem("hh_system_session") || sessionStorage.getItem("hh_system_session");
+      if (raw) {
+        const sess = JSON.parse(raw);
+        if (sess && sess.access_token) authToken = sess.access_token;
+      }
+    } catch (e) {}
 
     fetch(`${SUPABASE_URL}/rest/v1/invoices?${filter}&select=*,customers(*),invoice_items(*)`, {
       headers: {
         "apikey": SUPABASE_KEY,
-        "Authorization": `Bearer ${SUPABASE_KEY}`
+        "Authorization": `Bearer ${authToken}`
       }
     })
     .then(res => res.json())
     .then(data => {
       if (!data || data.length === 0) {
-        document.getElementById("invoiceContainer").innerHTML = '<div style="color:red;text-align:center;">Invoice not found or access restricted.</div>';
+        // Try fallback preview from sessionStorage
+        try {
+          const draftRaw = sessionStorage.getItem("preview_invoice_" + (invoiceId || invoiceNumber));
+          if (draftRaw) {
+            renderInvoice(JSON.parse(draftRaw));
+            return;
+          }
+        } catch (e) {}
+
+        document.getElementById("invoiceContainer").innerHTML = '<div style="color:#dc2626;text-align:center;padding:40px;font-weight:600;">Invoice not found or restricted.<br><span style="font-size:13px;color:#64748b;font-weight:400;">If this invoice is in draft status, please make sure you are signed into your dashboard.</span></div>';
         return;
       }
       renderInvoice(data[0]);
