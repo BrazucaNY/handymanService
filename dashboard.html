@@ -1519,6 +1519,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     function saveContacts(list) {
       try {
+        window.contacts = list;
         localStorage.setItem(STORAGE_CONTACTS_KEY, JSON.stringify(list));
       } catch (e) {
         console.error("Error saving local contacts:", e);
@@ -1526,6 +1527,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     var contacts = loadContacts();
+    window.contacts = contacts;
 
     // Render Contacts Table
     function renderContacts(list) {
@@ -2251,8 +2253,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     function populateCustomerDropdown() {
       if (!custSelect) return;
       custSelect.innerHTML = '<option value="">-- Choose Customer --</option>';
-      if (window.contacts && Array.isArray(window.contacts)) {
-        window.contacts.forEach(function(c) {
+      var list = (window.contacts && Array.isArray(window.contacts)) ? window.contacts : (typeof contacts !== 'undefined' ? contacts : []);
+      if (list && list.length > 0) {
+        list.forEach(function(c) {
           var opt = document.createElement('option');
           opt.value = c.id || c.name;
           opt.textContent = c.name + (c.town ? ' (' + c.town + ')' : '');
