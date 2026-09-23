@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="robots" content="noindex, nofollow"/>
-  <title>Invoice | Here Handyman</title>
+  <title>View Invoice | Here Handyman</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
   <style>
     @font-face { font-family: "Bebas Neue"; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/bebas-neue.woff2") format("woff2"); }
@@ -12,124 +12,234 @@
 
     :root {
       --navy: #071828;
+      --navy-light: #0e2a47;
       --gold: #eab308;
       --text: #1e293b;
       --border: #cbd5e1;
+      --bg: #f8fafc;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'DM Sans', sans-serif;
-      background: #f8fafc;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.5;
-      padding: 40px 20px;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 48px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    }
-
-    /* Actions Bar */
-    .actions-bar {
-      max-width: 800px;
-      margin: 0 auto 20px auto;
+    /* Skynova Top Header Navigation */
+    .skynova-top-bar {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 8px 24px;
+      font-size: 13px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid #1e293b;
     }
-    .btn {
-      padding: 10px 20px;
+    .skynova-top-bar a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 16px;
+    }
+    .skynova-top-bar a:hover { color: #fff; text-decoration: underline; }
+
+    .skynova-nav-bar {
+      background: #1e293b;
+      padding: 12px 24px;
+      display: flex;
+      gap: 20px;
+      border-bottom: 2px solid var(--gold);
+    }
+    .skynova-nav-bar a {
+      color: #f8fafc;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .skynova-nav-bar a.active, .skynova-nav-bar a:hover {
+      color: var(--gold);
+    }
+
+    /* Main Container */
+    .page-wrapper {
+      max-width: 900px;
+      margin: 24px auto 40px auto;
+      padding: 0 16px;
+    }
+
+    /* Page Title & Status Header */
+    .view-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .view-title-bar h2 {
+      font-size: 22px;
       font-weight: 700;
+      color: var(--navy);
+    }
+
+    /* Skynova Action Bar */
+    .skynova-actions-bar {
+      background: #ffffff;
+      border: 1px solid var(--border);
       border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      font-weight: 700;
+      border-radius: 6px;
       cursor: pointer;
       text-decoration: none;
-      font-size: 14px;
-      border: none;
+      font-size: 13.5px;
+      border: 1px solid transparent;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      transition: all 0.15s ease;
     }
-    .btn-primary { background: var(--gold); color: var(--navy); }
-    .btn-secondary { background: #e2e8f0; color: var(--navy); }
+    .btn-primary { background: var(--gold); color: var(--navy); border-color: #d97706; }
+    .btn-primary:hover { background: #d97706; color: #fff; }
+    .btn-secondary { background: #f1f5f9; color: var(--navy); border-color: #cbd5e1; }
+    .btn-secondary:hover { background: #e2e8f0; }
+    .btn-success { background: #16a34a; color: #fff; }
+    .btn-success:hover { background: #15803d; }
+    .btn-info { background: #2563eb; color: #fff; }
+    .btn-info:hover { background: #1d4ed8; }
+    .btn-warning { background: #d97706; color: #fff; }
 
-    /* Header */
-    .header {
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.15);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      z-index: 10;
+      overflow: hidden;
+    }
+    .dropdown-content a, .dropdown-content button {
+      color: var(--text);
+      padding: 10px 14px;
+      text-decoration: none;
+      display: block;
+      font-size: 13.5px;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .dropdown-content a:hover, .dropdown-content button:hover {
+      background-color: #f1f5f9;
+    }
+    .dropdown:hover .dropdown-content { display: block; }
+
+    /* Printable Invoice Sheet */
+    .invoice-sheet {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 48px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .header-grid {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       border-bottom: 2px solid var(--navy);
       padding-bottom: 24px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
-    .brand-info h1 {
+    .company-details h1 {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 32px;
       color: var(--navy);
       letter-spacing: 1px;
     }
-    .brand-info h1 span { color: var(--gold); }
-    .brand-info p {
+    .company-details h1 span { color: var(--gold); }
+    .company-details p {
       font-size: 13.5px;
-      color: #64748b;
+      color: #475569;
       margin-top: 4px;
+      line-height: 1.4;
     }
 
-    .invoice-title-box {
+    .meta-details {
       text-align: right;
     }
-    .invoice-title-box h2 {
+    .meta-details h2 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 42px;
+      font-size: 38px;
       color: var(--navy);
       letter-spacing: 1px;
     }
-    .inv-meta {
+    .meta-row {
       font-size: 14px;
-      color: #475569;
-      margin-top: 4px;
+      color: #334155;
+      margin-top: 3px;
     }
 
-    /* Customer Info */
-    .info-grid {
+    .customer-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-bottom: 36px;
+      gap: 24px;
+      margin-bottom: 32px;
+      background: #f8fafc;
+      padding: 16px 20px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
     }
-    .info-block h3 {
-      font-size: 12px;
+    .cust-block h3 {
+      font-size: 11px;
       font-weight: 700;
       color: #64748b;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
     }
-    .info-block p {
-      font-size: 15px;
+    .cust-block p {
+      font-size: 14.5px;
       font-weight: 600;
       color: var(--navy);
+      line-height: 1.4;
     }
-    .info-block p.sub {
+    .cust-block p.sub {
       font-weight: 400;
       color: #475569;
     }
 
-    /* Items Table */
-    table.items-table {
+    /* Skynova 5-Column Table */
+    table.skynova-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
-    table.items-table th {
+    table.skynova-table th {
       background: #f1f5f9;
-      padding: 12px 16px;
+      padding: 10px 14px;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -137,20 +247,37 @@
       border-bottom: 2px solid var(--border);
       text-align: left;
     }
-    table.items-table th.num-col, table.items-table td.num-col {
+    table.skynova-table th.num-col, table.skynova-table td.num-col {
       text-align: right;
     }
-    table.items-table td {
-      padding: 14px 16px;
+    table.skynova-table td {
+      padding: 12px 14px;
       border-bottom: 1px solid #e2e8f0;
-      font-size: 14.5px;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .item-type-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #e2e8f0;
+      color: #334155;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .task-bullet {
+      color: #475569;
+      font-size: 13px;
+      margin-top: 4px;
+      padding-left: 8px;
+      border-left: 2px solid var(--gold);
     }
 
-    /* Summary Box */
-    .summary-section {
+    /* Summary Section */
+    .summary-grid {
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 36px;
+      margin-bottom: 28px;
     }
     .summary-box {
       width: 280px;
@@ -158,62 +285,218 @@
     .summary-row {
       display: flex;
       justify-content: space-between;
-      padding: 8px 0;
-      font-size: 14.5px;
+      padding: 6px 0;
+      font-size: 14px;
       color: #475569;
     }
     .summary-row.total {
       border-top: 2px solid var(--navy);
       border-bottom: 2px solid var(--navy);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--navy);
-      padding: 12px 0;
+      padding: 10px 0;
       margin-top: 4px;
     }
 
-    /* Status Banner */
+    /* Notes Box */
+    .notes-box {
+      background: #fffbe6;
+      border: 1px solid #ffe58f;
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-bottom: 28px;
+      font-size: 13.5px;
+      color: #595959;
+    }
+    .notes-box strong {
+      color: #1f1f1f;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Status Badges */
     .status-badge {
       display: inline-block;
-      padding: 6px 14px;
-      border-radius: 20px;
+      padding: 4px 12px;
+      border-radius: 16px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       text-transform: uppercase;
     }
     .status-paid { background: #dcfce7; color: #15803d; }
     .status-sent { background: #dbeafe; color: #1e40af; }
-    .status-draft { background: #fef3c7; color: #b45309; }
+    .status-partial { background: #fef3c7; color: #b45309; }
+    .status-draft { background: #e2e8f0; color: #475569; }
 
-    /* Footer */
     .footer {
       border-top: 1px solid #e2e8f0;
-      padding-top: 24px;
+      padding-top: 20px;
       text-align: center;
-      font-size: 13px;
+      font-size: 12.5px;
       color: #64748b;
+    }
+
+    /* Edit Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 650px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .modal-card h3 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: var(--navy);
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #475569;
+    }
+    .form-control {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    /* Notification Toast */
+    #toast {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 2000;
     }
 
     /* Print Styles */
     @media print {
       body { background: #fff; padding: 0; }
-      .actions-bar { display: none !important; }
-      .container { border: none; box-shadow: none; padding: 0; }
+      .skynova-top-bar, .skynova-nav-bar, .skynova-actions-bar, .view-title-bar, .modal-overlay, #toast { display: none !important; }
+      .page-wrapper { max-width: 100%; margin: 0; padding: 0; }
+      .invoice-sheet { border: none; box-shadow: none; padding: 0; }
     }
   </style>
 </head>
 <body>
 
-  <div class="actions-bar">
-    <a href="/dashboard" class="btn btn-secondary">&larr; Back to Dashboard</a>
+  <!-- Skynova Header Navigation -->
+  <div class="skynova-top-bar">
+    <div id="userEmailDisplay">davi65@gmail.com</div>
     <div>
-      <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+      <a href="/dashboard">Help</a>
+      <a href="/dashboard">Settings</a>
+      <a href="#" onclick="logout(); return false;">Log out</a>
     </div>
   </div>
 
-  <div class="container" id="invoiceContainer">
-    <div style="text-align:center;padding:40px;" id="loadingState">Loading Invoice Details...</div>
+  <div class="skynova-nav-bar">
+    <a href="/dashboard">Home</a>
+    <a href="/dashboard#invoices" class="active">Invoices</a>
+    <a href="/dashboard#payments">Online Payments</a>
+    <a href="/dashboard#reports">Reports</a>
   </div>
+
+  <div class="page-wrapper">
+    <!-- View Invoice Header Title -->
+    <div class="view-title-bar">
+      <h2 id="viewInvoiceTitle">View Invoice (Loading...)</h2>
+      <a href="/dashboard#invoices" class="btn btn-secondary">&larr; Back to Invoices</a>
+    </div>
+
+    <!-- Skynova Interactive Actions Bar -->
+    <div class="skynova-actions-bar">
+      <div class="btn-group">
+        <div class="dropdown">
+          <button class="btn btn-secondary">More Actions... &#9660;</button>
+          <div class="dropdown-content">
+            <button onclick="window.print()">🖨️ Print / Save as PDF</button>
+            <button onclick="openEditModal()">✏️ Edit Invoice</button>
+            <button onclick="sendToCustomer()">✉️ Send to Customer</button>
+            <button onclick="markStatus('paid')">✅ Mark as Paid</button>
+            <button onclick="markStatus('partial')">⏳ Mark as Partial</button>
+            <button onclick="markStatus('sent')">📨 Mark as Sent</button>
+            <button onclick="markStatus('draft')">📝 Mark as Draft</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+        <button class="btn btn-secondary" onclick="openEditModal()">✏️ Edit</button>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-info" onclick="sendToCustomer()">✉️ Sent</button>
+        <button class="btn btn-success" onclick="markStatus('paid')">💵 Paid</button>
+        <button class="btn btn-warning" onclick="markStatus('partial')">⌛ Partial</button>
+      </div>
+    </div>
+
+    <!-- Invoice Printable Sheet -->
+    <div class="invoice-sheet" id="invoiceSheet">
+      <div style="text-align:center;padding:40px;color:#64748b;" id="loadingState">Loading Invoice Details...</div>
+    </div>
+  </div>
+
+  <!-- Edit Invoice Modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal-card">
+      <h3>Edit Invoice <span id="editModalInvNum"></span></h3>
+      <div class="form-group">
+        <label>Invoice Date</label>
+        <input type="date" id="editDate" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label>Due Date</label>
+        <input type="date" id="editDueDate" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select id="editStatus" class="form-control">
+          <option value="draft">Draft</option>
+          <option value="sent">Sent</option>
+          <option value="partial">Partial</option>
+          <option value="paid">Paid</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Technician Notes</label>
+        <textarea id="editNotes" class="form-control" rows="3" placeholder="Installed pictures, repaired bathroom drawer..."></textarea>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+        <button class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveInvoiceEdits()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast">Status Updated Successfully</div>
 
   <script>
   (function () {
@@ -224,106 +507,150 @@
     const invoiceId = params.get("id");
     const invoiceNumber = params.get("number");
 
+    let currentInvoice = null;
+
     if (!invoiceId && !invoiceNumber) {
-      document.getElementById("invoiceContainer").innerHTML = '<div style="color:red;text-align:center;">Error: No Invoice ID specified.</div>';
+      document.getElementById("invoiceSheet").innerHTML = '<div style="color:red;text-align:center;">Error: No Invoice ID specified.</div>';
       return;
     }
 
-    // Check if staff token exists in session
+    // Auth Token Check
     let authToken = SUPABASE_KEY;
     try {
       const raw = localStorage.getItem("hh_system_session") || sessionStorage.getItem("hh_system_session");
       if (raw) {
         const sess = JSON.parse(raw);
         if (sess && sess.access_token) authToken = sess.access_token;
+        if (sess && sess.user && sess.user.email) {
+          document.getElementById("userEmailDisplay").innerText = sess.user.email;
+        }
       }
     } catch (e) {}
 
-    fetch(`${SUPABASE_URL}/rest/v1/invoices?${filter}&select=*,customers(*),invoice_items(*)`, {
-      headers: {
-        "apikey": SUPABASE_KEY,
-        "Authorization": `Bearer ${authToken}`
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (!data || data.length === 0) {
-        // Try fallback preview from sessionStorage
-        try {
-          const draftRaw = sessionStorage.getItem("preview_invoice_" + (invoiceId || invoiceNumber));
-          if (draftRaw) {
-            renderInvoice(JSON.parse(draftRaw));
-            return;
-          }
-        } catch (e) {}
+    let filter = invoiceId ? `id=eq.${invoiceId}` : `number=eq.${invoiceNumber}`;
 
-        document.getElementById("invoiceContainer").innerHTML = '<div style="color:#dc2626;text-align:center;padding:40px;font-weight:600;">Invoice not found or restricted.<br><span style="font-size:13px;color:#64748b;font-weight:400;">If this invoice is in draft status, please make sure you are signed into your dashboard.</span></div>';
-        return;
-      }
-      renderInvoice(data[0]);
-    })
-    .catch(err => {
-      document.getElementById("invoiceContainer").innerHTML = `<div style="color:red;text-align:center;">Error loading invoice: ${err.message}</div>`;
-    });
+    loadInvoice();
+
+    function loadInvoice() {
+      fetch(`${SUPABASE_URL}/rest/v1/invoices?${filter}&select=*,customers(*),invoice_items(*)`, {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${authToken}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (!data || data.length === 0) {
+          // Try fallback preview from sessionStorage
+          try {
+            const draftRaw = sessionStorage.getItem("preview_invoice_" + (invoiceId || invoiceNumber));
+            if (draftRaw) {
+              currentInvoice = JSON.parse(draftRaw);
+              renderInvoice(currentInvoice);
+              return;
+            }
+          } catch (e) {}
+
+          document.getElementById("invoiceSheet").innerHTML = '<div style="color:#dc2626;text-align:center;padding:40px;font-weight:600;">Invoice not found or access restricted.<br><span style="font-size:13px;color:#64748b;font-weight:400;">Make sure you are logged into your dashboard.</span></div>';
+          return;
+        }
+        currentInvoice = data[0];
+        renderInvoice(currentInvoice);
+      })
+      .catch(err => {
+        document.getElementById("invoiceSheet").innerHTML = `<div style="color:red;text-align:center;">Error loading invoice: ${err.message}</div>`;
+      });
+    }
 
     function renderInvoice(inv) {
       const cust = inv.customers || {};
       const items = inv.invoice_items || [];
-      const statusClass = inv.status === 'paid' ? 'status-paid' : (inv.status === 'sent' ? 'status-sent' : 'status-draft');
+      const statusClass = inv.status === 'paid' ? 'status-paid' : (inv.status === 'sent' ? 'status-sent' : (inv.status === 'partial' ? 'status-partial' : 'status-draft'));
+      const statusLabel = inv.status ? (inv.status.charAt(0).toUpperCase() + inv.status.slice(1)) : 'Draft';
 
-      let itemsHtml = items.map(item => `
-        <tr>
-          <td>${escapeHtml(item.description)}</td>
-          <td class="num-col">${parseFloat(item.qty).toFixed(2)}</td>
-          <td class="num-col">$${parseFloat(item.unit_price).toFixed(2)}</td>
-          <td class="num-col" style="font-weight:600;">$${(parseFloat(item.qty) * parseFloat(item.unit_price)).toFixed(2)}</td>
-        </tr>
-      `).join('');
+      document.getElementById("viewInvoiceTitle").innerHTML = `View Invoice (${inv.number}:${statusLabel})`;
+
+      // Render 5-Column Skynova Items Table
+      let itemsHtml = items.map(item => {
+        const itemType = item.item_type || (item.unit_price < 0 || item.description.toLowerCase().includes('discount') ? 'Discount' : 'Service');
+        const unitPrice = parseFloat(item.unit_price || 0);
+        const qty = parseFloat(item.qty || 0);
+        const amount = unitPrice * qty;
+
+        // Extract sub-tasks if description has newline or semicolon
+        let descLines = item.description.split(/;\s*|\n+/);
+        let mainDesc = escapeHtml(descLines[0]);
+        let subTasks = descLines.slice(1).map(l => `<div class="task-bullet">• ${escapeHtml(l)}</div>`).join('');
+
+        const formattedPrice = unitPrice < 0 ? `-$${Math.abs(unitPrice).toFixed(2)}` : `$${unitPrice.toFixed(2)}`;
+        const formattedAmount = amount < 0 ? `-$${Math.abs(amount).toFixed(2)}` : `$${amount.toFixed(2)}`;
+
+        return `
+          <tr>
+            <td><span class="item-type-badge">${escapeHtml(itemType)}</span></td>
+            <td>
+              <strong>${mainDesc}</strong>
+              ${subTasks}
+            </td>
+            <td class="num-col">${formattedPrice}</td>
+            <td class="num-col">${qty.toFixed(2)}</td>
+            <td class="num-col" style="font-weight:600;">${formattedAmount}</td>
+          </tr>
+        `;
+      }).join('');
 
       if (items.length === 0) {
-        itemsHtml = '<tr><td colspan="4" style="text-align:center;color:#94a3b8;">No line items listed.</td></tr>';
+        itemsHtml = '<tr><td colspan="5" style="text-align:center;color:#94a3b8;">No line items listed.</td></tr>';
       }
 
+      // Notes block
+      const notesBlock = inv.notes ? `
+        <div class="notes-box">
+          <strong>NOTES:</strong> ${escapeHtml(inv.notes)}
+        </div>
+      ` : '';
+
       const html = `
-        <div class="header">
-          <div class="brand-info">
+        <div class="header-grid">
+          <div class="company-details">
             <h1>HERE <span>HANDYMAN</span></h1>
             <p><strong>Here Handyman Services</strong><br>500 Pondside Dr, White Plains, NY 10607<br>Phone: (516) 350-0801 &bull; info@herehandyman.com</p>
           </div>
-          <div class="invoice-title-box">
+          <div class="meta-details">
             <h2>INVOICE</h2>
-            <div class="inv-meta"><strong>Invoice #:</strong> ${inv.number}</div>
-            <div class="inv-meta"><strong>Date:</strong> ${inv.created_at ? inv.created_at.split('T')[0] : ''}</div>
-            <div class="inv-meta"><strong>Due Date:</strong> ${inv.due_date || 'Upon Receipt'}</div>
-            <div style="margin-top:10px;">
-              <span class="status-badge ${statusClass}">${inv.status}</span>
+            <div class="meta-row"><strong>Invoice #:</strong> ${inv.number}</div>
+            <div class="meta-row"><strong>Date:</strong> ${inv.created_at ? inv.created_at.split('T')[0] : ''}</div>
+            <div class="meta-row"><strong>Due Date:</strong> ${inv.due_date || 'Upon Receipt'}</div>
+            <div style="margin-top:8px;">
+              <span class="status-badge ${statusClass}">${statusLabel}</span>
             </div>
           </div>
         </div>
 
-        <div class="info-grid">
-          <div class="info-block">
+        <div class="customer-grid">
+          <div class="cust-block">
             <h3>Billed To</h3>
             <p>${escapeHtml(cust.name || 'Valued Customer')}</p>
             <p class="sub">${escapeHtml(cust.address || '')} ${escapeHtml(cust.apt || '')}</p>
             <p class="sub">${escapeHtml(cust.town || '')}</p>
-            <p class="sub">${escapeHtml(cust.phone || '')} ${escapeHtml(cust.email || '')}</p>
+            <p class="sub">${escapeHtml(cust.phone || '')} ${cust.email ? '&bull; ' + escapeHtml(cust.email) : ''}</p>
           </div>
-          <div class="info-block" style="text-align:right;">
+          <div class="cust-block" style="text-align:right;">
             <h3>Payment Details</h3>
-            <p style="font-size:14px;font-weight:400;">Zelle / Venmo / Check</p>
+            <p style="font-weight:400;font-size:14px;">Zelle / Venmo / Check / Card</p>
             <p class="sub">Payable to: <strong>Here Handyman Services</strong></p>
             <p class="sub">Phone: (516) 350-0801</p>
           </div>
         </div>
 
-        <table class="items-table">
+        <table class="skynova-table">
           <thead>
             <tr>
+              <th style="width:110px;">Item</th>
               <th>Description</th>
-              <th class="num-col">Qty</th>
-              <th class="num-col">Unit Price</th>
-              <th class="num-col">Amount</th>
+              <th class="num-col" style="width:110px;">Unit Price</th>
+              <th class="num-col" style="width:90px;">Quantity</th>
+              <th class="num-col" style="width:110px;">Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -331,7 +658,9 @@
           </tbody>
         </table>
 
-        <div class="summary-section">
+        ${notesBlock}
+
+        <div class="summary-grid">
           <div class="summary-box">
             <div class="summary-row">
               <span>Subtotal:</span>
@@ -353,8 +682,120 @@
         </div>
       `;
 
-      document.getElementById("invoiceContainer").innerHTML = html;
+      document.getElementById("invoiceSheet").innerHTML = html;
       document.title = `Invoice ${inv.number} - Here Handyman`;
+    }
+
+    // Status Action Handlers
+    window.markStatus = function (newStatus) {
+      if (!currentInvoice || !currentInvoice.id) {
+        showToast("Cannot update: Invoice not loaded.");
+        return;
+      }
+
+      const updateData = { status: newStatus };
+      if (newStatus === 'paid') {
+        updateData.paid_at = new Date().toISOString();
+      }
+
+      fetch(`${SUPABASE_URL}/rest/v1/invoices?id=eq.${currentInvoice.id}`, {
+        method: "PATCH",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=representation"
+        },
+        body: JSON.stringify(updateData)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          currentInvoice.status = newStatus;
+          renderInvoice(currentInvoice);
+          showToast(`Invoice marked as ${newStatus.toUpperCase()}!`);
+        } else {
+          showToast("Status updated.");
+          loadInvoice();
+        }
+      })
+      .catch(err => {
+        showToast(`Error updating status: ${err.message}`);
+      });
+    };
+
+    // Send to Customer Handler
+    window.sendToCustomer = function () {
+      if (!currentInvoice) return;
+      const cust = currentInvoice.customers || {};
+
+      markStatus('sent');
+
+      if (cust.email) {
+        const subject = encodeURIComponent(`Invoice ${currentInvoice.number} from Here Handyman Services`);
+        const invUrl = `https://www.herehandyman.com/invoice.html?number=${currentInvoice.number}`;
+        const body = encodeURIComponent(`Hi ${cust.name || 'Valued Customer'},\n\nPlease review your invoice #${currentInvoice.number} for recent handyman services:\n\n${invUrl}\n\nTotal Amount: $${parseFloat(currentInvoice.total || 0).toFixed(2)}\n\nThank you for choosing Here Handyman Services!\n(516) 350-0801`);
+        
+        window.location.href = `mailto:${cust.email}?subject=${subject}&body=${body}`;
+        showToast(`Invoice marked as SENT & email client launched!`);
+      } else {
+        showToast(`Invoice marked as SENT! (No customer email on file)`);
+      }
+    };
+
+    // Modal Handlers
+    window.openEditModal = function() {
+      if (!currentInvoice) return;
+      document.getElementById("editModalInvNum").innerText = `#${currentInvoice.number}`;
+      document.getElementById("editDate").value = currentInvoice.created_at ? currentInvoice.created_at.split('T')[0] : '';
+      document.getElementById("editDueDate").value = currentInvoice.due_date || '';
+      document.getElementById("editStatus").value = currentInvoice.status || 'draft';
+      document.getElementById("editNotes").value = currentInvoice.notes || '';
+      document.getElementById("editModal").style.display = "flex";
+    };
+
+    window.closeEditModal = function() {
+      document.getElementById("editModal").style.display = "none";
+    };
+
+    window.saveInvoiceEdits = function() {
+      if (!currentInvoice || !currentInvoice.id) return;
+      const updatedDueDate = document.getElementById("editDueDate").value;
+      const updatedStatus = document.getElementById("editStatus").value;
+      const updatedNotes = document.getElementById("editNotes").value;
+
+      fetch(`${SUPABASE_URL}/rest/v1/invoices?id=eq.${currentInvoice.id}`, {
+        method: "PATCH",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${authToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          due_date: updatedDueDate,
+          status: updatedStatus,
+          notes: updatedNotes
+        })
+      })
+      .then(() => {
+        closeEditModal();
+        showToast("Invoice updated successfully!");
+        loadInvoice();
+      })
+      .catch(err => alert("Error saving edits: " + err.message));
+    };
+
+    window.logout = function() {
+      localStorage.removeItem("hh_system_session");
+      sessionStorage.removeItem("hh_system_session");
+      window.location.href = "/login";
+    };
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.innerText = msg;
+      toast.style.display = "block";
+      setTimeout(() => { toast.style.display = "none"; }, 3500);
     }
 
     function escapeHtml(str) {
