@@ -177,7 +177,30 @@ CREATE POLICY customer_public_customers_view ON public.customers FOR SELECT
   ));
 
 -- ----------------------------------------------------------
+-- 10. PROJECT PHOTOS TABLE (FIELD UPLOADS & GEOTAGGER)
+-- ----------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.project_photos (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  category TEXT DEFAULT 'before_after' CHECK (category IN ('before','after','before_after','showcase')),
+  town TEXT NOT NULL DEFAULT 'White Plains',
+  latitude NUMERIC(10,6),
+  longitude NUMERIC(10,6),
+  photo_url TEXT NOT NULL,
+  geotagged BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.project_photos ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS project_photos_staff ON public.project_photos;
+CREATE POLICY project_photos_staff ON public.project_photos FOR ALL USING (public.is_staff()) WITH CHECK (public.is_staff());
+
+DROP POLICY IF EXISTS project_photos_public_read ON public.project_photos;
+CREATE POLICY project_photos_public_read ON public.project_photos FOR SELECT USING (true);
+
+-- ----------------------------------------------------------
 -- NOTE FOR INITIAL ADMIN SETUP:
 -- Run this in Supabase SQL editor after creating your user in Auth -> Users:
 -- INSERT INTO public.staff (user_id, role) VALUES ('<PASTE-YOUR-USER-UUID>', 'owner');
 -- ----------------------------------------------------------
+
