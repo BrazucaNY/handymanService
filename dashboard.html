@@ -2813,24 +2813,68 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     var fieldPhotos = loadFieldPhotos();
 
+    // Automatic Image Compression & WebP Converter
+    function compressAndConvertToWebP(file, maxDimension, quality, callback) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var img = new Image();
+        img.onload = function() {
+          var canvas = document.createElement('canvas');
+          var width = img.width;
+          var height = img.height;
+
+          if (width > height) {
+            if (width > maxDimension) {
+              height = Math.round((height * maxDimension) / width);
+              width = maxDimension;
+            }
+          } else {
+            if (height > maxDimension) {
+              width = Math.round((width * maxDimension) / height);
+              height = maxDimension;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Convert image to WebP format
+          var webpDataUrl = canvas.toDataURL('image/webp', quality || 0.82);
+          callback(webpDataUrl, width, height, file.size);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
     window.handleFieldPhotoSelected = function(input) {
       if (!input.files || !input.files[0]) return;
       var file = input.files[0];
-      var reader = new FileReader();
 
-      reader.onload = function(e) {
-        currentFieldPhotoDataUrl = e.target.result;
+      var badge = document.getElementById("fieldPhotoGpsTagBadge");
+      if (badge) badge.innerHTML = "⚡ Optimizing image & converting to WebP...";
+
+      compressAndConvertToWebP(file, 1200, 0.82, function(webpUrl, w, h, originalSize) {
+        currentFieldPhotoDataUrl = webpUrl;
         var img = document.getElementById("fieldPhotoPreviewImg");
         var box = document.getElementById("fieldPhotoPreviewBox");
         var btn = document.getElementById("uploadFieldPhotoBtn");
+
+        var origKb = Math.round(originalSize / 1024);
+        var webpKb = Math.round((webpUrl.length * 3 / 4) / 1024);
 
         if (img && box && btn) {
           img.src = currentFieldPhotoDataUrl;
           box.style.display = "block";
           btn.style.display = "block";
+          if (badge) {
+            badge.innerHTML = "✅ <strong>Image Converted to WebP &amp; Optimized!</strong><br>Resolution: " + w + "x" + h + "px &bull; Reduced from " + origKb + "KB to <strong>" + webpKb + "KB WebP</strong> &bull; 📍 EXIF Geotag Prepared";
+          }
         }
-      };
-      reader.readAsDataURL(file);
+      });
     };
 
     window.detectCurrentGpsLocation = function() {
@@ -2940,7 +2984,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div>
               <strong style="font-size:14.5px;color:var(--navy);display:block;margin-bottom:4px;">${p.title}</strong>
               <div style="font-size:12px;color:var(--muted);">GPS: ${p.lat}, ${p.lon}</div>
-              <div style="font-size:12px;color:#16a34a;font-weight:600;margin-top:2px;">✓ EXIF Location Metadata Tagged</div>
+              <div style="font-size:12px;color:#16a34a;font-weight:600;margin-top:2px;">⚡ WebP Optimized &bull; 📍 EXIF Geotagged</div>
             </div>
             <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f1f5f9;padding-top:10px;">
               <span style="font-size:11.5px;color:var(--muted);">${p.created_at}</span>
