@@ -4,6 +4,8 @@
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://vvwnmiffuaxiazlskeya.supabase.co";
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
 
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: JSON.stringify({ error: "Method Not Allowed" }) };
@@ -46,10 +48,50 @@ exports.handler = async (event) => {
 
     // 3. Parse Request Payload
     const body = JSON.parse(event.body || "{}");
-    const { customer_id, due_date, items, tax } = body;
+    const { customer_id, customer_name, due_date, items, tax } = body;
 
-    if (!customer_id || !items || !Array.isArray(items) || items.length === 0) {
-      return { statusCode: 400, body: JSON.stringify({ error: "Bad Request: customer_id and items are required" }) };
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return { statusCode: 400, body: JSON.stringify({ error: "Bad Request: items are required" }) };
+    }
+
+    // Resolve Customer UUID
+    let validCustomerId = null;
+    const targetName = customer_name || customer_id || "Valued Customer";
+
+    if (customer_id && UUID_REGEX.test(customer_id)) {
+      validCustomerId = customer_id;
+    } else {
+      // Find or Create Customer in public.customers
+      const findCustRes = await fetch(`${SUPABASE_URL}/rest/v1/customers?name=eq.${encodeURIComponent(targetName)}&select=id`, {
+        headers: {
+          "apikey": SUPABASE_SERVICE_ROLE_KEY,
+          "Authorization": `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`
+        }
+      });
+      const findCustData = await findCustRes.json();
+
+      if (findCustRes.ok && findCustData && findCustData.length > 0) {
+        validCustomerId = findCustData[0].id;
+      } else {
+        // Create new customer
+        const createCustRes = await fetch(`${SUPABASE_URL}/rest/v1/customers`, {
+          method: "POST",
+          headers: {
+            "apikey": SUPABASE_SERVICE_ROLE_KEY,
+            "Authorization": `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+            "Content-Type": "application/json",
+            "Prefer": "return=representation"
+          },
+          body: JSON.stringify({
+            name: targetName,
+            created_by: user.id
+          })
+        });
+        const newCustData = await createCustRes.json();
+        if (createCustRes.ok && newCustData && newCustData.length > 0) {
+          validCustomerId = newCustData[0].id;
+        }
+      }
     }
 
     // Calculate totals
@@ -82,6 +124,18 @@ exports.handler = async (event) => {
     const invNumber = `HH-${year}-${String(totalCount).padStart(4, "0")}`;
 
     // 4. Create Invoice Record
+    const invPayload = {
+      number: invNumber,
+      status: "draft",
+      subtotal: subtotal.toFixed(2),
+      tax: taxAmount.toFixed(2),
+      total: total.toFixed(2),
+      due_date: due_date || new Date().toISOString().split("T")[0]
+    };
+    if (validCustomerId) {
+      invPayload.customer_id = validCustomerId;
+    }
+
     const createInvRes = await fetch(`${SUPABASE_URL}/rest/v1/invoices`, {
       method: "POST",
       headers: {
@@ -90,20 +144,12 @@ exports.handler = async (event) => {
         "Content-Type": "application/json",
         "Prefer": "return=representation"
       },
-      body: JSON.stringify({
-        customer_id,
-        number: invNumber,
-        status: "draft",
-        subtotal: subtotal.toFixed(2),
-        tax: taxAmount.toFixed(2),
-        total: total.toFixed(2),
-        due_date: due_date || new Date().toISOString().split("T")[0]
-      })
+      body: JSON.stringify(invPayload)
     });
 
     const newInvoice = await createInvRes.json();
     if (!createInvRes.ok || !newInvoice || newInvoice.length === 0) {
-      return { statusCode: 500, body: JSON.stringify({ error: "Failed to create invoice record" }) };
+      return { statusCode: 500, body: JSON.stringify({ error: "Failed to create invoice record", details: newInvoice }) };
     }
 
     const invoiceId = newInvoice[0].id;
