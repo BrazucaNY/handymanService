@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Invoice | Here Handyman</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <style>
+    @font-face { font-family: "Bebas Neue"; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/bebas-neue.woff2") format("woff2"); }
+    @font-face { font-family: "DM Sans"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/dm-sans.woff2") format("woff2"); }
+
+    :root {
+      --navy: #071828;
+      --gold: #eab308;
+      --text: #1e293b;
+      --border: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f8fafc;
+      color: var(--text);
+      line-height: 1.5;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    /* Actions Bar */
+    .actions-bar {
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary { background: var(--gold); color: var(--navy); }
+    .btn-secondary { background: #e2e8f0; color: var(--navy); }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+    .brand-info h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      color: var(--navy);
+      letter-spacing: 1px;
+    }
+    .brand-info h1 span { color: var(--gold); }
+    .brand-info p {
+      font-size: 13.5px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .invoice-title-box {
+      text-align: right;
+    }
+    .invoice-title-box h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      color: var(--navy);
+      letter-spacing: 1px;
+    }
+    .inv-meta {
+      font-size: 14px;
+      color: #475569;
+      margin-top: 4px;
+    }
+
+    /* Customer Info */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+    .info-block h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .info-block p {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .info-block p.sub {
+      font-weight: 400;
+      color: #475569;
+    }
+
+    /* Items Table */
+    table.items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 32px;
+    }
+    table.items-table th {
+      background: #f1f5f9;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--navy);
+      border-bottom: 2px solid var(--border);
+      text-align: left;
+    }
+    table.items-table th.num-col, table.items-table td.num-col {
+      text-align: right;
+    }
+    table.items-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 14.5px;
+    }
+
+    /* Summary Box */
+    .summary-section {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 36px;
+    }
+    .summary-box {
+      width: 280px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 14.5px;
+      color: #475569;
+    }
+    .summary-row.total {
+      border-top: 2px solid var(--navy);
+      border-bottom: 2px solid var(--navy);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      padding: 12px 0;
+      margin-top: 4px;
+    }
+
+    /* Status Banner */
+    .status-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    .status-paid { background: #dcfce7; color: #15803d; }
+    .status-sent { background: #dbeafe; color: #1e40af; }
+    .status-draft { background: #fef3c7; color: #b45309; }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    /* Print Styles */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .actions-bar { display: none !important; }
+      .container { border: none; box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="actions-bar">
+    <a href="/dashboard" class="btn btn-secondary">&larr; Back to Dashboard</a>
+    <div>
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    </div>
+  </div>
+
+  <div class="container" id="invoiceContainer">
+    <div style="text-align:center;padding:40px;" id="loadingState">Loading Invoice Details...</div>
+  </div>
+
+  <script>
+  (function () {
+    const SUPABASE_URL = "https://vvwnmiffuaxiazlskeya.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
+
+    const params = new URLSearchParams(window.location.search);
+    const invoiceId = params.get("id");
+    const invoiceNumber = params.get("number");
+
+    if (!invoiceId && !invoiceNumber) {
+      document.getElementById("invoiceContainer").innerHTML = '<div style="color:red;text-align:center;">Error: No Invoice ID specified.</div>';
+      return;
+    }
+
+    let filter = invoiceId ? `id=eq.${invoiceId}` : `number=eq.${invoiceNumber}`;
+
+    fetch(`${SUPABASE_URL}/rest/v1/invoices?${filter}&select=*,customers(*),invoice_items(*)`, {
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (!data || data.length === 0) {
+        document.getElementById("invoiceContainer").innerHTML = '<div style="color:red;text-align:center;">Invoice not found or access restricted.</div>';
+        return;
+      }
+      renderInvoice(data[0]);
+    })
+    .catch(err => {
+      document.getElementById("invoiceContainer").innerHTML = `<div style="color:red;text-align:center;">Error loading invoice: ${err.message}</div>`;
+    });
+
+    function renderInvoice(inv) {
+      const cust = inv.customers || {};
+      const items = inv.invoice_items || [];
+      const statusClass = inv.status === 'paid' ? 'status-paid' : (inv.status === 'sent' ? 'status-sent' : 'status-draft');
+
+      let itemsHtml = items.map(item => `
+        <tr>
+          <td>${escapeHtml(item.description)}</td>
+          <td class="num-col">${parseFloat(item.qty).toFixed(2)}</td>
+          <td class="num-col">$${parseFloat(item.unit_price).toFixed(2)}</td>
+          <td class="num-col" style="font-weight:600;">$${(parseFloat(item.qty) * parseFloat(item.unit_price)).toFixed(2)}</td>
+        </tr>
+      `).join('');
+
+      if (items.length === 0) {
+        itemsHtml = '<tr><td colspan="4" style="text-align:center;color:#94a3b8;">No line items listed.</td></tr>';
+      }
+
+      const html = `
+        <div class="header">
+          <div class="brand-info">
+            <h1>HERE <span>HANDYMAN</span></h1>
+            <p><strong>Here Handyman Services</strong><br>500 Pondside Dr, White Plains, NY 10607<br>Phone: (516) 350-0801 &bull; info@herehandyman.com</p>
+          </div>
+          <div class="invoice-title-box">
+            <h2>INVOICE</h2>
+            <div class="inv-meta"><strong>Invoice #:</strong> ${inv.number}</div>
+            <div class="inv-meta"><strong>Date:</strong> ${inv.created_at ? inv.created_at.split('T')[0] : ''}</div>
+            <div class="inv-meta"><strong>Due Date:</strong> ${inv.due_date || 'Upon Receipt'}</div>
+            <div style="margin-top:10px;">
+              <span class="status-badge ${statusClass}">${inv.status}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-block">
+            <h3>Billed To</h3>
+            <p>${escapeHtml(cust.name || 'Valued Customer')}</p>
+            <p class="sub">${escapeHtml(cust.address || '')} ${escapeHtml(cust.apt || '')}</p>
+            <p class="sub">${escapeHtml(cust.town || '')}</p>
+            <p class="sub">${escapeHtml(cust.phone || '')} ${escapeHtml(cust.email || '')}</p>
+          </div>
+          <div class="info-block" style="text-align:right;">
+            <h3>Payment Details</h3>
+            <p style="font-size:14px;font-weight:400;">Zelle / Venmo / Check</p>
+            <p class="sub">Payable to: <strong>Here Handyman Services</strong></p>
+            <p class="sub">Phone: (516) 350-0801</p>
+          </div>
+        </div>
+
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th class="num-col">Qty</th>
+              <th class="num-col">Unit Price</th>
+              <th class="num-col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${itemsHtml}
+          </tbody>
+        </table>
+
+        <div class="summary-section">
+          <div class="summary-box">
+            <div class="summary-row">
+              <span>Subtotal:</span>
+              <span>$${parseFloat(inv.subtotal || 0).toFixed(2)}</span>
+            </div>
+            <div class="summary-row">
+              <span>Tax / Fees:</span>
+              <span>$${parseFloat(inv.tax || 0).toFixed(2)}</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total Balance:</span>
+              <span>$${parseFloat(inv.total || 0).toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          Thank you for your business! Insured Handyman Services &bull; Westchester County, NY
+        </div>
+      `;
+
+      document.getElementById("invoiceContainer").innerHTML = html;
+      document.title = `Invoice ${inv.number} - Here Handyman`;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+  })();
+  </script>
+
+</body>
+</html>

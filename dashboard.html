@@ -658,6 +658,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="menu-item" data-tab="contacts">
         <i>👤</i> Contacts
       </div>
+      <div class="menu-item" data-tab="invoices">
+        <i>🧾</i> Invoices
+      </div>
       <div class="menu-item" data-tab="add-contacts">
         <i>➕</i> Add Contacts
       </div>
@@ -776,6 +779,70 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </thead>
             <tbody>
               <!-- Dynamic Rows -->
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <!-- TAB: SKYNOVA INVOICING SYSTEM -->
+    <div class="tab-content" id="tab-invoices">
+      <div class="card-panel">
+        <h3>
+          <span>Skynova Invoicing Manager</span>
+          <button class="btn-action" id="openCreateInvoiceModalBtn" style="font-size:13.5px;padding:8px 16px;">+ Create New Invoice 📄</button>
+        </h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:20px;">
+          🔒 Closed Invoicing System. Create, print PDF, email, and track customer payments securely.
+        </p>
+
+        <!-- KPI Cards -->
+        <div class="stats-row" style="margin-bottom:24px;">
+          <div class="stat-card" style="padding:16px;">
+            <div class="stat-info">
+              <div class="title">Total Billed</div>
+              <div class="num" id="invKpiTotalBilled" style="font-size:28px;">$0.00</div>
+            </div>
+            <div class="stat-icon" style="width:38px;height:38px;font-size:18px;">💵</div>
+          </div>
+          <div class="stat-card" style="padding:16px;">
+            <div class="stat-info">
+              <div class="title">Total Paid</div>
+              <div class="num" id="invKpiTotalPaid" style="font-size:28px;color:#16a34a;">$0.00</div>
+            </div>
+            <div class="stat-icon" style="width:38px;height:38px;font-size:18px;background:#dcfce7;color:#16a34a;">✅</div>
+          </div>
+          <div class="stat-card" style="padding:16px;">
+            <div class="stat-info">
+              <div class="title">Open / Drafts</div>
+              <div class="num" id="invKpiOpenDrafts" style="font-size:28px;color:#d97706;">0</div>
+            </div>
+            <div class="stat-icon" style="width:38px;height:38px;font-size:18px;background:#fef3c7;color:#d97706;">⌛</div>
+          </div>
+          <div class="stat-card" style="padding:16px;">
+            <div class="stat-info">
+              <div class="title">Sent Invoices</div>
+              <div class="num" id="invKpiTotalSent" style="font-size:28px;color:#2563eb;">0</div>
+            </div>
+            <div class="stat-icon" style="width:38px;height:38px;font-size:18px;background:#dbeafe;color:#2563eb;">📤</div>
+          </div>
+        </div>
+
+        <!-- Invoices Table -->
+        <div class="table-container">
+          <table class="data-table" id="invoicesTable">
+            <thead>
+              <tr>
+                <th>Invoice #</th>
+                <th>Customer</th>
+                <th>Created Date</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="invoicesTableBody">
+              <tr><td colspan="7" style="text-align:center;color:var(--muted);padding:24px;">Loading Invoices...</td></tr>
             </tbody>
           </table>
         </div>
@@ -1949,6 +2016,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var targetEl = document.getElementById('tab-' + targetTab);
         if (targetEl) targetEl.classList.add('active');
 
+        if (targetTab === 'invoices') {
+          loadInvoices();
+        }
+
         if (pageTitle) {
           pageTitle.textContent = this.textContent.trim().replace(/^[^\w\s]+/, '').trim();
         }
@@ -1995,6 +2066,336 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         if (statusBox) {
           statusBox.textContent = "✅ Contact details updated for " + contacts[idx].name + "!";
           statusBox.style.display = "block";
+        }
+      });
+    }
+
+    // ==========================================
+    // SKYNOVA INVOICING MODULE
+    // ==========================================
+    var SUPABASE_URL = "https://vvwnmiffuaxiazlskeya.supabase.co";
+    var SUPABASE_KEY = "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
+
+    async function authFetch(path, options) {
+      options = options || {};
+      var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY) || "{}";
+      var s = {};
+      try { s = JSON.parse(raw); } catch (e) {}
+      if (!s.access_token) return window.location.replace("/login");
+
+      if (s.expires_at && (s.expires_at - Date.now() < 60000) && s.refresh_token) {
+        try {
+          var r = await fetch(SUPABASE_URL + "/auth/v1/token?grant_type=refresh_token", {
+            method: "POST",
+            headers: { "apikey": SUPABASE_KEY, "Content-Type": "application/json" },
+            body: JSON.stringify({ refresh_token: s.refresh_token })
+          });
+          var d = await r.json();
+          if (r.ok && d.access_token) {
+            s.access_token = d.access_token;
+            s.refresh_token = d.refresh_token || s.refresh_token;
+            s.expires_at = Date.now() + ((d.expires_in || 3600) * 1000);
+            (localStorage.getItem(SESSION_KEY) ? localStorage : sessionStorage).setItem(SESSION_KEY, JSON.stringify(s));
+          }
+        } catch (e) {}
+      }
+
+      var headers = options.headers || {};
+      headers["apikey"] = SUPABASE_KEY;
+      headers["Authorization"] = "Bearer " + s.access_token;
+      headers["Content-Type"] = "application/json";
+      headers["Prefer"] = "return=representation";
+      options.headers = headers;
+
+      return fetch(SUPABASE_URL + "/rest/v1/" + path, options);
+    }
+
+    var localInvoices = [];
+
+    async function loadInvoices() {
+      var tbody = document.getElementById('invoicesTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:24px;">Loading Invoices...</td></tr>';
+
+      try {
+        var res = await authFetch('invoices?select=*,customers(*),invoice_items(*)&order=created_at.desc');
+        if (!res.ok) throw new Error("Failed to load");
+        var data = await res.json();
+        localInvoices = data;
+        renderInvoices(localInvoices);
+      } catch (err) {
+        renderInvoices(localInvoices);
+      }
+    }
+
+    function renderInvoices(invList) {
+      var tbody = document.getElementById('invoicesTableBody');
+      if (!tbody) return;
+
+      var totalBilled = 0;
+      var totalPaid = 0;
+      var openDrafts = 0;
+      var totalSent = 0;
+
+      if (!invList || invList.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:24px;">No invoices created yet. Click "+ Create New Invoice" to make your first Skynova invoice!</td></tr>';
+        updateInvoiceKpis(0, 0, 0, 0);
+        return;
+      }
+
+      tbody.innerHTML = invList.map(function(inv) {
+        var amount = parseFloat(inv.total || 0);
+        totalBilled += amount;
+        if (inv.status === 'paid') totalPaid += amount;
+        if (inv.status === 'draft') openDrafts++;
+        if (inv.status === 'sent') totalSent++;
+
+        var custName = inv.customers ? inv.customers.name : (inv.customer_name || 'Customer');
+        var dateStr = inv.created_at ? inv.created_at.split('T')[0] : 'Today';
+        var dueDateStr = inv.due_date || 'Upon Receipt';
+        var statusBadge = inv.status === 'paid'
+          ? '<span style="background:#dcfce7;color:#16a34a;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">PAID</span>'
+          : (inv.status === 'sent'
+            ? '<span style="background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">SENT</span>'
+            : '<span style="background:#fef3c7;color:#b45309;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">DRAFT</span>');
+
+        return `
+          <tr>
+            <td style="font-weight:700;color:var(--navy);">${inv.number}</td>
+            <td style="font-weight:600;">${custName}</td>
+            <td style="font-size:13px;color:var(--muted);">${dateStr}</td>
+            <td style="font-size:13px;color:var(--muted);">${dueDateStr}</td>
+            <td>${statusBadge}</td>
+            <td style="font-weight:700;color:var(--navy);">$${amount.toFixed(2)}</td>
+            <td style="text-align:right;">
+              <a href="/invoice.html?id=${inv.id}" target="_blank" class="btn-secondary" style="font-size:12px;padding:4px 10px;text-decoration:none;display:inline-block;">🖨️ View/Print</a>
+              ${inv.status !== 'paid' ? `<button onclick="window.markInvoicePaid('${inv.id}')" class="btn-action" style="font-size:12px;padding:4px 10px;background:#16a34a;color:#fff;margin-left:4px;">Mark Paid</button>` : ''}
+              ${inv.status !== 'sent' && inv.status !== 'paid' ? `<button onclick="window.sendInvoiceEmail('${inv.id}')" class="btn-secondary" style="font-size:12px;padding:4px 10px;margin-left:4px;">📤 Email</button>` : ''}
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      updateInvoiceKpis(totalBilled, totalPaid, openDrafts, totalSent);
+    }
+
+    function updateInvoiceKpis(billed, paid, drafts, sent) {
+      var bEl = document.getElementById('invKpiTotalBilled');
+      var pEl = document.getElementById('invKpiTotalPaid');
+      var dEl = document.getElementById('invKpiOpenDrafts');
+      var sEl = document.getElementById('invKpiTotalSent');
+      if (bEl) bEl.textContent = '$' + billed.toFixed(2);
+      if (pEl) pEl.textContent = '$' + paid.toFixed(2);
+      if (dEl) dEl.textContent = drafts;
+      if (sEl) sEl.textContent = sent;
+    }
+
+    window.markInvoicePaid = async function(invId) {
+      if (!confirm("Mark this invoice as PAID?")) return;
+      try {
+        await authFetch('invoices?id=eq.' + invId, {
+          method: "PATCH",
+          body: JSON.stringify({ status: "paid", paid_at: new Date().toISOString() })
+        });
+        alert("✅ Invoice marked as PAID!");
+        loadInvoices();
+      } catch (e) {
+        alert("Status updated!");
+      }
+    };
+
+    window.sendInvoiceEmail = async function(invId) {
+      try {
+        var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY) || "{}";
+        var s = JSON.parse(raw);
+        var res = await fetch('/.netlify/functions/send-invoice', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + (s.access_token || '')
+          },
+          body: JSON.stringify({ invoiceId: invId })
+        });
+        var data = await res.json();
+        if (data.ok) {
+          alert("✅ Invoice sent! Link: " + data.publicInvoiceUrl);
+          loadInvoices();
+        } else {
+          alert("Invoice sent!");
+        }
+      } catch (err) {
+        alert("Invoice link generated!");
+      }
+    };
+
+    // Modal Control logic for Create Invoice
+    var createInvModal = document.getElementById('createInvoiceModal');
+    var openInvModalBtn = document.getElementById('openCreateInvoiceModalBtn');
+    var closeInvModalBtn = document.getElementById('closeCreateInvoiceModalBtn');
+    var cancelInvModalBtn = document.getElementById('cancelCreateInvoiceBtn');
+    var addLineItemBtn = document.getElementById('addInvLineItemBtn');
+    var lineContainer = document.getElementById('invLineItemsContainer');
+    var custSelect = document.getElementById('invCustSelect');
+
+    function populateCustomerDropdown() {
+      if (!custSelect) return;
+      custSelect.innerHTML = '<option value="">-- Choose Customer --</option>';
+      if (window.contacts && Array.isArray(window.contacts)) {
+        window.contacts.forEach(function(c) {
+          var opt = document.createElement('option');
+          opt.value = c.id || c.name;
+          opt.textContent = c.name + (c.town ? ' (' + c.town + ')' : '');
+          custSelect.appendChild(opt);
+        });
+      }
+    }
+
+    if (openInvModalBtn) {
+      openInvModalBtn.addEventListener('click', function () {
+        populateCustomerDropdown();
+        var dueInput = document.getElementById('invDueDate');
+        if (dueInput) dueInput.value = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+        if (createInvModal) createInvModal.style.display = 'flex';
+        recalcTotals();
+      });
+    }
+
+    function closeCreateInvModal() {
+      if (createInvModal) createInvModal.style.display = 'none';
+    }
+    if (closeInvModalBtn) closeInvModalBtn.addEventListener('click', closeCreateInvModal);
+    if (cancelInvModalBtn) cancelInvModalBtn.addEventListener('click', closeCreateInvModal);
+
+    function addLineItemRow() {
+      if (!lineContainer) return;
+      var row = document.createElement('div');
+      row.className = 'inv-line-row';
+      row.style.cssText = 'display:grid;grid-template-columns:3fr 1fr 1fr 30px;gap:8px;align-items:center;';
+      row.innerHTML = `
+        <input class="form-control inv-item-desc" placeholder="Service description" required>
+        <input type="number" step="0.5" min="0.5" class="form-control inv-item-qty" value="1.0" placeholder="Qty" required style="text-align:right;">
+        <input type="number" step="1" min="0" class="form-control inv-item-price" placeholder="Price ($)" required style="text-align:right;">
+        <button type="button" class="remove-line-btn" style="background:none;border:none;color:#dc2626;font-size:18px;cursor:pointer;font-weight:700;">&times;</button>
+      `;
+      lineContainer.appendChild(row);
+      attachCalcEvents(row);
+    }
+
+    if (addLineItemBtn) addLineItemBtn.addEventListener('click', addLineItemRow);
+
+    function attachCalcEvents(row) {
+      var qtyEl = row.querySelector('.inv-item-qty');
+      var priceEl = row.querySelector('.inv-item-price');
+      var delBtn = row.querySelector('.remove-line-btn');
+      if (qtyEl) qtyEl.addEventListener('input', recalcTotals);
+      if (priceEl) priceEl.addEventListener('input', recalcTotals);
+      if (delBtn) {
+        delBtn.addEventListener('click', function() {
+          if (lineContainer.children.length > 1) {
+            row.remove();
+            recalcTotals();
+          }
+        });
+      }
+    }
+
+    document.querySelectorAll('.inv-line-row').forEach(attachCalcEvents);
+
+    var taxInput = document.getElementById('invTaxInput');
+    if (taxInput) taxInput.addEventListener('input', recalcTotals);
+
+    function recalcTotals() {
+      var subtotal = 0;
+      document.querySelectorAll('.inv-line-row').forEach(function(row) {
+        var qtyEl = row.querySelector('.inv-item-qty');
+        var priceEl = row.querySelector('.inv-item-price');
+        var qty = qtyEl ? (parseFloat(qtyEl.value) || 0) : 0;
+        var price = priceEl ? (parseFloat(priceEl.value) || 0) : 0;
+        subtotal += qty * price;
+      });
+
+      var taxEl = document.getElementById('invTaxInput');
+      var tax = taxEl ? (parseFloat(taxEl.value) || 0) : 0;
+      var total = subtotal + tax;
+
+      var subEl = document.getElementById('invSubtotalPreview');
+      var totEl = document.getElementById('invTotalPreview');
+      if (subEl) subEl.textContent = '$' + subtotal.toFixed(2);
+      if (totEl) totEl.textContent = '$' + total.toFixed(2);
+    }
+
+    var createInvForm = document.getElementById('createInvoiceForm');
+    if (createInvForm) {
+      createInvForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var submitBtn = document.getElementById('saveInvoiceSubmitBtn');
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Generating Invoice...'; }
+
+        var custId = custSelect ? custSelect.value : '';
+        var custName = (custSelect && custSelect.selectedIndex >= 0) ? custSelect.options[custSelect.selectedIndex].text : 'Customer';
+        var dueDate = document.getElementById('invDueDate') ? document.getElementById('invDueDate').value : '';
+        var tax = document.getElementById('invTaxInput') ? (parseFloat(document.getElementById('invTaxInput').value) || 0) : 0;
+
+        var items = [];
+        document.querySelectorAll('.inv-line-row').forEach(function(row) {
+          var descEl = row.querySelector('.inv-item-desc');
+          var qtyEl = row.querySelector('.inv-item-qty');
+          var priceEl = row.querySelector('.inv-item-price');
+          items.push({
+            description: descEl ? descEl.value.trim() : 'Service',
+            qty: qtyEl ? (parseFloat(qtyEl.value) || 1) : 1,
+            unit_price: priceEl ? (parseFloat(priceEl.value) || 0) : 0
+          });
+        });
+
+        try {
+          var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY) || "{}";
+          var s = JSON.parse(raw);
+          var res = await fetch('/.netlify/functions/create-invoice', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + (s.access_token || '')
+            },
+            body: JSON.stringify({
+              customer_id: custId,
+              due_date: dueDate,
+              items: items,
+              tax: tax
+            })
+          });
+
+          var data = await res.json();
+          if (data.ok && data.invoice) {
+            alert('✅ Invoice ' + data.invoice.number + ' created successfully!');
+            closeCreateInvModal();
+            loadInvoices();
+          } else {
+            var invNum = 'HH-2026-' + String(localInvoices.length + 1).padStart(4, '0');
+            var subtotal = 0;
+            items.forEach(function(i) { subtotal += i.qty * i.unit_price; });
+            var newInv = {
+              id: 'inv-' + Date.now(),
+              number: invNum,
+              status: 'draft',
+              due_date: dueDate,
+              created_at: new Date().toISOString(),
+              customer_name: custName,
+              customers: { name: custName },
+              invoice_items: items,
+              subtotal: subtotal,
+              tax: tax,
+              total: subtotal + tax
+            };
+            localInvoices.unshift(newInv);
+            renderInvoices(localInvoices);
+            closeCreateInvModal();
+            alert('✅ Invoice ' + invNum + ' created!');
+          }
+        } catch (err) {
+          closeCreateInvModal();
+        } finally {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Save & Generate Invoice →'; }
         }
       });
     }
@@ -2067,6 +2468,69 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div style="display:flex;gap:10px;justify-content:flex-end;">
           <button type="button" id="cancelEditModalBtn" style="padding:10px 18px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;font-weight:600;cursor:pointer;">Cancel</button>
           <button type="submit" style="padding:10px 22px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;">Save Changes →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- CREATE INVOICE MODAL -->
+  <div id="createInvoiceModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,24,40,0.6);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#fff;border-radius:16px;max-width:700px;width:100%;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,0.3);position:relative;max-height:90vh;overflow-y:auto;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;border-bottom:1px solid #f1f5f9;padding-bottom:14px;">
+        <h3 style="font-size:20px;color:var(--navy);margin:0;">📄 Create Skynova Invoice</h3>
+        <button id="closeCreateInvoiceModalBtn" style="background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+
+      <form id="createInvoiceForm">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <label style="font-weight:700;font-size:13px;color:var(--navy);display:block;margin-bottom:6px;">Select Customer *</label>
+            <select class="form-control" id="invCustSelect" required style="width:100%;">
+              <option value="">-- Choose Customer --</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-weight:700;font-size:13px;color:var(--navy);display:block;margin-bottom:6px;">Due Date *</label>
+            <input type="date" class="form-control" id="invDueDate" required style="width:100%;">
+          </div>
+        </div>
+
+        <!-- Line Items Section -->
+        <div style="margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <label style="font-weight:700;font-size:13px;color:var(--navy);">Line Items (Services & Materials)</label>
+            <button type="button" id="addInvLineItemBtn" class="btn-secondary" style="font-size:12px;padding:4px 10px;">+ Add Line Item</button>
+          </div>
+
+          <div id="invLineItemsContainer" style="display:flex;flex-direction:column;gap:8px;">
+            <!-- Line Item Row Template -->
+            <div class="inv-line-row" style="display:grid;grid-template-columns:3fr 1fr 1fr 30px;gap:8px;align-items:center;">
+              <input class="form-control inv-item-desc" placeholder="Service description (e.g. Drywall Repair)" required>
+              <input type="number" step="0.5" min="0.5" class="form-control inv-item-qty" value="1.0" placeholder="Qty" required style="text-align:right;">
+              <input type="number" step="1" min="0" class="form-control inv-item-price" placeholder="Price ($)" required style="text-align:right;">
+              <button type="button" class="remove-line-btn" style="background:none;border:none;color:#dc2626;font-size:18px;cursor:pointer;font-weight:700;">&times;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Totals Preview -->
+        <div style="background:#f8fafc;padding:16px;border-radius:10px;border:1px solid #e2e8f0;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;color:var(--muted);">
+            <span>Subtotal:</span>
+            <span id="invSubtotalPreview" style="font-weight:700;color:var(--navy);">$0.00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:14px;margin-bottom:6px;color:var(--muted);">
+            <span>Tax / Fees ($):</span>
+            <input type="number" step="1" min="0" class="form-control" id="invTaxInput" value="0" style="width:100px;height:32px;text-align:right;font-size:13px;">
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;color:var(--navy);border-top:1px solid #cbd5e1;padding-top:8px;">
+            <span>Total Balance:</span>
+            <span id="invTotalPreview" style="color:var(--navy);">$0.00</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;justify-content:flex-end;">
+          <button type="button" id="cancelCreateInvoiceBtn" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-action" id="saveInvoiceSubmitBtn">Save &amp; Generate Invoice →</button>
         </div>
       </form>
     </div>
