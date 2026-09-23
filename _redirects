@@ -32,6 +32,12 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /invoices                  /invoice.html                   200
 /invoices/                 /invoice.html                   200
 
+# Customer Payment Pages
+/pay/0000961                                   /pay-0000961.html                  200
+/pay-0000961                                   /pay-0000961.html                  200
+/pay/tyler-lynze                               /pay-0000961.html                  200
+/invoices/tyler-lynze                          /pay-0000961.html                  200
+
 # Explicit Clean URL Rewrites for All Service, Town & Blog Pages
 /offer                                       /offer.html                        200
 /offer/                                      /offer.html                        200

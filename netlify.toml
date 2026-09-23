@@ -30,6 +30,26 @@
   to = "/blog/index.html"
   status = 200
 
+[[redirects]]
+  from = "/pay/0000961"
+  to = "/pay-0000961.html"
+  status = 200
+
+[[redirects]]
+  from = "/pay-0000961"
+  to = "/pay-0000961.html"
+  status = 200
+
+[[redirects]]
+  from = "/pay/tyler-lynze"
+  to = "/pay-0000961.html"
+  status = 200
+
+[[redirects]]
+  from = "/invoices/tyler-lynze"
+  to = "/pay-0000961.html"
+  status = 200
+
 # /book & /book-appointment redirects
 [[redirects]]
   from = "/book"
