@@ -30,7 +30,7 @@
   to = "/blog/index.html"
   status = 200
 
-# /book & /book-appointment (200 rewrite to /book.html)
+# /book & /book-appointment redirects
 [[redirects]]
   from = "/book"
   to = "/book.html"
@@ -38,18 +38,18 @@
 
 [[redirects]]
   from = "/book/"
-  to = "/book.html"
-  status = 200
+  to = "/book"
+  status = 301
 
 [[redirects]]
   from = "/book-appointment"
-  to = "/book.html"
-  status = 200
+  to = "/book"
+  status = 301
 
 [[redirects]]
   from = "/book-appointment/"
-  to = "/book.html"
-  status = 200
+  to = "/book"
+  status = 301
 
 # /services hub page
 [[redirects]]

@@ -3,13 +3,12 @@ http://herehandyman.com/*        https://www.herehandyman.com/:splat  301!
 http://www.herehandyman.com/*    https://www.herehandyman.com/:splat  301!
 https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 
-# Booking Page Clean Rewrites & 301 Redirects
+# Booking Page Clean Rewrites & Redirects
 /book                                        /book.html                         200
-/book/                                       /book                              301!
-/book-appointment                            /book                              301!
-/book-appointment/                           /book                              301!
-/book-appointment.html                       /book                              301!
-/book.html                                   /book                              301!
+/book/                                       /book                              301
+/book-appointment                            /book                              301
+/book-appointment/                           /book                              301
+/book-appointment.html                       /book                              301
 
 # Blog Hub Clean Rewrites (200 OK - No 301 chain)
 /blog                                        /blog/index.html                   200
