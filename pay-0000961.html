@@ -563,16 +563,18 @@
             <div class="cc-logo-icon">💳</div>
             <div class="pay-card-title">
               <h3>Pay with Credit / Debit Card</h3>
-              <p>Fast & Secure Card Processing</p>
+              <p>Powered by Square Secure Checkout</p>
             </div>
           </div>
 
-          <div class="cc-status-box" id="cc-status-box">
-            <p id="cc-status-text">🔒 Credit Card payment link will be enabled shortly.</p>
+          <div class="cc-status-box" id="cc-status-box" style="background: #f0fdf4; border-color: #bbf7d0;">
+            <p id="cc-status-text" style="color: #15803d; font-weight: 600;">
+              💳 Card Total: <strong>$497.56</strong> <span style="font-size: 0.8rem; opacity: 0.85;">(includes $17.56 card fee)</span>
+            </p>
           </div>
 
-          <a href="#" id="cc-pay-btn" class="btn-cc-pay disabled" onclick="handleCcClick(event)">
-            💳 Pay $480.00 with Card
+          <a href="https://app.squareup.com/pay-invoice/invtmp:03e318c2-709c-4f6e-8bae-c19189da62d9" target="_blank" id="cc-pay-btn" class="btn-cc-pay">
+            💳 Pay $497.56 with Card
           </a>
         </div>
 
@@ -675,7 +677,8 @@
 
     <!-- Actions Footer Bar -->
     <div class="actions-bar">
-      <button class="btn-action" onclick="window.print()">🖨️ Print / Save as PDF</button>
+      <button class="btn-action" onclick="window.print()">🖨️ Print Page</button>
+      <a href="https://squareup.com/invoices/attachments/download/pdf/invoice?token=eyJhbGciOiJIUzI1NiJ9.eyJpbnZvaWNlX3Rva2VuIjoiaW52OjAtQ2hENkhoZU5wZlp4ZUZybkVuNUV4SXplRVBVTyIsInNlZWQiOiIyMDI2LTA5LTIzIDE5OjAwOjQ4ICswMDAwIn0.G2NygUVcOwuz-vHdwFiEH2Xpj00tFOBF7KlDyOWCqxM&inline=true" target="_blank" class="btn-action" style="background: var(--navy); color: var(--gold); border-color: var(--navy);">📄 Download Official PDF Invoice</a>
       <a href="tel:5163500801" class="btn-action">📞 Questions? Call David (516) 350-0801</a>
     </div>
 
