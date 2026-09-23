@@ -1360,13 +1360,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               Take or upload Before &amp; After job photos directly from your phone in the field. Photos are automatically geotagged with Westchester County GPS metadata to boost your local Google Maps ranking.
             </p>
           </div>
-          <button class="btn-action" onclick="document.getElementById('fieldPhotoFileInput').click()" style="font-size:15px;padding:12px 24px;">
-            📸 Take Photo or Select File
-          </button>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn-action" onclick="document.getElementById('fieldCameraInput').click()" style="font-size:15px;padding:12px 20px;background:#16a34a;color:#fff;">
+              📸 Take Photo (Camera)
+            </button>
+            <button class="btn-secondary" onclick="document.getElementById('fieldGalleryInput').click()" style="font-size:14px;padding:12px 18px;">
+              🖼️ Select Photo (Gallery)
+            </button>
+          </div>
         </div>
 
-        <!-- Hidden Native Mobile File Input -->
-        <input type="file" id="fieldPhotoFileInput" accept="image/*" capture="environment" style="display:none;" onchange="window.handleFieldPhotoSelected(this)"/>
+        <!-- Hidden Native Mobile File Inputs -->
+        <!-- Camera Only Input -->
+        <input type="file" id="fieldCameraInput" accept="image/*" capture="camera" style="display:none;" onchange="window.handleFieldPhotoSelected(this)"/>
+        <!-- Gallery Input -->
+        <input type="file" id="fieldGalleryInput" accept="image/*" style="display:none;" onchange="window.handleFieldPhotoSelected(this)"/>
 
         <!-- Field Upload Form -->
         <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:24px;margin-bottom:32px;">
@@ -3030,7 +3038,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       document.getElementById("fieldPhotoPreviewBox").style.display = "none";
       document.getElementById("uploadFieldPhotoBtn").style.display = "none";
       document.getElementById("fieldPhotoTitle").value = "";
-      document.getElementById("fieldPhotoFileInput").value = "";
+      if (document.getElementById("fieldCameraInput")) document.getElementById("fieldCameraInput").value = "";
+      if (document.getElementById("fieldGalleryInput")) document.getElementById("fieldGalleryInput").value = "";
 
       alert("✅ Photo uploaded, EXIF geotagged & added to Project Showcase!");
     };
