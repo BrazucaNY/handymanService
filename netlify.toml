@@ -57,6 +57,12 @@
   to = "/services.html"
   status = 200
 
+# /offer page
+[[redirects]]
+  from = "/offer"
+  to = "/offer.html"
+  status = 200
+
 # /about page
 [[redirects]]
   from = "/about"
