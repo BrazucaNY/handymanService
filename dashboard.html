@@ -788,22 +788,60 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- TAB: SKYNOVA INVOICING SYSTEM -->
     <div class="tab-content" id="tab-invoices">
       <div class="card-panel">
-        <h3>
-          <span>Skynova Invoicing Manager</span>
-          <button class="btn-action" id="openCreateInvoiceModalBtn" style="font-size:13.5px;padding:8px 16px;">+ Create New Invoice 📄</button>
-        </h3>
-        <p style="color:var(--muted);font-size:13.5px;margin-bottom:20px;">
-          🔒 Closed Invoicing System. Create, print PDF, email, and track customer payments securely.
-        </p>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:16px;">
+          <div>
+            <h3 style="margin:0;">List of Invoices</h3>
+            <p style="color:var(--muted);font-size:13.5px;margin-top:4px;margin-bottom:0;">
+              🔒 Closed Invoicing System &bull; skynova.com format
+            </p>
+          </div>
+          <div>
+            <button class="btn-action" id="openCreateInvoiceModalBtn" style="font-size:14px;padding:9px 18px;">+ New Invoice 📄</button>
+          </div>
+        </div>
+
+        <!-- Skynova Filter Bar -->
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px 16px;margin-bottom:20px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <label style="font-size:13px;font-weight:700;color:var(--navy);">From:</label>
+            <input type="date" id="invFilterFromDate" class="form-control" style="width:140px;height:36px;font-size:13px;">
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <label style="font-size:13px;font-weight:700;color:var(--navy);">To:</label>
+            <input type="date" id="invFilterToDate" class="form-control" style="width:140px;height:36px;font-size:13px;">
+          </div>
+          <div>
+            <select id="invFilterCustomer" class="form-control" style="height:36px;font-size:13px;min-width:160px;">
+              <option value="all">All customers</option>
+            </select>
+          </div>
+          <div>
+            <select id="invFilterStatus" class="form-control" style="height:36px;font-size:13px;min-width:140px;">
+              <option value="all">All invoices</option>
+              <option value="draft">Draft</option>
+              <option value="sent">Sent</option>
+              <option value="paid">Paid</option>
+              <option value="past_due">Past due</option>
+            </select>
+          </div>
+          <button id="invResetFiltersBtn" class="btn-secondary" style="height:36px;font-size:12.5px;padding:0 12px;">Reset Filters</button>
+        </div>
 
         <!-- KPI Cards -->
         <div class="stats-row" style="margin-bottom:24px;">
           <div class="stat-card" style="padding:16px;">
             <div class="stat-info">
-              <div class="title">Total Billed</div>
+              <div class="title">Total Invoices</div>
               <div class="num" id="invKpiTotalBilled" style="font-size:28px;">$0.00</div>
             </div>
             <div class="stat-icon" style="width:38px;height:38px;font-size:18px;">💵</div>
+          </div>
+          <div class="stat-card" style="padding:16px;">
+            <div class="stat-info">
+              <div class="title">Balance Due</div>
+              <div class="num" id="invKpiBalanceDue" style="font-size:28px;color:#dc2626;">$0.00</div>
+            </div>
+            <div class="stat-icon" style="width:38px;height:38px;font-size:18px;background:#fef2f2;color:#dc2626;">⚠️</div>
           </div>
           <div class="stat-card" style="padding:16px;">
             <div class="stat-info">
@@ -819,32 +857,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
             <div class="stat-icon" style="width:38px;height:38px;font-size:18px;background:#fef3c7;color:#d97706;">⌛</div>
           </div>
-          <div class="stat-card" style="padding:16px;">
-            <div class="stat-info">
-              <div class="title">Sent Invoices</div>
-              <div class="num" id="invKpiTotalSent" style="font-size:28px;color:#2563eb;">0</div>
-            </div>
-            <div class="stat-icon" style="width:38px;height:38px;font-size:18px;background:#dbeafe;color:#2563eb;">📤</div>
-          </div>
         </div>
 
-        <!-- Invoices Table -->
+        <!-- Skynova Invoices Table -->
         <div class="table-container">
           <table class="data-table" id="invoicesTable">
             <thead>
               <tr>
-                <th>Invoice #</th>
-                <th>Customer</th>
-                <th>Created Date</th>
-                <th>Due Date</th>
-                <th>Status</th>
-                <th>Total</th>
+                <th style="cursor:pointer;" id="thSortNumber">Invoice ▲▼</th>
+                <th style="cursor:pointer;" id="thSortCustomer">Customer ▲▼</th>
+                <th style="cursor:pointer;" id="thSortDate">Date ▲▼</th>
+                <th style="cursor:pointer;" id="thSortTotal">Total ▲▼</th>
+                <th style="cursor:pointer;" id="thSortBalance">Balance ▲▼</th>
+                <th style="cursor:pointer;" id="thSortStatus">Status ▲▼</th>
                 <th style="text-align:right;">Actions</th>
               </tr>
             </thead>
             <tbody id="invoicesTableBody">
               <tr><td colspan="7" style="text-align:center;color:var(--muted);padding:24px;">Loading Invoices...</td></tr>
             </tbody>
+            <tfoot>
+              <tr style="background:#f8fafc;font-weight:700;border-top:2px solid var(--navy);">
+                <td id="invSummaryCount">0 invoices</td>
+                <td></td>
+                <td style="text-align:right;">Total:</td>
+                <td id="invSummaryTotal">$0.00</td>
+                <td id="invSummaryBalance" style="color:#dc2626;">$0.00</td>
+                <td></td>
+                <td style="text-align:right;">
+                  <button id="printTableBtn" class="btn-secondary" style="font-size:12px;padding:6px 12px;" onclick="window.print()">Print table 🖨️</button>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -2113,22 +2157,94 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       return fetch(SUPABASE_URL + "/rest/v1/" + path, options);
     }
 
-    var localInvoices = [];
+    var SKYNOVA_SEED_INVOICES = [
+      { id: "79643560", number: "0000960", customer_name: "Lori Ann Marcella", created_at: "2026-09-22", due_date: "2026-09-22", total: 250.00, balance: 250.00, status: "draft", invoice_items: [{ description: "Hang Pictures & Mirror, Bathroom Drawer Repair, Shower Caddy & Rod, Assemble 2 desks", qty: 1, unit_price: 250.00 }] },
+      { id: "79643182", number: "0000959", customer_name: "Lori Ann Marcella", created_at: "2026-09-22", due_date: "2026-09-22", total: 672.00, balance: 672.00, status: "draft", invoice_items: [{ description: "Kitchen Wall Repair & Closure, 9 Window Blinds, Door Knob, Dining Painting", qty: 1, unit_price: 672.00 }] },
+      { id: "79271931", number: "0000958", customer_name: "Donna", created_at: "2026-08-27", due_date: "2026-08-27", total: 150.00, balance: 0.00, status: "paid", invoice_items: [{ description: "General Handyman Repairs", qty: 1, unit_price: 150.00 }] },
+      { id: "78649627", number: "0000957", customer_name: "Sterling Facilities Management Inc", created_at: "2026-07-14", due_date: "2026-07-14", total: 300.00, balance: 300.00, status: "past_due", invoice_items: [{ description: "Facility Maintenance Work", qty: 1, unit_price: 300.00 }] },
+      { id: "78259932", number: "0000897", customer_name: "Sterling Facilities Management Inc", created_at: "2026-06-16", due_date: "2026-06-16", total: 300.00, balance: 0.00, status: "paid", invoice_items: [{ description: "Facility Repair Work", qty: 1, unit_price: 300.00 }] },
+      { id: "76253034", number: "0000892", customer_name: "Yokata Rodriguez", created_at: "2026-01-20", due_date: "2026-01-20", total: 89.00, balance: 89.00, status: "past_due", invoice_items: [{ description: "Minor Home Repair", qty: 1, unit_price: 89.00 }] },
+      { id: "76128270", number: "0000891", customer_name: "Diamond Jones", created_at: "2026-01-10", due_date: "2026-01-10", total: 250.00, balance: 0.00, status: "paid", invoice_items: [{ description: "Handyman Repairs", qty: 1, unit_price: 250.00 }] }
+    ];
+
+    var localInvoices = SKYNOVA_SEED_INVOICES;
 
     async function loadInvoices() {
       var tbody = document.getElementById('invoicesTableBody');
       if (!tbody) return;
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:24px;">Loading Invoices...</td></tr>';
 
       try {
         var res = await authFetch('invoices?select=*,customers(*),invoice_items(*)&order=created_at.desc');
-        if (!res.ok) throw new Error("Failed to load");
-        var data = await res.json();
-        localInvoices = data;
-        renderInvoices(localInvoices);
-      } catch (err) {
-        renderInvoices(localInvoices);
-      }
+        if (res.ok) {
+          var dbData = await res.json();
+          if (dbData && dbData.length > 0) {
+            // Merge DB data with seed data
+            localInvoices = dbData.concat(SKYNOVA_SEED_INVOICES.filter(s => !dbData.some(d => d.number === s.number)));
+          }
+        }
+      } catch (err) {}
+
+      populateCustomerFilter();
+      applyInvoiceFilters();
+    }
+
+    function populateCustomerFilter() {
+      var select = document.getElementById('invFilterCustomer');
+      if (!select) return;
+      var curVal = select.value;
+      select.innerHTML = '<option value="all">All customers</option>';
+      var names = [];
+      localInvoices.forEach(function(inv) {
+        var name = inv.customers ? inv.customers.name : (inv.customer_name || 'Customer');
+        if (name && names.indexOf(name) === -1) names.push(name);
+      });
+      names.sort().forEach(function(n) {
+        var opt = document.createElement('option');
+        opt.value = n;
+        opt.textContent = n;
+        select.appendChild(opt);
+      });
+      select.value = curVal || 'all';
+    }
+
+    function applyInvoiceFilters() {
+      var fromDate = document.getElementById('invFilterFromDate') ? document.getElementById('invFilterFromDate').value : '';
+      var toDate = document.getElementById('invFilterToDate') ? document.getElementById('invFilterToDate').value : '';
+      var custFilter = document.getElementById('invFilterCustomer') ? document.getElementById('invFilterCustomer').value : 'all';
+      var statusFilter = document.getElementById('invFilterStatus') ? document.getElementById('invFilterStatus').value : 'all';
+
+      var filtered = localInvoices.filter(function(inv) {
+        var custName = inv.customers ? inv.customers.name : (inv.customer_name || '');
+        var invDate = inv.created_at ? inv.created_at.split('T')[0] : '';
+
+        if (fromDate && invDate < fromDate) return false;
+        if (toDate && invDate > toDate) return false;
+        if (custFilter !== 'all' && custName !== custFilter) return false;
+        if (statusFilter !== 'all') {
+          if (statusFilter === 'past_due' && inv.status !== 'past_due' && inv.status !== 'overdue') return false;
+          if (statusFilter !== 'past_due' && inv.status !== statusFilter) return false;
+        }
+        return true;
+      });
+
+      renderInvoices(filtered);
+    }
+
+    // Filter Listeners
+    ['invFilterFromDate', 'invFilterToDate', 'invFilterCustomer', 'invFilterStatus'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('change', applyInvoiceFilters);
+    });
+
+    var resetBtn = document.getElementById('invResetFiltersBtn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function() {
+        if (document.getElementById('invFilterFromDate')) document.getElementById('invFilterFromDate').value = '';
+        if (document.getElementById('invFilterToDate')) document.getElementById('invFilterToDate').value = '';
+        if (document.getElementById('invFilterCustomer')) document.getElementById('invFilterCustomer').value = 'all';
+        if (document.getElementById('invFilterStatus')) document.getElementById('invFilterStatus').value = 'all';
+        applyInvoiceFilters();
+      });
     }
 
     function renderInvoices(invList) {
@@ -2136,40 +2252,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       if (!tbody) return;
 
       var totalBilled = 0;
+      var totalBalance = 0;
       var totalPaid = 0;
       var openDrafts = 0;
-      var totalSent = 0;
 
       if (!invList || invList.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:24px;">No invoices created yet. Click "+ Create New Invoice" to make your first Skynova invoice!</td></tr>';
-        updateInvoiceKpis(0, 0, 0, 0);
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:24px;">No invoices match your selected filter criteria.</td></tr>';
+        updateInvoiceKpis(0, 0, 0, 0, 0);
         return;
       }
 
       tbody.innerHTML = invList.map(function(inv) {
         var amount = parseFloat(inv.total || 0);
+        var balance = inv.status === 'paid' ? 0 : (typeof inv.balance !== 'undefined' ? parseFloat(inv.balance) : amount);
+
         totalBilled += amount;
+        totalBalance += balance;
+
         if (inv.status === 'paid') totalPaid += amount;
         if (inv.status === 'draft') openDrafts++;
-        if (inv.status === 'sent') totalSent++;
 
         var custName = inv.customers ? inv.customers.name : (inv.customer_name || 'Customer');
         var dateStr = inv.created_at ? inv.created_at.split('T')[0] : 'Today';
-        var dueDateStr = inv.due_date || 'Upon Receipt';
-        var statusBadge = inv.status === 'paid'
-          ? '<span style="background:#dcfce7;color:#16a34a;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">PAID</span>'
-          : (inv.status === 'sent'
-            ? '<span style="background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">SENT</span>'
-            : '<span style="background:#fef3c7;color:#b45309;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">DRAFT</span>');
+
+        var statusBadge = '';
+        if (inv.status === 'paid') {
+          statusBadge = '<span style="background:#dcfce7;color:#16a34a;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">Paid</span>';
+        } else if (inv.status === 'past_due' || inv.status === 'overdue') {
+          statusBadge = '<span style="background:#fef2f2;color:#dc2626;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">Past due</span>';
+        } else if (inv.status === 'sent') {
+          statusBadge = '<span style="background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">Sent</span>';
+        } else {
+          statusBadge = '<span style="background:#fef3c7;color:#b45309;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;">Draft</span>';
+        }
 
         return `
           <tr>
-            <td style="font-weight:700;color:var(--navy);">${inv.number}</td>
-            <td style="font-weight:600;">${custName}</td>
+            <td style="font-weight:700;color:var(--navy);"><a href="javascript:void(0)" onclick="window.openInvoiceView('${inv.id}')" style="color:var(--navy);text-decoration:underline;">${inv.number}</a></td>
+            <td style="font-weight:600;"><a href="javascript:void(0)" onclick="alert('Customer: ${custName}')" style="color:#2563eb;text-decoration:none;">${custName}</a></td>
             <td style="font-size:13px;color:var(--muted);">${dateStr}</td>
-            <td style="font-size:13px;color:var(--muted);">${dueDateStr}</td>
-            <td>${statusBadge}</td>
             <td style="font-weight:700;color:var(--navy);">$${amount.toFixed(2)}</td>
+            <td style="font-weight:700;color:${balance > 0 ? '#dc2626' : 'var(--navy)'};">$${balance.toFixed(2)}</td>
+            <td>${statusBadge}</td>
             <td style="text-align:right;">
               <button onclick="window.openInvoiceView('${inv.id}')" class="btn-secondary" style="font-size:12px;padding:4px 10px;cursor:pointer;">🖨️ View/Print</button>
               ${inv.status !== 'paid' ? `<button onclick="window.markInvoicePaid('${inv.id}')" class="btn-action" style="font-size:12px;padding:4px 10px;background:#16a34a;color:#fff;margin-left:4px;">Mark Paid</button>` : ''}
@@ -2179,18 +2303,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         `;
       }).join('');
 
-      updateInvoiceKpis(totalBilled, totalPaid, openDrafts, totalSent);
+      updateInvoiceKpis(totalBilled, totalBalance, totalPaid, openDrafts, invList.length);
     }
 
-    function updateInvoiceKpis(billed, paid, drafts, sent) {
+    function updateInvoiceKpis(billed, balance, paid, drafts, count) {
       var bEl = document.getElementById('invKpiTotalBilled');
+      var balEl = document.getElementById('invKpiBalanceDue');
       var pEl = document.getElementById('invKpiTotalPaid');
       var dEl = document.getElementById('invKpiOpenDrafts');
-      var sEl = document.getElementById('invKpiTotalSent');
-      if (bEl) bEl.textContent = '$' + billed.toFixed(2);
-      if (pEl) pEl.textContent = '$' + paid.toFixed(2);
+      var cntEl = document.getElementById('invSummaryCount');
+      var totEl = document.getElementById('invSummaryTotal');
+      var sumBalEl = document.getElementById('invSummaryBalance');
+
+      if (bEl) bEl.textContent = '$' + billed.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      if (balEl) balEl.textContent = '$' + balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      if (pEl) pEl.textContent = '$' + paid.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       if (dEl) dEl.textContent = drafts;
-      if (sEl) sEl.textContent = sent;
+
+      if (cntEl) cntEl.textContent = (count || 0) + ' invoices';
+      if (totEl) totEl.textContent = '$' + billed.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      if (sumBalEl) sumBalEl.textContent = '$' + balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
     window.openInvoiceView = function(invId) {
