@@ -42,7 +42,7 @@ xml_lines = [
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 ]
 
-today = "2026-09-22"
+today = "2026-09-23"
 for url, prio in pages:
     xml_lines.append("  <url>")
     xml_lines.append(f"    <loc>{url}</loc>")
