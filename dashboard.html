@@ -1378,7 +1378,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         <!-- Field Upload Form -->
         <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:24px;margin-bottom:32px;">
-          <h4 style="font-size:16px;color:var(--navy);margin-bottom:16px;font-weight:700;">Upload Job Photo Details</h4>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h4 style="font-size:16px;color:var(--navy);font-weight:700;margin:0;">Upload Job Photo Details</h4>
+            <span style="font-size:12px;background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:12px;font-weight:700;">Step-by-Step Mobile Form</span>
+          </div>
+
+          <!-- Step 1 Big Camera Callout -->
+          <div style="background:#ffffff;border:2px dashed #2563eb;border-radius:10px;padding:16px;text-align:center;margin-bottom:20px;">
+            <div style="font-size:14px;font-weight:700;color:#1e40af;margin-bottom:8px;">📸 Step 1: Take or Select Your Photo</div>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+              <button type="button" class="btn-action" onclick="document.getElementById('fieldCameraInput').click()" style="font-size:15px;padding:10px 20px;background:#16a34a;color:#fff;">
+                📸 Open Camera Now
+              </button>
+              <button type="button" class="btn-secondary" onclick="document.getElementById('fieldGalleryInput').click()" style="font-size:14px;padding:10px 16px;">
+                🖼️ Choose from Gallery
+              </button>
+            </div>
+          </div>
           
           <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;margin-bottom:16px;">
             <div>
@@ -1420,7 +1436,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
           </div>
 
-          <button type="button" class="btn-action" id="uploadFieldPhotoBtn" onclick="window.saveAndGeotagFieldPhoto()" style="width:100%;display:none;font-size:16px;padding:14px;background:#16a34a;color:#fff;">
+          <button type="button" class="btn-action" id="uploadFieldPhotoBtn" onclick="window.saveAndGeotagFieldPhoto()" style="width:100%;font-size:16px;padding:14px;background:#16a34a;color:#fff;margin-top:10px;">
             🚀 Save, Geotag &amp; Upload to Project Showcase
           </button>
         </div>
@@ -2985,7 +3001,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     window.saveAndGeotagFieldPhoto = async function() {
       if (!currentFieldPhotoDataUrl) {
-        alert("Please select or capture a photo first.");
+        alert("📸 Opening your phone camera now... Please take your photo!");
+        if (document.getElementById("fieldCameraInput")) document.getElementById("fieldCameraInput").click();
         return;
       }
 
