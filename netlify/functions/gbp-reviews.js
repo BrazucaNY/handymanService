@@ -5,7 +5,33 @@ const saProject = process.env.FIREBASE_PROJECT_ID || ('handyman' + 'service' + '
 const client_email = process.env.GOOGLE_SA_EMAIL || (`herehandyman-booking@${saProject}.iam.gserviceaccount.com`);
 const private_key = (process.env.GOOGLE_SA_PRIVATE_KEY || '').replace(/\\n/g, '\n');
 
+// User OAuth 2.0 (Direct access for primary owner davi65@gmail.com)
+const client_id = process.env.GOOGLE_CLIENT_ID;
+const client_secret = process.env.GOOGLE_CLIENT_SECRET;
+const refresh_token = process.env.GOOGLE_OAUTH_REFRESH_TOKEN || process.env.GOOGLE_REFRESH_TOKEN;
+
 async function getAccessToken() {
+  // Option A: Primary Owner User OAuth 2.0 Refresh Token (Preferred for davi65@gmail.com)
+  if (client_id && client_secret && refresh_token) {
+    const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        client_id,
+        client_secret,
+        refresh_token,
+        grant_type: 'refresh_token'
+      })
+    });
+
+    if (tokenRes.ok) {
+      const tokenData = await tokenRes.json();
+      return { token: tokenData.access_token, authType: 'User OAuth (davi65@gmail.com)' };
+    }
+    console.warn('OAuth refresh token failed, falling back to Service Account JWT...');
+  }
+
+  // Option B: Service Account JWT Fallback
   const now = Math.floor(Date.now() / 1000);
   const header = { alg: 'RS256', typ: 'JWT' };
   const claimSet = {
@@ -38,7 +64,23 @@ async function getAccessToken() {
   }
 
   const tokenData = await tokenRes.json();
-  return tokenData.access_token;
+  return { token: tokenData.access_token, authType: `Service Account (${client_email})` };
+}
+
+// Generate high-converting Local SEO reply according to Here Handyman guidelines
+function generateSeoReply(reviewerName, comment, town, service) {
+  const name = reviewerName || 'valued customer';
+  const location = town || 'Westchester County, NY';
+  const jobService = service || 'home repair';
+
+  const westchesterCities = ['White Plains', 'Scarsdale', 'Yonkers', 'Harrison', 'Rye', 'Mamaroneck', 'Tarrytown', 'Dobbs Ferry', 'Eastchester', 'New Rochelle'];
+  const selectedCity = westchesterCities.find(c => location.toLowerCase().includes(c.toLowerCase())) || 'Westchester County';
+
+  if (comment && comment.length > 5) {
+    return `${name}, thank you so much for the 5-star review! It was a real pleasure helping with your ${jobService} in ${selectedCity}. At Here Handyman, we take pride in delivering prompt, clean, and top-quality home repairs across Westchester County. Looking forward to helping you again anytime! David, Here Handyman`;
+  }
+
+  return `${name}, thank you for choosing Here Handyman! Providing reliable, professional 5-star home maintenance and ${jobService} in ${selectedCity} is what we love to do. Give us a call anytime for your next project! David, Here Handyman`;
 }
 
 export async function handler(event, context) {
@@ -54,7 +96,7 @@ export async function handler(event, context) {
   }
 
   try {
-    const accessToken = await getAccessToken();
+    const { token: accessToken, authType } = await getAccessToken();
 
     if (event.httpMethod === 'GET') {
       // 1. Fetch Accounts from Google Business Profile API
@@ -73,34 +115,35 @@ export async function handler(event, context) {
         body: JSON.stringify({
           success: true,
           authenticated: true,
-          clientEmail: client_email,
+          authType,
           accounts: accountsData.accounts || [],
-          message: 'Successfully authenticated with Google Business Profile API!'
+          message: `Successfully authenticated using ${authType}!`
         })
       };
     }
 
     if (event.httpMethod === 'POST') {
-      // 2. Post AI Reply to a specific Google Review
       const body = JSON.parse(event.body || '{}');
-      const { reviewName, replyComment } = body;
+      const { reviewName, replyComment, reviewerName, comment, town, service } = body;
 
-      if (!reviewName || !replyComment) {
+      const finalReply = replyComment || generateSeoReply(reviewerName, comment, town, service);
+
+      if (!reviewName) {
         return {
           statusCode: 400,
           headers,
-          body: JSON.stringify({ error: 'reviewName and replyComment are required' })
+          body: JSON.stringify({ error: 'reviewName is required to post a reply' })
         };
       }
 
-      // Send reply back to Google My Business API: PUT https://mybusiness.googleapis.com/v4/{reviewName}/reply
+      // Send reply to Google My Business API: PUT https://mybusiness.googleapis.com/v4/{reviewName}/reply
       const replyRes = await fetch(`https://mybusiness.googleapis.com/v4/${reviewName}/reply`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ comment: replyComment })
+        body: JSON.stringify({ comment: finalReply })
       });
 
       const replyData = await replyRes.json();
@@ -111,7 +154,8 @@ export async function handler(event, context) {
         body: JSON.stringify({
           success: replyRes.ok,
           reply: replyData,
-          message: replyRes.ok ? 'Successfully posted reply to Google!' : 'Failed to post reply to Google.'
+          postedComment: finalReply,
+          message: replyRes.ok ? 'Successfully posted Local SEO reply to Google!' : 'Failed to post reply to Google.'
         })
       };
     }
@@ -127,3 +171,4 @@ export async function handler(event, context) {
     };
   }
 }
+
