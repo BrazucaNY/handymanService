@@ -51,6 +51,22 @@
   to = "/book"
   status = 301
 
+# /reviews & /review-us redirects
+[[redirects]]
+  from = "/reviews"
+  to = "/reviews.html"
+  status = 200
+
+[[redirects]]
+  from = "/review-us"
+  to = "/reviews.html"
+  status = 200
+
+[[redirects]]
+  from = "/review"
+  to = "/reviews.html"
+  status = 200
+
 # /services hub page
 [[redirects]]
   from = "/services"

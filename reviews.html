@@ -19,14 +19,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Customer Review & Feedback Portal | Here Handyman Westchester NY</title>
-  <meta name="description" content="Share your experience with Here Handyman in Westchester County NY. Read verified 5-star Google reviews or submit your feedback directly to owner David."/>
+  <title>Leave Us a 5-Star Google Review | Here Handyman Westchester NY</title>
+  <meta name="description" content="Share your 5-star experience with Here Handyman on Google Business Profile. Read verified customer reviews from homeowners across Westchester County NY."/>
   <link rel="canonical" href="https://www.herehandyman.com/reviews"/>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
   <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 
-  <meta property="og:title" content="Verified Customer Reviews & Feedback | Here Handyman"/>
+  <meta property="og:title" content="Leave Us a 5-Star Google Review | Here Handyman"/>
   <meta property="og:description" content="Read 5-star Google reviews from Westchester homeowners or share your experience with Here Handyman."/>
   <meta property="og:image" content="https://www.herehandyman.com/assets/images/og-image.webp"/>
   <meta property="og:url" content="https://www.herehandyman.com/reviews"/>
@@ -120,7 +120,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
     }
     .nav-links a {
       color: #fff;
@@ -129,7 +129,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight: 500;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
     .nav-cta {
       background: var(--gold);
       color: var(--navy) !important;
@@ -140,7 +140,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .nav-cta:hover { background: var(--gold-hover); transform: translateY(-1px); }
 
-    @media (max-width: 680px) {
+    @media (max-width: 768px) {
       .nav-links a:not(.nav-cta) { display: none; }
     }
 
@@ -153,14 +153,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       padding: 0 20px;
     }
 
-    /* Rating Summary Header Banner */
+    /* Header Banner */
     .summary-banner {
       background: var(--navy);
       color: var(--white);
       border-radius: var(--radius);
-      padding: 28px;
+      padding: 32px 28px;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 24px;
       box-shadow: 0 10px 30px rgba(7, 24, 40, 0.12);
       border: 1px solid rgba(255,255,255,0.1);
     }
@@ -180,13 +180,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .summary-banner h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 6vw, 52px);
+      font-size: clamp(34px, 5.5vw, 48px);
       letter-spacing: 1px;
       line-height: 1.05;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .summary-banner p {
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.88);
       font-size: 16px;
       max-width: 640px;
       margin: 0 auto;
@@ -196,15 +196,98 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       align-items: center;
       justify-content: center;
       gap: 6px;
-      font-size: 24px;
+      font-size: 22px;
       color: var(--gold);
       margin-top: 14px;
     }
     .rating-stars-badge span {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       color: #fff;
       margin-left: 6px;
+    }
+
+    /* Direct Google Review Hero Funnel Card */
+    .google-funnel-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+      border: 2px solid #4285F4;
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      margin-bottom: 36px;
+      box-shadow: 0 12px 36px rgba(66, 133, 244, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .google-funnel-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
+    }
+    .google-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid rgba(66, 133, 244, 0.25);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .google-funnel-card h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .google-funnel-card p {
+      color: var(--muted);
+      font-size: 15.5px;
+      max-width: 580px;
+      margin: 0 auto 20px;
+    }
+    .hero-google-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 460px;
+      height: 58px;
+      background: #4285F4;
+      color: #ffffff;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(66, 133, 244, 0.35);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .hero-google-btn:hover {
+      background: #3367d6;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(66, 133, 244, 0.45);
+    }
+    .hero-google-btn svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .micro-note {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
     /* Cards */
@@ -219,13 +302,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     .card-title-center {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .card-title-center h2 {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 34px;
       color: var(--navy);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .card-title-center p {
       color: var(--muted);
@@ -235,7 +318,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* Star Rating Selector */
     .star-rating-box {
       text-align: center;
-      margin: 10px 0 28px;
+      margin: 10px 0 24px;
     }
     .star-rating-box p {
       font-weight: 700;
@@ -258,6 +341,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .star.selected, .star.hover {
       color: var(--gold);
       transform: scale(1.15);
+    }
+
+    /* Dynamic Banner above Form */
+    .funnel-notice {
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 14.5px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .funnel-notice.positive {
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+    }
+    .funnel-notice.feedback {
+      background: #fffbeb;
+      color: #92400e;
+      border: 1px solid #fde68a;
     }
 
     /* Form Fields */
@@ -309,7 +413,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     .btn-submit {
       width: 100%;
-      height: 52px;
+      height: 54px;
       background: var(--gold);
       color: var(--navy);
       font-family: 'Bebas Neue', sans-serif;
@@ -321,10 +425,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transition: background 0.2s, transform 0.15s;
       box-shadow: 0 8px 20px rgba(234, 179, 8, 0.3);
       margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
     .btn-submit:hover {
       background: var(--gold-hover);
       transform: translateY(-1px);
+    }
+    .btn-submit.google-action {
+      background: #4285F4;
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3);
+    }
+    .btn-submit.google-action:hover {
+      background: #3367d6;
     }
 
     /* Result Screens */
@@ -491,8 +607,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="/services">Services</a>
+        <a href="/white-plains-handyman">White Plains</a>
         <a href="/gallery">Gallery</a>
-        <a href="/book" class="nav-cta">Book Online</a>
+        <a href="/reviews" class="active">Reviews</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a href="/book" class="nav-cta">Book Here</a>
       </div>
     </div>
   </nav>
@@ -502,24 +622,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <!-- RATING SUMMARY HEADER -->
     <div class="summary-banner">
-      <div class="summary-badge">Verified Customer Experience</div>
-      <h1>Westchester's Top-Rated Handyman</h1>
-      <p>Your honest feedback helps us maintain 5-star quality across White Plains, Scarsdale, Yonkers, Rye, Harrison, Mamaroneck, and all Westchester County towns.</p>
+      <div class="summary-badge">Google Business Profile Review Portal</div>
+      <h1>Leave Us a 5-Star Google Review</h1>
+      <p>Your review helps fellow homeowners across White Plains, Scarsdale, Yonkers, Rye, Harrison, Mamaroneck, and Westchester County find reliable, top-rated handyman services from owner David.</p>
       <div class="rating-stars-badge">
-        ★★★★★ <span>5.0 / 5.0 Rating (Verified Google Reviews)</span>
+        ★★★★★ <span>5.0 / 5.0 Rating (24 Verified Google Reviews)</span>
       </div>
     </div>
 
-    <!-- MAIN REVIEW HARVESTER CARD -->
+    <!-- DIRECT GOOGLE REVIEW FUNNEL CARD -->
+    <div class="google-funnel-card">
+      <div class="google-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.545,6.477,2.545,12s4.476,10,10,10c5.753,0,9.577-4.041,9.577-9.752c0-0.654-0.065-1.295-0.183-1.996H12.545z"/></svg>
+        Google Business Profile
+      </div>
+      <h2>Rate Us Directly on Google</h2>
+      <p>If David completed a job for you, tapping below takes you directly to our official Google Maps review window!</p>
+      <a href="https://g.page/r/CcY8nHWkiRZ0EAE/review" target="_blank" rel="noopener" class="hero-google-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.545,6.477,2.545,12s4.476,10,10,10c5.753,0,9.577-4.041,9.577-9.752c0-0.654-0.065-1.295-0.183-1.996H12.545z"/></svg>
+        <span>Write a 5-Star Review on Google →</span>
+      </a>
+      <div class="micro-note">
+        <span>✓ Takes 30 seconds</span> • <span>✓ Opens directly in Google Maps</span>
+      </div>
+    </div>
+
+    <!-- MAIN REVIEW HARVESTER & FEEDBACK CARD -->
     <div class="card" id="formCard">
       <div class="card-title-center">
-        <h2>Leave Your Review & Feedback</h2>
-        <p>Takes less than 1 minute. Please share your experience with David!</p>
+        <h2>Or Share Your Feedback Below</h2>
+        <p>Select your star rating to get started:</p>
       </div>
 
       <!-- Step 1: Star Selection -->
       <div class="star-rating-box">
-        <p>Tap a star to rate your service:</p>
         <div class="stars" id="starContainer">
           <span class="star" data-rating="1">★</span>
           <span class="star" data-rating="2">★</span>
@@ -527,6 +663,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <span class="star" data-rating="4">★</span>
           <span class="star" data-rating="5">★</span>
         </div>
+      </div>
+
+      <!-- Dynamic Notice -->
+      <div class="funnel-notice positive" id="funnelNotice">
+        🚀 <strong>5-Star Rating:</strong> Submitting will copy your feedback and take you directly to Google Maps to post!
       </div>
 
       <!-- Step 2: Contact Info & Review Form -->
@@ -607,19 +748,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
 
         <div class="form-group">
-          <label>Your Review / Feedback <span>*</span></label>
+          <label id="reviewTextLabel">Your Review / Feedback <span>*</span></label>
           <textarea class="form-control" id="reviewText" placeholder="Tell us about the job completed by David..." required></textarea>
         </div>
 
-        <button type="submit" class="btn-submit" id="submitBtn">Submit & Continue →</button>
+        <button type="submit" class="btn-submit google-action" id="submitBtn">
+          <span>Copy & Post Review on Google →</span>
+        </button>
       </form>
     </div>
 
     <!-- Screen 5-Star Success (Google Review Redirect) -->
     <div class="card result-screen" id="positiveScreen">
       <div class="icon-success">✓</div>
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--navy);">Thank You For The 5-Star Rating!</h2>
-      <p style="color:var(--muted);margin-bottom:16px;">Your review text has been copied to your clipboard. Please paste it on our official Google Business Profile page to help other local homeowners!</p>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--navy);">Thank You For The 5-Star Review!</h2>
+      <p style="color:var(--muted);margin-bottom:16px;">Your review text has been copied to your clipboard. Please paste it on our official Google Business Profile page!</p>
 
       <div class="reward-banner">
         <h4>🎁 Special Thank You Discount</h4>
@@ -637,7 +780,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="icon-success" style="background:#fef3c7;color:#d97706;">💬</div>
       <h2 style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--navy);">Thank You For Your Feedback</h2>
       <p style="color:var(--muted);margin-bottom:20px;">We appreciate your honesty. Owner David has received your comments directly and will contact you within 24 hours to ensure you are 100% satisfied.</p>
-      <a href="/" class="btn-submit" style="display:inline-block;text-decoration:none;line-height:52px;text-align:center;">Return to Homepage</a>
+      <a href="/" class="btn-submit" style="display:inline-block;text-decoration:none;line-height:54px;text-align:center;">Return to Homepage</a>
     </div>
 
     <!-- VERIFIED GOOGLE REVIEWS SHOWCASE GRID (100% REAL GOOGLE BUSINESS PROFILE REVIEWS) -->
@@ -647,7 +790,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <div class="reviews-grid">
 
-        <!-- Real Review 1 -->
+        <!-- Real Review: Sean Murray -->
+        <div class="review-card">
+          <div>
+            <div class="review-card-header">
+              <span class="review-author">Sean Murray</span>
+              <span class="review-town">Westchester, NY</span>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Reasonable price. David was great. He hung two toilet paper holders and installed one smoke detector to the ceiling. He also checked a ceiling fan that was wobbling and explaining thoroughly why it was happening. I plan on referring him to my extended family and friends in Westchester."</p>
+          </div>
+          <div>
+            <span class="review-tag">✓ Verified Google Review</span>
+            <div class="owner-response">
+              <strong>David's Reply:</strong> Thank you so much, Sean! It was a pleasure fixing the fixtures and getting that wobbling fan diagnosed properly. Appreciate the referrals!
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Review: Lori Ann Marcella -->
         <div class="review-card">
           <div>
             <div class="review-card-header">
@@ -665,7 +826,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
         </div>
 
-        <!-- Real Review 2 -->
+        <!-- Real Review: Jacob Marquez -->
         <div class="review-card">
           <div>
             <div class="review-card-header">
@@ -683,7 +844,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
         </div>
 
-        <!-- Real Review 3 -->
+        <!-- Real Review: Carlos Ramirez -->
         <div class="review-card">
           <div>
             <div class="review-card-header">
@@ -701,7 +862,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
         </div>
 
-        <!-- Real Review 4 -->
+        <!-- Real Review: Kathy Roberts -->
         <div class="review-card">
           <div>
             <div class="review-card-header">
@@ -719,7 +880,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
         </div>
 
-        <!-- Real Review 5 -->
+        <!-- Real Review: Pam Jaffee -->
         <div class="review-card">
           <div>
             <div class="review-card-header">
@@ -737,7 +898,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
         </div>
 
-        <!-- Real Review 6 -->
+        <!-- Real Review: Anne Bryant -->
         <div class="review-card">
           <div>
             <div class="review-card-header">
@@ -762,7 +923,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 <strong>Here Handyman</strong>. All rights reserved. Licensed &amp; Insured in Westchester County, NY.</p>
+    <p>&copy; 2026 <strong>Here Handyman</strong>. All rights reserved. Insured &amp; Top-Rated in Westchester County, NY.</p>
     <p style="margin-top:6px;font-size:12.5px;">
       Direct Call / Text: <a href="tel:+15163500801">(516) 350-0801</a> | 
       <a href="https://g.page/r/CcY8nHWkiRZ0EAE" target="_blank" rel="noopener">Google Business Profile</a> | 
@@ -779,6 +940,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const formCard = document.getElementById('formCard');
       const positiveScreen = document.getElementById('positiveScreen');
       const feedbackScreen = document.getElementById('feedbackScreen');
+      const funnelNotice = document.getElementById('funnelNotice');
+      const submitBtn = document.getElementById('submitBtn');
+      const reviewTextLabel = document.getElementById('reviewTextLabel');
 
       let currentRating = 5;
 
@@ -792,6 +956,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             star.classList.remove('selected');
           }
         });
+
+        if (rating >= 4) {
+          funnelNotice.className = 'funnel-notice positive';
+          funnelNotice.innerHTML = '🚀 <strong>' + rating + '-Star Rating:</strong> Submitting will copy your feedback and take you directly to Google Maps to post!';
+          submitBtn.className = 'btn-submit google-action';
+          submitBtn.innerHTML = '<span>Copy & Post Review on Google →</span>';
+          if (reviewTextLabel) reviewTextLabel.innerHTML = 'Your Review / Feedback <span>*</span>';
+        } else {
+          funnelNotice.className = 'funnel-notice feedback';
+          funnelNotice.innerHTML = '💬 <strong>Private Feedback:</strong> Your comments will be sent directly to owner David so he can contact you personally.';
+          submitBtn.className = 'btn-submit';
+          submitBtn.innerHTML = '<span>Send Private Feedback to David →</span>';
+          if (reviewTextLabel) reviewTextLabel.innerHTML = 'How Can We Make Things Right? <span>*</span>';
+        }
       }
 
       // Default 5 stars
@@ -829,9 +1007,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const submitBtn = document.getElementById('submitBtn');
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Saving Review...';
+        submitBtn.innerHTML = '<span>Saving & Processing...</span>';
 
         const payload = {
           name: document.getElementById('custName').value,
@@ -868,9 +1045,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         // Hide Form Card
         formCard.style.display = 'none';
 
-        // Route screens
+        // Route screens & open Google Review tab if 4-5 stars
         if (payload.rating >= 4) {
           positiveScreen.classList.add('active');
+          window.open('https://g.page/r/CcY8nHWkiRZ0EAE/review', '_blank');
         } else {
           feedbackScreen.classList.add('active');
         }
