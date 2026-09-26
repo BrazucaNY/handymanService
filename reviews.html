@@ -13,8 +13,7 @@
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PCT6SLV8');</script>
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,document,'script','dataLayer','GTM-PCT6SLV8');</script>
 <!-- End Google Tag Manager -->
 
   <meta charset="UTF-8"/>
@@ -214,7 +213,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-radius: var(--radius);
       padding: 36px 28px;
       text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
       box-shadow: 0 12px 36px rgba(66, 133, 244, 0.15);
       position: relative;
       overflow: hidden;
@@ -288,6 +287,68 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       align-items: center;
       justify-content: center;
       gap: 6px;
+    }
+
+    /* Social Connect Card */
+    .social-connect-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(7, 24, 40, 0.08);
+      padding: 32px 24px;
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .social-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .social-sub {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 580px;
+      margin: 0 auto 20px;
+    }
+    .social-buttons-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .social-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
+    .social-btn.insta {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+    .social-btn.fb {
+      background: #1877F2;
+    }
+    .social-btn.linkedin {
+      background: #0A66C2;
+    }
+    .social-btn.yt {
+      background: #FF0000;
+    }
+    .social-btn.x-twitter {
+      background: #000000;
     }
 
     /* Verified Reviews Showcase Grid */
@@ -387,6 +448,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     footer a { color: var(--navy); font-weight: 600; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+    .footer-social-links {
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 13.5px;
+    }
   </style>
 </head>
 <body>
@@ -435,6 +505,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </a>
       <div class="micro-note">
         <span>✓ Takes 30 seconds</span> • <span>✓ Opens directly in Google Maps</span>
+      </div>
+    </div>
+
+    <!-- FOLLOW US ON SOCIAL MEDIA CARD -->
+    <div class="social-connect-card">
+      <h2 class="social-title">Follow Here Handyman On Social Media</h2>
+      <p class="social-sub">See recent job site photos, before/after transformations, and handyman tips across Westchester County!</p>
+
+      <div class="social-buttons-grid">
+        <a href="https://www.instagram.com/herehandyman/" target="_blank" rel="noopener" class="social-btn insta">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          <span>Instagram</span>
+        </a>
+
+        <a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank" rel="noopener" class="social-btn fb">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>Facebook</span>
+        </a>
+
+        <a href="https://www.linkedin.com/company/here-handyman" target="_blank" rel="noopener" class="social-btn linkedin">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.7a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z"/></svg>
+          <span>LinkedIn</span>
+        </a>
+
+        <a href="https://www.youtube.com/@herehandyman" target="_blank" rel="noopener" class="social-btn yt">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span>YouTube</span>
+        </a>
+
+        <a href="https://x.com/HereHandymanNY" target="_blank" rel="noopener" class="social-btn x-twitter">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <span>X / Twitter</span>
+        </a>
       </div>
     </div>
 
@@ -579,6 +682,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- FOOTER -->
   <footer>
     <p>&copy; 2026 <strong>Here Handyman</strong>. All rights reserved. Insured &amp; Top-Rated in Westchester County, NY.</p>
+    <div class="footer-social-links">
+      <a href="https://www.instagram.com/herehandyman/" target="_blank" rel="noopener">Instagram</a> |
+      <a href="https://www.facebook.com/profile.php?id=61578693421538" target="_blank" rel="noopener">Facebook</a> |
+      <a href="https://www.linkedin.com/company/here-handyman" target="_blank" rel="noopener">LinkedIn</a> |
+      <a href="https://www.youtube.com/@herehandyman" target="_blank" rel="noopener">YouTube</a> |
+      <a href="https://x.com/HereHandymanNY" target="_blank" rel="noopener">X (Twitter)</a>
+    </div>
     <p style="margin-top:6px;font-size:12.5px;">
       Direct Call / Text: <a href="tel:+15163500801">(516) 350-0801</a> | 
       <a href="https://g.page/r/CcY8nHWkiRZ0EAE" target="_blank" rel="noopener">Google Business Profile</a> | 
