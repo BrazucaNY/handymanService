@@ -212,7 +212,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
       border: 2px solid #4285F4;
       border-radius: var(--radius);
-      padding: 32px 24px;
+      padding: 36px 28px;
       text-align: center;
       margin-bottom: 36px;
       box-shadow: 0 12px 36px rgba(66, 133, 244, 0.15);
@@ -242,15 +242,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .google-funnel-card h2 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 36px;
+      font-size: 38px;
       color: var(--navy);
       margin-bottom: 8px;
     }
     .google-funnel-card p {
       color: var(--muted);
-      font-size: 15.5px;
+      font-size: 16px;
       max-width: 580px;
-      margin: 0 auto 20px;
+      margin: 0 auto 24px;
     }
     .hero-google-btn {
       display: inline-flex;
@@ -258,13 +258,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       justify-content: center;
       gap: 12px;
       width: 100%;
-      max-width: 460px;
-      height: 58px;
+      max-width: 480px;
+      height: 60px;
       background: #4285F4;
       color: #ffffff;
       font-family: 'DM Sans', sans-serif;
       font-weight: 700;
-      font-size: 18px;
+      font-size: 19px;
       border-radius: 12px;
       text-decoration: none;
       box-shadow: 0 8px 24px rgba(66, 133, 244, 0.35);
@@ -276,232 +276,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       box-shadow: 0 12px 28px rgba(66, 133, 244, 0.45);
     }
     .hero-google-btn svg {
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       flex-shrink: 0;
     }
     .micro-note {
-      font-size: 13px;
+      font-size: 13.5px;
       color: #64748b;
-      margin-top: 12px;
+      margin-top: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
     }
 
-    /* Cards */
-    .card {
-      background: var(--white);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 30px rgba(7, 24, 40, 0.08);
-      padding: 36px 28px;
-      margin-bottom: 36px;
-    }
-
-    .card-title-center {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .card-title-center h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 34px;
-      color: var(--navy);
-      margin-bottom: 4px;
-    }
-    .card-title-center p {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    /* Star Rating Selector */
-    .star-rating-box {
-      text-align: center;
-      margin: 10px 0 24px;
-    }
-    .star-rating-box p {
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-    .stars {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      font-size: 46px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .star {
-      color: #cbd5e1;
-      transition: transform 0.15s ease, color 0.15s ease;
-    }
-    .star.selected, .star.hover {
-      color: var(--gold);
-      transform: scale(1.15);
-    }
-
-    /* Dynamic Banner above Form */
-    .funnel-notice {
-      padding: 14px 18px;
-      border-radius: 10px;
-      font-size: 14.5px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .funnel-notice.positive {
-      background: #eff6ff;
-      color: #1e40af;
-      border: 1px solid #bfdbfe;
-    }
-    .funnel-notice.feedback {
-      background: #fffbeb;
-      color: #92400e;
-      border: 1px solid #fde68a;
-    }
-
-    /* Form Fields */
-    .form-group {
-      text-align: left;
-      margin-bottom: 18px;
-    }
-    .form-group label {
-      display: block;
-      font-weight: 700;
-      font-size: 13.5px;
-      color: var(--navy);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .form-group label span { color: #dc2626; }
-    .form-control {
-      width: 100%;
-      height: 48px;
-      padding: 0 16px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-size: 15px;
-      font-family: inherit;
-      color: var(--text);
-      background: #fdfdfd;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .form-control:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
-    }
-    textarea.form-control {
-      height: 110px;
-      padding: 12px 16px;
-      resize: vertical;
-    }
-
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    @media (max-width: 600px) {
-      .row-2 { grid-template-columns: 1fr; }
-    }
-
-    .btn-submit {
-      width: 100%;
-      height: 54px;
-      background: var(--gold);
-      color: var(--navy);
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 1px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      box-shadow: 0 8px 20px rgba(234, 179, 8, 0.3);
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .btn-submit:hover {
-      background: var(--gold-hover);
-      transform: translateY(-1px);
-    }
-    .btn-submit.google-action {
-      background: #4285F4;
-      color: #ffffff;
-      box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3);
-    }
-    .btn-submit.google-action:hover {
-      background: #3367d6;
-    }
-
-    /* Result Screens */
-    .result-screen {
-      display: none;
-      text-align: center;
-      padding: 20px 0;
-    }
-    .result-screen.active {
-      display: block;
-    }
-
-    .icon-success {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: #dcfce7;
-      color: var(--green);
-      font-size: 36px;
-      display: grid;
-      place-items: center;
-      margin: 0 auto 16px;
-    }
-
-    .reward-banner {
-      background: linear-gradient(135deg, #071828 0%, #0e2a47 100%);
-      color: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px 0;
-      border-left: 5px solid var(--gold);
-      text-align: left;
-    }
-    .reward-banner h4 {
-      color: var(--gold);
-      font-size: 18px;
-      margin-bottom: 4px;
-    }
-
-    .google-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      height: 54px;
-      background: #4285F4;
-      color: #fff;
-      font-weight: 700;
-      font-size: 16px;
-      border-radius: 10px;
-      text-decoration: none;
-      box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3);
-      transition: background 0.2s;
-      margin-top: 14px;
-    }
-    .google-btn:hover { background: #3367d6; }
-
     /* Verified Reviews Showcase Grid */
     .reviews-showcase {
-      margin-top: 40px;
+      margin-top: 20px;
     }
     .reviews-showcase-title {
       font-family: 'Bebas Neue', sans-serif;
@@ -645,142 +436,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="micro-note">
         <span>✓ Takes 30 seconds</span> • <span>✓ Opens directly in Google Maps</span>
       </div>
-    </div>
-
-    <!-- MAIN REVIEW HARVESTER & FEEDBACK CARD -->
-    <div class="card" id="formCard">
-      <div class="card-title-center">
-        <h2>Or Share Your Feedback Below</h2>
-        <p>Select your star rating to get started:</p>
-      </div>
-
-      <!-- Step 1: Star Selection -->
-      <div class="star-rating-box">
-        <div class="stars" id="starContainer">
-          <span class="star" data-rating="1">★</span>
-          <span class="star" data-rating="2">★</span>
-          <span class="star" data-rating="3">★</span>
-          <span class="star" data-rating="4">★</span>
-          <span class="star" data-rating="5">★</span>
-        </div>
-      </div>
-
-      <!-- Dynamic Notice -->
-      <div class="funnel-notice positive" id="funnelNotice">
-        🚀 <strong>5-Star Rating:</strong> Submitting will copy your feedback and take you directly to Google Maps to post!
-      </div>
-
-      <!-- Step 2: Contact Info & Review Form -->
-      <form id="reviewForm">
-        <input type="hidden" id="selectedRating" value="5">
-
-        <div class="row-2">
-          <div class="form-group">
-            <label>Full Name <span>*</span></label>
-            <input type="text" class="form-control" id="custName" placeholder="e.g. John Smith" required>
-          </div>
-          <div class="form-group">
-            <label>Phone Number <span>*</span></label>
-            <input type="tel" class="form-control" id="custPhone" placeholder="(516) 350-0801" required>
-          </div>
-        </div>
-
-        <div class="row-2">
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" class="form-control" id="custEmail" placeholder="john@example.com">
-          </div>
-          <div class="form-group">
-            <label>Town / City <span>*</span></label>
-            <select class="form-control" id="custTown" required>
-              <option value="">Select your town...</option>
-              <option value="White Plains">White Plains</option>
-              <option value="Scarsdale">Scarsdale</option>
-              <option value="Yonkers">Yonkers</option>
-              <option value="New Rochelle">New Rochelle</option>
-              <option value="Rye">Rye</option>
-              <option value="Harrison">Harrison</option>
-              <option value="Mamaroneck">Mamaroneck</option>
-              <option value="Hartsdale">Hartsdale</option>
-              <option value="Tarrytown">Tarrytown</option>
-              <option value="Eastchester">Eastchester</option>
-              <option value="Bronxville">Bronxville</option>
-              <option value="Ardsley">Ardsley</option>
-              <option value="Briarcliff Manor">Briarcliff Manor</option>
-              <option value="Dobbs Ferry">Dobbs Ferry</option>
-              <option value="Elmsford">Elmsford</option>
-              <option value="Greenburgh">Greenburgh</option>
-              <option value="Irvington">Irvington</option>
-              <option value="Larchmont">Larchmont</option>
-              <option value="Mount Vernon">Mount Vernon</option>
-              <option value="Ossining">Ossining</option>
-              <option value="Pelham">Pelham</option>
-              <option value="Sleepy Hollow">Sleepy Hollow</option>
-              <option value="Valhalla">Valhalla</option>
-              <option value="Other Westchester">Other Westchester Town</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row-2">
-          <div class="form-group">
-            <label>Street Address</label>
-            <input type="text" class="form-control" id="custAddress" placeholder="123 Main St">
-          </div>
-          <div class="form-group">
-            <label>Service Completed <span>*</span></label>
-            <select class="form-control" id="custService" required>
-              <option value="">Select service...</option>
-              <option value="TV Mounting">TV Mounting & Wiring</option>
-              <option value="Furniture Assembly">Furniture Assembly</option>
-              <option value="Electrical Repair">Electrical & Lighting Repairs</option>
-              <option value="Plumbing Repair">Plumbing Repairs & Swaps</option>
-              <option value="Drywall & Painting">Drywall Patching & Painting</option>
-              <option value="Door Repair">Door & Hardware Repair</option>
-              <option value="Kitchen & Bath">Kitchen & Bath Upgrades</option>
-              <option value="Carpentry & Shelving">Carpentry & Custom Shelving</option>
-              <option value="Smart Home">Smart Home Device Setup</option>
-              <option value="Deck Maintenance">Deck Sealing & Maintenance</option>
-              <option value="General Home Repairs">General Home Maintenance</option>
-              <option value="Property Management">Commercial Property Maintenance</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label id="reviewTextLabel">Your Review / Feedback <span>*</span></label>
-          <textarea class="form-control" id="reviewText" placeholder="Tell us about the job completed by David..." required></textarea>
-        </div>
-
-        <button type="submit" class="btn-submit google-action" id="submitBtn">
-          <span>Copy & Post Review on Google →</span>
-        </button>
-      </form>
-    </div>
-
-    <!-- Screen 5-Star Success (Google Review Redirect) -->
-    <div class="card result-screen" id="positiveScreen">
-      <div class="icon-success">✓</div>
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--navy);">Thank You For The 5-Star Review!</h2>
-      <p style="color:var(--muted);margin-bottom:16px;">Your review text has been copied to your clipboard. Please paste it on our official Google Business Profile page!</p>
-
-      <div class="reward-banner">
-        <h4>🎁 Special Thank You Discount</h4>
-        <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.95);">You unlocked <strong>10% OFF</strong> your next handyman booking with Here Handyman!</p>
-      </div>
-
-      <a id="googleRedirectBtn" href="https://g.page/r/CcY8nHWkiRZ0EAE/review" target="_blank" rel="noopener" class="google-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.545,6.477,2.545,12s4.476,10,10,10c5.753,0,9.577-4.041,9.577-9.752c0-0.654-0.065-1.295-0.183-1.996H12.545z"/></svg>
-        Paste Your Review on Google Maps →
-      </a>
-    </div>
-
-    <!-- Screen Private Feedback (1-3 Stars) -->
-    <div class="card result-screen" id="feedbackScreen">
-      <div class="icon-success" style="background:#fef3c7;color:#d97706;">💬</div>
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--navy);">Thank You For Your Feedback</h2>
-      <p style="color:var(--muted);margin-bottom:20px;">We appreciate your honesty. Owner David has received your comments directly and will contact you within 24 hours to ensure you are 100% satisfied.</p>
-      <a href="/" class="btn-submit" style="display:inline-block;text-decoration:none;line-height:54px;text-align:center;">Return to Homepage</a>
     </div>
 
     <!-- VERIFIED GOOGLE REVIEWS SHOWCASE GRID (100% REAL GOOGLE BUSINESS PROFILE REVIEWS) -->
@@ -931,129 +586,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </p>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const starContainer = document.getElementById('starContainer');
-      const stars = starContainer.querySelectorAll('.star');
-      const selectedRatingInput = document.getElementById('selectedRating');
-      const form = document.getElementById('reviewForm');
-      const formCard = document.getElementById('formCard');
-      const positiveScreen = document.getElementById('positiveScreen');
-      const feedbackScreen = document.getElementById('feedbackScreen');
-      const funnelNotice = document.getElementById('funnelNotice');
-      const submitBtn = document.getElementById('submitBtn');
-      const reviewTextLabel = document.getElementById('reviewTextLabel');
-
-      let currentRating = 5;
-
-      function updateStars(rating) {
-        currentRating = rating;
-        selectedRatingInput.value = rating;
-        stars.forEach((star, index) => {
-          if (index < rating) {
-            star.classList.add('selected');
-          } else {
-            star.classList.remove('selected');
-          }
-        });
-
-        if (rating >= 4) {
-          funnelNotice.className = 'funnel-notice positive';
-          funnelNotice.innerHTML = '🚀 <strong>' + rating + '-Star Rating:</strong> Submitting will copy your feedback and take you directly to Google Maps to post!';
-          submitBtn.className = 'btn-submit google-action';
-          submitBtn.innerHTML = '<span>Copy & Post Review on Google →</span>';
-          if (reviewTextLabel) reviewTextLabel.innerHTML = 'Your Review / Feedback <span>*</span>';
-        } else {
-          funnelNotice.className = 'funnel-notice feedback';
-          funnelNotice.innerHTML = '💬 <strong>Private Feedback:</strong> Your comments will be sent directly to owner David so he can contact you personally.';
-          submitBtn.className = 'btn-submit';
-          submitBtn.innerHTML = '<span>Send Private Feedback to David →</span>';
-          if (reviewTextLabel) reviewTextLabel.innerHTML = 'How Can We Make Things Right? <span>*</span>';
-        }
-      }
-
-      // Default 5 stars
-      updateStars(5);
-
-      stars.forEach(star => {
-        star.addEventListener('click', function() {
-          const rating = parseInt(this.getAttribute('data-rating'));
-          updateStars(rating);
-        });
-
-        star.addEventListener('mouseenter', function() {
-          const rating = parseInt(this.getAttribute('data-rating'));
-          stars.forEach((s, i) => {
-            if (i < rating) s.classList.add('hover');
-            else s.classList.remove('hover');
-          });
-        });
-      });
-
-      starContainer.addEventListener('mouseleave', function() {
-        stars.forEach(s => s.classList.remove('hover'));
-      });
-
-      // Phone formatting helper
-      const phoneInput = document.getElementById('custPhone');
-      if (phoneInput) {
-        phoneInput.addEventListener('input', function(e) {
-          let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-          e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-        });
-      }
-
-      // Submit Handler
-      form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Saving & Processing...</span>';
-
-        const payload = {
-          name: document.getElementById('custName').value,
-          phone: document.getElementById('custPhone').value,
-          email: document.getElementById('custEmail').value,
-          town: document.getElementById('custTown').value,
-          address: document.getElementById('custAddress').value,
-          service: document.getElementById('custService').value,
-          rating: parseInt(selectedRatingInput.value),
-          reviewText: document.getElementById('reviewText').value,
-          submittedAt: new Date().toISOString()
-        };
-
-        // Copy review text to clipboard for 4 or 5 star ratings
-        if (payload.rating >= 4) {
-          try {
-            await navigator.clipboard.writeText(payload.reviewText);
-          } catch (err) {
-            console.log('Clipboard copy note:', err);
-          }
-        }
-
-        // Send to Netlify Serverless Review API
-        try {
-          await fetch('/.netlify/functions/submit-review', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-        } catch (err) {
-          console.error('API Error:', err);
-        }
-
-        // Hide Form Card
-        formCard.style.display = 'none';
-
-        // Route screens & open Google Review tab if 4-5 stars
-        if (payload.rating >= 4) {
-          positiveScreen.classList.add('active');
-          window.open('https://g.page/r/CcY8nHWkiRZ0EAE/review', '_blank');
-        } else {
-          feedbackScreen.classList.add('active');
-        }
-      });
-    });
-  </script>
 </body>
 </html>
