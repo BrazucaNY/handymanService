@@ -146,6 +146,16 @@
   status = 404
 
 
+[[redirects]]
+  from = "/pressure-washing"
+  to = "/pressure-washing.html"
+  status = 200
+
+[[redirects]]
+  from = "/gutter-cleaning"
+  to = "/gutter-cleaning.html"
+  status = 200
+
 # Clean URL redirects — city landing pages (no .html in URL)
 [[redirects]]
   from = "/white-plains-handyman"
@@ -160,6 +170,16 @@
 [[redirects]]
   from = "/yonkers-handyman"
   to = "/yonkers-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/chappaqua-handyman"
+  to = "/chappaqua-handyman.html"
+  status = 200
+
+[[redirects]]
+  from = "/armonk-handyman"
+  to = "/armonk-handyman.html"
   status = 200
 
 [[redirects]]
@@ -268,6 +288,17 @@
   from = "/blog/move-in-handyman-checklist-westchester"
   to = "/blog/move-in-handyman-checklist-westchester.html"
   status = 200
+
+# HTML Cache headers for static landing pages
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, s-maxage=3600"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, s-maxage=3600"
 
 # Security headers for dashboard
 [[headers]]
