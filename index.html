@@ -5434,6 +5434,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   updateCarousel();
 })();
 </script>
+<script>
+(function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    try {
+      var raw = localStorage.getItem("hh_field_project_photos");
+      if (!raw) return;
+      var photos = JSON.parse(raw);
+      if (!Array.isArray(photos) || photos.length === 0) return;
+      var grid = document.querySelector(".gallery-grid");
+      if (!grid) return;
+
+      photos.forEach(function(p) {
+        if (!p || !p.photo_url) return;
+        var item = document.createElement("div");
+        item.className = "gallery-item carpentry";
+        item.dataset.index = p.id || ("user-" + Date.now());
+
+        var badgeText = p.stage === "before" ? "🔴 Before Condition" : (p.stage === "after" ? "🟢 Completed Work" : "⭐ Before & After Showcase");
+        var townText = p.town ? (" — " + p.town + ", NY") : "";
+
+        item.innerHTML = `
+          <div class="gallery-badge" style="background:#eab308;color:#071828;font-weight:700;">${badgeText}</div>
+          <img src="${p.photo_url}" alt="${p.title || 'Here Handyman Project'}${townText}" width="400" height="267" loading="lazy" decoding="async">
+          <div class="gallery-label">${p.title || 'Handyman Service'}${townText}</div>
+        `;
+        grid.insertBefore(item, grid.firstChild);
+      });
+    } catch(e) {}
+  });
+})();
+</script>
 </body>
 
 </html>
