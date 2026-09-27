@@ -5438,7 +5438,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 (function() {
   document.addEventListener("DOMContentLoaded", function() {
     try {
-      var raw = localStorage.getItem("hh_field_project_photos");
+      var raw = localStorage.getItem("hh_field_project_photos_v3") || localStorage.getItem("hh_field_project_photos");
       if (!raw) return;
       var photos = JSON.parse(raw);
       if (!Array.isArray(photos) || photos.length === 0) return;
