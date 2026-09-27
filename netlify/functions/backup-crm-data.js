@@ -1,9 +1,8 @@
 // Serverless Function: Automated Backup System for Here Handyman CRM (Zero-Dependency Node 18)
 export async function handler(event, context) {
   const authHeader = event.headers.authorization || event.headers.Authorization || '';
-  const cronSecret = process.env.CRON_BACKUP_SECRET || 'hh_crm_secret_backup_key';
-  
-  if (!authHeader.includes(cronSecret) && !authHeader.includes('Bearer')) {
+  const expected = process.env.CRON_BACKUP_SECRET;
+  if (!expected || authHeader !== "Bearer " + expected) {
     return {
       statusCode: 401,
       headers: { 'Content-Type': 'application/json' },

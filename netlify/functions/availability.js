@@ -77,9 +77,12 @@ export async function handler(event) {
   const durationMs = durationMinutes * 60 * 1000;
   const stepMs = 60 * 60 * 1000;
 
-  // 7:00 AM EDT = 11:00 UTC, Last start time slot 7:00 PM EDT = 23:00 UTC
-  const workStartMs = Date.UTC(yr, mo - 1, dy, 11, 0, 0);
-  const lastStartMs = Date.UTC(yr, mo - 1, dy, 23, 0, 0);
+  // Calculate exact Eastern Time (America/New_York) offset for 7:00 AM and 7:00 PM (19:00) start times
+  const testNyDate = new Date(Date.UTC(yr, mo - 1, dy, 12, 0, 0));
+  const isNyEdt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', timeZoneName: 'short' }).format(testNyDate).includes('EDT');
+  const nyUtcOffset = isNyEdt ? 4 : 5; // EDT is UTC-4, EST is UTC-5
+  const workStartMs = Date.UTC(yr, mo - 1, dy, 7 + nyUtcOffset, 0, 0);
+  const lastStartMs = Date.UTC(yr, mo - 1, dy, 19 + nyUtcOffset, 0, 0);
   const nowMs = Date.now();
 
   for (let currentStart = workStartMs; currentStart <= lastStartMs; currentStart += stepMs) {

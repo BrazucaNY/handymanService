@@ -340,7 +340,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "5.0",
-    "reviewCount": "50",
+    "reviewCount": "24",
     "bestRating": "5.0",
     "worstRating": "1.0"
   }
@@ -551,15 +551,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       fetch(SUPABASE_URL + "/auth/v1/recover", {
         method: "POST",
-        headers: { "apikey": SUPABASE_PUBLISHABLE_KEY, "Content-Type": "application/json" },
+        headers: {
+          "apikey": SUPABASE_PUBLISHABLE_KEY,
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({ email: email, redirectTo: "https://www.herehandyman.com/login" })
       })
-        .then(function () {
+        .then(function (res) {
+          if (!res.ok) throw new Error("Failed to send reset link");
           resetMsg.textContent = "Reset link sent! Check your email (" + email + ").";
+          resetMsg.className = "msg ok";
+          resetMsg.style.display = "block";
         })
         .catch(function () {
           resetMsg.textContent = "Error sending reset email. Please try again.";
           resetMsg.className = "msg error";
+          resetMsg.style.display = "block";
         })
         .then(function () {
           sendResetBtn.disabled = false;
@@ -572,7 +579,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var recoveryToken = null;
     if (hash.indexOf("access_token=") !== -1) {
       var match = hash.match(/access_token=([^&]+)/);
-      if (match) recoveryToken = match[1];
+      if (match) recoveryToken = decodeURIComponent(match[1]);
     }
 
     if (recoveryToken) {
@@ -607,22 +614,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               updateMsg.textContent = r.data && r.data.msg ? r.data.msg : "Error updating password.";
               updateMsg.className = "msg error";
               updateMsg.style.display = "block";
+              saveNewPasswordBtn.disabled = false;
+              saveNewPasswordBtn.textContent = "Save New Password →";
               return;
             }
             updateMsg.textContent = "Password updated successfully! Signing you in...";
             updateMsg.className = "msg ok";
             updateMsg.style.display = "block";
+
+            var sessionData = {
+              access_token: recoveryToken,
+              expires_at: Math.floor(Date.now() / 1000) + 3600,
+              user: r.data || { email: "owner@herehandyman.com", role: "authenticated" }
+            };
+            try {
+              localStorage.setItem("hh_system_session", JSON.stringify(sessionData));
+              sessionStorage.setItem("hh_system_session", JSON.stringify(sessionData));
+            } catch (e) {}
+
             setTimeout(function () {
-              window.location.hash = "";
-              window.location.reload();
-            }, 1500);
+              window.location.replace("/dashboard");
+            }, 1000);
           })
           .catch(function () {
             updateMsg.textContent = "Network error. Please try again.";
             updateMsg.className = "msg error";
             updateMsg.style.display = "block";
-          })
-          .then(function () {
+            saveNewPasswordBtn.disabled = false;
+            saveNewPasswordBtn.textContent = "Save New Password →";
+          });
+      });
+    }
             saveNewPasswordBtn.disabled = false;
             saveNewPasswordBtn.textContent = "Update Password & Sign In →";
           });

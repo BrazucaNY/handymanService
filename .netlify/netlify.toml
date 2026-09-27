@@ -25,10 +25,6 @@ SECRETS_SCAN_OMIT_PATHS = "netlify/functions/googleCalendar.js"
 
 [build.services]
 
-[[edge_functions]]
-function = "content-negotiation"
-path = "/*"
-
 [functions]
 
 [functions.emails]
@@ -114,6 +110,9 @@ for = "/*"
 [headers.values]
 X-Content-Type-Options = "nosniff"
 X-XSS-Protection = "1; mode=block"
+X-Frame-Options = "SAMEORIGIN"
+Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+Permissions-Policy = "camera=(), microphone=(), geolocation=(self)"
 Referrer-Policy = "strict-origin-when-cross-origin"
 Vary = "Accept, Accept-Encoding"
 
@@ -162,26 +161,49 @@ Pragma = "no-cache"
 Expires = "0"
 
 [[headers]]
-for = "/admin/*"
+for = "/*.html"
+
+[headers.values]
+Cache-Control = "public, max-age=3600, s-maxage=3600"
+
+[[headers]]
+for = "/"
+
+[headers.values]
+Cache-Control = "public, max-age=3600, s-maxage=3600"
+
+[[headers]]
+for = "/dashboard*"
 
 [headers.values]
 Cache-Control = "no-cache, no-store, must-revalidate"
-Content-Security-Policy = "default-src 'self' https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com https://*.firebaseapp.com https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://apis.google.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://*.firebaseapp.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self' https://*.firebaseapp.com https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com;"
+Content-Security-Policy = "default-src 'self' https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; connect-src 'self' https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co wss://*.supabase.co;"
 Expires = "0"
 Pragma = "no-cache"
-Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+Referrer-Policy = "strict-origin-when-cross-origin"
 X-Content-Type-Options = "nosniff"
 X-Frame-Options = "DENY"
-X-XSS-Protection = "1; mode=block"
+X-Robots-Tag = "noindex, nofollow"
 
 [[headers]]
 for = "/login.html"
 
 [headers.values]
-Content-Security-Policy = "default-src 'self' https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com https://*.firebaseapp.com https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://apis.google.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://*.firebaseapp.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://*.firebaseapp.com https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com;"
+Content-Security-Policy = "default-src 'self' https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co wss://*.supabase.co;"
 X-Frame-Options = "DENY"
 Cache-Control = "no-cache, no-store, must-revalidate"
 X-Content-Type-Options = "nosniff"
+X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+for = "/invoice*"
+
+[headers.values]
+Content-Security-Policy = "default-src 'self' https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self' https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co wss://*.supabase.co;"
+Referrer-Policy = "strict-origin-when-cross-origin"
+X-Content-Type-Options = "nosniff"
+X-Frame-Options = "DENY"
+X-Robots-Tag = "noindex, nofollow"
 
 [[redirects]]
 from = "http://herehandyman.com/*"
@@ -221,20 +243,8 @@ force = true
 
 [[redirects]]
 from = "/book-appointment.html"
-to = "/book.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
-from = "/book.html"
-to = "/book.html"
-status = 200.0
+to = "/book"
+status = 301.0
 force = false
 
 [redirects.query]
@@ -354,6 +364,18 @@ force = false
 [[redirects]]
 from = "/CRM/dashboard"
 to = "/dashboard.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/offer/"
+to = "/offer.html"
 status = 200.0
 force = false
 
@@ -2524,18 +2546,6 @@ force = false
 [redirects.headers]
 
 [[redirects]]
-from = "/reviews"
-to = "/reviews.html"
-status = 200.0
-force = false
-
-[redirects.query]
-
-[redirects.conditions]
-
-[redirects.headers]
-
-[[redirects]]
 from = "/reviews/"
 to = "/reviews.html"
 status = 200.0
@@ -3054,8 +3064,8 @@ force = false
 
 [[redirects]]
 from = "/book/"
-to = "/book.html"
-status = 200.0
+to = "/book"
+status = 301.0
 force = false
 
 [redirects.query]
@@ -3066,8 +3076,8 @@ force = false
 
 [[redirects]]
 from = "/book-appointment"
-to = "/book.html"
-status = 200.0
+to = "/book"
+status = 301.0
 force = false
 
 [redirects.query]
@@ -3078,7 +3088,43 @@ force = false
 
 [[redirects]]
 from = "/book-appointment/"
-to = "/book.html"
+to = "/book"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/reviews"
+to = "/reviews.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/review-us"
+to = "/reviews.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/review"
+to = "/reviews.html"
 status = 200.0
 force = false
 
@@ -3091,6 +3137,18 @@ force = false
 [[redirects]]
 from = "/services"
 to = "/services.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/offer"
+to = "/offer.html"
 status = 200.0
 force = false
 
@@ -3281,6 +3339,30 @@ force = false
 [redirects.headers]
 
 [[redirects]]
+from = "/pressure-washing"
+to = "/pressure-washing.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/gutter-cleaning"
+to = "/gutter-cleaning.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
 from = "/white-plains-handyman"
 to = "/white-plains-handyman.html"
 status = 200.0
@@ -3307,6 +3389,30 @@ force = false
 [[redirects]]
 from = "/yonkers-handyman"
 to = "/yonkers-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/chappaqua-handyman"
+to = "/chappaqua-handyman.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/armonk-handyman"
+to = "/armonk-handyman.html"
 status = 200.0
 force = false
 

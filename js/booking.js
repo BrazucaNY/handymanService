@@ -204,7 +204,7 @@ function handleZipCheck() {
     return;
   }
 
-  if (!cleanZip.startsWith('10') && !cleanZip.startsWith('11') && !CONFIG.zips.includes(cleanZip)) {
+  if (!CONFIG.zips.includes(cleanZip)) {
     showError(errorEl, `Sorry, ${cleanZip} is outside our service area. Contact us at (516) 350-0801 for custom requests!`);
     return;
   }

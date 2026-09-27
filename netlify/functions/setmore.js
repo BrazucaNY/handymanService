@@ -3,7 +3,7 @@
 
 import https from 'node:https';
 
-const SETMORE_REFRESH_TOKEN = process.env.SETMORE_REFRESH_TOKEN || 'r1/b9ac1e2a5bq66TP8pWitf0crZXjF9TkqIMqrpFr28gixe';
+const SETMORE_REFRESH_TOKEN = process.env.SETMORE_REFRESH_TOKEN;
 const DAVID_STAFF_KEY = '6df5336e-23d0-4bfc-94a7-12dfbb70416e';
 
 // Service ID to Setmore Service Key Mapping
@@ -167,4 +167,12 @@ export async function getSetmoreSlots(dateStrDDMMYYYY, serviceId = 'general') {
     console.error('Error fetching Setmore slots:', err);
     return [];
   }
+}
+
+export async function handler() {
+  return {
+    statusCode: 404,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ error: "Not a public endpoint" })
+  };
 }

@@ -25,8 +25,13 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /CRM/                      /login.html                     200
 /dashboard                 /dashboard.html                 200
 /dashboard/                /dashboard.html                 200
+/invoices                  /dashboard.html                 200
+/invoices/                 /dashboard.html                 200
+/invoice                   /dashboard.html                 200
+/invoice/                  /dashboard.html                 200
 /admin/dashboard           /dashboard.html                 200
 /CRM/dashboard             /dashboard.html                 200
+/contact                   /#contact                       301
 
 
 # Explicit Clean URL Rewrites for All Service, Town & Blog Pages

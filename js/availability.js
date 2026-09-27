@@ -23,12 +23,11 @@ export function buildSlots({ dateStr, bookedRanges = [], durationMinutes = 60 })
 
   // Build New York start and end times for the working day
   const [year, month, day] = dateStr.split('-').map(Number);
-  
-  // Construct 7:00 AM start time in NY time
-  const dayStart = new Date(Date.UTC(year, month - 1, day, 7 + 4, 0, 0, 0)); // Approx EDT offset
-  // Set exact hours 7:00 to 20:00 using New York timezone
-  const workStartMs = new Date(`${dateStr}T07:00:00-04:00`).getTime();
-  const workEndMs = new Date(`${dateStr}T20:00:00-04:00`).getTime();
+  const testNyDate = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
+  const isNyEdt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', timeZoneName: 'short' }).format(testNyDate).includes('EDT');
+  const nyUtcOffset = isNyEdt ? 4 : 5;
+  const workStartMs = Date.UTC(year, month - 1, day, 7 + nyUtcOffset, 0, 0);
+  const workEndMs = Date.UTC(year, month - 1, day, 19 + nyUtcOffset, 0, 0);
 
   const nowMs = Date.now();
 

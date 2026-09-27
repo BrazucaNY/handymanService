@@ -280,4 +280,12 @@ export async function updateGoogleCalendarEventByBookingId(bookingId, email, new
   }
 }
 
+export async function handler() {
+  return {
+    statusCode: 404,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ error: "Not a public endpoint" })
+  };
+}
+
 
