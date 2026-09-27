@@ -3984,9 +3984,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       return arr;
     }
     function asciiComment(s) {
-      var head = [0x41, 0x53, 0x43, 0x49, 0x49, 0, 0, 0];
-      for (var i = 0; i < s.length; i++) head.push(s.charCodeAt(i) & 255);
-      return head;
+      return "ASCII\x00\x00\x00" + (s || "");
     }
 
     document.getElementById("baDownload").addEventListener("click", function () {
@@ -4047,6 +4045,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       a.href = out;
       a.download = "here-handyman-before-after-" + town.replace(/\s+/g, "-").toLowerCase() + ".jpg";
       a.click();
+
+      // Post-download UI & canvas state reset
+      imgA = null;
+      imgB = null;
+      var slotA = document.getElementById("baSlotA");
+      var slotB = document.getElementById("baSlotB");
+      if (slotA) slotA.innerHTML = "<span>Drop photo or click</span>";
+      if (slotB) slotB.innerHTML = "<span>Drop photo or click</span>";
+      var fileA = document.getElementById("baFileA");
+      var fileB = document.getElementById("baFileB");
+      if (fileA) fileA.value = "";
+      if (fileB) fileB.value = "";
+      draw();
     });
 
     draw();

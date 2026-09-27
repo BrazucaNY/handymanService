@@ -443,9 +443,7 @@
       return arr;
     }
     function asciiComment(s) {
-      const head = [0x41,0x53,0x43,0x49,0x49,0,0,0];
-      for (let i = 0; i < s.length; i++) head.push(s.charCodeAt(i) & 255);
-      return head;
+      return "ASCII\x00\x00\x00" + (s || "");
     }
 
     document.getElementById("download").addEventListener("click", function () {
@@ -516,6 +514,19 @@
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+
+      // Post-download UI & canvas state reset
+      imgA = null;
+      imgB = null;
+      const slotA = document.getElementById("slotA");
+      const slotB = document.getElementById("slotB");
+      if (slotA) slotA.innerHTML = "<span>Drop photo or click</span>";
+      if (slotB) slotB.innerHTML = "<span>Drop photo or click</span>";
+      const fileA = document.getElementById("fileA");
+      const fileB = document.getElementById("fileB");
+      if (fileA) fileA.value = "";
+      if (fileB) fileB.value = "";
+      draw();
     });
 
     draw();
