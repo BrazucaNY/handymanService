@@ -202,12 +202,6 @@
       townEl.appendChild(o);
     });
 
-    function syncCoords() {
-      const t = TOWNS[Number(townEl.value)];
-      document.getElementById("lat").value = t[1];
-      document.getElementById("lng").value = t[2];
-      fillMetaFromTown();
-    }
     function fillMetaFromTown() {
       const town = TOWNS[Number(townEl.value)][0];
       const cap = document.getElementById("caption");
@@ -216,15 +210,32 @@
       if (!title.dataset.touched) title.value = "Before & After — Here Handyman — " + town + ", NY";
       const kw = document.getElementById("keywords");
       if (!kw.dataset.touched) {
-        kw.value = "Here Handyman, " + town + ", Westchester County NY, before after, handyman, home repair, " + town + " handyman";
+        kw.value = "Here Handyman, " + town + ", Westchester County NY, before after collage, handyman, home repair, " + town + " handyman, 5 star handyman";
       }
       const cm = document.getElementById("comment");
       if (!cm.dataset.touched) {
-        cm.value = "Here Handyman job photo. Before and after collage. " + town + ", Westchester County, NY. © Here Handyman. (516) 350-0801. herehandyman.com";
+        const capText = cap.value.trim() || ("Before & after — " + town + ", NY");
+        cm.value = "Professional handyman service by Here Handyman: " + capText + ". Top-rated home repairs, TV mounting, carpentry, plumbing & maintenance in " + town + ", Westchester County, NY. Verified 5.0★ Google Business Profile rating. Call/Text: (516) 350-0801 | https://www.herehandyman.com";
       }
     }
+    function syncCoords() {
+      const t = TOWNS[Number(townEl.value)];
+      document.getElementById("lat").value = t[1];
+      document.getElementById("lng").value = t[2];
+      fillMetaFromTown();
+    }
     townEl.addEventListener("change", syncCoords);
-    ["caption","title","keywords","comment"].forEach(function (id) {
+    document.getElementById("caption").addEventListener("input", function () {
+      this.dataset.touched = "1";
+      const cm = document.getElementById("comment");
+      if (!cm.dataset.touched) {
+        const town = TOWNS[Number(townEl.value)][0];
+        const capText = this.value.trim() || ("Before & after — " + town + ", NY");
+        cm.value = "Professional handyman service by Here Handyman: " + capText + ". Top-rated home repairs, TV mounting, carpentry, plumbing & maintenance in " + town + ", Westchester County, NY. Verified 5.0★ Google Business Profile rating. Call/Text: (516) 350-0801 | https://www.herehandyman.com";
+      }
+      draw();
+    });
+    ["title","keywords","comment"].forEach(function (id) {
       document.getElementById(id).addEventListener("input", function () { this.dataset.touched = "1"; });
     });
     syncCoords();

@@ -3760,11 +3760,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       if (!title.dataset.touched) title.value = "Before & After — Here Handyman — " + town + ", NY";
       var kw = document.getElementById("baKeywords");
       if (!kw.dataset.touched) {
-        kw.value = "Here Handyman, " + town + ", Westchester County NY, before after, handyman, home repair, " + town + " handyman";
+        kw.value = "Here Handyman, " + town + ", Westchester County NY, before after collage, handyman, home repair, " + town + " handyman, 5 star handyman";
       }
       var cm = document.getElementById("baComment");
       if (!cm.dataset.touched) {
-        cm.value = "Here Handyman job photo. Before and after collage. " + town + ", Westchester County, NY. Here Handyman. (516) 350-0801. herehandyman.com";
+        var capText = cap.value.trim() || ("Before & after — " + town + ", NY");
+        cm.value = "Professional handyman service by Here Handyman: " + capText + ". Top-rated home repairs, TV mounting, carpentry, plumbing & maintenance in " + town + ", Westchester County, NY. Verified 5.0★ Google Business Profile rating. Call/Text: (516) 350-0801 | https://www.herehandyman.com";
       }
     }
     function syncCoords() {
@@ -3774,7 +3775,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       fillMetaFromTown();
     }
     townEl.addEventListener("change", syncCoords);
-    ["baCaption", "baTitle", "baKeywords", "baComment"].forEach(function (id) {
+    document.getElementById("baCaption").addEventListener("input", function () {
+      this.dataset.touched = "1";
+      var cm = document.getElementById("baComment");
+      if (!cm.dataset.touched) {
+        var town = TOWNS[Number(townEl.value)][0];
+        var capText = this.value.trim() || ("Before & after — " + town + ", NY");
+        cm.value = "Professional handyman service by Here Handyman: " + capText + ". Top-rated home repairs, TV mounting, carpentry, plumbing & maintenance in " + town + ", Westchester County, NY. Verified 5.0★ Google Business Profile rating. Call/Text: (516) 350-0801 | https://www.herehandyman.com";
+      }
+      draw();
+    });
+    ["baTitle", "baKeywords", "baComment"].forEach(function (id) {
       document.getElementById(id).addEventListener("input", function () { this.dataset.touched = "1"; });
     });
     syncCoords();
