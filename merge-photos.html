@@ -619,7 +619,7 @@
         };
 
         try {
-          const photosKey = "hh_showcase_photos";
+          const photosKey = "hh_field_project_photos";
           const existing = JSON.parse(localStorage.getItem(photosKey) || "[]");
           existing.unshift(newPhoto);
           localStorage.setItem(photosKey, JSON.stringify(existing));

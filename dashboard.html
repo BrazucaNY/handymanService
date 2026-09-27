@@ -1653,7 +1653,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
 
         <!-- Before & After Project Gallery / Carousel Preview -->
-        <h4 style="font-size:18px;color:var(--navy);margin-bottom:16px;font-weight:700;">🖼️ Project Gallery &amp; Showcase</h4>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+          <h4 style="font-size:18px;color:var(--navy);margin:0;font-weight:700;">🖼️ Project Gallery &amp; Showcase <span style="font-size:13px;color:var(--muted);font-weight:400;">(Newest First)</span></h4>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" onclick="window.filterShowcasePhotos('all')" class="showcase-filter-btn" id="filterBtnAll" style="padding:6px 14px;border-radius:20px;border:1px solid #cbd5e1;background:#2563eb;color:#fff;font-size:12px;font-weight:700;cursor:pointer;">All Posted</button>
+            <button type="button" onclick="window.filterShowcasePhotos('showcase')" class="showcase-filter-btn" id="filterBtnShowcase" style="padding:6px 14px;border-radius:20px;border:1px solid #cbd5e1;background:#fff;color:#1e293b;font-size:12px;font-weight:700;cursor:pointer;">⭐ Collages</button>
+            <button type="button" onclick="window.filterShowcasePhotos('before')" class="showcase-filter-btn" id="filterBtnBefore" style="padding:6px 14px;border-radius:20px;border:1px solid #cbd5e1;background:#fff;color:#1e293b;font-size:12px;font-weight:700;cursor:pointer;">🔴 Before</button>
+            <button type="button" onclick="window.filterShowcasePhotos('after')" class="showcase-filter-btn" id="filterBtnAfter" style="padding:6px 14px;border-radius:20px;border:1px solid #cbd5e1;background:#fff;color:#1e293b;font-size:12px;font-weight:700;cursor:pointer;">🟢 After</button>
+          </div>
+        </div>
         <div id="fieldPhotosGrid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:20px;">
           <!-- Populated dynamically via JS -->
         </div>
@@ -3643,24 +3651,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       alert("✅ Photo uploaded, EXIF geotagged & added to Project Showcase!");
     };
 
+    var currentShowcaseFilter = 'all';
+
+    window.filterShowcasePhotos = function(filter) {
+      currentShowcaseFilter = filter;
+      document.querySelectorAll('.showcase-filter-btn').forEach(function(btn) {
+        btn.style.background = '#fff';
+        btn.style.color = '#1e293b';
+      });
+      var activeBtnMap = {
+        'all': 'filterBtnAll',
+        'showcase': 'filterBtnShowcase',
+        'before': 'filterBtnBefore',
+        'after': 'filterBtnAfter'
+      };
+      var targetBtn = document.getElementById(activeBtnMap[filter]);
+      if (targetBtn) {
+        targetBtn.style.background = '#2563eb';
+        targetBtn.style.color = '#fff';
+      }
+      renderFieldPhotosGrid();
+    };
+
+    window.addPhotoToShowcase = function(newPhoto) {
+      fieldPhotos.unshift(newPhoto);
+      saveFieldPhotos(fieldPhotos);
+      renderFieldPhotosGrid();
+    };
+
+    window.deleteFieldPhoto = function(idOrIdx) {
+      if (confirm("⚠️ Are you sure you want to delete this photo from your Project Gallery & Showcase?")) {
+        if (typeof idOrIdx === 'string') {
+          fieldPhotos = fieldPhotos.filter(function(p) { return p.id !== idOrIdx; });
+        } else {
+          fieldPhotos.splice(idOrIdx, 1);
+        }
+        saveFieldPhotos(fieldPhotos);
+        renderFieldPhotosGrid();
+      }
+    };
+
     function renderFieldPhotosGrid() {
       var grid = document.getElementById("fieldPhotosGrid");
       if (!grid) return;
       grid.innerHTML = "";
 
-      if (fieldPhotos.length === 0) {
-        grid.innerHTML = '<div style="color:var(--muted);grid-column:1/-1;text-align:center;padding:30px;">No field photos uploaded yet. Use the camera button above to take your first job photo!</div>';
+      var listToRender = fieldPhotos.filter(function(p) {
+        if (currentShowcaseFilter === 'all') return true;
+        return p.stage === currentShowcaseFilter;
+      });
+
+      if (listToRender.length === 0) {
+        grid.innerHTML = '<div style="color:var(--muted);grid-column:1/-1;text-align:center;padding:30px;background:#fff;border-radius:10px;border:1px dashed #cbd5e1;">No photos in this category yet. Click "🚀 POST TO GALLERY & CAROUSEL" above to publish your first photo!</div>';
         return;
       }
 
-      fieldPhotos.forEach(function(p, idx) {
+      listToRender.forEach(function(p, idx) {
         var card = document.createElement("div");
         card.style.cssText = "background:#fff;border:1px solid #cbd5e1;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);display:flex;flex-direction:column;";
 
         var stageBadge = p.stage === 'before' ? 
           '<span style="background:#fee2e2;color:#dc2626;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;">🔴 BEFORE</span>' : 
           (p.stage === 'after' ? '<span style="background:#dcfce7;color:#15803d;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;">🟢 AFTER</span>' : 
-          '<span style="background:#fef3c7;color:#b45309;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;">⭐ SHOWCASE</span>');
+          '<span style="background:#fef3c7;color:#b45309;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;">⭐ COLLAGE &amp; SHOWCASE</span>');
+
+        var itemKey = p.id ? p.id : idx;
 
         card.innerHTML = `
           <div style="position:relative;height:180px;background:#0f172a;display:flex;align-items:center;justify-content:center;overflow:hidden;">
@@ -3675,8 +3730,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div style="font-size:12px;color:#16a34a;font-weight:600;margin-top:2px;">⚡ WebP Optimized &bull; 📍 EXIF Geotagged</div>
             </div>
             <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f1f5f9;padding-top:10px;">
-              <span style="font-size:11.5px;color:var(--muted);">${p.created_at}</span>
-              <button onclick="window.deleteFieldPhoto(${idx})" style="background:none;border:none;color:#dc2626;font-size:12px;cursor:pointer;font-weight:700;">🗑️ Delete</button>
+              <span style="font-size:11.5px;color:var(--muted);">${p.created_at || 'Just Now'}</span>
+              <button onclick="window.deleteFieldPhoto('${itemKey}')" style="background:#fee2e2;border:1px solid #fca5a5;color:#dc2626;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:4px;">🗑️ Delete Photo</button>
             </div>
           </div>
         `;
@@ -3684,15 +3739,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     }
 
-    window.deleteFieldPhoto = function(idx) {
-      if (confirm("Delete this photo from your project showcase?")) {
-        fieldPhotos.splice(idx, 1);
-        saveFieldPhotos(fieldPhotos);
-        renderFieldPhotosGrid();
-      }
-    };
-
     renderFieldPhotosGrid();
+  });
   });
   </script>
   <script src="/js/piexif.js"></script>
@@ -4147,15 +4195,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           created_at: new Date().toISOString().split("T")[0]
         };
 
-        try {
-          var photosKey = "hh_showcase_photos";
-          var existing = JSON.parse(localStorage.getItem(photosKey) || "[]");
-          existing.unshift(newPhoto);
-          localStorage.setItem(photosKey, JSON.stringify(existing));
-        } catch (e) {}
-
-        if (typeof renderFieldPhotosGrid === "function") {
-          renderFieldPhotosGrid();
+        if (typeof window.addPhotoToShowcase === "function") {
+          window.addPhotoToShowcase(newPhoto);
         }
 
         alert("🎉 POST APPROVED & PUBLISHED TO GALLERY CAROUSEL!\n\n" +
