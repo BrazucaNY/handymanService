@@ -3391,7 +3391,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         town: "White Plains",
         lat: 41.033987,
         lon: -73.762910,
-        photo_url: "/assets/images/portfolio/yard_cleanup_weed_removal_white_plains_after.webp",
+        photo_url: "/assets/images/before-after/yard_cleanup_weed_removal_white_plains_after.webp",
         created_at: "2026-09-27"
       },
       {
@@ -3401,7 +3401,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         town: "White Plains",
         lat: 41.033987,
         lon: -73.762910,
-        photo_url: "/assets/images/portfolio/yard_cleanup_weed_removal_white_plains_before.webp",
+        photo_url: "/assets/images/before-after/yard_cleanup_weed_removal_white_plains_before.webp",
         created_at: "2026-09-27"
       },
       {
@@ -3502,16 +3502,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         if (raw) {
           var parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) {
+            var updated = false;
             defaultPhotos.forEach(function(dp) {
               if (!parsed.some(function(p) { return p.id === dp.id || p.photo_url === dp.photo_url; })) {
                 parsed.unshift(dp);
+                updated = true;
               }
             });
+            if (updated) saveFieldPhotos(parsed);
             return parsed;
           }
         }
       } catch (e) {}
-      localStorage.setItem(STORAGE_PHOTOS_KEY, JSON.stringify(defaultPhotos));
+      saveFieldPhotos(defaultPhotos);
       return defaultPhotos;
     }
 
