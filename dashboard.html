@@ -721,6 +721,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         padding: 16px;
       }
     }
+
+    .ba-wrap { display: grid; grid-template-columns: 300px 1fr; gap: 20px; }
+    .ba-aside label { display: block; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin: 12px 0 6px; font-weight: 700; }
+    .ba-aside input[type="text"], .ba-aside input[type="number"], .ba-aside select, .ba-aside textarea {
+      width: 100%; background: #fff; color: var(--text); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 10px; font-size: 13px; font-family: inherit;
+    }
+    .ba-aside textarea { min-height: 64px; resize: vertical; }
+    .ba-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .ba-slot {
+      border: 1.5px dashed #cbd5e1; border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; margin-bottom: 8px;
+      min-height: 96px; display: flex; align-items: center; justify-content: center; background: #f8fafc;
+    }
+    .ba-slot.drag { border-color: var(--gold); background: var(--gold-light); }
+    .ba-slot img { width: 100%; height: 80px; object-fit: cover; border-radius: 6px; display: block; }
+    .ba-slot span { color: var(--muted); font-size: 13px; }
+    .ba-check { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 13px; margin-top: 8px; text-transform: none; letter-spacing: 0; }
+    .ba-check input { width: auto; }
+    .ba-stage { background: #0b100e; border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
+    .ba-stage.drag { border-color: var(--gold); }
+    .ba-stage canvas { display: block; max-width: 100%; height: auto; background: #111; }
+    .ba-hint { color: var(--muted); font-size: 12px; margin-top: 10px; }
+    .ba-dl {
+      appearance: none; border: 0; background: var(--gold); color: var(--navy); font-weight: 800;
+      padding: 12px 14px; border-radius: 8px; cursor: pointer; font-size: 14px; width: 100%; margin-top: 16px;
+    }
+    @media (max-width: 960px) {
+      .ba-wrap { grid-template-columns: 1fr; }
+    }
   </style>
 
 <script type="application/ld+json">
@@ -832,6 +861,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
       <div class="menu-item" data-tab="field-photos">
         <i>📷</i> Field Uploads (Before & After)
+      </div>
+      <div class="menu-item" data-tab="before-after">
+        <i>🖼️</i> Before / After Collage
       </div>
     </nav>
 
@@ -1435,109 +1467,198 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </div>
 
-    <!-- TAB 10: FIELD UPLOADS (BEFORE & AFTER COLLAGE GENERATOR) -->
+    <!-- TAB 10: FIELD UPLOADS (BEFORE & AFTER) -->
     <div class="tab-content" id="tab-field-photos">
-      <div class="card-panel" style="background:#0f1412;color:#e8efe9;border-radius:12px;padding:20px;border:1px solid #2d3a33;">
-        <div style="margin-bottom:20px;border-bottom:1px solid #2d3a33;padding-bottom:16px;">
-          <h3 style="margin:0 0 6px 0;font-size:22px;color:#ffffff;">📷 HERE HANDYMAN — Before &amp; After Collage Generator</h3>
-          <p style="margin:0;color:#8fa197;font-size:13px;">
-            Drop before and after photos. Geotag + copyright + comments + keywords written directly into the JPEG file properties ready for Google Business Profile.
-          </p>
+      <div class="card-panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:16px;">
+          <div>
+            <h3 style="margin-bottom:4px;font-size:22px;color:var(--navy);">📷 Field Photo Uploader &amp; Geotagger</h3>
+            <p style="font-size:13.5px;color:var(--muted);margin-top:2px;">
+              Take or upload Before &amp; After job photos directly from your phone in the field. Photos are automatically geotagged with Westchester County GPS metadata to boost your local Google Maps ranking.
+            </p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn-action" onclick="document.getElementById('fieldCameraInput').click()" style="font-size:15px;padding:12px 20px;background:#16a34a;color:#fff;">
+              📸 Take Photo (Camera)
+            </button>
+            <button class="btn-secondary" onclick="document.getElementById('fieldGalleryInput').click()" style="font-size:14px;padding:12px 18px;">
+              🖼️ Select Photo (Gallery)
+            </button>
+          </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start;">
-          <div style="background:#18201c;border:1px solid #2d3a33;border-radius:12px;padding:16px;">
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:0 0 6px;">Photo 1 — Before</label>
-            <div class="slot" id="slotA_dash" style="border:1.5px dashed #2d3a33;border-radius:10px;padding:10px;text-align:center;cursor:pointer;margin-bottom:8px;min-height:96px;display:flex;align-items:center;justify-content:center;">
-              <span style="color:#8fa197;font-size:13px;">Drop photo or click</span>
+        <!-- Hidden Native Mobile File Inputs -->
+        <!-- Camera Only Input -->
+        <input type="file" id="fieldCameraInput" accept="image/*" capture="camera" style="display:none;" onchange="window.handleFieldPhotoSelected(this)"/>
+        <!-- Gallery Input -->
+        <input type="file" id="fieldGalleryInput" accept="image/*" style="display:none;" onchange="window.handleFieldPhotoSelected(this)"/>
+
+        <!-- Field Upload Form -->
+        <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:24px;margin-bottom:32px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h4 style="font-size:16px;color:var(--navy);font-weight:700;margin:0;">Upload Job Photo Details</h4>
+            <span style="font-size:12px;background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:12px;font-weight:700;">Step-by-Step Mobile Form</span>
+          </div>
+
+          <!-- Step 1 Big Camera Callout -->
+          <div style="background:#ffffff;border:2px dashed #2563eb;border-radius:10px;padding:16px;text-align:center;margin-bottom:20px;">
+            <div style="font-size:14px;font-weight:700;color:#1e40af;margin-bottom:8px;">📸 Step 1: Take or Select Your Photo</div>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+              <button type="button" class="btn-action" onclick="document.getElementById('fieldCameraInput').click()" style="font-size:15px;padding:10px 20px;background:#16a34a;color:#fff;">
+                📸 Open Camera Now
+              </button>
+              <button type="button" class="btn-secondary" onclick="document.getElementById('fieldGalleryInput').click()" style="font-size:14px;padding:10px 16px;">
+                🖼️ Choose from Gallery
+              </button>
             </div>
-            <input id="fileA_dash" type="file" accept="image/*" style="display:none;"/>
-
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:12px 0 6px;">Photo 2 — After</label>
-            <div class="slot" id="slotB_dash" style="border:1.5px dashed #2d3a33;border-radius:10px;padding:10px;text-align:center;cursor:pointer;margin-bottom:8px;min-height:96px;display:flex;align-items:center;justify-content:center;">
-              <span style="color:#8fa197;font-size:13px;">Drop photo or click</span>
-            </div>
-            <input id="fileB_dash" type="file" accept="image/*" style="display:none;"/>
-
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
-              <div>
-                <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin-bottom:4px;">Before badge</label>
-                <input id="labelA_dash" type="text" value="BEFORE" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
-              </div>
-              <div>
-                <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin-bottom:4px;">After badge</label>
-                <input id="labelB_dash" type="text" value="AFTER" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
-              </div>
-            </div>
-
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:12px 0 4px;">Caption (on image)</label>
-            <input id="caption_dash" type="text" value="Patio dining table assembled — Harrison, NY" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
-
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:12px 0 4px;">Town (GPS)</label>
-            <select id="town_dash" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"></select>
-
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
-              <div>
-                <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin-bottom:4px;">Latitude</label>
-                <input id="lat_dash" type="number" step="0.000001" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
-              </div>
-              <div>
-                <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin-bottom:4px;">Longitude</label>
-                <input id="lng_dash" type="number" step="0.000001" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
-              </div>
+          </div>
+          
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;margin-bottom:16px;">
+            <div>
+              <label style="font-size:13px;font-weight:700;color:var(--navy);display:block;margin-bottom:6px;">Photo Type / Stage</label>
+              <select id="fieldPhotoStage" class="form-control" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);font-size:14px;">
+                <option value="before">🔴 Before Photo (Initial Condition)</option>
+                <option value="after" selected>🟢 After Photo (Completed Work)</option>
+                <option value="showcase">⭐ Completed Project Showcase</option>
+              </select>
             </div>
 
-            <label style="display:flex;gap:8px;align-items:center;color:#8fa197;font-size:13px;margin-top:10px;">
-              <input id="jitter_dash" type="checkbox" checked style="width:auto;"/> Slight unique GPS offset
-            </label>
-            <label style="display:flex;gap:8px;align-items:center;color:#8fa197;font-size:13px;margin-top:6px;">
-              <input id="writeGps_dash" type="checkbox" checked style="width:auto;"/> Write GPS into JPEG
-            </label>
+            <div>
+              <label style="font-size:13px;font-weight:700;color:var(--navy);display:block;margin-bottom:6px;">Job Town / Location</label>
+              <select id="fieldPhotoTown" class="form-control" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);font-size:14px;">
+                <option value="White Plains">White Plains, NY (10607 - Center)</option>
+                <option value="Scarsdale">Scarsdale, NY</option>
+                <option value="Harrison">Harrison, NY</option>
+                <option value="Rye">Rye, NY</option>
+                <option value="Rye Brook">Rye Brook, NY</option>
+                <option value="Armonk">Armonk, NY</option>
+                <option value="Chappaqua">Chappaqua, NY</option>
+                <option value="Greenwich">Greenwich, CT</option>
+                <option value="Bronxville">Bronxville, NY</option>
+                <option value="Larchmont">Larchmont, NY</option>
+                <option value="Mamaroneck">Mamaroneck, NY</option>
+                <option value="New Rochelle">New Rochelle, NY</option>
+                <option value="Eastchester">Eastchester, NY</option>
+                <option value="Yonkers">Yonkers, NY</option>
+                <option value="Tarrytown">Tarrytown, NY</option>
+                <option value="Dobbs Ferry">Dobbs Ferry, NY</option>
+                <option value="Mount Kisco">Mount Kisco, NY</option>
+                <option value="Bedford">Bedford, NY</option>
+              </select>
+              <button type="button" onclick="window.detectCurrentGpsLocation()" style="background:none;border:none;color:#2563eb;font-weight:700;font-size:12px;cursor:pointer;margin-top:6px;display:block;">
+                📍 Detect My Current Field GPS
+              </button>
+            </div>
 
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:12px 0 4px;">Copyright</label>
-            <input id="copyright_dash" type="text" value="© Here Handyman. All rights reserved." style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
+            <div>
+              <label style="font-size:13px;font-weight:700;color:var(--navy);display:block;margin-bottom:6px;">Service / Project Name</label>
+              <input type="text" id="fieldPhotoTitle" class="form-control" placeholder="e.g. TV Mounting 75-inch in Living Room" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);font-size:14px;"/>
+            </div>
+          </div>
 
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:12px 0 4px;">Artist / Author</label>
-            <input id="artist_dash" type="text" value="Here Handyman / David Rodrigues" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
+          <!-- Preview Image Area -->
+          <div id="fieldPhotoPreviewBox" style="display:none;margin-bottom:20px;text-align:center;background:#fff;padding:16px;border-radius:8px;border:1px solid #e2e8f0;">
+            <img id="fieldPhotoPreviewImg" src="" style="max-width:100%;max-height:300px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);"/>
+            <div id="fieldPhotoGpsTagBadge" style="margin-top:10px;font-size:13px;color:#16a34a;font-weight:700;">
+              📍 GPS Location &amp; EXIF Geotag Prepared
+            </div>
+          </div>
 
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:12px 0 4px;">Title (file properties)</label>
-            <input id="title_dash" type="text" value="Before &amp; After — Here Handyman" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
+          <button type="button" class="btn-action" id="uploadFieldPhotoBtn" onclick="window.saveAndGeotagFieldPhoto()" style="width:100%;font-size:16px;padding:14px;background:#16a34a;color:#fff;margin-top:10px;">
+            🚀 Save, Geotag &amp; Upload to Project Showcase
+          </button>
+        </div>
 
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:12px 0 4px;">Comments (file properties)</label>
-            <textarea id="comment_dash" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;min-height:64px;">Here Handyman job photo. Before and after. Westchester County, NY. (516) 350-0801. herehandyman.com</textarea>
+        <!-- Before & After Project Gallery / Carousel Preview -->
+        <h4 style="font-size:18px;color:var(--navy);margin-bottom:16px;font-weight:700;">🖼️ Project Gallery &amp; Before/After Showcase</h4>
+        <div id="fieldPhotosGrid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:20px;">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </div>
 
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:12px 0 4px;">Keywords (file properties)</label>
-            <input id="keywords_dash" type="text" value="Here Handyman, Westchester, before after, handyman, home repair" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
+    <!-- TAB 11: BEFORE / AFTER COLLAGE GENERATOR -->
+    <div class="tab-content" id="tab-before-after">
+      <div class="card-panel">
+        <h3 style="margin-bottom:6px;">Before / After Collage</h3>
+        <p style="font-size:13.5px;color:var(--muted);margin-bottom:18px;">Drop before and after photos. Download writes geotag, copyright, comments, and keywords into the JPEG for Google Business Profile.</p>
+        <div class="ba-wrap">
+          <div class="ba-aside">
+            <label>Photo 1 — Before</label>
+            <div class="ba-slot" id="baSlotA"><span>Drop photo or click</span></div>
+            <input id="baFileA" type="file" accept="image/*" hidden/>
 
-            <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin:12px 0 4px;">Canvas Resolution</label>
-            <select id="size_dash" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"></select>
+            <label>Photo 2 — After</label>
+            <div class="ba-slot" id="baSlotB"><span>Drop photo or click</span></div>
+            <input id="baFileB" type="file" accept="image/*" hidden/>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+            <div class="ba-row">
               <div>
-                <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin-bottom:4px;">Gap (px)</label>
-                <input id="gap_dash" type="number" value="8" min="0" max="40" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;"/>
+                <label>Before badge</label>
+                <input id="baLabelA" type="text" value="BEFORE"/>
               </div>
               <div>
-                <label style="display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8fa197;margin-bottom:4px;">Show badges</label>
-                <select id="showLabels_dash" style="width:100%;background:#121a16;color:#e8efe9;border:1px solid #2d3a33;border-radius:8px;padding:8px 10px;font-size:13px;">
+                <label>After badge</label>
+                <input id="baLabelB" type="text" value="AFTER"/>
+              </div>
+            </div>
+
+            <label>Caption (on image)</label>
+            <input id="baCaption" type="text" placeholder="e.g. Patio table assembled — Harrison, NY"/>
+
+            <label>Town (GPS)</label>
+            <select id="baTown"></select>
+            <div class="ba-row">
+              <div>
+                <label>Latitude</label>
+                <input id="baLat" type="number" step="0.000001"/>
+              </div>
+              <div>
+                <label>Longitude</label>
+                <input id="baLng" type="number" step="0.000001"/>
+              </div>
+            </div>
+            <label class="ba-check"><input id="baJitter" type="checkbox" checked/> Slight unique GPS offset</label>
+            <label class="ba-check"><input id="baWriteGps" type="checkbox" checked/> Write GPS into JPEG</label>
+
+            <label>Copyright</label>
+            <input id="baCopyright" type="text" value="Here Handyman. All rights reserved."/>
+
+            <label>Artist / Author</label>
+            <input id="baArtist" type="text" value="Here Handyman / David Rodrigues"/>
+
+            <label>Title (file properties)</label>
+            <input id="baTitle" type="text" value="Before & After — Here Handyman"/>
+
+            <label>Comments (file properties)</label>
+            <textarea id="baComment">Here Handyman job photo. Before and after. Westchester County, NY. (516) 350-0801. herehandyman.com</textarea>
+
+            <label>Keywords (file properties)</label>
+            <input id="baKeywords" type="text" value="Here Handyman, Westchester, before after, handyman, home repair"/>
+
+            <label>Canvas</label>
+            <select id="baSize"></select>
+            <div class="ba-row">
+              <div>
+                <label>Gap (px)</label>
+                <input id="baGap" type="number" value="8" min="0" max="40"/>
+              </div>
+              <div>
+                <label>Show badges</label>
+                <select id="baShowLabels">
                   <option value="1" selected>Yes</option>
                   <option value="0">No</option>
                 </select>
               </div>
             </div>
 
-            <div style="margin-top:16px">
-              <button type="button" id="download_dash" style="background:#eab308;color:#071828;font-weight:800;padding:12px 14px;border-radius:8px;border:none;cursor:pointer;width:100%;font-size:14px;">Download Geotagged JPEG</button>
-            </div>
+            <button class="ba-dl" type="button" id="baDownload">Download geotagged JPEG</button>
           </div>
-
-          <div style="display:flex;flex-direction:column;align-items:center;">
-            <div class="stage_dash" style="background:#0b100e;border:1px solid #2d3a33;border-radius:12px;padding:12px;max-width:100%;">
-              <canvas id="c_dash" width="1920" height="1080" style="display:block;max-width:100%;height:auto;background:#111;"></canvas>
+          <div>
+            <div class="ba-stage" id="baStage">
+              <canvas id="baCanvas" width="1920" height="1080"></canvas>
             </div>
-            <p style="color:#8fa197;font-size:12px;margin-top:12px;text-align:center;max-width:640px;">
-              Export is JPEG with Here Handyman copyright, comments, keywords, and town GPS in the file properties — ready for Google Business Profile.
-            </p>
+            <p class="ba-hint">Left drop = before. Right drop = after. Files stay in this browser until you download.</p>
           </div>
         </div>
       </div>
@@ -2049,27 +2170,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     // Filter Buttons Event Listener Initialization
-    document.addEventListener('DOMContentLoaded', function() {
-      var filterBar = document.getElementById('reviewFilterBar');
-      if (filterBar) {
-        filterBar.querySelectorAll('.review-filter-btn').forEach(function(btn) {
-          btn.addEventListener('click', function() {
-            filterBar.querySelectorAll('.review-filter-btn').forEach(b => {
-              b.classList.remove('active');
-              b.className = 'btn-secondary review-filter-btn';
-            });
-            this.className = 'btn-action review-filter-btn active';
-            currentReviewFilter = this.getAttribute('data-filter');
-            renderGbpReviews();
+    var filterBar = document.getElementById('reviewFilterBar');
+    if (filterBar) {
+      filterBar.querySelectorAll('.review-filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filterBar.querySelectorAll('.review-filter-btn').forEach(b => {
+            b.classList.remove('active');
+            b.className = 'btn-secondary review-filter-btn';
           });
+          this.className = 'btn-action review-filter-btn active';
+          currentReviewFilter = this.getAttribute('data-filter');
+          renderGbpReviews();
         });
-      }
+      });
+    }
 
-      var syncBtn = document.getElementById('syncGbpBtn');
-      if (syncBtn) {
-        syncBtn.addEventListener('click', syncGbpReviews);
-      }
-    });
+    var syncBtn = document.getElementById('syncGbpBtn');
+    if (syncBtn) {
+      syncBtn.addEventListener('click', syncGbpReviews);
+    }
 
     // Demo Function: Add an Unreplied Review to test AI SEO Reply feature
     window.addTestUnrepliedReview = function() {
@@ -2114,7 +2233,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         if (raw) {
           var parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            // Auto-migration: extract apartment numbers embedded in town or address string
             parsed.forEach(function(c) {
               if (c.town && !c.apt) {
                 var match = c.town.match(/^(.*?)\s*[-,\s]+\s*(apt|unit|ste|suite|#)\s*\.?\s*(.*)$/i);
@@ -2150,6 +2268,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     // Render Contacts Table
     function renderContacts(list) {
       var tbody = document.querySelector("#contactsTable tbody");
+      if (!tbody) return;
       tbody.innerHTML = "";
       if (list.length === 0) {
         tbody.innerHTML = "<tr><td colspan='11' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts found. Use Add Contacts to create your first client.</td></tr>";
@@ -2234,127 +2353,138 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           });
         });
       }
-      document.getElementById('statContacts').textContent = contacts.length;
-      document.getElementById('statRequests').textContent = contacts.length;
+      if (document.getElementById('statContacts')) document.getElementById('statContacts').textContent = contacts.length;
+      if (document.getElementById('statRequests')) document.getElementById('statRequests').textContent = contacts.length;
     }
 
     renderContacts(contacts);
 
     // Search Filtering
-    document.getElementById('contactSearchInput').addEventListener('input', function () {
-      var query = this.value.toLowerCase().trim();
-      var filtered = contacts.filter(function (c) {
-        return c.name.toLowerCase().includes(query) ||
-               c.phone.toLowerCase().includes(query) ||
-               (c.email && c.email.toLowerCase().includes(query)) ||
-               (c.address && c.address.toLowerCase().includes(query)) ||
-               (c.apt && c.apt.toLowerCase().includes(query)) ||
-               (c.town && c.town.toLowerCase().includes(query)) ||
-               (c.lead && c.lead.toLowerCase().includes(query)) ||
-               (c.service && c.service.toLowerCase().includes(query));
+    var searchInput = document.getElementById('contactSearchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        var query = this.value.toLowerCase().trim();
+        var filtered = contacts.filter(function (c) {
+          return c.name.toLowerCase().includes(query) ||
+                 c.phone.toLowerCase().includes(query) ||
+                 (c.email && c.email.toLowerCase().includes(query)) ||
+                 (c.address && c.address.toLowerCase().includes(query)) ||
+                 (c.apt && c.apt.toLowerCase().includes(query)) ||
+                 (c.town && c.town.toLowerCase().includes(query)) ||
+                 (c.lead && c.lead.toLowerCase().includes(query)) ||
+                 (c.service && c.service.toLowerCase().includes(query));
+        });
+        renderContacts(filtered);
       });
-      renderContacts(filtered);
-    });
+    }
 
     // 🔍 Auto-Compare Contacts with GBP Reviews
-    document.getElementById('compareGbpBtn').addEventListener('click', function () {
-      var matchedCount = 0;
-      contacts.forEach(function (c) {
-        if (isGbpReviewerMatch(c.name)) {
-          if (!c.hasGbpReview) {
-            c.hasGbpReview = true;
-            matchedCount++;
+    var compareBtn = document.getElementById('compareGbpBtn');
+    if (compareBtn) {
+      compareBtn.addEventListener('click', function () {
+        var matchedCount = 0;
+        contacts.forEach(function (c) {
+          if (isGbpReviewerMatch(c.name)) {
+            if (!c.hasGbpReview) {
+              c.hasGbpReview = true;
+              matchedCount++;
+            }
           }
-        }
-      });
-      saveContacts(contacts);
-      renderContacts(contacts);
-      var totalReviewed = contacts.filter(function(c) { return c.hasGbpReview || isGbpReviewerMatch(c.name); }).length;
-      alert("🔍 GBP Review Auto-Comparison Complete!\n\n" + matchedCount + " contact(s) newly matched with Google Business Profile reviews.\n\nTotal CRM Contacts with confirmed GBP Reviews: " + totalReviewed + " of " + contacts.length + ".");
-    });
-
-    // 1-Click Secure CSV Export
-    document.getElementById('exportCsvBtn').addEventListener('click', function () {
-      var csvContent = "data:text/csv;charset=utf-8,Name,Phone,Email,Address,Apt/Unit,Town,Lead Source,Service,Status,GBP Review Left\n";
-      contacts.forEach(function (c) {
-        var reviewed = c.hasGbpReview || isGbpReviewerMatch(c.name) ? "YES" : "NO";
-        csvContent += '"' + c.name + '","' + c.phone + '","' + (c.email || '') + '","' + (c.address || '') + '","' + (c.apt || '') + '","' + (c.town || '') + '","' + (c.lead || 'Direct') + '","' + (c.service || '') + '","' + (c.status || 'Active') + '","' + reviewed + '"\n';
-      });
-      var encodedUri = encodeURI(csvContent);
-      var link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "here-handyman-customers-backup-" + new Date().toISOString().slice(0,10) + ".csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
-
-    // Add Contact Form with Persistence & Database Sync
-    document.getElementById('addContactForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var name = document.getElementById('newCustName').value.trim();
-      var phone = document.getElementById('newCustPhone').value.trim();
-      var email = document.getElementById('newCustEmail').value.trim();
-      var address = document.getElementById('newCustAddress') ? document.getElementById('newCustAddress').value.trim() : '';
-      var apt = document.getElementById('newCustApt') ? document.getElementById('newCustApt').value.trim() : '';
-      var town = document.getElementById('newCustTown') ? document.getElementById('newCustTown').value.trim() : 'Westchester';
-      var lead = document.getElementById('newCustLead') ? document.getElementById('newCustLead').value.trim() || 'Direct' : 'Direct';
-      var service = document.getElementById('newCustService').value.trim() || 'General Repairs';
-      var hasGbpReview = document.getElementById('newCustGbpReview') ? document.getElementById('newCustGbpReview').checked : false;
-
-      if (name && phone) {
-        var newContact = {
-          name: name,
-          phone: phone,
-          email: email,
-          address: address,
-          apt: apt,
-          town: town,
-          lead: lead,
-          service: service,
-          status: "Active",
-          hasGbpReview: hasGbpReview,
-          date: new Date().toISOString().slice(0, 10)
-        };
-
-        // 1. Add to local state & persist in localStorage
-        contacts.unshift(newContact);
+        });
         saveContacts(contacts);
         renderContacts(contacts);
+        var totalReviewed = contacts.filter(function(c) { return c.hasGbpReview || isGbpReviewerMatch(c.name); }).length;
+        alert("🔍 GBP Review Auto-Comparison Complete!\n\n" + matchedCount + " contact(s) newly matched with Google Business Profile reviews.\n\nTotal CRM Contacts with confirmed GBP Reviews: " + totalReviewed + " of " + contacts.length + ".");
+      });
+    }
 
-        // 2. Display success status banner
-        var statusBox = document.getElementById('addContactSuccessMsg');
-        statusBox.textContent = "✅ Customer " + name + " saved to CRM! Total contacts updated: " + contacts.length;
-        statusBox.style.display = "block";
+    // 1-Click Secure CSV Export
+    var exportBtn = document.getElementById('exportCsvBtn');
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function () {
+        var csvContent = "data:text/csv;charset=utf-8,Name,Phone,Email,Address,Apt/Unit,Town,Lead Source,Service,Status,GBP Review Left\n";
+        contacts.forEach(function (c) {
+          var reviewed = c.hasGbpReview || isGbpReviewerMatch(c.name) ? "YES" : "NO";
+          csvContent += '"' + c.name + '","' + c.phone + '","' + (c.email || '') + '","' + (c.address || '') + '","' + (c.apt || '') + '","' + (c.town || '') + '","' + (c.lead || 'Direct') + '","' + (c.service || '') + '","' + (c.status || 'Active') + '","' + reviewed + '"\n';
+        });
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "here-handyman-customers-backup-" + new Date().toISOString().slice(0,10) + ".csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
 
-        // 3. Sync asynchronously with Supabase/Netlify Function
-        fetch('/.netlify/functions/submit-review', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
+    // Add Contact Form with Persistence & Database Sync
+    var addForm = document.getElementById('addContactForm');
+    if (addForm) {
+      addForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = document.getElementById('newCustName').value.trim();
+        var phone = document.getElementById('newCustPhone').value.trim();
+        var email = document.getElementById('newCustEmail').value.trim();
+        var address = document.getElementById('newCustAddress') ? document.getElementById('newCustAddress').value.trim() : '';
+        var apt = document.getElementById('newCustApt') ? document.getElementById('newCustApt').value.trim() : '';
+        var town = document.getElementById('newCustTown') ? document.getElementById('newCustTown').value.trim() : 'Westchester';
+        var lead = document.getElementById('newCustLead') ? document.getElementById('newCustLead').value.trim() || 'Direct' : 'Direct';
+        var service = document.getElementById('newCustService').value.trim() || 'General Repairs';
+        var hasGbpReview = document.getElementById('newCustGbpReview') ? document.getElementById('newCustGbpReview').checked : false;
+
+        if (name && phone) {
+          var newContact = {
             name: name,
             phone: phone,
             email: email,
             address: address,
+            apt: apt,
             town: town,
-            leadSource: lead,
+            lead: lead,
             service: service,
-            rating: 5,
-            reviewText: "Direct contact added via Admin CRM Dashboard",
-            submittedAt: new Date().toISOString()
-          })
-        }).catch(function (err) {
-          console.log("Background DB sync note:", err);
-        });
+            status: "Active",
+            hasGbpReview: hasGbpReview,
+            date: new Date().toISOString().slice(0, 10)
+          };
 
-        this.reset();
+          contacts.unshift(newContact);
+          saveContacts(contacts);
+          renderContacts(contacts);
 
-        setTimeout(function() {
-          // Switch to contacts tab
-          document.querySelector('.menu-item[data-tab="contacts"]').click();
-        }, 800);
-      }
-    });
+          var statusBox = document.getElementById('addContactSuccessMsg');
+          if (statusBox) {
+            statusBox.textContent = "✅ Customer " + name + " saved to CRM! Total contacts updated: " + contacts.length;
+            statusBox.style.display = "block";
+          }
+
+          fetch('/.netlify/functions/submit-review', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: name,
+              phone: phone,
+              email: email,
+              address: address,
+              town: town,
+              leadSource: lead,
+              service: service,
+              rating: 5,
+              reviewText: "Direct contact added via Admin CRM Dashboard",
+              submittedAt: new Date().toISOString()
+            })
+          }).catch(function (err) {
+            console.log("Background DB sync note:", err);
+          });
+
+          this.reset();
+
+          setTimeout(function() {
+            var targetMenuItem = document.querySelector('.menu-item[data-tab="contacts"]');
+            if (targetMenuItem) targetMenuItem.click();
+          }, 800);
+        }
+      });
+    }
 
     // Dynamic Review Tracking & GBP Sync
     var BASE_GBP_REVIEWS = 24;
@@ -2362,7 +2492,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     function updateReviewStats() {
       var totalReviews = BASE_GBP_REVIEWS + webReviews.length;
-      document.getElementById('statReviews').textContent = totalReviews;
+      if (document.getElementById('statReviews')) document.getElementById('statReviews').textContent = totalReviews;
       
       var gbpBadge = document.getElementById('gbpReviewBadgeText');
       if (gbpBadge) {
@@ -2371,145 +2501,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     updateReviewStats();
-
-    // Sync GBP Reviews Button connected to Google Cloud API Service Account
-    var syncBtn = document.getElementById('syncGbpBtn');
-    if (syncBtn) {
-      syncBtn.addEventListener('click', function () {
-        var self = this;
-        self.disabled = true;
-        self.textContent = 'Syncing GBP API...';
-
-        fetch('/.netlify/functions/gbp-reviews')
-          .then(function(res) { return res.json(); })
-          .then(function(data) {
-            syncLiveWebReviews();
-            updateReviewStats();
-            self.disabled = false;
-            self.textContent = 'Sync Latest GBP Reviews 🔄';
-            if (data && data.success) {
-              alert('✅ Google Business Profile Live API Connected!\n\nAuthenticated as: ' + data.clientEmail + '\n\n✓ Synced ' + (BASE_GBP_REVIEWS + webReviews.length) + ' verified Google Business Profile reviews!');
-            } else {
-              alert('✓ Synced ' + (BASE_GBP_REVIEWS + webReviews.length) + ' verified Google Business Profile reviews!');
-            }
-          })
-          .catch(function(err) {
-            console.log('GBP API Sync Notice:', err);
-            syncLiveWebReviews();
-            updateReviewStats();
-            self.disabled = false;
-            self.textContent = 'Sync Latest GBP Reviews 🔄';
-            alert('✓ Synced ' + (BASE_GBP_REVIEWS + webReviews.length) + ' verified Google Business Profile reviews!');
-          });
-      });
-    }
-
-    // Setup interactive AI SEO reply buttons on review cards
-    function setupReviewCardActions() {
-      document.querySelectorAll('.review-card').forEach(function(card) {
-        if (card.querySelector('.ai-reply-btn')) return;
-
-        var nameEl = card.querySelector('.reviewer-name');
-        var textEl = card.querySelector('.review-text');
-        var replyBox = card.querySelector('.ai-reply-box');
-
-        var reviewerName = nameEl ? nameEl.textContent.trim() : 'Customer';
-        var reviewText = textEl ? textEl.textContent.trim() : '';
-
-        var btnContainer = document.createElement('div');
-        btnContainer.style.cssText = 'display:flex;gap:8px;margin-top:12px;margin-bottom:8px;flex-wrap:wrap;';
-        btnContainer.innerHTML = 
-          '<button class="btn-secondary ai-reply-btn" style="font-size:12px;padding:6px 12px;background:#f0f9ff;color:#0284c7;border:1px solid #bae6fd;font-weight:700;cursor:pointer;">✨ AI SEO Reply</button>' +
-          '<button class="btn-action post-gbp-btn" style="font-size:12px;padding:6px 12px;background:#16a34a;font-weight:700;cursor:pointer;">🚀 Post to Google</button>';
-
-        if (replyBox) {
-          card.insertBefore(btnContainer, replyBox);
-        } else {
-          card.appendChild(btnContainer);
-        }
-
-        var aiBtn = btnContainer.querySelector('.ai-reply-btn');
-        var postBtn = btnContainer.querySelector('.post-gbp-btn');
-
-        aiBtn.addEventListener('click', function() {
-          this.disabled = true;
-          this.textContent = 'Generating SEO Reply...';
-          var self = this;
-
-          fetch('/.netlify/functions/ai-seo-reply', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              reviewerName: reviewerName,
-              reviewText: reviewText,
-              town: 'Westchester County',
-              service: 'Handyman Service'
-            })
-          })
-          .then(res => res.json())
-          .then(data => {
-            self.disabled = false;
-            self.textContent = '✨ Regenerate AI SEO Reply';
-            if (data && data.seoReply) {
-              if (!replyBox) {
-                replyBox = document.createElement('div');
-                replyBox.className = 'ai-reply-box';
-                card.appendChild(replyBox);
-              }
-              replyBox.innerHTML = '<div class="ai-reply-header">🤖 AI SEO Response • ' + new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) + '</div><div>' + data.seoReply + '</div>';
-            }
-          })
-          .catch(err => {
-            console.error('AI SEO Reply error:', err);
-            self.disabled = false;
-            self.textContent = '✨ AI SEO Reply';
-          });
-        });
-
-        postBtn.addEventListener('click', function() {
-          var currentReply = replyBox ? replyBox.innerText.replace(/🤖 AI SEO Response[^\n]*/, '').trim() : '';
-          if (!currentReply) {
-            alert('Please generate an AI SEO reply first by clicking ✨ AI SEO Reply!');
-            return;
-          }
-
-          if (confirm('Post this SEO reply to Google Business Profile for ' + reviewerName + '?\n\n"' + currentReply.slice(0, 150) + '..."')) {
-            this.disabled = true;
-            this.textContent = 'Posting to Google...';
-            var self = this;
-
-            fetch('/.netlify/functions/gbp-reviews', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                reviewName: 'accounts/105960944786626315708/locations/herehandyman/reviews/1',
-                replyComment: currentReply
-              })
-            })
-            .then(res => res.json())
-            .then(data => {
-              self.disabled = false;
-              if (data && data.success) {
-                self.textContent = '✅ Posted to Google!';
-                self.style.background = '#059669';
-                alert('✅ Reply successfully posted to Google Business Profile!');
-              } else {
-                self.textContent = '🚀 Post to Google';
-                alert('ℹ️ Reply saved! (Note: Connect your Google Business Profile Service Account credentials in Netlify Environment Variables to post directly to Google Maps).');
-              }
-            })
-            .catch(err => {
-              console.log('Post error:', err);
-              self.disabled = false;
-              self.textContent = '🚀 Post to Google';
-              alert('ℹ️ Reply saved locally!');
-            });
-          }
-        });
-      });
-    }
-
-    setupReviewCardActions();
 
     // Fetch live web reviews/contacts from Supabase to auto-populate CRM & Reviews
     function syncLiveWebReviews() {
@@ -2554,41 +2545,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     syncLiveWebReviews();
     renderGbpReviews();
 
-    var syncGbpBtn = document.getElementById('syncGbpBtn');
-    if (syncGbpBtn) {
-      syncGbpBtn.addEventListener('click', function() {
-        syncGbpBtn.textContent = 'Syncing... ⏳';
-        fetch('/.netlify/functions/gbp-reviews')
-          .then(function(res) { return res.json(); })
-          .then(function(data) {
-            syncGbpBtn.textContent = 'Sync Latest GBP Reviews 🔄';
-            if (data.reviews && Array.isArray(data.reviews)) {
-              data.reviews.forEach(function(r) {
-                var exists = GBP_REVIEWS_DATA.some(function(local) { return local.author === r.reviewer.displayName; });
-                if (!exists) {
-                  GBP_REVIEWS_DATA.unshift({
-                    id: r.name || ('gbp-' + Date.now()),
-                    author: r.reviewer.displayName || 'Google Customer',
-                    rating: r.starRating === 'FIVE' ? 5 : 5,
-                    date: r.createTime ? r.createTime.slice(0,10) : 'Recent',
-                    reviewText: r.comment || '',
-                    replyText: r.reviewReply ? r.reviewReply.comment : '',
-                    hasReply: Boolean(r.reviewReply && r.reviewReply.comment)
-                  });
-                }
-              });
-            }
-            renderGbpReviews();
-            alert('✅ Synced latest Google Business Profile reviews!');
-          })
-          .catch(function(err) {
-            syncGbpBtn.textContent = 'Sync Latest GBP Reviews 🔄';
-            renderGbpReviews();
-            alert('✓ Synced 13 verified Google Business Profile reviews!');
-          });
-      });
-    }
-
     var testUnrepliedBtn = document.getElementById('testUnrepliedBtn');
     if (testUnrepliedBtn) {
       testUnrepliedBtn.addEventListener('click', function() {
@@ -2602,8 +2558,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var phonePreview = document.getElementById('phoneMsgPreview');
 
     function updatePhonePreview() {
-      var owner = ownerInput.value.trim() || "David";
-      var biz = bizInput.value.trim() || "Here Handyman";
+      if (!phonePreview) return;
+      var owner = ownerInput ? (ownerInput.value.trim() || "David") : "David";
+      var biz = bizInput ? (bizInput.value.trim() || "Here Handyman") : "Here Handyman";
       phonePreview.textContent = "Hey Jessica, we hope you enjoyed your experience with " + biz + "! Would you mind taking a moment to leave a review for " + owner + "? Here's the link: https://www.herehandyman.com/reviews/";
     }
 
@@ -2638,6 +2595,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         if (targetTab === 'invoices') {
           loadInvoices();
+        }
+        if (targetTab === 'before-after' && window.baDraw) {
+          window.baDraw();
         }
 
         if (pageTitle) {
@@ -2751,7 +2711,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         if (res.ok) {
           var dbData = await res.json();
           if (dbData && dbData.length > 0) {
-            // Merge DB data with seed data
             localInvoices = dbData.concat(SKYNOVA_SEED_INVOICES.filter(s => !dbData.some(d => d.number === s.number)));
           }
         }
@@ -2803,7 +2762,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       renderInvoices(filtered);
     }
 
-    // Filter Listeners
     ['invFilterFromDate', 'invFilterToDate', 'invFilterCustomer', 'invFilterStatus'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('change', applyInvoiceFilters);
@@ -3121,134 +3079,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     }
 
-    // Logout Handler
-    var logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', function () {
-        localStorage.removeItem(SESSION_KEY);
-        sessionStorage.removeItem(SESSION_KEY);
-        window.location.href = "/login";
-      });
-    }
-  });
-  </script>
-
-  <!-- EDIT CONTACT MODAL -->
-  <div id="editContactModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,24,40,0.6);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
-    <div style="background:#fff;border-radius:16px;max-width:550px;width:100%;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,0.3);position:relative;max-height:90vh;overflow-y:auto;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;border-bottom:1px solid #f1f5f9;padding-bottom:14px;">
-        <h3 style="font-size:20px;color:var(--navy);margin:0;">✏️ Edit Customer Contact</h3>
-        <button id="closeEditModalBtn" style="background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;line-height:1;">&times;</button>
-      </div>
-      <form id="editContactForm">
-        <input type="hidden" id="editCustIndex">
-        <div class="form-group" style="margin-bottom:14px;">
-          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Customer Full Name *</label>
-          <input class="form-control" id="editCustName" required style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
-        </div>
-        <div class="form-group" style="margin-bottom:14px;">
-          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Phone Number *</label>
-          <input class="form-control" id="editCustPhone" required style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
-        </div>
-        <div class="form-group" style="margin-bottom:14px;">
-          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Email Address</label>
-          <input class="form-control" type="email" id="editCustEmail" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
-        </div>
-        <div class="form-group" style="margin-bottom:14px;">
-          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Street Address</label>
-          <input class="form-control" id="editCustAddress" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
-        </div>
-        <div class="form-group" style="margin-bottom:14px;">
-          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Apt / Suite / Unit</label>
-          <input class="form-control" id="editCustApt" placeholder="e.g. Apt 612" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
-        </div>
-        <div class="form-group" style="margin-bottom:14px;">
-          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Town / City *</label>
-          <input class="form-control" id="editCustTown" required style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
-        </div>
-        <div class="form-group" style="margin-bottom:14px;">
-          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Lead Source</label>
-          <input class="form-control" id="editCustLead" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
-        </div>
-        <div class="form-group" style="margin-bottom:14px;">
-          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Service Completed</label>
-          <input class="form-control" id="editCustService" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
-        </div>
-        <div class="form-group" style="margin-bottom:20px;">
-          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Status</label>
-          <select class="form-control" id="editCustStatus" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
-            <option value="Active">Active</option>
-            <option value="Completed">Completed</option>
-            <option value="Pending">Pending</option>
-          </select>
-        </div>
-        <div class="form-group" style="display:flex;align-items:center;gap:10px;margin-bottom:24px;background:#f8fafc;padding:12px 14px;border-radius:8px;border:1px solid #e2e8f0;">
-          <input type="checkbox" id="editCustGbpReview" style="width:18px;height:18px;cursor:pointer;">
-          <label for="editCustGbpReview" style="font-weight:600;font-size:13.5px;color:var(--navy);cursor:pointer;margin:0;">Customer left Google Business Profile (GBP) Review ⭐</label>
-        </div>
-        <div style="display:flex;gap:10px;justify-content:flex-end;">
-          <button type="button" id="cancelEditModalBtn" style="padding:10px 18px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;font-weight:600;cursor:pointer;">Cancel</button>
-          <button type="submit" style="padding:10px 22px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;">Save Changes →</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <!-- CREATE INVOICE MODAL -->
-  <div id="createInvoiceModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,24,40,0.6);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
-    <div style="background:#fff;border-radius:16px;max-width:700px;width:100%;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,0.3);position:relative;max-height:90vh;overflow-y:auto;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;border-bottom:1px solid #f1f5f9;padding-bottom:14px;">
-        <h3 style="font-size:20px;color:var(--navy);margin:0;">📄 Create Skynova Invoice</h3>
-        <button id="closeCreateInvoiceModalBtn" style="background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;line-height:1;">&times;</button>
-      </div>
-
-      <form id="createInvoiceForm">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-          <div>
-            <label style="font-weight:700;font-size:13px;color:var(--navy);display:block;margin-bottom:6px;">Select Customer *</label>
-            <select class="form-control" id="invCustSelect" required style="width:100%;">
-              <option value="">-- Choose Customer --</option>
-            </select>
-          </div>
-          <div>
-            <label style="font-weight:700;font-size:13px;color:var(--navy);display:block;margin-bottom:6px;">Due Date *</label>
-            <input type="date" class="form-control" id="invDueDate" required style="width:100%;">
-          </div>
-        </div>
-
-        <!-- Line Items Section -->
-        <div style="margin-bottom:20px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <label style="font-weight:700;font-size:13px;color:var(--navy);">Line Items (Services & Materials)</label>
-            <button type="button" id="addInvLineItemBtn" class="btn-secondary" style="font-size:12px;padding:4px 10px;">+ Add Line Item</button>
-          </div>
-
-          <div id="invLineItemsContainer" style="display:flex;flex-direction:column;gap:8px;">
-            <!-- Line Item Row Template -->
-            <div class="inv-line-row" style="display:grid;grid-template-columns:3fr 1fr 1fr 30px;gap:8px;align-items:center;">
-              <input class="form-control inv-item-desc" placeholder="Service description (e.g. Drywall Repair)" required>
-              <input type="number" step="0.5" min="0.5" class="form-control inv-item-qty" value="1.0" placeholder="Qty" required style="text-align:right;">
-              <input type="number" step="1" min="0" class="form-control inv-item-price" placeholder="Price ($)" required style="text-align:right;">
-              <button type="button" class="remove-line-btn" style="background:none;border:none;color:#dc2626;font-size:18px;cursor:pointer;font-weight:700;">&times;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Totals Preview -->
-        <div style="background:#f8fafc;padding:16px;border-radius:10px;border:1px solid #e2e8f0;margin-bottom:20px;">
-          <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;color:var(--muted);">
-            <span>Subtotal:</span>
-            <span id="invSubtotalPreview" style="font-weight:700;color:var(--navy);">$0.00</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;font-size:14px;margin-bottom:6px;color:var(--muted);">
-            <span>Tax / Fees ($):</span>
-            <input type="number" step="1" min="0" class="form-control" id="invTaxInput" value="0" style="width:100px;height:32px;text-align:right;font-size:13px;">
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;color:var(--navy);border-top:1px solid #cbd5e1;padding-top:8px;">
-            <span>Total Balance:</span>
-            <span id="invTotalPreview" style="color:var(--navy);">$0.00</span>
-          </div>
-        </div>
-
     // ==========================================
     // FIELD PHOTO UPLOADER & GEOTAGGER MODULE
     // ==========================================
@@ -3396,7 +3226,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           var ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
 
-          // Convert image to WebP format
           var webpDataUrl = canvas.toDataURL('image/webp', quality || 0.82);
           callback(webpDataUrl, width, height, file.size);
         };
@@ -3572,331 +3401,481 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     };
 
-    // Initialize Dashboard Before & After Collage Generator
-    (function initDashCollage() {
-      const TOWNS = [
-        ["White Plains", 41.033986, -73.762910],
-        ["Scarsdale", 40.998165, -73.784576],
-        ["Yonkers", 40.931210, -73.898747],
-        ["Hartsdale", 41.023432, -73.797635],
-        ["Harrison", 41.018986, -73.712629],
-        ["New Rochelle", 40.911488, -73.782354],
-        ["Tarrytown", 41.076208, -73.858708],
-        ["Mamaroneck", 40.948711, -73.732628],
-        ["Rye", 40.980654, -73.683739],
-        ["Elmsford", 41.055097, -73.820129],
-        ["Ardsley", 41.010653, -73.843743],
-        ["Dobbs Ferry", 41.014541, -73.872635],
-        ["Bronxville", 40.938155, -73.832078],
-        ["Pelham", 40.909821, -73.807910],
-        ["Eastchester", 40.959543, -73.809576],
-        ["Larchmont", 40.927877, -73.751799],
-        ["Ossining", 41.162873, -73.861522],
-        ["Irvington", 41.039264, -73.873467],
-        ["Briarcliff Manor", 41.145096, -73.823743],
-        ["Sleepy Hollow", 41.085651, -73.858467],
-        ["Mount Vernon", 40.912599, -73.837079],
-        ["Greenburgh", 41.033432, -73.816800],
-        ["Valhalla", 41.074820, -73.775129],
-        ["Chappaqua", 41.159543, -73.764855],
-        ["Armonk", 41.126487, -73.714021]
-      ];
+    renderFieldPhotosGrid();
 
-      const SIZES = [
-        ["1920 x 1080", "1920x1080"],
-        ["1600 x 900", "1600x900"],
-        ["1200 x 630", "1200x630"]
-      ];
+    // Logout Handler
+    var logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function () {
+        localStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(SESSION_KEY);
+        window.location.href = "/login";
+      });
+    }
+  });
+  </script>
 
-      let imgA = null;
-      let imgB = null;
-      const canvas = document.getElementById("c_dash");
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d");
-      const townEl = document.getElementById("town_dash");
-      const sizeEl = document.getElementById("size_dash");
+  <!-- EDIT CONTACT MODAL -->
+  <div id="editContactModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,24,40,0.6);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#fff;border-radius:16px;max-width:550px;width:100%;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,0.3);position:relative;max-height:90vh;overflow-y:auto;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;border-bottom:1px solid #f1f5f9;padding-bottom:14px;">
+        <h3 style="font-size:20px;color:var(--navy);margin:0;">✏️ Edit Customer Contact</h3>
+        <button id="closeEditModalBtn" style="background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+      <form id="editContactForm">
+        <input type="hidden" id="editCustIndex">
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Customer Full Name *</label>
+          <input class="form-control" id="editCustName" required style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Phone Number *</label>
+          <input class="form-control" id="editCustPhone" required style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Email Address</label>
+          <input class="form-control" type="email" id="editCustEmail" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Street Address</label>
+          <input class="form-control" id="editCustAddress" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Apt / Suite / Unit</label>
+          <input class="form-control" id="editCustApt" placeholder="e.g. Apt 612" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Town / City *</label>
+          <input class="form-control" id="editCustTown" required style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Lead Source</label>
+          <input class="form-control" id="editCustLead" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Service Completed</label>
+          <input class="form-control" id="editCustService" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+        </div>
+        <div class="form-group" style="margin-bottom:20px;">
+          <label style="font-weight:600;font-size:13px;color:var(--navy);display:block;margin-bottom:4px;">Status</label>
+          <select class="form-control" id="editCustStatus" style="width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;">
+            <option value="Active">Active</option>
+            <option value="Completed">Completed</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+        <div class="form-group" style="display:flex;align-items:center;gap:10px;margin-bottom:24px;background:#f8fafc;padding:12px 14px;border-radius:8px;border:1px solid #e2e8f0;">
+          <input type="checkbox" id="editCustGbpReview" style="width:18px;height:18px;cursor:pointer;">
+          <label for="editCustGbpReview" style="font-weight:600;font-size:13.5px;color:var(--navy);cursor:pointer;margin:0;">Customer left Google Business Profile (GBP) Review ⭐</label>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;">
+          <button type="button" id="cancelEditModalBtn" style="padding:10px 18px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;font-weight:600;cursor:pointer;">Cancel</button>
+          <button type="submit" style="padding:10px 22px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;">Save Changes →</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
+  <!-- CREATE INVOICE MODAL -->
+  <div id="createInvoiceModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,24,40,0.6);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#fff;border-radius:16px;max-width:700px;width:100%;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,0.3);position:relative;max-height:90vh;overflow-y:auto;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;border-bottom:1px solid #f1f5f9;padding-bottom:14px;">
+        <h3 style="font-size:20px;color:var(--navy);margin:0;">📄 Create Skynova Invoice</h3>
+        <button id="closeCreateInvoiceModalBtn" style="background:none;border:none;font-size:24px;color:var(--muted);cursor:pointer;line-height:1;">&times;</button>
+      </div>
+
+      <form id="createInvoiceForm">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <label style="font-weight:700;font-size:13px;color:var(--navy);display:block;margin-bottom:6px;">Select Customer *</label>
+            <select class="form-control" id="invCustSelect" required style="width:100%;">
+              <option value="">-- Choose Customer --</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-weight:700;font-size:13px;color:var(--navy);display:block;margin-bottom:6px;">Due Date *</label>
+            <input type="date" class="form-control" id="invDueDate" required style="width:100%;">
+          </div>
+        </div>
+
+        <!-- Line Items Section -->
+        <div style="margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <label style="font-weight:700;font-size:13px;color:var(--navy);">Line Items (Services & Materials)</label>
+            <button type="button" id="addInvLineItemBtn" class="btn-secondary" style="font-size:12px;padding:4px 10px;">+ Add Line Item</button>
+          </div>
+
+          <div id="invLineItemsContainer" style="display:flex;flex-direction:column;gap:8px;">
+            <!-- Line Item Row Template -->
+            <div class="inv-line-row" style="display:grid;grid-template-columns:3fr 1fr 1fr 30px;gap:8px;align-items:center;">
+              <input class="form-control inv-item-desc" placeholder="Service description (e.g. Drywall Repair)" required>
+              <input type="number" step="0.5" min="0.5" class="form-control inv-item-qty" value="1.0" placeholder="Qty" required style="text-align:right;">
+              <input type="number" step="1" min="0" class="form-control inv-item-price" placeholder="Price ($)" required style="text-align:right;">
+              <button type="button" class="remove-line-btn" style="background:none;border:none;color:#dc2626;font-size:18px;cursor:pointer;font-weight:700;">&times;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Totals Preview -->
+        <div style="background:#f8fafc;padding:16px;border-radius:10px;border:1px solid #e2e8f0;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;color:var(--muted);">
+            <span>Subtotal:</span>
+            <span id="invSubtotalPreview" style="font-weight:700;color:var(--navy);">$0.00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:14px;margin-bottom:6px;color:var(--muted);">
+            <span>Tax / Fees ($):</span>
+            <input type="number" step="1" min="0" class="form-control" id="invTaxInput" value="0" style="width:100px;height:32px;text-align:right;font-size:13px;">
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;color:var(--navy);border-top:1px solid #cbd5e1;padding-top:8px;">
+            <span>Total Balance:</span>
+            <span id="invTotalPreview" style="color:var(--navy);">$0.00</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:flex-end;">
+          <button type="button" id="cancelCreateInvoiceBtn" style="padding:10px 18px;border:1px solid #cbd5e1;background:#fff;border-radius:8px;font-weight:600;cursor:pointer;">Cancel</button>
+          <button type="submit" id="saveInvoiceSubmitBtn" style="padding:10px 22px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;">Save &amp; Generate Invoice →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER COLLAGE GENERATOR SCRIPT -->
+  <script>
+  (function () {
+    var TOWNS = [
+      ["White Plains", 41.033986, -73.762910],
+      ["Scarsdale", 40.998165, -73.784576],
+      ["Yonkers", 40.931210, -73.898747],
+      ["Hartsdale", 41.023432, -73.797635],
+      ["Harrison", 41.018986, -73.712629],
+      ["New Rochelle", 40.911488, -73.782354],
+      ["Tarrytown", 41.076208, -73.858708],
+      ["Mamaroneck", 40.948711, -73.732628],
+      ["Rye", 40.980654, -73.683739],
+      ["Elmsford", 41.055097, -73.820129],
+      ["Ardsley", 41.010653, -73.843743],
+      ["Dobbs Ferry", 41.014541, -73.872635],
+      ["Bronxville", 40.938155, -73.832078],
+      ["Pelham", 40.909821, -73.807910],
+      ["Eastchester", 40.959543, -73.809576],
+      ["Larchmont", 40.927877, -73.751799],
+      ["Ossining", 41.162873, -73.861522],
+      ["Irvington", 41.039264, -73.873467],
+      ["Briarcliff Manor", 41.145096, -73.823743],
+      ["Sleepy Hollow", 41.085651, -73.858467],
+      ["Mount Vernon", 40.912599, -73.837079],
+      ["Greenburgh", 41.033432, -73.816800],
+      ["Valhalla", 41.074820, -73.775129],
+      ["Chappaqua", 41.159543, -73.764855],
+      ["Armonk", 41.126487, -73.714021]
+    ];
+    var SIZES = [
+      ["1920 x 1080", "1920x1080"],
+      ["1600 x 900", "1600x900"],
+      ["1200 x 630", "1200x630"]
+    ];
+    var imgA = null;
+    var imgB = null;
+    var canvas = document.getElementById("baCanvas");
+    if (!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var townEl = document.getElementById("baTown");
+    var sizeEl = document.getElementById("baSize");
+
+    if (townEl) {
       TOWNS.forEach(function (t, i) {
-        const o = document.createElement("option");
+        var o = document.createElement("option");
         o.value = i;
         o.textContent = t[0];
-        if (t[0] === "Harrison") o.selected = true;
+        if (t[0] === "White Plains") o.selected = true;
         townEl.appendChild(o);
       });
+    }
 
-      function syncCoords() {
-        const t = TOWNS[Number(townEl.value)];
-        document.getElementById("lat_dash").value = t[1];
-        document.getElementById("lng_dash").value = t[2];
-        fillMetaFromTown();
-      }
-      function fillMetaFromTown() {
-        const town = TOWNS[Number(townEl.value)][0];
-        const cap = document.getElementById("caption_dash");
-        if (!cap.dataset.touched) cap.value = "Before & after — " + town + ", NY";
-        const title = document.getElementById("title_dash");
-        if (!title.dataset.touched) title.value = "Before & After — Here Handyman — " + town + ", NY";
-        const kw = document.getElementById("keywords_dash");
-        if (!kw.dataset.touched) {
-          kw.value = "Here Handyman, " + town + ", Westchester County NY, before after, handyman, home repair, " + town + " handyman";
-        }
-        const cm = document.getElementById("comment_dash");
-        if (!cm.dataset.touched) {
-          cm.value = "Here Handyman job photo. Before and after collage. " + town + ", Westchester County, NY. © Here Handyman. (516) 350-0801. herehandyman.com";
-        }
-      }
-      townEl.addEventListener("change", syncCoords);
-      ["caption_dash","title_dash","keywords_dash","comment_dash"].forEach(function (id) {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener("input", function () { this.dataset.touched = "1"; });
-      });
-      syncCoords();
-
+    if (sizeEl) {
       SIZES.forEach(function (s, i) {
-        const o = document.createElement("option");
+        var o = document.createElement("option");
         o.value = s[1];
         o.textContent = s[0];
         if (i === 0) o.selected = true;
         sizeEl.appendChild(o);
       });
+    }
 
-      function setSlot(which, url) {
-        const slot = document.getElementById(which === "A" ? "slotA_dash" : "slotB_dash");
-        if (!slot) return;
-        slot.innerHTML = "";
-        const t = document.createElement("img");
-        t.src = url;
-        t.style.width = "100%";
-        t.style.height = "80px";
-        t.style.objectFit = "cover";
-        t.style.borderRadius = "6px";
-        t.style.display = "block";
-        slot.appendChild(t);
+    function fillMetaFromTown() {
+      if (!townEl) return;
+      var town = TOWNS[Number(townEl.value)][0];
+      var cap = document.getElementById("baCaption");
+      if (cap && !cap.dataset.touched) cap.value = "Before & after — " + town + ", NY";
+      var title = document.getElementById("baTitle");
+      if (title && !title.dataset.touched) title.value = "Before & After — Here Handyman — " + town + ", NY";
+      var kw = document.getElementById("baKeywords");
+      if (kw && !kw.dataset.touched) {
+        kw.value = "Here Handyman, " + town + ", Westchester County NY, before after, handyman, home repair, " + town + " handyman";
       }
-      function loadFile(file, which) {
-        if (!file || !file.type || file.type.indexOf("image/") !== 0) return;
-        const url = URL.createObjectURL(file);
-        const im = new Image();
-        im.onload = function () {
-          if (which === "A") imgA = im; else imgB = im;
-          setSlot(which, url);
-          draw();
-        };
-        im.src = url;
+      var cm = document.getElementById("baComment");
+      if (cm && !cm.dataset.touched) {
+        cm.value = "Here Handyman job photo. Before and after collage. " + town + ", Westchester County, NY. Here Handyman. (516) 350-0801. herehandyman.com";
       }
-      function firstImage(list) {
-        if (!list || !list.length) return null;
-        for (let i = 0; i < list.length; i++) {
-          if (list[i].type && list[i].type.indexOf("image/") === 0) return list[i];
+    }
+
+    function syncCoords() {
+      if (!townEl) return;
+      var t = TOWNS[Number(townEl.value)];
+      if (document.getElementById("baLat")) document.getElementById("baLat").value = t[1];
+      if (document.getElementById("baLng")) document.getElementById("baLng").value = t[2];
+      fillMetaFromTown();
+    }
+
+    if (townEl) townEl.addEventListener("change", syncCoords);
+    ["baCaption", "baTitle", "baKeywords", "baComment"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener("input", function () { this.dataset.touched = "1"; });
+    });
+    syncCoords();
+
+    function setSlot(which, url) {
+      var slot = document.getElementById(which === "A" ? "baSlotA" : "baSlotB");
+      if (!slot) return;
+      slot.innerHTML = "";
+      var t = document.createElement("img");
+      t.src = url;
+      slot.appendChild(t);
+    }
+
+    function loadFile(file, which) {
+      if (!file || !file.type || file.type.indexOf("image/") !== 0) return;
+      var url = URL.createObjectURL(file);
+      var im = new Image();
+      im.onload = function () {
+        if (which === "A") imgA = im; else imgB = im;
+        setSlot(which, url);
+        draw();
+      };
+      im.src = url;
+    }
+
+    function firstImage(list) {
+      if (!list || !list.length) return null;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].type && list[i].type.indexOf("image/") === 0) return list[i];
+      }
+      return null;
+    }
+
+    function bindDrop(el, which) {
+      if (!el) return;
+      ["dragenter", "dragover"].forEach(function (ev) {
+        el.addEventListener(ev, function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          el.classList.add("drag");
+        });
+      });
+      ["dragleave", "drop"].forEach(function (ev) {
+        el.addEventListener(ev, function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          el.classList.remove("drag");
+        });
+      });
+      el.addEventListener("drop", function (e) {
+        var file = firstImage(e.dataTransfer.files);
+        if (file) loadFile(file, which);
+      });
+    }
+
+    bindDrop(document.getElementById("baSlotA"), "A");
+    bindDrop(document.getElementById("baSlotB"), "B");
+    var stage = document.getElementById("baStage");
+    if (stage) {
+      ["dragenter", "dragover"].forEach(function (ev) {
+        stage.addEventListener(ev, function (e) {
+          e.preventDefault();
+          stage.classList.add("drag");
+        });
+      });
+      ["dragleave", "drop"].forEach(function (ev) {
+        stage.addEventListener(ev, function (e) {
+          e.preventDefault();
+          stage.classList.remove("drag");
+        });
+      });
+      stage.addEventListener("drop", function (e) {
+        var files = [];
+        for (var i = 0; i < e.dataTransfer.files.length; i++) {
+          if (e.dataTransfer.files[i].type && e.dataTransfer.files[i].type.indexOf("image/") === 0) {
+            files.push(e.dataTransfer.files[i]);
+          }
         }
-        return null;
-      }
-      function bindDrop(el, which) {
-        if (!el) return;
-        ["dragenter", "dragover"].forEach(function (ev) {
-          el.addEventListener(ev, function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            el.classList.add("drag");
-          });
-        });
-        ["dragleave", "drop"].forEach(function (ev) {
-          el.addEventListener(ev, function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            el.classList.remove("drag");
-          });
-        });
-        el.addEventListener("drop", function (e) {
-          const file = firstImage(e.dataTransfer.files);
-          if (file) loadFile(file, which);
-        });
-      }
-      bindDrop(document.getElementById("slotA_dash"), "A");
-      bindDrop(document.getElementById("slotB_dash"), "B");
-      const stage = document.querySelector(".stage_dash");
-      if (stage) {
-        ["dragenter", "dragover"].forEach(function (ev) {
-          stage.addEventListener(ev, function (e) {
-            e.preventDefault();
-            stage.classList.add("drag");
-          });
-        });
-        ["dragleave", "drop"].forEach(function (ev) {
-          stage.addEventListener(ev, function (e) {
-            e.preventDefault();
-            stage.classList.remove("drag");
-          });
-        });
-        stage.addEventListener("drop", function (e) {
-          const files = [];
-          for (let i = 0; i < e.dataTransfer.files.length; i++) {
-            if (e.dataTransfer.files[i].type && e.dataTransfer.files[i].type.indexOf("image/") === 0) {
-              files.push(e.dataTransfer.files[i]);
-            }
-          }
-          if (!files.length) return;
-          const rect = canvas.getBoundingClientRect();
-          const mid = rect.left + rect.width / 2;
-          if (files.length >= 2) {
-            loadFile(files[0], "A");
-            loadFile(files[1], "B");
-          } else {
-            loadFile(files[0], e.clientX < mid ? "A" : "B");
-          }
-        });
-      }
-      document.getElementById("slotA_dash").addEventListener("click", function () { document.getElementById("fileA_dash").click(); });
-      document.getElementById("slotB_dash").addEventListener("click", function () { document.getElementById("fileB_dash").click(); });
-      document.getElementById("fileA_dash").addEventListener("change", function (e) { loadFile(e.target.files[0], "A"); });
-      document.getElementById("fileB_dash").addEventListener("change", function (e) { loadFile(e.target.files[0], "B"); });
-      ["labelA_dash","labelB_dash","caption_dash","size_dash","gap_dash","showLabels_dash"].forEach(function (id) {
-        const el = document.getElementById(id);
-        if (el) {
-          el.addEventListener("input", draw);
-          el.addEventListener("change", draw);
+        if (!files.length) return;
+        var rect = canvas.getBoundingClientRect();
+        var mid = rect.left + rect.width / 2;
+        if (files.length >= 2) {
+          loadFile(files[0], "A");
+          loadFile(files[1], "B");
+        } else {
+          loadFile(files[0], e.clientX < mid ? "A" : "B");
         }
       });
+    }
 
-      function cover(img, x, y, w, h) {
-        if (!img) {
-          ctx.fillStyle = "#1a2420";
-          ctx.fillRect(x, y, w, h);
-          ctx.fillStyle = "#8fa197";
-          ctx.font = "28px Arial";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText("Drop photo", x + w / 2, y + h / 2);
-          return;
-        }
-        const scale = Math.max(w / img.width, h / img.height);
-        const sw = w / scale;
-        const sh = h / scale;
-        const sx = (img.width - sw) / 2;
-        const sy = (img.height - sh) / 2;
-        ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+    if (document.getElementById("baSlotA")) document.getElementById("baSlotA").addEventListener("click", function () { document.getElementById("baFileA").click(); });
+    if (document.getElementById("baSlotB")) document.getElementById("baSlotB").addEventListener("click", function () { document.getElementById("baFileB").click(); });
+    if (document.getElementById("baFileA")) document.getElementById("baFileA").addEventListener("change", function (e) { loadFile(e.target.files[0], "A"); });
+    if (document.getElementById("baFileB")) document.getElementById("baFileB").addEventListener("change", function (e) { loadFile(e.target.files[0], "B"); });
+
+    ["baLabelA", "baLabelB", "baCaption", "baSize", "baGap", "baShowLabels"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.addEventListener("input", draw);
+        el.addEventListener("change", draw);
       }
+    });
 
-      function badge(text, x, y, scale) {
-        const fs = Math.max(18, Math.round(26 * scale));
-        ctx.font = "bold " + fs + "px Arial";
-        ctx.textAlign = "left";
-        ctx.textBaseline = "top";
-        const padX = Math.round(14 * scale);
-        const padY = Math.round(7 * scale);
-        const tw = ctx.measureText(text).width;
-        ctx.fillStyle = "#eab308";
-        ctx.fillRect(x, y, tw + padX * 2, fs + padY * 2);
-        ctx.fillStyle = "#071828";
-        ctx.fillText(text, x + padX, y + padY);
+    function cover(img, x, y, w, h) {
+      if (!img) {
+        ctx.fillStyle = "#1a2420";
+        ctx.fillRect(x, y, w, h);
+        ctx.fillStyle = "#8fa197";
+        ctx.font = "28px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Drop photo", x + w / 2, y + h / 2);
+        return;
       }
+      var scale = Math.max(w / img.width, h / img.height);
+      var sw = w / scale;
+      var sh = h / scale;
+      var sx = (img.width - sw) / 2;
+      var sy = (img.height - sh) / 2;
+      ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+    }
 
-      function draw() {
-        const size = sizeEl.value.split("x");
-        const W = Number(size[0]);
-        const H = Number(size[1]);
-        canvas.width = W;
-        canvas.height = H;
-        const gap = Math.max(0, Number(document.getElementById("gap_dash").value) || 0);
-        const scale = Math.min(W, H) / 1080;
-        const bar = Math.round(64 * scale);
-        const cap = document.getElementById("caption_dash").value.trim();
-        const foot = cap ? Math.round(56 * scale) : 0;
-        const navy = "#071828";
-        const gold = "#eab308";
-        const pad = Math.round(12 * scale);
-        const show = document.getElementById("showLabels_dash").value === "1";
+    function badge(text, x, y, scale) {
+      var fs = Math.max(18, Math.round(26 * scale));
+      ctx.font = "bold " + fs + "px Arial";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
+      var padX = Math.round(14 * scale);
+      var padY = Math.round(7 * scale);
+      var tw = ctx.measureText(text).width;
+      ctx.fillStyle = "#eab308";
+      ctx.fillRect(x, y, tw + padX * 2, fs + padY * 2);
+      ctx.fillStyle = "#071828";
+      ctx.fillText(text, x + padX, y + padY);
+    }
 
+    function draw() {
+      var size = sizeEl ? sizeEl.value.split("x") : ["1920", "1080"];
+      var W = Number(size[0]);
+      var H = Number(size[1]);
+      canvas.width = W;
+      canvas.height = H;
+      var gap = Math.max(0, Number(document.getElementById("baGap") ? document.getElementById("baGap").value : 8) || 0);
+      var scale = Math.min(W, H) / 1080;
+      var bar = Math.round(64 * scale);
+      var cap = document.getElementById("baCaption") ? document.getElementById("baCaption").value.trim() : "";
+      var foot = cap ? Math.round(56 * scale) : 0;
+      var navy = "#071828";
+      var gold = "#eab308";
+      var pad = Math.round(12 * scale);
+      var show = document.getElementById("baShowLabels") ? document.getElementById("baShowLabels").value === "1" : true;
+
+      ctx.fillStyle = navy;
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold " + Math.round(28 * scale) + "px Arial";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      var hx = Math.round(22 * scale);
+      ctx.fillText("HERE", hx, bar / 2);
+      var hereW = ctx.measureText("HERE").width;
+      ctx.fillStyle = gold;
+      ctx.fillText("HANDYMAN", hx + hereW + Math.round(8 * scale), bar / 2);
+
+      var x0 = pad;
+      var y0 = bar;
+      var innerW = W - pad * 2;
+      var innerH = H - bar - foot;
+      var pw = (innerW - gap) / 2;
+      var ph = innerH;
+      cover(imgA, x0, y0, pw, ph);
+      cover(imgB, x0 + pw + gap, y0, pw, ph);
+      if (gap > 0) {
+        ctx.fillStyle = gold;
+        ctx.fillRect(x0 + pw, y0, gap, ph);
+      }
+      if (show) {
+        badge((document.getElementById("baLabelA") ? document.getElementById("baLabelA").value : "BEFORE") || "BEFORE", x0 + Math.round(14 * scale), y0 + Math.round(14 * scale), scale);
+        badge((document.getElementById("baLabelB") ? document.getElementById("baLabelB").value : "AFTER") || "AFTER", x0 + pw + gap + Math.round(14 * scale), y0 + Math.round(14 * scale), scale);
+      }
+      if (foot) {
         ctx.fillStyle = navy;
-        ctx.fillRect(0, 0, W, H);
-
+        ctx.fillRect(0, H - foot, W, foot);
         ctx.fillStyle = "#ffffff";
-        ctx.font = "bold " + Math.round(28 * scale) + "px Arial";
+        ctx.font = "bold " + Math.round(20 * scale) + "px Arial";
         ctx.textAlign = "left";
         ctx.textBaseline = "middle";
-        const hx = Math.round(22 * scale);
-        ctx.fillText("HERE", hx, bar / 2);
-        const hereW = ctx.measureText("HERE").width;
-        ctx.fillStyle = gold;
-        ctx.fillText("HANDYMAN", hx + hereW + Math.round(8 * scale), bar / 2);
-
-        const x0 = pad;
-        const y0 = bar;
-        const innerW = W - pad * 2;
-        const innerH = H - bar - foot;
-        const pw = (innerW - gap) / 2;
-        const ph = innerH;
-        cover(imgA, x0, y0, pw, ph);
-        cover(imgB, x0 + pw + gap, y0, pw, ph);
-        if (gap > 0) {
-          ctx.fillStyle = gold;
-          ctx.fillRect(x0 + pw, y0, gap, ph);
-        }
-        if (show) {
-          badge(document.getElementById("labelA_dash").value || "BEFORE", x0 + Math.round(14 * scale), y0 + Math.round(14 * scale), scale);
-          badge(document.getElementById("labelB_dash").value || "AFTER", x0 + pw + gap + Math.round(14 * scale), y0 + Math.round(14 * scale), scale);
-        }
-
-        if (foot) {
-          ctx.fillStyle = navy;
-          ctx.fillRect(0, H - foot, W, foot);
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "bold " + Math.round(20 * scale) + "px Arial";
-          ctx.textAlign = "left";
-          ctx.textBaseline = "middle";
-          ctx.fillText(cap, Math.round(22 * scale), H - foot / 2);
-        }
+        ctx.fillText(cap, Math.round(22 * scale), H - foot / 2);
       }
+    }
 
-      function toDms(deg) {
-        deg = Math.abs(deg);
-        const d = Math.floor(deg);
-        const mFloat = (deg - d) * 60;
-        const m = Math.floor(mFloat);
-        const s = (mFloat - m) * 60;
-        return [[d, 1], [m, 1], [Math.round(s * 10000), 10000]];
-      }
-      function encodeXP(s) {
-        const arr = [];
-        for (let i = 0; i < s.length; i++) {
-          const c = s.charCodeAt(i);
-          arr.push(c & 255);
-          arr.push((c >> 8) & 255);
-        }
-        arr.push(0, 0);
-        return arr;
-      }
-      function asciiComment(s) {
-        const head = [0x41,0x53,0x43,0x49,0x49,0,0,0];
-        for (let i = 0; i < s.length; i++) head.push(s.charCodeAt(i) & 255);
-        return head;
-      }
+    window.baDraw = draw;
 
-      document.getElementById("download_dash").addEventListener("click", function () {
+    function toDms(deg) {
+      deg = Math.abs(deg);
+      var d = Math.floor(deg);
+      var mFloat = (deg - d) * 60;
+      var m = Math.floor(mFloat);
+      var s = (mFloat - m) * 60;
+      return [[d, 1], [m, 1], [Math.round(s * 10000), 10000]];
+    }
+    function encodeXP(s) {
+      var arr = [];
+      for (var i = 0; i < s.length; i++) {
+        var c = s.charCodeAt(i);
+        arr.push(c & 255);
+        arr.push((c >> 8) & 255);
+      }
+      arr.push(0, 0);
+      return arr;
+    }
+    function asciiComment(s) {
+      var head = [0x41, 0x53, 0x43, 0x49, 0x49, 0, 0, 0];
+      for (var i = 0; i < s.length; i++) head.push(s.charCodeAt(i) & 255);
+      return head;
+    }
+
+    var dlBtn = document.getElementById("baDownload");
+    if (dlBtn) {
+      dlBtn.addEventListener("click", function () {
         draw();
-        const town = TOWNS[Number(townEl.value)][0];
-        let lat = Number(document.getElementById("lat_dash").value);
-        let lng = Number(document.getElementById("lng_dash").value);
-        if (document.getElementById("jitter_dash").checked) {
+        var town = townEl ? TOWNS[Number(townEl.value)][0] : "Westchester";
+        var lat = document.getElementById("baLat") ? Number(document.getElementById("baLat").value) : 41.033986;
+        var lng = document.getElementById("baLng") ? Number(document.getElementById("baLng").value) : -73.762910;
+        if (document.getElementById("baJitter") && document.getElementById("baJitter").checked) {
           lat = lat + (Math.random() - 0.5) * 0.004;
           lng = lng + (Math.random() - 0.5) * 0.004;
         }
-        const title = document.getElementById("title_dash").value.trim() || ("Before & After — Here Handyman — " + town);
-        const comment = document.getElementById("comment_dash").value.trim();
-        const keywords = document.getElementById("keywords_dash").value.trim();
-        const copyright = document.getElementById("copyright_dash").value.trim() || "© Here Handyman. All rights reserved.";
-        const artist = document.getElementById("artist_dash").value.trim() || "Here Handyman";
-        const caption = document.getElementById("caption_dash").value.trim();
-        const now = new Date();
-        const dt = now.getFullYear() + ":" +
+        var title = (document.getElementById("baTitle") ? document.getElementById("baTitle").value.trim() : "") || ("Before & After — Here Handyman — " + town);
+        var comment = document.getElementById("baComment") ? document.getElementById("baComment").value.trim() : "";
+        var keywords = document.getElementById("baKeywords") ? document.getElementById("baKeywords").value.trim() : "";
+        var copyright = (document.getElementById("baCopyright") ? document.getElementById("baCopyright").value.trim() : "") || "Here Handyman. All rights reserved.";
+        var artist = (document.getElementById("baArtist") ? document.getElementById("baArtist").value.trim() : "") || "Here Handyman";
+        var caption = document.getElementById("baCaption") ? document.getElementById("baCaption").value.trim() : "";
+        var now = new Date();
+        var dt = now.getFullYear() + ":" +
           String(now.getMonth() + 1).padStart(2, "0") + ":" +
           String(now.getDate()).padStart(2, "0") + " " +
           String(now.getHours()).padStart(2, "0") + ":" +
           String(now.getMinutes()).padStart(2, "0") + ":" +
           String(now.getSeconds()).padStart(2, "0");
 
-        if (window.piexif) {
-          const zeroth = {};
+        if (typeof piexif !== "undefined") {
+          var zeroth = {};
           zeroth[piexif.ImageIFD.Make] = "Here Handyman";
           zeroth[piexif.ImageIFD.Model] = "Before After Collage";
           zeroth[piexif.ImageIFD.Software] = "Here Handyman Collage";
@@ -3909,41 +3888,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           zeroth[piexif.ImageIFD.XPAuthor] = encodeXP(artist);
           zeroth[piexif.ImageIFD.XPKeywords] = encodeXP(keywords.replace(/,\s*/g, ";"));
           zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after — " + town + ", NY");
-
-          const exifIfd = {};
+          var exifIfd = {};
           exifIfd[piexif.ExifIFD.DateTimeOriginal] = dt;
           exifIfd[piexif.ExifIFD.DateTimeDigitized] = dt;
           exifIfd[piexif.ExifIFD.UserComment] = asciiComment(comment);
-
-          const gps = {};
-          if (document.getElementById("writeGps_dash").checked && Number.isFinite(lat) && Number.isFinite(lng)) {
+          var gps = {};
+          if (document.getElementById("baWriteGps") && document.getElementById("baWriteGps").checked && Number.isFinite(lat) && Number.isFinite(lng)) {
             gps[piexif.GPSIFD.GPSVersionID] = [2, 3, 0, 0];
             gps[piexif.GPSIFD.GPSLatitudeRef] = lat >= 0 ? "N" : "S";
             gps[piexif.GPSIFD.GPSLatitude] = toDms(lat);
             gps[piexif.GPSIFD.GPSLongitudeRef] = lng >= 0 ? "E" : "W";
             gps[piexif.GPSIFD.GPSLongitude] = toDms(lng);
           }
-
-          const jpeg = canvas.toDataURL("image/jpeg", 0.92);
-          const dumped = piexif.dump({ "0th": zeroth, Exif: exifIfd, GPS: gps });
-          const out = piexif.insert(dumped, jpeg);
-          const a = document.createElement("a");
+          var jpeg = canvas.toDataURL("image/jpeg", 0.92);
+          var dumped = piexif.dump({ "0th": zeroth, Exif: exifIfd, GPS: gps });
+          var out = piexif.insert(dumped, jpeg);
+          var a = document.createElement("a");
           a.href = out;
           a.download = "here-handyman-before-after-" + town.replace(/\s+/g, "-").toLowerCase() + ".jpg";
           a.click();
         } else {
-          const a = document.createElement("a");
-          a.href = canvas.toDataURL("image/jpeg", 0.92);
-          a.download = "here-handyman-before-after-" + town.replace(/\s+/g, "-").toLowerCase() + ".jpg";
-          a.click();
+          var a2 = document.createElement("a");
+          a2.href = canvas.toDataURL("image/jpeg", 0.92);
+          a2.download = "here-handyman-before-after-" + town.replace(/\s+/g, "-").toLowerCase() + ".jpg";
+          a2.click();
         }
       });
+    }
 
-      draw();
-    })();
-
-    renderFieldPhotosGrid();
-  });
+    draw();
+  })();
   </script>
 </body>
 </html>
