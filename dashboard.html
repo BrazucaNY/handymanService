@@ -3385,6 +3385,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     var defaultPhotos = [
       {
+        id: "photo-yard-cleanup-after",
+        title: "Overgrown Brush & Property Line Cleanup",
+        stage: "after",
+        town: "White Plains",
+        lat: 41.033987,
+        lon: -73.762910,
+        photo_url: "/assets/images/portfolio/yard_cleanup_weed_removal_white_plains_after.webp",
+        created_at: "2026-09-27"
+      },
+      {
+        id: "photo-yard-cleanup-before",
+        title: "Overgrown Weeds & Shrub Bed Before Clearing",
+        stage: "before",
+        town: "White Plains",
+        lat: 41.033987,
+        lon: -73.762910,
+        photo_url: "/assets/images/portfolio/yard_cleanup_weed_removal_white_plains_before.webp",
+        created_at: "2026-09-27"
+      },
+      {
         id: "photo-desk-after",
         title: "Computer Desk Assembly (Wood Top & Metal Frame)",
         stage: "after",
@@ -3481,7 +3501,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var raw = localStorage.getItem(STORAGE_PHOTOS_KEY);
         if (raw) {
           var parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            defaultPhotos.forEach(function(dp) {
+              if (!parsed.some(function(p) { return p.id === dp.id || p.photo_url === dp.photo_url; })) {
+                parsed.unshift(dp);
+              }
+            });
+            return parsed;
+          }
         }
       } catch (e) {}
       localStorage.setItem(STORAGE_PHOTOS_KEY, JSON.stringify(defaultPhotos));
