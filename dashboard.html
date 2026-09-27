@@ -859,10 +859,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <i>📱</i> Social Posting
       </div>
       <div class="menu-item" data-tab="field-photos">
-        <i>📷</i> Field Uploads (Before & After)
-      </div>
-      <div class="menu-item" data-tab="before-after">
-        <i>🖼️</i> Before / After Collage
+        <i>📷</i> Before &amp; After (Uploads &amp; Collage)
       </div>
     </nav>
 
@@ -1466,42 +1463,128 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </div>
 
-    <!-- TAB 10: FIELD UPLOADS (BEFORE & AFTER) -->
+    <!-- TAB 10: BEFORE & AFTER PHOTO STUDIO (UPLOADS & COLLAGE) -->
     <div class="tab-content" id="tab-field-photos">
       <div class="card-panel">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:16px;">
           <div>
-            <h3 style="margin-bottom:4px;font-size:22px;color:var(--navy);">📷 Field Photo Uploader &amp; Geotagger</h3>
+            <h3 style="margin-bottom:4px;font-size:22px;color:var(--navy);">📷 Before &amp; After Photo Studio</h3>
             <p style="font-size:13.5px;color:var(--muted);margin-top:2px;">
-              Take or upload Before &amp; After job photos directly from your phone in the field. Photos are automatically geotagged with Westchester County GPS metadata to boost your local Google Maps ranking.
+              Create side-by-side geotagged Before &amp; After collages for Google Business Profile, or upload single job photos directly from your phone in the field.
             </p>
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn-action" onclick="document.getElementById('fieldCameraInput').click()" style="font-size:15px;padding:12px 20px;background:#16a34a;color:#fff;">
-              📸 Take Photo (Camera)
+            <button class="btn-action" onclick="document.getElementById('fieldCameraInput').click()" style="font-size:14px;padding:10px 18px;background:#16a34a;color:#fff;">
+              📸 Field Camera
             </button>
-            <button class="btn-secondary" onclick="document.getElementById('fieldGalleryInput').click()" style="font-size:14px;padding:12px 18px;">
-              🖼️ Select Photo (Gallery)
+            <button class="btn-secondary" onclick="document.getElementById('fieldGalleryInput').click()" style="font-size:14px;padding:10px 16px;">
+              🖼️ Field Gallery
             </button>
           </div>
         </div>
 
         <!-- Hidden Native Mobile File Inputs -->
-        <!-- Camera Only Input -->
         <input type="file" id="fieldCameraInput" accept="image/*" capture="camera" style="display:none;" onchange="window.handleFieldPhotoSelected(this)"/>
-        <!-- Gallery Input -->
         <input type="file" id="fieldGalleryInput" accept="image/*" style="display:none;" onchange="window.handleFieldPhotoSelected(this)"/>
 
-        <!-- Field Upload Form -->
+        <!-- SECTION 1: INTERACTIVE BEFORE & AFTER COLLAGE GENERATOR -->
+        <div style="margin-bottom:40px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid #e2e8f0;padding-bottom:10px;">
+            <h4 style="font-size:18px;color:var(--navy);font-weight:700;margin:0;">🖼️ Before / After Collage Generator</h4>
+            <span style="font-size:12px;background:#eab308;color:#071828;padding:4px 10px;border-radius:12px;font-weight:800;">Google Business Profile Ready</span>
+          </div>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Drag &amp; drop photos into Before (Left) and After (Right) slots below. Choose your Westchester town to automatically generate EXIF geotags, title, keywords, and copyright.</p>
+          <div class="ba-wrap">
+            <div class="ba-aside">
+              <label>Photo 1 — Before</label>
+              <div class="ba-slot" id="baSlotA"><span>Drop photo or click</span></div>
+              <input id="baFileA" type="file" accept="image/*" hidden/>
+
+              <label>Photo 2 — After</label>
+              <div class="ba-slot" id="baSlotB"><span>Drop photo or click</span></div>
+              <input id="baFileB" type="file" accept="image/*" hidden/>
+
+              <div class="ba-row">
+                <div>
+                  <label>Before badge</label>
+                  <input id="baLabelA" type="text" value="BEFORE"/>
+                </div>
+                <div>
+                  <label>After badge</label>
+                  <input id="baLabelB" type="text" value="AFTER"/>
+                </div>
+              </div>
+
+              <label>Caption (on image)</label>
+              <input id="baCaption" type="text" placeholder="e.g. Patio table assembled — Harrison, NY"/>
+
+              <label>Town (GPS)</label>
+              <select id="baTown"></select>
+              <div class="ba-row">
+                <div>
+                  <label>Latitude</label>
+                  <input id="baLat" type="number" step="0.000001"/>
+                </div>
+                <div>
+                  <label>Longitude</label>
+                  <input id="baLng" type="number" step="0.000001"/>
+                </div>
+              </div>
+              <label class="ba-check"><input id="baJitter" type="checkbox" checked/> Slight unique GPS offset</label>
+              <label class="ba-check"><input id="baWriteGps" type="checkbox" checked/> Write GPS into JPEG</label>
+
+              <label>Copyright</label>
+              <input id="baCopyright" type="text" value="Here Handyman. All rights reserved."/>
+
+              <label>Artist / Author</label>
+              <input id="baArtist" type="text" value="Here Handyman / David Rodrigues"/>
+
+              <label>Title (file properties)</label>
+              <input id="baTitle" type="text" value="Before & After — Here Handyman"/>
+
+              <label>Comments (file properties)</label>
+              <textarea id="baComment">Here Handyman job photo. Before and after. Westchester County, NY. (516) 350-0801. herehandyman.com</textarea>
+
+              <label>Keywords (file properties)</label>
+              <input id="baKeywords" type="text" value="Here Handyman, Westchester, before after, handyman, home repair"/>
+
+              <label>Canvas</label>
+              <select id="baSize"></select>
+              <div class="ba-row">
+                <div>
+                  <label>Gap (px)</label>
+                  <input id="baGap" type="number" value="8" min="0" max="40"/>
+                </div>
+                <div>
+                  <label>Show badges</label>
+                  <select id="baShowLabels">
+                    <option value="1" selected>Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="ba-dl" type="button" id="baDownload">Download geotagged JPEG</button>
+            </div>
+            <div>
+              <div class="ba-stage" id="baStage">
+                <canvas id="baCanvas" width="1920" height="1080"></canvas>
+              </div>
+              <p class="ba-hint">Left drop = before. Right drop = after. Files stay in this browser until you download.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: SINGLE FIELD PHOTO UPLOADER & SHOWCASE GALLERY -->
         <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:24px;margin-bottom:32px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-            <h4 style="font-size:16px;color:var(--navy);font-weight:700;margin:0;">Upload Job Photo Details</h4>
-            <span style="font-size:12px;background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:12px;font-weight:700;">Step-by-Step Mobile Form</span>
+            <h4 style="font-size:16px;color:var(--navy);font-weight:700;margin:0;">📸 Upload Single Job Photo</h4>
+            <span style="font-size:12px;background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:12px;font-weight:700;">Mobile Field Form</span>
           </div>
 
           <!-- Step 1 Big Camera Callout -->
           <div style="background:#ffffff;border:2px dashed #2563eb;border-radius:10px;padding:16px;text-align:center;margin-bottom:20px;">
-            <div style="font-size:14px;font-weight:700;color:#1e40af;margin-bottom:8px;">📸 Step 1: Take or Select Your Photo</div>
+            <div style="font-size:14px;font-weight:700;color:#1e40af;margin-bottom:8px;">📸 Take or Select Photo from Phone</div>
             <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
               <button type="button" class="btn-action" onclick="document.getElementById('fieldCameraInput').click()" style="font-size:15px;padding:10px 20px;background:#16a34a;color:#fff;">
                 📸 Open Camera Now
@@ -1569,95 +1652,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
 
         <!-- Before & After Project Gallery / Carousel Preview -->
-        <h4 style="font-size:18px;color:var(--navy);margin-bottom:16px;font-weight:700;">🖼️ Project Gallery &amp; Before/After Showcase</h4>
+        <h4 style="font-size:18px;color:var(--navy);margin-bottom:16px;font-weight:700;">🖼️ Project Gallery &amp; Showcase</h4>
         <div id="fieldPhotosGrid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:20px;">
           <!-- Populated dynamically via JS -->
-        </div>
-      </div>
-    </div>
-
-    <div class="tab-content" id="tab-before-after">
-      <div class="card-panel">
-        <h3 style="margin-bottom:6px;">Before / After Collage</h3>
-        <p style="font-size:13.5px;color:var(--muted);margin-bottom:18px;">Drop before and after photos. Download writes geotag, copyright, comments, and keywords into the JPEG for Google Business Profile.</p>
-        <div class="ba-wrap">
-          <div class="ba-aside">
-            <label>Photo 1 — Before</label>
-            <div class="ba-slot" id="baSlotA"><span>Drop photo or click</span></div>
-            <input id="baFileA" type="file" accept="image/*" hidden/>
-
-            <label>Photo 2 — After</label>
-            <div class="ba-slot" id="baSlotB"><span>Drop photo or click</span></div>
-            <input id="baFileB" type="file" accept="image/*" hidden/>
-
-            <div class="ba-row">
-              <div>
-                <label>Before badge</label>
-                <input id="baLabelA" type="text" value="BEFORE"/>
-              </div>
-              <div>
-                <label>After badge</label>
-                <input id="baLabelB" type="text" value="AFTER"/>
-              </div>
-            </div>
-
-            <label>Caption (on image)</label>
-            <input id="baCaption" type="text" placeholder="e.g. Patio table assembled — Harrison, NY"/>
-
-            <label>Town (GPS)</label>
-            <select id="baTown"></select>
-            <div class="ba-row">
-              <div>
-                <label>Latitude</label>
-                <input id="baLat" type="number" step="0.000001"/>
-              </div>
-              <div>
-                <label>Longitude</label>
-                <input id="baLng" type="number" step="0.000001"/>
-              </div>
-            </div>
-            <label class="ba-check"><input id="baJitter" type="checkbox" checked/> Slight unique GPS offset</label>
-            <label class="ba-check"><input id="baWriteGps" type="checkbox" checked/> Write GPS into JPEG</label>
-
-            <label>Copyright</label>
-            <input id="baCopyright" type="text" value="Here Handyman. All rights reserved."/>
-
-            <label>Artist / Author</label>
-            <input id="baArtist" type="text" value="Here Handyman / David Rodrigues"/>
-
-            <label>Title (file properties)</label>
-            <input id="baTitle" type="text" value="Before & After — Here Handyman"/>
-
-            <label>Comments (file properties)</label>
-            <textarea id="baComment">Here Handyman job photo. Before and after. Westchester County, NY. (516) 350-0801. herehandyman.com</textarea>
-
-            <label>Keywords (file properties)</label>
-            <input id="baKeywords" type="text" value="Here Handyman, Westchester, before after, handyman, home repair"/>
-
-            <label>Canvas</label>
-            <select id="baSize"></select>
-            <div class="ba-row">
-              <div>
-                <label>Gap (px)</label>
-                <input id="baGap" type="number" value="8" min="0" max="40"/>
-              </div>
-              <div>
-                <label>Show badges</label>
-                <select id="baShowLabels">
-                  <option value="1" selected>Yes</option>
-                  <option value="0">No</option>
-                </select>
-              </div>
-            </div>
-
-            <button class="ba-dl" type="button" id="baDownload">Download geotagged JPEG</button>
-          </div>
-          <div>
-            <div class="ba-stage" id="baStage">
-              <canvas id="baCanvas" width="1920" height="1080"></canvas>
-            </div>
-            <p class="ba-hint">Left drop = before. Right drop = after. Files stay in this browser until you download.</p>
-          </div>
         </div>
       </div>
     </div>

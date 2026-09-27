@@ -635,41 +635,26 @@ SOFTWARE.
     };
 
 
-    if (typeof window !== "undefined" && typeof window.btoa === "function") {
-        var btoa = window.btoa;
-    }
-    if (typeof btoa === "undefined") {
-        var btoa = function (input) {        var output = "";
-            var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
-            var i = 0;
-            var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-
-            while (i < input.length) {
-
-                chr1 = input.charCodeAt(i++);
-                chr2 = input.charCodeAt(i++);
-                chr3 = input.charCodeAt(i++);
-
-                enc1 = chr1 >> 2;
-                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-                enc4 = chr3 & 63;
-
-                if (isNaN(chr2)) {
-                    enc3 = enc4 = 64;
-                } else if (isNaN(chr3)) {
-                    enc4 = 64;
-                }
-
-                output = output +
-                keyStr.charAt(enc1) + keyStr.charAt(enc2) +
-                keyStr.charAt(enc3) + keyStr.charAt(enc4);
-
-            }
-
-            return output;
-        };
-    }
+    var btoa = function (input) {
+        if (typeof window !== "undefined" && typeof window.btoa === "function") {
+            try { return window.btoa(input); } catch (e) {}
+        }
+        var output = "";
+        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+        var i = 0;
+        var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+        while (i < input.length) {
+            chr1 = input.charCodeAt(i++) & 255;
+            var c2 = i < input.length ? input.charCodeAt(i++) & 255 : NaN;
+            var c3 = i < input.length ? input.charCodeAt(i++) & 255 : NaN;
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (isNaN(c2) ? 0 : (c2 >> 4));
+            enc3 = isNaN(c2) ? 64 : (((c2 & 15) << 2) | (isNaN(c3) ? 0 : (c3 >> 6)));
+            enc4 = isNaN(c3) ? 64 : (c3 & 63);
+            output += keyStr.charAt(enc1) + keyStr.charAt(enc2) + keyStr.charAt(enc3) + keyStr.charAt(enc4);
+        }
+        return output;
+    };
     
     
     if (typeof window !== "undefined" && typeof window.atob === "function") {
@@ -2470,13 +2455,13 @@ SOFTWARE.
     };
     
     
-    if (typeof exports !== 'undefined') {
-        if (typeof module !== 'undefined' && module.exports) {
-            exports = module.exports = that;
+    if (typeof window !== "undefined") { window.piexif = that; }
+    if (typeof globalThis !== "undefined") { globalThis.piexif = that; }
+    if (typeof exports !== "undefined") {
+        if (typeof module !== "undefined" && module.exports) {
+            module.exports = that;
         }
         exports.piexif = that;
-    } else {
-        window.piexif = that;
     }
 
 })();
