@@ -23,7 +23,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-(function () {
+(function (root, factory) {
+    if (typeof exports === 'object' && typeof module !== 'undefined') {
+        module.exports = factory();
+    } else if (typeof define === 'function' && define.amd) {
+        define(factory);
+    } else {
+        var g = root || (typeof window !== 'undefined' ? window : globalThis);
+        g.piexif = factory();
+    }
+}(typeof self !== 'undefined' ? self : this, function () {
     "use strict";
     var that = {};
     that.version = "1.0.6";
@@ -1008,13 +1017,5 @@ SOFTWARE.
 
     that.InteropIFD = { InteroperabilityIndex:1 };
 
-    if (typeof window !== 'undefined') {
-        window.piexif = that;
-    }
-    if (typeof exports !== 'undefined') {
-        if (typeof module !== 'undefined' && module.exports) {
-            module.exports = that;
-        }
-        exports.piexif = that;
-    }
-})();
+    return that;
+}));
