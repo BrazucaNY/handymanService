@@ -23,16 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-(function (root, factory) {
-    if (typeof exports === 'object' && typeof module !== 'undefined') {
-        module.exports = factory();
-    } else if (typeof define === 'function' && define.amd) {
-        define(factory);
-    } else {
-        var g = root || (typeof window !== 'undefined' ? window : globalThis);
-        g.piexif = factory();
-    }
-}(typeof self !== 'undefined' ? self : this, function () {
+var piexif = (function () {
     "use strict";
     var that = {};
     that.version = "1.0.6";
@@ -1018,4 +1009,8 @@ SOFTWARE.
     that.InteropIFD = { InteroperabilityIndex:1 };
 
     return that;
-}));
+})();
+
+if (typeof window !== "undefined") { window.piexif = piexif; }
+if (typeof globalThis !== "undefined") { globalThis.piexif = piexif; }
+if (typeof module !== "undefined" && module.exports) { module.exports = piexif; }
