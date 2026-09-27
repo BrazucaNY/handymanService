@@ -621,77 +621,52 @@ var piexif = (function () {
         }
     };
 
-    if (typeof window !== "undefined" && typeof window.btoa === "function") {
-        var btoa = window.btoa;
-    }
-    if (typeof btoa === "undefined") {
-        var btoa = function (input) {
-            var output = "";
-            var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
-            var i = 0;
-            var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    var btoaFunc = function (input) {
+        if (typeof window !== "undefined" && typeof window.btoa === "function") {
+            try { return window.btoa(input); } catch (e) {}
+        }
+        var output = "";
+        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+        var i = 0;
+        var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+        while (i < input.length) {
+            chr1 = input.charCodeAt(i++) & 255;
+            var c2 = i < input.length ? input.charCodeAt(i++) & 255 : NaN;
+            var c3 = i < input.length ? input.charCodeAt(i++) & 255 : NaN;
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (isNaN(c2) ? 0 : (c2 >> 4));
+            enc3 = isNaN(c2) ? 64 : (((c2 & 15) << 2) | (isNaN(c3) ? 0 : (c3 >> 6)));
+            enc4 = isNaN(c3) ? 64 : (c3 & 63);
+            output += keyStr.charAt(enc1) + keyStr.charAt(enc2) + keyStr.charAt(enc3) + keyStr.charAt(enc4);
+        }
+        return output;
+    };
+    var btoa = btoaFunc;
 
-            while (i < input.length) {
-                chr1 = input.charCodeAt(i++);
-                chr2 = input.charCodeAt(i++);
-                chr3 = input.charCodeAt(i++);
-
-                enc1 = chr1 >> 2;
-                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-                enc4 = chr3 & 63;
-
-                if (isNaN(chr2)) {
-                    enc3 = enc4 = 64;
-                } else if (isNaN(chr3)) {
-                    enc4 = 64;
-                }
-
-                output = output +
-                keyStr.charAt(enc1) + keyStr.charAt(enc2) +
-                keyStr.charAt(enc3) + keyStr.charAt(enc4);
-            }
-
-            return output;
-        };
-    }
-    
-    if (typeof window !== "undefined" && typeof window.atob === "function") {
-        var atob = window.atob;
-    }
-    if (typeof atob === "undefined") {
-        var atob = function (input) {
-            var output = "";
-            var chr1, chr2, chr3;
-            var enc1, enc2, enc3, enc4;
-            var i = 0;
-            var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-
-            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-
-            while (i < input.length) {
-                enc1 = keyStr.indexOf(input.charAt(i++));
-                enc2 = keyStr.indexOf(input.charAt(i++));
-                enc3 = keyStr.indexOf(input.charAt(i++));
-                enc4 = keyStr.indexOf(input.charAt(i++));
-
-                chr1 = (enc1 << 2) | (enc2 >> 4);
-                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-                chr3 = ((enc3 & 3) << 6) | enc4;
-
-                output = output + String.fromCharCode(chr1);
-
-                if (enc3 != 64) {
-                    output = output + String.fromCharCode(chr2);
-                }
-                if (enc4 != 64) {
-                    output = output + String.fromCharCode(chr3);
-                }
-            }
-
-            return output;
-        };
-    }
+    var atobFunc = (typeof window !== "undefined" && typeof window.atob === "function" && window.atob) ||
+                   (typeof globalThis !== "undefined" && typeof globalThis.atob === "function" && globalThis.atob) ||
+                   function (input) {
+                       var output = "";
+                       var chr1, chr2, chr3;
+                       var enc1, enc2, enc3, enc4;
+                       var i = 0;
+                       var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+                       input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+                       while (i < input.length) {
+                           enc1 = keyStr.indexOf(input.charAt(i++));
+                           enc2 = keyStr.indexOf(input.charAt(i++));
+                           enc3 = keyStr.indexOf(input.charAt(i++));
+                           enc4 = keyStr.indexOf(input.charAt(i++));
+                           chr1 = (enc1 << 2) | (enc2 >> 4);
+                           chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                           chr3 = ((enc3 & 3) << 6) | enc4;
+                           output += String.fromCharCode(chr1);
+                           if (enc3 != 64) output += String.fromCharCode(chr2);
+                           if (enc4 != 64) output += String.fromCharCode(chr3);
+                       }
+                       return output;
+                   };
+    var atob = atobFunc;
 
     function pack(mark, array) {
         if (!(array instanceof Array)) {
@@ -857,20 +832,37 @@ var piexif = (function () {
 
         var head = 2;
         var segments = ["\xff\xd8"];
-        while (true) {
-            if (data.slice(head, head + 2) == "\xff\xda") {
-                segments.push(data.slice(head));
+        while (head < data.length) {
+            if (data.charCodeAt(head) !== 0xff) {
+                throw new Error("Invalid JPEG marker start at offset " + head);
+            }
+            var start = head;
+            while (head < data.length && data.charCodeAt(head) === 0xff) {
+                head++;
+            }
+            if (head >= data.length) break;
+
+            var marker = data.charCodeAt(head);
+            head++;
+
+            if (marker >= 0xd0 && marker <= 0xd7) {
+                segments.push(data.slice(start, head));
+                continue;
+            }
+            if (marker === 0xd9) {
+                segments.push(data.slice(start, head));
                 break;
-            } else {
-                var length = unpack(">H", data.slice(head + 2, head + 4))[0];
-                var endPoint = head + length + 2;
-                segments.push(data.slice(head, endPoint));
-                head = endPoint;
+            }
+            if (marker === 0xda) {
+                segments.push(data.slice(start));
+                break;
             }
 
-            if (head >= data.length) {
-                throw new Error("Wrong JPEG data.");
-            }
+            if (head + 2 > data.length) break;
+            var length = (data.charCodeAt(head) << 8) | data.charCodeAt(head + 1);
+            var end = head + length;
+            segments.push(data.slice(start, end));
+            head = end;
         }
         return segments;
     }
