@@ -16,3 +16,7 @@
 - The agent **MUST** make an explicit **POST / DO NOT POST** decision recommendation:
   - If **POST**: Specify exact placement (e.g. `offer.html`, `gallery.html`, `index.html` before-after carousel, or GBP post), suggest clean WebP filename (service + town), alt text, and caption.
   - If **DO NOT POST**: Clearly explain why (e.g. cluttered background, prep work vs finished installation) and give actionable advice on how to take a better photo (e.g. "Take a photo of the installed smoke detectors mounted cleanly on the ceiling!").
+
+## 3. Automatic Source File Cleanup
+- **Post-Optimization File Deletion**: Whenever any uploaded photo (JPG, JPEG, PNG, etc.) is processed and converted into an optimized `.webp` image for website use, the agent **MUST ALWAYS** delete the original source file (JPG/JPEG/PNG) from the workspace/repository immediately after optimization. Only the final WebP asset should remain.
+
