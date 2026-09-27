@@ -1008,12 +1008,13 @@ SOFTWARE.
 
     that.InteropIFD = { InteroperabilityIndex:1 };
 
+    if (typeof window !== 'undefined') {
+        window.piexif = that;
+    }
     if (typeof exports !== 'undefined') {
         if (typeof module !== 'undefined' && module.exports) {
-            exports = module.exports = that;
+            module.exports = that;
         }
         exports.piexif = that;
-    } else {
-        window.piexif = that;
     }
 })();

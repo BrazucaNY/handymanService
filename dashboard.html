@@ -3875,45 +3875,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           String(now.getMinutes()).padStart(2, "0") + ":" +
           String(now.getSeconds()).padStart(2, "0");
 
-        if (typeof piexif !== "undefined") {
-          var zeroth = {};
-          zeroth[piexif.ImageIFD.Make] = "Here Handyman";
-          zeroth[piexif.ImageIFD.Model] = "Before After Collage";
-          zeroth[piexif.ImageIFD.Software] = "Here Handyman Collage";
-          zeroth[piexif.ImageIFD.Artist] = artist;
-          zeroth[piexif.ImageIFD.Copyright] = copyright;
-          zeroth[piexif.ImageIFD.ImageDescription] = caption || title;
-          zeroth[piexif.ImageIFD.DateTime] = dt;
-          zeroth[piexif.ImageIFD.XPTitle] = encodeXP(title);
-          zeroth[piexif.ImageIFD.XPComment] = encodeXP(comment);
-          zeroth[piexif.ImageIFD.XPAuthor] = encodeXP(artist);
-          zeroth[piexif.ImageIFD.XPKeywords] = encodeXP(keywords.replace(/,\s*/g, ";"));
-          zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after — " + town + ", NY");
-          var exifIfd = {};
-          exifIfd[piexif.ExifIFD.DateTimeOriginal] = dt;
-          exifIfd[piexif.ExifIFD.DateTimeDigitized] = dt;
-          exifIfd[piexif.ExifIFD.UserComment] = asciiComment(comment);
-          var gps = {};
-          if (document.getElementById("baWriteGps") && document.getElementById("baWriteGps").checked && Number.isFinite(lat) && Number.isFinite(lng)) {
-            gps[piexif.GPSIFD.GPSVersionID] = [2, 3, 0, 0];
-            gps[piexif.GPSIFD.GPSLatitudeRef] = lat >= 0 ? "N" : "S";
-            gps[piexif.GPSIFD.GPSLatitude] = toDms(lat);
-            gps[piexif.GPSIFD.GPSLongitudeRef] = lng >= 0 ? "E" : "W";
-            gps[piexif.GPSIFD.GPSLongitude] = toDms(lng);
+        var downloadUrl = canvas.toDataURL("image/jpeg", 0.92);
+
+        if (typeof piexif !== "undefined" && piexif.dump && piexif.insert && piexif.ImageIFD) {
+          try {
+            var zeroth = {};
+            zeroth[piexif.ImageIFD.Make] = "Here Handyman";
+            zeroth[piexif.ImageIFD.Model] = "Before After Collage";
+            zeroth[piexif.ImageIFD.Software] = "Here Handyman Collage";
+            zeroth[piexif.ImageIFD.Artist] = artist;
+            zeroth[piexif.ImageIFD.Copyright] = copyright;
+            zeroth[piexif.ImageIFD.ImageDescription] = caption || title;
+            zeroth[piexif.ImageIFD.DateTime] = dt;
+            zeroth[piexif.ImageIFD.XPTitle] = encodeXP(title);
+            zeroth[piexif.ImageIFD.XPComment] = encodeXP(comment);
+            zeroth[piexif.ImageIFD.XPAuthor] = encodeXP(artist);
+            zeroth[piexif.ImageIFD.XPKeywords] = encodeXP(keywords.replace(/,\s*/g, ";"));
+            zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after — " + town + ", NY");
+            var exifIfd = {};
+            exifIfd[piexif.ExifIFD.DateTimeOriginal] = dt;
+            exifIfd[piexif.ExifIFD.DateTimeDigitized] = dt;
+            exifIfd[piexif.ExifIFD.UserComment] = asciiComment(comment);
+            var gps = {};
+            if (document.getElementById("baWriteGps") && document.getElementById("baWriteGps").checked && Number.isFinite(lat) && Number.isFinite(lng)) {
+              gps[piexif.GPSIFD.GPSVersionID] = [2, 3, 0, 0];
+              gps[piexif.GPSIFD.GPSLatitudeRef] = lat >= 0 ? "N" : "S";
+              gps[piexif.GPSIFD.GPSLatitude] = toDms(lat);
+              gps[piexif.GPSIFD.GPSLongitudeRef] = lng >= 0 ? "E" : "W";
+              gps[piexif.GPSIFD.GPSLongitude] = toDms(lng);
+            }
+            var dumped = piexif.dump({ "0th": zeroth, Exif: exifIfd, GPS: gps });
+            downloadUrl = piexif.insert(dumped, downloadUrl);
+          } catch (exifErr) {
+            console.warn("EXIF metadata injection note:", exifErr);
           }
-          var jpeg = canvas.toDataURL("image/jpeg", 0.92);
-          var dumped = piexif.dump({ "0th": zeroth, Exif: exifIfd, GPS: gps });
-          var out = piexif.insert(dumped, jpeg);
-          var a = document.createElement("a");
-          a.href = out;
-          a.download = "here-handyman-before-after-" + town.replace(/\s+/g, "-").toLowerCase() + ".jpg";
-          a.click();
-        } else {
-          var a2 = document.createElement("a");
-          a2.href = canvas.toDataURL("image/jpeg", 0.92);
-          a2.download = "here-handyman-before-after-" + town.replace(/\s+/g, "-").toLowerCase() + ".jpg";
-          a2.click();
         }
+
+        var a = document.createElement("a");
+        a.href = downloadUrl;
+        a.download = "here-handyman-before-after-" + town.replace(/\s+/g, "-").toLowerCase() + ".jpg";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       });
     }
 
