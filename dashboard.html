@@ -963,8 +963,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           🔒 Row-Level Security Enforced. All customer data is protected and backed up.
         </p>
 
-        <div style="display:flex;gap:12px;margin-bottom:20px;">
-          <input class="form-control" id="contactSearchInput" placeholder="Search by name, phone, email, or town..." style="max-width:360px;">
+        <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;align-items:center;">
+          <input class="form-control" id="contactSearchInput" placeholder="Search by name, phone, email, address, town, state..." style="max-width:320px;">
+          <select class="form-control" id="contactStateFilter" style="max-width:140px;font-weight:700;color:var(--navy);">
+            <option value="all">🌐 All States</option>
+            <option value="NY">NY (New York)</option>
+            <option value="IL">IL (Illinois)</option>
+            <option value="CT">CT (Connecticut)</option>
+            <option value="NJ">NJ (New Jersey)</option>
+            <option value="PA">PA (Pennsylvania)</option>
+          </select>
+          <select class="form-control" id="contactTownFilter" style="max-width:180px;font-weight:700;color:var(--navy);">
+            <option value="all">🏙️ All Towns</option>
+          </select>
         </div>
 
         <div class="table-container">
@@ -977,6 +988,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <th>Street Address</th>
                 <th>Apt / Unit</th>
                 <th>Town</th>
+                <th>State</th>
                 <th>Lead Source</th>
                 <th>Service Completed</th>
                 <th>Status</th>
@@ -2247,14 +2259,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     var defaultContacts = [
-      { name: "Marsia Wisdom", phone: "914-325-1568", email: "", address: "300 High Point Dr", apt: "612", town: "White Plains", lead: "Tasker", service: "Handyman Service", status: "Active", date: "2026-09-20", hasGbpReview: true },
-      { name: "Lori Ann Marcella", phone: "(914) 420-4716", email: "", address: "275 Beechwood Ln", apt: "", town: "Yorktown Heights", lead: "Facebook", service: "General Handyman", status: "Active", date: "2026-09-10", hasGbpReview: true },
-      { name: "Benjamin Berkey", phone: "(914) 275-6075", email: "", address: "17 Sunset Dr", apt: "", town: "Chappaqua", lead: "owner-operated, no app middleman App", service: "TV Mounting (56 & 100)", status: "Active", date: "2026-09-15", hasGbpReview: true },
-      { name: "Darin Fass", phone: "(917) 686-0004", email: "", address: "44 Carlton Drive", apt: "", town: "Mount Kisco", lead: "owner-operated, no app middleman App", service: "Wayfair Wall Hanging", status: "Active", date: "2026-09-18", hasGbpReview: true },
-      { name: "Jacob Marquez", phone: "(914) 555-0841", email: "jacob.m@example.com", address: "88 Mamaroneck Ave", apt: "4B", town: "White Plains", lead: "Google", service: "Interior Door Repair & Installation", status: "Completed", date: "2026-09-09", hasGbpReview: true },
-      { name: "Carlos Ramirez", phone: "(914) 555-0322", email: "carlos.r@example.com", address: "45 Post Rd", apt: "", town: "Scarsdale", lead: "Google", service: "Springfree Trampoline Move & Assembly", status: "Completed", date: "2026-08-21", hasGbpReview: true },
-      { name: "Kathy Roberts", phone: "(914) 555-0914", email: "kathy.r@example.com", address: "12 Halstead Ave", apt: "", town: "Harrison", lead: "Google", service: "Artwork & Bathroom Curtain Hanging", status: "Completed", date: "2026-07-25", hasGbpReview: true },
-      { name: "Pam Jaffee", phone: "(914) 555-0118", email: "pam.j@example.com", address: "210 Central Park Ave", apt: "Apt 2", town: "Yonkers", lead: "Google", service: "Electrical Wiring Repair & Fixtures", status: "Completed", date: "2026-07-07", hasGbpReview: true }
+      { name: "Marsia Wisdom", phone: "914-325-1568", email: "", address: "300 High Point Dr", apt: "612", town: "White Plains", state: "NY", lead: "Tasker", service: "Handyman Service", status: "Active", date: "2026-09-20", hasGbpReview: true },
+      { name: "Lori Ann Marcella", phone: "(914) 420-4716", email: "", address: "275 Beechwood Ln", apt: "", town: "Yorktown Heights", state: "NY", lead: "Facebook", service: "General Handyman", status: "Active", date: "2026-09-10", hasGbpReview: true },
+      { name: "Benjamin Berkey", phone: "(914) 275-6075", email: "", address: "17 Sunset Dr", apt: "", town: "Chappaqua", state: "NY", lead: "owner-operated, no app middleman App", service: "TV Mounting (56 & 100)", status: "Active", date: "2026-09-15", hasGbpReview: true },
+      { name: "Darin Fass", phone: "(917) 686-0004", email: "", address: "44 Carlton Drive", apt: "", town: "Mount Kisco", state: "NY", lead: "owner-operated, no app middleman App", service: "Wayfair Wall Hanging", status: "Active", date: "2026-09-18", hasGbpReview: true },
+      { name: "Jacob Marquez", phone: "(914) 555-0841", email: "jacob.m@example.com", address: "88 Mamaroneck Ave", apt: "4B", town: "White Plains", state: "NY", lead: "Google", service: "Interior Door Repair & Installation", status: "Completed", date: "2026-09-09", hasGbpReview: true },
+      { name: "Carlos Ramirez", phone: "(914) 555-0322", email: "carlos.r@example.com", address: "45 Post Rd", apt: "", town: "Scarsdale", state: "NY", lead: "Google", service: "Springfree Trampoline Move & Assembly", status: "Completed", date: "2026-08-21", hasGbpReview: true },
+      { name: "Kathy Roberts", phone: "(914) 555-0914", email: "kathy.r@example.com", address: "12 Halstead Ave", apt: "", town: "Harrison", state: "NY", lead: "Google", service: "Artwork & Bathroom Curtain Hanging", status: "Completed", date: "2026-07-25", hasGbpReview: true },
+      { name: "Pam Jaffee", phone: "(914) 555-0118", email: "pam.j@example.com", address: "210 Central Park Ave", apt: "Apt 2", town: "Yonkers", state: "NY", lead: "Google", service: "Electrical Wiring Repair & Fixtures", status: "Completed", date: "2026-07-07", hasGbpReview: true }
     ];
 
     // Load contacts from localStorage or initialize defaults
@@ -2264,14 +2276,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         if (raw) {
           var parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            // Auto-migration: extract apartment numbers embedded in town or address string
+            // Auto-migration: separate state from town if combined
             parsed.forEach(function(c) {
-              if (c.town && !c.apt) {
-                var match = c.town.match(/^(.*?)\s*[-,\s]+\s*(apt|unit|ste|suite|#)\s*\.?\s*(.*)$/i);
-                if (match) {
-                  c.town = match[1].trim();
-                  c.apt = match[3] ? (match[2] + " " + match[3]).trim() : match[2].trim();
+              if (c.town) {
+                var stateMatch = c.town.match(/^(.*?)\s+([A-Z]{2})$/);
+                if (stateMatch) {
+                  c.town = stateMatch[1].trim();
+                  c.state = stateMatch[2].toUpperCase();
                 }
+              }
+              if (!c.state) {
+                c.state = 'NY';
               }
             });
             saveContacts(parsed);
@@ -2297,12 +2312,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var contacts = loadContacts();
     window.contacts = contacts;
 
+    // Populate Dynamic Town Filter based on selected State
+    function populateTownFilter(activeState) {
+      var townSelect = document.getElementById('contactTownFilter');
+      if (!townSelect) return;
+      var curVal = townSelect.value;
+      townSelect.innerHTML = '<option value="all">🏙️ All Towns</option>';
+
+      var uniqueTowns = [];
+      contacts.forEach(function(c) {
+        var cState = c.state || 'NY';
+        if (activeState === 'all' || cState === activeState) {
+          var t = (c.town || 'Westchester').trim();
+          if (t && uniqueTowns.indexOf(t) === -1) {
+            uniqueTowns.push(t);
+          }
+        }
+      });
+
+      uniqueTowns.sort().forEach(function(t) {
+        var opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        townSelect.appendChild(opt);
+      });
+
+      if (uniqueTowns.indexOf(curVal) !== -1) {
+        townSelect.value = curVal;
+      } else {
+        townSelect.value = 'all';
+      }
+    }
+
     // Render Contacts Table
     function renderContacts(list) {
       var tbody = document.querySelector("#contactsTable tbody");
       tbody.innerHTML = "";
       if (list.length === 0) {
-        tbody.innerHTML = "<tr><td colspan='11' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts found. Use Add Contacts to create your first client.</td></tr>";
+        tbody.innerHTML = "<tr><td colspan='12' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts match your search or state/town filters.</td></tr>";
       } else {
         list.forEach(function (c, index) {
           var isReviewed = Boolean(c.hasGbpReview || isGbpReviewerMatch(c.name));
@@ -2312,6 +2359,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "</label></td>";
 
           var aptDisplay = c.apt ? ("<span style='background:#f1f5f9;color:#475569;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600;display:inline-block;'>" + (c.apt.toLowerCase().startsWith('apt') || c.apt.toLowerCase().startsWith('unit') || c.apt.toLowerCase().startsWith('ste') || c.apt.startsWith('#') ? c.apt : 'Apt ' + c.apt) + "</span>") : '—';
+          var stateBadge = "<span style='background:#e2e8f0;color:#0f172a;padding:3px 8px;border-radius:6px;font-size:11.5px;font-weight:800;display:inline-block;'>" + (c.state || 'NY') + "</span>";
 
           var tr = document.createElement("tr");
           tr.innerHTML = "<td><strong>" + c.name + "</strong></td>" +
@@ -2320,11 +2368,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                          "<td>" + (c.address || '—') + "</td>" +
                          "<td>" + aptDisplay + "</td>" +
                          "<td><span class='badge-town'>" + (c.town || 'Westchester') + "</span></td>" +
+                         "<td>" + stateBadge + "</td>" +
                          "<td><span style='background:#eff6ff;color:#1d4ed8;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:600;display:inline-block;'>⚡ " + (c.lead || 'Direct') + "</span></td>" +
                          "<td>" + c.service + "</td>" +
                          "<td><span style='color:var(--green);font-weight:700;'>● " + (c.status || 'Active') + "</span></td>" +
-                         gbpCell +
-                         "<td><button data-index='" + index + "' class='btn-edit-cust' style='background:none;border:none;color:#2563eb;cursor:pointer;font-weight:700;font-size:13px;margin-right:8px;'>✏️ Edit</button><button data-index='" + index + "' class='btn-delete-cust' style='background:none;border:none;color:#dc2626;cursor:pointer;font-weight:700;font-size:13px;'>🗑️ Delete</button></td>";
+                          gbpCell +
+                          "<td><button data-index='" + index + "' class='btn-history-cust' style='background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;cursor:pointer;font-weight:700;font-size:12px;padding:4px 8px;border-radius:6px;margin-right:6px;'>📜 History</button>" +
+                          "<button data-index='" + index + "' class='btn-edit-cust' style='background:none;border:none;color:#2563eb;cursor:pointer;font-weight:700;font-size:13px;margin-right:8px;'>✏️ Edit</button>" +
+                          "<button data-index='" + index + "' class='btn-delete-cust' style='background:none;border:none;color:#dc2626;cursor:pointer;font-weight:700;font-size:13px;'>🗑️ Delete</button></td>";
           tbody.appendChild(tr);
         });
 
@@ -2338,7 +2389,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             if (realIdx === -1) realIdx = idx;
             contacts[realIdx].hasGbpReview = this.checked;
             saveContacts(contacts);
-            renderContacts(contacts);
+            filterAndRenderContacts();
+          });
+        });
+
+        // Customer History Drawer Event Handlers
+        document.querySelectorAll('.btn-history-cust').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var idx = parseInt(this.getAttribute('data-index'));
+            var c = list[idx];
+            if (!c) return;
+            openCustomerHistoryModal(c);
           });
         });
 
@@ -2359,6 +2420,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             document.getElementById('editCustAddress').value = c.address || '';
             if (document.getElementById('editCustApt')) document.getElementById('editCustApt').value = c.apt || '';
             document.getElementById('editCustTown').value = c.town || '';
+            if (document.getElementById('editCustState')) document.getElementById('editCustState').value = c.state || 'NY';
             document.getElementById('editCustLead').value = c.lead || '';
             document.getElementById('editCustService').value = c.service || '';
             document.getElementById('editCustStatus').value = c.status || 'Active';
@@ -2379,7 +2441,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             if (confirm("Are you sure you want to delete this customer contact from your CRM?")) {
               contacts.splice(realIdx, 1);
               saveContacts(contacts);
-              renderContacts(contacts);
+              filterAndRenderContacts();
             }
           });
         });
@@ -2388,23 +2450,178 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       document.getElementById('statRequests').textContent = contacts.length;
     }
 
-    renderContacts(contacts);
+    // Filter Logic Combining Search Query, State, and Town Selection
+    function filterAndRenderContacts() {
+      var query = (document.getElementById('contactSearchInput') ? document.getElementById('contactSearchInput').value : '').toLowerCase().trim();
+      var selectedState = document.getElementById('contactStateFilter') ? document.getElementById('contactStateFilter').value : 'all';
+      var selectedTown = document.getElementById('contactTownFilter') ? document.getElementById('contactTownFilter').value : 'all';
 
-    // Search Filtering
-    document.getElementById('contactSearchInput').addEventListener('input', function () {
-      var query = this.value.toLowerCase().trim();
+      populateTownFilter(selectedState);
+
       var filtered = contacts.filter(function (c) {
-        return c.name.toLowerCase().includes(query) ||
+        var cState = c.state || 'NY';
+        var cTown = (c.town || 'Westchester').trim();
+
+        var stateMatch = (selectedState === 'all' || cState === selectedState);
+        var townMatch = (selectedTown === 'all' || cTown === selectedTown);
+
+        var queryMatch = !query ||
+               c.name.toLowerCase().includes(query) ||
                c.phone.toLowerCase().includes(query) ||
                (c.email && c.email.toLowerCase().includes(query)) ||
                (c.address && c.address.toLowerCase().includes(query)) ||
                (c.apt && c.apt.toLowerCase().includes(query)) ||
                (c.town && c.town.toLowerCase().includes(query)) ||
+               (c.state && c.state.toLowerCase().includes(query)) ||
                (c.lead && c.lead.toLowerCase().includes(query)) ||
                (c.service && c.service.toLowerCase().includes(query));
+
+        return stateMatch && townMatch && queryMatch;
       });
+
       renderContacts(filtered);
-    });
+    }
+
+    filterAndRenderContacts();
+
+    // Event Listeners for Filters
+    if (document.getElementById('contactSearchInput')) {
+      document.getElementById('contactSearchInput').addEventListener('input', filterAndRenderContacts);
+    }
+    if (document.getElementById('contactStateFilter')) {
+      document.getElementById('contactStateFilter').addEventListener('change', function() {
+        document.getElementById('contactTownFilter').value = 'all';
+        filterAndRenderContacts();
+      });
+    }
+    if (document.getElementById('contactTownFilter')) {
+      document.getElementById('contactTownFilter').addEventListener('change', filterAndRenderContacts);
+    }
+
+    // Open Customer History Modal Function
+    function openCustomerHistoryModal(c) {
+      document.getElementById('histCustName').textContent = "📜 Customer Activity History — " + c.name;
+      var sub = (c.phone || '') + " • " + (c.address ? c.address + ', ' : '') + (c.town || 'Westchester') + ", " + (c.state || 'NY');
+      document.getElementById('histCustSub').textContent = sub;
+
+      var cleanPhone = (c.phone || '').replace(/\D/g, '');
+      document.getElementById('histCallBtn').href = cleanPhone ? "tel:" + cleanPhone : "#";
+      document.getElementById('histSmsBtn').href = cleanPhone ? "sms:" + cleanPhone : "#";
+      
+      var fullAddr = (c.address ? c.address + ', ' : '') + (c.town || '') + ' ' + (c.state || 'NY');
+      document.getElementById('histMapsBtn').href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(fullAddr);
+
+      document.getElementById('histServiceTitle').textContent = "🛠️ Service Requested: " + (c.service || 'Handyman Work');
+      document.getElementById('histPriceQuote').textContent = c.notes ? c.notes : "Google Voice Contact Record";
+
+      var counts = c.counts || { sms: 0, calls: 0, voicemails: 0 };
+      var histList = c.history || [];
+
+      if (histList.length === 0 && c.notes) {
+        histList = [{
+          type: 'sms',
+          date: c.date || '',
+          direction: 'unknown',
+          content: c.notes
+        }];
+      }
+
+      document.getElementById('histCountBadges').innerHTML = 
+        "<span style='background:#dbeafe;color:#1e40af;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;'>💬 " + (counts.sms || (histList.length ? histList.length : 1)) + " SMS</span> " +
+        "<span style='background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;'>📞 " + (counts.calls || 0) + " Calls</span> " +
+        "<span style='background:#f3e8ff;color:#6b21a8;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:700;'>🎙️ " + (counts.voicemails || 0) + " Voicemails</span>";
+
+      var container = document.getElementById('histTimelineContainer');
+      container.innerHTML = "";
+
+      if (histList.length === 0) {
+        container.innerHTML = "<div style='text-align:center;color:#64748b;padding:30px;background:#fff;border-radius:12px;'>No interaction logs recorded for this customer yet.</div>";
+      } else {
+        histList.forEach(function(item) {
+          var card = document.createElement('div');
+          card.style.borderRadius = '12px';
+          card.style.padding = '14px 16px';
+          card.style.fontSize = '13.5px';
+          card.style.lineHeight = '1.5';
+          card.style.boxShadow = '0 1px 3px rgba(0,0,0,0.06)';
+
+          var dateFormatted = item.date ? item.date.replace('T', ' ').replace(/:\d{2}-\d{2}:\d{2}/, '') : '';
+
+          if (item.type === 'sms') {
+            var raw = item.content || '';
+            var isSent = raw.includes('Me :') || item.direction === 'outgoing';
+            
+            card.style.background = isSent ? '#dcfce7' : '#ffffff';
+            card.style.border = isSent ? '1px solid #86efac' : '1px solid #cbd5e1';
+            card.style.alignSelf = isSent ? 'flex-end' : 'flex-start';
+            card.style.maxWidth = '88%';
+
+            var header = "<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:11.5px;font-weight:700;color:" + (isSent ? '#15803d' : '#475569') + ";'>" +
+                         "<span>" + (isSent ? "📤 Outgoing Text (David)" : "📥 Incoming Text Message") + "</span>" +
+                         "<span>" + dateFormatted + "</span>" +
+                         "</div>";
+            
+            var cleanBody = raw
+              .replace(/^Me to\s*\n?/gi, '')
+              .replace(/[A-Za-z]{3}\s+\d{1,2},\s*\d{4},\s*\d{1,2}:\d{2}:\d{2}\s*(?:AM|PM)\s*Eastern Time\s*:\s*/gi, '\n')
+              .replace(/^Labels\s*:.*$/gm, '')
+              .replace(/^User Deleted\s*:.*$/gm, '')
+              .replace(/^Me\s*:\s*/gm, '▶ ')
+              .replace(/^:\s*/gm, '◀ ')
+              .trim();
+
+            card.innerHTML = header + "<div style='white-space:pre-wrap;color:#0f172a;'>" + cleanBody + "</div>";
+          } else if (item.type === 'voicemail') {
+            card.style.background = '#fefeef';
+            card.style.border = '1px solid #fde047';
+            card.style.maxWidth = '92%';
+
+            var vmHeader = "<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:11.5px;font-weight:700;color:#854d0e;'>" +
+                           "<span>🎙️ Voicemail Transcript</span>" +
+                           "<span>" + dateFormatted + "</span>" +
+                           "</div>";
+            card.innerHTML = vmHeader + "<div style='font-style:italic;color:#334155;'>\"" + (item.content || 'Voicemail received') + "\"</div>";
+          } else if (item.type === 'call') {
+            card.style.background = '#f8fafc';
+            card.style.border = '1px solid #cbd5e1';
+            card.style.maxWidth = '92%';
+
+            var callHeader = "<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:11.5px;font-weight:700;color:#334155;'>" +
+                             "<span>📞 Call Event: " + (item.call_type || 'Call') + (item.duration ? ' (' + item.duration + ')' : '') + "</span>" +
+                             "<span>" + dateFormatted + "</span>" +
+                             "</div>";
+            card.innerHTML = callHeader + (item.transcript ? "<div style='font-size:13px;color:#475569;'>Transcript: " + item.transcript + "</div>" : "");
+          }
+
+          container.appendChild(card);
+        });
+      }
+
+      document.getElementById('histReviewReqBtn').onclick = function() {
+        var firstName = c.name.split(' ')[0] || 'there';
+        var textMsg = "Hi " + firstName + ", this is David from Here Handyman! Thank you for choosing us for your " + (c.service || 'home repairs') + " in " + (c.town || 'Westchester') + "! If you were happy with our work, could you please leave us a quick 5-star review on Google? Direct link: https://www.herehandyman.com/reviews/ Thank you so much!";
+        
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(textMsg);
+          alert("⭐ Review Request SMS Copied to Clipboard!\n\nMessage:\n\"" + textMsg + "\"\n\nYou can now paste and send this via SMS directly to " + c.name + " (" + c.phone + ")!");
+        } else {
+          prompt("Copy this 5-star review request message for " + c.name + ":", textMsg);
+        }
+      };
+
+      document.getElementById('customerHistoryModal').style.display = 'flex';
+    }
+
+    if (document.getElementById('closeHistoryModalBtn')) {
+      document.getElementById('closeHistoryModalBtn').addEventListener('click', function() {
+        document.getElementById('customerHistoryModal').style.display = 'none';
+      });
+    }
+    if (document.getElementById('closeHistoryModalBottomBtn')) {
+      document.getElementById('closeHistoryModalBottomBtn').addEventListener('click', function() {
+        document.getElementById('customerHistoryModal').style.display = 'none';
+      });
+    }
 
     // 🔍 Auto-Compare Contacts with GBP Reviews
     document.getElementById('compareGbpBtn').addEventListener('click', function () {
@@ -2418,28 +2635,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
       });
       saveContacts(contacts);
-      renderContacts(contacts);
+      filterAndRenderContacts();
       var totalReviewed = contacts.filter(function(c) { return c.hasGbpReview || isGbpReviewerMatch(c.name); }).length;
       alert("🔍 GBP Review Auto-Comparison Complete!\n\n" + matchedCount + " contact(s) newly matched with Google Business Profile reviews.\n\nTotal CRM Contacts with confirmed GBP Reviews: " + totalReviewed + " of " + contacts.length + ".");
     });
 
     // 📱 1-Click Import Google Voice Batch (Incremental 15-Contact Trial)
     var trialVoiceBatch = [
-      { name: "Tony", phone: "(201) 417-5353", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Door Hardware & Installation", status: "Completed", date: "2026-05-02", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Project: Interior Door Removal & Hardware." },
-      { name: "David / Client", phone: "(201) 681-0630", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Mirror Repair ($85, $100)", status: "Completed", date: "2026-07-13", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Project: Mirror Repair & Mounting." },
-      { name: "David / Handyman Client", phone: "(205) 883-1464", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Pergola Repair", status: "Completed", date: "2025-11-24", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Project: Pergola Assembly & Repair." },
-      { name: "Client (6735)", phone: "(213) 300-6735", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Plumbing Fixture Repair (3 Toilets, 2 Faucets)", status: "Completed", date: "2023-08-14", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Client requested 3 toilets & 2 faucets installation." },
-      { name: "Sergey (Helping Hand)", phone: "(213) 364-1397", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Door Hardware & Installation ($380, $450)", status: "Completed", date: "2025-03-25", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Door hardware & installation work." },
-      { name: "Nextdoor Client", phone: "(213) 902-6893", email: "", address: "", apt: "", town: "White Plains", lead: "Google Voice", service: "Interior Painting", status: "Completed", date: "2026-05-13", hasGbpReview: false, notes: "Imported from Google Voice Takeout (Nextdoor lead). Interior painting services." },
-      { name: "Nataliya", phone: "(215) 999-8960", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Lock & Hardware Repair", status: "Completed", date: "2025-10-14", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Cargo Van & Hardware lock service." },
-      { name: "Yelp Lead Client", phone: "(217) 634-7118", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Electrical Fixture Installation", status: "Completed", date: "2025-03-25", hasGbpReview: false, notes: "Imported from Google Voice Takeout (Yelp lead). Electrical service." },
-      { name: "Ken / David R.", phone: "(219) 808-9104", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Light Fixture Repair", status: "Completed", date: "2022-06-07", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Light fixture installation." },
-      { name: "Uri", phone: "(224) 432-9519", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Drywall Patching & Painting ($1,200)", status: "Completed", date: "2025-04-08", hasGbpReview: false, notes: "Imported from Google Voice Takeout. House interior painting & drywall prep." },
-      { name: "Rhonda", phone: "(224) 456-2763", email: "", address: "2028 Stephen St", apt: "", town: "Westchester", lead: "Google Voice", service: "Drywall Patching & Painting ($200)", status: "Completed", date: "2026-01-15", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Painting & drywall patch." },
-      { name: "Limerick Ct Client", phone: "(234) 392-6883", email: "", address: "10 Limerick Court", apt: "", town: "White Plains", lead: "Google Voice", service: "House Carpentry & Trim", status: "Completed", date: "2026-09-01", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Carpentry service inquiry." },
-      { name: "Dan", phone: "(256) 934-4913", email: "", address: "", apt: "", town: "Pelham", lead: "Google Voice", service: "TV Mounting & Playhouse Assembly (3 TVs)", status: "Completed", date: "2023-10-14", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Mounted 3 TVs 40-inch and playhouse assembly." },
-      { name: "Elvric", phone: "(267) 724-5525", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Gutter Installation & Cleaning", status: "Completed", date: "2026-06-06", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Gutter installation for residence." },
-      { name: "Dominic (Yelp Lead)", phone: "(272) 888-1155", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Door Hardware & Installation ($150)", status: "Completed", date: "2025-04-02", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Handyman door repair & hardware." }
+      { name: "Tony", phone: "(201) 417-5353", email: "", address: "", apt: "", town: "Westchester", state: "NJ", lead: "Google Voice", service: "Door Hardware & Installation", status: "Completed", date: "2026-05-02", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Project: Interior Door Removal & Hardware." },
+      { name: "David / Client", phone: "(201) 681-0630", email: "", address: "", apt: "", town: "Westchester", state: "NJ", lead: "Google Voice", service: "Mirror Repair ($85, $100)", status: "Completed", date: "2026-07-13", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Project: Mirror Repair & Mounting." },
+      { name: "David / Handyman Client", phone: "(205) 883-1464", email: "", address: "", apt: "", town: "Westchester", state: "NY", lead: "Google Voice", service: "Pergola Repair", status: "Completed", date: "2025-11-24", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Project: Pergola Assembly & Repair." },
+      { name: "Client (6735)", phone: "(213) 300-6735", email: "", address: "", apt: "", town: "Westchester", state: "NY", lead: "Google Voice", service: "Plumbing Fixture Repair (3 Toilets, 2 Faucets)", status: "Completed", date: "2023-08-14", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Client requested 3 toilets & 2 faucets installation." },
+      { name: "Sergey (Helping Hand)", phone: "(213) 364-1397", email: "", address: "", apt: "", town: "Westchester", state: "NY", lead: "Google Voice", service: "Door Hardware & Installation ($380, $450)", status: "Completed", date: "2025-03-25", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Door hardware & installation work." },
+      { name: "Nextdoor Client", phone: "(213) 902-6893", email: "", address: "", apt: "", town: "White Plains", state: "NY", lead: "Google Voice", service: "Interior Painting", status: "Completed", date: "2026-05-13", hasGbpReview: false, notes: "Imported from Google Voice Takeout (Nextdoor lead). Interior painting services." },
+      { name: "Nataliya", phone: "(215) 999-8960", email: "", address: "", apt: "", town: "Westchester", state: "PA", lead: "Google Voice", service: "Lock & Hardware Repair", status: "Completed", date: "2025-10-14", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Cargo Van & Hardware lock service." },
+      { name: "Yelp Lead Client", phone: "(217) 634-7118", email: "", address: "", apt: "", town: "Westchester", state: "IL", lead: "Google Voice", service: "Electrical Fixture Installation", status: "Completed", date: "2025-03-25", hasGbpReview: false, notes: "Imported from Google Voice Takeout (Yelp lead). Electrical service." },
+      { name: "Ken / David R.", phone: "(219) 808-9104", email: "", address: "", apt: "", town: "Westchester", state: "IN", lead: "Google Voice", service: "Light Fixture Repair", status: "Completed", date: "2022-06-07", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Light fixture installation." },
+      { name: "Uri", phone: "(224) 432-9519", email: "", address: "", apt: "", town: "Westchester", state: "IL", lead: "Google Voice", service: "Drywall Patching & Painting ($1,200)", status: "Completed", date: "2025-04-08", hasGbpReview: false, notes: "Imported from Google Voice Takeout. House interior painting & drywall prep." },
+      { name: "Rhonda", phone: "(224) 456-2763", email: "", address: "2028 Stephen St", apt: "", town: "Bolingbrook", state: "IL", lead: "Google Voice", service: "Drywall Patching & Painting ($200)", status: "Completed", date: "2026-01-15", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Painting & drywall patch." },
+      { name: "Limerick Ct Client", phone: "(234) 392-6883", email: "", address: "10 Limerick Court", apt: "", town: "White Plains", state: "NY", lead: "Google Voice", service: "House Carpentry & Trim", status: "Completed", date: "2026-09-01", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Carpentry service inquiry." },
+      { name: "Dan", phone: "(256) 934-4913", email: "", address: "", apt: "", town: "Pelham", state: "NY", lead: "Google Voice", service: "TV Mounting & Playhouse Assembly (3 TVs)", status: "Completed", date: "2023-10-14", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Mounted 3 TVs 40-inch and playhouse assembly." },
+      { name: "Elvric", phone: "(267) 724-5525", email: "", address: "", apt: "", town: "Westchester", state: "PA", lead: "Google Voice", service: "Gutter Installation & Cleaning", status: "Completed", date: "2026-06-06", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Gutter installation for residence." },
+      { name: "Dominic (Yelp Lead)", phone: "(272) 888-1155", email: "", address: "", apt: "", town: "Westchester", state: "PA", lead: "Google Voice", service: "Door Hardware & Installation ($150)", status: "Completed", date: "2025-04-02", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Handyman door repair & hardware." }
     ];
 
     document.getElementById('importVoiceBatchBtn').addEventListener('click', function () {
@@ -2452,8 +2669,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
       });
       saveContacts(contacts);
-      renderContacts(contacts);
-      alert("📱 Google Voice Trial Batch Import Complete!\n\n" + addedCount + " authentic customer contact(s) imported into CRM.\n\nTotal CRM Contacts now: " + contacts.length + ".\n\nSummary: 971 authentic handyman customer records extracted from Google Voice Takeout DB.");
+      filterAndRenderContacts();
+      alert("📱 Google Voice Trial Batch Import Complete!\n\n" + addedCount + " authentic customer contact(s) imported into CRM.\n\nTotal CRM Contacts now: " + contacts.length + ".\n\nSeparated state & town filters are active.");
     });
 
     // 1-Click Secure CSV Export
@@ -3379,6 +3596,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </form>
     </div>
   </div>
+  <!-- CUSTOMER HISTORY & LOGS MODAL -->
+  <div id="customerHistoryModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,24,40,0.7);backdrop-filter:blur(5px);z-index:99999;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#ffffff;border-radius:18px;max-width:780px;width:100%;padding:0;box-shadow:0 25px 60px rgba(0,0,0,0.35);position:relative;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;border:1px solid #e2e8f0;">
+      
+      <!-- Modal Header -->
+      <div style="background:#0f172a;color:#ffffff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <h3 id="histCustName" style="font-size:19px;font-weight:800;margin:0;color:#ffffff;display:flex;align-items:center;gap:10px;">
+            📜 Customer Activity History
+          </h3>
+          <p id="histCustSub" style="margin:4px 0 0 0;font-size:13px;color:#94a3b8;"></p>
+        </div>
+        <button id="closeHistoryModalBtn" style="background:rgba(255,255,255,0.1);border:none;font-size:22px;color:#ffffff;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;">&times;</button>
+      </div>
+
+      <!-- Quick Action Toolbar -->
+      <div style="background:#f8fafc;padding:12px 24px;border-bottom:1px solid #e2e8f0;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <a id="histCallBtn" href="#" style="background:#16a34a;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">📞 Call Customer</a>
+        <a id="histSmsBtn" href="#" style="background:#2563eb;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">💬 Send SMS</a>
+        <a id="histMapsBtn" href="#" target="_blank" style="background:#0284c7;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">📍 Google Maps</a>
+        <button id="histReviewReqBtn" style="background:#7c3aed;color:#fff;padding:8px 14px;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">🌟 1-Click Review Request</button>
+      </div>
+
+      <!-- Quoted Price & Service Overview Banner -->
+      <div id="histOverviewBanner" style="background:#eff6ff;padding:12px 24px;border-bottom:1px solid #dbeafe;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+        <div style="font-size:13px;color:#1e40af;">
+          <strong id="histServiceTitle" style="font-size:14px;display:block;"></strong>
+          <span id="histPriceQuote" style="font-weight:600;color:#1d4ed8;"></span>
+        </div>
+        <div style="display:flex;gap:8px;" id="histCountBadges"></div>
+      </div>
+
+      <!-- History Scrollable Timeline -->
+      <div id="histTimelineContainer" style="padding:20px 24px;overflow-y:auto;flex:1;background:#f1f5f9;display:flex;flex-direction:column;gap:14px;min-height:280px;"></div>
+
+      <!-- Modal Footer -->
+      <div style="background:#ffffff;padding:14px 24px;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;color:#64748b;">🔒 Source: Verified Google Voice Telemetry DB</span>
+        <button id="closeHistoryModalBottomBtn" style="padding:8px 18px;background:#e2e8f0;color:#334155;border:none;border-radius:8px;font-weight:700;cursor:pointer;">Close</button>
+      </div>
+    </div>
+  </div>
+
   <!-- CREATE INVOICE MODAL -->
   <div id="createInvoiceModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,24,40,0.6);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
     <div style="background:#fff;border-radius:16px;max-width:700px;width:100%;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,0.3);position:relative;max-height:90vh;overflow-y:auto;">

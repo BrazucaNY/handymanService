@@ -9,7 +9,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 db_path = r"C:\Users\davi6\Downloads\takeout-20260921T002237Z-1-001\Takeout\Voice\HereHandymanVoiceDatabase\here_handyman_voice.db"
 
 conn = sqlite3.connect(db_path)
-cursor = conn.cursor()
+cur = conn.cursor()
 
 JOB_KEYWORDS = re.compile(r'\b(tv|mount|mounting|door|doors|wall|walls|paint|painting|drywall|assembly|ikea|shelf|shelves|faucet|toilet|sink|light|fan|gutter|lock|patch|repair|clean|leak|shower|cabinet|washer|dryer|refrigerator|dishwasher|frame|curtain|mirror|griddle|pergola|deck)\b', re.I)
 PRICE_REGEX = re.compile(r'\$\d+(?:\.\d{2})?|\b\d+\s*(?:dollars|bucks)\b', re.I)
@@ -24,10 +24,10 @@ AREA_CODE_STATE = {
     '215': 'PA', '267': 'PA', '484': 'PA', '610': 'PA'
 }
 
-cursor.execute("SELECT id, phone, name, first_seen_utc, last_seen_utc, message_count, call_count, voicemail_count FROM customers;")
-all_customers = cursor.fetchall()
+cur.execute("SELECT id, phone, name, first_seen_utc, last_seen_utc, message_count, call_count, voicemail_count FROM customers;")
+all_customers = cur.fetchall()
 
-valid_customers = []
+enriched_customers = []
 
 for cust in all_customers:
     cust_id, phone, default_name, first_seen, last_seen, msg_cnt, call_cnt, vm_cnt = cust
@@ -42,13 +42,19 @@ for cust in all_customers:
         formatted_phone = phone
         area_code = ""
 
-    cursor.execute("SELECT message_text FROM messages WHERE customer_id = ?;", (cust_id,))
-    messages = cursor.fetchall()
+    # Fetch messages
+    cur.execute("SELECT event_datetime_local, direction, message_text FROM messages WHERE customer_id = ? ORDER BY event_datetime_utc ASC;", (cust_id,))
+    messages_raw = cur.fetchall()
 
-    cursor.execute("SELECT voicemail_text FROM voicemails WHERE customer_id = ?;", (cust_id,))
-    voicemails = cursor.fetchall()
+    # Fetch calls
+    cur.execute("SELECT event_datetime_local, call_type, duration, transcript FROM calls WHERE customer_id = ? ORDER BY event_datetime_utc ASC;", (cust_id,))
+    calls_raw = cur.fetchall()
 
-    full_text = " ".join([m[0] for m in messages if m[0]] + [v[0] for v in voicemails if v[0]])
+    # Fetch voicemails
+    cur.execute("SELECT event_datetime_local, voicemail_text FROM voicemails WHERE customer_id = ? ORDER BY event_datetime_utc ASC;", (cust_id,))
+    voicemails_raw = cur.fetchall()
+
+    full_text = " ".join([m[2] for m in messages_raw if m[2]] + [v[1] for v in voicemails_raw if v[1]] + [c[3] for c in calls_raw if c[3]])
 
     if any(ignore in full_text.lower() for ignore in ['careem', 'zenly', 'samsung account', 'wechat', 'trucking', 'cpm', 'verification code', 'your code is', 'bank of america']):
         continue
@@ -98,21 +104,38 @@ for cust in all_customers:
         service_label = "TV Mounting & Hardware"
     elif "door" in jobs_found:
         service_label = "Door Hardware & Installation"
-    elif "assembly" in jobs_found or "ikea" in jobs_found:
-        service_label = "Furniture Assembly"
-    elif "drywall" in jobs_found or "paint" in jobs_found:
-        service_label = "Drywall Patching & Painting"
-    elif "leak" in jobs_found or "faucet" in jobs_found or "toilet" in jobs_found:
-        service_label = "Plumbing Fixture Repair"
 
-    if quoted_price:
-        service_label += f" ({quoted_price})"
+    # Build history timeline array
+    history = []
+    for m in messages_raw:
+        history.append({
+            'type': 'sms',
+            'date': m[0] or '',
+            'direction': m[1] or 'RECEIVED',
+            'content': m[2] or ''
+        })
+    for v in voicemails_raw:
+        history.append({
+            'type': 'voicemail',
+            'date': v[0] or '',
+            'content': v[1] or ''
+        })
+    for c in calls_raw:
+        history.append({
+            'type': 'call',
+            'date': c[0] or '',
+            'call_type': c[1] or 'Call',
+            'duration': c[2] or '',
+            'transcript': c[3] or ''
+        })
 
-    date_str = "2026-09-01"
-    if last_seen:
-        date_str = last_seen.split("T")[0]
+    # Sort history chronologically if dates exist
+    history.sort(key=lambda x: x.get('date', ''))
 
-    valid_customers.append({
+    # Format date string for summary table
+    date_str = (last_seen or first_seen or '').split('T')[0] or '2026-09-01'
+
+    cust_obj = {
         "id": cust_id,
         "name": extracted_name,
         "phone": formatted_phone,
@@ -122,30 +145,22 @@ for cust in all_customers:
         "town": matched_town,
         "state": matched_state,
         "lead": "Google Voice",
-        "service": service_label,
+        "service": service_label + (f" ({quoted_price})" if quoted_price else ""),
         "status": "Completed",
         "date": date_str,
         "hasGbpReview": False,
-        "message_count": msg_cnt,
-        "call_count": call_cnt,
-        "voicemail_count": vm_cnt
-    })
+        "notes": f"Imported from Google Voice Takeout. {msg_cnt} SMS, {call_cnt} calls, {vm_cnt} voicemails." + (f" Quoted: {quoted_price}" if quoted_price else ""),
+        "quoted_prices": prices,
+        "counts": {"sms": msg_cnt, "calls": call_cnt, "voicemails": vm_cnt},
+        "history": history
+    }
 
-conn.close()
+    enriched_customers.append(cust_obj)
 
-output_all = r"c:\Users\davi6\.gemini\antigravity\scratch\here-handyman\scripts\all_voice_customers.json"
-with open(output_all, "w", encoding="utf-8") as f:
-    json.dump(valid_customers, f, indent=2)
+print(f"Extracted {len(enriched_customers)} customers with full history timeline.")
 
-print(f"📊 SUMMARY OF GOOGLE VOICE ANALYSIS WITH STATE SEPARATION:")
-print(f"• Total Raw Records in Takeout DB: {len(all_customers)}")
-print(f"• Authentic Handyman Customer Records Extracted: {len(valid_customers)}")
+output_file = r"c:\Users\davi6\.gemini\antigravity\scratch\here-handyman\scripts\all_voice_customers_with_history.json"
+with open(output_file, 'w', encoding='utf-8') as f:
+    json.dump(enriched_customers, f, indent=2, ensure_ascii=False)
 
-# Count per state
-state_counts = {}
-for c in valid_customers:
-    st = c.get('state', 'NY')
-    state_counts[st] = state_counts.get(st, 0) + 1
-
-print("• Breakdown by State:", state_counts)
-print(f"• Full Dataset Saved to: {output_all}")
+print(f"Saved to {output_file}")
