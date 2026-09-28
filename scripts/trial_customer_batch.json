@@ -1,5 +1,37 @@
 [
   {
+    "id": 5,
+    "name": "Client (9070)",
+    "phone": "(201) 362-9070",
+    "email": "",
+    "address": "",
+    "apt": "",
+    "town": "Westchester",
+    "state": "NJ",
+    "lead": "Google Voice",
+    "service": "Handyman Service",
+    "status": "Completed",
+    "date": "2024-01-17",
+    "hasGbpReview": false,
+    "notes": "Imported from Google Voice Takeout. 0 SMS, 1 calls, 0 voicemails.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 0,
+      "calls": 1,
+      "voicemails": 0
+    },
+    "history": [
+      {
+        "type": "call",
+        "date": "2024-01-17T09:13:21-05:00",
+        "call_type": "missed_call",
+        "duration": "",
+        "transcript": "Missed call from\nCall Log for\nMissed call from\nMissed call from\nJan 17, 2024, 9:13:21 AM\nEastern Time\nLabels:\nMissed , Inbox\nUser Deleted:\nFalse"
+      }
+    ]
+  },
+  {
+    "id": 11,
     "name": "Client (5353)",
     "phone": "(201) 417-5353",
     "email": "",
@@ -29,7 +61,38 @@
     ]
   },
   {
-    "name": "David\nJul",
+    "id": 13,
+    "name": "Client (3963)",
+    "phone": "(201) 645-3963",
+    "email": "",
+    "address": "",
+    "apt": "",
+    "town": "Westchester",
+    "state": "NJ",
+    "lead": "Google Voice",
+    "service": "Handyman Service",
+    "status": "Completed",
+    "date": "2025-10-11",
+    "hasGbpReview": false,
+    "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 1,
+      "calls": 0,
+      "voicemails": 0
+    },
+    "history": [
+      {
+        "type": "sms",
+        "date": "2025-10-10T22:22:58-04:00",
+        "direction": "unknown",
+        "content": "Oct 10, 2025, 10:22:58 PM\nEastern Time :\n:\nYour key can be programmed by a certified locksmith partner in your area, call (888) 904-7270 to get your new key.\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Client (0630)",
     "phone": "(201) 681-0630",
     "email": "",
     "address": "",
@@ -80,88 +143,309 @@
     ]
   },
   {
-    "name": "David The",
-    "phone": "(205) 883-1464",
+    "id": 15,
+    "name": "Client (8411)",
+    "phone": "(201) 740-8411",
+    "email": "",
+    "address": "",
+    "apt": "",
+    "town": "Westchester",
+    "state": "NJ",
+    "lead": "Google Voice",
+    "service": "Handyman Service",
+    "status": "Completed",
+    "date": "2023-12-04",
+    "hasGbpReview": false,
+    "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 1,
+      "calls": 0,
+      "voicemails": 0
+    },
+    "history": [
+      {
+        "type": "sms",
+        "date": "2023-12-04T00:23:36-05:00",
+        "direction": "incoming",
+        "content": "Received call from\nCall Log for\nReceived call from\nReceived call from\nDec 4, 2023, 12:23:36 AM\nEastern Time\n(00:00:16)\nLabels:\nReceived\nUser Deleted:\nFalse"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Client (8436)",
+    "phone": "(201) 771-8436",
+    "email": "",
+    "address": "",
+    "apt": "",
+    "town": "Westchester",
+    "state": "NJ",
+    "lead": "Google Voice",
+    "service": "Handyman Service",
+    "status": "Completed",
+    "date": "2023-01-23",
+    "hasGbpReview": false,
+    "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 1,
+      "calls": 0,
+      "voicemails": 0
+    },
+    "history": [
+      {
+        "type": "sms",
+        "date": "2023-01-23T07:24:13-05:00",
+        "direction": "unknown",
+        "content": "Jan 23, 2023, 7:24:13 AM\nEastern Time :\n:\nYour Uber code is 2350. Never share this code.\nLabels:\nText\nUser Deleted:\nFalse"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Client (3893)",
+    "phone": "(201) 835-3893",
+    "email": "",
+    "address": "",
+    "apt": "",
+    "town": "Westchester",
+    "state": "NJ",
+    "lead": "Google Voice",
+    "service": "Handyman Service",
+    "status": "Completed",
+    "date": "2026-07-08",
+    "hasGbpReview": false,
+    "notes": "Imported from Google Voice Takeout. 2 SMS, 0 calls, 0 voicemails.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 2,
+      "calls": 0,
+      "voicemails": 0
+    },
+    "history": [
+      {
+        "type": "sms",
+        "date": "2026-07-08T08:53:22-04:00",
+        "direction": "incoming",
+        "content": "Received call from\nCall Log for\nReceived call from\nReceived call from\nJul 8, 2026, 8:53:22 AM\nEastern Time\n(00:09:08)\nLabels:\nReceived\nUser Deleted:\nFalse"
+      },
+      {
+        "type": "sms",
+        "date": "2026-07-08T09:01:30-04:00",
+        "direction": "unknown",
+        "content": "Jul 8, 2026, 9:01:30 AM\nEastern Time :\n:\n<Subject: Brad LeBeau>\nContact card attachment\nJul 8, 2026, 9:02:19 AM\nEastern Time :\n:\n<Subject: Mobile> - (917) 653-4657\nJul 8, 2026, 2:21:51 PM\nEastern Time :\n:\nDid you text brad?\nJul 8, 2026, 2:39:32 PM\nEastern Time :\n:\nHe didn't get it...unless you're not interested. Which is fine\nLabels:\nText\nUser Deleted:\nFalse"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Client (8888)",
+    "phone": "(202) 455-8888",
     "email": "",
     "address": "",
     "apt": "",
     "town": "Westchester",
     "state": "NY",
     "lead": "Google Voice",
-    "service": "Pergola Repair",
+    "service": "Handyman Service",
     "status": "Completed",
-    "date": "2025-11-24",
+    "date": "2023-03-09",
     "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 1 SMS, 1 calls, 0 voicemails.",
+    "notes": "Imported from Google Voice Takeout. 0 SMS, 0 calls, 1 voicemails.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 0,
+      "calls": 0,
+      "voicemails": 1
+    },
+    "history": [
+      {
+        "type": "voicemail",
+        "date": "2023-03-09T12:45:53-05:00",
+        "content": "Voicemail from\nCall Log for\nVoicemail from\nVoicemail from\nMar 9, 2023, 12:45:53 PM\nEastern Time\nAudio\n(00:00:27)\nLabels:\nVoicemail , Inbox\nUser Deleted:\nFalse"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Maria",
+    "phone": "(202) 500-8937",
+    "email": "",
+    "address": "",
+    "apt": "",
+    "town": "Westchester",
+    "state": "NY",
+    "lead": "Google Voice",
+    "service": "Handyman Service",
+    "status": "Completed",
+    "date": "2025-06-26",
+    "hasGbpReview": false,
+    "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
     "quoted_prices": [],
     "counts": {
       "sms": 1,
+      "calls": 0,
+      "voicemails": 0
+    },
+    "history": [
+      {
+        "type": "sms",
+        "date": "2025-06-26T16:54:12-04:00",
+        "direction": "unknown",
+        "content": "Jun 26, 2025, 4:54:12 PM\nEastern Time :\n:\nHi. I'm Maria from Indeed. Are you available for P/time F/time?\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Client (6888)",
+    "phone": "(202) 836-6888",
+    "email": "",
+    "address": "",
+    "apt": "",
+    "town": "Westchester",
+    "state": "NY",
+    "lead": "Google Voice",
+    "service": "Handyman Service",
+    "status": "Completed",
+    "date": "2022-10-29",
+    "hasGbpReview": false,
+    "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 1,
+      "calls": 0,
+      "voicemails": 0
+    },
+    "history": [
+      {
+        "type": "sms",
+        "date": "2022-10-29T05:35:19-04:00",
+        "direction": "unknown",
+        "content": "Oct 29, 2022, 5:35:19 AM\nEastern Time :\n:\nSnapchat 2FA Code: 436230. Snapchat Support will not ask for this code. Do not share it with anyone.\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Client (6492)",
+    "phone": "(203) 249-6492",
+    "email": "",
+    "address": "",
+    "apt": "",
+    "town": "Westchester",
+    "state": "CT",
+    "lead": "Google Voice",
+    "service": "Handyman Service",
+    "status": "Completed",
+    "date": "2026-08-13",
+    "hasGbpReview": false,
+    "notes": "Imported from Google Voice Takeout. 5 SMS, 0 calls, 0 voicemails.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 5,
+      "calls": 0,
+      "voicemails": 0
+    },
+    "history": [
+      {
+        "type": "sms",
+        "date": "2026-07-24T16:52:36-04:00",
+        "direction": "incoming",
+        "content": "Received call from\nCall Log for\nReceived call from\nReceived call from\nJul 24, 2026, 4:52:36 PM\nEastern Time\n(00:02:10)\nLabels:\nReceived\nUser Deleted:\nFalse"
+      },
+      {
+        "type": "sms",
+        "date": "2026-07-24T16:55:42-04:00",
+        "direction": "unknown",
+        "content": "Jul 24, 2026, 4:55:42 PM\nEastern Time :\n:\nBilly Vizcarra Vinyl\nJul 24, 2026, 5:08:29 PM\nEastern Time :\nMe :\nGracias\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
+      },
+      {
+        "type": "sms",
+        "date": "2026-08-11T10:15:57-04:00",
+        "direction": "unknown",
+        "content": "Aug 11, 2026, 10:15:57 AM\nEastern Time :\n:\nBuenos días David, aún está interesado en poner el vinyl en su auto?\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
+      },
+      {
+        "type": "sms",
+        "date": "2026-08-12T16:21:34-04:00",
+        "direction": "unknown",
+        "content": "Me to\nAug 12, 2026, 4:21:34 PM\nEastern Time :\nMe :\nBuenos días Billy. Sí, todavía estoy interesado. El vinyl todavía está en Chicago y por ahora no estoy seguro de cuándo voy a poder traerlo para instalarlo. Cuando sepa cuándo lo voy a tener aquí, te aviso para coordinar la instalación. Gracias.\nLabels:\nText\nUser Deleted:\nFalse"
+      },
+      {
+        "type": "sms",
+        "date": "2026-08-13T09:15:48-04:00",
+        "direction": "unknown",
+        "content": "Aug 13, 2026, 9:15:48 AM\nEastern Time :\n:\nBuenos días David. Ok entiendo. Cualquier cosa q necesites me avisas.\nQue tengas buen día 🦾\nLabels:\nText\nUser Deleted:\nFalse"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Client (1918)",
+    "phone": "(203) 338-1918",
+    "email": "",
+    "address": "",
+    "apt": "",
+    "town": "Westchester",
+    "state": "CT",
+    "lead": "Google Voice",
+    "service": "Handyman Service",
+    "status": "Completed",
+    "date": "2026-05-04",
+    "hasGbpReview": false,
+    "notes": "Imported from Google Voice Takeout. 3 SMS, 1 calls, 0 voicemails.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 3,
       "calls": 1,
       "voicemails": 0
     },
     "history": [
       {
         "type": "sms",
-        "date": "2025-11-24T10:53:33-05:00",
+        "date": "2026-05-03T22:37:40-04:00",
         "direction": "unknown",
-        "content": "Me to\nNov 24, 2025, 10:53:33 AM\nEastern Time :\nMe :\nHi this is David the handyman.\nNov 24, 2025, 10:53:43 AM\nEastern Time :\nMe :\nAre you doing the pergola today again ?\nLabels:\nText\nUser Deleted:\nFalse"
+        "content": "Me to\nMay 3, 2026, 10:37:40 PM\nEastern Time :\nMe :\nBoa noite pode me dar mais informações sobre o trabalho ? Meu nome é David.\nLabels:\nText\nUser Deleted:\nFalse"
+      },
+      {
+        "type": "sms",
+        "date": "2026-05-04T09:55:39-04:00",
+        "direction": "incoming",
+        "content": "Received call from\nCall Log for\nReceived call from\nReceived call from\nMay 4, 2026, 9:55:39 AM\nEastern Time\n(00:00:03)\nLabels:\nReceived\nUser Deleted:\nFalse"
+      },
+      {
+        "type": "sms",
+        "date": "2026-05-04T09:56:10-04:00",
+        "direction": "incoming",
+        "content": "May 4, 2026, 9:56:10 AM\nEastern Time :\n:\nBom dia david\nMay 4, 2026, 9:56:22 AM\nEastern Time :\n:\nPoderia me ligar aqui assim que possivel ?\nMay 4, 2026, 9:56:38 AM\nEastern Time :\nMe :\nOpa bom dia\nMay 4, 2026, 9:57:04 AM\nEastern Time :\n:\nJoia\nMay 4, 2026, 9:57:09 AM\nEastern Time :\nMe :\nSim sim em 20 minutos te ligo\nMay 4, 2026, 9:57:10 AM\nEastern Time :\n:\n?\nMay 4, 2026, 9:57:43 AM\nEastern Time :\n:\nMMS Received\nMay 4, 2026, 10:36:54 AM\nEastern Time :\n:\nJunior Santos\n[Celular] +14453187921\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
       },
       {
         "type": "call",
-        "date": "2025-11-24T11:12:52-05:00",
+        "date": "2026-05-04T10:32:40-04:00",
         "call_type": "other",
         "duration": "",
-        "transcript": "Placed call to\nCall Log for\nPlaced call to\nPlaced call to\nNov 24, 2025, 11:12:52 AM\nEastern Time\n(00:00:28)\nLabels:\nPlaced\nUser Deleted:\nFalse"
+        "transcript": "Placed call to\nCall Log for\nPlaced call to\nPlaced call to\nMay 4, 2026, 10:32:40 AM\nEastern Time\n(00:03:13)\nLabels:\nPlaced\nUser Deleted:\nFalse"
       }
     ]
   },
   {
-    "name": "Client (6735)",
-    "phone": "(213) 300-6735",
+    "id": 27,
+    "name": "Chris",
+    "phone": "(203) 512-6401",
     "email": "",
     "address": "",
     "apt": "",
     "town": "Westchester",
-    "state": "NY",
+    "state": "CT",
     "lead": "Google Voice",
-    "service": "Toilet, Faucet Repair",
+    "service": "Handyman Service",
     "status": "Completed",
-    "date": "2023-08-14",
+    "date": "2026-09-17",
     "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
+    "notes": "Imported from Google Voice Takeout. 2 SMS, 0 calls, 0 voicemails.",
     "quoted_prices": [],
-    "counts": {
-      "sms": 1,
-      "calls": 0,
-      "voicemails": 0
-    },
-    "history": [
-      {
-        "type": "sms",
-        "date": "2023-08-14T11:18:18-04:00",
-        "direction": "unknown",
-        "content": "Aug 14, 2023, 11:18:18 AM\nEastern Time :\n:\nHello, how are you doing today? I need 3 toilets and 2 faucets installed and i need them done in a couple of weeks. Do you accept check payment? If yes, How much do you charge per toilet and faucet installation?\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      }
-    ]
-  },
-  {
-    "name": "Sergey From",
-    "phone": "(213) 364-1397",
-    "email": "",
-    "address": "",
-    "apt": "",
-    "town": "Westchester",
-    "state": "NY",
-    "lead": "Google Voice",
-    "service": "Door Hardware & Installation ($380, $450)",
-    "status": "Completed",
-    "date": "2025-03-25",
-    "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 2 SMS, 0 calls, 0 voicemails. Quoted: $380, $450",
-    "quoted_prices": [
-      "$380",
-      "$450"
-    ],
     "counts": {
       "sms": 2,
       "calls": 0,
@@ -170,30 +454,31 @@
     "history": [
       {
         "type": "sms",
-        "date": "2025-03-25T07:12:02-04:00",
-        "direction": "outgoing",
-        "content": "Mar 25, 2025, 7:12:02 AM\nEastern Time :\n:\nGood morning, David — this is Sergey from Helping Hand. If we’re looking at tomorrow, morning would be the best time, as I’m already booked with other jobs in the afternoon. Let me know if that works for you!\nBest regards,\nSergey, Helping Hand\nMar 25, 2025, 7:12:28 AM\nEastern Time :\n:\nAnd could you share the address, please?\nMar 25, 2025, 7:12:50 AM\nEastern Time :\nMe :\nThank you ! I want to send you all the pic here as well I am not sure if I add every pic in the job request.\nMar 25, 2025, 7:13:11 AM\nEastern Time :\n:\nLiked “Thank you ! I want to send you all the pic here as well I am not sure if I add every pic in the job request.”\nMar 25, 2025, 7:13:53 AM\nEastern Time :\n:\nThank you so much, that’ll be a big help — the photos didn’t attach to your original request, so this will make it much easier to go over everything.\nMar 25, 2025, 7:15:11 AM\nEastern Time :\nMe :\nMMS Sent\nMar 25, 2025, 7:15:15 AM\nEastern Time :\nMe :\nMMS Sent\nMar 25, 2025, 7:15:18 AM\nEastern Time :\nMe :\nMMS Sent\nMar 25, 2025, 7:15:23 AM\nEastern Time :\nMe :\nMMS Sent\nMar 25, 2025, 7:15:27 AM\nEastern Time :\nMe :\nMMS Sent\nMar 25, 2025, 7:15:30 AM\nEastern Time :\nMe :\nMMS Sent\nMar 25, 2025, 7:15:35 AM\nEastern Time :\nMe :\nMMS Sent\nMar 25, 2025, 7:15:38 AM\nEastern Time :\nMe :\nMMS Sent\nMar 25, 2025, 7:15:41 AM\nEastern Time :\nMe :\nI have a plumber checking the leak today, and I will probably need that part of the ceiling painted after he repairs the issue.\nMar 25, 2025, 7:20:59 AM\nEastern Time :\n:\nI just reviewed all the photos — thank you for sending them through! Please confirm if I’ve understood everything correctly:\n1. Interior door repair – the side of the wooden door has come apart and needs to be re-glued, clamped, and possibly refinished to restore the clean look.\n2. Replace Z-Wave switch – remove the smart switch and install a standard one (we’ll check wire compatibility).\n3. Ceiling and wall patching/painting – after the plumber addresses the leak, we’ll patch, prime, and repaint the affected ceiling and adjacent wall areas.\n4. Vent cover inspection – the exterior vent cover appears loose; we may need to reseal or replace it.\nEstimated cost for the full scope would be $380–$450, depending on the condition behind the switch and how extensive the ceiling repair is once fully dry.\nCould you please confirm if this matches your expectations?\nMar 25, 2025, 7:23:03 AM\nEastern Time :\nMe :\nThe basement well missing the plast cover. Needs a new plastic cover over that windows well\nMar 25, 2025, 7:27:18 AM\nEastern Time :\n:\nWould you like us to purchase the window well cover and bring it with us, or do you already have one?\nMar 25, 2025, 7:27:18 AM\nEastern Time :\n:\nLiked “The basement well missing the plast cover. Needs a new plastic cover over that windows well”\nMar 25, 2025, 7:27:58 AM\nEastern Time :\nMe :\ncorrect plastic***\nMar 25, 2025, 7:30:04 AM\nEastern Time :\n:\nWe can definitely come by and start the work. Since there’s a Home Depot or Menards nearby in Plainfield, I can check the cover options while I’m there and confirm with you before purchasing. That way, we’ll make sure to get exactly what’s needed.\nMar 25, 2025, 7:33:11 AM\nEastern Time :\nMe :\nGreat let me just confirm with the tenants.\nMar 25, 2025, 7:33:36 AM\nEastern Time :\n:\nSounds like a plan 👍\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
+        "date": "2026-09-16T09:49:49-04:00",
+        "direction": "unknown",
+        "content": "Sep 16, 2026, 9:49:49 AM\nEastern Time :\n:\nHi, this is Chris, to confirm you're the person who reached out with being able to support on the gate?\nSep 16, 2026, 3:51:36 PM\nEastern Time :\nMe :\nYES\nSep 16, 2026, 3:51:45 PM\nEastern Time :\nMe :\nhow how are Chris ?\nSep 16, 2026, 3:51:52 PM\nEastern Time :\nMe :\nThis is david from herehandyman.com\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
       },
       {
         "type": "sms",
-        "date": "2025-03-25T16:38:37-04:00",
+        "date": "2026-09-17T07:10:35-04:00",
         "direction": "unknown",
-        "content": "Mar 25, 2025, 4:38:37 PM\nEastern Time :\n:\nHi David. Were you able to check with the tenant if the appointment for tomorrow is still needed?\nMar 25, 2025, 6:09:26 PM\nEastern Time :\n:\nDavid 🙏 if the morning slot is already taken for tomorrow, we can reschedule for later in the day. A regular client reached out, and I couldn’t turn them down or hold them off.\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
+        "content": "Me to\nSep 17, 2026, 7:10:35 AM\nEastern Time :\nMe :\nGood Morning Chris let me know if you still need help with the gate. Thank You !\nLabels:\nText\nUser Deleted:\nFalse"
       }
     ]
   },
   {
-    "name": "Client (6893)",
-    "phone": "(213) 902-6893",
+    "id": 28,
+    "name": "Client (9703)",
+    "phone": "(203) 561-9703",
     "email": "",
     "address": "",
     "apt": "",
     "town": "White Plains",
     "state": "NY",
     "lead": "Google Voice",
-    "service": "Painting Repair",
+    "service": "Handyman Service",
     "status": "Completed",
-    "date": "2026-05-13",
+    "date": "2026-09-04",
     "hasGbpReview": false,
     "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
     "quoted_prices": [],
@@ -205,83 +490,25 @@
     "history": [
       {
         "type": "sms",
-        "date": "2026-05-13T02:05:22-04:00",
+        "date": "2026-09-04T10:32:41-04:00",
         "direction": "unknown",
-        "content": "May 13, 2026, 2:05:22 AM\nEastern Time :\n:\nHi I came across your contact on the NEXTDOOR and wanted to see if you’re available for Painting services. I’d love to know more about your rates and availability. Also, do you accept payment by check? Let me know if you’re interested. Thanks!\n📍White Plains,NY\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
+        "content": "Me to\nSep 4, 2026, 10:32:41 AM\nEastern Time :\nMe :\nHi! I’m David, owner of HereHandyman.com, serving White Plains and Westchester County. I came across Kindred Canine Co. and wanted to introduce myself.\nI’d love to connect with other local small businesses and support each other. If you’ve had a chance to check out my work, I’d really appreciate an honest Google review, and I’d be happy to leave an honest review for Kindred Canine as well.\nAlways great to support good local businesses!\nDavid\nHereHandyman.com\n(516) 350-0801\nLabels:\nText\nUser Deleted:\nFalse"
       }
     ]
   },
   {
-    "name": "Nataliya With",
-    "phone": "(215) 999-8960",
+    "id": 29,
+    "name": "Client (2071)",
+    "phone": "(203) 885-2071",
     "email": "",
     "address": "",
     "apt": "",
     "town": "Westchester",
-    "state": "PA",
+    "state": "CT",
     "lead": "Google Voice",
-    "service": "Lock Repair",
+    "service": "Handyman Service",
     "status": "Completed",
-    "date": "2025-10-14",
-    "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 6 SMS, 0 calls, 0 voicemails.",
-    "quoted_prices": [],
-    "counts": {
-      "sms": 6,
-      "calls": 0,
-      "voicemails": 0
-    },
-    "history": [
-      {
-        "type": "sms",
-        "date": "2025-10-07T09:07:34-04:00",
-        "direction": "unknown",
-        "content": "Oct 7, 2025, 9:07:34 AM\nEastern Time :\n:\nHello David, this is Nataliya with PA Auto Sales. Great News, the 2023 Ford Transit Cargo Van you inquired about is available !! When would be a good time for you to stop in?\nReply STOP to cancel.\nOct 7, 2025, 12:55:25 PM\nEastern Time :\n:\nI hope you're doing well. I just wanted to double-check and make sure I didn’t miss any calls from you. Please let me know if you tried reaching out, and I'll be happy to assist you.\nOct 7, 2025, 6:55:18 PM\nEastern Time :\n:\nHi David, it's Nataliya. I wanted confirm that you are receiving my text messages?\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2025-10-08T08:56:59-04:00",
-        "direction": "unknown",
-        "content": "Oct 8, 2025, 8:56:59 AM\nEastern Time :\n:\nHello David, just a heads-up — the 2023 Ford Transit Cargo Van you’re interested in is getting a lot of attention! Let’s lock in your Priority Test Drive before it’s gone. When would be a good time for you to come in? Thanks again, Nataliya at PA Auto Sales Blvd\nOct 8, 2025, 12:55:15 PM\nEastern Time :\n:\nDavid, do you have any questions about the 2023 Ford Transit Cargo Van I'd be more than happy to provide any information you need. Is there anything specific you'd like to know more about this vehicle?\nOct 8, 2025, 1:15:26 PM\nEastern Time :\n:\nHey its Nuk, here is the link to the website with all the transits.\nhttps://www.paautosales.com/used-vehicles/vans/?_dFR%5Bbody%5D%5B0%5D=Vans&_dFR%5Bmake%5D%5B0%5D=Ford&_dFR%5Bmake%5D%5B1%5D=Ram&_dFR%5Btype%5D%5B0%5D=Used&_dFR%5Btype%5D%5B1%5D=Certified%2520Used\nOct 8, 2025, 4:55:18 PM\nEastern Time :\n:\nDear David, I wanted to let you know that we currently have over 200 vehicles in stock. If you decide that you would like to test drive another vehicle in addition to the 2023 Ford Transit Cargo Van you inquired about, please feel free to give me a call directly at (267) 368-0407. I'd be happy to assist you in scheduling an appointment at your convenience.\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2025-10-09T08:56:56-04:00",
-        "direction": "unknown",
-        "content": "Oct 9, 2025, 8:56:56 AM\nEastern Time :\n:\nHi David, I reserved a time for your Priority Test Drive today at 5:15pm. If this is not convenient, please call me ASAP so we can set up a day and time that works best for you. Thanks again, Nataliya at PA Auto Sales Blvd\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2025-10-10T08:56:33-04:00",
-        "direction": "unknown",
-        "content": "Oct 10, 2025, 8:56:33 AM\nEastern Time :\n:\nJust want to confirm that we are still on today for 5:15 pm ?\nLabels:\nText\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2025-10-11T08:56:50-04:00",
-        "direction": "unknown",
-        "content": "Oct 11, 2025, 8:56:50 AM\nEastern Time :\n:\nHey David, since you were unable to make your Priority Test Drive, what day and time works best for you to reschedule? Thanks, Nataliya\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2025-10-14T08:56:53-04:00",
-        "direction": "unknown",
-        "content": "Oct 14, 2025, 8:56:53 AM\nEastern Time :\n:\nHi David, can you let me know if you have given up on your vehicle search? Is there anything else I can do to help you move forward? Thank you, Nataliya at PA Auto Sales Blvd\nOct 14, 2025, 9:09:20 AM\nEastern Time :\nMe :\nStop\nOct 14, 2025, 9:09:22 AM\nEastern Time :\n:\nYou have successfully been removed from receiving text messages.\nLabels:\nText\nUser Deleted:\nFalse"
-      }
-    ]
-  },
-  {
-    "name": "Client (7118)",
-    "phone": "(217) 634-7118",
-    "email": "",
-    "address": "",
-    "apt": "",
-    "town": "Westchester",
-    "state": "NY",
-    "lead": "Google Voice",
-    "service": "Door Hardware & Installation",
-    "status": "Completed",
-    "date": "2025-03-25",
+    "date": "2026-05-03",
     "hasGbpReview": false,
     "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
     "quoted_prices": [],
@@ -293,384 +520,9 @@
     "history": [
       {
         "type": "sms",
-        "date": "2025-03-25T09:32:55-04:00",
-        "direction": "incoming",
-        "content": "Mar 25, 2025, 9:32:55 AM\nEastern Time :\n:\nYelp sent your Electricians project to AArdvark Electric Service, 5.0 stars (125 reviews), and you've received a reply from Laura. Reply via text or at https://yelp.to/JesztZ6rL-\nReply HELP for more info or STOP to end all messages. Msg&data rates may apply.\nMar 25, 2025, 9:32:56 AM\nEastern Time :\n:\nGood morning David, we appreciate your inquiry! If the problem with the light is electrical, i.e. its not getting power we can help with that. If the problem is the fixture we do not repair fixtures, a hardware or lighting store can repair the fixture. We do not do carpentry work and so would not be able to repair the door, for this we recommend a handy man. If power is the problem and the fixture is good, we will be happy to troubleshoot and correct the problem, feel free to give us a call at your convenience Monday through Friday 8am - 5pm so we can discuss the details and schedule a service call. Thank you! Sincerely, - Laura\nAardvark Electric Service (630) 789-1949\nMar 25, 2025, 10:34:41 AM\nEastern Time :\n:\nSounds good, thank you : )\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      }
-    ]
-  },
-  {
-    "name": "David Rodrigues",
-    "phone": "(219) 808-9104",
-    "email": "",
-    "address": "",
-    "apt": "",
-    "town": "Westchester",
-    "state": "NY",
-    "lead": "Google Voice",
-    "service": "Light Repair",
-    "status": "Completed",
-    "date": "2022-06-07",
-    "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 18 SMS, 0 calls, 0 voicemails.",
-    "quoted_prices": [],
-    "counts": {
-      "sms": 18,
-      "calls": 0,
-      "voicemails": 0
-    },
-    "history": [
-      {
-        "type": "sms",
-        "date": "2022-02-11T10:08:39-05:00",
+        "date": "2026-05-03T09:24:24-04:00",
         "direction": "unknown",
-        "content": "Me to\nFeb 11, 2022, 10:08:39 AM\nEastern Time :\nMe :\nKen this is David Rodrigues from Coca Cola give me a call please\nLabels:\nText\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-02-16T08:00:57-05:00",
-        "direction": "outgoing",
-        "content": "Me to\nFeb 16, 2022, 8:00:57 AM\nEastern Time :\nMe :\nMMS Sent\nFeb 16, 2022, 8:00:59 AM\nEastern Time :\nMe :\nBar code just in case you need.\nLabels:\nText\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-02-18T08:49:55-05:00",
-        "direction": "unknown",
-        "content": "Me to\nFeb 18, 2022, 8:49:55 AM\nEastern Time :\nMe :\nI see a note for tail light cracked. Please make sure you bring to the shop.\nFeb 18, 2022, 9:20:21 AM\nEastern Time :\n:\nOf course\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-02-23T07:17:13-05:00",
-        "direction": "unknown",
-        "content": "Feb 23, 2022, 7:17:13 AM\nEastern Time :\n:\nIt was full when I checked it first thing this morning @ my first stop now\nFeb 23, 2022, 7:22:09 AM\nEastern Time :\nMe :\nThank you\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-02-25T05:41:36-05:00",
-        "direction": "outgoing",
-        "content": "Me to\nFeb 25, 2022, 5:41:36 AM\nEastern Time :\nMe :\nMMS Sent\nFeb 25, 2022, 5:41:41 AM\nEastern Time :\nMe :\nMMS Sent\nFeb 25, 2022, 7:44:51 AM\nEastern Time :\n:\nMeijer 10 cases new monster not on file bringing them back to the plant\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-03T10:27:41-05:00",
-        "direction": "unknown",
-        "content": "Mar 3, 2022, 10:27:41 AM\nEastern Time :\n:\nAnything left? I'm waiting for the dock\nMar 3, 2022, 10:36:59 AM\nEastern Time :\n:\nGot it\nMar 3, 2022, 10:37:33 AM\nEastern Time :\nMe :\nThank you\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-09T05:00:38-05:00",
-        "direction": "unknown",
-        "content": "Mar 9, 2022, 5:00:38 AM\nEastern Time :\n:\nKenneth need's help in the warehouse\nMar 9, 2022, 5:03:10 AM\nEastern Time :\nMe :\nGoing\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-14T04:53:08-04:00",
-        "direction": "unknown",
-        "content": "Mar 14, 2022, 4:53:08 AM\nEastern Time :\n:\nStarting the week off on a positive note\nMar 14, 2022, 4:58:47 AM\nEastern Time :\nMe :\nGreat let’s charge and have a great day\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-15T05:12:43-04:00",
-        "direction": "unknown",
-        "content": "Me to\nMar 15, 2022, 5:12:43 AM\nEastern Time :\nMe :\nCome to the shop please\nMar 15, 2022, 5:29:40 AM\nEastern Time :\n:\nI'll get the putty when I return to plant.\nMar 15, 2022, 5:32:14 AM\nEastern Time :\nMe :\nThank You !\nMar 15, 2022, 9:53:55 AM\nEastern Time :\nMe :\nCall me back please\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-17T06:28:54-04:00",
-        "direction": "incoming",
-        "content": "Mar 17, 2022, 6:28:54 AM\nEastern Time :\n:\nCmon bro\nMar 17, 2022, 9:11:52 AM\nEastern Time :\n:\nCmon bro\nMar 17, 2022, 9:40:28 AM\nEastern Time :\nMe :\n:)\nMar 17, 2022, 9:40:35 AM\nEastern Time :\nMe :\nneed to bring up more\nMar 17, 2022, 11:13:13 AM\nEastern Time :\n:\nMMS Received\nMar 17, 2022, 11:13:26 AM\nEastern Time :\nMe :\nLOL\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-23T08:23:39-04:00",
-        "direction": "unknown",
-        "content": "Mar 23, 2022, 8:23:39 AM\nEastern Time :\n:\nHere’s today’s out of order at the jewel & a Walmart pallet is in front of the pallet\nMar 23, 2022, 8:55:18 AM\nEastern Time :\nMe :\nThank you!\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-24T09:15:30-04:00",
-        "direction": "incoming",
-        "content": "Mar 24, 2022, 9:15:30 AM\nEastern Time :\n:\nMMS Received\nMar 24, 2022, 9:16:17 AM\nEastern Time :\n:\nI'm taking 21900683 not 0685\nMar 24, 2022, 12:22:38 PM\nEastern Time :\n:\nHello\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-25T09:36:52-04:00",
-        "direction": "incoming",
-        "content": "Mar 25, 2022, 9:36:52 AM\nEastern Time :\n:\nMMS Received\nMar 25, 2022, 9:37:23 AM\nEastern Time :\nMe :\nDead ?\nMar 25, 2022, 10:35:20 AM\nEastern Time :\n:\nAt the next stop\nMar 25, 2022, 10:35:50 AM\nEastern Time :\nMe :\nCan you send me a pic of the level\nMar 25, 2022, 2:17:37 PM\nEastern Time :\n:\nAfter charging it at jewel & Walmart\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-28T06:57:32-04:00",
-        "direction": "incoming",
-        "content": "Mar 28, 2022, 6:57:32 AM\nEastern Time :\n:\nMeijer behind Walmart pallets\nVideo attachment\nMar 28, 2022, 6:58:08 AM\nEastern Time :\nMe :\nHow many stops today\nMar 28, 2022, 7:02:50 AM\nEastern Time :\n:\n5\nMar 28, 2022, 7:03:08 AM\nEastern Time :\n:\nWalmart is next\nMar 28, 2022, 7:12:38 AM\nEastern Time :\nMe :\nPicture of the route please\nMar 28, 2022, 7:18:51 AM\nEastern Time :\n:\nMMS Received\nMar 28, 2022, 7:19:39 AM\nEastern Time :\nMe :\nThank You !\nMar 28, 2022, 11:17:43 AM\nEastern Time :\n:\nTrain stoped moving\nMar 28, 2022, 11:44:27 AM\nEastern Time :\n:\nMMS Received\nMar 28, 2022, 11:44:57 AM\nEastern Time :\nMe :\nNew one ?\nMar 28, 2022, 11:45:04 AM\nEastern Time :\nMe :\nOr fro last Friday ?\nMar 28, 2022, 12:32:13 PM\nEastern Time :\n:\nYes today I couldn't finish aldi\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-29T12:10:42-04:00",
-        "direction": "unknown",
-        "content": "Mar 29, 2022, 12:10:42 PM\nEastern Time :\n:\nWhat’s wrong with this picture?\nMar 29, 2022, 12:12:24 PM\nEastern Time :\nMe :\nShould be on chep pallet\nMar 29, 2022, 12:43:54 PM\nEastern Time :\n:\nYes\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-30T07:56:52-04:00",
-        "direction": "incoming",
-        "content": "Mar 30, 2022, 7:56:52 AM\nEastern Time :\n:\nWhat else is new?\nMar 30, 2022, 8:08:27 AM\nEastern Time :\n:\nHere we go again\nVideo attachment\nMar 30, 2022, 10:27:06 AM\nEastern Time :\n:\nMMS Received\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-03-31T05:13:09-04:00",
-        "direction": "unknown",
-        "content": "Mar 31, 2022, 5:13:09 AM\nEastern Time :\n:\nGetting licensed plate light replaced\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2022-06-07T09:16:48-04:00",
-        "direction": "unknown",
-        "content": "Jun 7, 2022, 9:16:48 AM\nEastern Time :\n:\nHello there, hope you are doing well brother\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      }
-    ]
-  },
-  {
-    "name": "Uri And",
-    "phone": "(224) 432-9519",
-    "email": "",
-    "address": "",
-    "apt": "",
-    "town": "Westchester",
-    "state": "IL",
-    "lead": "Google Voice",
-    "service": "Paint Repair ($1200)",
-    "status": "Completed",
-    "date": "2025-04-08",
-    "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 2 SMS, 4 calls, 1 voicemails. Quoted: $1200",
-    "quoted_prices": [
-      "$1200"
-    ],
-    "counts": {
-      "sms": 2,
-      "calls": 4,
-      "voicemails": 1
-    },
-    "history": [
-      {
-        "type": "call",
-        "date": "2025-04-02T10:02:50-04:00",
-        "call_type": "missed_call",
-        "duration": "",
-        "transcript": "Missed call from\nCall Log for\nMissed call from\nMissed call from\nApr 2, 2025, 10:02:50 AM\nEastern Time\nLabels:\nMissed , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2025-04-02T10:04:59-04:00",
-        "direction": "outgoing",
-        "content": "Me to\nApr 2, 2025, 10:04:59 AM\nEastern Time :\nMe :\nHello, sorry I can take your call righ now.\nApr 2, 2025, 10:05:36 AM\nEastern Time :\nMe :\nAre you calling regarding the paint job in my house?\nApr 2, 2025, 10:06:19 AM\nEastern Time :\n:\nYes sir, my name is uri and I'm calling from Rising Lion LLC\nApr 2, 2025, 10:07:37 AM\nEastern Time :\n:\nWhen can we stop by and give you an estimate\nApr 2, 2025, 10:08:09 AM\nEastern Time :\nMe :\nHello Uri\nApr 2, 2025, 10:08:17 AM\nEastern Time :\nMe :\nMy name is David\nApr 2, 2025, 10:08:43 AM\nEastern Time :\nMe :\nBecause its a rental property can you give me ideia of price here ?\nApr 2, 2025, 10:09:04 AM\nEastern Time :\nMe :\nMMS Sent\nApr 2, 2025, 10:09:08 AM\nEastern Time :\nMe :\nMMS Sent\nApr 2, 2025, 10:09:12 AM\nEastern Time :\nMe :\nMMS Sent\nApr 2, 2025, 10:09:15 AM\nEastern Time :\nMe :\nMMS Sent\nApr 2, 2025, 10:09:20 AM\nEastern Time :\nMe :\nMMS Sent\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "call",
-        "date": "2025-04-04T08:20:12-04:00",
-        "call_type": "missed_call",
-        "duration": "",
-        "transcript": "Missed call from\nCall Log for\nMissed call from\nMissed call from\nApr 4, 2025, 8:20:12 AM\nEastern Time\nLabels:\nMissed , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "call",
-        "date": "2025-04-06T19:45:14-04:00",
-        "call_type": "missed_call",
-        "duration": "",
-        "transcript": "Missed call from\nCall Log for\nMissed call from\nMissed call from\nApr 6, 2025, 7:45:14 PM\nEastern Time\nLabels:\nMissed , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2025-04-07T08:30:33-04:00",
-        "direction": "unknown",
-        "content": "Apr 7, 2025, 8:30:33 AM\nEastern Time :\n:\nHey David we can get it all done for $1200\nApr 7, 2025, 8:34:58 AM\nEastern Time :\n:\nHow does that sound we can get started asap\nApr 7, 2025, 10:51:44 AM\nEastern Time :\nMe :\nThe tenants called someone, and the repairs are now complete. Thank you.\nApr 7, 2025, 4:10:34 PM\nEastern Time :\n:\nHey no problem can you go ahead and cancel the lead on thumbtack please\nLabels:\nText\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "voicemail",
-        "date": "2025-04-08T11:02:10-04:00",
-        "content": "Voicemail from\nCall Log for\nVoicemail from\nVoicemail from\nApr 8, 2025, 11:02:10 AM\nEastern Time\nTranscript:\nno you\nno\n0.0\n0.0\n0.73909354 you\n0.0\n0.0\n0.73909354\nAudio\n(00:00:02)\nLabels:\nVoicemail , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "call",
-        "date": "2025-04-08T17:11:06-04:00",
-        "call_type": "missed_call",
-        "duration": "",
-        "transcript": "Missed call from\nCall Log for\nMissed call from\nMissed call from\nApr 8, 2025, 5:11:06 PM\nEastern Time\nLabels:\nMissed\nUser Deleted:\nFalse"
-      }
-    ]
-  },
-  {
-    "name": "David Handyman",
-    "phone": "(224) 456-2763",
-    "email": "",
-    "address": "2028 Stephen St",
-    "apt": "",
-    "town": "Westchester",
-    "state": "IL",
-    "lead": "Google Voice",
-    "service": "Shelves, Wall Repair ($200)",
-    "status": "Completed",
-    "date": "2026-01-15",
-    "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 4 SMS, 0 calls, 0 voicemails. Quoted: $200",
-    "quoted_prices": [
-      "$200"
-    ],
-    "counts": {
-      "sms": 4,
-      "calls": 0,
-      "voicemails": 0
-    },
-    "history": [
-      {
-        "type": "sms",
-        "date": "2026-01-11T14:49:38-05:00",
-        "direction": "incoming",
-        "content": "Me to\nJan 11, 2026, 2:49:38 PM\nEastern Time :\nMe :\nHello Rhonda this is David handyman\nJan 11, 2026, 2:49:55 PM\nEastern Time :\nMe :\nCan you please send me a picture of what are you looking to paint ?\nJan 11, 2026, 2:50:10 PM\nEastern Time :\n:\nYes i will\nJan 11, 2026, 2:50:52 PM\nEastern Time :\n:\nMMS Received\nJan 11, 2026, 2:56:19 PM\nEastern Time :\nMe :\nvery nice do you wanna go with a white\nJan 11, 2026, 2:56:29 PM\nEastern Time :\n:\nYea\nJan 11, 2026, 2:56:32 PM\nEastern Time :\n:\nYes\nJan 11, 2026, 2:59:08 PM\nEastern Time :\n:\nHow much do u charge to paint it\nJan 11, 2026, 3:00:06 PM\nEastern Time :\nMe :\nAre we painting only the shelves or are we painting the wall behind as well?\nJan 11, 2026, 3:00:17 PM\nEastern Time :\nMe :\nThe wall behind the shelves the entire wall\nJan 11, 2026, 3:00:32 PM\nEastern Time :\n:\nJust the shelves\nJan 11, 2026, 3:01:39 PM\nEastern Time :\nMe :\n8 shelves with paint 250 how that sounds.\nJan 11, 2026, 3:02:09 PM\nEastern Time :\nMe :\nWith go with Pure white semi-gloss\nJan 11, 2026, 3:34:34 PM\nEastern Time :\n:\nIts a little higher than the other estimates I received. But thanks\nJan 11, 2026, 4:41:34 PM\nEastern Time :\nMe :\nNo problem. Just the work involved send pre cooking making sure it's finished property. I can put paint only for 100 nothing else no prep no cooking. Pre make a big difference. Thank You! 🙏\nJan 11, 2026, 8:28:35 PM\nEastern Time :\nMe :\nMMS Sent\nJan 11, 2026, 8:28:37 PM\nEastern Time :\nMe :\nI saw this online similar to what you have.\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2026-01-12T09:24:01-05:00",
-        "direction": "outgoing",
-        "content": "Jan 12, 2026, 9:24:01 AM\nEastern Time :\n:\nIs there a picture of what u saw similar to mine?\nJan 12, 2026, 9:24:28 AM\nEastern Time :\nMe :\nYes\nJan 12, 2026, 9:27:01 AM\nEastern Time :\n:\nCan u share\nJan 12, 2026, 9:27:20 AM\nEastern Time :\nMe :\nMMS Sent\nJan 12, 2026, 9:27:44 AM\nEastern Time :\nMe :\nSent\nJan 12, 2026, 9:29:39 AM\nEastern Time :\nMe :\nYou got it ?\nJan 12, 2026, 9:30:39 AM\nEastern Time :\n:\nYes. I understand what prep is but what is cooking as far as painting? Would u seal the wood first then paint?\nJan 12, 2026, 9:32:15 AM\nEastern Time :\nMe :\nLol 😆 caulking\nJan 12, 2026, 9:34:01 AM\nEastern Time :\n:\nHow ling would the process take\nJan 12, 2026, 9:34:09 AM\nEastern Time :\n:\nHow long\nJan 12, 2026, 9:35:40 AM\nEastern Time :\nMe :\nIt takes about 2 1/2 hours to prepare and 2 coats of paint to complete the job.\nJan 12, 2026, 9:37:02 AM\nEastern Time :\n:\nCan u do it for $200? I also want an estimate on repainting my kitchen cabinets. We were having a hard time connecting before.\nJan 12, 2026, 10:02:40 AM\nEastern Time :\nMe :\nYes\nJan 12, 2026, 10:02:48 AM\nEastern Time :\nMe :\nWhen are you available?\nJan 12, 2026, 11:07:11 AM\nEastern Time :\n:\nDo u think u should come take a look first before u purchase anything? Im available this evening if u want to stop by. That way u can see rhew kitchen cabinets too\nJan 12, 2026, 12:26:40 PM\nEastern Time :\nMe :\nYeap. Are you available now?\nJan 12, 2026, 12:26:48 PM\nEastern Time :\nMe :\nGive me your address\nJan 12, 2026, 12:26:58 PM\nEastern Time :\n:\nNo, im at work now\nJan 12, 2026, 3:37:36 PM\nEastern Time :\n:\nI will be home after 5:15. Can u come after that time?\nJan 12, 2026, 5:42:10 PM\nEastern Time :\nMe :\nCan we do tomorrow same time ?\nJan 12, 2026, 5:43:05 PM\nEastern Time :\n:\nThats fine\nJan 12, 2026, 5:43:20 PM\nEastern Time :\nMe :\nThank You!\nJan 12, 2026, 5:46:38 PM\nEastern Time :\n:\nLiked “Thank You!”\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2026-01-13T14:04:34-05:00",
-        "direction": "unknown",
-        "content": "Jan 13, 2026, 2:04:34 PM\nEastern Time :\n:\nHi. We are supposed to meet today. Im available between 3:30-5:00 and again after 7 this evening. I had an appt I forgot about.\nI knows its been very hard for us to connect over the last months with my shelving and now with painting. I hope we connect soon\nJan 13, 2026, 2:16:04 PM\nEastern Time :\nMe :\nYes let me see if I can make between 3 and 5\nJan 13, 2026, 2:16:35 PM\nEastern Time :\nMe :\nI am ok painting at night I don't mind doing the work when you are available.\nJan 13, 2026, 2:16:53 PM\nEastern Time :\n:\nIts up to u\nJan 13, 2026, 2:17:15 PM\nEastern Time :\n:\nDid u wanna start tonight?\nJan 13, 2026, 2:18:03 PM\nEastern Time :\nMe :\nI was planning for tomorrow any time.\nJan 13, 2026, 2:18:31 PM\nEastern Time :\n:\nDisliked “I was planning for tomorrow any time.”\nJan 13, 2026, 2:18:52 PM\nEastern Time :\n:\nU were coming to take a look today, right\nJan 13, 2026, 2:19:23 PM\nEastern Time :\nMe :\nCorrect. Are you doing the work tomorrow ?\nJan 13, 2026, 2:20:38 PM\nEastern Time :\n:\nI am working from home on Thursday\nJan 13, 2026, 2:20:57 PM\nEastern Time :\n:\n2028 Stephen St\nAurora\nJan 13, 2026, 2:22:06 PM\nEastern Time :\nMe :\nThen let's do Thursday. I can save the trip and do all on Thursday how that sounds?\nJan 13, 2026, 2:23:30 PM\nEastern Time :\n:\nLiked “Then let's do Thursday. I can save the trip and do all on Thursday how that sounds?”\nJan 13, 2026, 2:24:36 PM\nEastern Time :\nMe :\nSounds good. I will bring everything on Thursday so I can take care the shelves and at the same time I will check your kitchen.\nJan 13, 2026, 2:51:09 PM\nEastern Time :\n:\nLiked “Sounds good. I will bring everything on Thursday so I can take care the shelves and at the same time I will check your kitchen.”\nJan 13, 2026, 2:51:15 PM\nEastern Time :\n:\nI wanted to make sure u know I want white\nJan 13, 2026, 3:46:30 PM\nEastern Time :\nMe :\nYes! Semi gloss white\nJan 13, 2026, 3:46:38 PM\nEastern Time :\nMe :\nRight?\nJan 13, 2026, 3:54:32 PM\nEastern Time :\n:\nIdk, whatever will be best but I know there's a lot of different types of white. What brand do u use?\nJan 13, 2026, 3:54:53 PM\nEastern Time :\n:\nSorry, I was n a meeting for the last 2 hrs\nJan 13, 2026, 3:55:10 PM\nEastern Time :\nMe :\nBehr from home depot\nJan 13, 2026, 3:55:31 PM\nEastern Time :\nMe :\nI suggest pure white so it pop\nJan 13, 2026, 3:56:42 PM\nEastern Time :\n:\nI will try to swing HD and take a look\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2026-01-15T08:51:15-05:00",
-        "direction": "outgoing",
-        "content": "Me to\nJan 15, 2026, 8:51:15 AM\nEastern Time :\nMe :\nGood Morning! I am planning to stop by around 1:30 - 2:00 if that is ok with you.\nJan 15, 2026, 9:01:44 AM\nEastern Time :\n:\nLiked “Good Morning! I am planning to stop by around 1:30 - 2:00 if that is ok with you.”\nJan 15, 2026, 2:02:52 PM\nEastern Time :\nMe :\nHello I need your address.\nJan 15, 2026, 2:20:55 PM\nEastern Time :\n:\nI think I sent it to the weong pwraon, sorry\nJan 15, 2026, 2:21:09 PM\nEastern Time :\n:\n2028 Stephen Street\nAurora\nJan 15, 2026, 2:21:31 PM\nEastern Time :\n:\nOh no, its there. A few messages back\nJan 15, 2026, 2:21:56 PM\nEastern Time :\nMe :\nOk on my way\nJan 15, 2026, 2:21:59 PM\nEastern Time :\nMe :\nThank You!\nJan 15, 2026, 2:22:25 PM\nEastern Time :\n:\nLiked “Ok on my way”\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      }
-    ]
-  },
-  {
-    "name": "Away At",
-    "phone": "(234) 392-6883",
-    "email": "",
-    "address": "10 Limerick Court",
-    "apt": "",
-    "town": "White Plains",
-    "state": "NY",
-    "lead": "Google Voice",
-    "service": "Door Hardware & Installation",
-    "status": "Completed",
-    "date": "2026-09-01",
-    "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-    "quoted_prices": [],
-    "counts": {
-      "sms": 1,
-      "calls": 0,
-      "voicemails": 0
-    },
-    "history": [
-      {
-        "type": "sms",
-        "date": "2026-09-01T14:06:24-04:00",
-        "direction": "outgoing",
-        "content": "Sep 1, 2026, 2:06:24 PM\nEastern Time :\n:\nHello, how are you doing today I am reaching out to inquire about your availability in providing house carpentry services for my home while I am away\nSep 1, 2026, 2:09:31 PM\nEastern Time :\nMe :\nAbsolutely. To give you a better idea of pricing, could you please let me know how many rooms are involved, how many stairs/levels the house has, and what specific carpentry work you need done? If possible, please send me some photos of the areas as well. This will help me understand the scope of the work and provide an accurate estimate.\nSep 1, 2026, 2:18:25 PM\nEastern Time :\n:\nHere's the location\nSep 1, 2026, 2:18:28 PM\nEastern Time :\n:\n10 Limerick Court, North White Plains, White Plains, NY 10603\nSep 1, 2026, 3:12:39 PM\nEastern Time :\nMe :\nI would send this next:\nThanks for sending the location. Could you please send me a few photos of the areas where you need the carpentry work done, along with a list of the specific repairs or projects you’d like completed?\nAlso, please let me know when you’ll be away and when you’d like the work completed. Once I have that information, I can review everything and give you an estimate.\nSep 1, 2026, 3:14:29 PM\nEastern Time :\n:\nhttps://www.homedepot.com/p/Krosswood-Doors-36-in-x-80-in-Rustic-Knotty-Alder-Arch-Top-9-Lite-Clear-Glass-with-V-Panel-Unfinished-Wood-Front-Door-Slab-KA-559V-30-68-134/308301782?MERCH=REC-_-pip_alternatives-_-301301601-_-5-_-n/a-_-n/a-_-n/a-_-n/a-_-n/a\nSep 1, 2026, 3:15:00 PM\nEastern Time :\n:\nI need you to replace the old doors with the new one I sent you in 4rooms are you available on Friday and what is your location?\nSep 1, 2026, 3:24:12 PM\nEastern Time :\nMe :\nYes, I’m available Friday. I’m located in White Plains and service the surrounding Westchester County area. For the 4 doors, please send me photos of the existing doors and frames so I can see what will be involved. Also, are you replacing just the door slabs, or the complete door units including the frames?\nSep 1, 2026, 3:28:05 PM\nEastern Time :\n:\nSorry I'm away at the moment I'm replacing the complete doors just as seen\nSep 1, 2026, 3:30:00 PM\nEastern Time :\n:\nI also need you to get the doors and the handles so can you do the total estimate for both doors handles and cost of labor all together so I can make the payment ahead of time\nSep 1, 2026, 3:31:29 PM\nEastern Time :\nMe :\nYes, I can provide the doors, handles, and installation and give you one total price. Since you’re away, I’ll need to verify the existing door sizes and openings before purchasing anything. If someone can give me access to the house, I can come by, take the measurements, and then send you the complete estimate for all 4 doors, handles, materials, and labor.\nSep 1, 2026, 3:33:31 PM\nEastern Time :\n:\nOh I never thought of that and it's closed no way to get in there\nSep 1, 2026, 3:34:58 PM\nEastern Time :\nMe :\nNo problem. In that case, I don’t want to have you purchase anything until I can verify the measurements. The door you sent is 36\" x 80\", and I need to make sure that size and the door configuration will work with your existing openings. If you’re able to get access to the house later, I can take the measurements and then give you one complete price for the 4 doors, handles, materials, and installation.\nLabels:\nText\nUser Deleted:\nFalse"
-      }
-    ]
-  },
-  {
-    "name": "Dan",
-    "phone": "(256) 934-4913",
-    "email": "",
-    "address": "",
-    "apt": "",
-    "town": "Pelham",
-    "state": "NY",
-    "lead": "Google Voice",
-    "service": "Mounting Repair",
-    "status": "Completed",
-    "date": "2023-10-14",
-    "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-    "quoted_prices": [],
-    "counts": {
-      "sms": 1,
-      "calls": 0,
-      "voicemails": 0
-    },
-    "history": [
-      {
-        "type": "sms",
-        "date": "2023-10-14T18:44:44-04:00",
-        "direction": "unknown",
-        "content": "Oct 14, 2023, 6:44:44 PM\nEastern Time :\n:\nHi, my name is Dan. I’m in need of your handyman service for mounting 3Tvs 40inch and playhouse. Text me your location to know you’re not far from me. Area Pelham.\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      }
-    ]
-  },
-  {
-    "name": "Elvric",
-    "phone": "(267) 724-5525",
-    "email": "",
-    "address": "",
-    "apt": "",
-    "town": "Westchester",
-    "state": "PA",
-    "lead": "Google Voice",
-    "service": "Gutter Repair",
-    "status": "Completed",
-    "date": "2026-06-06",
-    "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-    "quoted_prices": [],
-    "counts": {
-      "sms": 1,
-      "calls": 0,
-      "voicemails": 0
-    },
-    "history": [
-      {
-        "type": "sms",
-        "date": "2026-06-06T15:38:36-04:00",
-        "direction": "unknown",
-        "content": "Jun 6, 2026, 3:38:36 PM\nEastern Time :\n:\nHello, Good afternoon\nI'm Elvric, I'm texting to know if you're available for gutter Installation for my house, If yes pls I need to speak to who is in charge. Thank you\nJun 6, 2026, 3:39:34 PM\nEastern Time :\nMe :\nI am a handyman how big is the project ? Are we replacing or installing new gutters ?\nJun 6, 2026, 3:39:46 PM\nEastern Time :\nMe :\nMy name is David.\nJun 6, 2026, 4:37:19 PM\nEastern Time :\n:\nGreat\nJun 6, 2026, 4:37:34 PM\nEastern Time :\n:\nI just bought this house and I need an estimate for seamless gutter installation around the whole perimeter of the house. i'ts gonna be a surprise for my wife its our 20th wedding anniversary\nJun 6, 2026, 4:41:03 PM\nEastern Time :\nMe :\nI'm sorry, but I cannot help you. I can provide you with gutters, although they won't be seamless. There is a gutter-only company that has a machine to make the exact size for your house with seamless.\nJun 6, 2026, 4:56:46 PM\nEastern Time :\n:\nYou do gutter installation right?\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      }
-    ]
-  },
-  {
-    "name": "Unsure What",
-    "phone": "(272) 888-1155",
-    "email": "",
-    "address": "",
-    "apt": "",
-    "town": "Westchester",
-    "state": "NY",
-    "lead": "Google Voice",
-    "service": "Door Hardware & Installation ($150)",
-    "status": "Completed",
-    "date": "2025-04-02",
-    "hasGbpReview": false,
-    "notes": "Imported from Google Voice Takeout. 2 SMS, 0 calls, 0 voicemails. Quoted: $150",
-    "quoted_prices": [
-      "$150",
-      "$150"
-    ],
-    "counts": {
-      "sms": 2,
-      "calls": 0,
-      "voicemails": 0
-    },
-    "history": [
-      {
-        "type": "sms",
-        "date": "2025-03-25T08:16:48-04:00",
-        "direction": "incoming",
-        "content": "Mar 25, 2025, 8:16:48 AM\nEastern Time :\n:\nYelp sent your Handyman project to 5 Talents Renovations, and you've received a reply from Dominic. Reply via text or at https://yelp.to/kodZU9KA4_\nReply HELP for more info or STOP to end all messages. Msg&data rates may apply.\nMar 25, 2025, 8:16:49 AM\nEastern Time :\n:\n\"Good morning David,\nThank you for thinking of 5 Talents Renovations to complete your projects.\nI charge $150 consultation fee that can be credited towards work completed.\nThe light could be a multitude of things. If it is as simple as a faulty switch, to replace the fixture is $150. I can troubleshoot the existing wiring, but if the result is overloading the circuit, old wiring or anything like that, you'll need to call in a certified electrician.\nGlueing the door, I have to look at. I'm unsure what needs fixing and that seems like a temporary solution.\nReplacing a window well cover shouldn't be too difficult. The best thing to do would be for me to stop by and see each project. I can g...\"\nView the rest of this message at https://yelp.to/M7MmC5akfp\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-      },
-      {
-        "type": "sms",
-        "date": "2025-04-02T00:52:42-04:00",
-        "direction": "unknown",
-        "content": "Apr 2, 2025, 12:52:42 AM\nEastern Time :\n:\nHello David,\nWanted to follow up and see if you found anyone to complete this job for you?\nCheers,\n-Dominic Sartino\n5 Talents Renovations\n773-403-4425\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
+        "content": "Me to\nMay 3, 2026, 9:24:24 AM\nEastern Time :\nMe :\nGood Morning Linda. My name is David I am a handyman please let me know if I can help you.\nLabels:\nText\nUser Deleted:\nFalse"
       }
     ]
   }
