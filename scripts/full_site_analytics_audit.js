@@ -62,7 +62,15 @@ async function runFullAudit() {
       }
     }
 
-    // 5. Check for JSON-LD Schema.org validity
+    // 5. Check for unclosed HTML structural tags (<figure>, <section>, etc.)
+    const figureOpen = (content.match(/<figure\b/g) || []).length;
+    const figureClose = (content.match(/<\/figure>/g) || []).length;
+    if (figureOpen !== figureClose) {
+      fileIssues.push({ type: 'ERROR', msg: `Mismatched <figure> tags: ${figureOpen} open vs ${figureClose} close` });
+      errorCount++;
+    }
+
+    // 6. Check for JSON-LD Schema.org validity
     if (content.includes('application/ld+json')) {
       const schemaRegex = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
       let sMatch;
