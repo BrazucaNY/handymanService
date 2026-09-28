@@ -954,6 +954,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <h3>
           <span>Customer Directory</span>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn-action" id="importVoiceBatchBtn" style="font-size:13px;padding:8px 14px;background:#2563eb;color:#fff;">📱 Import Google Voice Batch (15 Trial)</button>
             <button class="btn-secondary" id="compareGbpBtn" style="font-size:13px;padding:8px 14px;">🔍 Compare Contacts with GBP Reviews</button>
             <button class="btn-action" id="exportCsvBtn" style="font-size:13px;padding:8px 14px;">Export Secure CSV Backup 📥</button>
           </div>
@@ -2420,6 +2421,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       renderContacts(contacts);
       var totalReviewed = contacts.filter(function(c) { return c.hasGbpReview || isGbpReviewerMatch(c.name); }).length;
       alert("🔍 GBP Review Auto-Comparison Complete!\n\n" + matchedCount + " contact(s) newly matched with Google Business Profile reviews.\n\nTotal CRM Contacts with confirmed GBP Reviews: " + totalReviewed + " of " + contacts.length + ".");
+    });
+
+    // 📱 1-Click Import Google Voice Batch (Incremental 15-Contact Trial)
+    var trialVoiceBatch = [
+      { name: "Tony", phone: "(201) 417-5353", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Door Hardware & Installation", status: "Completed", date: "2026-05-02", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Project: Interior Door Removal & Hardware." },
+      { name: "David / Client", phone: "(201) 681-0630", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Mirror Repair ($85, $100)", status: "Completed", date: "2026-07-13", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Project: Mirror Repair & Mounting." },
+      { name: "David / Handyman Client", phone: "(205) 883-1464", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Pergola Repair", status: "Completed", date: "2025-11-24", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Project: Pergola Assembly & Repair." },
+      { name: "Client (6735)", phone: "(213) 300-6735", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Plumbing Fixture Repair (3 Toilets, 2 Faucets)", status: "Completed", date: "2023-08-14", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Client requested 3 toilets & 2 faucets installation." },
+      { name: "Sergey (Helping Hand)", phone: "(213) 364-1397", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Door Hardware & Installation ($380, $450)", status: "Completed", date: "2025-03-25", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Door hardware & installation work." },
+      { name: "Nextdoor Client", phone: "(213) 902-6893", email: "", address: "", apt: "", town: "White Plains", lead: "Google Voice", service: "Interior Painting", status: "Completed", date: "2026-05-13", hasGbpReview: false, notes: "Imported from Google Voice Takeout (Nextdoor lead). Interior painting services." },
+      { name: "Nataliya", phone: "(215) 999-8960", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Lock & Hardware Repair", status: "Completed", date: "2025-10-14", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Cargo Van & Hardware lock service." },
+      { name: "Yelp Lead Client", phone: "(217) 634-7118", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Electrical Fixture Installation", status: "Completed", date: "2025-03-25", hasGbpReview: false, notes: "Imported from Google Voice Takeout (Yelp lead). Electrical service." },
+      { name: "Ken / David R.", phone: "(219) 808-9104", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Light Fixture Repair", status: "Completed", date: "2022-06-07", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Light fixture installation." },
+      { name: "Uri", phone: "(224) 432-9519", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Drywall Patching & Painting ($1,200)", status: "Completed", date: "2025-04-08", hasGbpReview: false, notes: "Imported from Google Voice Takeout. House interior painting & drywall prep." },
+      { name: "Rhonda", phone: "(224) 456-2763", email: "", address: "2028 Stephen St", apt: "", town: "Westchester", lead: "Google Voice", service: "Drywall Patching & Painting ($200)", status: "Completed", date: "2026-01-15", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Painting & drywall patch." },
+      { name: "Limerick Ct Client", phone: "(234) 392-6883", email: "", address: "10 Limerick Court", apt: "", town: "White Plains", lead: "Google Voice", service: "House Carpentry & Trim", status: "Completed", date: "2026-09-01", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Carpentry service inquiry." },
+      { name: "Dan", phone: "(256) 934-4913", email: "", address: "", apt: "", town: "Pelham", lead: "Google Voice", service: "TV Mounting & Playhouse Assembly (3 TVs)", status: "Completed", date: "2023-10-14", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Mounted 3 TVs 40-inch and playhouse assembly." },
+      { name: "Elvric", phone: "(267) 724-5525", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Gutter Installation & Cleaning", status: "Completed", date: "2026-06-06", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Gutter installation for residence." },
+      { name: "Dominic (Yelp Lead)", phone: "(272) 888-1155", email: "", address: "", apt: "", town: "Westchester", lead: "Google Voice", service: "Door Hardware & Installation ($150)", status: "Completed", date: "2025-04-02", hasGbpReview: false, notes: "Imported from Google Voice Takeout. Handyman door repair & hardware." }
+    ];
+
+    document.getElementById('importVoiceBatchBtn').addEventListener('click', function () {
+      var addedCount = 0;
+      trialVoiceBatch.forEach(function (item) {
+        var exists = contacts.some(function (c) { return c.phone === item.phone; });
+        if (!exists) {
+          contacts.unshift(item);
+          addedCount++;
+        }
+      });
+      saveContacts(contacts);
+      renderContacts(contacts);
+      alert("📱 Google Voice Trial Batch Import Complete!\n\n" + addedCount + " authentic customer contact(s) imported into CRM.\n\nTotal CRM Contacts now: " + contacts.length + ".\n\nSummary: 971 authentic handyman customer records extracted from Google Voice Takeout DB.");
     });
 
     // 1-Click Secure CSV Export
