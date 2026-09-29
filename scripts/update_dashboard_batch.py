@@ -9,15 +9,15 @@ with open('dashboard.html', encoding='utf-8') as f:
     content = f.read()
 
 start_marker = "var trialVoiceBatch = ["
-end_marker = "];\n\n    document.getElementById('importVoiceBatchBtn')"
+end_marker = "]\n\n    // 🚀 Load All"
 
 s_idx = content.find(start_marker)
 e_idx = content.find(end_marker, s_idx)
 
 if s_idx != -1 and e_idx != -1:
-    new_content = content[:s_idx] + "var trialVoiceBatch = " + json_str + content[e_idx + 2:]
+    new_content = content[:s_idx] + "var trialVoiceBatch = " + json_str + ";" + content[e_idx + 1:]
     with open('dashboard.html', 'w', encoding='utf-8') as f:
         f.write(new_content)
-    print("Successfully embedded clean trialVoiceBatch into dashboard.html!")
+    print("Successfully updated embedded trialVoiceBatch in dashboard.html!")
 else:
-    print("Could not locate trialVoiceBatch markers in dashboard.html:", s_idx, e_idx)
+    print("Could not find exact markers in dashboard.html:", s_idx, e_idx)

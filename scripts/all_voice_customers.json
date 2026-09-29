@@ -1,5 +1,27 @@
 [
   {
+    "id": "cust-harvey-kaminski",
+    "name": "Harvey Kaminski",
+    "phone": "(914) 589-1751",
+    "email": "",
+    "address": "6 Hobby Lane",
+    "apt": "",
+    "town": "Bedford",
+    "state": "NY",
+    "lead": "Direct Call",
+    "service": "Ring Camera Troubleshooting & Repair (Front Doorbell + Backyard)",
+    "status": "Active",
+    "date": "2026-09-28",
+    "hasGbpReview": false,
+    "notes": "Ring cameras: Front doorbell camera foggy lens + Backyard camera offline. Address: 6 Hobby Lane, Bedford, NY 10506. Scheduled visit for Friday.",
+    "quoted_prices": [],
+    "counts": {
+      "sms": 3,
+      "calls": 1,
+      "voicemails": 0
+    }
+  },
+  {
     "id": 5,
     "name": "Client (9070)",
     "phone": "(201) 362-9070",
