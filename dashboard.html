@@ -954,9 +954,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <h3>
           <span>Customer Directory</span>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn-action" id="importVoiceBatchBtn" style="font-size:13px;padding:8px 14px;background:#2563eb;color:#fff;">📱 Import Google Voice Batch (15 Trial)</button>
-            <button class="btn-secondary" id="compareGbpBtn" style="font-size:13px;padding:8px 14px;">🔍 Compare Contacts with GBP Reviews</button>
-            <button class="btn-action" id="exportCsvBtn" style="font-size:13px;padding:8px 14px;">Export Secure CSV Backup 📥</button>
+            <button class="btn-action" id="importAllVoiceBtn" style="font-size:13px;padding:8px 14px;background:#16a34a;color:#fff;font-weight:700;">🚀 Load All 1,217 Customers</button>
+            <button class="btn-action" id="importVoiceBatchBtn" style="font-size:13px;padding:8px 14px;background:#2563eb;color:#fff;">📱 Import 15 Trial Batch</button>
+            <button class="btn-secondary" id="compareGbpBtn" style="font-size:13px;padding:8px 14px;">🔍 Compare GBP Reviews</button>
+            <button class="btn-action" id="exportCsvBtn" style="font-size:13px;padding:8px 14px;">Export CSV Backup 📥</button>
             <button class="btn-secondary" id="resetCleanDbBtn" style="font-size:13px;padding:8px 14px;background:#fef2f2;color:#991b1b;border:1px solid #fecaca;">🔄 Reset Clean DB</button>
           </div>
         </h3>
@@ -1001,6 +1002,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <!-- Dynamic Rows -->
             </tbody>
           </table>
+        </div>
+        
+        <!-- CONTACTS TABLE PAGINATION BAR -->
+        <div id="contactPaginationBar" style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:10px;background:#f8fafc;padding:12px 18px;border-radius:10px;border:1px solid #cbd5e1;">
+          <div style="font-size:13.5px;color:var(--navy);font-weight:600;">
+            Showing <span id="pagStart" style="font-weight:800;color:#1e40af;">1</span>–<span id="pagEnd" style="font-weight:800;color:#1e40af;">50</span> of <span id="pagTotal" style="font-weight:800;color:#16a34a;">0</span> Contacts
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <label style="font-size:13px;font-weight:700;color:var(--navy);margin:0;">Rows per Page:</label>
+            <select id="pagSizeSelect" style="padding:6px 10px;border-radius:6px;border:1px solid #cbd5e1;font-size:13px;font-weight:700;background:#fff;">
+              <option value="50" selected>50</option>
+              <option value="100">100</option>
+              <option value="250">250</option>
+              <option value="all">All (1,217)</option>
+            </select>
+            <button id="prevPageBtn" style="padding:6px 14px;background:#fff;border:1px solid #cbd5e1;border-radius:6px;font-weight:700;cursor:pointer;">◀ Prev</button>
+            <span id="pagPageNum" style="font-size:13px;font-weight:800;color:var(--navy);">Page 1 of 1</span>
+            <button id="nextPageBtn" style="padding:6px 14px;background:#fff;border:1px solid #cbd5e1;border-radius:6px;font-weight:700;cursor:pointer;">Next ▶</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2360,14 +2380,51 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     }
 
-    // Render Contacts Table
+    var currentPage = 1;
+    var pageSize = 50;
+    var currentFilteredList = [];
+
+    // Render Contacts Table with Pagination
     function renderContacts(list) {
+      currentFilteredList = list || [];
+      var total = currentFilteredList.length;
+
+      var effectiveSize = (pageSize === 'all') ? (total || 1) : parseInt(pageSize);
+      var totalPages = Math.max(1, Math.ceil(total / effectiveSize));
+
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      var startIdx = (currentPage - 1) * effectiveSize;
+      var endIdx = (pageSize === 'all') ? total : Math.min(startIdx + effectiveSize, total);
+
+      var pageSlice = currentFilteredList.slice(startIdx, endIdx);
+
+      // Update Pagination UI Elements
+      var pagStart = document.getElementById('pagStart');
+      var pagEnd = document.getElementById('pagEnd');
+      var pagTotal = document.getElementById('pagTotal');
+      var pagPageNum = document.getElementById('pagPageNum');
+      var prevBtn = document.getElementById('prevPageBtn');
+      var nextBtn = document.getElementById('nextPageBtn');
+
+      if (pagStart) pagStart.textContent = total === 0 ? 0 : (startIdx + 1);
+      if (pagEnd) pagEnd.textContent = endIdx;
+      if (pagTotal) pagTotal.textContent = total;
+      if (pagPageNum) pagPageNum.textContent = "Page " + currentPage + " of " + totalPages;
+
+      if (prevBtn) prevBtn.disabled = (currentPage <= 1);
+      if (nextBtn) nextBtn.disabled = (currentPage >= totalPages);
+
       var tbody = document.querySelector("#contactsTable tbody");
       tbody.innerHTML = "";
-      if (list.length === 0) {
+      if (pageSlice.length === 0) {
         tbody.innerHTML = "<tr><td colspan='12' style='text-align:center;color:var(--muted);padding:20px;'>No customer contacts match your search or state/town filters.</td></tr>";
       } else {
-        list.forEach(function (c, index) {
+        pageSlice.forEach(function (c, sliceIdx) {
+          var realIdx = contacts.indexOf(c);
+          var index = realIdx !== -1 ? realIdx : sliceIdx;
+
           var isReviewed = Boolean(c.hasGbpReview || isGbpReviewerMatch(c.name));
           var gbpCell = "<td style='text-align:center;'><label style='cursor:pointer;display:inline-flex;align-items:center;gap:6px;'><input type='checkbox' class='cb-gbp-review' data-index='" + index + "' " + (isReviewed ? 'checked' : '') + "> " +
             (isReviewed ? "<span style='background:#dcfce7;color:#15803d;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700;'>⭐ Review Left</span>"
@@ -2399,11 +2456,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         document.querySelectorAll('.cb-gbp-review').forEach(function(cb) {
           cb.addEventListener('change', function() {
             var idx = parseInt(this.getAttribute('data-index'));
-            var c = list[idx];
+            var c = contacts[idx];
             if (!c) return;
-            var realIdx = contacts.indexOf(c);
-            if (realIdx === -1) realIdx = idx;
-            contacts[realIdx].hasGbpReview = this.checked;
+            c.hasGbpReview = this.checked;
             saveContacts(contacts);
             filterAndRenderContacts();
           });
@@ -2413,7 +2468,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         document.querySelectorAll('.btn-history-cust').forEach(function(btn) {
           btn.addEventListener('click', function() {
             var idx = parseInt(this.getAttribute('data-index'));
-            var c = list[idx];
+            var c = contacts[idx];
             if (!c) return;
             openCustomerHistoryModal(c);
           });
@@ -2423,13 +2478,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         document.querySelectorAll('.btn-edit-cust').forEach(function(btn) {
           btn.addEventListener('click', function() {
             var idx = parseInt(this.getAttribute('data-index'));
-            var c = list[idx];
+            var c = contacts[idx];
             if (!c) return;
 
-            var realIdx = contacts.indexOf(c);
-            if (realIdx === -1) realIdx = idx;
-
-            document.getElementById('editCustIndex').value = realIdx;
+            document.getElementById('editCustIndex').value = idx;
             document.getElementById('editCustName').value = c.name || '';
             document.getElementById('editCustPhone').value = c.phone || '';
             document.getElementById('editCustEmail').value = c.email || '';
@@ -2450,12 +2502,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         document.querySelectorAll('.btn-delete-cust').forEach(function(btn) {
           btn.addEventListener('click', function() {
             var idx = parseInt(this.getAttribute('data-index'));
-            var c = list[idx];
-            var realIdx = contacts.indexOf(c);
-            if (realIdx === -1) realIdx = idx;
+            var c = contacts[idx];
 
             if (confirm("Are you sure you want to delete this customer contact from your CRM?")) {
-              contacts.splice(realIdx, 1);
+              contacts.splice(idx, 1);
               saveContacts(contacts);
               filterAndRenderContacts();
             }
@@ -2495,6 +2545,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         return stateMatch && townMatch && queryMatch;
       });
 
+      currentPage = 1;
       renderContacts(filtered);
     }
 
@@ -3186,6 +3237,62 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             ]
       }
 ]
+
+    // 🚀 Load All 1,217 Google Voice Customers into CRM
+    if (document.getElementById('importAllVoiceBtn')) {
+      document.getElementById('importAllVoiceBtn').addEventListener('click', function () {
+        fetch('scripts/all_voice_customers.json')
+          .then(function(r) { return r.json(); })
+          .then(function(allData) {
+            contacts = allData;
+            saveContacts(contacts);
+            currentPage = 1;
+            filterAndRenderContacts();
+            alert("🚀 Successfully loaded all 1,217 Google Voice customer contacts into CRM!\n\nState Breakdown:\n• NY (New York): 962\n• IL (Illinois): 212\n• PA (Pennsylvania): 20\n• NJ (New Jersey): 16\n• CT (Connecticut): 7");
+          })
+          .catch(function(err) {
+            console.error("Error loading full customer dataset:", err);
+            alert("Notice: Could not load full dataset file scripts/all_voice_customers.json.");
+          });
+      });
+    }
+
+    // Auto-load all 1,217 contacts if localStorage has fewer than 500 records
+    if (contacts.length < 500) {
+      fetch('scripts/all_voice_customers.json')
+        .then(function(r) { return r.json(); })
+        .then(function(allData) {
+          if (Array.isArray(allData) && allData.length > 500) {
+            contacts = allData;
+            saveContacts(contacts);
+            filterAndRenderContacts();
+          }
+        })
+        .catch(function() {});
+    }
+
+    // Pagination Controls Listeners
+    if (document.getElementById('prevPageBtn')) {
+      document.getElementById('prevPageBtn').addEventListener('click', function() {
+        if (currentPage > 1) {
+          currentPage--;
+          renderContacts(currentFilteredList);
+        }
+      });
+    }
+    if (document.getElementById('nextPageBtn')) {
+      document.getElementById('nextPageBtn').addEventListener('click', function() {
+        currentPage++;
+        renderContacts(currentFilteredList);
+      });
+    }
+    if (document.getElementById('pagSizeSelect')) {
+      document.getElementById('pagSizeSelect').addEventListener('change', function() {
+        pageSize = this.value;
+        currentPage = 1;
+        renderContacts(currentFilteredList);
+      });
+    }
 
     document.getElementById('importVoiceBatchBtn').addEventListener('click', function () {
       var addedCount = 0;
