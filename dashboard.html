@@ -957,6 +957,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <button class="btn-action" id="importVoiceBatchBtn" style="font-size:13px;padding:8px 14px;background:#2563eb;color:#fff;">📱 Import Google Voice Batch (15 Trial)</button>
             <button class="btn-secondary" id="compareGbpBtn" style="font-size:13px;padding:8px 14px;">🔍 Compare Contacts with GBP Reviews</button>
             <button class="btn-action" id="exportCsvBtn" style="font-size:13px;padding:8px 14px;">Export Secure CSV Backup 📥</button>
+            <button class="btn-secondary" id="resetCleanDbBtn" style="font-size:13px;padding:8px 14px;background:#fef2f2;color:#991b1b;border:1px solid #fecaca;">🔄 Reset Clean DB</button>
           </div>
         </h3>
         <p style="color:var(--muted);font-size:13.5px;margin-bottom:16px;">
@@ -1709,7 +1710,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script>
   document.addEventListener('DOMContentLoaded', function () {
     var SESSION_KEY = "hh_system_session";
-    var STORAGE_CONTACTS_KEY = "hh_crm_contacts";
+    var STORAGE_CONTACTS_KEY = "hh_crm_contacts_v2";
 
     // Google Business Profile (GBP) Verified Reviewers List
     var GBP_REVIEWS_LIST = [
@@ -2276,8 +2277,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         if (raw) {
           var parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            // Auto-migration: separate state from town if combined
+            // Auto-migration & Sanitization: clean names, separate state from town
             parsed.forEach(function(c) {
+              if (c.name) {
+                c.name = c.name
+                  .replace(/[\r\n\t]+/g, ' ')
+                  .replace(/\s*\((?:Yelp|Nextdoor|Google|Facebook|Tasker|Direct|Inbox|Text)\s*Lead\)/gi, '')
+                  .replace(/\b(?:From|To|Me To|Voicemail|Missed Call|Placed Call|Received Call|Text|Inbox|Call|Placed|Received|Missed)\b/gi, '')
+                  .replace(/\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z0-9,\.\s:\-]*\b/gi, '')
+                  .replace(/\s+/g, ' ').trim();
+                
+                if (!c.name || c.name.toLowerCase() === 'david' || c.name.toLowerCase() === 'me' || c.name.length < 2) {
+                  var digits = (c.phone || '').replace(/\D/g, '');
+                  var suffix = digits.length >= 4 ? digits.slice(-4) : "Contact";
+                  c.name = "Client (" + suffix + ")";
+                }
+              }
+
               if (c.town) {
                 var stateMatch = c.town.match(/^(.*?)\s+([A-Z]{2})$/);
                 if (stateMatch) {
@@ -3184,6 +3200,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       filterAndRenderContacts();
       alert("📱 Google Voice Trial Batch Import Complete!\n\n" + addedCount + " authentic customer contact(s) imported into CRM.\n\nTotal CRM Contacts now: " + contacts.length + ".\n\nSeparated state & town filters are active.");
     });
+
+    // 🔄 Reset & Reload Clean Database
+    if (document.getElementById('resetCleanDbBtn')) {
+      document.getElementById('resetCleanDbBtn').addEventListener('click', function () {
+        if (confirm("Reset CRM database to the clean, 100% sanitized customer dataset?\n\nThis will purge old cached browser entries like '(Yelp Lead)' and refresh your contacts table.")) {
+          try {
+            localStorage.removeItem("hh_crm_contacts");
+            localStorage.removeItem("hh_crm_contacts_v2");
+          } catch(e) {}
+          contacts = loadContacts();
+          saveContacts(contacts);
+          filterAndRenderContacts();
+          alert("✅ Database successfully reset and synced with clean, sanitized customer records!");
+        }
+      });
+    }
 
     // 1-Click Secure CSV Export
     document.getElementById('exportCsvBtn').addEventListener('click', function () {
