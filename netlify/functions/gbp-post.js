@@ -10,9 +10,6 @@ const client_id = process.env.GOOGLE_CLIENT_ID || process.env.CLIENT_ID || proce
 const client_secret = process.env.GOOGLE_CLIENT_SECRET || process.env.CLIENT_SECRET || process.env.GMB_CLIENT_SECRET;
 const refresh_token = process.env.GOOGLE_OAUTH_REFRESH_TOKEN || process.env.GOOGLE_REFRESH_TOKEN || process.env.REFRESH_TOKEN || process.env.GMB_REFRESH_TOKEN || process.env.GBP_REFRESH_TOKEN;
 
-const ACCOUNT_ID = process.env.GBP_ACCOUNT_ID || "107235988987982670835";
-const LOCATION_ID = process.env.GBP_LOCATION_ID || "1964673381603454408";
-
 async function getAccessToken() {
   // Option A: Primary Owner User OAuth 2.0 Refresh Token
   if (client_id && client_secret && refresh_token) {
@@ -68,7 +65,7 @@ async function getAccessToken() {
     }
   }
 
-  throw new Error("Missing Google OAuth credentials in Netlify Environment. Please check Netlify environment variable settings for GOOGLE_CLIENT_ID and GOOGLE_OAUTH_REFRESH_TOKEN.");
+  throw new Error("Missing Google OAuth credentials in Netlify Environment.");
 }
 
 export async function handler(event, context) {
@@ -97,6 +94,35 @@ export async function handler(event, context) {
     const { title, summary, town, imageUrl, ctaUrl } = body;
 
     const accessToken = await getAccessToken();
+
+    // 1. Dynamic Account Discovery
+    const accountsRes = await fetch('https://mybusinessaccountmanagement.googleapis.com/v1/accounts', {
+      headers: { 'Authorization': `Bearer ${accessToken}` }
+    });
+
+    let accountName = "accounts/107235988987982670835";
+    if (accountsRes.ok) {
+      const accountsData = await accountsRes.json();
+      if (accountsData.accounts && accountsData.accounts.length > 0) {
+        accountName = accountsData.accounts[0].name;
+      }
+    }
+
+    // 2. Dynamic Location Discovery
+    const locRes = await fetch(`https://mybusinessbusinessinformation.googleapis.com/v1/${accountName}/locations?readMask=name,title,storefrontAddress`, {
+      headers: { 'Authorization': `Bearer ${accessToken}` }
+    });
+
+    let locationName = "locations/1964673381603454408";
+    if (locRes.ok) {
+      const locData = await locRes.json();
+      if (locData.locations && locData.locations.length > 0) {
+        locationName = locData.locations[0].name;
+      }
+    }
+
+    // Format final post endpoint URL: https://mybusiness.googleapis.com/v4/{accountName}/{locationName}/localPosts
+    const postApiUrl = `https://mybusiness.googleapis.com/v4/${accountName}/${locationName}/localPosts`;
 
     const postSummary = summary || `Before & After: ${title || 'Handyman Service'} in ${town || 'Westchester'}, NY
 
@@ -128,8 +154,7 @@ Need small home repairs, mounting, or installations in Westchester County?
       ];
     }
 
-    const postApiUrl = `https://mybusiness.googleapis.com/v4/accounts/${ACCOUNT_ID}/locations/${LOCATION_ID}/localPosts`;
-
+    console.log(`Publishing local post to GBP: ${postApiUrl}`);
     const gbpRes = await fetch(postApiUrl, {
       method: 'POST',
       headers: {
