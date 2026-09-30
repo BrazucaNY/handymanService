@@ -1623,7 +1623,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               </div>
 
               <button class="ba-dl" type="button" id="baDownload">Download geotagged JPEG</button>
-              <button type="button" id="baPost" style="width:100%;margin-top:10px;padding:14px;background:#16a34a;color:#fff;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(22,163,74,0.3);transition:all 0.2s ease;">🚀 POST TO GALLERY &amp; CAROUSEL</button>
+              <button type="button" id="baPost" style="width:100%;margin-top:10px;padding:14px;background:#1a73e8;color:#fff;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(26,115,232,0.3);transition:all 0.2s ease;">📍 POST ON GBP</button>
             </div>
             <div>
               <div class="ba-stage" id="baStage">
@@ -4724,7 +4724,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
 
       if (listToRender.length === 0) {
-        grid.innerHTML = '<div style="color:var(--muted);grid-column:1/-1;text-align:center;padding:30px;background:#fff;border-radius:10px;border:1px dashed #cbd5e1;">No photos in this category yet. Click "🚀 POST TO GALLERY & CAROUSEL" above to publish your first photo!</div>';
+        grid.innerHTML = '<div style="color:var(--muted);grid-column:1/-1;text-align:center;padding:30px;background:#fff;border-radius:10px;border:1px dashed #cbd5e1;">No photos in this category yet. Click "📍 POST ON GBP" above to publish your first photo!</div>';
         return;
       }
 
@@ -4751,15 +4751,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div style="font-size:12px;color:var(--muted);">GPS: ${p.lat}, ${p.lon}</div>
               <div style="font-size:12px;color:#16a34a;font-weight:600;margin-top:2px;">⚡ WebP Optimized &bull; 📍 EXIF Geotagged</div>
             </div>
-            <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f1f5f9;padding-top:10px;">
-              <span style="font-size:11.5px;color:var(--muted);">${p.created_at || 'Just Now'}</span>
-              <button onclick="window.deleteFieldPhoto('${itemKey}')" style="background:#fee2e2;border:1px solid #fca5a5;color:#dc2626;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:4px;">🗑️ Delete Photo</button>
+            <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f1f5f9;padding-top:10px;gap:8px;">
+              <button onclick="window.postFieldPhotoToGbp('${itemKey}')" style="background:#e0f2fe;border:1px solid #7dd3fc;color:#0369a1;padding:5px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:4px;">📍 POST ON GBP</button>
+              <button onclick="window.deleteFieldPhoto('${itemKey}')" style="background:#fee2e2;border:1px solid #fca5a5;color:#dc2626;padding:5px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:4px;">🗑️ Delete</button>
             </div>
           </div>
         `;
         grid.appendChild(card);
       });
     }
+
+    window.postFieldPhotoToGbp = async function(itemKey) {
+      var photo = fieldPhotos.find(function(p) { return p.id === itemKey || p.id === String(itemKey); }) || fieldPhotos[itemKey];
+      if (!photo) {
+        alert("Photo item not found.");
+        return;
+      }
+
+      var confirmPost = confirm("📍 Post '" + photo.title + "' directly to Google Business Profile now?");
+      if (!confirmPost) return;
+
+      try {
+        var res = await fetch('/.netlify/functions/gbp-post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: photo.title,
+            town: photo.town,
+            summary: "Before & After Project: " + photo.title + " in " + photo.town + ", NY\n\nNeed home repairs, mounting, or assembly done right in Westchester County?\n\n📍 " + photo.town + ", NY\n🔨 Here Handyman\n📞 (516) 350-0801\n🌐 https://www.herehandyman.com/book",
+            imageUrl: photo.photo_url.startsWith('http') ? photo.photo_url : undefined
+          })
+        });
+
+        var data = await res.json();
+        if (res.ok && data.success) {
+          alert("🎉 POST PUBLISHED DIRECTLY TO GOOGLE BUSINESS PROFILE!\n\n" +
+                "📍 Location: Here Handyman (" + photo.town + ", NY)\n" +
+                "🔗 View Live on Google Maps:\n" + (data.searchUrl || 'Published to GBP listing'));
+        } else {
+          alert("⚠️ GBP Post Error: " + (data.error || 'Failed to publish post to GBP. Please check API connection.'));
+        }
+      } catch (err) {
+        alert("⚠️ Connection Error: " + err.message);
+      }
+    };
 
     renderFieldPhotosGrid();
   });
@@ -5220,13 +5255,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           window.addPhotoToShowcase(newPhoto);
         }
 
-        alert("🎉 POST APPROVED & PUBLISHED TO GALLERY CAROUSEL!\n\n" +
-              "• Target Placements: Index Carousel, Gallery Grid, Offer Page & GBP Post\n" +
-              "• Quality Audit: PASS (Visual Quality, Handyman Craftsmanship, Clutter Safety)\n" +
-              "• Rating Signal: 5.0 ★ Google Business Profile Enforced\n" +
-              "• EXIF GPS: Geotagged for " + town + ", NY (" + lat.toFixed(4) + ", " + lng.toFixed(4) + ")\n" +
-              "• WebP Conversion: Complete & Saved to Project Showcase\n\n" +
-              "Geotagged JPEG downloaded to PC!");
+        fetch('/.netlify/functions/gbp-post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: title,
+            town: town,
+            summary: caption || (title + " in " + town + ", NY\n\nNeed home repairs, mounting, or assembly done right in Westchester County?\n\n📍 " + town + ", NY\n🔨 Here Handyman\n📞 (516) 350-0801\n🌐 https://www.herehandyman.com/book")
+          })
+        }).then(function(r){ return r.json(); }).then(function(resData){
+          if (resData.success) {
+            alert("🎉 POST PUBLISHED DIRECTLY TO GOOGLE BUSINESS PROFILE!\n\n" +
+                  "• Target Placement: Google Business Profile Listing (" + town + ", NY)\n" +
+                  "• Post Status: LIVE on Google Maps\n" +
+                  "• EXIF GPS: Geotagged for " + town + ", NY (" + lat.toFixed(4) + ", " + lng.toFixed(4) + ")\n\n" +
+                  "Geotagged JPEG downloaded to PC!");
+          } else {
+            alert("🎉 SAVED TO DASHBOARD SHOWCASE!\n\n(GBP Publish Note: " + (resData.error || 'Check Google connection') + ")\n\nGeotagged JPEG downloaded to PC!");
+          }
+        }).catch(function(err){
+          alert("🎉 SAVED TO DASHBOARD SHOWCASE!\n\nGeotagged JPEG downloaded to PC!");
+        });
 
         // Post-download & post UI reset
         imgA = null;
