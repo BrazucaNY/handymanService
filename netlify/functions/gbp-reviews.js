@@ -99,7 +99,7 @@ export async function handler(event, context) {
     const { token: accessToken, authType } = await getAccessToken();
 
     if (event.httpMethod === 'GET') {
-      // 1. Fetch Accounts from Google Business Profile API
+      // 1. Fetch Accounts
       const accountsRes = await fetch('https://mybusinessaccountmanagement.googleapis.com/v1/accounts', {
         headers: { 'Authorization': `Bearer ${accessToken}` }
       });
@@ -107,6 +107,33 @@ export async function handler(event, context) {
       let accountsData = {};
       if (accountsRes.ok) {
         accountsData = await accountsRes.json();
+      }
+
+      let locationsData = {};
+      let reviewsData = {};
+      let locationName = "";
+
+      if (accountsData.accounts && accountsData.accounts.length > 0) {
+        const accountName = accountsData.accounts[0].name;
+        
+        // 2. Fetch Locations
+        const locRes = await fetch(`https://mybusinessbusinessinformation.googleapis.com/v1/${accountName}/locations?readMask=name,title,storefrontAddress`, {
+          headers: { 'Authorization': `Bearer ${accessToken}` }
+        });
+        if (locRes.ok) {
+          locationsData = await locRes.json();
+          if (locationsData.locations && locationsData.locations.length > 0) {
+            locationName = locationsData.locations[0].name;
+            
+            // 3. Fetch Live Reviews
+            const reviewsRes = await fetch(`https://mybusiness.googleapis.com/v4/${accountName}/${locationName}/reviews`, {
+              headers: { 'Authorization': `Bearer ${accessToken}` }
+            });
+            if (reviewsRes.ok) {
+              reviewsData = await reviewsRes.json();
+            }
+          }
+        }
       }
 
       return {
@@ -117,7 +144,9 @@ export async function handler(event, context) {
           authenticated: true,
           authType,
           accounts: accountsData.accounts || [],
-          message: `Successfully authenticated using ${authType}!`
+          locations: locationsData.locations || [],
+          reviews: reviewsData.reviews || [],
+          message: `Successfully connected to Google Business Profile API!`
         })
       };
     }
