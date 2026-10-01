@@ -10,6 +10,12 @@ Disallow: /admin
 Disallow: /admin/
 Disallow: /CRM
 Disallow: /CRM/
+Disallow: /timer
+Disallow: /timer/
+Disallow: /timer.html
+Disallow: /schedule
+Disallow: /schedule/
+Disallow: /schedule.html
 
 Sitemap: https://www.herehandyman.com/sitemap.xml
 # LLM & AI Engine Documentation: https://www.herehandyman.com/llms.txt
