@@ -7,7 +7,9 @@ if sys.platform == "win32":
     sys.stdout.reconfigure(encoding='utf-8')
 
 site_dir = r"c:\Users\davi6\.gemini\antigravity\scratch\here-handyman"
-html_files = [f for f in glob.glob(os.path.join(site_dir, "**", "*.html"), recursive=True) if "node_modules" not in f and ".netlify" not in f]
+EXCLUDED_UTILITY_PAGES = {"404.html", "login.html", "dashboard.html", "schedule.html", "timer.html"}
+all_html_files = glob.glob(os.path.join(site_dir, "**", "*.html"), recursive=True)
+html_files = [f for f in all_html_files if "node_modules" not in f and ".netlify" not in f and os.path.basename(f) not in EXCLUDED_UTILITY_PAGES]
 
 schema_template = {
     "@context": "https://schema.org",
