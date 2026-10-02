@@ -45,7 +45,7 @@ schema_template = {
     "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
-        "reviewCount": "24",
+        "reviewCount": "25",
         "bestRating": "5.0",
         "worstRating": "1.0"
     }
