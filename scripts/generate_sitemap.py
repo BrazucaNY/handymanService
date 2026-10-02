@@ -15,8 +15,8 @@ pages = []
 for f in html_files:
     rel = os.path.relpath(f, site_dir).replace("\\", "/")
     
-    # Exclude internal, admin, and non-indexable utility pages
-    if any(rel == p or rel.startswith(p) for p in [".netlify", "node_modules", "dashboard.html", "login.html", "404.html", "timer.html", "schedule.html", "merge-photos.html"]):
+    # Exclude internal, admin, scratch, and non-indexable utility pages
+    if any(rel == p or rel.startswith(p) for p in [".netlify", "node_modules", "scratch", "tmp", "dashboard.html", "login.html", "404.html", "timer.html", "schedule.html", "merge-photos.html"]):
         continue
     
     # Get actual file last modification date
