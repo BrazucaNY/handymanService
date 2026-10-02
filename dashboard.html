@@ -1747,8 +1747,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         rating: 5,
         date: "Just Now (1 hour ago)",
         reviewText: "Reasonable price. David was great. He hung two toilet paper holders and installed one smoke detector to the ceiling. He also checked a ceiling fan that was wobbling and explaining thoroughly why it was happening. I plan on referring him to my extended family and friends in Westchester.",
-        replyText: "Sean, thank you so much for the 5-star review and recommendation! It was a pleasure hanging your toilet paper holders, mounting the ceiling smoke detector, and getting your ceiling fan checked out so you know exactly what was going on. I really appreciate you sharing Here Handyman with your friends and family in Westchester! Give me a call anytime for your next project. David, Here Handyman",
-        hasReply: true
+        replyText: "",
+        hasReply: false
       },
       {
         id: "gbp-1",
@@ -1873,8 +1873,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         rating: 5,
         date: "May 28, 2026",
         reviewText: "David mounted our 65-inch OLED TV and concealed all the cables behind the wall in White Plains. Ultra-clean work and very professional!",
-        replyText: "Thank you Sarah! TV mounting with hidden wire concealment is our specialty in White Plains. Enjoy your clean setup!",
-        hasReply: true
+        replyText: "",
+        hasReply: false
       },
       {
         id: "gbp-15",
@@ -1882,8 +1882,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         rating: 5,
         date: "May 19, 2026",
         reviewText: "Hired Here Handyman for drywall patching and painting after a plumbing repair in Scarsdale. You can't even tell where the hole was! Highly recommend.",
-        replyText: "Thanks Michael! Making drywall patches invisible is what we strive for. Appreciate your recommendation!",
-        hasReply: true
+        replyText: "",
+        hasReply: false
       },
       {
         id: "gbp-16",
@@ -3678,7 +3678,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           .catch(function(err) {
             syncGbpBtn.textContent = 'Sync Latest GBP Reviews 🔄';
             renderGbpReviews();
-            alert('✓ Synced 13 verified Google Business Profile reviews!');
+            alert('✓ Displaying all ' + GBP_REVIEWS_DATA.length + ' verified Google Business Profile reviews!');
           });
       });
     }
