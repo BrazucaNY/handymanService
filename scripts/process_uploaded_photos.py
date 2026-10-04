@@ -7,20 +7,12 @@ sys.stdout.reconfigure(encoding='utf-8')
 def process_photos():
     uploads = [
         {
-            "src": "C:/Users/davi6/.gemini/antigravity/brain/37fb85cf-cf25-4347-ae07-6d93c5dfe048/.user_uploaded/media_1790614820249.jpg",
-            "dst": "assets/images/portfolio/front_door_handle_deadbolt_lock_white_plains.webp"
+            "src": "C:/Users/davi6/.gemini/antigravity/brain/37fb85cf-cf25-4347-ae07-6d93c5dfe048/.user_uploaded/media_1791155060656.jpg",
+            "dst": "assets/images/before-after/leather_recliner_armchair_assembly_white_plains_before.webp"
         },
         {
-            "src": "C:/Users/davi6/.gemini/antigravity/brain/37fb85cf-cf25-4347-ae07-6d93c5dfe048/.user_uploaded/media_1790614820253.jpg",
-            "dst": "assets/images/portfolio/smart_lock_deadbolt_door_installation_scarsdale.webp"
-        },
-        {
-            "src": "C:/Users/davi6/.gemini/antigravity/brain/37fb85cf-cf25-4347-ae07-6d93c5dfe048/.user_uploaded/media_1790614820272.jpg",
-            "dst": "assets/images/before-after/patio_exterior_painting_makeover_white_plains_before.webp"
-        },
-        {
-            "src": "C:/Users/davi6/.gemini/antigravity/brain/37fb85cf-cf25-4347-ae07-6d93c5dfe048/.user_uploaded/media_1790614820388.jpg",
-            "dst": "assets/images/before-after/patio_exterior_painting_makeover_white_plains_after.webp"
+            "src": "C:/Users/davi6/.gemini/antigravity/brain/37fb85cf-cf25-4347-ae07-6d93c5dfe048/.user_uploaded/media_1791155067348.jpg",
+            "dst": "assets/images/before-after/leather_recliner_armchair_assembly_white_plains_after.webp"
         }
     ]
 
