@@ -16,6 +16,8 @@ Disallow: /timer.html
 Disallow: /schedule
 Disallow: /schedule/
 Disallow: /schedule.html
+Disallow: /scratch
+Disallow: /scratch/
 
 Sitemap: https://www.herehandyman.com/sitemap.xml
 # LLM & AI Engine Documentation: https://www.herehandyman.com/llms.txt

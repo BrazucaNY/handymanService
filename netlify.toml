@@ -358,13 +358,34 @@
 
 # Security headers for login
 [[headers]]
-  for = "/login.html"
+  for = "/login*"
   [headers.values]
     Content-Security-Policy = "default-src 'self' https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co https://www.gstatic.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net; connect-src 'self' https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co wss://*.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net;"
     X-Frame-Options = "DENY"
     Cache-Control = "no-cache, no-store, must-revalidate"
     X-Content-Type-Options = "nosniff"
     X-Robots-Tag = "noindex, nofollow"
+
+# Security headers for schedule page
+[[headers]]
+  for = "/schedule*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Security headers for timer page
+[[headers]]
+  for = "/timer*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Security headers for scratch files
+[[headers]]
+  for = "/scratch*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache, no-store, must-revalidate"
 
 # Security headers for invoice page
 [[headers]]
