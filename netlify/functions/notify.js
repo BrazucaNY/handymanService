@@ -51,7 +51,8 @@ export async function sendOwnerEmail({ subject, fromName, replyTo, message }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
+        "User-Agent": "Netlify-Serverless-Function/1.0"
       },
       body: JSON.stringify(payload)
     });
