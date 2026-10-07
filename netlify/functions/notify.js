@@ -1,7 +1,4 @@
-const WEB3FORMS_ACCESS_KEY =
-  process.env.WEB3FORMS_ACCESS_KEY ||
-  process.env.WEB3FORMS_KEY ||
-  "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0";
+const WEB3FORMS_ACCESS_KEY = process.env.WEB3FORMS_ACCESS_KEY || process.env.WEB3FORMS_KEY || "";
 
 const OWNER_EMAIL = process.env.OWNER_EMAIL || "davi65@gmail.com";
 
@@ -25,6 +22,11 @@ export function formatEastern(iso) {
 }
 
 export async function sendOwnerEmail({ subject, fromName, replyTo, message }) {
+  if (!WEB3FORMS_ACCESS_KEY) {
+    console.error("WEB3FORMS_ACCESS_KEY is not set");
+    return false;
+  }
+
   const replyEmail = isValidEmail(replyTo) ? replyTo.trim() : OWNER_EMAIL;
   const senderName = fromName || "Here Handyman Booking";
 
