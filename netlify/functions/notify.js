@@ -35,7 +35,7 @@ export async function sendOwnerEmail({ subject, fromName, replyTo, message }) {
     subject,
     from_name: senderName,
     name: senderName,
-    email: replyEmail,
+    email: OWNER_EMAIL,
     replyto: replyEmail,
     message
   };
