@@ -214,6 +214,9 @@ export async function handler(event) {
     }
 
     // 8. Send Instant Notification Email (must await so Netlify does not freeze the request)
+    console.log("=== STARTING EMAIL SEND PROCESS ===");
+    console.log("Booking ID:", bookingId);
+    console.log("OWNER_EMAIL:", OWNER_EMAIL);
     const easternTime = formatEastern(startTimeIso);
     console.log("Attempting to send owner email to:", OWNER_EMAIL);
     const emailSent = await sendOwnerEmail({
@@ -237,6 +240,7 @@ Google Calendar: ${calendarEventId ? "Added" : "FAILED - check Netlify env vars"
     if (!emailSent) {
       console.error("Owner booking email failed to send for", bookingId);
     }
+    console.log("=== EMAIL SEND PROCESS COMPLETE ===");
 
     // 9. Return HTTP 200 Success Confirmation
     return {
