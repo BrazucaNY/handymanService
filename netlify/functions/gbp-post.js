@@ -1,5 +1,6 @@
 // Netlify Serverless Function: Google Business Profile (GBP) Local Post Publisher
 import crypto from 'node:crypto';
+import { getStore, connectLambda } from '@netlify/blobs';
 
 const saProject = process.env.FIREBASE_PROJECT_ID || ('handyman' + 'service' + 'admin');
 const client_email = process.env.GOOGLE_SA_EMAIL || (`herehandyman-booking@${saProject}.iam.gserviceaccount.com`);
@@ -96,7 +97,7 @@ export async function handler(event, context) {
 
   try {
     const body = JSON.parse(event.body || '{}');
-    const { title, summary, town, imageUrl, ctaUrl, refreshToken, clientId, clientSecret } = body;
+    const { title, summary, town, imageUrl, imageData, ctaUrl, refreshToken, clientId, clientSecret } = body;
 
     const accessToken = await getAccessToken(refreshToken, clientId, clientSecret);
 
@@ -154,11 +155,38 @@ Need small home repairs, mounting, or installations in Westchester County?
       }
     };
 
-    if (imageUrl && imageUrl.startsWith('http')) {
+    let finalImageUrl = (imageUrl && imageUrl.startsWith('http')) ? imageUrl : null;
+
+    // Dashboard sends the collage as a base64 data URL. Google can't read data: URLs,
+    // so save it to Netlify Blobs and give Google a public https link instead.
+    if (!finalImageUrl && typeof imageData === 'string' && imageData.startsWith('data:image/')) {
+      const match = imageData.match(/^data:image\/(jpeg|jpg|png);base64,(.+)$/);
+      if (!match) {
+        throw new Error('Photo must be JPEG or PNG for Google Business Profile.');
+      }
+      const ext = match[1] === 'png' ? 'png' : 'jpg';
+      const buffer = Buffer.from(match[2], 'base64');
+      if (buffer.length < 10 * 1024) {
+        throw new Error('Photo is too small for Google (minimum 10 KB).');
+      }
+      if (buffer.length > 5 * 1024 * 1024) {
+        throw new Error('Photo is too large for Google (maximum 5 MB).');
+      }
+
+      connectLambda(event);
+      const store = getStore('gbp-media');
+      const key = `post-${Date.now()}-${crypto.randomBytes(4).toString('hex')}.${ext}`;
+      await store.set(key, buffer);
+
+      const siteUrl = (process.env.URL || 'https://www.herehandyman.com').replace(/\/$/, '');
+      finalImageUrl = `${siteUrl}/gbp-media/${key}`;
+    }
+
+    if (finalImageUrl) {
       postPayload.media = [
         {
           mediaFormat: "PHOTO",
-          sourceUrl: imageUrl
+          sourceUrl: finalImageUrl
         }
       ];
     }
@@ -192,6 +220,8 @@ Need small home repairs, mounting, or installations in Westchester County?
         message: "Successfully published post to Google Business Profile!",
         postId: gbpData.name,
         searchUrl: gbpData.searchUrl,
+        photoAttached: Boolean(finalImageUrl),
+        photoUrl: finalImageUrl,
         post: gbpData
       })
     };

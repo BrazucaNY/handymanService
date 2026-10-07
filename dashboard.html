@@ -4780,6 +4780,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     }
 
+    // Convert any image (data URL / blob URL) to a JPEG data URL Google Business Profile accepts.
+    window.toGbpJpeg = function(src) {
+      return new Promise(function(resolve, reject) {
+        var img = new Image();
+        img.onload = function() {
+          var maxSide = 2000;
+          var scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+          var c = document.createElement('canvas');
+          c.width = Math.round(img.naturalWidth * scale);
+          c.height = Math.round(img.naturalHeight * scale);
+          var ctx = c.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, c.width, c.height);
+          ctx.drawImage(img, 0, 0, c.width, c.height);
+          var q = 0.9, out = c.toDataURL('image/jpeg', q);
+          while (out.length * 0.75 > 4.5 * 1024 * 1024 && q > 0.5) {
+            q -= 0.1;
+            out = c.toDataURL('image/jpeg', q);
+          }
+          resolve(out);
+        };
+        img.onerror = function() { reject(new Error('Could not read photo for GBP upload.')); };
+        img.src = src;
+      });
+    };
+
     window.postFieldPhotoToGbp = async function(itemKey) {
       var photo = fieldPhotos.find(function(p) { return p.id === itemKey || p.id === String(itemKey); }) || fieldPhotos[itemKey];
       if (!photo) {
@@ -4791,6 +4817,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       if (!confirmPost) return;
 
       try {
+        var isHttp = /^https?:/.test(photo.photo_url || '');
+        var jpegData = isHttp ? undefined : await window.toGbpJpeg(photo.photo_url);
         var res = await fetch('/.netlify/functions/gbp-post', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -4798,15 +4826,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             title: photo.title,
             town: photo.town,
             summary: "Before & After Project: " + photo.title + " in " + photo.town + ", NY\n\nNeed home repairs, mounting, or assembly done right in Westchester County?\n\n📍 " + photo.town + ", NY\n🔨 Here Handyman\n📞 (516) 350-0801\n🌐 https://www.herehandyman.com/book",
-            imageUrl: photo.photo_url.startsWith('http') ? photo.photo_url : undefined
+            imageUrl: isHttp ? photo.photo_url : undefined,
+            imageData: jpegData
           })
         });
 
         var data = await res.json();
         if (res.ok && data.success) {
-          alert("🎉 POST PUBLISHED DIRECTLY TO GOOGLE BUSINESS PROFILE!\n\n" +
+          alert("🎉 POST PUBLISHED TO GOOGLE BUSINESS PROFILE!\n\n" +
                 "📍 Location: Here Handyman (" + photo.town + ", NY)\n" +
-                "🔗 View Live on Google Maps:\n" + (data.searchUrl || 'Published to GBP listing'));
+                "📸 Photo attached: " + (data.photoAttached ? "YES" : "NO") + "\n" +
+                "🔗 " + (data.searchUrl || 'Published to GBP listing'));
         } else {
           alert("⚠️ GBP Post Error: " + (data.error || 'Failed to publish post to GBP. Please check API connection.'));
         }
@@ -5274,26 +5304,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           window.addPhotoToShowcase(newPhoto);
         }
 
-        fetch('/.netlify/functions/gbp-post', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            title: title,
-            town: town,
-            summary: caption || (title + " in " + town + ", NY\n\nNeed home repairs, mounting, or assembly done right in Westchester County?\n\n📍 " + town + ", NY\n🔨 Here Handyman\n📞 (516) 350-0801\n🌐 https://www.herehandyman.com/book")
-          })
+        var postSummary = caption || (title + " in " + town + ", NY\n\nNeed home repairs, mounting, or assembly done right in Westchester County?\n\n📍 " + town + ", NY\n🔨 Here Handyman\n📞 (516) 350-0801\n🌐 https://www.herehandyman.com/book");
+        // Keep the geotagged JPEG if it's under Google's 5 MB limit, otherwise shrink it.
+        var gbpImagePromise = (out.length * 0.75 <= 4.5 * 1024 * 1024)
+          ? Promise.resolve(out)
+          : window.toGbpJpeg(out);
+
+        gbpImagePromise.then(function(imageData) {
+          return fetch('/.netlify/functions/gbp-post', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              title: title,
+              town: town,
+              summary: postSummary,
+              imageData: imageData
+            })
+          });
         }).then(function(r){ return r.json(); }).then(function(resData){
           if (resData.success) {
-            alert("🎉 POST PUBLISHED DIRECTLY TO GOOGLE BUSINESS PROFILE!\n\n" +
-                  "• Target Placement: Google Business Profile Listing (" + town + ", NY)\n" +
-                  "• Post Status: LIVE on Google Maps\n" +
-                  "• EXIF GPS: Geotagged for " + town + ", NY (" + lat.toFixed(4) + ", " + lng.toFixed(4) + ")\n\n" +
+            alert("🎉 POST PUBLISHED TO GOOGLE BUSINESS PROFILE!\n\n" +
+                  "• Town: " + town + ", NY\n" +
+                  "• Photo attached: " + (resData.photoAttached ? "YES" : "NO") + "\n" +
+                  "• EXIF GPS: " + lat.toFixed(4) + ", " + lng.toFixed(4) + "\n\n" +
+                  "Note: Google may take a few minutes to show the photo.\n" +
                   "Geotagged JPEG downloaded to PC!");
           } else {
-            alert("🎉 SAVED TO DASHBOARD SHOWCASE!\n\n(GBP Publish Note: " + (resData.error || 'Check Google connection') + ")\n\nGeotagged JPEG downloaded to PC!");
+            alert("⚠️ SAVED TO DASHBOARD, BUT GBP POST FAILED\n\n" + (resData.error || 'Check Google connection') + "\n\nGeotagged JPEG downloaded to PC!");
           }
         }).catch(function(err){
-          alert("🎉 SAVED TO DASHBOARD SHOWCASE!\n\nGeotagged JPEG downloaded to PC!");
+          alert("⚠️ SAVED TO DASHBOARD, BUT GBP POST FAILED\n\n" + err.message + "\n\nGeotagged JPEG downloaded to PC!");
         });
 
         // Post-download & post UI reset

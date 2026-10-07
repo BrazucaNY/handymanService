@@ -399,3 +399,9 @@
 
 [functions]
   node_bundler = "esbuild"
+# Public URLs for photos posted to Google Business Profile from the dashboard
+[[redirects]]
+  from = "/gbp-media/:key"
+  to = "/.netlify/functions/gbp-image?key=:key"
+  status = 200
+
