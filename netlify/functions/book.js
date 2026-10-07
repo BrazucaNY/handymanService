@@ -5,7 +5,7 @@ import crypto from 'node:crypto';
 import { DB_CONFIG } from './dbConfig.js';
 import { createGoogleCalendarEvent, getGoogleCalendarBusyRanges } from './googleCalendar.js';
 import { createSetmoreAppointment } from './setmore.js';
-import { sendOwnerEmail, formatEastern, OWNER_EMAIL } from './notify.js';
+import { sendOwnerSMS, formatEastern } from './notify.js';
 
 // Server-derived service durations (ignores client-passed durationMinutes)
 const SERVICE_DURATIONS = {
@@ -213,9 +213,20 @@ export async function handler(event) {
       }
     }
 
-    // 8. Email is sent from client-side (browser can pass Cloudflare challenge)
-    // Server-side email is blocked by Cloudflare 403
-    console.log("Email notification handled by client-side (browser can pass Cloudflare challenge)");
+    // 8. Send SMS Notification to owner
+    console.log("=== STARTING SMS SEND PROCESS ===");
+    console.log("Booking ID:", bookingId);
+    const easternTime = formatEastern(startTimeIso);
+    console.log("Attempting to send SMS to owner");
+    const smsSent = await sendOwnerSMS({
+      subject: `NEW APPOINTMENT #${bookingId}`,
+      message: `NEW APPOINTMENT CONFIRMED!\n\nBooking ID: ${bookingId}\nName: ${name}\nPhone: ${phone}\nEmail: ${email || "Not provided"}\nAddress: ${address || "Not provided"}\nZIP: ${cleanZip}\nService: ${serviceId}\nDate & Time: ${easternTime}\nNotes: ${notes || "None"}\nGoogle Calendar: ${calendarEventId ? "Added" : "FAILED - check Netlify env vars"}`
+    });
+    console.log("SMS send result:", smsSent);
+    if (!smsSent) {
+      console.error("Owner booking SMS failed to send for", bookingId);
+    }
+    console.log("=== SMS SEND PROCESS COMPLETE ===");
 
     // 9. Return HTTP 200 Success Confirmation
     return {

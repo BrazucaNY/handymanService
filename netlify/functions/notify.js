@@ -6,6 +6,14 @@ const WEB3FORMS_ACCESS_KEY =
 export const OWNER_EMAIL =
   process.env.OWNER_EMAIL || "davi65@gmail.com";
 
+const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || "";
+const TWILIO_API_KEY_SID = process.env.TWILIO_API_KEY_SID || "";
+const TWILIO_API_KEY_SECRET = process.env.TWILIO_API_KEY_SECRET || "";
+const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER || "";
+const OWNER_PHONE_NUMBER = process.env.OWNER_PHONE_NUMBER || "+15163500801";
+
+import twilio from "twilio";
+
 function isValidEmail(value) {
   return (
     typeof value === "string" &&
@@ -143,6 +151,44 @@ export async function sendOwnerEmail({
       error
     );
 
+    return false;
+  }
+}
+
+export async function sendOwnerSMS({
+  subject,
+  message
+}) {
+  console.log("=== STARTING TWILIO SMS ===");
+  console.log("Subject:", subject);
+  console.log("Owner phone:", OWNER_PHONE_NUMBER);
+  console.log("Twilio phone:", TWILIO_PHONE_NUMBER);
+  console.log("Twilio account SID configured:", !!TWILIO_ACCOUNT_SID);
+  console.log("Twilio API key configured:", !!TWILIO_API_KEY_SID);
+
+  if (!TWILIO_ACCOUNT_SID || !TWILIO_API_KEY_SID || !TWILIO_API_KEY_SECRET) {
+    console.error("ERROR: Twilio credentials missing");
+    return false;
+  }
+
+  if (!TWILIO_PHONE_NUMBER || !OWNER_PHONE_NUMBER) {
+    console.error("ERROR: Twilio phone number or owner phone number missing");
+    return false;
+  }
+
+  try {
+    const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_API_KEY_SID + ":" + TWILIO_API_KEY_SECRET);
+
+    const smsMessage = await client.messages.create({
+      body: `${subject}\n\n${message}`,
+      from: TWILIO_PHONE_NUMBER,
+      to: OWNER_PHONE_NUMBER
+    });
+
+    console.log("Twilio SMS sent successfully. SID:", smsMessage.sid);
+    return true;
+  } catch (error) {
+    console.error("Twilio SMS error:", error);
     return false;
   }
 }
