@@ -22,6 +22,10 @@ export function formatEastern(iso) {
 }
 
 export async function sendOwnerEmail({ subject, fromName, replyTo, message }) {
+  console.log("sendOwnerEmail called with:", { subject, fromName, replyTo, messageLength: message?.length });
+  console.log("WEB3FORMS_ACCESS_KEY exists:", !!WEB3FORMS_ACCESS_KEY);
+  console.log("OWNER_EMAIL:", OWNER_EMAIL);
+  
   if (!WEB3FORMS_ACCESS_KEY) {
     console.error("WEB3FORMS_ACCESS_KEY is not set");
     return false;
@@ -40,6 +44,8 @@ export async function sendOwnerEmail({ subject, fromName, replyTo, message }) {
     message
   };
 
+  console.log("Sending email payload to Web3Forms:", { ...payload, access_key: "***" });
+
   try {
     const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -50,12 +56,16 @@ export async function sendOwnerEmail({ subject, fromName, replyTo, message }) {
       body: JSON.stringify(payload)
     });
 
+    console.log("Web3Forms response status:", res.status);
     const data = await res.json().catch(() => ({}));
+    console.log("Web3Forms response data:", data);
+    
     if (!res.ok || data.success === false) {
       console.error("Web3Forms email failed:", res.status, data);
       return false;
     }
 
+    console.log("Email sent successfully");
     return true;
   } catch (err) {
     console.error("Web3Forms email error:", err);
