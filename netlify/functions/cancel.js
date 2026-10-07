@@ -3,6 +3,7 @@
 
 import { DB_CONFIG } from './dbConfig.js';
 import { deleteGoogleCalendarEventByBookingId } from './googleCalendar.js';
+import { sendOwnerEmail } from './notify.js';
 
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
@@ -104,16 +105,19 @@ export async function handler(event) {
     const custPhone = dbBooking ? dbBooking.customer_phone : "N/A";
     const startTime = dbBooking ? dbBooking.start_time : "N/A";
 
-    fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        access_key: "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0",
-        subject: `❌ APPOINTMENT CANCELLED #${cleanBookingId}`,
-        from_name: "Here Handyman Online Cancellation",
-        message: `AN APPOINTMENT HAS BEEN CANCELLED ONLINE\n\nBooking ID: ${cleanBookingId}\nCustomer Name: ${custName}\nPhone: ${custPhone}\nEmail: ${cleanEmail}\nScheduled Start Time: ${startTime}\nGoogle Calendar Removed: ${calendarDeleted ? 'YES' : 'NO/NOT FOUND'}`
-      })
-    }).catch(err => console.error("Web3Forms cancellation email background error:", err));
+    await sendOwnerEmail({
+      subject: `APPOINTMENT CANCELLED #${cleanBookingId}`,
+      fromName: "Here Handyman Online Cancellation",
+      replyTo: cleanEmail,
+      message: `AN APPOINTMENT HAS BEEN CANCELLED ONLINE
+
+Booking ID: ${cleanBookingId}
+Customer Name: ${custName}
+Phone: ${custPhone}
+Email: ${cleanEmail}
+Scheduled Start Time: ${startTime}
+Google Calendar Removed: ${calendarDeleted ? "YES" : "NO/NOT FOUND"}`
+    });
 
     return {
       statusCode: 200,

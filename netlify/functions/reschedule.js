@@ -3,6 +3,7 @@
 
 import { DB_CONFIG } from './dbConfig.js';
 import { updateGoogleCalendarEventByBookingId, getGoogleCalendarBusyRanges } from './googleCalendar.js';
+import { sendOwnerEmail } from './notify.js';
 
 const SERVICE_DURATIONS = {
   tv: 60,
@@ -177,16 +178,20 @@ export async function handler(event) {
       hour12: true
     });
 
-    fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        access_key: "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0",
-        subject: `📅 APPOINTMENT RESCHEDULED #${cleanBookingId}`,
-        from_name: "Here Handyman Online Reschedule",
-        message: `AN APPOINTMENT HAS BEEN RESCHEDULED ONLINE\n\nBooking ID: ${cleanBookingId}\nCustomer: ${custName}\nPhone: ${custPhone}\nEmail: ${cleanEmail}\nService: ${serviceName}\nNew Date & Time: ${formattedNewTime}\nGoogle Calendar Updated: ${calendarUpdated ? 'YES' : 'NO/NOT FOUND'}`
-      })
-    }).catch(err => console.error("Web3Forms reschedule email background error:", err));
+    await sendOwnerEmail({
+      subject: `APPOINTMENT RESCHEDULED #${cleanBookingId}`,
+      fromName: "Here Handyman Online Reschedule",
+      replyTo: cleanEmail,
+      message: `AN APPOINTMENT HAS BEEN RESCHEDULED ONLINE
+
+Booking ID: ${cleanBookingId}
+Customer: ${custName}
+Phone: ${custPhone}
+Email: ${cleanEmail}
+Service: ${serviceName}
+New Date & Time: ${formattedNewTime}
+Google Calendar Updated: ${calendarUpdated ? "YES" : "NO/NOT FOUND"}`
+    });
 
     return {
       statusCode: 200,

@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import { DB_CONFIG } from './dbConfig.js';
 import { createGoogleCalendarEvent, getGoogleCalendarBusyRanges } from './googleCalendar.js';
 import { createSetmoreAppointment } from './setmore.js';
+import { sendOwnerEmail, formatEastern } from './notify.js';
 
 // Server-derived service durations (ignores client-passed durationMinutes)
 const SERVICE_DURATIONS = {
@@ -50,11 +51,19 @@ export async function handler(event) {
     const { zip, serviceId, start, name, phone, address, email, notes } = body;
 
     // 1. Required Fields Validation
-    if (!zip || !serviceId || !start || !name || !phone) {
+    if (!zip || !serviceId || !start || !name || !phone || !email) {
       return {
         statusCode: 400,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "Missing required fields (zip, serviceId, start, name, phone)." })
+        body: JSON.stringify({ error: "Missing required fields (zip, serviceId, start, name, phone, email)." })
+      };
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim())) {
+      return {
+        statusCode: 400,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: "Please provide a valid email address." })
       };
     }
 
@@ -124,18 +133,26 @@ export async function handler(event) {
     }
 
     // 6. Post Event directly to David's Google Calendar (Single Source of Truth)
-    await createGoogleCalendarEvent({
-      bookingId,
-      startIso: startTimeIso,
-      endIso: endTimeIso,
-      serviceName: serviceId,
-      customerName: name,
-      customerPhone: phone,
-      customerEmail: email,
-      customerAddress: address,
-      zip: cleanZip,
-      notes
-    }).catch(gErr => console.error("Google Calendar Event Creation Error:", gErr));
+    let calendarEventId = null;
+    try {
+      calendarEventId = await createGoogleCalendarEvent({
+        bookingId,
+        startIso: startTimeIso,
+        endIso: endTimeIso,
+        serviceName: serviceId,
+        customerName: name,
+        customerPhone: phone,
+        customerEmail: email,
+        customerAddress: address,
+        zip: cleanZip,
+        notes
+      });
+      if (!calendarEventId) {
+        console.error("Google Calendar event was not created (missing auth or API error).");
+      }
+    } catch (gErr) {
+      console.error("Google Calendar Event Creation Error:", gErr);
+    }
 
     // 6b. Sync appointment directly to Setmore API
     createSetmoreAppointment({
@@ -184,17 +201,28 @@ export async function handler(event) {
       }
     }
 
-    // 8. Send Instant Notification Email via Web3Forms (non-blocking)
-    fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        access_key: "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0",
-        subject: `⚡ NEW APPOINTMENT BOOKED #${bookingId}`,
-        from_name: "Here Handyman Direct Booking",
-        message: `NEW APPOINTMENT CONFIRMED!\n\nBooking ID: ${bookingId}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nZIP: ${cleanZip}\nService: ${serviceId}\nStart Time: ${startTimeIso}\nNotes: ${notes || 'None'}`
-      })
-    }).catch(err => console.error("Web3Forms email background error:", err));
+    // 8. Send Instant Notification Email (must await so Netlify does not freeze the request)
+    const easternTime = formatEastern(startTimeIso);
+    const emailSent = await sendOwnerEmail({
+      subject: `NEW APPOINTMENT BOOKED #${bookingId}`,
+      fromName: "Here Handyman Direct Booking",
+      replyTo: email,
+      message: `NEW APPOINTMENT CONFIRMED!
+
+Booking ID: ${bookingId}
+Name: ${name}
+Phone: ${phone}
+Email: ${email || "Not provided"}
+Address: ${address || "Not provided"}
+ZIP: ${cleanZip}
+Service: ${serviceId}
+Date & Time: ${easternTime}
+Notes: ${notes || "None"}
+Google Calendar: ${calendarEventId ? "Added" : "FAILED - check Netlify env vars"}`
+    });
+    if (!emailSent) {
+      console.error("Owner booking email failed to send for", bookingId);
+    }
 
     // 9. Return HTTP 200 Success Confirmation
     return {
