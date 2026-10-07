@@ -364,7 +364,7 @@ async function handleFinalSubmit() {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: process.env.WEB3FORMS_ACCESS_KEY || "",
+          access_key: "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0",
           subject: `NEW APPOINTMENT BOOKED #${data.id}`,
           from_name: "Here Handyman Online Booking",
           name: name,
@@ -379,7 +379,7 @@ async function handleFinalSubmit() {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: process.env.WEB3FORMS_ACCESS_KEY || "",
+          access_key: "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0",
           subject: `NEW APPOINTMENT BOOKED #${data.id}`,
           from_name: "Here Handyman Online Booking",
           name: name,

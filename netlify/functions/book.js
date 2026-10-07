@@ -213,35 +213,9 @@ export async function handler(event) {
       }
     }
 
-    // 8. Send Instant Notification Email (must await so Netlify does not freeze the request)
-    console.log("=== STARTING EMAIL SEND PROCESS ===");
-    console.log("Booking ID:", bookingId);
-    console.log("OWNER_EMAIL:", OWNER_EMAIL);
-    const easternTime = formatEastern(startTimeIso);
-    console.log("Attempting to send owner email to:", OWNER_EMAIL);
-    const emailSent = await sendOwnerEmail({
-      subject: `NEW APPOINTMENT BOOKED #${bookingId}`,
-      fromName: "Here Handyman Direct Booking",
-      replyTo: email,
-      message: `NEW APPOINTMENT CONFIRMED!
-
-Booking ID: ${bookingId}
-Name: ${name}
-Phone: ${phone}
-Email: ${email || "Not provided"}
-Address: ${address || "Not provided"}
-ZIP: ${cleanZip}
-Service: ${serviceId}
-Date & Time: ${easternTime}
-Notes: ${notes || "None"}
-Google Calendar: ${calendarEventId ? "Added" : "FAILED - check Netlify env vars"}`
-    });
-    console.log("Email send result:", emailSent);
-    if (!emailSent) {
-      console.error("Owner booking email failed to send for", bookingId);
-      console.log("Falling back to client-side email notification");
-    }
-    console.log("=== EMAIL SEND PROCESS COMPLETE ===");
+    // 8. Email is sent from client-side (browser can pass Cloudflare challenge)
+    // Server-side email is blocked by Cloudflare 403
+    console.log("Email notification handled by client-side (browser can pass Cloudflare challenge)");
 
     // 9. Return HTTP 200 Success Confirmation
     return {
