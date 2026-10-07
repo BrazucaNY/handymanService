@@ -5,7 +5,7 @@ import crypto from 'node:crypto';
 import { DB_CONFIG } from './dbConfig.js';
 import { createGoogleCalendarEvent, getGoogleCalendarBusyRanges } from './googleCalendar.js';
 import { createSetmoreAppointment } from './setmore.js';
-import { sendOwnerEmail, formatEastern } from './notify.js';
+import { sendOwnerEmail, formatEastern, OWNER_EMAIL } from './notify.js';
 
 // Server-derived service durations (ignores client-passed durationMinutes)
 const SERVICE_DURATIONS = {
