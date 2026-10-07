@@ -239,6 +239,7 @@ Google Calendar: ${calendarEventId ? "Added" : "FAILED - check Netlify env vars"
     console.log("Email send result:", emailSent);
     if (!emailSent) {
       console.error("Owner booking email failed to send for", bookingId);
+      console.log("Falling back to client-side email notification");
     }
     console.log("=== EMAIL SEND PROCESS COMPLETE ===");
 
