@@ -359,6 +359,22 @@ async function handleFinalSubmit() {
     }
 
     try {
+      // Send email to customer
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0",
+          subject: `NEW APPOINTMENT BOOKED #${data.id}`,
+          from_name: "Here Handyman Online Booking",
+          name: name,
+          phone: phone,
+          email: email,
+          replyto: email,
+          message: `NEW APPOINTMENT CONFIRMED!\n\nBooking ID: ${data.id}\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}\nZIP: ${state.zip}\nService: ${state.service.name}\nDate/Time Slot: ${state.date} at ${state.slot.label}\nNotes: ${notes || 'None'}`
+        })
+      });
+      // Send email to owner
       await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
