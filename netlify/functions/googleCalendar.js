@@ -2,45 +2,15 @@
 import crypto from 'node:crypto';
 
 const saProject = process.env.FIREBASE_PROJECT_ID || ('handyman' + 'service' + 'admin');
-const GOOGLE_SA_EMAIL = process.env.GOOGLE_SA_EMAIL || process.env.GOOGLE_SA_SA_EMAIL || `herehandyman-booking@${saProject}.iam.gserviceaccount.com`;
+const GOOGLE_SA_EMAIL = process.env.GOOGLE_SA_EMAIL || `herehandyman-booking@${saProject}.iam.gserviceaccount.com`;
 const GOOGLE_SA_PRIVATE_KEY = (process.env.GOOGLE_SA_PRIVATE_KEY || '').replace(/\\n/g, '\n');
-const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || process.env.GOOGLE_CALENDAR_EMAIL || 'davi65@gmail.com';
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_OAUTH_REFRESH_TOKEN || process.env.GOOGLE_REFRESH_TOKEN;
+const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || process.env.GOOGLE_CALENDAR_EMAIL || 'primary';
 
 /**
- * Generates an OAuth2 access token.
- * Prefers David's user OAuth refresh token so events land on davi65@gmail.com.
- * Falls back to the service account JWT if user OAuth is not configured.
+ * Generates an OAuth2 access token for Google API using a Service Account JWT signature.
  */
 async function getAccessToken() {
-  if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET && GOOGLE_REFRESH_TOKEN) {
-    try {
-      const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          client_id: GOOGLE_CLIENT_ID,
-          client_secret: GOOGLE_CLIENT_SECRET,
-          refresh_token: GOOGLE_REFRESH_TOKEN,
-          grant_type: 'refresh_token'
-        })
-      });
-
-      if (tokenRes.ok) {
-        const tokenData = await tokenRes.json();
-        return tokenData.access_token;
-      }
-
-      console.warn('Google user OAuth refresh failed, falling back to service account:', await tokenRes.text());
-    } catch (oauthErr) {
-      console.warn('Google user OAuth error, falling back to service account:', oauthErr);
-    }
-  }
-
   if (!GOOGLE_SA_EMAIL || !GOOGLE_SA_PRIVATE_KEY) {
-    console.error('Google Calendar auth missing: set GOOGLE_OAUTH_REFRESH_TOKEN or GOOGLE_SA_EMAIL + GOOGLE_SA_PRIVATE_KEY');
     return null;
   }
 
@@ -74,7 +44,7 @@ async function getAccessToken() {
 
   if (!tokenRes.ok) {
     const errorText = await tokenRes.text();
-    console.error('Google service account token error:', errorText);
+    console.error('Google OAuth token error:', errorText);
     return null;
   }
 
@@ -143,51 +113,31 @@ export async function createGoogleCalendarEvent({
     const token = await getAccessToken();
     if (!token || !GOOGLE_CALENDAR_ID) return null;
 
-    const attendees = [];
-    if (customerEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(customerEmail).trim())) {
-      attendees.push({ email: String(customerEmail).trim() });
-    }
-
     const eventPayload = {
-      summary: `[${bookingId}] ${serviceName} - ${customerName}`,
-      location: `${customerAddress || ''}${zip ? `, ZIP ${zip}` : ''}`.trim(),
+      summary: `🔨 [${bookingId}] ${serviceName} - ${customerName}`,
+      location: `${customerAddress}, ZIP ${zip}`,
       description: `APPOINTMENT CONFIRMED FROM WEBSITE\n\nBooking ID: ${bookingId}\nCustomer: ${customerName}\nPhone: ${customerPhone}\nEmail: ${customerEmail || 'Not provided'}\nAddress: ${customerAddress}, ZIP ${zip}\nService: ${serviceName}\nNotes: ${notes || 'None'}`,
       start: { dateTime: startIso, timeZone: 'America/New_York' },
       end: { dateTime: endIso, timeZone: 'America/New_York' },
       reminders: {
         useDefault: false,
         overrides: [
-          { method: 'email', minutes: 1440 },
-          { method: 'popup', minutes: 1440 },
-          { method: 'popup', minutes: 120 },
-          { method: 'popup', minutes: 30 }
+          { method: 'email', minutes: 1440 }, // 24-hour email reminder
+          { method: 'popup', minutes: 1440 }, // 24-hour popup reminder
+          { method: 'popup', minutes: 120 },  // 2-hour popup reminder
+          { method: 'popup', minutes: 30 }    // 30-min popup reminder
         ]
       }
     };
 
-    if (attendees.length) {
-      eventPayload.attendees = attendees;
-    }
-
-    async function insertEvent(payload, sendUpdates) {
-      const qs = sendUpdates ? '?sendUpdates=all' : '?sendUpdates=none';
-      return fetch(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events${qs}`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
-    }
-
-    let res = await insertEvent(eventPayload, attendees.length > 0);
-    if (!res.ok && attendees.length > 0) {
-      const firstError = await res.text();
-      console.warn('Google Calendar insert with attendees failed, retrying without attendees:', firstError);
-      delete eventPayload.attendees;
-      res = await insertEvent(eventPayload, false);
-    }
+    const res = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GOOGLE_CALENDAR_ID)}/events`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(eventPayload)
+    });
 
     if (!res.ok) {
       console.error('Google Calendar Event Insert Error:', await res.text());
