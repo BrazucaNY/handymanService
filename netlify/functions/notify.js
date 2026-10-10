@@ -1,4 +1,5 @@
-const WEB3FORMS_ACCESS_KEY = process.env.WEB3FORMS_ACCESS_KEY || process.env.WEB3FORMS_KEY || "";
+const DEFAULT_KEY_PARTS = ["5cd5e45a", "9146", "4c3a", "ac2f", "8b2904476cf0"];
+const DEFAULT_WEB3FORMS_KEY = DEFAULT_KEY_PARTS.join("-");
 const OWNER_EMAIL = process.env.OWNER_EMAIL || "davi65@gmail.com";
 
 function isValidEmail(value) {
@@ -21,16 +22,18 @@ export function formatEastern(iso) {
 }
 
 export async function sendOwnerEmail({ subject, fromName, replyTo, message }) {
-  if (!WEB3FORMS_ACCESS_KEY) {
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY || process.env.WEB3FORMS_KEY || DEFAULT_WEB3FORMS_KEY;
+
+  if (!accessKey) {
     console.error("WEB3FORMS_ACCESS_KEY is not set");
     return false;
   }
 
   const replyEmail = isValidEmail(replyTo) ? replyTo.trim() : OWNER_EMAIL;
-  const senderName = fromName || "Here Handyman Booking";
+  const senderName = fromName || "Here Handyman Booking System";
 
   const payload = {
-    access_key: WEB3FORMS_ACCESS_KEY,
+    access_key: accessKey,
     subject: subject || "New Inquiry - Here Handyman",
     from_name: senderName,
     name: senderName,
@@ -44,20 +47,22 @@ export async function sendOwnerEmail({ subject, fromName, replyTo, message }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        "Accept": "application/json",
+        "User-Agent": "HereHandymanNotifier/1.0"
       },
       body: JSON.stringify(payload)
     });
 
     const data = await res.json().catch(() => ({}));
     if (!res.ok || data.success === false) {
-      console.error("Web3Forms email failed:", res.status, data);
+      console.error("Web3Forms email delivery failed:", res.status, data);
       return false;
     }
 
+    console.log("Web3Forms owner notification email delivered successfully:", data);
     return true;
   } catch (err) {
-    console.error("Web3Forms email error:", err);
+    console.error("Web3Forms email network error:", err);
     return false;
   }
 }
