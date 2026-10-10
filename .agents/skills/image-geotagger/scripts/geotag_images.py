@@ -16,6 +16,7 @@ TOWN_COORDINATES = {
     "mamaroneck": {"lat": 40.948700, "lon": -73.734600, "city": "Mamaroneck"},
     "yonkers": {"lat": 40.931200, "lon": -73.898700, "city": "Yonkers"},
     "new_rochelle": {"lat": 40.911500, "lon": -73.782400, "city": "New Rochelle"},
+    "hillsdale": {"lat": 42.181200, "lon": -73.541500, "city": "Hillsdale"},
     "default": {"lat": 41.033987, "lon": -73.762910, "city": "White Plains"}
 }
 
