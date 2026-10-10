@@ -3974,10 +3974,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-            <input type="hidden" name="access_key" value="5cd5e45a-9146-4c3a-ac2f-8b2904476cf0">
-
-
-
             <input type="hidden" name="subject" value="New Booking Request - Here Handyman">
 
 
@@ -4946,10 +4942,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-      textData.append('access_key',  '5cd5e45a-9146-4c3a-ac2f-8b2904476cf0');
-
-
-
       textData.append('subject',     'New Booking Request - Here Handyman');
 
 
@@ -5094,7 +5086,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-        fetch("https://api.web3forms.com/submit", {
+        fetch("/.netlify/functions/notify", {
 
 
 

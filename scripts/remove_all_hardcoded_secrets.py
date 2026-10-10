@@ -1,8 +1,13 @@
-const WEB3FORMS_ACCESS_KEY = process.env.WEB3FORMS_ACCESS_KEY || process.env.WEB3FORMS_KEY || "";
+import re
+import os
+
+def update_notify_function():
+    notify_path = 'netlify/functions/notify.js'
+    code = '''const WEB3FORMS_ACCESS_KEY = process.env.WEB3FORMS_ACCESS_KEY || process.env.WEB3FORMS_KEY || "";
 const OWNER_EMAIL = process.env.OWNER_EMAIL || "davi65@gmail.com";
 
 function isValidEmail(value) {
-  return typeof value === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  return typeof value === "string" && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(value.trim());
 }
 
 export function formatEastern(iso) {
@@ -91,7 +96,7 @@ export async function handler(event) {
     const p = phone || "";
     const s = service || "";
     const pd = project_details || "";
-    finalMessage = `NEW WEBSITE INQUIRY\n\nName: ${fn} ${ln}\nPhone: ${p}\nEmail: ${finalReplyTo}\nService: ${s}\nDetails: ${pd}`;
+    finalMessage = `NEW WEBSITE INQUIRY\\n\\nName: ${fn} ${ln}\\nPhone: ${p}\\nEmail: ${finalReplyTo}\\nService: ${s}\\nDetails: ${pd}`;
   }
 
   const success = await sendOwnerEmail({
@@ -107,3 +112,47 @@ export async function handler(event) {
     body: JSON.stringify({ success, message: success ? "Form submitted successfully" : "Email delivery failed" })
   };
 }
+'''
+    with open(notify_path, 'w', encoding='utf-8') as f:
+        f.write(code)
+    print("Updated netlify/functions/notify.js with POST endpoint handler.")
+
+def update_index_html():
+    with open('index.html', 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # 1. Remove hidden input for access_key
+    content = re.sub(r'<input\s+type="hidden"\s+name="access_key"\s+value="[^"]*">\s*', '', content)
+
+    # 2. Remove textData.append('access_key', ...)
+    content = re.sub(r'textData\.append\(\s*[\'\"]access_key[\'\"]\s*,\s*[\'\"][^\'\"]*[\'\"]\s*\);\s*', '', content)
+
+    # 3. Update fetch call to point to /.netlify/functions/notify
+    content = content.replace(
+        'fetch("https://api.web3forms.com/submit", {',
+        'fetch("/.netlify/functions/notify", {'
+    )
+
+    with open('index.html', 'w', encoding='utf-8') as f:
+        f.write(content)
+    print("Removed hardcoded access_key from index.html.")
+
+def update_booking_js():
+    with open('js/booking.js', 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Replace fetch to web3forms with /.netlify/functions/notify
+    content = content.replace(
+        'await fetch("https://api.web3forms.com/submit", {',
+        'await fetch("/.netlify/functions/notify", {'
+    )
+    content = re.sub(r'access_key:\s*\"[^\"]*\",\s*', '', content)
+
+    with open('js/booking.js', 'w', encoding='utf-8') as f:
+        f.write(content)
+    print("Removed hardcoded access_key from js/booking.js.")
+
+if __name__ == '__main__':
+    update_notify_function()
+    update_index_html()
+    update_booking_js()

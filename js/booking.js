@@ -359,11 +359,10 @@ async function handleFinalSubmit() {
     }
 
     try {
-      await fetch("https://api.web3forms.com/submit", {
+      await fetch("/.netlify/functions/notify", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
-          access_key: "5cd5e45a-9146-4c3a-ac2f-8b2904476cf0",
           subject: `NEW APPOINTMENT BOOKED #${data.id}`,
           from_name: "Here Handyman Online Booking",
           name: name,
