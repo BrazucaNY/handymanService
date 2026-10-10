@@ -7154,60 +7154,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     // Main loader loop
 
-
-
     function loadAllGalleryImages() {
-      if (!getGrid()) return;
-      // Clear static fallbacks
-      const grid = getGrid(); if (grid) grid.innerHTML = '';
-
-
+      const grid = getGrid();
+      if (!grid) return;
+      grid.innerHTML = '';
 
       // Load only first image of each category for "All" view
-
       localGalleryImages.forEach(img => {
-
-
 
         if (img.index === 1) {
 
-
-
           addGalleryItemDOM(img.category, img.src, img.index, img.desc);
-
-
 
         }
 
-
-
       });
 
-
-
-      
-
-
-
       // If we loaded no images (e.g. offline or empty folders), reload fallback static items!
-
-
-
       if (localGalleryImages.length === 0) {
-
-
 
         restoreStaticFallback();
 
-
-
       } else {
 
-
-
         // Show all loaded images
-
-        const grid = getGrid(); const items = grid ? grid.querySelectorAll('.gallery-item') : [];
+        const items = grid.querySelectorAll('.gallery-item');
 
         items.forEach(item => {
 
@@ -7217,135 +7188,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       }
 
-
-
     }
-
-
-
-
-
 
 
     // Restore fallback items in case folders are completely empty
 
-
-
     function restoreStaticFallback() {
+      const grid = getGrid();
+      if (!grid) return;
 
-
-
-      const grid = getGrid(); if (grid) grid.innerHTML = `
-
-
+      grid.innerHTML = `
 
         <div class="gallery-item carpentry tall" data-index="1">
 
-
-
           <div class="gallery-badge">Carpentry</div>
-
-
 
           <img src="assets/images/carpentry/1.webp" alt="Custom Built-in Bookshelves in a study" width="600" height="900" loading="lazy">
 
-
-
           <div class="gallery-label">Custom Built-in Bookshelves</div>
 
-
-
         </div>
-
-
 
         <div class="gallery-item painting" data-index="1">
 
-
-
           <div class="gallery-badge">Painting</div>
-
-
 
           <img src="assets/images/painting/1.webp" alt="Professional interior painting services in Westchester NY – Here Handyman" width="400" height="267" loading="lazy">
 
-
-
           <div class="gallery-label">Interior Painting – Westchester NY</div>
 
-
-
         </div>
-
-
 
         <div class="gallery-item plumbing" data-index="1">
 
-
-
           <div class="gallery-badge">Plumbing</div>
-
-
 
           <img src="assets/images/plumbing/1.webp" alt="Expert plumbing repairs &amp; installation in Westchester NY – Here Handyman" width="400" height="267" loading="lazy">
 
-
-
           <div class="gallery-label">Plumbing Services – Westchester NY</div>
 
-
-
         </div>
-
-
 
         <div class="gallery-item electrical" data-index="1">
 
-
-
           <div class="gallery-badge">Electrical</div>
-
-
 
           <img src="assets/images/electrical/1.webp" alt="Elegant copper pendant lighting fixture in kitchen" width="400" height="267" loading="lazy">
 
-
-
           <div class="gallery-label">Pendant Light Installation</div>
 
-
-
         </div>
-
-
 
         <div class="gallery-item repairs" data-index="1">
 
-
-
           <div class="gallery-badge">Repairs</div>
-
-
 
           <img src="assets/images/repairs/1.webp" alt="Fully repaired wall ready for painting" width="400" height="267" loading="lazy">
 
-
-
           <div class="gallery-label">Seamless Drywall Patching</div>
-
-
 
         </div>
 
-
-
       `;
 
-
-
       // Show all fallback items
-
-      const grid = getGrid(); const items = grid ? grid.querySelectorAll('.gallery-item') : [];
+      const items = grid.querySelectorAll('.gallery-item');
 
       items.forEach(item => {
 
@@ -7435,13 +7342,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     function filterGalleryDOM(filter) {
 
-
+      const grid = getGrid();
+      if (!grid) return;
+      grid.innerHTML = '';
 
       if (filter === 'all') {
 
         // Reload only first image of each category
-
-        const grid = getGrid(); if (grid) grid.innerHTML = '';
 
         localGalleryImages.forEach(img => {
 
@@ -7453,19 +7360,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         });
 
-        const grid = getGrid(); const items = grid ? grid.querySelectorAll('.gallery-item') : [];
-
-        items.forEach(item => {
-
-          item.style.display = 'block';
-
-        });
-
       } else {
 
         // Load all images of the selected category
-
-        const grid = getGrid(); if (grid) grid.innerHTML = '';
 
         localGalleryImages.forEach(img => {
 
@@ -7477,21 +7374,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         });
 
-        const grid = getGrid(); const items = grid ? grid.querySelectorAll('.gallery-item') : [];
-
-        items.forEach(item => {
-
-          item.style.display = 'block';
-
-        });
-
       }
 
+      const items = grid.querySelectorAll('.gallery-item');
 
+      items.forEach(item => {
+
+        item.style.display = 'block';
+
+      });
 
       updateLightboxList(filter);
-
-
 
     }
 
@@ -7521,87 +7414,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
     // Event delegation for opening Lightbox on image click
-    const gridEl = getGrid();
-    if (gridEl) {
-      gridEl.addEventListener('click', (e) => {
-
-
+    document.addEventListener('click', (e) => {
 
       const item = e.target.closest('.gallery-item');
 
-
-
       if (!item) return;
-
-
-
-      
-
-
 
       e.preventDefault();
 
-
-
       const img = item.querySelector('img');
 
-
+      if (!img) return;
 
       const clickedSrc = img.getAttribute('src');
 
-
-
-      const clickedCat = categories.find(c => item.classList.contains(c));
-
-
+      const clickedCat = categories.find(c => item.classList.contains(c)) || 'repairs';
 
       imagesList = localGalleryImages
 
-
-
         .filter(gi => gi.category === clickedCat)
-
-
 
         .sort((a, b) => Number(a.index) - Number(b.index))
 
-
-
         .map(gi => ({
-
-
 
           src: gi.src,
 
-
-
           alt: (clickedCat.charAt(0).toUpperCase() + clickedCat.slice(1) + ' project photo ' + gi.index),
-
-
 
           caption: clickedCat.charAt(0).toUpperCase() + clickedCat.slice(1) + ' Project #' + gi.index
 
-
-
         }));
-
-
 
       currentIndex = imagesList.findIndex(image => image.src === clickedSrc);
 
-
-
       if (currentIndex !== -1) {
-
-
 
         openLightbox();
 
-
-
       }
     });
-    }
 
 
 
