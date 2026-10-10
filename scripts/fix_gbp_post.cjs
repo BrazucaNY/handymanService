@@ -36,7 +36,7 @@ async function fixGbpPost() {
   const accountId = "107235988987982670835";
   const locationId = "1964673381603454408";
 
-  const imageUrl = "https://raw.githubusercontent.com/BrazucaNY/handymanService/main/assets/images/portfolio/curtain-rod-installation-white-plains.jpg";
+  const imageUrl = "https://raw.githubusercontent.com/BrazucaNY/handymanService/main/assets/images/portfolio/curtain-rod-installation-white-plains.webp";
   console.log(`Checking JPG image URL: ${imageUrl}`);
   const imgCheck = await fetch(imageUrl);
   console.log("Image HTTP status:", imgCheck.status, imgCheck.headers.get('content-type'));
