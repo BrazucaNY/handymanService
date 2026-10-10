@@ -112,7 +112,7 @@ for filepath in html_files:
     else:
         # Check review rating if aggregateRating present
         rating_match = re.search(r'"ratingValue"\s*:\s*"(5\.0|5)"', content)
-        review_count_match = re.search(r'"reviewCount"\s*:\s*"(26|28)"', content)
+        review_count_match = re.search(r'"reviewCount"\s*:\s*"(26|28|30)"', content)
         if "aggregateRating" in content:
             if not rating_match:
                 audit_results["schema_rating_mismatch"].append((rel, "Rating value not 5.0"))
