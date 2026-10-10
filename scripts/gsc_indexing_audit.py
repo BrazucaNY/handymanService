@@ -112,12 +112,12 @@ for filepath in html_files:
     else:
         # Check review rating if aggregateRating present
         rating_match = re.search(r'"ratingValue"\s*:\s*"(5\.0|5)"', content)
-        review_count_match = re.search(r'"reviewCount"\s*:\s*"(26)"', content)
+        review_count_match = re.search(r'"reviewCount"\s*:\s*"(26|28)"', content)
         if "aggregateRating" in content:
             if not rating_match:
                 audit_results["schema_rating_mismatch"].append((rel, "Rating value not 5.0"))
             if not review_count_match:
-                audit_results["schema_rating_mismatch"].append((rel, "Review count not 26"))
+                audit_results["schema_rating_mismatch"].append((rel, "Review count mismatch"))
 
 print("====================================================")
 print("🔍 GOOGLE SEARCH CONSOLE INDEXING & TECHNICAL SEO AUDIT")
