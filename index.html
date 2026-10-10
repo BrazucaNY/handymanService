@@ -4327,7 +4327,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
     let galleryGrid = null;
-    function getGrid() { if (!galleryGrid) galleryGrid = document.querySelector('.gallery-grid'); return galleryGrid; }
+    function getGrid() { return document.querySelector('.gallery-grid'); }
 
 
 
@@ -7140,7 +7140,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-      (getGrid() && getGrid().appendChild)(item);
+      const grid = getGrid(); if (grid) grid.appendChild(item);
 
 
 
@@ -7159,7 +7159,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     function loadAllGalleryImages() {
       if (!getGrid()) return;
       // Clear static fallbacks
-      if (getGrid()) getGrid().innerHTML = '';
+      const grid = getGrid(); if (grid) grid.innerHTML = '';
 
 
 
@@ -7207,7 +7207,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         // Show all loaded images
 
-        const items = getGrid() && getGrid().querySelectorAll('.gallery-item');
+        const grid = getGrid(); const items = grid ? grid.querySelectorAll('.gallery-item') : [];
 
         items.forEach(item => {
 
@@ -7235,7 +7235,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-      if (getGrid()) getGrid().innerHTML = `
+      const grid = getGrid(); if (grid) grid.innerHTML = `
 
 
 
@@ -7345,7 +7345,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       // Show all fallback items
 
-      const items = getGrid() && getGrid().querySelectorAll('.gallery-item');
+      const grid = getGrid(); const items = grid ? grid.querySelectorAll('.gallery-item') : [];
 
       items.forEach(item => {
 
@@ -7369,7 +7369,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-      const items = getGrid() && getGrid().querySelectorAll('.gallery-item');
+      const grid = getGrid(); const items = grid ? grid.querySelectorAll('.gallery-item') : [];
 
 
 
@@ -7441,7 +7441,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         // Reload only first image of each category
 
-        if (getGrid()) getGrid().innerHTML = '';
+        const grid = getGrid(); if (grid) grid.innerHTML = '';
 
         localGalleryImages.forEach(img => {
 
@@ -7453,7 +7453,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         });
 
-        const items = getGrid() && getGrid().querySelectorAll('.gallery-item');
+        const grid = getGrid(); const items = grid ? grid.querySelectorAll('.gallery-item') : [];
 
         items.forEach(item => {
 
@@ -7465,7 +7465,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         // Load all images of the selected category
 
-        if (getGrid()) getGrid().innerHTML = '';
+        const grid = getGrid(); if (grid) grid.innerHTML = '';
 
         localGalleryImages.forEach(img => {
 
@@ -7477,7 +7477,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         });
 
-        const items = getGrid() && getGrid().querySelectorAll('.gallery-item');
+        const grid = getGrid(); const items = grid ? grid.querySelectorAll('.gallery-item') : [];
 
         items.forEach(item => {
 
