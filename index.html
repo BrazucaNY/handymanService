@@ -5188,8 +5188,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <h2>
        Book a Service / Request Quote
       </h2>
-      <form action="https://api.web3forms.com/submit" enctype="multipart/form-data" id="quote-form" method="POST">
-       <input name="access_key" type="hidden" value="5cd5e45a-9146-4c3a-ac2f-8b2904476cf0"/>
+      <form action="/.netlify/functions/notify" enctype="multipart/form-data" id="quote-form" method="POST">
        <input name="subject" type="hidden" value="New Booking Request - Here Handyman"/>
        <input name="from_name" type="hidden" value="Here Handyman Website"/>
        <div class="form-row">
@@ -5604,17 +5603,24 @@ document.addEventListener('submit', async function(e) {
 
   try {
     const formData = new FormData(form);
-    if (!formData.has('access_key')) {
-      formData.append('access_key', '5cd5e45a-9146-4c3a-ac2f-8b2904476cf0');
-    }
+    const payload = {
+      subject: formData.get('subject') || 'New Booking Request - Here Handyman',
+      first_name: formData.get('first_name') || formData.get('name') || '',
+      last_name: formData.get('last_name') || '',
+      email: formData.get('email') || '',
+      phone: formData.get('phone') || '',
+      service: formData.get('service') || '',
+      project_details: formData.get('project_details') || formData.get('message') || ''
+    };
 
-    const res = await fetch('https://api.web3forms.com/submit', {
+    const res = await fetch('/.netlify/functions/notify', {
       method: 'POST',
-      body: formData
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
 
-    const data = await res.json();
-    if (res.ok && data.success) {
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data.success !== false) {
       form.innerHTML = '<div style="text-align:center;padding:45px 20px;color:#071828;"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><h3 style="font-size:24px;font-weight:800;margin-bottom:12px;color:#071828;text-transform:uppercase;">Thank You! Your Request Has Been Sent.</h3><p style="font-size:16px;color:#374151;max-width:520px;margin:0 auto;line-height:1.6;">David will review your project details and contact you shortly at your provided phone number or email.</p></div>';
     } else {
       alert('Submission error. Please call or text (516) 350-0801 directly.');

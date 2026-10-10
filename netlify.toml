@@ -8,6 +8,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  SECRETS_SCAN_OMIT_KEYS = "WEB3FORMS_ACCESS_KEY"
 
 # Remove the [context.production.environment] section completely
 # Environment variables should be set in Netlify's UI
