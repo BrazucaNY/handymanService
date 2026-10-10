@@ -2667,5 +2667,94 @@
   </script>
   <script src="/js/booking.js?v=8" type="module">
   </script>
- </body>
+ 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initReviewsCarousel();
+});
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
+  initReviewsCarousel();
+}
+
+function initReviewsCarousel() {
+  var track = document.getElementById('reviewTrack');
+  var prevBtn = document.getElementById('reviewPrev');
+  var nextBtn = document.getElementById('reviewNext');
+  
+  if (!track || !prevBtn || !nextBtn) return;
+  if (track.dataset.carouselInitialized === 'true') return;
+  track.dataset.carouselInitialized = 'true';
+
+  var currentIndex = 0;
+
+  function getVisibleCards() {
+    var width = window.innerWidth;
+    if (width <= 600) return 1;
+    if (width <= 960) return 2;
+    return 3;
+  }
+
+  function updateCarousel() {
+    var cards = track.querySelectorAll('.rev-card-item');
+    if (cards.length === 0) return;
+    
+    var visible = getVisibleCards();
+    var maxIndex = cards.length - visible;
+    if (maxIndex < 0) maxIndex = 0;
+
+    if (currentIndex > maxIndex) currentIndex = 0; // wrap around to start
+    if (currentIndex < 0) currentIndex = maxIndex; // wrap around to end
+
+    var cardWidth = cards[0].getBoundingClientRect().width;
+    var gap = 16;
+    var offset = currentIndex * (cardWidth + gap);
+
+    track.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+    track.style.transform = 'translateX(-' + offset + 'px)';
+  }
+
+  nextBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    currentIndex++;
+    updateCarousel();
+  });
+
+  prevBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    currentIndex--;
+    updateCarousel();
+  });
+
+  // Touch Swipe Support
+  var startX = 0;
+  var isSwiping = false;
+
+  track.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1) {
+      startX = e.touches[0].clientX;
+      isSwiping = true;
+    }
+  }, { passive: true });
+
+  track.addEventListener('touchend', function(e) {
+    if (!isSwiping) return;
+    isSwiping = false;
+    var endX = e.changedTouches[0].clientX;
+    var diffX = startX - endX;
+    if (Math.abs(diffX) > 40) {
+      if (diffX > 0) {
+        currentIndex++;
+      } else {
+        currentIndex--;
+      }
+      updateCarousel();
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', updateCarousel);
+  setTimeout(updateCarousel, 100);
+}
+</script>
+
+</body>
 </html>
