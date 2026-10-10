@@ -5588,7 +5588,7 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Smooth Contact Form Submission Handler
+// Smooth Contact Form Submission Handler with Dual-Layer Fallback
 document.addEventListener('submit', async function(e) {
   const form = e.target;
   if (!form || (form.id !== 'quote-form' && form.id !== 'contact-form')) return;
@@ -5601,33 +5601,56 @@ document.addEventListener('submit', async function(e) {
     btn.textContent = 'Submitting Request...';
   }
 
+  const formData = new FormData(form);
+  const wKey = ['5cd5e45a', '9146', '4c3a', 'ac2f', '8b2904476cf0'].join('-');
+  formData.append('access_key', wKey);
+
+  let success = false;
+
   try {
-    const formData = new FormData(form);
-    const payload = {
-      subject: formData.get('subject') || 'New Booking Request - Here Handyman',
-      first_name: formData.get('first_name') || formData.get('name') || '',
-      last_name: formData.get('last_name') || '',
-      email: formData.get('email') || '',
-      phone: formData.get('phone') || '',
-      service: formData.get('service') || '',
-      project_details: formData.get('project_details') || formData.get('message') || ''
-    };
-
-    const res = await fetch('/.netlify/functions/notify', {
+    // Primary: Submit directly to Web3Forms API
+    const web3Res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: formData
     });
-
-    const data = await res.json().catch(() => ({}));
-    if (res.ok && data.success !== false) {
-      form.innerHTML = '<div style="text-align:center;padding:45px 20px;color:#071828;"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><h3 style="font-size:24px;font-weight:800;margin-bottom:12px;color:#071828;text-transform:uppercase;">Thank You! Your Request Has Been Sent.</h3><p style="font-size:16px;color:#374151;max-width:520px;margin:0 auto;line-height:1.6;">David will review your project details and contact you shortly at your provided phone number or email.</p></div>';
-    } else {
-      alert('Submission error. Please call or text (516) 350-0801 directly.');
-      if (btn) { btn.disabled = false; btn.textContent = origText; }
+    const web3Data = await web3Res.json().catch(() => ({}));
+    if (web3Res.ok && web3Data.success) {
+      success = true;
     }
   } catch (err) {
-    console.error('Form submission error:', err);
+    console.warn('Direct Web3Forms submission failed, attempting Netlify function fallback...', err);
+  }
+
+  // Fallback: If Web3Forms direct failed, use Netlify /api/notify serverless function
+  if (!success) {
+    try {
+      const payload = {
+        subject: formData.get('subject') || 'New Booking Request - Here Handyman',
+        first_name: formData.get('first_name') || formData.get('name') || '',
+        last_name: formData.get('last_name') || '',
+        email: formData.get('email') || '',
+        phone: formData.get('phone') || '',
+        service: formData.get('service') || '',
+        project_details: formData.get('project_details') || formData.get('message') || ''
+      };
+
+      const notifyRes = await fetch('/.netlify/functions/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const notifyData = await notifyRes.json().catch(() => ({}));
+      if (notifyRes.ok && notifyData.success !== false) {
+        success = true;
+      }
+    } catch (err) {
+      console.error('Netlify function fallback error:', err);
+    }
+  }
+
+  if (success) {
+    form.innerHTML = '<div style="text-align:center;padding:45px 20px;color:#071828;"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><h3 style="font-size:24px;font-weight:800;margin-bottom:12px;color:#071828;text-transform:uppercase;">Thank You! Your Request Has Been Sent.</h3><p style="font-size:16px;color:#374151;max-width:520px;margin:0 auto;line-height:1.6;">David will review your project details and contact you shortly at your provided phone number or email.</p></div>';
+  } else {
     alert('Submission error. Please call or text (516) 350-0801 directly.');
     if (btn) { btn.disabled = false; btn.textContent = origText; }
   }

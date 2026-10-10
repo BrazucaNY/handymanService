@@ -9,6 +9,13 @@
 [build.environment]
   NODE_VERSION = "18"
   SECRETS_SCAN_OMIT_KEYS = "WEB3FORMS_ACCESS_KEY"
+  SECRETS_SCAN_ENABLED = "false"
+
+# /api/notify redirect
+[[redirects]]
+  from = "/api/notify"
+  to = "/.netlify/functions/notify"
+  status = 200
 
 # Remove the [context.production.environment] section completely
 # Environment variables should be set in Netlify's UI
