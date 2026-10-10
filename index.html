@@ -5532,6 +5532,32 @@ function initReviewsCarousel() {
   window.addEventListener('resize', updateCarousel);
   setTimeout(updateCarousel, 100);
 }
+
+// FAQ Accordion click handler using Event Delegation
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.faq-question');
+  if (!btn) return;
+  
+  e.preventDefault();
+  const faqItem = btn.closest('.faq-item');
+  if (!faqItem) return;
+
+  const isActive = faqItem.classList.contains('active');
+
+  // Close all other FAQ items
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.classList.remove('active');
+    const answer = item.querySelector('.faq-answer');
+    if (answer) answer.style.maxHeight = null;
+  });
+
+  // Toggle clicked item
+  if (!isActive) {
+    faqItem.classList.add('active');
+    const answer = faqItem.querySelector('.faq-answer');
+    if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+});
   </script>
  </body>
 </html>
