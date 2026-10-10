@@ -7501,50 +7501,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-    // Filter Buttons click handler
-
-
-
-    const filterButtons = document.querySelectorAll('.filter-btn');
-
-
-
-    filterButtons.forEach(btn => {
-
-
-
-      btn.addEventListener('click', () => {
-
-
-
-        const filter = btn.getAttribute('data-filter');
-
-
-
-        
-
-
-
-        filterButtons.forEach(b => b.classList.remove('active'));
-
-
-
-        btn.classList.add('active');
-
-
-
-        
-
-
-
-        filterGalleryDOM(filter);
-
-
-
-      });
-
-
-
+    // Filter Buttons click handler using Event Delegation (robust against late DOM load)
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      const filter = btn.getAttribute('data-filter');
+      if (!filter) return;
+      
+      e.preventDefault();
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterGalleryDOM(filter);
     });
 
 
@@ -7554,8 +7521,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
     // Event delegation for opening Lightbox on image click
-    if (getGrid()) {
-      galleryGrid.addEventListener('click', (e) => {
+    const gridEl = getGrid();
+    if (gridEl) {
+      gridEl.addEventListener('click', (e) => {
 
 
 
