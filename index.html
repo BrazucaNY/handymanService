@@ -6343,6 +6343,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
     const galleryGrid = document.querySelector('.gallery-grid');
+    if (!galleryGrid) return;
 
 
 
@@ -9039,6 +9040,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
     function addGalleryItemDOM(category, src, index, desc) {
+      if (!galleryGrid) return;
 
 
 
@@ -9171,13 +9173,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
     function loadAllGalleryImages() {
-
-
-
+      if (!galleryGrid) return;
       // Clear static fallbacks
-
-
-
       galleryGrid.innerHTML = '';
 
 
