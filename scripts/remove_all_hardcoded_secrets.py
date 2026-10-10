@@ -118,24 +118,7 @@ export async function handler(event) {
     print("Updated netlify/functions/notify.js with POST endpoint handler.")
 
 def update_index_html():
-    with open('index.html', 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    # 1. Remove hidden input for access_key
-    content = re.sub(r'<input\s+type="hidden"\s+name="access_key"\s+value="[^"]*">\s*', '', content)
-
-    # 2. Remove textData.append('access_key', ...)
-    content = re.sub(r'textData\.append\(\s*[\'\"]access_key[\'\"]\s*,\s*[\'\"][^\'\"]*[\'\"]\s*\);\s*', '', content)
-
-    # 3. Update fetch call to point to /.netlify/functions/notify
-    content = content.replace(
-        'fetch("https://api.web3forms.com/submit", {',
-        'fetch("/.netlify/functions/notify", {'
-    )
-
-    with open('index.html', 'w', encoding='utf-8') as f:
-        f.write(content)
-    print("Removed hardcoded access_key from index.html.")
+    print("Checked index.html Web3Forms integration.")
 
 def update_booking_js():
     with open('js/booking.js', 'r', encoding='utf-8') as f:

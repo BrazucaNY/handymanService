@@ -5189,6 +5189,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
        Book a Service / Request Quote
       </h2>
       <form action="https://api.web3forms.com/submit" enctype="multipart/form-data" id="quote-form" method="POST">
+       <input name="access_key" type="hidden" value="5cd5e45a-9146-4c3a-ac2f-8b2904476cf0"/>
        <input name="subject" type="hidden" value="New Booking Request - Here Handyman"/>
        <input name="from_name" type="hidden" value="Here Handyman Website"/>
        <div class="form-row">
@@ -5585,6 +5586,44 @@ document.addEventListener('click', function(e) {
     faqItem.classList.add('active');
     const answer = faqItem.querySelector('.faq-answer');
     if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+});
+
+// Smooth Contact Form Submission Handler
+document.addEventListener('submit', async function(e) {
+  const form = e.target;
+  if (!form || (form.id !== 'quote-form' && form.id !== 'contact-form')) return;
+
+  e.preventDefault();
+  const btn = form.querySelector('.form-submit, button[type="submit"]');
+  const origText = btn ? btn.textContent : 'Book Now';
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Submitting Request...';
+  }
+
+  try {
+    const formData = new FormData(form);
+    if (!formData.has('access_key')) {
+      formData.append('access_key', '5cd5e45a-9146-4c3a-ac2f-8b2904476cf0');
+    }
+
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+
+    const data = await res.json();
+    if (res.ok && data.success) {
+      form.innerHTML = '<div style="text-align:center;padding:45px 20px;color:#071828;"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><h3 style="font-size:24px;font-weight:800;margin-bottom:12px;color:#071828;text-transform:uppercase;">Thank You! Your Request Has Been Sent.</h3><p style="font-size:16px;color:#374151;max-width:520px;margin:0 auto;line-height:1.6;">David will review your project details and contact you shortly at your provided phone number or email.</p></div>';
+    } else {
+      alert('Submission error. Please call or text (516) 350-0801 directly.');
+      if (btn) { btn.disabled = false; btn.textContent = origText; }
+    }
+  } catch (err) {
+    console.error('Form submission error:', err);
+    alert('Submission error. Please call or text (516) 350-0801 directly.');
+    if (btn) { btn.disabled = false; btn.textContent = origText; }
   }
 });
   </script>
