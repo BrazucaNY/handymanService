@@ -37,41 +37,27 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "OfferCatalog",
-      "@id": "https://www.herehandyman.com/offer#catalog",
-      "name": "TV Mounting Packages",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "name": "Basic TV Mounting Package (Up to 55\")",
-          "price": "99.00",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.herehandyman.com/offer"
-        },
-        {
-          "@type": "Offer",
-          "name": "Large TV Mounting Package (56\" - 85\"+)",
-          "price": "139.00",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.herehandyman.com/offer"
-        },
-        {
-          "@type": "Offer",
-          "name": "Deluxe TV Mounting + In-Wall Wire Concealment Package",
-          "price": "189.00",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.herehandyman.com/offer"
-        }
-      ]
+      "@type": "Service",
+      "@id": "https://www.herehandyman.com/offer#service",
+      "name": "Professional TV Mounting & Wire Concealment",
+      "serviceType": "TV Mounting",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Here Handyman",
+        "telephone": "+1-516-350-0801",
+        "url": "https://www.herehandyman.com"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Westchester County, New York"
+      },
+      "description": "Professional TV wall mounting and wire concealment in Westchester County, NY. Precision laser leveling, stud locator anchoring, and clean in-wall cable routing on all wall types."
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.herehandyman.com/" },
-        { "@type": "ListItem", "position": 2, "name": "TV Mounting Packages" }
+        { "@type": "ListItem", "position": 2, "name": "TV Mounting Services" }
       ]
     },
     {
@@ -79,10 +65,10 @@
       "itemListElement": [
         {
           "@type": "Question",
-          "name": "How do I book a TV mounting package with Here Handyman?",
+          "name": "How do I book a TV mounting service with Here Handyman?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can lock in your TV mounting package online at www.herehandyman.com/book or by calling or texting (516) 350-0801 for fast same-day or next-day scheduling across Westchester County."
+            "text": "You can schedule your TV mounting online at www.herehandyman.com/book or by calling/texting (516) 350-0801 for fast same-day or next-day appointments across Westchester County."
           }
         },
         {
@@ -95,10 +81,10 @@
         },
         {
           "@type": "Question",
-          "name": "What is included in the Deluxe In-Wall Cable Concealment package?",
+          "name": "What is included in the In-Wall Cable Concealment service?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The Deluxe package includes TV mounting (up to 85\"), full in-wall cable concealment pass-through, soundbar mounting, cable management, and testing of all connected devices."
+            "text": "In-wall wire concealment includes TV mounting (up to 85-inch), full in-wall cable pass-through, soundbar mounting, cable management, and testing of all connected devices."
           }
         },
         {
@@ -309,19 +295,19 @@
 <section class="offers-section">
   <div class="container">
     <div class="section-header">
-      <h2>Choose Your TV Mounting Package</h2>
-      <p>Transparent pricing and professional installation for all Westchester County homes.</p>
+      <h2>Professional TV Mounting Services</h2>
+      <p>Upfront estimates, precision laser leveling, and expert installation for all Westchester County homes.</p>
     </div>
 
     <div class="pricing-grid">
       
-      <!-- Tier 1: Basic -->
+      <!-- Tier 1: Standard TV Mounting -->
       <div class="pricing-card">
         <div class="card-header">
-          <h3>Basic TV Package</h3>
+          <h3>Standard TV Mounting</h3>
           <div class="subtitle">For TVs Up to 55"</div>
           <div class="card-price">
-            <span class="deal-price">$99</span>
+            <span class="deal-price">Upfront Quote</span>
           </div>
         </div>
         <div class="card-body">
@@ -334,44 +320,44 @@
             <li>Clean Work Area Guaranteed</li>
           </ul>
           <div class="card-footer">
-            <a href="/book?package=basic-tv" class="btn-primary pricing-btn">Select Basic Package ($99)</a>
+            <a href="/book" class="btn-primary pricing-btn">Book Standard Mounting</a>
           </div>
         </div>
       </div>
 
-      <!-- Tier 2: Large TV (Most Popular) -->
+      <!-- Tier 2: Big Screen & Fireplace TV Mounting -->
       <div class="pricing-card featured">
         <div class="ribbon popular">MOST POPULAR</div>
         <div class="card-header">
-          <h3>Large TV Package</h3>
-          <div class="subtitle">For TVs 56" - 85"+</div>
+          <h3>Big Screen & Fireplace Mount</h3>
+          <div class="subtitle">For TVs 56" - 85"+ & Fireplace Walls</div>
           <div class="card-price">
-            <span class="deal-price">$139</span>
+            <span class="deal-price">Upfront Quote</span>
           </div>
         </div>
         <div class="card-body">
           <ul class="feature-list">
             <li>Mount 1 TV (56" up to 85"+ Big Screen)</li>
             <li>Heavy-Duty Stud Anchoring & Safety Test</li>
-            <li>Drywall, Wood, or Brick/Concrete Mounting</li>
+            <li>Drywall, Wood, Brick, or Concrete Mounting</li>
             <li>Soundbar or Streaming Box Setup</li>
             <li>Clean Cable Management & Bundling</li>
             <li>100% Lifetime No-Fall Guarantee</li>
           </ul>
           <div class="card-footer">
-            <a href="/book?package=large-tv" class="btn-primary pricing-btn">Select Large Package ($139)</a>
+            <a href="/book" class="btn-primary pricing-btn">Book Big Screen Mounting</a>
           </div>
         </div>
       </div>
 
-      <!-- Tier 3: Deluxe In-Wall Wire Concealment (Best Value) -->
+      <!-- Tier 3: Deluxe In-Wall Wire Concealment -->
       <div class="pricing-card">
         <div class="ribbon">BEST VALUE</div>
         <div class="card-header">
-          <h3>Deluxe Wire Concealment</h3>
-          <div class="subtitle">TV Mount + Hidden In-Wall Wires</div>
+          <h3>In-Wall Wire Concealment</h3>
+          <div class="subtitle">TV Mount + Invisible In-Wall Wires</div>
           <div class="card-price">
-            <span class="deal-price">$189</span>
+            <span class="deal-price">Upfront Quote</span>
           </div>
         </div>
         <div class="card-body">
@@ -384,7 +370,7 @@
             <li>Flawless Showroom Finish</li>
           </ul>
           <div class="card-footer">
-            <a href="/book?package=deluxe-tv" class="btn-primary pricing-btn">Select Deluxe Package ($189)</a>
+            <a href="/book" class="btn-primary pricing-btn">Book Deluxe Wire Concealment</a>
           </div>
         </div>
       </div>
