@@ -5,7 +5,7 @@ import crypto from 'node:crypto';
 import { DB_CONFIG } from './dbConfig.js';
 import { createGoogleCalendarEvent, getGoogleCalendarBusyRanges } from './googleCalendar.js';
 import { createSetmoreAppointment } from './setmore.js';
-import { sendOwnerSMS, formatEastern } from './notify.js';
+import { sendOwnerEmail, formatEastern } from './notify.js';
 
 // Server-derived service durations (ignores client-passed durationMinutes)
 const SERVICE_DURATIONS = {
@@ -20,27 +20,15 @@ const SERVICE_DURATIONS = {
   general: 180
 };
 
-// Allowed service ZIP codes (Westchester + NYC Boroughs + Long Island)
+// Allowed Westchester service ZIP codes (20-mile radius from White Plains 10607)
 const ALLOWED_ZIPS = [
-  // Westchester County
   "10601", "10603", "10604", "10605", "10606", "10607",
   "10583", "10528", "10577", "10580", "10573", "10538",
   "10543", "10504", "10514", "10506", "10536", "10549",
   "10570", "10510", "10562", "10591", "10533", "10522",
   "10706", "10530", "10502", "10523", "10595", "10708",
   "10707", "10709", "10803", "10801", "10804", "10805",
-  "10701", "10703", "10704", "10705", "10710",
-  // NYC Boroughs
-  "10001", "10002", "10003", "10004", "10005", "10006", "10007", "10008", "10009", "10010", "10011", "10012", "10013", "10014", "10015", "10016", "10017", "10018", "10019", "10020", "10021", "10022", "10023", "10024", "10025", "10026", "10027", "10028", "10029", "10030", "10031", "10032", "10033", "10034", "10035", "10036", "10037", "10038", "10039", "10040", "10041", "10042", "10043", "10044", "10045",
-  "11201", "11203", "11204", "11205", "11206", "11207", "11208", "11209", "11210", "11211", "11212", "11213", "11214", "11215", "11216", "11217", "11218", "11219", "11220", "11221", "11222", "11223", "11224", "11225", "11226", "11227", "11228", "11229", "11230", "11231", "11232", "11233", "11234", "11235", "11236", "11237", "11238", "11239", "11240", "11241", "11242", "11243", "11244", "11245", "11246", "11247", "11248", "11249", "11250", "11251", "11252", "11253", "11254", "11255", "11256",
-  "11354", "11355", "11356", "11357", "11358", "11359", "11360", "11361", "11362", "11363", "11364", "11365", "11366", "11367", "11368", "11369", "11370", "11371", "11372", "11373", "11374", "11375", "11376", "11377", "11378", "11379", "11380", "11381", "11382", "11383", "11384", "11385", "11386", "11387", "11388", "11390", "11394", "11395", "11396", "11397", "11398", "11399",
-  "10451", "10452", "10453", "10454", "10455", "10456", "10457", "10458", "10459", "10460", "10461", "10462", "10463", "10464", "10465", "10466", "10467", "10468", "10469", "10470", "10471", "10472", "10473", "10474", "10475",
-  "10301", "10302", "10303", "10304", "10305", "10306", "10307", "10308", "10309", "10310", "10311", "10312", "10313", "10314",
-  // Long Island
-  "11520", "11521", "11522", "11523", "11524", "11525", "11526", "11528", "11530", "11542", "11545", "11547", "11548", "11550", "11551", "11552", "11553", "11554", "11556", "11557", "11558", "11559", "11560", "11561", "11563", "11564", "11565", "11566", "11567", "11568", "11569", "11572", "11575", "11577", "11579",
-  "11725", "11727", "11735", "11742", "11743", "11747", "11758", "11763", "11765", "11767", "11768", "11772", "11777", "11784", "11786", "11787", "11788", "11790", "11797",
-  "11706", "11710", "11714", "11717", "11719", "11720", "11722", "11725", "11727", "11735", "11742", "11743", "11747", "11758", "11763", "11765", "11767", "11768", "11772", "11777", "11784", "11786", "11787", "11788", "11790", "11797",
-  "11768", "11777", "11779", "11786", "11787", "11788", "11794"
+  "10701", "10703", "10704", "10705", "10710"
 ];
 
 export async function handler(event) {
@@ -213,20 +201,28 @@ export async function handler(event) {
       }
     }
 
-    // 8. Send SMS Notification to owner
-    console.log("=== STARTING SMS SEND PROCESS ===");
-    console.log("Booking ID:", bookingId);
+    // 8. Send Instant Notification Email (must await so Netlify does not freeze the request)
     const easternTime = formatEastern(startTimeIso);
-    console.log("Attempting to send SMS to owner");
-    const smsSent = await sendOwnerSMS({
-      subject: `NEW APPOINTMENT #${bookingId}`,
-      message: `NEW APPOINTMENT CONFIRMED!\n\nBooking ID: ${bookingId}\nName: ${name}\nPhone: ${phone}\nEmail: ${email || "Not provided"}\nAddress: ${address || "Not provided"}\nZIP: ${cleanZip}\nService: ${serviceId}\nDate & Time: ${easternTime}\nNotes: ${notes || "None"}\nGoogle Calendar: ${calendarEventId ? "Added" : "FAILED - check Netlify env vars"}`
+    const emailSent = await sendOwnerEmail({
+      subject: `NEW APPOINTMENT BOOKED #${bookingId}`,
+      fromName: "Here Handyman Direct Booking",
+      replyTo: email,
+      message: `NEW APPOINTMENT CONFIRMED!
+
+Booking ID: ${bookingId}
+Name: ${name}
+Phone: ${phone}
+Email: ${email || "Not provided"}
+Address: ${address || "Not provided"}
+ZIP: ${cleanZip}
+Service: ${serviceId}
+Date & Time: ${easternTime}
+Notes: ${notes || "None"}
+Google Calendar: ${calendarEventId ? "Added" : "FAILED - check Netlify env vars"}`
     });
-    console.log("SMS send result:", smsSent);
-    if (!smsSent) {
-      console.error("Owner booking SMS failed to send for", bookingId);
+    if (!emailSent) {
+      console.error("Owner booking email failed to send for", bookingId);
     }
-    console.log("=== SMS SEND PROCESS COMPLETE ===");
 
     // 9. Return HTTP 200 Success Confirmation
     return {

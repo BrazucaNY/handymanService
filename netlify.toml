@@ -2,13 +2,12 @@
   publish = "."
   functions = "netlify/functions"
 
-[build.environment]
-  NODE_VERSION = "18"
-  SECRETS_SCAN_OMIT_KEYS = "WEB3FORMS_ACCESS_KEY,TWILIO_ACCOUNT_SID,TWILIO_AUTH_TOKEN,TWILIO_API_KEY_SID,TWILIO_API_KEY_SECRET"
-
 # [[edge_functions]]
 #   function = "content-negotiation"
 #   path = "/*"
+
+[build.environment]
+  NODE_VERSION = "18"
 
 # Remove the [context.production.environment] section completely
 # Environment variables should be set in Netlify's UI
