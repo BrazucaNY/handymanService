@@ -17,8 +17,11 @@
   to = "/.netlify/functions/notify"
   status = 200
 
-# Remove the [context.production.environment] section completely
-# Environment variables should be set in Netlify's UI
+# Redirect /index.html to clean apex/root URL to save crawl budget
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
 
 # /gallery page
 [[redirects]]
@@ -80,11 +83,16 @@
   to = "/services.html"
   status = 200
 
-# /offer page
+# /offer page (redirect to services)
 [[redirects]]
   from = "/offer"
-  to = "/offer.html"
-  status = 200
+  to = "/services"
+  status = 301
+
+[[redirects]]
+  from = "/offer/"
+  to = "/services"
+  status = 301
 
 # /about page
 [[redirects]]
@@ -98,16 +106,16 @@
   to = "/service-areas.html"
   status = 200
 
-# /privacy & /privacy-policy (200 rewrite to /privacy-policy.html)
+# /privacy redirect to canonical /privacy-policy
 [[redirects]]
   from = "/privacy"
-  to = "/privacy-policy.html"
-  status = 200
+  to = "/privacy-policy"
+  status = 301
 
 [[redirects]]
   from = "/privacy.html"
-  to = "/privacy-policy.html"
-  status = 200
+  to = "/privacy-policy"
+  status = 301
 
 [[redirects]]
   from = "/privacy-policy"
@@ -344,6 +352,48 @@
   from = "/invoice"
   to = "/dashboard.html"
   status = 200
+
+# /admin and /CRM redirects to /login
+[[redirects]]
+  from = "/admin"
+  to = "/login"
+  status = 301
+
+[[redirects]]
+  from = "/admin/"
+  to = "/login"
+  status = 301
+
+[[redirects]]
+  from = "/CRM"
+  to = "/login"
+  status = 301
+
+[[redirects]]
+  from = "/CRM/"
+  to = "/login"
+  status = 301
+
+# /price and /pricing redirects to services (prevent soft 404)
+[[redirects]]
+  from = "/price"
+  to = "/services"
+  status = 301
+
+[[redirects]]
+  from = "/price/"
+  to = "/services"
+  status = 301
+
+[[redirects]]
+  from = "/pricing"
+  to = "/services"
+  status = 301
+
+[[redirects]]
+  from = "/pricing/"
+  to = "/services"
+  status = 301
 
 # /contact redirect
 [[redirects]]
