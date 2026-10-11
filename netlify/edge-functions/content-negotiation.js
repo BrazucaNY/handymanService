@@ -3,22 +3,33 @@ export default async (request, context) => {
   const url = new URL(request.url);
 
   // Exclude static assets and serverless functions (/.netlify/*)
-  if (url.pathname.startsWith("/.netlify") || /\.(png|jpg|jpeg|webp|gif|svg|ico|css|js|woff|woff2|ttf|eot)$/i.test(url.pathname)) {
+  if (
+    url.pathname.startsWith("/.netlify") ||
+    /\.(png|jpg|jpeg|webp|gif|svg|ico|css|js|woff|woff2|ttf|eot)$/i.test(url.pathname)
+  ) {
     return context.next();
   }
 
-  // If client requests text/markdown via Accept header
+  // Handle Accept: text/markdown negotiation (acceptmarkdown.com)
   if (accept.includes("text/markdown")) {
-    // If request path is a 404 or missing page
     const res = await context.next();
+
+    // 01 Agent-friendly 404s: Return 404 status with Markdown guidance for missing pages
     if (res.status === 404) {
       const markdown404 = `# 404 - Page Not Found
 
-That page does not exist on Here Handyman (Westchester County, NY handyman services).
+The requested page does not exist on Here Handyman (Westchester County, NY handyman services).
 
-For agents: full site index available at [sitemap.xml](/sitemap.xml), [llms.txt](/llms.txt), or [llms-full.txt](/llms-full.txt). Homepage: [herehandyman.com](https://www.herehandyman.com).
+## Available Resources for AI Agents:
+- **Sitemap**: [sitemap.xml](https://www.herehandyman.com/sitemap.xml)
+- **LLMS Index**: [llms.txt](https://www.herehandyman.com/llms.txt)
+- **Full LLMS Index**: [llms-full.txt](https://www.herehandyman.com/llms-full.txt)
+- **Homepage**: [Here Handyman](https://www.herehandyman.com/)
+- **Services**: [Our Services](https://www.herehandyman.com/services)
+- **Book Appointment**: [Book Online](https://www.herehandyman.com/book)
 
-Call or text (516) 350-0801 or [book a job](https://www.herehandyman.com/book-appointment).
+## Contact:
+Call or text: (516) 350-0801 | Email: info@herehandyman.com
 `;
       return new Response(markdown404, {
         status: 404,
@@ -30,16 +41,33 @@ Call or text (516) 350-0801 or [book a job](https://www.herehandyman.com/book-ap
       });
     }
 
-    // Serve llms.txt as markdown content for valid pages
-    const markdownUrl = new URL("/llms.txt", request.url);
-    const response = await context.rewrite(markdownUrl);
-    response.headers.set("Content-Type", "text/markdown; charset=utf-8");
-    response.headers.set("Vary", "Accept, Accept-Encoding");
-    return response;
+    // Serve llms.txt as markdown content for valid pages when Accept: text/markdown requested
+    try {
+      const llmsRes = await fetch(new URL("/llms.txt", request.url));
+      const llmsText = await llmsRes.text();
+      return new Response(llmsText, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/markdown; charset=utf-8",
+          "Vary": "Accept, Accept-Encoding",
+          "Cache-Control": "public, max-age=3600, must-revalidate"
+        }
+      });
+    } catch (_err) {
+      // Fall through to default response on fetch error
+    }
   }
 
   // Normal HTML/browser response
   const response = await context.next();
-  response.headers.set("Vary", "Accept, Accept-Encoding");
-  return response;
+
+  // Safe header modification: clone headers to prevent immutable headers TypeError
+  const newHeaders = new Headers(response.headers);
+  newHeaders.set("Vary", "Accept, Accept-Encoding");
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: newHeaders
+  });
 };
