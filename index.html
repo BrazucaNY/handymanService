@@ -5417,6 +5417,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
  </section>
 
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">&lsaquo;</button>
+    <button class="lightbox-next" id="lightboxNext" aria-label="Next image">&rsaquo;</button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="Enlarged Project Photo">
+      <div id="lightbox-caption"></div>
+    </div>
+  </div>
+
 <footer>
    <div class="footer-top">
     <div class="footer-brand">
@@ -5769,6 +5780,128 @@ document.addEventListener('submit', async function(e) {
     if (btn) { btn.disabled = false; btn.textContent = origText; }
   }
 });
+
+// =========================================================
+// 🖼️ GALLERY FILTER TABS & LIGHTBOX MODAL CONTROLLER
+// =========================================================
+(function initGalleryFilterAndLightbox() {
+  document.addEventListener('click', function(e) {
+    const filterBtn = e.target.closest('.filter-btn');
+    if (!filterBtn) return;
+
+    e.preventDefault();
+    const filterGroup = filterBtn.closest('.gallery-filters');
+    if (filterGroup) {
+      filterGroup.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    }
+    filterBtn.classList.add('active');
+
+    const filterValue = filterBtn.getAttribute('data-filter') || 'all';
+    const galleryItems = document.querySelectorAll('.gallery-grid .gallery-item');
+
+    galleryItems.forEach(item => {
+      if (filterValue === 'all' || item.classList.contains(filterValue)) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+
+  let visibleItems = [];
+  let currentIndex = 0;
+
+  function getVisibleItems() {
+    return Array.from(document.querySelectorAll('.gallery-grid .gallery-item')).filter(item => {
+      return item.style.display !== 'none' && item.offsetParent !== null;
+    });
+  }
+
+  function showLightboxIndex(idx) {
+    visibleItems = getVisibleItems();
+    if (!visibleItems.length) return;
+
+    if (idx < 0) idx = visibleItems.length - 1;
+    if (idx >= visibleItems.length) idx = 0;
+    currentIndex = idx;
+
+    const currentCard = visibleItems[currentIndex];
+    const img = currentCard.querySelector('img');
+    const label = currentCard.querySelector('.gallery-label') || currentCard.querySelector('.gallery-badge');
+
+    if (img && lightbox && lightboxImg) {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || '';
+      if (lightboxCaption) {
+        lightboxCaption.textContent = label ? label.textContent.trim() : (img.alt || '');
+      }
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function hideLightbox() {
+    if (lightbox) {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  document.addEventListener('click', function(e) {
+    const item = e.target.closest('.gallery-grid .gallery-item');
+    if (!item) return;
+
+    e.preventDefault();
+    visibleItems = getVisibleItems();
+    const idx = visibleItems.indexOf(item);
+    showLightboxIndex(idx >= 0 ? idx : 0);
+  });
+
+  if (lightbox) {
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox || e.target.id === 'lightboxClose' || e.target.classList.contains('lightbox-close')) {
+        hideLightbox();
+      }
+    });
+  }
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', function(e) {
+      e.preventDefault();
+      hideLightbox();
+    });
+  }
+
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      showLightboxIndex(currentIndex - 1);
+    });
+  }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      showLightboxIndex(currentIndex + 1);
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (!lightbox || !lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') hideLightbox();
+    if (e.key === 'ArrowLeft') showLightboxIndex(currentIndex - 1);
+    if (e.key === 'ArrowRight') showLightboxIndex(currentIndex + 1);
+  });
+})();
   </script>
  </body>
 </html>
