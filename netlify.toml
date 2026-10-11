@@ -22,6 +22,7 @@
   from = "/index.html"
   to = "/"
   status = 301
+  force = true
 
 # /gallery page
 [[redirects]]
@@ -358,20 +359,35 @@
   from = "/admin"
   to = "/login"
   status = 301
+  force = true
 
 [[redirects]]
-  from = "/admin/"
+  from = "/admin/*"
   to = "/login"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/CRM"
   to = "/login"
   status = 301
+  force = true
 
 [[redirects]]
-  from = "/CRM/"
+  from = "/CRM/*"
   to = "/login"
+  status = 301
+  force = true
+
+# /contact clean rewrite & redirect
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact/"
+  to = "/contact"
   status = 301
 
 # /price and /pricing redirects to services (prevent soft 404)
@@ -395,11 +411,18 @@
   to = "/services"
   status = 301
 
-# /contact redirect
-[[redirects]]
-  from = "/contact"
-  to = "/#contact"
-  status = 301
+# Security headers for admin & CRM
+[[headers]]
+  for = "/admin*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/CRM*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache, no-store, must-revalidate"
 
 # Security headers for dashboard
 [[headers]]

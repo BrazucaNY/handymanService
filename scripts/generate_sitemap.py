@@ -15,8 +15,8 @@ pages = []
 for f in html_files:
     rel = os.path.relpath(f, site_dir).replace("\\", "/")
     
-    # Exclude internal, admin, scratch, and non-indexable utility pages
-    if any(rel == p or rel.startswith(p) for p in [".netlify", "node_modules", "scratch", "tmp", "dashboard.html", "login.html", "404.html", "timer.html", "schedule.html", "merge-photos.html"]):
+    # Exclude internal, admin, scratch, offer (redirected), and non-indexable utility pages
+    if any(rel == p or rel.startswith(p) for p in [".netlify", "node_modules", "scratch", "tmp", "dashboard.html", "login.html", "404.html", "timer.html", "schedule.html", "merge-photos.html", "offer.html"]):
         continue
     
     # Get actual file last modification date
@@ -27,7 +27,7 @@ for f in html_files:
         url = "https://www.herehandyman.com/"
         priority = "1.0"
         changefreq = "weekly"
-    elif rel in ["services.html", "book.html", "reviews.html", "about.html", "offer.html"]:
+    elif rel in ["services.html", "book.html", "reviews.html", "about.html", "contact.html"]:
         url = f"https://www.herehandyman.com/{rel[:-5]}"
         priority = "0.95"
         changefreq = "weekly"

@@ -2,6 +2,7 @@
 http://herehandyman.com/*        https://www.herehandyman.com/:splat  301!
 http://www.herehandyman.com/*    https://www.herehandyman.com/:splat  301!
 https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
+/index.html                      /                                    301!
 
 # Booking Page Clean Rewrites & Redirects
 /book                                        /book.html                         200
@@ -9,6 +10,10 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /book-appointment                            /book                              301
 /book-appointment/                           /book                              301
 /book-appointment.html                       /book                              301
+
+# Contact Page Clean Rewrite & Redirects
+/contact                                     /contact.html                      200
+/contact/                                    /contact                           301
 
 # Blog Hub Clean Rewrites (200 OK - No 301 chain)
 /blog                                        /blog/index.html                   200
@@ -18,20 +23,21 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 
 # Admin & System Portal Rewrites
 /login                     /login.html                     200
-/login/                    /login.html                     200
-/admin                     /login.html                     200
-/admin/                    /login.html                     200
-/CRM                       /login.html                     200
-/CRM/                      /login.html                     200
+/login/                    /login                          301
+/admin                     /login                          301!
+/admin/                    /login                          301!
+/admin/*                   /login                          301!
+/CRM                       /login                          301!
+/CRM/                      /login                          301!
+/CRM/*                     /login                          301!
 /dashboard                 /dashboard.html                 200
 /dashboard/                /dashboard.html                 200
 /invoices                  /dashboard.html                 200
 /invoices/                 /dashboard.html                 200
 /invoice                   /dashboard.html                 200
 /invoice/                  /dashboard.html                 200
-/admin/dashboard           /dashboard.html                 200
-/CRM/dashboard             /dashboard.html                 200
-/contact                   /#contact                       301
+/admin/dashboard           /login                          301!
+/CRM/dashboard             /login                          301!
 
 
 # Explicit Clean URL Rewrites for All Service, Town & Blog Pages
