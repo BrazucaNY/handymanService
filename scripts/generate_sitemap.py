@@ -26,11 +26,11 @@ for f in html_files:
     if rel == "index.html":
         url = "https://www.herehandyman.com/"
         priority = "1.0"
-        changefreq = "daily"
+        changefreq = "weekly"
     elif rel in ["services.html", "book.html", "reviews.html", "about.html", "offer.html"]:
         url = f"https://www.herehandyman.com/{rel[:-5]}"
         priority = "0.95"
-        changefreq = "daily"
+        changefreq = "weekly"
     elif rel == "blog/index.html":
         url = "https://www.herehandyman.com/blog/"
         priority = "0.90"
@@ -42,7 +42,7 @@ for f in html_files:
     else:
         url = f"https://www.herehandyman.com/{rel[:-5]}"
         priority = "0.85"
-        changefreq = "weekly"
+        changefreq = "monthly"
         
     pages.append((url, lastmod, changefreq, priority))
 
