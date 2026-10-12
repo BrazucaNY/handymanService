@@ -20,17 +20,6 @@ const SERVICE_DURATIONS = {
   general: 180
 };
 
-// Allowed Westchester service ZIP codes (20-mile radius from White Plains 10607)
-const ALLOWED_ZIPS = [
-  "10601", "10603", "10604", "10605", "10606", "10607",
-  "10583", "10528", "10577", "10580", "10573", "10538",
-  "10543", "10504", "10514", "10506", "10536", "10549",
-  "10570", "10510", "10562", "10591", "10533", "10522",
-  "10706", "10530", "10502", "10523", "10595", "10708",
-  "10707", "10709", "10803", "10801", "10804", "10805",
-  "10701", "10703", "10704", "10705", "10710"
-];
-
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: JSON.stringify({ error: "Method Not Allowed" }) };
@@ -77,14 +66,14 @@ export async function handler(event) {
       };
     }
 
-    // 3. ZIP Code Validation
+    // 3. ZIP Code Validation (Accepts any valid 5-digit US ZIP code: NYC 5 Boroughs, Westchester, etc.)
     const cleanZip = String(zip).trim();
-    const isZipValid = /^\d{5}$/.test(cleanZip) && (cleanZip.startsWith('10') || cleanZip.startsWith('11') || ALLOWED_ZIPS.includes(cleanZip));
+    const isZipValid = /^\d{5}$/.test(cleanZip);
     if (!isZipValid) {
       return {
         statusCode: 400,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "ZIP code is outside our Westchester County service area." })
+        body: JSON.stringify({ error: "Please enter a valid 5-digit ZIP code." })
       };
     }
 

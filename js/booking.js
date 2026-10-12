@@ -204,11 +204,6 @@ function handleZipCheck() {
     return;
   }
 
-  if (!CONFIG.zips.includes(cleanZip)) {
-    showError(errorEl, `Sorry, ${cleanZip} is outside our service area. Contact us at (516) 350-0801 for custom requests!`);
-    return;
-  }
-
   hideError(errorEl);
   state.zip = cleanZip;
   state.step = 2;
