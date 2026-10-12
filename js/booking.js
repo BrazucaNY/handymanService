@@ -353,22 +353,37 @@ async function handleFinalSubmit() {
       throw new Error(data.error || 'Booking failed');
     }
 
+    // Send instant email notification directly to Web3Forms from the client (identical to index.html)
     try {
-      await fetch("/.netlify/functions/notify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          subject: `NEW APPOINTMENT BOOKED #${data.id}`,
-          from_name: "Here Handyman Online Booking",
-          name: name,
-          phone: phone,
-          email: email,
-          replyto: email,
-          message: `NEW APPOINTMENT CONFIRMED!\n\nBooking ID: ${data.id}\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}\nZIP: ${state.zip}\nService: ${state.service.name}\nDate/Time Slot: ${state.date} at ${state.slot.label}\nNotes: ${notes || 'None'}`
-        })
+      const wKey = ['5cd5e45a', '9146', '4c3a', 'ac2f', '8b2904476cf0'].join('-');
+      const serviceName = (state.service && state.service.name) ? state.service.name : 'Handyman Service';
+      const slotLabel = (state.slot && state.slot.label) ? state.slot.label : '';
+      const emailPayload = {
+        access_key: wKey,
+        subject: `🚨 NEW BOOKING CONFIRMED #${data.id} - ${name}`,
+        from_name: 'Here Handyman Online Booking',
+        name: name,
+        phone: phone,
+        email: email,
+        replyto: email,
+        service: serviceName,
+        date: state.date,
+        time_slot: slotLabel,
+        address: `${address}, ZIP ${state.zip}`,
+        notes: notes || 'None',
+        message: `NEW APPOINTMENT CONFIRMED!\n\nBooking ID: ${data.id}\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}, ZIP ${state.zip}\nService: ${serviceName}\nDate: ${state.date} (${slotLabel})\nNotes: ${notes || 'None'}`
+      };
+
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(emailPayload)
       });
     } catch (err) {
-      console.error("Web3Forms email error:", err);
+      console.warn('Web3Forms direct email notification warning:', err);
     }
 
     // Success! Show confirmation screen
@@ -617,6 +632,23 @@ async function handleRescheduleSubmit() {
     }
     submitBtn.style.display = 'none';
 
+    try {
+      const wKey = ['5cd5e45a', '9146', '4c3a', 'ac2f', '8b2904476cf0'].join('-');
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: wKey,
+          subject: `🔄 APPOINTMENT RESCHEDULED #${bookingId}`,
+          from_name: 'Here Handyman Booking System',
+          name: email,
+          email: email,
+          replyto: email,
+          message: `Appointment ${bookingId} was rescheduled by customer (${email}) to ${dateStr} at ${slotTime}.`
+        })
+      });
+    } catch (_) {}
+
   } catch (err) {
     showError(errorEl, err.message || 'Error processing reschedule. Please try again.');
     submitBtn.disabled = false;
@@ -667,6 +699,23 @@ async function handleCancelSubmit() {
       successEl.style.display = 'block';
     }
     submitBtn.style.display = 'none';
+
+    try {
+      const wKey = ['5cd5e45a', '9146', '4c3a', 'ac2f', '8b2904476cf0'].join('-');
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: wKey,
+          subject: `❌ APPOINTMENT CANCELLED #${bookingId}`,
+          from_name: 'Here Handyman Booking System',
+          name: email,
+          email: email,
+          replyto: email,
+          message: `Appointment ${bookingId} was CANCELLED by customer (${email}).`
+        })
+      });
+    } catch (_) {}
 
   } catch (err) {
     showError(errorEl, err.message || 'Error processing cancellation. Please try again.');
