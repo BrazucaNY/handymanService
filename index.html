@@ -5592,22 +5592,34 @@ function initReviewsCarousel() {
   }
 
   function updateCarousel() {
-    var cards = track.querySelectorAll('.rev-card-item');
-    if (cards.length === 0) return;
-    
-    var visible = getVisibleCards();
-    var maxIndex = cards.length - visible;
-    if (maxIndex < 0) maxIndex = 0;
+    if (currentIndex === 0) {
+      track.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+      track.style.transform = 'translateX(0px)';
+      return;
+    }
 
-    if (currentIndex > maxIndex) currentIndex = 0; // wrap around to start
-    if (currentIndex < 0) currentIndex = maxIndex; // wrap around to end
+    requestAnimationFrame(function() {
+      var cards = track.querySelectorAll('.rev-card-item');
+      if (cards.length === 0) return;
+      
+      var visible = getVisibleCards();
+      var maxIndex = Math.max(0, cards.length - visible);
 
-    var cardWidth = cards[0].getBoundingClientRect().width;
-    var gap = 16;
-    var offset = currentIndex * (cardWidth + gap);
+      if (currentIndex > maxIndex) currentIndex = 0;
+      if (currentIndex < 0) currentIndex = maxIndex;
 
-    track.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    track.style.transform = 'translateX(-' + offset + 'px)';
+      if (currentIndex === 0) {
+        track.style.transform = 'translateX(0px)';
+        return;
+      }
+
+      var cardWidth = cards[0].offsetWidth || cards[0].getBoundingClientRect().width;
+      var gap = 16;
+      var offset = currentIndex * (cardWidth + gap);
+
+      track.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+      track.style.transform = 'translateX(-' + offset + 'px)';
+    });
   }
 
   nextBtn.addEventListener('click', function(e) {
@@ -5648,8 +5660,13 @@ function initReviewsCarousel() {
     }
   }, { passive: true });
 
-  window.addEventListener('resize', updateCarousel);
-  setTimeout(updateCarousel, 100);
+  var resizeTimer = null;
+  window.addEventListener('resize', function() {
+    if (resizeTimer) cancelAnimationFrame(resizeTimer);
+    resizeTimer = requestAnimationFrame(function() {
+      if (currentIndex !== 0) updateCarousel();
+    });
+  }, { passive: true });
 }
 
 // FAQ Accordion click handler using Event Delegation
