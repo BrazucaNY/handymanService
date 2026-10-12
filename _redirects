@@ -247,6 +247,9 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /plumbing-repairs-yonkers/                   /plumbing-repairs-yonkers.html     200
 /plumbing-repairs                            /plumbing-repairs.html             200
 /plumbing-repairs/                           /plumbing-repairs.html             200
+/privacy                                        /privacy-policy                    301
+/privacy/                                       /privacy-policy                    301
+/privacy.html                                   /privacy-policy                    301
 /privacy-policy                              /privacy-policy.html               200
 /privacy-policy/                             /privacy-policy.html               200
 /property-managers                           /property-managers.html            200
@@ -261,6 +264,10 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /schedule/                                   /schedule.html                     200
 /service-areas                               /service-areas.html                200
 /service-areas/                              /service-areas.html                200
+/price                                          /services                          301
+/price/                                         /services                          301
+/pricing                                        /services                          301
+/pricing/                                       /services                          301
 /services                                    /services.html                     200
 /services/                                   /services.html                     200
 /sleepy-hollow-handyman                      /sleepy-hollow-handyman.html       200
