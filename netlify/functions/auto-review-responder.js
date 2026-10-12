@@ -24,7 +24,7 @@ async function getAccessToken() {
 
     if (tokenRes.ok) {
       const tokenData = await tokenRes.json();
-      return { token: tokenData.access_token, authType: 'User OAuth (davi65@gmail.com)' };
+      return { token: tokenData.access_token, authType: 'User OAuth (Primary Owner)' };
     }
   }
 
@@ -90,13 +90,22 @@ function generateSeoReply(reviewerName, commentText, starRating) {
 export async function handler(event, context) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Content-Type': 'application/json'
   };
 
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
+  }
+
+  const authHeader = event.headers.authorization || event.headers.Authorization || "";
+  if (!authHeader.startsWith("Bearer ")) {
+    return {
+      statusCode: 401,
+      headers,
+      body: JSON.stringify({ error: "Unauthorized: Invalid or missing token" })
+    };
   }
 
   try {

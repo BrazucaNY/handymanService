@@ -874,7 +874,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <h1 id="pageTitle">Dashboard</h1>
       <div class="user-pill">
         <span class="dot"></span>
-        <span id="sessionUser">davi65@gmail.com</span>
+        <span id="sessionUser">Admin</span>
       </div>
     </div>
 
@@ -1149,11 +1149,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
           <div class="form-group">
             <label>Phone Number *</label>
-            <input class="form-control" id="newCustPhone" placeholder="e.g. (914) 315-8820" required>
+            <input class="form-control" id="newCustPhone" placeholder="e.g. (914) 555-0123" required>
           </div>
           <div class="form-group">
             <label>Email Address</label>
-            <input class="form-control" type="email" id="newCustEmail" placeholder="e.g. client@herehandyman.com">
+            <input class="form-control" type="email" id="newCustEmail" placeholder="e.g. client@example.com">
           </div>
           <div class="form-group">
             <label>Street Address</label>
@@ -1732,6 +1732,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var SESSION_KEY = "hh_system_session";
     var STORAGE_CONTACTS_KEY = "hh_crm_contacts_v3";
 
+    try {
+      var rawSession = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
+      if (rawSession) {
+        var sessObj = JSON.parse(rawSession);
+        if (sessObj && sessObj.email) {
+          var userEl = document.getElementById('sessionUser');
+          if (userEl) userEl.textContent = sessObj.email;
+        }
+      }
+    } catch (e) {}
+
+    window.getAuthHeaders = function(extra) {
+      var token = "";
+      try {
+        var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY) || "{}";
+        var s = JSON.parse(raw);
+        token = s.access_token || "";
+      } catch (e) {}
+      var h = { 'Authorization': 'Bearer ' + token };
+      if (extra) Object.assign(h, extra);
+      return h;
+    };
+    var getAuthHeaders = window.getAuthHeaders;
+
     // Google Business Profile (GBP) Verified Reviewers List
     var GBP_REVIEWS_LIST = [
       "Harvey Kaminski", "Mary V White", "Jelly Wang", "Sean Murray", "Lori Ann Marcella", "Jacob Marquez", "Carlos Ramirez", "Franklin Miranda", "Lala Alla",
@@ -2000,7 +2024,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       if (syncBtn) syncBtn.disabled = true;
 
       try {
-        const res = await fetch('/.netlify/functions/gbp-reviews');
+        const res = await fetch('/.netlify/functions/gbp-reviews', { headers: getAuthHeaders() });
         if (res.ok) {
           const data = await res.json();
           if (data.reviews && data.reviews.length > 0) {
@@ -2195,7 +2219,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         try {
           const res = await fetch('/.netlify/functions/ai-seo-reply', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({
               reviewerName: item.author,
               reviewText: item.reviewText,
@@ -2235,7 +2259,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       try {
         const res = await fetch('/.netlify/functions/gbp-reviews', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
           body: JSON.stringify({
             reviewName: item.id,
             replyComment: textToPost
@@ -2307,43 +2331,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       });
     }
 
-    var defaultContacts = [
-      { name: "Marsia Wisdom", phone: "914-325-1568", email: "", address: "300 High Point Dr", apt: "612", town: "White Plains", state: "NY", lead: "Tasker", service: "Handyman Service", status: "Active", date: "2026-09-20", hasGbpReview: true },
-      { name: "Lori Ann Marcella", phone: "(914) 420-4716", email: "", address: "275 Beechwood Ln", apt: "", town: "Yorktown Heights", state: "NY", lead: "Facebook", service: "General Handyman", status: "Active", date: "2026-09-10", hasGbpReview: true },
-      { name: "Benjamin Berkey", phone: "(914) 275-6075", email: "", address: "17 Sunset Dr", apt: "", town: "Chappaqua", state: "NY", lead: "owner-operated, no app middleman App", service: "TV Mounting (56 & 100)", status: "Active", date: "2026-09-15", hasGbpReview: true },
-      { name: "Darin Fass", phone: "(917) 686-0004", email: "", address: "44 Carlton Drive", apt: "", town: "Mount Kisco", state: "NY", lead: "owner-operated, no app middleman App", service: "Wayfair Wall Hanging", status: "Active", date: "2026-09-18", hasGbpReview: true },
-      { name: "Jacob Marquez", phone: "(914) 381-4902", email: "", address: "88 Mamaroneck Ave", apt: "4B", town: "White Plains", state: "NY", lead: "Google", service: "Interior Door Repair & Installation", status: "Completed", date: "2026-09-09", hasGbpReview: true },
-      { name: "Carlos Ramirez", phone: "(914) 723-5104", email: "", address: "45 Post Rd", apt: "", town: "Scarsdale", state: "NY", lead: "Google", service: "Springfree Trampoline Move & Assembly", status: "Completed", date: "2026-08-21", hasGbpReview: true },
-      { name: "Kathy Roberts", phone: "(914) 835-1290", email: "", address: "12 Halstead Ave", apt: "", town: "Harrison", state: "NY", lead: "Google", service: "Artwork & Bathroom Curtain Hanging", status: "Completed", date: "2026-07-25", hasGbpReview: true },
-      { name: "Pam Jaffee", phone: "(914) 965-4120", email: "", address: "210 Central Park Ave", apt: "Apt 2", town: "Yonkers", state: "NY", lead: "Google", service: "Electrical Wiring Repair & Fixtures", status: "Completed", date: "2026-07-07", hasGbpReview: true }
-    ];
+    var defaultContacts = [];
 
-    // Load contacts from localStorage or initialize defaults
+    // Load contacts from localStorage
     function loadContacts() {
       try {
-        localStorage.removeItem("hh_crm_contacts");
-        localStorage.removeItem("hh_crm_contacts_v2");
         var raw = localStorage.getItem(STORAGE_CONTACTS_KEY);
         if (raw) {
           var parsed = JSON.parse(raw);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            // Remove legacy raw phone number imports (starts with Client () or invalid names)
-            parsed = parsed.filter(function(c) {
-              if (!c || !c.name) return false;
-              if (c.name.startsWith("Client (") || c.name.toLowerCase() === 'david' || c.name.toLowerCase() === 'me') return false;
-              return true;
-            });
-            if (parsed.length > 0) {
-              saveContacts(parsed);
-              return parsed;
-            }
+            return parsed;
           }
         }
       } catch (e) {
         console.warn("Error loading local contacts:", e);
       }
-      localStorage.setItem(STORAGE_CONTACTS_KEY, JSON.stringify(defaultContacts));
-      return defaultContacts;
+      return [];
     }
 
     function saveContacts(list) {
@@ -2717,647 +2720,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       alert("🔍 GBP Review Auto-Comparison Complete!\n\n" + matchedCount + " contact(s) newly matched with Google Business Profile reviews.\n\nTotal CRM Contacts with confirmed GBP Reviews: " + totalReviewed + " of " + contacts.length + ".");
     });
 
-    // 📱 1-Click Import Google Voice Batch (Incremental 15-Contact Trial)
-    var trialVoiceBatch = [
-      {
-            "id": "cust-harvey-kaminski",
-            "name": "Harvey Kaminski",
-            "phone": "(914) 589-1751",
-            "email": "",
-            "address": "6 Hobby Lane",
-            "apt": "",
-            "town": "Bedford",
-            "state": "NY",
-            "lead": "Direct Call",
-            "service": "Ring Camera Troubleshooting & Repair (Front Doorbell + Backyard)",
-            "status": "Active",
-            "date": "2026-09-28",
-            "hasGbpReview": false,
-            "notes": "Ring cameras: Front doorbell camera foggy lens + Backyard camera offline. Address: 6 Hobby Lane, Bedford, NY 10506. Scheduled visit for Friday.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 3,
-                  "calls": 1,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2026-09-28T13:47:00-04:00",
-                        "direction": "incoming",
-                        "content": "David, this is Harvey Kaminski. We just spoke on the phone about two issues I am having with the ring cameras at my house in Westchester. The front camera attached to the doorbell is foggy and difficult to make out the picture. There is also another camera in the backyard which is off-line. My address is 6 Hobby Lane Bedford, NY 10506. It would be best if you could arrange a visit anytime this Friday. Please let me know what other information you require. Thank you. Harvey Kaminski C- 914-589-1751"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-09-28T13:47:30-04:00",
-                        "direction": "outgoing",
-                        "content": "Me :\nHello Harvey, thank you for sending over the address and details. Could you please send over a photo of the front doorbell camera lens, as well as a screenshot of what the foggy view looks like in your Ring app? If possible, a photo of the backyard camera so I can identify the exact models and prepare the proper tools before Friday. David Rodrigues | Here Handyman Phone: (516) 350-0801 Website: herehandyman.com"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-09-28T13:54:00-04:00",
-                        "direction": "incoming",
-                        "content": "Thanks, David. I will send it to you later."
-                  }
-            ]
-      },
-      {
-            "id": 5,
-            "name": "Client (9070)",
-            "phone": "(201) 362-9070",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NJ",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2024-01-17",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 0 SMS, 1 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 0,
-                  "calls": 1,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "call",
-                        "date": "2024-01-17T09:13:21-05:00",
-                        "call_type": "missed_call",
-                        "duration": "",
-                        "transcript": "Missed call from\nCall Log for\nMissed call from\nMissed call from\nJan 17, 2024, 9:13:21 AM\nEastern Time\nLabels:\nMissed , Inbox\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 11,
-            "name": "Client (5353)",
-            "phone": "(201) 417-5353",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NJ",
-            "lead": "Google Voice",
-            "service": "Door Hardware & Installation",
-            "status": "Completed",
-            "date": "2026-05-02",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 1,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2026-05-01T20:57:38-04:00",
-                        "direction": "unknown",
-                        "content": "Me to\nMay 1, 2026, 8:57:38 PM\nEastern Time :\nMe :\nHello Tony just checking if you got someone to remove the interior door.\nLabels:\nText\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 13,
-            "name": "Client (3963)",
-            "phone": "(201) 645-3963",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NJ",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2025-10-11",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 1,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2025-10-10T22:22:58-04:00",
-                        "direction": "unknown",
-                        "content": "Oct 10, 2025, 10:22:58 PM\nEastern Time :\n:\nYour key can be programmed by a certified locksmith partner in your area, call (888) 904-7270 to get your new key.\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 14,
-            "name": "Client (0630)",
-            "phone": "(201) 681-0630",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NJ",
-            "lead": "Google Voice",
-            "service": "Mirror Repair ($100, $85)",
-            "status": "Completed",
-            "date": "2026-07-13",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 3 SMS, 1 calls, 0 voicemails. Quoted: $100, $85",
-            "quoted_prices": [
-                  "$85",
-                  "$100"
-            ],
-            "counts": {
-                  "sms": 3,
-                  "calls": 1,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2026-07-09T17:27:27-04:00",
-                        "direction": "outgoing",
-                        "content": "Me to\nJul 9, 2026, 5:27:27 PM\nEastern Time :\nMe :\nThis is David\nJul 9, 2026, 5:28:04 PM\nEastern Time :\nMe :\nHerehandyman.com\nJul 9, 2026, 5:30:26 PM\nEastern Time :\nMe :\n10:00 am tomorrow!\nJul 9, 2026, 5:32:43 PM\nEastern Time :\nMe :\nMMS Sent\nJul 9, 2026, 5:32:48 PM\nEastern Time :\nMe :\nMMS Sent\nJul 9, 2026, 5:32:50 PM\nEastern Time :\nMe :\nMMS Sent\nJul 9, 2026, 5:32:52 PM\nEastern Time :\nMe :\nMMS Sent\nJul 9, 2026, 5:32:54 PM\nEastern Time :\nMe :\nMMS Sent\nJul 9, 2026, 5:32:57 PM\nEastern Time :\nMe :\nMMS Sent\nJul 9, 2026, 5:33:25 PM\nEastern Time :\nMe :\nMMS Sent\nJul 9, 2026, 5:33:28 PM\nEastern Time :\nMe :\nMMS Sent\nJul 9, 2026, 5:42:55 PM\nEastern Time :\n:\nOk\nJul 9, 2026, 6:04:41 PM\nEastern Time :\n:\nYou did not send the photo with the white strip . Please send . Thank you.\nJul 9, 2026, 6:36:00 PM\nEastern Time :\nMe :\nMMS Sent\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-07-10T08:35:15-04:00",
-                        "direction": "unknown",
-                        "content": "Me to\nJul 10, 2026, 8:35:15 AM\nEastern Time :\nMe :\nGood Morning\nJul 10, 2026, 8:35:32 AM\nEastern Time :\nMe :\nI need your address for today appointment.\nJul 10, 2026, 9:46:12 AM\nEastern Time :\n:\nApologies. I got hit with work issues. Can we reschedule for later today or tomorrow morning. I will call of text when things are a little more settled\nJul 10, 2026, 9:47:27 AM\nEastern Time :\nMe :\nOk\nJul 10, 2026, 9:47:29 AM\nEastern Time :\nMe :\nThank You!\nJul 10, 2026, 12:05:30 PM\nEastern Time :\n:\nHi...can you do pictures only . 13 pictures and 1 mirror for $85?\nJul 10, 2026, 5:13:57 PM\nEastern Time :\nMe :\nWe can do $100 next week ?\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "call",
-                        "date": "2026-07-10T09:44:10-04:00",
-                        "call_type": "other",
-                        "duration": "",
-                        "transcript": "Placed call to\nCall Log for\nPlaced call to\nPlaced call to\nJul 10, 2026, 9:44:10 AM\nEastern Time\n(00:00:25)\nLabels:\nPlaced\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-07-13T19:44:52-04:00",
-                        "direction": "unknown",
-                        "content": "Me to\nJul 13, 2026, 7:44:52 PM\nEastern Time :\nMe :\nHello do you have some time tomorrow ?\nLabels:\nText\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 15,
-            "name": "Client (8411)",
-            "phone": "(201) 740-8411",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NJ",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2023-12-04",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 1,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2023-12-04T00:23:36-05:00",
-                        "direction": "incoming",
-                        "content": "Received call from\nCall Log for\nReceived call from\nReceived call from\nDec 4, 2023, 12:23:36 AM\nEastern Time\n(00:00:16)\nLabels:\nReceived\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 16,
-            "name": "Client (8436)",
-            "phone": "(201) 771-8436",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NJ",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2023-01-23",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 1,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2023-01-23T07:24:13-05:00",
-                        "direction": "unknown",
-                        "content": "Jan 23, 2023, 7:24:13 AM\nEastern Time :\n:\nYour Uber code is 2350. Never share this code.\nLabels:\nText\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 17,
-            "name": "Client (3893)",
-            "phone": "(201) 835-3893",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NJ",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2026-07-08",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 2 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 2,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2026-07-08T08:53:22-04:00",
-                        "direction": "incoming",
-                        "content": "Received call from\nCall Log for\nReceived call from\nReceived call from\nJul 8, 2026, 8:53:22 AM\nEastern Time\n(00:09:08)\nLabels:\nReceived\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-07-08T09:01:30-04:00",
-                        "direction": "unknown",
-                        "content": "Jul 8, 2026, 9:01:30 AM\nEastern Time :\n:\n<Subject: Brad LeBeau>\nContact card attachment\nJul 8, 2026, 9:02:19 AM\nEastern Time :\n:\n<Subject: Mobile> - (917) 653-4657\nJul 8, 2026, 2:21:51 PM\nEastern Time :\n:\nDid you text brad?\nJul 8, 2026, 2:39:32 PM\nEastern Time :\n:\nHe didn't get it...unless you're not interested. Which is fine\nLabels:\nText\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 22,
-            "name": "Client (8888)",
-            "phone": "(202) 455-8888",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NY",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2023-03-09",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 0 SMS, 0 calls, 1 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 0,
-                  "calls": 0,
-                  "voicemails": 1
-            },
-            "history": [
-                  {
-                        "type": "voicemail",
-                        "date": "2023-03-09T12:45:53-05:00",
-                        "content": "Voicemail from\nCall Log for\nVoicemail from\nVoicemail from\nMar 9, 2023, 12:45:53 PM\nEastern Time\nAudio\n(00:00:27)\nLabels:\nVoicemail , Inbox\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 23,
-            "name": "Maria",
-            "phone": "(202) 500-8937",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NY",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2025-06-26",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 1,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2025-06-26T16:54:12-04:00",
-                        "direction": "unknown",
-                        "content": "Jun 26, 2025, 4:54:12 PM\nEastern Time :\n:\nHi. I'm Maria from Indeed. Are you available for P/time F/time?\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 24,
-            "name": "Client (6888)",
-            "phone": "(202) 836-6888",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "NY",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2022-10-29",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 1,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2022-10-29T05:35:19-04:00",
-                        "direction": "unknown",
-                        "content": "Oct 29, 2022, 5:35:19 AM\nEastern Time :\n:\nSnapchat 2FA Code: 436230. Snapchat Support will not ask for this code. Do not share it with anyone.\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 25,
-            "name": "Client (6492)",
-            "phone": "(203) 249-6492",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "CT",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2026-08-13",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 5 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 5,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2026-07-24T16:52:36-04:00",
-                        "direction": "incoming",
-                        "content": "Received call from\nCall Log for\nReceived call from\nReceived call from\nJul 24, 2026, 4:52:36 PM\nEastern Time\n(00:02:10)\nLabels:\nReceived\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-07-24T16:55:42-04:00",
-                        "direction": "unknown",
-                        "content": "Jul 24, 2026, 4:55:42 PM\nEastern Time :\n:\nBilly Vizcarra Vinyl\nJul 24, 2026, 5:08:29 PM\nEastern Time :\nMe :\nGracias\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-08-11T10:15:57-04:00",
-                        "direction": "unknown",
-                        "content": "Aug 11, 2026, 10:15:57 AM\nEastern Time :\n:\nBuenos días David, aún está interesado en poner el vinyl en su auto?\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-08-12T16:21:34-04:00",
-                        "direction": "unknown",
-                        "content": "Me to\nAug 12, 2026, 4:21:34 PM\nEastern Time :\nMe :\nBuenos días Billy. Sí, todavía estoy interesado. El vinyl todavía está en Chicago y por ahora no estoy seguro de cuándo voy a poder traerlo para instalarlo. Cuando sepa cuándo lo voy a tener aquí, te aviso para coordinar la instalación. Gracias.\nLabels:\nText\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-08-13T09:15:48-04:00",
-                        "direction": "unknown",
-                        "content": "Aug 13, 2026, 9:15:48 AM\nEastern Time :\n:\nBuenos días David. Ok entiendo. Cualquier cosa q necesites me avisas.\nQue tengas buen día 🦾\nLabels:\nText\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 26,
-            "name": "Client (1918)",
-            "phone": "(203) 338-1918",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "CT",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2026-05-04",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 3 SMS, 1 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 3,
-                  "calls": 1,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2026-05-03T22:37:40-04:00",
-                        "direction": "unknown",
-                        "content": "Me to\nMay 3, 2026, 10:37:40 PM\nEastern Time :\nMe :\nBoa noite pode me dar mais informações sobre o trabalho ? Meu nome é David.\nLabels:\nText\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-05-04T09:55:39-04:00",
-                        "direction": "incoming",
-                        "content": "Received call from\nCall Log for\nReceived call from\nReceived call from\nMay 4, 2026, 9:55:39 AM\nEastern Time\n(00:00:03)\nLabels:\nReceived\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-05-04T09:56:10-04:00",
-                        "direction": "incoming",
-                        "content": "May 4, 2026, 9:56:10 AM\nEastern Time :\n:\nBom dia david\nMay 4, 2026, 9:56:22 AM\nEastern Time :\n:\nPoderia me ligar aqui assim que possivel ?\nMay 4, 2026, 9:56:38 AM\nEastern Time :\nMe :\nOpa bom dia\nMay 4, 2026, 9:57:04 AM\nEastern Time :\n:\nJoia\nMay 4, 2026, 9:57:09 AM\nEastern Time :\nMe :\nSim sim em 20 minutos te ligo\nMay 4, 2026, 9:57:10 AM\nEastern Time :\n:\n?\nMay 4, 2026, 9:57:43 AM\nEastern Time :\n:\nMMS Received\nMay 4, 2026, 10:36:54 AM\nEastern Time :\n:\nJunior Santos\n[Celular] +14453187921\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "call",
-                        "date": "2026-05-04T10:32:40-04:00",
-                        "call_type": "other",
-                        "duration": "",
-                        "transcript": "Placed call to\nCall Log for\nPlaced call to\nPlaced call to\nMay 4, 2026, 10:32:40 AM\nEastern Time\n(00:03:13)\nLabels:\nPlaced\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 27,
-            "name": "Chris",
-            "phone": "(203) 512-6401",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "CT",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2026-09-17",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 2 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 2,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2026-09-16T09:49:49-04:00",
-                        "direction": "unknown",
-                        "content": "Sep 16, 2026, 9:49:49 AM\nEastern Time :\n:\nHi, this is Chris, to confirm you're the person who reached out with being able to support on the gate?\nSep 16, 2026, 3:51:36 PM\nEastern Time :\nMe :\nYES\nSep 16, 2026, 3:51:45 PM\nEastern Time :\nMe :\nhow how are Chris ?\nSep 16, 2026, 3:51:52 PM\nEastern Time :\nMe :\nThis is david from herehandyman.com\nLabels:\nText , Inbox\nUser Deleted:\nFalse"
-                  },
-                  {
-                        "type": "sms",
-                        "date": "2026-09-17T07:10:35-04:00",
-                        "direction": "unknown",
-                        "content": "Me to\nSep 17, 2026, 7:10:35 AM\nEastern Time :\nMe :\nGood Morning Chris let me know if you still need help with the gate. Thank You !\nLabels:\nText\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 28,
-            "name": "Client (9703)",
-            "phone": "(203) 561-9703",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "White Plains",
-            "state": "NY",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2026-09-04",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 1,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2026-09-04T10:32:41-04:00",
-                        "direction": "unknown",
-                        "content": "Me to\nSep 4, 2026, 10:32:41 AM\nEastern Time :\nMe :\nHi! I’m David, owner of HereHandyman.com, serving White Plains and Westchester County. I came across Kindred Canine Co. and wanted to introduce myself.\nI’d love to connect with other local small businesses and support each other. If you’ve had a chance to check out my work, I’d really appreciate an honest Google review, and I’d be happy to leave an honest review for Kindred Canine as well.\nAlways great to support good local businesses!\nDavid\nHereHandyman.com\n(516) 350-0801\nLabels:\nText\nUser Deleted:\nFalse"
-                  }
-            ]
-      },
-      {
-            "id": 29,
-            "name": "Client (2071)",
-            "phone": "(203) 885-2071",
-            "email": "",
-            "address": "",
-            "apt": "",
-            "town": "Westchester",
-            "state": "CT",
-            "lead": "Google Voice",
-            "service": "Handyman Service",
-            "status": "Completed",
-            "date": "2026-05-03",
-            "hasGbpReview": false,
-            "notes": "Imported from Google Voice Takeout. 1 SMS, 0 calls, 0 voicemails.",
-            "quoted_prices": [],
-            "counts": {
-                  "sms": 1,
-                  "calls": 0,
-                  "voicemails": 0
-            },
-            "history": [
-                  {
-                        "type": "sms",
-                        "date": "2026-05-03T09:24:24-04:00",
-                        "direction": "unknown",
-                        "content": "Me to\nMay 3, 2026, 9:24:24 AM\nEastern Time :\nMe :\nGood Morning Linda. My name is David I am a handyman please let me know if I can help you.\nLabels:\nText\nUser Deleted:\nFalse"
-                  }
-            ]
-      }
-];
-
-    // 🚀 Load All 1,217 Google Voice Customers into CRM
-    if (document.getElementById('importAllVoiceBtn')) {
-      document.getElementById('importAllVoiceBtn').addEventListener('click', function () {
-        fetch('scripts/all_voice_customers.json')
-          .then(function(r) { return r.json(); })
-          .then(function(allData) {
-            contacts = allData;
-            saveContacts(contacts);
-            currentPage = 1;
-            filterAndRenderContacts();
-            alert("🚀 Successfully loaded all 1,217 Google Voice customer contacts into CRM!\n\nState Breakdown:\n• NY (New York): 962\n• IL (Illinois): 212\n• PA (Pennsylvania): 20\n• NJ (New Jersey): 16\n• CT (Connecticut): 7");
-          })
-          .catch(function(err) {
-            console.error("Error loading full customer dataset:", err);
-            alert("Notice: Could not load full dataset file scripts/all_voice_customers.json.");
-          });
-      });
-    }
-
-    // Auto-load all 1,217 contacts if localStorage has fewer than 500 records
-    if (contacts.length < 500) {
-      fetch('scripts/all_voice_customers.json')
-        .then(function(r) { return r.json(); })
-        .then(function(allData) {
-          if (Array.isArray(allData) && allData.length > 500) {
-            contacts = allData;
-            saveContacts(contacts);
-            filterAndRenderContacts();
-          }
-        })
-        .catch(function() {});
-    }
-
-    // Pagination Controls Listeners
-    if (document.getElementById('prevPageBtn')) {
-      document.getElementById('prevPageBtn').addEventListener('click', function() {
-        if (currentPage > 1) {
-          currentPage--;
-          renderContacts(currentFilteredList);
-        }
-      });
-    }
-    if (document.getElementById('nextPageBtn')) {
-      document.getElementById('nextPageBtn').addEventListener('click', function() {
-        currentPage++;
-        renderContacts(currentFilteredList);
-      });
-    }
-    if (document.getElementById('pagSizeSelect')) {
-      document.getElementById('pagSizeSelect').addEventListener('change', function() {
-        pageSize = this.value;
-        currentPage = 1;
-        renderContacts(currentFilteredList);
-      });
-    }
+    var trialVoiceBatch = [];
 
     document.getElementById('importVoiceBatchBtn').addEventListener('click', function () {
-      var addedCount = 0;
-      trialVoiceBatch.forEach(function (item) {
-        var exists = contacts.some(function (c) { return c.phone === item.phone; });
-        if (!exists) {
-          contacts.unshift(item);
-          addedCount++;
-        }
-      });
-      saveContacts(contacts);
-      filterAndRenderContacts();
-      alert("📱 Google Voice Trial Batch Import Complete!\n\n" + addedCount + " authentic customer contact(s) imported into CRM.\n\nTotal CRM Contacts now: " + contacts.length + ".\n\nSeparated state & town filters are active.");
+      alert("No pending Google Voice batch staged. To add customer contacts, click 'Add Contact' above or import contacts directly.");
     });
 
     // 🔄 Reset & Reload Clean Database
@@ -3433,7 +2799,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         // 3. Sync asynchronously with Supabase/Netlify Function
         fetch('/.netlify/functions/submit-review', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
           body: JSON.stringify({
             name: name,
             phone: phone,
@@ -3483,7 +2849,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         self.disabled = true;
         self.textContent = 'Syncing GBP API...';
 
-        fetch('/.netlify/functions/gbp-reviews')
+        fetch('/.netlify/functions/gbp-reviews', { headers: getAuthHeaders() })
           .then(function(res) { return res.json(); })
           .then(function(data) {
             syncLiveWebReviews();
@@ -3541,7 +2907,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           fetch('/.netlify/functions/ai-seo-reply', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({
               reviewerName: reviewerName,
               reviewText: reviewText,
@@ -3583,7 +2949,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
             fetch('/.netlify/functions/gbp-reviews', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: getAuthHeaders({ 'Content-Type': 'application/json' }),
               body: JSON.stringify({
                 reviewName: 'accounts/105960944786626315708/locations/herehandyman/reviews/1',
                 replyComment: currentReply
@@ -3661,7 +3027,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     if (syncGbpBtn) {
       syncGbpBtn.addEventListener('click', function() {
         syncGbpBtn.textContent = 'Syncing... ⏳';
-        fetch('/.netlify/functions/gbp-reviews')
+        fetch('/.netlify/functions/gbp-reviews', { headers: getAuthHeaders() })
           .then(function(res) { return res.json(); })
           .then(function(data) {
             syncGbpBtn.textContent = 'Sync Latest GBP Reviews 🔄';
@@ -4821,7 +4187,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var jpegData = isHttp ? undefined : await window.toGbpJpeg(photo.photo_url);
         var res = await fetch('/.netlify/functions/gbp-post', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: window.getAuthHeaders({ 'Content-Type': 'application/json' }),
           body: JSON.stringify({
             title: photo.title,
             town: photo.town,
@@ -4846,7 +4212,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     };
 
     renderFieldPhotosGrid();
-  });
   </script>
   <script src="/js/piexif.js"></script>
   <script>
@@ -5313,7 +4678,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         gbpImagePromise.then(function(imageData) {
           return fetch('/.netlify/functions/gbp-post', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: window.getAuthHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({
               title: title,
               town: town,
@@ -5366,7 +4731,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     try {
       var res = await fetch('/.netlify/functions/analytics-ai-summary', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: window.getAuthHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify({
           pageViews: 1450,
           activeUsers: 620,

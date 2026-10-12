@@ -117,7 +117,7 @@ export async function handler(event) {
 
     const bookingId = "HH-" + crypto.randomUUID().slice(0, 8).toUpperCase();
 
-    // 5. Google Calendar Single Source of Truth: Check for busy events on davi65@gmail.com
+    // 5. Google Calendar Single Source of Truth: Check for busy events on primary owner calendar
     try {
       const gBusy = await getGoogleCalendarBusyRanges(startTimeIso, endTimeIso);
       const isGoogleBusy = (gBusy || []).some(b => startMs < b.end && b.start < endMs);

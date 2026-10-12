@@ -28,6 +28,15 @@ export const handler = async (event) => {
     };
   }
 
+  const authHeader = event.headers.authorization || event.headers.Authorization || "";
+  if (!authHeader.startsWith("Bearer ")) {
+    return {
+      statusCode: 401,
+      headers,
+      body: JSON.stringify({ error: "Unauthorized: Invalid or missing token" })
+    };
+  }
+
   try {
     const data = JSON.parse(event.body || '{}');
 

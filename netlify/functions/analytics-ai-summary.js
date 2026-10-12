@@ -5,13 +5,22 @@ import { BetaAnalyticsDataClient } from '@google-analytics/data';
 export async function handler(event, context) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
     'Content-Type': 'application/json'
   };
 
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
+  }
+
+  const authHeader = event.headers.authorization || event.headers.Authorization || "";
+  if (!authHeader.startsWith("Bearer ")) {
+    return {
+      statusCode: 401,
+      headers,
+      body: JSON.stringify({ error: "Unauthorized: Invalid or missing token" })
+    };
   }
 
   try {

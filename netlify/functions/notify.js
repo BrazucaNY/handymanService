@@ -1,6 +1,6 @@
 const DEFAULT_KEY_PARTS = ["5cd5e45a", "9146", "4c3a", "ac2f", "8b2904476cf0"];
 const DEFAULT_WEB3FORMS_KEY = DEFAULT_KEY_PARTS.join("-");
-const OWNER_EMAIL = process.env.OWNER_EMAIL || "davi65@gmail.com";
+const OWNER_EMAIL = process.env.OWNER_EMAIL || "info@herehandyman.com";
 
 function isValidEmail(value) {
   return typeof value === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());

@@ -5,13 +5,13 @@ const saProject = process.env.FIREBASE_PROJECT_ID || ('handyman' + 'service' + '
 const client_email = process.env.GOOGLE_SA_EMAIL || (`herehandyman-booking@${saProject}.iam.gserviceaccount.com`);
 const private_key = (process.env.GOOGLE_SA_PRIVATE_KEY || '').replace(/\\n/g, '\n');
 
-// User OAuth 2.0 (Direct access for primary owner davi65@gmail.com)
+// User OAuth 2.0 (Direct access for primary owner)
 const client_id = process.env.GOOGLE_CLIENT_ID;
 const client_secret = process.env.GOOGLE_CLIENT_SECRET;
 const refresh_token = process.env.GOOGLE_OAUTH_REFRESH_TOKEN || process.env.GOOGLE_REFRESH_TOKEN;
 
 async function getAccessToken() {
-  // Option A: Primary Owner User OAuth 2.0 Refresh Token (Preferred for davi65@gmail.com)
+  // Option A: Primary Owner User OAuth 2.0 Refresh Token
   if (client_id && client_secret && refresh_token) {
     const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
@@ -26,7 +26,7 @@ async function getAccessToken() {
 
     if (tokenRes.ok) {
       const tokenData = await tokenRes.json();
-      return { token: tokenData.access_token, authType: 'User OAuth (davi65@gmail.com)' };
+      return { token: tokenData.access_token, authType: 'User OAuth (Primary Owner)' };
     }
     console.warn('OAuth refresh token failed, falling back to Service Account JWT...');
   }
@@ -86,13 +86,22 @@ function generateSeoReply(reviewerName, comment, town, service) {
 export async function handler(event, context) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Content-Type': 'application/json'
   };
 
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
+  }
+
+  const authHeader = event.headers.authorization || event.headers.Authorization || "";
+  if (!authHeader.startsWith("Bearer ")) {
+    return {
+      statusCode: 401,
+      headers,
+      body: JSON.stringify({ error: "Unauthorized: Invalid or missing token" })
+    };
   }
 
   try {

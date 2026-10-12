@@ -119,12 +119,19 @@ $$;
 -- ----------------------------------------------------------
 -- 9. ROW LEVEL SECURITY (RLS) POLICIES
 -- ----------------------------------------------------------
+ALTER TABLE public.bookings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.staff ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.customers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.jobs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.invoices ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.invoice_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.audit_log ENABLE ROW LEVEL SECURITY;
+
+-- Deny all anon access to bookings (Netlify serverless functions use service_role)
+DROP POLICY IF EXISTS bookings_staff_all ON public.bookings;
+CREATE POLICY bookings_staff_all ON public.bookings FOR ALL
+  USING (public.is_staff())
+  WITH CHECK (public.is_staff());
 
 CREATE OR REPLACE FUNCTION public.is_staff()
 RETURNS BOOLEAN LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public AS $$

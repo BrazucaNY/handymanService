@@ -95,6 +95,15 @@ export async function handler(event, context) {
     };
   }
 
+  const authHeader = event.headers.authorization || event.headers.Authorization || "";
+  if (!authHeader.startsWith("Bearer ")) {
+    return {
+      statusCode: 401,
+      headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Unauthorized: Invalid or missing token' })
+    };
+  }
+
   try {
     const body = JSON.parse(event.body || '{}');
     const { title, summary, town, imageUrl, imageData, ctaUrl, refreshToken, clientId, clientSecret } = body;
