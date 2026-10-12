@@ -444,24 +444,56 @@ document.getElementById('contact-form').addEventListener('submit', async functio
 
   const formData = new FormData(form);
   const wKey = ['5cd5e45a', '9146', '4c3a', 'ac2f', '8b2904476cf0'].join('-');
-  formData.append('access_key', wKey);
+  const firstName = (formData.get('first_name') || '').toString().trim();
+  const lastName = (formData.get('last_name') || '').toString().trim();
+  const fullName = (firstName + ' ' + lastName).trim() || 'Website Visitor';
+  const email = (formData.get('email') || '').toString().trim();
+  const phone = (formData.get('phone') || '').toString().trim();
+  const city = (formData.get('city') || '').toString().trim();
+  const service = (formData.get('service') || '').toString().trim();
+  const details = (formData.get('project_details') || formData.get('message') || '').toString().trim();
+
+  const payload = {
+    access_key: wKey,
+    subject: formData.get('subject') || 'New Contact Inquiry - Here Handyman',
+    from_name: 'Here Handyman Contact Page',
+    name: fullName,
+    email: email,
+    phone: phone,
+    service: service,
+    city: city,
+    project_details: details,
+    message: `Customer: ${fullName}\nPhone: ${phone}\nEmail: ${email}\nCity: ${city}\nService Requested: ${service}\nProject Details:\n${details}`
+  };
 
   let success = false;
   try {
-    const res = await fetch('/.netlify/functions/notify', {
+    const web3Res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
     });
-    if (res.ok) success = true;
-  } catch (err) {}
+    const resText = await web3Res.text();
+    let resJson = {};
+    try { resJson = JSON.parse(resText); } catch (_) {}
+    if (web3Res.ok && (resJson.success === true || resText.includes('"success":true') || resText.toLowerCase().includes('success'))) {
+      success = true;
+    }
+  } catch (err) {
+    console.warn('Direct Web3Forms failed, trying Netlify fallback...', err);
+  }
 
   if (!success) {
     try {
-      const resFallback = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/.netlify/functions/notify', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
-      if (resFallback.ok) success = true;
+      if (res.ok) success = true;
     } catch (err) {}
   }
 

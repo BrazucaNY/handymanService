@@ -5336,25 +5336,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </label>
         <textarea id="project-details" name="project_details" placeholder="Tell us what you need help with..." required="" rows="4"></textarea>
        </div>
-       <div class="form-group">
-        <div class="upload-zone" id="upload-zone">
-         <input accept="image/*" id="file-input" multiple="" name="project_photos[]" style="display: none;" type="file"/>
-         <div class="upload-icon">
-          <svg fill="none" height="32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="display: inline-block;" viewbox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg">
-           <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
-           </path>
-           <circle cx="12" cy="13" r="4">
-           </circle>
-          </svg>
-         </div>
-         <div class="upload-text">
-          Click or drag photos of your project here
-         </div>
-         <div class="upload-sub">
-          Optional: PNG, JPG up to 5MB
-         </div>
-         <div class="file-preview-grid" id="file-preview">
-         </div>
+       <div class="photo-hint-box" style="background:#f8fafc;border:1px dashed #cbd5e1;border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;">
+        <div style="flex-shrink:0;width:38px;height:38px;border-radius:50%;background:#e0f2fe;display:flex;align-items:center;justify-content:center;color:#0284c7;">
+         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+        </div>
+        <div style="font-size:13px;line-height:1.45;color:#475569;">
+         <strong style="color:#0f172a;display:block;margin-bottom:2px;">Have project photos?</strong>
+         Text photos directly to <a href="tel:5163500801" style="color:#0284c7;font-weight:700;text-decoration:none;">(516) 350-0801</a> with your name for an even faster flat-rate quote!
         </div>
        </div>
        <button class="form-submit" type="submit">
@@ -5690,7 +5678,7 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Smooth Contact Form Submission Handler with Dual-Layer Fallback
+// Smooth Contact Form Submission Handler with Direct Client-Side Delivery & Resilient Fallback
 document.addEventListener('submit', async function(e) {
   const form = e.target;
   if (!form || (form.id !== 'quote-form' && form.id !== 'contact-form')) return;
@@ -5705,37 +5693,55 @@ document.addEventListener('submit', async function(e) {
 
   const formData = new FormData(form);
   const wKey = ['5cd5e45a', '9146', '4c3a', 'ac2f', '8b2904476cf0'].join('-');
-  formData.append('access_key', wKey);
+  const firstName = (formData.get('first_name') || '').toString().trim();
+  const lastName = (formData.get('last_name') || '').toString().trim();
+  const fullName = (firstName + ' ' + lastName).trim() || (formData.get('name') || '').toString().trim() || 'Website Visitor';
+  const email = (formData.get('email') || '').toString().trim();
+  const phone = (formData.get('phone') || '').toString().trim();
+  const service = (formData.get('service') || '').toString().trim();
+  const details = (formData.get('project_details') || formData.get('message') || '').toString().trim();
+
+  const payload = {
+    access_key: wKey,
+    subject: formData.get('subject') || 'New Booking Request - Here Handyman',
+    from_name: 'Here Handyman Website',
+    name: fullName,
+    email: email,
+    phone: phone,
+    service: service,
+    project_details: details,
+    message: `Customer: ${fullName}\nPhone: ${phone}\nEmail: ${email}\nService Requested: ${service}\nProject Details:\n${details}`
+  };
 
   let success = false;
 
   try {
-    // Primary: Submit directly to Web3Forms API
+    // Primary: Direct client-side JSON submission to Web3Forms API
     const web3Res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
     });
-    const web3Data = await web3Res.json().catch(() => ({}));
-    if (web3Res.ok && web3Data.success) {
+
+    const resText = await web3Res.text();
+    let web3Data = {};
+    try { web3Data = JSON.parse(resText); } catch (_) {}
+
+    if (web3Res.ok && (web3Data.success === true || resText.includes('"success":true') || resText.toLowerCase().includes('success'))) {
       success = true;
+    } else {
+      console.warn('Web3Forms returned non-success response:', resText);
     }
   } catch (err) {
-    console.warn('Direct Web3Forms submission failed, attempting Netlify function fallback...', err);
+    console.warn('Direct Web3Forms submission failed, attempting Netlify fallback...', err);
   }
 
-  // Fallback: If Web3Forms direct failed, use Netlify /api/notify serverless function
+  // Fallback: If Web3Forms direct failed, try Netlify /api/notify serverless function
   if (!success) {
     try {
-      const payload = {
-        subject: formData.get('subject') || 'New Booking Request - Here Handyman',
-        first_name: formData.get('first_name') || formData.get('name') || '',
-        last_name: formData.get('last_name') || '',
-        email: formData.get('email') || '',
-        phone: formData.get('phone') || '',
-        service: formData.get('service') || '',
-        project_details: formData.get('project_details') || formData.get('message') || ''
-      };
-
       const notifyRes = await fetch('/.netlify/functions/notify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
