@@ -5,10 +5,10 @@ const saProject = process.env.FIREBASE_PROJECT_ID || ('handyman' + 'service' + '
 const client_email = process.env.GOOGLE_SA_EMAIL || (`herehandyman-booking@${saProject}.iam.gserviceaccount.com`);
 const private_key = (process.env.GOOGLE_SA_PRIVATE_KEY || '').replace(/\\n/g, '\n');
 
-// User OAuth 2.0 (Direct access for primary owner)
-const client_id = process.env.GOOGLE_CLIENT_ID;
-const client_secret = process.env.GOOGLE_CLIENT_SECRET;
-const refresh_token = process.env.GOOGLE_OAUTH_REFRESH_TOKEN || process.env.GOOGLE_REFRESH_TOKEN;
+// User OAuth 2.0 (Check all environment variable aliases)
+const client_id = process.env.GOOGLE_CLIENT_ID || process.env.CLIENT_ID || process.env.GMB_CLIENT_ID;
+const client_secret = process.env.GOOGLE_CLIENT_SECRET || process.env.CLIENT_SECRET || process.env.GMB_CLIENT_SECRET;
+const refresh_token = process.env.GOOGLE_OAUTH_REFRESH_TOKEN || process.env.GOOGLE_REFRESH_TOKEN || process.env.REFRESH_TOKEN || process.env.GMB_REFRESH_TOKEN || process.env.GBP_REFRESH_TOKEN;
 
 async function getAccessToken() {
   // Option A: Primary Owner User OAuth 2.0 Refresh Token
