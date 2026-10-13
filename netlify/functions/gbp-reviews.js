@@ -155,11 +155,6 @@ export async function handler(event, context) {
           success: true,
           authenticated: true,
           authType,
-          oauthEnv: {
-            hasClientId: !!client_id,
-            hasClientSecret: !!client_secret,
-            hasRefreshToken: !!refresh_token
-          },
           accounts: accountsData.accounts || [],
           locations: locationsData.locations || [],
           reviews: reviewsData.reviews || [],
