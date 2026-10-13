@@ -28,7 +28,10 @@ async function getAccessToken() {
       const tokenData = await tokenRes.json();
       return { token: tokenData.access_token, authType: 'User OAuth (Primary Owner)' };
     }
-    console.warn('OAuth refresh token failed, falling back to Service Account JWT...');
+    const errText = await tokenRes.text().catch(() => '');
+    console.warn('OAuth refresh token failed (' + tokenRes.status + '): ' + errText + ' falling back to Service Account JWT...');
+  } else {
+    console.warn('Missing OAuth credentials:', { hasClientId: !!client_id, hasClientSecret: !!client_secret, hasRefreshToken: !!refresh_token });
   }
 
   // Option B: Service Account JWT Fallback
@@ -152,6 +155,11 @@ export async function handler(event, context) {
           success: true,
           authenticated: true,
           authType,
+          oauthEnv: {
+            hasClientId: !!client_id,
+            hasClientSecret: !!client_secret,
+            hasRefreshToken: !!refresh_token
+          },
           accounts: accountsData.accounts || [],
           locations: locationsData.locations || [],
           reviews: reviewsData.reviews || [],
