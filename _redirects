@@ -101,6 +101,8 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /drywall-repair-rye/                         /drywall-repair-rye.html           200
 /drywall-repair-scarsdale                    /drywall-repair-scarsdale.html     200
 /drywall-repair-scarsdale/                   /drywall-repair-scarsdale.html     200
+/deck-repair-scarsdale                       /deck-repair-scarsdale.html        200
+/deck-repair-scarsdale/                      /deck-repair-scarsdale.html        200
 /drywall-repair-white-plains                 /drywall-repair-white-plains.html  200
 /drywall-repair-white-plains/                /drywall-repair-white-plains.html  200
 /drywall-repair-yonkers                      /drywall-repair-yonkers.html       200
