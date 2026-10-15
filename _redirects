@@ -41,8 +41,8 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 
 
 # Explicit Clean URL Rewrites for All Service, Town & Blog Pages
-/offer                                       /offer.html                        200
-/offer/                                      /offer.html                        200
+/offer                                       /book                              301
+/offer/                                      /book                              301
 /about                                       /about.html                        200
 /about/                                      /about.html                        200
 /ardsley-handyman                            /ardsley-handyman.html             200
