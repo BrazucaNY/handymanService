@@ -36,7 +36,7 @@ async function uploadPhotoToGbp() {
   const accountId = "107235988987982670835";
   const locationId = "1964673381603454408";
 
-  const imageUrl = "https://raw.githubusercontent.com/BrazucaNY/handymanService/main/assets/images/portfolio/curtain-rod-installation-white-plains.webp";
+  const imageUrl = "https://raw.githubusercontent.com/BrazucaNY/handymanService/main/assets/images/portfolio/nursery_modular_bookcase_cubby_assembly_chappaqua_after.webp";
 
   const mediaUrl = `https://mybusiness.googleapis.com/v4/accounts/${accountId}/locations/${locationId}/media`;
 

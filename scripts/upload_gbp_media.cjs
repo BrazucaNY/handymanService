@@ -42,7 +42,7 @@ async function uploadMedia() {
     locationAssociation: {
       category: "ADDITIONAL"
     },
-    sourceUrl: "https://www.herehandyman.com/assets/images/portfolio/curtain-rod-installation-white-plains.webp"
+    sourceUrl: "https://www.herehandyman.com/assets/images/portfolio/nursery_modular_bookcase_cubby_assembly_chappaqua_after.webp"
   };
 
   console.log("Uploading photo to GBP Media library...");
