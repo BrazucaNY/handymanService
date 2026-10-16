@@ -79,8 +79,16 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /blog/trampoline-assembly-westchester/       /blog/trampoline-assembly-westchester.html        200
 /blog/tv-mounting-cost-white-plains          /blog/tv-mounting-cost-white-plains.html          200
 /blog/tv-mounting-cost-white-plains/         /blog/tv-mounting-cost-white-plains.html          200
-/briarcliff-manor-handyman                   /briarcliff-manor-handyman.html    200
-/briarcliff-manor-handyman/                  /briarcliff-manor-handyman.html    200
+/bedford-handyman                             /bedford-handyman.html             200
+/bedford-handyman/                            /bedford-handyman.html             200
+/briarcliff-manor-handyman                   /bedford-handyman                             /bedford-handyman.html             200
+/bedford-handyman/                            /bedford-handyman.html             200
+/briarcliff-manor-handyman.html    200
+/bedford-handyman                             /bedford-handyman.html             200
+/bedford-handyman/                            /bedford-handyman.html             200
+/briarcliff-manor-handyman/                  /bedford-handyman                             /bedford-handyman.html             200
+/bedford-handyman/                            /bedford-handyman.html             200
+/briarcliff-manor-handyman.html    200
 /bronxville-handyman                         /bronxville-handyman.html          200
 /bronxville-handyman/                        /bronxville-handyman.html          200
 /carpentry-shelving                          /carpentry-shelving.html           200
