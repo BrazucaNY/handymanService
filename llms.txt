@@ -77,7 +77,7 @@ To ensure quality and compliance, Here Handyman clearly defines what is within s
 
 We serve all of Westchester County including:
 
-White Plains · Scarsdale · Yonkers · Hartsdale · Harrison · New Rochelle · Tarrytown · Mamaroneck · Rye · Elmsford · Ardsley · Dobbs Ferry · Bronxville · Pelham · Eastchester · Larchmont · Ossining · Irvington · Briarcliff Manor · Sleepy Hollow · Mount Vernon · Greenburgh · Valhalla · Chappaqua · Armonk
+White Plains · Scarsdale · Yonkers · Hartsdale · Harrison · New Rochelle · Tarrytown · Mamaroneck · Rye · Elmsford · Ardsley · Dobbs Ferry · Bronxville · Pelham · Eastchester · Larchmont · Ossining · Irvington · Briarcliff Manor · Sleepy Hollow · Mount Vernon · Greenburgh · Valhalla · Chappaqua · Bedford · Armonk
 
 ### City-Specific Pages
 
@@ -105,6 +105,7 @@ White Plains · Scarsdale · Yonkers · Hartsdale · Harrison · New Rochelle ·
 - [Valhalla Handyman](https://www.herehandyman.com/valhalla-handyman)
 - [Elmsford Handyman](https://www.herehandyman.com/elmsford-handyman)
 - [Chappaqua Handyman](https://www.herehandyman.com/chappaqua-handyman)
+- [Bedford Handyman](https://www.herehandyman.com/bedford-handyman)
 - [Armonk Handyman](https://www.herehandyman.com/armonk-handyman)
 - [Gutter Cleaning](https://www.herehandyman.com/gutter-cleaning)
 - [Pressure Washing](https://www.herehandyman.com/pressure-washing)
