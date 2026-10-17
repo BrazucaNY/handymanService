@@ -15,14 +15,18 @@
        j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PCT6SLV8';
        document.head.appendChild(j);
      }
-     if ('requestIdleCallback' in window) {
-       requestIdleCallback(loadGTM, { timeout: 4500 });
-     } else {
-       setTimeout(loadGTM, 3500);
+     var events = ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'];
+     function onInteraction() {
+       loadGTM();
+       events.forEach(function(e) {
+         window.removeEventListener(e, onInteraction, { passive: true });
+       });
      }
-     ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach(function(e) {
-       window.addEventListener(e, loadGTM, { once: true, passive: true });
+     events.forEach(function(e) {
+       window.addEventListener(e, onInteraction, { once: true, passive: true });
      });
+     // Safety fallback for non-interactive sessions
+     setTimeout(loadGTM, 8000);
    })();
   </script>
   <!-- End Google Tag Manager -->
