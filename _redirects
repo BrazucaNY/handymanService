@@ -4,6 +4,13 @@ http://www.herehandyman.com/*    https://www.herehandyman.com/:splat  301!
 https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /index.html                      /                                    301!
 
+# Security Blocks: Prevent exposure of sensitive package manifests and scripts
+/package.json                    /404.html                            404!
+/package-lock.json               /404.html                            404!
+/skills-lock.json                /404.html                            404!
+/.env*                           /404.html                            404!
+/scripts/*                       /404.html                            404!
+
 # Booking Page Clean Rewrites & Redirects
 /book                                        /book.html                         200
 /book/                                       /book                              301

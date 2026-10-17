@@ -1,5 +1,5 @@
-// Netlify Serverless Function: TypeSafe AI SEO Review Reply Generator for Here Handyman
 import { TypeSafeClient, choice, noul, score } from '@typesafe-ai/sdk';
+import { verifyStaffSession } from './authHelper.js';
 
 export async function handler(event, context) {
   const headers = {
@@ -13,12 +13,12 @@ export async function handler(event, context) {
     return { statusCode: 200, headers, body: '' };
   }
 
-  const authHeader = event.headers.authorization || event.headers.Authorization || "";
-  if (!authHeader.startsWith("Bearer ")) {
+  const isAuthorized = await verifyStaffSession(event);
+  if (!isAuthorized) {
     return {
       statusCode: 401,
       headers,
-      body: JSON.stringify({ error: "Unauthorized: Invalid or missing token" })
+      body: JSON.stringify({ error: "Unauthorized: Invalid or expired staff token" })
     };
   }
 

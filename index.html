@@ -5618,6 +5618,10 @@
       <form action="/.netlify/functions/notify" enctype="multipart/form-data" id="quote-form" method="POST">
        <input name="subject" type="hidden" value="New Booking Request - Here Handyman"/>
        <input name="from_name" type="hidden" value="Here Handyman Website"/>
+       <div style="display:none!important;position:absolute!important;left:-9999px!important;" aria-hidden="true">
+        <label for="quote_hp_website">Leave this field blank</label>
+        <input autocomplete="off" id="quote_hp_website" name="website" tabindex="-1" type="text"/>
+       </div>
        <div class="form-row">
         <div class="form-group">
          <label for="first-name">

@@ -1,21 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18119699321"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18119699321');
-</script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PCT6SLV8');</script>
-<!-- End Google Tag Manager -->
 
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -3210,17 +3195,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       return fetch(SUPABASE_URL + "/rest/v1/" + path, options);
     }
 
-    var SKYNOVA_SEED_INVOICES = [
-      { id: "79643560", number: "0000960", customer_name: "Lori Ann Marcella", created_at: "2026-09-22", due_date: "2026-09-22", total: 250.00, balance: 250.00, status: "draft", invoice_items: [{ description: "Hang Pictures & Mirror, Bathroom Drawer Repair, Shower Caddy & Rod, Assemble 2 desks", qty: 1, unit_price: 250.00 }] },
-      { id: "79643182", number: "0000959", customer_name: "Lori Ann Marcella", created_at: "2026-09-22", due_date: "2026-09-22", total: 672.00, balance: 672.00, status: "draft", invoice_items: [{ description: "Kitchen Wall Repair & Closure, 9 Window Blinds, Door Knob, Dining Painting", qty: 1, unit_price: 672.00 }] },
-      { id: "79271931", number: "0000958", customer_name: "Donna", created_at: "2026-08-27", due_date: "2026-08-27", total: 150.00, balance: 0.00, status: "paid", invoice_items: [{ description: "General Handyman Repairs", qty: 1, unit_price: 150.00 }] },
-      { id: "78649627", number: "0000957", customer_name: "Sterling Facilities Management Inc", created_at: "2026-07-14", due_date: "2026-07-14", total: 300.00, balance: 300.00, status: "past_due", invoice_items: [{ description: "Facility Maintenance Work", qty: 1, unit_price: 300.00 }] },
-      { id: "78259932", number: "0000897", customer_name: "Sterling Facilities Management Inc", created_at: "2026-06-16", due_date: "2026-06-16", total: 300.00, balance: 0.00, status: "paid", invoice_items: [{ description: "Facility Repair Work", qty: 1, unit_price: 300.00 }] },
-      { id: "76253034", number: "0000892", customer_name: "Yokata Rodriguez", created_at: "2026-01-20", due_date: "2026-01-20", total: 89.00, balance: 89.00, status: "past_due", invoice_items: [{ description: "Minor Home Repair", qty: 1, unit_price: 89.00 }] },
-      { id: "76128270", number: "0000891", customer_name: "Diamond Jones", created_at: "2026-01-10", due_date: "2026-01-10", total: 250.00, balance: 0.00, status: "paid", invoice_items: [{ description: "Handyman Repairs", qty: 1, unit_price: 250.00 }] }
-    ];
-
-    var localInvoices = SKYNOVA_SEED_INVOICES;
+    var localInvoices = [];
 
     async function loadInvoices() {
       var tbody = document.getElementById('invoicesTableBody');
@@ -3231,8 +3206,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         if (res.ok) {
           var dbData = await res.json();
           if (dbData && dbData.length > 0) {
-            // Merge DB data with seed data
-            localInvoices = dbData.concat(SKYNOVA_SEED_INVOICES.filter(s => !dbData.some(d => d.number === s.number)));
+            localInvoices = dbData;
+          } else {
+            localInvoices = [];
           }
         }
       } catch (err) {}

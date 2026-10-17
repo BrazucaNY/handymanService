@@ -1,4 +1,6 @@
 // Netlify Serverless Function: Create Invoice Endpoint (Authenticated)
+import { verifyStaffSession } from './authHelper.js';
+
 export async function handler(event, context) {
   if (event.httpMethod !== "POST") {
     return {
@@ -8,12 +10,12 @@ export async function handler(event, context) {
     };
   }
 
-  const authHeader = event.headers.authorization || event.headers.Authorization || "";
-  if (!authHeader.startsWith("Bearer ")) {
+  const isAuthorized = await verifyStaffSession(event);
+  if (!isAuthorized) {
     return {
       statusCode: 401,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Unauthorized: Invalid or missing token" })
+      body: JSON.stringify({ error: "Unauthorized: Invalid or expired staff token" })
     };
   }
 

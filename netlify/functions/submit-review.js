@@ -2,6 +2,7 @@
 // Customer Contact & Review Intake Engine with Full CORS & Supabase Integration
 
 import { DB_CONFIG } from './dbConfig.js';
+import { verifyStaffSession } from './authHelper.js';
 
 export const handler = async (event) => {
   const headers = {
@@ -28,12 +29,12 @@ export const handler = async (event) => {
     };
   }
 
-  const authHeader = event.headers.authorization || event.headers.Authorization || "";
-  if (!authHeader.startsWith("Bearer ")) {
+  const isAuthorized = await verifyStaffSession(event);
+  if (!isAuthorized) {
     return {
       statusCode: 401,
       headers,
-      body: JSON.stringify({ error: "Unauthorized: Invalid or missing token" })
+      body: JSON.stringify({ error: "Unauthorized: Invalid or expired staff token" })
     };
   }
 

@@ -44,7 +44,7 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Permissions-Policy: camera=(self), microphone=(), geolocation=(self)
   Referrer-Policy: strict-origin-when-cross-origin
-  Content-Security-Policy: default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net https://*.setmore.com https://*.supabase.co https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; img-src 'self' data: blob: https: https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://api.web3forms.com https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co wss://*.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net; media-src 'self' data: blob: https:; object-src 'none'; frame-src 'self' https://*.setmore.com https://www.youtube.com https://www.google.com https://maps.google.com https://*.google.com;
+  Content-Security-Policy: default-src 'self' https:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net https://*.setmore.com https://*.supabase.co https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; img-src 'self' data: blob: https: https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://api.web3forms.com https://vvwnmiffuaxiazlskeya.supabase.co https://*.supabase.co wss://*.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://googleads.g.doubleclick.net; media-src 'self' data: blob: https:; object-src 'none'; frame-src 'self' https://*.setmore.com https://www.youtube.com https://www.google.com https://maps.google.com https://*.google.com;
   Vary: Accept, Accept-Encoding
 
 /admin
@@ -79,18 +79,21 @@
 
 /dashboard
   X-Robots-Tag: noindex, nofollow, noarchive
+  X-Frame-Options: DENY
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
 
 /dashboard/
   X-Robots-Tag: noindex, nofollow, noarchive
+  X-Frame-Options: DENY
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
 
 /dashboard.html
   X-Robots-Tag: noindex, nofollow, noarchive
+  X-Frame-Options: DENY
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0
@@ -101,12 +104,25 @@
 
 /timer*
   X-Robots-Tag: noindex, nofollow, noarchive
+  X-Frame-Options: DENY
   Cache-Control: no-cache, no-store, must-revalidate
 
 /invoices*
   X-Robots-Tag: noindex, nofollow, noarchive
+  X-Frame-Options: DENY
   Cache-Control: no-cache, no-store, must-revalidate
 
 /invoice*
   X-Robots-Tag: noindex, nofollow, noarchive
+  X-Frame-Options: DENY
   Cache-Control: no-cache, no-store, must-revalidate
+
+/package.json
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/package-lock.json
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/.well-known/security.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=604800

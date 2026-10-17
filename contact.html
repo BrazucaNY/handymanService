@@ -325,6 +325,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <form id="contact-form" action="/.netlify/functions/notify" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="subject" value="New Contact Inquiry - Here Handyman">
         <input type="hidden" name="from_name" value="Here Handyman Contact Page">
+        <div style="display:none!important;position:absolute!important;left:-9999px!important;" aria-hidden="true">
+          <label for="contact_hp_website">Leave this field blank</label>
+          <input type="text" id="contact_hp_website" name="website" tabindex="-1" autocomplete="off">
+        </div>
 
         <div class="form-row">
           <div class="form-group">

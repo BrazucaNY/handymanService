@@ -69,12 +69,41 @@ export async function sendOwnerEmail({ subject, fromName, replyTo, message }) {
   }
 }
 
+// In-memory rate limiting map (IP -> array of timestamps)
+const ipRateMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const MAX_REQUESTS_PER_WINDOW = 5;
+
+function isRateLimited(ip) {
+  if (!ip) return false;
+  const now = Date.now();
+  const timestamps = (ipRateMap.get(ip) || []).filter(ts => now - ts < RATE_LIMIT_WINDOW_MS);
+  if (timestamps.length >= MAX_REQUESTS_PER_WINDOW) {
+    return true;
+  }
+  timestamps.push(now);
+  ipRateMap.set(ip, timestamps);
+  return false;
+}
+
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ error: "Method Not Allowed" })
+    };
+  }
+
+  // 1. IP Rate Limiting Check
+  const clientIp = event.headers["x-forwarded-for"] || event.headers["client-ip"] || event.headers["x-nf-client-connection-ip"] || "";
+  const ip = clientIp.split(",")[0].trim();
+  if (isRateLimited(ip)) {
+    console.warn(`[SPAM FILTER] Rate limit triggered for IP: ${ip}`);
+    return {
+      statusCode: 429,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "Too many requests. Please try again later." })
     };
   }
 
@@ -85,26 +114,47 @@ export async function handler(event) {
     body = {};
   }
 
+  // 2. Honeypot Anti-Bot Traps
+  if (body.bot_field || body.website || body.company_url || body.url || body.hp_check) {
+    console.warn(`[SPAM TRAP] Honeypot field filled by bot from IP: ${ip}. Dropping silently.`);
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ success: true, message: "Inquiry received successfully." })
+    };
+  }
+
   const { subject, from_name, fromName, replyto, replyTo, email, message, name, phone, first_name, last_name, project_details, service } = body;
 
+  const fn = first_name || name || "";
+  const ln = last_name || "";
+  const p = phone || "";
+  const finalReplyTo = replyTo || replyto || email || "";
+
+  // 3. Basic Validation: Must provide contact method
+  if (!p && !isValidEmail(finalReplyTo)) {
+    return {
+      statusCode: 400,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "Please provide a valid phone number or email address." })
+    };
+  }
+
   const finalSubject = subject || "New Inquiry - Here Handyman";
-  const finalFromName = fromName || from_name || name || "Here Handyman Website";
-  const finalReplyTo = replyTo || replyto || email || OWNER_EMAIL;
+  const finalFromName = fromName || from_name || (fn ? `${fn} ${ln}`.trim() : "Here Handyman Website");
+  const verifiedReplyEmail = isValidEmail(finalReplyTo) ? finalReplyTo : OWNER_EMAIL;
 
   let finalMessage = message;
   if (!finalMessage) {
-    const fn = first_name || name || "";
-    const ln = last_name || "";
-    const p = phone || "";
     const s = service || "";
     const pd = project_details || "";
-    finalMessage = `NEW WEBSITE INQUIRY\n\nName: ${fn} ${ln}\nPhone: ${p}\nEmail: ${finalReplyTo}\nService: ${s}\nDetails: ${pd}`;
+    finalMessage = `NEW WEBSITE INQUIRY\n\nName: ${fn} ${ln}\nPhone: ${p}\nEmail: ${verifiedReplyEmail}\nService: ${s}\nDetails: ${pd}`;
   }
 
   const success = await sendOwnerEmail({
     subject: finalSubject,
     fromName: finalFromName,
-    replyTo: finalReplyTo,
+    replyTo: verifiedReplyEmail,
     message: finalMessage
   });
 

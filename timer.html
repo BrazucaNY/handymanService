@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18119699321"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-18119699321');
-</script>
+  <script>
+    (function() {
+      var SESSION_KEY = "hh_system_session";
+      var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
+      if (!raw) {
+        window.location.replace("/login");
+        return;
+      }
+      try {
+        var s = JSON.parse(raw);
+        if (!s || !s.expires_at || s.expires_at <= Date.now()) {
+          localStorage.removeItem(SESSION_KEY);
+          sessionStorage.removeItem(SESSION_KEY);
+          window.location.replace("/login");
+        }
+      } catch (e) {
+        localStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(SESSION_KEY);
+        window.location.replace("/login");
+      }
+    })();
+  </script>
   <meta charset="UTF-8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
