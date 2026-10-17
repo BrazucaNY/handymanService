@@ -1212,6 +1212,11 @@
   .rev-avatar{width:38px;height:38px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
   .rev-author-info strong{display:block;font-size:.9rem;color:var(--navy);font-weight:700}
   .rev-author-info span{font-size:.75rem;color:#475569;display:block}
+  #before-after, #portfolio, #pet-friendly, #faq {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
+  }
+
   </style>
  </head>
  <body>
@@ -5144,7 +5149,18 @@
         }, { passive: true });
       }
 
-      startAutoplay();
+      if ('IntersectionObserver' in window && carouselEl) {
+        var obs = new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting) {
+            startAutoplay();
+          } else {
+            stopAutoplay();
+          }
+        }, { threshold: 0.05 });
+        obs.observe(carouselEl);
+      } else {
+        startAutoplay();
+      }
     })();
    </script>
 
