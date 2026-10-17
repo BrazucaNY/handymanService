@@ -36,7 +36,8 @@ Call or text: (516) 350-0801 | Email: info@herehandyman.com
         headers: {
           "Content-Type": "text/markdown; charset=utf-8",
           "Vary": "Accept, Accept-Encoding",
-          "Cache-Control": "public, max-age=0, must-revalidate"
+          "Cache-Control": "public, max-age=0, must-revalidate",
+          "X-Robots-Tag": "noindex, nofollow, noarchive"
         }
       });
     }
