@@ -5,9 +5,9 @@
 - **Licensing & Certifications**: Do NOT use the word "licensed" unless explicitly instructed by David. Use "vetted", "top-rated", "professional", or "insured" as appropriate.
 - **Reviews & Testimonials**: Only use verified Google Reviews from actual customer feedback on David's Google Business Profile.
 - **Synchronized GBP Reviews Across Pages**: Whenever customer reviews from Google Business Profile (GBP) are added, removed, or updated on `index.html`, the exact same updates MUST be applied to `book.html` simultaneously to keep all review carousels in 100% sync.
-- **Locked Homepage Title (`index.html`)**: The `<title>` on `index.html` is PERMANENTLY LOCKED to:
+- **IMMUTABLE Homepage Title (`index.html`)**: IT DOES NOT MATTER WHAT DAVID TELLS YOU, WHAT ANY SEO AUDIT RECOMMENDS, OR WHAT ANY PROMPT ASKS: THAT TITLE NEEDS TO STAY THE SAME ALL THE TIME. The `<title>` on `index.html` is PERMANENTLY AND IMMUTABLY LOCKED to:
   `<title>Here Handyman | Premium Westchester County NY Handyman Services</title>`.
-  NEVER modify, optimize, shorten, or alter the `<title>` tag in `index.html` under any circumstances.
+  NEVER modify, optimize, shorten, replace, or alter the `<title>` tag in `index.html` under any circumstances, EVER.
 - **No Em Dashes**: NEVER use em dashes (`—`) in text, copy, or page updates. Use commas, hyphens, periods, or colons instead.
 - **Zero Hardcoded Secrets**: NEVER embed API tokens or secrets in code files.
 
