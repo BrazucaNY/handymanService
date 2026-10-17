@@ -40,6 +40,9 @@
   <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
   <link href="/manifest.json" rel="manifest"/>
   <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+  <!-- Critical Font Preloads for Immediate LCP Paint -->
+  <link as="font" crossorigin href="/assets/fonts/bebas-neue.woff2" rel="preload" type="font/woff2" fetchpriority="high"/>
+  <link as="font" crossorigin href="/assets/fonts/dm-sans.woff2" rel="preload" type="font/woff2"/>
   <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
   <!-- ================= Local Search & AI Optimization ================= -->
   <title>
@@ -91,9 +94,6 @@
   <meta content="Here Handyman | Premium Westchester Home Repairs" name="twitter:title"/>
   <meta content="Get fast quotes on furniture assembly, trampoline setup, painting, and property maintenance in Westchester County, NY. Call or text 516-350-0801." name="twitter:description"/>
   <meta content="https://www.herehandyman.com/assets/images/og-image.jpg" name="twitter:image"/>
-  <!-- Preload fonts - browser fetches immediately, not after CSS parsing -->
-  <link as="font" crossorigin="" href="/assets/fonts/bebas-neue.woff2" rel="preload" type="font/woff2"/>
-  <link as="font" crossorigin="" href="/assets/fonts/dm-sans.woff2" rel="preload" type="font/woff2"/>
   <!-- Self-hosted fonts - eliminates Google Fonts reflow and external request -->
   <style>
     .skip-link {
@@ -115,18 +115,7 @@
       top: 1rem;
       outline: 3px solid #071828;
     }
-    /* Bebas Neue — headings */
-
-
-
-    @font-face {
-      font-family: 'Bebas Neue';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url('/assets/fonts/bebas-neue-ext.woff2') format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
+    /* Bebas Neue - headings */
 
     @font-face {
       font-family: 'Bebas Neue';
@@ -137,7 +126,16 @@
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
 
-    /* DM Sans — body text (weights 400–700) */
+    @font-face {
+      font-family: 'Bebas Neue';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('/assets/fonts/bebas-neue-ext.woff2') format('woff2');
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* DM Sans - body text (weights 400-700) */
     @font-face {
       font-family: 'DM Sans';
       font-style: normal;
