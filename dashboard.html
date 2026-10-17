@@ -1201,7 +1201,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="phone-frame">
             <div class="phone-notch"></div>
             <div class="phone-screen">
-              <img src="/assets/images/herehandyman.webp" alt="Business Image" class="phone-hero-img" id="phoneMockupImg" onerror="this.src='/favicon.svg'">
+              <img height="720" width="540" src="/assets/images/herehandyman.webp" alt="Business Image" class="phone-hero-img" id="phoneMockupImg" onerror="this.src='/favicon.svg'">
               <div class="sms-bubble" id="phoneMsgPreview">
                 Hey Jessica, we hope you enjoyed your experience with Here Handyman! Would you mind taking a moment to leave a review? Here's the link: https://www.herehandyman.com/reviews/
               </div>
@@ -1256,7 +1256,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div class="form-group">
                 <label>Business Image</label>
                 <div style="display:flex;gap:12px;align-items:center;">
-                  <img src="/assets/images/herehandyman.webp" style="width:60px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--border);" onerror="this.src='/favicon.svg'">
+                  <img height="720" width="540" src="/assets/images/herehandyman.webp" style="width:60px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--border);" onerror="this.src='/favicon.svg'">
                   <button class="btn-secondary" onclick="alert('Image uploader active')">Change Image</button>
                 </div>
               </div>
@@ -1707,7 +1707,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
           <!-- Preview Image Area -->
           <div id="fieldPhotoPreviewBox" style="display:none;margin-bottom:20px;text-align:center;background:#fff;padding:16px;border-radius:8px;border:1px solid #e2e8f0;">
-            <img id="fieldPhotoPreviewImg" src="" style="max-width:100%;max-height:300px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);"/>
+            <img height="400" width="600" id="fieldPhotoPreviewImg" src="" style="max-width:100%;max-height:300px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);"/>
             <div id="fieldPhotoGpsTagBadge" style="margin-top:10px;font-size:13px;color:#16a34a;font-weight:700;">
               📍 GPS Location &amp; EXIF Geotag Prepared
             </div>
@@ -4115,7 +4115,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         card.innerHTML = `
           <div style="position:relative;height:180px;background:#0f172a;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="${p.photo_url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='/favicon.svg';this.style.width='60px';"/>
+            <img height="400" src="${p.photo_url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='/favicon.svg';this.style.width='60px';"/>
             <div style="position:absolute;top:10px;left:10px;">${stageBadge}</div>
             <div style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.7);color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;">📍 ${p.town}</div>
           </div>
