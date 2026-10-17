@@ -24,6 +24,7 @@
       var SESSION_KEY = "hh_system_session";
       var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
       if (!raw) {
+        document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
         window.location.replace("/login");
         return;
       }
@@ -32,11 +33,15 @@
         if (!s || !s.expires_at || s.expires_at <= Date.now()) {
           localStorage.removeItem(SESSION_KEY);
           sessionStorage.removeItem(SESSION_KEY);
+          document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
           window.location.replace("/login");
+        } else {
+          document.cookie = "hh_auth=1; Path=/; SameSite=Lax; Secure; Max-Age=2592000";
         }
       } catch (e) {
         localStorage.removeItem(SESSION_KEY);
         sessionStorage.removeItem(SESSION_KEY);
+        document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
         window.location.replace("/login");
       }
     })();
@@ -1750,258 +1755,8 @@
     var getAuthHeaders = window.getAuthHeaders;
 
     // Google Business Profile (GBP) Verified Reviewers List
-    var GBP_REVIEWS_LIST = [
-      "Harvey Kaminski", "Mary V White", "Jelly Wang", "Sean Murray", "Lori Ann Marcella", "Jacob Marquez", "Carlos Ramirez", "Franklin Miranda", "Lala Alla",
-      "Kathy Roberts", "The Tiny Mess Club", "Randy Hecht", "Escober Investments", "Pam Jaffee",
-      "Wolfgang von Loewenstein", "Anne Bryant", "Nick Valsangkar"
-    ];
-
-    // Real GBP Reviews Data Array with Smart Reply Status
-    var GBP_REVIEWS_DATA = [
-      {
-        id: "gbp-harvey-kaminski",
-        author: "Harvey Kaminski",
-        rating: 5,
-        date: "Today (New)",
-        reviewText: "Very easy to deal with David. He is friendly, professional, competent and reasonably priced. I will gladly use him again.",
-        replyText: "Hi Harvey, thank you so much for the 5-star review! As a Google Local Guide, your support means the world to us. I really enjoyed working with you on your garage lighting project. When that outdoor Ring motion light wasn't getting any power, I was glad we took the time to trace the circuit step-by-step back to that faulty GFCI outlet in the garage. Running out to grab a new GFCI receptacle and getting it installed to restore full power to your garage and have that Ring floodlight working perfectly was my pleasure. I'm thrilled you found the service friendly, professional, competent, and reasonably priced. Whenever you need anything else taken care of, please don't hesitate to reach out! — David, Here Handyman",
-        hasReply: true
-      },
-      {
-        id: "gbp-mary-v-white",
-        author: "Mary V White",
-        rating: 5,
-        date: "Today (New)",
-        reviewText: "Great price. I recently moved into a new apartment and upgraded to a 75-inch TV. I needed my TV mounted in the living room along with curtain rods installed in both my living room and bedroom. After searching for the best handyman in White Plains, NY through both Google AI and Microsoft Copilot, I was repeatedly directed to Here Handyman. I called Dave at 4:46 PM on October 1, and to my surprise, he arrived at my home by 5:21 PM. He came fully prepared with all the necessary tools and equipment, including a vacuum. Dave carefully unboxed my TV, installed the Sanus mount, mounted the 75-inch television securely, broke down boxes for recycling, and installed curtain rods with proper center support. Vacuumed dust after each installation and left everything spotless. Five stars all the way!",
-        replyText: "Hi Mary, thank you so much for the incredible, detailed review and for trusting Here Handyman with your new home! Dealing with delivery and service cancellations right after a move is never fun, so I am really glad I was able to get out to your apartment quickly, get that Sanus mount properly anchored, and have your 75-inch TV set up exactly how you wanted. Making sure everything is rock-solid, cleanly installed, and left spotless is always my top priority, and I was happy to provide the extra hardware to ensure those curtain rods had proper center support. I truly enjoyed our conversation while getting everything done. Welcome to your new place, and please don't hesitate to reach out whenever you need anything else taken care of!",
-        hasReply: true
-      },
-      {
-        id: "gbp-jelly-wang",
-        author: "Jelly Wang",
-        rating: 5,
-        date: "Yesterday",
-        reviewText: "Reasonable price. Hired David to install a curtain rod on a wide living room window that had given me nothing but trouble: tricky wall construction that I couldn't figure out on my own. He was so great to communicate with throughout, clear about timing and what he needed from me, and the install came out perfect. Solid, level, exactly what I wanted. I would highly recommend him to anyone. Would absolutely hire again.",
-        replyText: "Thank you so much, Jelly! I really appreciate you taking the time to leave such a detailed review. That window and wall construction gave us a run for our money, but I'm so glad we got your curtain rod mounted solid, perfectly level, and looking great in your living room. It was a pleasure working with you, and I look forward to helping you with your next home project anytime!",
-        hasReply: true
-      },
-      {
-        id: "gbp-24",
-        author: "Sean Murray",
-        rating: 5,
-        date: "Just Now (1 hour ago)",
-        reviewText: "Reasonable price. David was great. He hung two toilet paper holders and installed one smoke detector to the ceiling. He also checked a ceiling fan that was wobbling and explaining thoroughly why it was happening. I plan on referring him to my extended family and friends in Westchester.",
-        replyText: "Sean, thank you so much for the 5-star review and recommendation! It was a pleasure hanging your toilet paper holders, mounting the ceiling smoke detector, and getting your ceiling fan checked out so you know exactly what was going on. I really appreciate you sharing Here Handyman with your friends and family in Westchester! Give me a call anytime for your next project. David, Here Handyman",
-        hasReply: true
-      },
-      {
-        id: "gbp-1",
-        author: "Lori Ann Marcella",
-        rating: 5,
-        date: "September 10, 2026",
-        reviewText: "David was amazing!!! I was in a tough situation and facing it alone. I found David randomly and he helped within hours of me asking. I had a lot of work ahead of me and I was frozen. David came in with a plan, executed it and I am so thankful.",
-        replyText: "Thank you so much, Lori Ann! We were more than happy to step in and help take the stress off. It was a pleasure working with you!",
-        hasReply: true
-      },
-      {
-        id: "gbp-2",
-        author: "Jacob Marquez",
-        rating: 5,
-        date: "September 09, 2026",
-        reviewText: "Dave is a very honest and easy to work with handyman. He helped me install new doors, he was fairly priced and reliable. 10/10 would recommend him to all my friends and family!",
-        replyText: "Thanks, Jacob! We really appreciate the 10/10 recommendation and enjoyed helping with your door installation!",
-        hasReply: true
-      },
-      {
-        id: "gbp-3",
-        author: "Carlos Ramirez",
-        rating: 5,
-        date: "August 21, 2026",
-        reviewText: "I called David after I couldn't get anyone to move my springfree trampoline. Within a day of reaching out to him, we had already agreed on a date/time for the move. Great communication, kept me informed through the process, prompt, excellent workmanship, and overall EXCELLENT experience.",
-        replyText: "Thank you Carlos! Moving trampolines can be tricky, but we're thrilled we could get it done quickly and smoothly for your family!",
-        hasReply: true
-      },
-      {
-        id: "gbp-4",
-        author: "Franklin Miranda",
-        rating: 5,
-        date: "August 30, 2026",
-        reviewText: "Awesome guy, he repaired my fence and it looks so much better now. Definitely recommend for any jobs you might have.",
-        replyText: "Thanks Franklin! Glad your fence is looking as good as new!",
-        hasReply: true
-      },
-      {
-        id: "gbp-5",
-        author: "Lala Alla",
-        rating: 5,
-        date: "July 31, 2026",
-        reviewText: "David installed shelves in my daughter’s bedroom. He was very professional, communicated well, and was able to do the job the same day. I am very pleased with his work and my daughter was so happy with results.",
-        replyText: "Thank you Lala! We're so happy your daughter loves her new room shelves!",
-        hasReply: true
-      },
-      {
-        id: "gbp-6",
-        author: "Kathy Roberts",
-        rating: 5,
-        date: "July 25, 2026",
-        reviewText: "I highly recommend this handyman! He was professional, punctual, and arrived exactly on time. He efficiently hung two large pieces of artwork and also installed my bathroom curtain perfectly. He paid close attention to detail, worked carefully, and made sure everything was secure.",
-        replyText: "Thank you Kathy! Hanging large artwork and curtains securely is our specialty. We appreciate your kind words!",
-        hasReply: true
-      },
-      {
-        id: "gbp-7",
-        author: "The Tiny Mess Club",
-        rating: 5,
-        date: "July 21, 2026",
-        reviewText: "David did a fantastic job assembling our play kitchen for our sensory play studio. He was professional, efficient, and paid great attention to detail. Everything was put together perfectly, feels incredibly sturdy, and looks great.",
-        replyText: "Thank you so much! It was a delight helping assemble the play kitchen for the sensory play studio!",
-        hasReply: true
-      },
-      {
-        id: "gbp-8",
-        author: "Randy Hecht",
-        rating: 5,
-        date: "July 14, 2026",
-        reviewText: "David is fantastic! We’ve hired him for two different projects. He is professional, reliable, and made sure everything was completed perfectly. Communication was excellent throughout the entire process.",
-        replyText: "Thanks Randy! It's always a pleasure working with you on your home projects!",
-        hasReply: true
-      },
-      {
-        id: "gbp-9",
-        author: "Escober Investments",
-        rating: 5,
-        date: "July 14, 2026",
-        reviewText: "Great work!! David is very professional and responsive. Any type of work he can do with procession and care!!",
-        replyText: "Thank you Escober Investments! We appreciate your business and kind recommendation!",
-        hasReply: true
-      },
-      {
-        id: "gbp-10",
-        author: "Pam Jaffee",
-        rating: 5,
-        date: "July 07, 2026",
-        reviewText: "David is AMAZING. I had an entirely botched job by another electrician and he came by twice to assess what went wrong and to FIX IT! (And my dog, an amazing judge of character, LOVES him!) I will be calling on HereHandyMan again, and recommend you do, too!",
-        replyText: "Hi Pam! We're so glad we could fix that electrical job and get everything working perfectly for you! Give your dog an extra belly rub from us!",
-        hasReply: true
-      },
-      {
-        id: "gbp-11",
-        author: "Wolfgang von Loewenstein",
-        rating: 5,
-        date: "July 03, 2026",
-        reviewText: "David was incredibly easy to work with and very fair priced. He helped with the installation of a play set. He showed up on time, was very respectful, and super communicative.",
-        replyText: "Thank you Wolfgang! Playset installations are so rewarding, and we're glad the kids enjoy it!",
-        hasReply: true
-      },
-      {
-        id: "gbp-12",
-        author: "Anne Bryant",
-        rating: 5,
-        date: "June 10, 2026",
-        reviewText: "Dave was quick and fast with putting all 3 dressers together. It was amazing to watch him figure it all out. It was like watching a magician. He had a method to all the madness and within a short amount of time, BAM I had a whole new bedroom.",
-        replyText: "Haha, thanks Anne! Assembly magic is what we do best—enjoy your new bedroom setup!",
-        hasReply: true
-      },
-      {
-        id: "gbp-13",
-        author: "Nick Valsangkar",
-        rating: 5,
-        date: "June 10, 2026",
-        reviewText: "David is awesome. Honest, responsive and always does a great job. highly recommend!",
-        replyText: "Thanks Nick! We really appreciate your continued trust and support!",
-        hasReply: true
-      },
-      {
-        id: "gbp-14",
-        author: "Sarah Jenkins",
-        rating: 5,
-        date: "May 28, 2026",
-        reviewText: "David mounted our 65-inch OLED TV and concealed all the cables behind the wall in White Plains. Ultra-clean work and very professional!",
-        replyText: "Thank you Sarah! TV mounting with hidden wire concealment is our specialty in White Plains. Enjoy your clean setup!",
-        hasReply: true
-      },
-      {
-        id: "gbp-15",
-        author: "Michael Chang",
-        rating: 5,
-        date: "May 19, 2026",
-        reviewText: "Hired Here Handyman for drywall patching and painting after a plumbing repair in Scarsdale. You can't even tell where the hole was! Highly recommend.",
-        replyText: "Thanks Michael! Making drywall patches invisible is what we strive for. Appreciate your recommendation!",
-        hasReply: true
-      },
-      {
-        id: "gbp-16",
-        author: "Rachel Miller",
-        rating: 5,
-        date: "May 04, 2026",
-        reviewText: "David assembled two large IKEA wardrobes and installed ceiling fans in our Harrison home. Fast, polite, and great attention to detail.",
-        replyText: "Thank you Rachel! It was a pleasure building your wardrobes and installing the ceiling fans in Harrison!",
-        hasReply: true
-      },
-      {
-        id: "gbp-17",
-        author: "David & Jessica Kaplan",
-        rating: 5,
-        date: "April 22, 2026",
-        reviewText: "Fantastic experience! Arrived right on time in Rye, fixed our squeaky doors, and replaced outdoor lighting fixtures. 5 stars!",
-        replyText: "Thank you David & Jessica! We're glad your doors and lighting in Rye are working smoothly!",
-        hasReply: true
-      },
-      {
-        id: "gbp-18",
-        author: "Robert Greenfield",
-        rating: 5,
-        date: "April 15, 2026",
-        reviewText: "Prompt, reliable, and fair pricing. Assembled a big outdoor playset and anchored it safely in Tarrytown. Will definitely hire again.",
-        replyText: "Thanks Robert! Safe playset assembly is top priority for kids. Always happy to help in Tarrytown!",
-        hasReply: true
-      },
-      {
-        id: "gbp-19",
-        author: "Elena Rostova",
-        rating: 5,
-        date: "April 02, 2026",
-        reviewText: "David repaired our kitchen cabinet hinges and mounted bathroom vanity mirrors in Mamaroneck. Everything was done cleanly and efficiently.",
-        replyText: "Thank you Elena! Cabinet repair and mirror mounting in Mamaroneck is always a delight. Enjoy!",
-        hasReply: true
-      },
-      {
-        id: "gbp-20",
-        author: "Marcus Vance",
-        rating: 5,
-        date: "March 24, 2026",
-        reviewText: "Excellent communication from start to finish. Fixed drywall cracks and repainted our hallway in Yonkers. Top-tier handyman service.",
-        replyText: "Thanks Marcus! Hallway drywall repair and fresh paint makes such a big difference. Appreciate your feedback!",
-        hasReply: true
-      },
-      {
-        id: "gbp-21",
-        author: "Patricia Higgins",
-        rating: 5,
-        date: "March 11, 2026",
-        reviewText: "Super helpful and polite! Replaced several light switches and installed smart home doorbells in Dobbs Ferry. Excellent work!",
-        replyText: "Thank you Patricia! Smart home device and switch setups in Dobbs Ferry are always fun to complete!",
-        hasReply: true
-      },
-      {
-        id: "gbp-22",
-        author: "Daniel O'Connor",
-        rating: 5,
-        date: "February 27, 2026",
-        reviewText: "Great job repairing our backyard gate and fence latch in Bronxville. Professional, punctual, and very easy to work with.",
-        replyText: "Thanks Daniel! Glad your Bronxville fence gate and latch are sturdy and secure!",
-        hasReply: true
-      },
-      {
-        id: "gbp-23",
-        author: "Amanda Thorne",
-        rating: 5,
-        date: "February 14, 2026",
-        reviewText: "David hung multiple floating shelves and gallery wall frames in our Chappaqua living room. Everything is perfectly level and sturdy!",
-        replyText: "Thank you Amanda! Level floating shelves and gallery walls in Chappaqua are our pride and joy!",
-        hasReply: true
-      }
-    ];
+    var GBP_REVIEWS_LIST = [];
+    var GBP_REVIEWS_DATA = [];
 
     // Filter state for Reviews tab: 'all', 'unreplied', 'replied'
     var currentReviewFilter = 'all';
@@ -2975,10 +2730,19 @@
 
     // Fetch live web reviews/contacts from Supabase to auto-populate CRM & Reviews
     function syncLiveWebReviews() {
+      var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY) || "{}";
+      var token = "";
+      try { token = JSON.parse(raw).access_token || ""; } catch (e) {}
+
+      var reqHeaders = {
+        'apikey': 'sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc'
+      };
+      if (token) {
+        reqHeaders['Authorization'] = 'Bearer ' + token;
+      }
+
       fetch('https://vvwnmiffuaxiazlskeya.supabase.co/rest/v1/customer_reviews?select=*', {
-        headers: {
-          'apikey': 'sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc'
-        }
+        headers: reqHeaders
       })
       .then(function(res) { return res.json(); })
       .then(function(data) {
@@ -3583,6 +3347,7 @@
       logoutBtn.addEventListener('click', function () {
         localStorage.removeItem(SESSION_KEY);
         sessionStorage.removeItem(SESSION_KEY);
+        document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
         window.location.href = "/login";
       });
     }

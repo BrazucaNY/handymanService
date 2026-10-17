@@ -319,6 +319,14 @@ async function handleFinalSubmit() {
 
   hideError(submitError);
 
+  const hpEl = document.getElementById('book_hp_website');
+  const hpVal = hpEl ? hpEl.value.trim() : '';
+  if (hpVal) {
+    // Bot caught by honeypot: return fake confirmation immediately without calling backend
+    renderConfirmationScreen('HH-' + Math.floor(100000 + Math.random() * 900000), state.slot ? state.slot.iso : new Date().toISOString());
+    return;
+  }
+
   const btn = document.getElementById('confirmBookingBtn');
   btn.disabled = true;
   btn.innerHTML = `Confirming Appointment...`;
@@ -336,7 +344,8 @@ async function handleFinalSubmit() {
         phone,
         address,
         email,
-        notes
+        notes,
+        website: hpVal
       })
     });
 

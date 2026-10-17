@@ -472,11 +472,14 @@
     function saveSession(session, persist) {
       clearSession();
       (persist ? localStorage : sessionStorage).setItem(SESSION_KEY, JSON.stringify(session));
+      var maxAge = persist ? "; Max-Age=2592000" : "";
+      document.cookie = "hh_auth=1; Path=/; SameSite=Lax; Secure" + maxAge;
     }
 
     function clearSession() {
       localStorage.removeItem(SESSION_KEY);
       sessionStorage.removeItem(SESSION_KEY);
+      document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
     }
 
     function showWelcome(session) {
@@ -630,6 +633,7 @@
             try {
               localStorage.setItem("hh_system_session", JSON.stringify(sessionData));
               sessionStorage.setItem("hh_system_session", JSON.stringify(sessionData));
+              document.cookie = "hh_auth=1; Path=/; SameSite=Lax; Secure; Max-Age=2592000";
             } catch (e) {}
 
             setTimeout(function () {
@@ -718,10 +722,12 @@
 
     var existing = getSession();
     if (existing) {
+      document.cookie = "hh_auth=1; Path=/; SameSite=Lax; Secure; Max-Age=2592000";
       showWelcome(existing);
       // Auto-forward logged in user to dashboard
       window.location.replace("/dashboard");
     } else {
+      document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
       showLogin();
     }
   })();

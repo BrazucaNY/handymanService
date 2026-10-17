@@ -20,9 +20,38 @@ const SERVICE_DURATIONS = {
   general: 180
 };
 
+// In-memory rate limiting map (IP -> array of timestamps)
+const ipRateMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const MAX_REQUESTS_PER_WINDOW = 5;
+
+function isRateLimited(ip) {
+  if (!ip) return false;
+  const now = Date.now();
+  const timestamps = (ipRateMap.get(ip) || []).filter(ts => now - ts < RATE_LIMIT_WINDOW_MS);
+  if (timestamps.length >= MAX_REQUESTS_PER_WINDOW) {
+    return true;
+  }
+  timestamps.push(now);
+  ipRateMap.set(ip, timestamps);
+  return false;
+}
+
 export async function handler(event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: JSON.stringify({ error: "Method Not Allowed" }) };
+  }
+
+  // 1. IP Rate Limiting Check
+  const clientIp = event.headers["x-forwarded-for"] || event.headers["client-ip"] || event.headers["x-nf-client-connection-ip"] || "";
+  const ip = clientIp.split(",")[0].trim();
+  if (isRateLimited(ip)) {
+    console.warn(`[SPAM FILTER] Rate limit triggered on /book for IP: ${ip}`);
+    return {
+      statusCode: 429,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "Too many booking attempts. Please call or text (516) 350-0801 directly." })
+    };
   }
 
   try {
@@ -34,6 +63,16 @@ export async function handler(event) {
         statusCode: 400,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ error: "Invalid JSON request body." })
+      };
+    }
+
+    // 2. Honeypot Anti-Bot Traps
+    if (body.bot_field || body.website || body.company_url || body.url || body.hp_check) {
+      console.warn(`[SPAM TRAP] Honeypot field filled by bot on /book from IP: ${ip}. Dropping silently.`);
+      return {
+        statusCode: 200,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: "HH-" + Math.floor(100000 + Math.random() * 900000), start: body.start || new Date().toISOString(), status: "confirmed" })
       };
     }
 

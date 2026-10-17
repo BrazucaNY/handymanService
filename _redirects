@@ -37,6 +37,9 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /CRM                       /login                          301!
 /CRM/                      /login                          301!
 /CRM/*                     /login                          301!
+/security.txt                  /.well-known/security.txt       301
+/dashboard.html                /dashboard                      301!
+/timer.html                    /timer                          301!
 /dashboard                 /dashboard.html                 200
 /dashboard/                /dashboard.html                 200
 /invoices                  /dashboard.html                 200

@@ -6,6 +6,7 @@
       var SESSION_KEY = "hh_system_session";
       var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
       if (!raw) {
+        document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
         window.location.replace("/login");
         return;
       }
@@ -14,11 +15,15 @@
         if (!s || !s.expires_at || s.expires_at <= Date.now()) {
           localStorage.removeItem(SESSION_KEY);
           sessionStorage.removeItem(SESSION_KEY);
+          document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
           window.location.replace("/login");
+        } else {
+          document.cookie = "hh_auth=1; Path=/; SameSite=Lax; Secure; Max-Age=2592000";
         }
       } catch (e) {
         localStorage.removeItem(SESSION_KEY);
         sessionStorage.removeItem(SESSION_KEY);
+        document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
         window.location.replace("/login");
       }
     })();
@@ -358,7 +363,7 @@
       <label for="rate">Hourly Rate:</label>
       <div class="input-wrapper">
         <span class="currency">$</span>
-        <input id="rate" type="number" value="85" min="1" step="5">
+        <input id="rate" type="number" value="" placeholder="0" min="1" step="5">
       </div>
     </div>
 
@@ -402,7 +407,7 @@
       if (savedState) {
         try {
           const state = JSON.parse(savedState);
-          rateInput.value = state.rate || 85;
+          rateInput.value = state.rate || "";
           accumulatedTime = state.accumulatedTime || 0;
           isRunning = state.isRunning || false;
           startTime = state.startTime || 0;
@@ -432,7 +437,7 @@
     // Save current state to localStorage
     function saveState() {
       const state = {
-        rate: parseFloat(rateInput.value) || 85,
+        rate: parseFloat(rateInput.value) || 0,
         accumulatedTime: accumulatedTime,
         isRunning: isRunning,
         startTime: startTime

@@ -1,5 +1,6 @@
 // Netlify Serverless Function: Google Business Profile (GBP) Live Reviews & AI Review Responder
 import crypto from 'node:crypto';
+import { verifyStaffSession } from './authHelper.js';
 
 const saProject = process.env.FIREBASE_PROJECT_ID || ('handyman' + 'service' + 'admin');
 const client_email = process.env.GOOGLE_SA_EMAIL || (`herehandyman-booking@${saProject}.iam.gserviceaccount.com`);
@@ -98,12 +99,12 @@ export async function handler(event, context) {
     return { statusCode: 200, headers, body: '' };
   }
 
-  const authHeader = event.headers.authorization || event.headers.Authorization || "";
-  if (!authHeader.startsWith("Bearer ")) {
+  const isAuthorized = await verifyStaffSession(event);
+  if (!isAuthorized) {
     return {
       statusCode: 401,
       headers,
-      body: JSON.stringify({ error: "Unauthorized: Invalid or missing token" })
+      body: JSON.stringify({ error: "Unauthorized: Invalid or expired staff token" })
     };
   }
 

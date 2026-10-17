@@ -6089,6 +6089,12 @@ document.addEventListener('submit', async function(e) {
   }
 
   const formData = new FormData(form);
+  const hp = (formData.get('website') || '').toString().trim();
+  if (hp) {
+    // Bot caught by honeypot: return fake success immediately without hitting APIs
+    form.innerHTML = '<div style="text-align:center;padding:45px 20px;color:#071828;"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" style="margin-bottom:16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><h3 style="font-size:24px;font-weight:800;margin-bottom:12px;color:#071828;text-transform:uppercase;">Thank You! Your Request Has Been Sent.</h3><p style="font-size:16px;color:#374151;max-width:520px;margin:0 auto;line-height:1.6;">David will review your project details and contact you shortly at your provided phone number or email.</p></div>';
+    return;
+  }
   const wKey = ['5cd5e45a', '9146', '4c3a', 'ac2f', '8b2904476cf0'].join('-');
   const firstName = (formData.get('first_name') || '').toString().trim();
   const lastName = (formData.get('last_name') || '').toString().trim();
