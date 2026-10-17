@@ -2,11 +2,19 @@
 import { DB_CONFIG } from './dbConfig.js';
 
 export async function verifyStaffSession(event) {
+  let token = '';
   const authHeader = event.headers.authorization || event.headers.Authorization || '';
-  if (!authHeader.startsWith('Bearer ')) {
-    return false;
+  if (authHeader.startsWith('Bearer ')) {
+    token = authHeader.replace(/^Bearer\s+/i, '').trim();
+  } else {
+    const cookieHeader = event.headers.cookie || event.headers.Cookie || '';
+    const cookies = cookieHeader.split(';').map(c => c.trim());
+    const jwtCookie = cookies.find(c => c.startsWith('hh_jwt='));
+    if (jwtCookie) {
+      token = jwtCookie.split('=')[1] || '';
+    }
   }
-  const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+
   if (!token) {
     return false;
   }

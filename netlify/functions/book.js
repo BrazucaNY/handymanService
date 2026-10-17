@@ -76,6 +76,41 @@ export async function handler(event) {
       };
     }
 
+    // 3. Cloudflare Turnstile CAPTCHA Verification
+    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+    if (turnstileSecret) {
+      const turnstileToken = body["cf-turnstile-response"] || body.turnstile_token || event.headers["cf-turnstile-response"] || "";
+      if (!turnstileToken) {
+        return {
+          statusCode: 403,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ error: "Security check token missing. Please try again." })
+        };
+      }
+      try {
+        const cfRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            secret: turnstileSecret,
+            response: turnstileToken,
+            remoteip: ip
+          })
+        });
+        const cfData = await cfRes.json();
+        if (!cfData.success) {
+          console.warn(`[SPAM FILTER] Cloudflare Turnstile validation failed on /book for IP: ${ip}`);
+          return {
+            statusCode: 403,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ error: "Security check failed. Please refresh and try again." })
+          };
+        }
+      } catch (cfErr) {
+        console.error("[TURNSTILE ERROR]", cfErr);
+      }
+    }
+
     const { zip, serviceId, start, name, phone, address, email, notes } = body;
 
     // 1. Required Fields Validation

@@ -3348,7 +3348,9 @@
         localStorage.removeItem(SESSION_KEY);
         sessionStorage.removeItem(SESSION_KEY);
         document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
-        window.location.href = "/login";
+        fetch("/.netlify/functions/auth-logout", { method: "POST" }).finally(function () {
+          window.location.href = "/login";
+        });
       });
     }
   });

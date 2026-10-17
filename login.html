@@ -669,26 +669,24 @@
       submitBtn.disabled = true;
       submitBtn.textContent = "Signing In...";
 
-      fetch(SUPABASE_URL + "/auth/v1/token?grant_type=password", {
+      fetch("/.netlify/functions/auth-login", {
         method: "POST",
         headers: {
-          "apikey": SUPABASE_PUBLISHABLE_KEY,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ email: email, password: password })
+        body: JSON.stringify({ email: email, password: password, remember: rememberEl.checked })
       })
         .then(function (res) {
           return res.json().then(function (data) { return { ok: res.ok, status: res.status, data: data }; });
         })
         .then(function (r) {
-          if (!r.ok || !r.data.access_token) {
+          if (!r.ok || !r.data.ok) {
             setMsg(friendlyError(r.data, r.status), "error");
             return;
           }
           var session = {
             access_token: r.data.access_token,
-            refresh_token: r.data.refresh_token || null,
-            expires_at: Date.now() + ((r.data.expires_in || 3600) * 1000),
+            expires_at: r.data.expires_at || (Date.now() + 3600000),
             email: (r.data.user && r.data.user.email) || email
           };
           saveSession(session, rememberEl.checked);
@@ -705,14 +703,8 @@
     });
 
     logoutBtn.addEventListener("click", function () {
-      var session = getSession();
       clearSession();
-      if (session && session.access_token) {
-        fetch(SUPABASE_URL + "/auth/v1/logout", {
-          method: "POST",
-          headers: { "apikey": SUPABASE_PUBLISHABLE_KEY, "Authorization": "Bearer " + session.access_token }
-        }).catch(function () {});
-      }
+      fetch("/.netlify/functions/auth-logout", { method: "POST" }).catch(function () {});
       form.reset();
       passwordEl.type = "password";
       togglePw.textContent = "Show";
