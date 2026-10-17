@@ -5,6 +5,10 @@
 - **Licensing & Certifications**: Do NOT use the word "licensed" unless explicitly instructed by David. Use "vetted", "top-rated", "professional", or "insured" as appropriate.
 - **Reviews & Testimonials**: Only use verified Google Reviews from actual customer feedback on David's Google Business Profile.
 - **Synchronized GBP Reviews Across Pages**: Whenever customer reviews from Google Business Profile (GBP) are added, removed, or updated on `index.html`, the exact same updates MUST be applied to `book.html` simultaneously to keep all review carousels in 100% sync.
+- **Locked Homepage Title (`index.html`)**: The `<title>` on `index.html` is PERMANENTLY LOCKED to:
+  `<title>Here Handyman | Premium Westchester County NY Handyman Services</title>`.
+  NEVER modify, optimize, shorten, or alter the `<title>` tag in `index.html` under any circumstances.
+- **No Em Dashes**: NEVER use em dashes (`—`) in text, copy, or page updates. Use commas, hyphens, periods, or colons instead.
 - **Zero Hardcoded Secrets**: NEVER embed API tokens or secrets in code files.
 
 ## 2. Mandatory Image & Photo Upload Analysis (POST vs DO NOT POST)
