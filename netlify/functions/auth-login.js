@@ -12,15 +12,25 @@ export async function handler(event) {
     };
   }
 
+  let body = {};
   try {
-    const { email, password, remember } = JSON.parse(event.body || "{}");
-    if (!email || !password) {
-      return {
-        statusCode: 400,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "Email and password are required." })
-      };
-    }
+    body = JSON.parse(event.body || "{}");
+  } catch (parseErr) {
+    return {
+      statusCode: 400,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "Invalid JSON format." })
+    };
+  }
+
+  const { email, password, remember } = body;
+  if (!email || !password) {
+    return {
+      statusCode: 400,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "Email and password are required." })
+    };
+  }
 
     const supabaseUrl = DB_CONFIG.SUPABASE_URL || "https://vvwnmiffuaxiazlskeya.supabase.co";
     const supabaseKey = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY || "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
