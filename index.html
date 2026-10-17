@@ -16,9 +16,9 @@
        document.head.appendChild(j);
      }
      if ('requestIdleCallback' in window) {
-       requestIdleCallback(loadGTM, { timeout: 2500 });
+       requestIdleCallback(loadGTM, { timeout: 4500 });
      } else {
-       setTimeout(loadGTM, 1500);
+       setTimeout(loadGTM, 3500);
      }
      ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach(function(e) {
        window.addEventListener(e, loadGTM, { once: true, passive: true });
@@ -26,8 +26,10 @@
    })();
   </script>
   <!-- End Google Tag Manager -->
-  <!-- GA4 fires via GTM container GTM-PCT6SLV8 — no direct install needed -->
+  <!-- GA4 fires via GTM container GTM-PCT6SLV8 - no direct install needed -->
   <!-- ================= Basic Meta Tags ================= -->
+  <link rel="preconnect" href="https://www.googletagmanager.com"/>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com"/>
   <meta charset="utf-8"/>
   <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
   <link href="/favicon.png" rel="icon" sizes="32x32" type="image/png"/>
@@ -85,12 +87,10 @@
   <meta content="Here Handyman | Premium Westchester Home Repairs" name="twitter:title"/>
   <meta content="Get fast quotes on furniture assembly, trampoline setup, painting, and property maintenance in Westchester County, NY. Call or text 516-350-0801." name="twitter:description"/>
   <meta content="https://www.herehandyman.com/assets/images/og-image.jpg" name="twitter:image"/>
-  <!-- Preload staff hero image for LCP -->
-  <link as="image" fetchpriority="high" href="/assets/images/handyman-working.webp" rel="preload"/>
-  <!-- Preload fonts — browser fetches immediately, not after CSS parsing -->
+  <!-- Preload fonts - browser fetches immediately, not after CSS parsing -->
   <link as="font" crossorigin="" href="/assets/fonts/bebas-neue.woff2" rel="preload" type="font/woff2"/>
   <link as="font" crossorigin="" href="/assets/fonts/dm-sans.woff2" rel="preload" type="font/woff2"/>
-  <!-- Self-hosted fonts — eliminates Google Fonts reflow and external request -->
+  <!-- Self-hosted fonts - eliminates Google Fonts reflow and external request -->
   <style>
     .skip-link {
       position: absolute;
@@ -1325,7 +1325,7 @@
       Fully Insured
      </div>
     </div>
-    <a aria-label="See our 32 Google reviews - 5.0 stars" class="stat" href="https://www.google.com/maps/search/?api=1&amp;query=Here+Handyman+Westchester+NY" rel="noopener" style="text-decoration:none;color:inherit;cursor:pointer;" target="_blank">
+    <a aria-label="5.0 ★ 5.0 Rating : Verified Reviews - See our 32 Google reviews" class="stat" href="https://www.google.com/maps/search/?api=1&amp;query=Here+Handyman+Westchester+NY" rel="noopener" style="text-decoration:none;color:inherit;cursor:pointer;" target="_blank">
      <div class="stat-num">
       5.0
       <span style="font-size:1.1rem">
