@@ -1,9 +1,10 @@
 // Netlify Serverless Function: POST /.netlify/functions/auth-login
-// Server-Side Authentication with Supabase and httpOnly Cookie Dispatch
+// Server-Side Authentication with Supabase and Cookie Dispatch
 
-import { DB_CONFIG } from './dbConfig.js';
+const SUPABASE_URL = process.env.SUPABASE_URL || "https://vvwnmiffuaxiazlskeya.supabase.co";
+const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
 
-export async function handler(event) {
+exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
@@ -33,13 +34,10 @@ export async function handler(event) {
   }
 
   try {
-    const supabaseUrl = DB_CONFIG.SUPABASE_URL || "https://vvwnmiffuaxiazlskeya.supabase.co";
-    const supabaseKey = process.env.SUPABASE_ANON_KEY || DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY || "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
-
-    const res = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
       method: "POST",
       headers: {
-        "apikey": supabaseKey,
+        "apikey": SUPABASE_KEY,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ email, password })
@@ -81,4 +79,4 @@ export async function handler(event) {
       body: JSON.stringify({ error: "Authentication service error." })
     };
   }
-}
+};

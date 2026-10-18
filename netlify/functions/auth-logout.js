@@ -1,8 +1,8 @@
 // Netlify Serverless Function: POST /.netlify/functions/auth-logout
-// Server-Side Logout with httpOnly Cookie Invalidation
+// Server-Side Logout with Cookie Invalidation
 
-export async function handler() {
-  const expiredAuth = "hh_auth=; Path=/; HttpOnly; SameSite=Lax; Secure; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
+exports.handler = async function () {
+  const expiredAuth = "hh_auth=; Path=/; SameSite=Lax; Secure; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
   const expiredJwt = "hh_jwt=; Path=/; HttpOnly; SameSite=Lax; Secure; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
   return {
@@ -15,4 +15,4 @@ export async function handler() {
     },
     body: JSON.stringify({ ok: true })
   };
-}
+};
