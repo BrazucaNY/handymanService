@@ -1,6 +1,12 @@
 export default async (request, context) => {
-  const accept = request.headers.get("accept") || "";
   const url = new URL(request.url);
+
+  // 301 redirect /index.html to / to eliminate canonical duplicate
+  if (url.pathname === "/index.html") {
+    return Response.redirect(new URL("/", request.url), 301);
+  }
+
+  const accept = request.headers.get("accept") || "";
 
   // Exclude static assets and serverless functions (/.netlify/*)
   if (
