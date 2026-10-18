@@ -32,8 +32,9 @@ export async function handler(event) {
     };
   }
 
+  try {
     const supabaseUrl = DB_CONFIG.SUPABASE_URL || "https://vvwnmiffuaxiazlskeya.supabase.co";
-    const supabaseKey = DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY || "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
+    const supabaseKey = process.env.SUPABASE_ANON_KEY || DB_CONFIG.SUPABASE_SERVICE_ROLE_KEY || "sb_publishable_-kxhroGZF03Y-RkyJ_bVTQ_5MQZRCZc";
 
     const res = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
       method: "POST",
@@ -54,7 +55,7 @@ export async function handler(event) {
     }
 
     const maxAge = remember ? 2592000 : 86400; // 30 days or 1 day
-    const authCookie = `hh_auth=1; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=${maxAge}`;
+    const authCookie = `hh_auth=1; Path=/; SameSite=Lax; Secure; Max-Age=${maxAge}`;
     const jwtCookie = `hh_jwt=${data.access_token}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=${maxAge}`;
 
     return {

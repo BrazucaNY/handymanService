@@ -494,12 +494,15 @@
     }
 
     function friendlyError(data, status) {
-      var code = (data && (data.error_code || data.code)) || "";
-      if (code === "invalid_credentials") return "Invalid email or password.";
+      var code = (data && (data.error_code || data.code || data.error)) || "";
+      if (code === "invalid_credentials" || code === "invalid_grant") return "Invalid email or password.";
       if (code === "email_not_confirmed") return "Please confirm your email address first.";
       if (code === "over_request_rate_limit" || status === 429) return "Too many attempts. Please try again in a few minutes.";
       if (code === "validation_failed") return "Please enter a valid email and password.";
-      return (data && data.msg) ? data.msg : "Something went wrong. Please try again.";
+      if (data && (data.error_description || data.message || data.msg)) {
+        return data.error_description || data.message || data.msg;
+      }
+      return "Something went wrong. Please try again.";
     }
 
     var resetRequestView = document.getElementById("resetRequestView");
