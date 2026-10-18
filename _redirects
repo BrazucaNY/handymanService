@@ -5,6 +5,7 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /index.html                      /                                    301!
 /light-fixtures-ceiling-fans     /lighting-fixture-installation       301
 /tv-mounting-art-hanging         /tv-mounting                         301
+/blog/interior-painting-cost-westchester /interior-painting           301
 
 # Security Blocks: Prevent exposure of sensitive package manifests and scripts
 /package.json                    /404.html                            404!
