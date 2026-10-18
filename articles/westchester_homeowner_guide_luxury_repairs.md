@@ -13,7 +13,7 @@
 
 ---
 
-In Westchester County’s premier residential communities—such as Scarsdale, Bronxville, Rye, and Chappaqua—home maintenance is fundamentally different than in modern production subdivisions. 
+In Westchester County’s premier residential communities - such as Scarsdale, Bronxville, Rye, and Chappaqua - home maintenance is fundamentally different than in modern production subdivisions. 
 
 Westchester architecture blends century-old pre-war masonry, historic plaster-and-lathe partitions, modern steel-stud additions, and custom hardwood trim. When fine art, heavy gilded mirrors, or massive 85-inch screens enter the equation, a simple hammer and drywall anchor will not suffice.
 
@@ -73,7 +73,7 @@ Settling foundations in 1920s Westchester homes frequently create hairline stres
 
 ## The Standard of White-Glove Handyman Service
 
-For homeowners who value their time and their property, the definition of a great handyman is not just tools—it is respect, transparency, and care:
+For homeowners who value their time and their property, the definition of a great handyman is not just tools - it is respect, transparency, and care:
 * **Cleanliness First**: Wearing disposable shoe booties inside the home, laying down drop cloths, and vacuuming the work area upon completion.
 * **Upfront Flat-Rate Estimates**: Knowing the exact project investment before work begins, with zero ticking hourly clocks.
 * **Direct Communication**: Working with an experienced, accountable craftsman who answers calls and texts promptly.

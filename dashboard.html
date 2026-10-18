@@ -1552,11 +1552,11 @@
           <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Drag &amp; drop photos into Before (Left) and After (Right) slots below. Choose your Westchester town to automatically generate EXIF geotags, title, keywords, and copyright.</p>
           <div class="ba-wrap">
             <div class="ba-aside">
-              <label>Photo 1 — Before</label>
+              <label>Photo 1 - Before</label>
               <div class="ba-slot" id="baSlotA"><span>Drop photo or click</span></div>
               <input id="baFileA" type="file" accept="image/*" hidden/>
 
-              <label>Photo 2 — After</label>
+              <label>Photo 2 - After</label>
               <div class="ba-slot" id="baSlotB"><span>Drop photo or click</span></div>
               <input id="baFileB" type="file" accept="image/*" hidden/>
 
@@ -1572,7 +1572,7 @@
               </div>
 
               <label>Caption (on image)</label>
-              <input id="baCaption" type="text" placeholder="e.g. Patio table assembled — Harrison, NY"/>
+              <input id="baCaption" type="text" placeholder="e.g. Patio table assembled - Harrison, NY"/>
 
               <label>Town (GPS)</label>
               <select id="baTown"></select>
@@ -1596,7 +1596,7 @@
               <input id="baArtist" type="text" value="Here Handyman / David Rodrigues"/>
 
               <label>Title (file properties)</label>
-              <input id="baTitle" type="text" value="Before & After — Here Handyman"/>
+              <input id="baTitle" type="text" value="Before & After - Here Handyman"/>
 
               <label>Comments (file properties)</label>
               <textarea id="baComment">Here Handyman job photo. Before and after. Westchester County, NY. (516) 350-0801. herehandyman.com</textarea>
@@ -2192,14 +2192,14 @@
                         : "<span style='background:#f1f5f9;color:#64748b;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:600;'>⏳ Pending</span>") +
             "</label></td>";
 
-          var aptDisplay = c.apt ? ("<span style='background:#f1f5f9;color:#475569;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600;display:inline-block;'>" + (c.apt.toLowerCase().startsWith('apt') || c.apt.toLowerCase().startsWith('unit') || c.apt.toLowerCase().startsWith('ste') || c.apt.startsWith('#') ? c.apt : 'Apt ' + c.apt) + "</span>") : '—';
+          var aptDisplay = c.apt ? ("<span style='background:#f1f5f9;color:#475569;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600;display:inline-block;'>" + (c.apt.toLowerCase().startsWith('apt') || c.apt.toLowerCase().startsWith('unit') || c.apt.toLowerCase().startsWith('ste') || c.apt.startsWith('#') ? c.apt : 'Apt ' + c.apt) + "</span>") : ' - ';
           var stateBadge = "<span style='background:#e2e8f0;color:#0f172a;padding:3px 8px;border-radius:6px;font-size:11.5px;font-weight:800;display:inline-block;'>" + (c.state || 'NY') + "</span>";
 
           var tr = document.createElement("tr");
           tr.innerHTML = "<td><strong>" + c.name + "</strong></td>" +
                          "<td>" + c.phone + "</td>" +
-                         "<td>" + (c.email || '—') + "</td>" +
-                         "<td>" + (c.address || '—') + "</td>" +
+                         "<td>" + (c.email || ' - ') + "</td>" +
+                         "<td>" + (c.address || ' - ') + "</td>" +
                          "<td>" + aptDisplay + "</td>" +
                          "<td><span class='badge-town'>" + (c.town || 'Westchester') + "</span></td>" +
                          "<td>" + stateBadge + "</td>" +
@@ -2328,7 +2328,7 @@
 
     // Open Customer History Modal Function
     function openCustomerHistoryModal(c) {
-      document.getElementById('histCustName').textContent = "📜 Customer Activity History — " + c.name;
+      document.getElementById('histCustName').textContent = "📜 Customer Activity History - " + c.name;
       var sub = (c.phone || '') + " • " + (c.address ? c.address + ', ' : '') + (c.town || 'Westchester') + ", " + (c.state || 'NY');
       document.getElementById('histCustSub').textContent = sub;
 
@@ -4006,16 +4006,16 @@
     function fillMetaFromTown() {
       var town = TOWNS[Number(townEl.value)][0];
       var cap = document.getElementById("baCaption");
-      if (!cap.dataset.touched) cap.value = "Before & after — " + town + ", NY";
+      if (!cap.dataset.touched) cap.value = "Before & after - " + town + ", NY";
       var title = document.getElementById("baTitle");
-      if (!title.dataset.touched) title.value = "Before & After — Here Handyman — " + town + ", NY";
+      if (!title.dataset.touched) title.value = "Before & After - Here Handyman - " + town + ", NY";
       var kw = document.getElementById("baKeywords");
       if (!kw.dataset.touched) {
         kw.value = "Here Handyman, " + town + ", Westchester County NY, before after collage, handyman, home repair, " + town + " handyman, 5 star handyman";
       }
       var cm = document.getElementById("baComment");
       if (!cm.dataset.touched) {
-        var capText = cap.value.trim() || ("Before & after — " + town + ", NY");
+        var capText = cap.value.trim() || ("Before & after - " + town + ", NY");
         cm.value = "Professional handyman service by Here Handyman: " + capText + ". Top-rated home repairs, TV mounting, carpentry, plumbing & maintenance in " + town + ", Westchester County, NY. Verified 5.0★ Google Business Profile rating. Call/Text: (516) 350-0801 | https://www.herehandyman.com";
       }
     }
@@ -4031,7 +4031,7 @@
       var cm = document.getElementById("baComment");
       if (!cm.dataset.touched) {
         var town = TOWNS[Number(townEl.value)][0];
-        var capText = this.value.trim() || ("Before & after — " + town + ", NY");
+        var capText = this.value.trim() || ("Before & after - " + town + ", NY");
         cm.value = "Professional handyman service by Here Handyman: " + capText + ". Top-rated home repairs, TV mounting, carpentry, plumbing & maintenance in " + town + ", Westchester County, NY. Verified 5.0★ Google Business Profile rating. Call/Text: (516) 350-0801 | https://www.herehandyman.com";
       }
       draw();
@@ -4251,7 +4251,7 @@
         lat = lat + (Math.random() - 0.5) * 0.004;
         lng = lng + (Math.random() - 0.5) * 0.004;
       }
-      var title = document.getElementById("baTitle").value.trim() || ("Before & After — Here Handyman — " + town);
+      var title = document.getElementById("baTitle").value.trim() || ("Before & After - Here Handyman - " + town);
       var comment = document.getElementById("baComment").value.trim();
       var keywords = document.getElementById("baKeywords").value.trim();
       var copyright = document.getElementById("baCopyright").value.trim() || "Here Handyman. All rights reserved.";
@@ -4276,7 +4276,7 @@
       zeroth[piexif.ImageIFD.XPComment] = encodeXP(comment);
       zeroth[piexif.ImageIFD.XPAuthor] = encodeXP(artist);
       zeroth[piexif.ImageIFD.XPKeywords] = encodeXP(keywords.replace(/,\s*/g, ";"));
-      zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after — " + town + ", NY");
+      zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after - " + town + ", NY");
       var exifIfd = {};
       exifIfd[piexif.ExifIFD.DateTimeOriginal] = dt;
       exifIfd[piexif.ExifIFD.DateTimeDigitized] = dt;
@@ -4331,12 +4331,12 @@
           lat = lat + (Math.random() - 0.5) * 0.004;
           lng = lng + (Math.random() - 0.5) * 0.004;
         }
-        var title = document.getElementById("baTitle").value.trim() || ("Before & After — Here Handyman — " + town + ", NY");
+        var title = document.getElementById("baTitle").value.trim() || ("Before & After - Here Handyman - " + town + ", NY");
         var comment = document.getElementById("baComment").value.trim();
         var keywords = document.getElementById("baKeywords").value.trim();
         var copyright = document.getElementById("baCopyright").value.trim() || "Here Handyman. All rights reserved.";
         var artist = document.getElementById("baArtist").value.trim() || "Here Handyman";
-        var caption = document.getElementById("baCaption").value.trim() || ("Before & after — " + town + ", NY");
+        var caption = document.getElementById("baCaption").value.trim() || ("Before & after - " + town + ", NY");
 
         var now = new Date();
         var dt = now.getFullYear() + ":" +
@@ -4358,7 +4358,7 @@
         zeroth[piexif.ImageIFD.XPComment] = encodeXP(comment);
         zeroth[piexif.ImageIFD.XPAuthor] = encodeXP(artist);
         zeroth[piexif.ImageIFD.XPKeywords] = encodeXP(keywords.replace(/,\s*/g, ";"));
-        zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after — " + town + ", NY");
+        zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after - " + town + ", NY");
 
         var exifIfd = {};
         exifIfd[piexif.ExifIFD.DateTimeOriginal] = dt;

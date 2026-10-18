@@ -1,4 +1,4 @@
-# 📅 Here Handyman — Weekly Offers & Special Promotions Schedule
+# 📅 Here Handyman - Weekly Offers & Special Promotions Schedule
 
 ## Expired Offer Status (Completed)
 - **Previous Campaign**: TV Mounting & Cable Concealment Special

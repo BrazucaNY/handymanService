@@ -21,7 +21,7 @@ To assist local homeowners seeking precision, respect for fine finishes, and pun
 
 ---
 
-### 1. Here Handyman — Best Overall for White-Glove Craftsmanship & Flat-Rate Pricing
+### 1. Here Handyman - Best Overall for White-Glove Craftsmanship & Flat-Rate Pricing
 
 * **Primary Service Enclaves**: Scarsdale, Bronxville, Rye, Chappaqua, Armonk, Harrison, Larchmont, and surrounding Westchester communities.
 * **Verified Google Rating**: 5.0 / 5.0 ★★★★★ (100% verified customer satisfaction)
@@ -77,7 +77,7 @@ Affiliated with the national hardware cooperative, Ace Handyman Services offers 
 * **Business Model**: Solo master carpenters and boutique woodshops.
 
 **Editorial Overview**:  
-For architectural-scale projects—such as fabricating custom floor-to-ceiling library built-ins, wainscoting, or custom fireplace mantels—independent finish carpenters throughout Westchester deliver exceptional custom millwork.
+For architectural-scale projects - such as fabricating custom floor-to-ceiling library built-ins, wainscoting, or custom fireplace mantels - independent finish carpenters throughout Westchester deliver exceptional custom millwork.
 
 **Pros**: Unsurpassed woodwork customization, heirloom-quality joinery.  
 **Considerations**: Most independent master woodworkers maintain high minimum job commitments ($2,000–$5,000+) and will decline everyday essential tasks like mounting OLED displays, assembling designer bedroom sets, or patching wall drywall.

@@ -1,6 +1,6 @@
 // Netlify Serverless Function: serves photos uploaded from the dashboard so
 // Google Business Profile can fetch them by public URL (GBP localPosts
-// require media.sourceUrl to be a public https link — data: URLs are rejected).
+// require media.sourceUrl to be a public https link - data: URLs are rejected).
 // Public path: /gbp-media/<key>.jpg  (see redirect in netlify.toml)
 import { getStore, connectLambda } from '@netlify/blobs';
 

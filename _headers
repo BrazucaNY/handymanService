@@ -1,17 +1,31 @@
 # =============================================
-# SPEED OPTIMIZATION — Cache Headers
+# SPEED OPTIMIZATION - Cache Headers
 # =============================================
 
-# Images — cache 1 year (huge speed boost for repeat visitors)
+# Images - cache 1 year (huge speed boost for repeat visitors)
 /assets/images/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Fonts — cache 1 year
+# Fonts - cache 1 year
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
-# HTML pages — cache 1 hour, revalidate
+# HTML pages - cache 1 hour, revalidate
 /*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Primary clean URL routes
+/gallery
+  Cache-Control: public, max-age=3600, must-revalidate
+/about
+  Cache-Control: public, max-age=3600, must-revalidate
+/services
+  Cache-Control: public, max-age=3600, must-revalidate
+/reviews
+  Cache-Control: public, max-age=3600, must-revalidate
+/book
+  Cache-Control: public, max-age=3600, must-revalidate
+/contact
   Cache-Control: public, max-age=3600, must-revalidate
 
 # City pages (no .html extension via redirect)
@@ -22,8 +36,10 @@
 /yonkers-handyman
   Cache-Control: public, max-age=3600, must-revalidate
 
-# Sitemap & robots — short cache so Google always gets fresh copy
+# Sitemap & robots - short cache so Google always gets fresh copy
 /sitemap.xml
+  Cache-Control: public, max-age=3600
+/image-sitemap.xml
   Cache-Control: public, max-age=3600
 /robots.txt
   Cache-Control: public, max-age=3600

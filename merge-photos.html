@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Here Handyman — Before &amp; After Collage</title>
+  <title>Here Handyman - Before &amp; After Collage</title>
   <meta name="description" content="Here Handyman Before &amp; After Photo Collage and EXIF Geotagging Tool."/>
   <style>
     :root {
@@ -61,7 +61,7 @@
 <body>
   <header>
     <div>
-      <h1>HERE HANDYMAN — Before &amp; After</h1>
+      <h1>HERE HANDYMAN - Before &amp; After</h1>
       <p>Drop before and after photos. Geotag + copyright + comments + keywords written into the JPEG.</p>
       <nav>
         <a href="/dashboard">Return to CRM Dashboard</a>
@@ -71,11 +71,11 @@
   </header>
   <div class="wrap">
     <aside>
-      <label>Photo 1 — Before</label>
+      <label>Photo 1 - Before</label>
       <div class="slot" id="slotA"><span>Drop photo or click</span></div>
       <input id="fileA" type="file" accept="image/*" hidden/>
 
-      <label>Photo 2 — After</label>
+      <label>Photo 2 - After</label>
       <div class="slot" id="slotB"><span>Drop photo or click</span></div>
       <input id="fileB" type="file" accept="image/*" hidden/>
 
@@ -91,7 +91,7 @@
       </div>
 
       <label>Caption (on image)</label>
-      <input id="caption" type="text" value="Patio dining table assembled — Harrison, NY" data-touched="1"/>
+      <input id="caption" type="text" value="Patio dining table assembled - Harrison, NY" data-touched="1"/>
 
       <label>Town (GPS)</label>
       <select id="town"></select>
@@ -115,7 +115,7 @@
       <input id="artist" type="text" value="Here Handyman / David Rodrigues"/>
 
       <label>Title (file properties)</label>
-      <input id="title" type="text" value="Before & After — Here Handyman"/>
+      <input id="title" type="text" value="Before & After - Here Handyman"/>
 
       <label>Comments (file properties)</label>
       <textarea id="comment">Here Handyman job photo. Before and after. Westchester County, NY. (516) 350-0801. herehandyman.com</textarea>
@@ -148,7 +148,7 @@
       <div class="stage">
         <canvas id="c" width="1920" height="1080"></canvas>
       </div>
-      <p class="hint">Export is JPEG with Here Handyman copyright, comments, keywords, and town GPS in the file properties — ready for Google Business Profile.</p>
+      <p class="hint">Export is JPEG with Here Handyman copyright, comments, keywords, and town GPS in the file properties - ready for Google Business Profile.</p>
     </main>
   </div>
 
@@ -207,16 +207,16 @@
     function fillMetaFromTown() {
       const town = TOWNS[Number(townEl.value)][0];
       const cap = document.getElementById("caption");
-      if (!cap.dataset.touched) cap.value = "Before & after — " + town + ", NY";
+      if (!cap.dataset.touched) cap.value = "Before & after - " + town + ", NY";
       const title = document.getElementById("title");
-      if (!title.dataset.touched) title.value = "Before & After — Here Handyman — " + town + ", NY";
+      if (!title.dataset.touched) title.value = "Before & After - Here Handyman - " + town + ", NY";
       const kw = document.getElementById("keywords");
       if (!kw.dataset.touched) {
         kw.value = "Here Handyman, " + town + ", Westchester County NY, before after collage, handyman, home repair, " + town + " handyman, 5 star handyman";
       }
       const cm = document.getElementById("comment");
       if (!cm.dataset.touched) {
-        const capText = cap.value.trim() || ("Before & after — " + town + ", NY");
+        const capText = cap.value.trim() || ("Before & after - " + town + ", NY");
         cm.value = "Professional handyman service by Here Handyman: " + capText + ". Top-rated home repairs, TV mounting, carpentry, plumbing & maintenance in " + town + ", Westchester County, NY. Verified 5.0★ Google Business Profile rating. Call/Text: (516) 350-0801 | https://www.herehandyman.com";
       }
     }
@@ -232,7 +232,7 @@
       const cm = document.getElementById("comment");
       if (!cm.dataset.touched) {
         const town = TOWNS[Number(townEl.value)][0];
-        const capText = this.value.trim() || ("Before & after — " + town + ", NY");
+        const capText = this.value.trim() || ("Before & after - " + town + ", NY");
         cm.value = "Professional handyman service by Here Handyman: " + capText + ". Top-rated home repairs, TV mounting, carpentry, plumbing & maintenance in " + town + ", Westchester County, NY. Verified 5.0★ Google Business Profile rating. Call/Text: (516) 350-0801 | https://www.herehandyman.com";
       }
       draw();
@@ -457,7 +457,7 @@
         lat = lat + (Math.random() - 0.5) * 0.004;
         lng = lng + (Math.random() - 0.5) * 0.004;
       }
-      const title = document.getElementById("title").value.trim() || ("Before & After — Here Handyman — " + town);
+      const title = document.getElementById("title").value.trim() || ("Before & After - Here Handyman - " + town);
       const comment = document.getElementById("comment").value.trim();
       const keywords = document.getElementById("keywords").value.trim();
       const copyright = document.getElementById("copyright").value.trim() || "© Here Handyman. All rights reserved.";
@@ -487,7 +487,7 @@
           zeroth[piexif.ImageIFD.XPComment] = encodeXP(comment);
           zeroth[piexif.ImageIFD.XPAuthor] = encodeXP(artist);
           zeroth[piexif.ImageIFD.XPKeywords] = encodeXP(keywords.replace(/,\s*/g, ";"));
-          zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after — " + town + ", NY");
+          zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after - " + town + ", NY");
 
           const exifIfd = {};
           exifIfd[piexif.ExifIFD.DateTimeOriginal] = dt;
@@ -546,12 +546,12 @@
           lat = lat + (Math.random() - 0.5) * 0.004;
           lng = lng + (Math.random() - 0.5) * 0.004;
         }
-        const title = document.getElementById("title").value.trim() || ("Before & After — Here Handyman — " + town + ", NY");
+        const title = document.getElementById("title").value.trim() || ("Before & After - Here Handyman - " + town + ", NY");
         const comment = document.getElementById("comment").value.trim();
         const keywords = document.getElementById("keywords").value.trim();
         const copyright = document.getElementById("copyright").value.trim() || "© Here Handyman. All rights reserved.";
         const artist = document.getElementById("artist").value.trim() || "Here Handyman";
-        const caption = document.getElementById("caption").value.trim() || ("Before & after — " + town + ", NY");
+        const caption = document.getElementById("caption").value.trim() || ("Before & after - " + town + ", NY");
         const now = new Date();
         const dt = now.getFullYear() + ":" +
           String(now.getMonth() + 1).padStart(2, "0") + ":" +
@@ -577,7 +577,7 @@
             zeroth[piexif.ImageIFD.XPComment] = encodeXP(comment);
             zeroth[piexif.ImageIFD.XPAuthor] = encodeXP(artist);
             zeroth[piexif.ImageIFD.XPKeywords] = encodeXP(keywords.replace(/,\s*/g, ";"));
-            zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after — " + town + ", NY");
+            zeroth[piexif.ImageIFD.XPSubject] = encodeXP("Here Handyman before and after - " + town + ", NY");
 
             const exifIfd = {};
             exifIfd[piexif.ExifIFD.DateTimeOriginal] = dt;

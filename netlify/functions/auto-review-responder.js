@@ -81,7 +81,7 @@ function generateSeoReply(reviewerName, commentText, starRating) {
   }
 
   if (starRating === 'FOUR' || starRating === 4) {
-    return `Thank you for the feedback and 4-star rating, ${name}! We're glad we could assist with your home repair in ${town}. We always strive for 100% satisfaction — feel free to call or text us anytime at (516) 350-0801 for your next project! David, Here Handyman`;
+    return `Thank you for the feedback and 4-star rating, ${name}! We're glad we could assist with your home repair in ${town}. We always strive for 100% satisfaction - feel free to call or text us anytime at (516) 350-0801 for your next project! David, Here Handyman`;
   }
 
   return `I'm truly sorry to hear your experience didn't meet the high standards we hold ourselves to, ${name}. I'd love the opportunity to make this right. Please reach out to me directly at (516) 350-0801 so we can talk through what happened. David, Here Handyman`;
