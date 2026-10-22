@@ -1,33 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    (function() {
-      var SESSION_KEY = "hh_system_session";
-      var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-      if (!raw) {
-        document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
-        window.location.replace("/login");
-        return;
-      }
-      try {
-        var s = JSON.parse(raw);
-        if (!s || !s.expires_at || s.expires_at <= Date.now()) {
-          localStorage.removeItem(SESSION_KEY);
-          sessionStorage.removeItem(SESSION_KEY);
-          document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
-          window.location.replace("/login");
-        } else {
-          document.cookie = "hh_auth=1; Path=/; SameSite=Lax; Secure; Max-Age=2592000";
-        }
-      } catch (e) {
-        localStorage.removeItem(SESSION_KEY);
-        sessionStorage.removeItem(SESSION_KEY);
-        document.cookie = "hh_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure";
-        window.location.replace("/login");
-      }
-    })();
-  </script>
   <meta charset="UTF-8">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

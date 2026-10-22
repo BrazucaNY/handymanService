@@ -7,10 +7,6 @@
   path = "/dashboard*"
 
 [[edge_functions]]
-  function = "auth-guard"
-  path = "/timer*"
-
-[[edge_functions]]
   function = "content-negotiation"
   path = "/*"
 
