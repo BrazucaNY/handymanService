@@ -55,16 +55,61 @@
   from = "/book/"
   to = "/book"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/book-appointment"
   to = "/book"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/book-appointment/"
   to = "/book"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/book-appointment.html"
+  to = "/book"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book-online"
+  to = "/book"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/our-services"
+  to = "/services"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/our-services/"
+  to = "/services"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/our-services.html"
+  to = "/services"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact-us"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact-us/"
+  to = "/contact"
+  status = 301
+  force = true
 
 # /reviews & /review-us redirects
 [[redirects]]
