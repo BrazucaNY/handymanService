@@ -6,6 +6,17 @@ export default async (request, context) => {
     return Response.redirect(new URL("/", request.url), 301);
   }
 
+  // 301 redirects for legacy URLs to eliminate Search Console 404 alerts
+  if (url.pathname === "/book-appointment" || url.pathname === "/book-appointment/" || url.pathname === "/book-appointment.html" || url.pathname === "/book-online" || url.pathname === "/book-online/") {
+    return Response.redirect(new URL("/book", request.url), 301);
+  }
+  if (url.pathname === "/our-services" || url.pathname === "/our-services/" || url.pathname === "/our-services.html") {
+    return Response.redirect(new URL("/services", request.url), 301);
+  }
+  if (url.pathname === "/contact-us" || url.pathname === "/contact-us/") {
+    return Response.redirect(new URL("/contact", request.url), 301);
+  }
+
   const accept = request.headers.get("accept") || "";
 
   // Exclude static assets and serverless functions (/.netlify/*)
