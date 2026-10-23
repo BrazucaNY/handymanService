@@ -2866,7 +2866,7 @@
        Professional home repairs, installations, assembly, and maintenance completed by Here Handyman for homeowners throughout White Plains and Westchester County. Explore real residential projects.
       </p>
      </div>
-     <!-- Before & After Featured Project Showcase Carousel (Top 10 Highlights) -->
+     <!-- Before & After Project Showcase Carousel (115 Projects) -->
      <div id="before-after-carousel" style="max-width:980px;margin:0 auto">
       <div class="ba-carousel" style="position:relative;overflow:hidden;border-radius:20px;box-shadow:0 25px 60px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.12)">
        <div class="ba-viewport" style="overflow:hidden">
@@ -3113,13 +3113,72 @@
 
       var cur = 0;
       var total = slides.length;
+      var loadedAll = false;
+      var isLoading = false;
 
       function goTo(i){
         cur = (i + total) % total;
         track.style.transform = 'translateX(-' + (cur * 100) + '%)';
       }
 
+      function loadRemainingSlides(callback){
+        if (loadedAll) {
+          if (callback) callback();
+          return;
+        }
+        if (isLoading) return;
+        isLoading = true;
+
+        fetch('/assets/data/before-after-slides.json')
+          .then(function(res){
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+          })
+          .then(function(items){
+            var remaining = items.slice(slides.length);
+            var fragment = document.createDocumentFragment();
+            remaining.forEach(function(item){
+              var fig = document.createElement('figure');
+              fig.className = 'ba-slide';
+              fig.style.cssText = 'min-width:100%;margin:0;flex-shrink:0;position:relative';
+              fig.innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#000">' +
+                '<div style="position:relative">' +
+                  '<img alt="' + (item.before.alt || '') + '" decoding="async" height="' + (item.before.height || 1200) + '" loading="lazy" src="' + item.before.src + '" style="width:100%;height:480px;object-fit:cover;display:block" width="' + (item.before.width || 900) + '"/>' +
+                  '<span style="position:absolute;top:14px;left:14px;background:rgba(7,24,40,0.9);color:#fff;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.2)">Before</span>' +
+                '</div>' +
+                '<div style="position:relative">' +
+                  '<img alt="' + (item.after.alt || '') + '" decoding="async" height="' + (item.after.height || 1200) + '" loading="lazy" src="' + item.after.src + '" style="width:100%;height:480px;object-fit:cover;display:block" width="' + (item.after.width || 900) + '"/>' +
+                  '<span style="position:absolute;top:14px;left:14px;background:#eab308;color:#071828;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:20px">After</span>' +
+                '</div>' +
+              '</div>' +
+              '<figcaption style="background:#0b2a4a;padding:16px 24px;color:#fff;font-size:15px;font-weight:700;text-align:center;letter-spacing:0.5px;border-top:1px solid rgba(255,255,255,0.1)">' +
+                item.caption +
+              '</figcaption>';
+              fragment.appendChild(fig);
+            });
+            track.appendChild(fragment);
+            slides = document.querySelectorAll('.ba-slide');
+            total = slides.length;
+            loadedAll = true;
+            isLoading = false;
+            if (callback) callback();
+          })
+          .catch(function(err){
+            isLoading = false;
+            console.warn('Could not load full slides:', err);
+          });
+      }
+
       window.baMove = function(dir){
+        if (!loadedAll && dir === -1 && cur === 0) {
+          loadRemainingSlides(function(){
+            goTo(total - 1);
+          });
+          return;
+        }
+        if (!loadedAll) {
+          loadRemainingSlides();
+        }
         goTo(cur + dir);
         resetAutoplay();
       };
@@ -3136,7 +3195,10 @@
 
       var carouselEl = document.querySelector('.ba-carousel');
       if (carouselEl) {
-        carouselEl.addEventListener('mouseenter', stopAutoplay);
+        carouselEl.addEventListener('mouseenter', function(){
+          stopAutoplay();
+          loadRemainingSlides();
+        });
         carouselEl.addEventListener('mouseleave', startAutoplay);
 
         var startX = 0;
@@ -3144,6 +3206,7 @@
           if (e.touches.length === 1) {
             startX = e.touches[0].clientX;
             stopAutoplay();
+            loadRemainingSlides();
           }
         }, { passive: true });
         carouselEl.addEventListener('touchend', function(e) {
@@ -3151,9 +3214,9 @@
           var diffX = startX - endX;
           if (Math.abs(diffX) > 40) {
             if (diffX > 0) {
-              goTo(cur + 1);
+              window.baMove(1);
             } else {
-              goTo(cur - 1);
+              window.baMove(-1);
             }
           }
           startAutoplay();
@@ -3164,6 +3227,7 @@
         var obs = new IntersectionObserver(function(entries) {
           if (entries[0].isIntersecting) {
             startAutoplay();
+            loadRemainingSlides();
           } else {
             stopAutoplay();
           }
@@ -3171,6 +3235,13 @@
         obs.observe(carouselEl);
       } else {
         startAutoplay();
+        loadRemainingSlides();
+      }
+
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function(){ setTimeout(loadRemainingSlides, 1000); });
+      } else {
+        setTimeout(loadRemainingSlides, 1500);
       }
     })();
    </script>
