@@ -3119,6 +3119,9 @@
       function goTo(i){
         cur = (i + total) % total;
         track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+        if (!loadedAll && cur >= 2) {
+          loadRemainingSlides();
+        }
       }
 
       function loadRemainingSlides(callback){
@@ -3227,7 +3230,6 @@
         var obs = new IntersectionObserver(function(entries) {
           if (entries[0].isIntersecting) {
             startAutoplay();
-            loadRemainingSlides();
           } else {
             stopAutoplay();
           }
@@ -3235,13 +3237,6 @@
         obs.observe(carouselEl);
       } else {
         startAutoplay();
-        loadRemainingSlides();
-      }
-
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(function(){ setTimeout(loadRemainingSlides, 1000); });
-      } else {
-        setTimeout(loadRemainingSlides, 1500);
       }
     })();
    </script>
