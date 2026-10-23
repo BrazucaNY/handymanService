@@ -40,8 +40,9 @@
   <link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
   <link href="/manifest.json" rel="manifest"/>
   <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
-  <!-- Critical Font Preloads for Immediate LCP Paint -->
-  <link rel="preload" as="image" href="/assets/images/handyman-working.webp" fetchpriority="high" type="image/webp"/>
+  <!-- Critical Image & Font Preloads for Immediate LCP Paint -->
+  <link rel="preload" as="image" href="/assets/images/handyman-working-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp"/>
+  <link rel="preload" as="image" href="/assets/images/handyman-working.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp"/>
   <link as="font" crossorigin href="/assets/fonts/bebas-neue.woff2" rel="preload" type="font/woff2" fetchpriority="high"/>
   <link as="font" crossorigin href="/assets/fonts/dm-sans.woff2" rel="preload" type="font/woff2"/>
   <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
@@ -1268,8 +1269,9 @@
   <header class="hero" id="main-content" tabindex="-1">
    <div class="hero-img">
      <picture>
+       <source media="(max-width: 768px)" srcset="/assets/images/handyman-working-mobile.webp" type="image/webp"/>
        <source srcset="/assets/images/handyman-working.webp" type="image/webp"/>
-       <img alt="Professional handyman technician working on residential home repairs in Westchester County NY" class="hero-img-src" decoding="async" fetchpriority="high" height="1080" loading="eager" src="/assets/images/handyman-working.webp" width="1920"/>
+       <img alt="Professional handyman technician working on residential home repairs in Westchester County NY" class="hero-img-src" decoding="async" fetchpriority="high" height="1024" loading="eager" src="/assets/images/handyman-working.webp" width="768"/>
      </picture>
    </div>
    <div class="hero-overlay">
