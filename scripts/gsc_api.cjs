@@ -99,11 +99,10 @@ async function main() {
 
   const urlsToInspect = [
     "https://www.herehandyman.com/",
+    "https://www.herehandyman.com/about",
+    "https://www.herehandyman.com/gallery",
     "https://www.herehandyman.com/service-areas",
-    "https://www.herehandyman.com/blog/",
-    "https://www.herehandyman.com/deck-repair-scarsdale",
-    "https://www.herehandyman.com/armonk-handyman",
-    "https://www.herehandyman.com/pressure-washing"
+    "https://www.herehandyman.com/blog/"
   ];
 
   for (const url of urlsToInspect) {
