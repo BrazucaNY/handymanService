@@ -166,6 +166,21 @@
   },
   {
     "before": {
+      "src": "/assets/images/before-after/nightstand_furniture_assembly_scarsdale_before.webp",
+      "alt": "Unassembled flat-pack nightstand wooden panels, cam locks, drawer runners, and hardware laid out before assembly - Scarsdale NY",
+      "width": 768,
+      "height": 1024
+    },
+    "after": {
+      "src": "/assets/images/before-after/nightstand_furniture_assembly_scarsdale_after.webp",
+      "alt": "Assembled rustic wood two-drawer nightstand with open cubby shelf and styled bedside lamp - Scarsdale NY",
+      "width": 768,
+      "height": 1024
+    },
+    "caption": "Rustic 2-Drawer Bedside Nightstand Assembly - Scarsdale, NY"
+  },
+  {
+    "before": {
       "src": "/assets/images/before-after/custom_composite_deck_installation_rye_before.webp",
       "alt": "Old weathered grey wooden deck boards before composite replacement - Rye NY",
       "width": 1024,
