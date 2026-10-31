@@ -1186,7 +1186,15 @@
   .reviews-track{display:flex;gap:16px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
   .rev-card-item{flex:0 0 calc(33.333% - 11px);min-width:280px;background:#f9f5ef;border:1px solid rgba(7,24,40,.08);border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 6px 18px rgba(7,24,40,.04)}
   @media (max-width:960px){.rev-card-item{flex:0 0 calc(50% - 8px)}}
-  @media (max-width:600px){.rev-card-item{flex:0 0 100%}}
+  @media (max-width:600px){.rev-card-item{flex:0 0 100%;min-width:0}}
+  @media (max-width:640px){
+    .ba-slide img{height:230px !important}
+    .ba-slide figcaption{font-size:13.5px !important;padding:12px 14px !important}
+    .ba-carousel button[onclick^="baMove"]{width:38px !important;height:38px !important}
+    .ba-carousel button[onclick="baMove(-1)"]{left:8px !important}
+    .ba-carousel button[onclick="baMove(1)"]{right:8px !important}
+    .ba-carousel button[onclick^="baMove"] svg{width:18px !important;height:18px !important}
+  }
   .rev-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   .rev-g-icon{display:flex;align-items:center;gap:6px;font-size:.75rem;font-weight:800;text-transform:uppercase;color:#1967d2}
   .rev-card-text{font-size:.92rem;color:#334155;line-height:1.6;font-style:italic;margin-bottom:16px}
@@ -4658,6 +4666,33 @@ document.addEventListener('submit', async function(e) {
         ticking = true;
       }
     }, { passive: true });
+  })();
+  </script>
+  <script>
+  (function initMobileNav() {
+    var toggle = document.getElementById('mobile-toggle');
+    var menu = document.getElementById('nav-menu');
+    if (!toggle || !menu) return;
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggle.classList.toggle('active');
+      menu.classList.toggle('active');
+      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+    });
+    document.addEventListener('click', function(e) {
+      if (menu.classList.contains('active') && !menu.contains(e.target) && !toggle.contains(e.target)) {
+        toggle.classList.remove('active');
+        menu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    menu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        toggle.classList.remove('active');
+        menu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
   })();
   </script>
   <!-- MOBILE BOTTOM BAR -->

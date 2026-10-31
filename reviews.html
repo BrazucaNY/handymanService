@@ -458,6 +458,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .owner-response strong { color: var(--navy); }
 
+    /* Mobile Bottom Sticky Bar */
+    .mobile-bar { display: none; }
+    @media (max-width: 768px) {
+      .mobile-bar {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        gap: 10px;
+        padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+        background: rgba(7, 24, 40, 0.96);
+        z-index: 999;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .mobile-bar a {
+        flex: 1;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 14px;
+        text-decoration: none;
+      }
+      .mobile-bar .call { background: #fff; color: var(--navy); }
+      .mobile-bar .book { background: var(--gold); color: var(--navy); }
+      footer { padding-bottom: 90px !important; }
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -947,5 +978,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </footer>
 
+  <!-- MOBILE BOTTOM BAR -->
+  <div class="mobile-bar" aria-label="Mobile quick actions">
+    <a class="call" href="tel:+15163500801">Call (516) 350-0801</a>
+    <a class="book" href="/book">Book Online</a>
+  </div>
 </body>
 </html>
