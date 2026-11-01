@@ -34,7 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "@graph": [
     {
       "@type": "HomeAndConstructionBusiness",
-      "@id": "https://www.herehandyman.com/deck-repair-scarsdale#business",
+      "@id": "https://www.herehandyman.com/#business",
       "name": "Here Handyman",
       "url": "https://www.herehandyman.com/deck-repair-scarsdale",
       "telephone": "(516) 350-0801",
@@ -43,15 +43,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "image": "https://www.herehandyman.com/assets/images/before-after/custom_composite_deck_installation_rye_after.webp",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Scarsdale",
+        "streetAddress": "500 Pondside Dr",
+        "addressLocality": "White Plains",
         "addressRegion": "NY",
-        "postalCode": "10583",
+        "postalCode": "10607",
         "addressCountry": "US"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "41.0051",
-        "longitude": "-73.7846"
+        "latitude": 41.04209,
+        "longitude": -73.80385
       },
       "areaServed": {
         "@type": "City",
@@ -60,10 +61,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
-        "bestRating": "5.0",
+        "bestRating": "5",
         "worstRating": "1.0",
-        "reviewCount": "32"
-      }
+        "reviewCount": "36"
+      },
+      "hasMap": "https://g.page/r/CcY8nHWkiRZ0EAE",
+      "paymentAccepted": "Cash, Credit Card, Zelle, Check",
+      "currenciesAccepted": "USD"
     },
     {
       "@type": "Service",
@@ -72,7 +76,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "serviceType": "Deck Repair & Carpentry",
       "provider": {
         "@type": "LocalBusiness",
-        "name": "Here Handyman"
+        "@id": "https://www.herehandyman.com/#business",
+        "name": "Here Handyman",
+        "telephone": "+1-516-350-0801",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "bestRating": "5",
+          "worstRating": "1",
+          "reviewCount": "36"
+        }
       },
       "areaServed": {
         "@type": "City",
@@ -86,10 +99,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.herehandyman.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.herehandyman.com/carpentry-shelving" },
-        { "@type": "ListItem", "position": 3, "name": "Scarsdale Handyman", "item": "https://www.herehandyman.com/scarsdale-handyman" },
-        { "@type": "ListItem", "position": 4, "name": "Deck Repair Scarsdale", "item": "https://www.herehandyman.com/deck-repair-scarsdale" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.herehandyman.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://www.herehandyman.com/carpentry-shelving"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Scarsdale Handyman",
+          "item": "https://www.herehandyman.com/scarsdale-handyman"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Deck Repair Scarsdale",
+          "item": "https://www.herehandyman.com/deck-repair-scarsdale"
+        }
       ]
     },
     {

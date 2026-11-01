@@ -18,6 +18,9 @@ Disallow: /schedule/
 Disallow: /schedule.html
 Disallow: /scratch
 Disallow: /scratch/
+Disallow: /merge-photos
+Disallow: /merge-photos/
+Disallow: /merge-photos.html
 
 Sitemap: https://www.herehandyman.com/sitemap.xml
 Sitemap: https://www.herehandyman.com/image-sitemap.xml
