@@ -8,12 +8,14 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /blog/interior-painting-cost-westchester /interior-painting           301
 /assets/images/before-after/smart_lock_installation_after.webp /assets/images/portfolio/smart_lock_deadbolt_door_installation_scarsdale.webp 301
 
-# Security Blocks: Prevent exposure of sensitive package manifests and scripts
+# Security Blocks: Prevent exposure of sensitive package manifests, scripts, and internal markdown
 /package.json                    /404.html                            404!
 /package-lock.json               /404.html                            404!
 /skills-lock.json                /404.html                            404!
 /.env*                           /404.html                            404!
 /scripts/*                       /404.html                            404!
+/articles/*                      /404.html                            404!
+/*.md                            /404.html                            404!
 
 # Booking Page Clean Rewrites & Redirects
 /book                                        /book.html                         200
