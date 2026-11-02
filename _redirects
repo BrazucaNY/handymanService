@@ -332,6 +332,36 @@ https://herehandyman.com/*       https://www.herehandyman.com/:splat  301!
 /yonkers-handyman                            /yonkers-handyman.html             200
 /yonkers-handyman/                           /yonkers-handyman.html             200
 
+/tv-mounting-chappaqua                                        /tv-mounting-chappaqua.html                         200
+/tv-mounting-chappaqua/                                       /tv-mounting-chappaqua.html                         200
+
+/tv-mounting-bedford                                        /tv-mounting-bedford.html                         200
+/tv-mounting-bedford/                                       /tv-mounting-bedford.html                         200
+
+/tv-mounting-armonk                                        /tv-mounting-armonk.html                         200
+/tv-mounting-armonk/                                       /tv-mounting-armonk.html                         200
+
+/tv-mounting-bronxville                                        /tv-mounting-bronxville.html                         200
+/tv-mounting-bronxville/                                       /tv-mounting-bronxville.html                         200
+
+/tv-mounting-larchmont                                        /tv-mounting-larchmont.html                         200
+/tv-mounting-larchmont/                                       /tv-mounting-larchmont.html                         200
+
+/tv-mounting-harrison                                        /tv-mounting-harrison.html                         200
+/tv-mounting-harrison/                                       /tv-mounting-harrison.html                         200
+
+/drywall-repair-chappaqua                                        /drywall-repair-chappaqua.html                         200
+/drywall-repair-chappaqua/                                       /drywall-repair-chappaqua.html                         200
+
+/interior-painting-bedford                                        /interior-painting-bedford.html                         200
+/interior-painting-bedford/                                       /interior-painting-bedford.html                         200
+
+/smart-home-installation-scarsdale                                        /smart-home-installation-scarsdale.html                         200
+/smart-home-installation-scarsdale/                                       /smart-home-installation-scarsdale.html                         200
+
+/carpentry-shelving-rye                                        /carpentry-shelving-rye.html                         200
+/carpentry-shelving-rye/                                       /carpentry-shelving-rye.html                         200
+
 # Fallback 404 handler
 /*                                           /404.html                          404
 
