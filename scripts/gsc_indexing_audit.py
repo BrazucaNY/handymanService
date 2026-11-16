@@ -19,7 +19,7 @@ if os.path.exists(sitemap_path):
         if loc.text:
             sitemap_urls.add(loc.text.strip())
 
-excluded_files = {"dashboard.html", "login.html", "404.html", "timer.html", "schedule.html", "merge-photos.html"}
+excluded_files = {"dashboard.html", "login.html", "404.html", "timer.html", "merge-photos.html"}
 
 html_files = glob.glob(os.path.join(site_dir, "**", "*.html"), recursive=True)
 

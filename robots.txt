@@ -13,9 +13,6 @@ Disallow: /CRM/
 Disallow: /timer
 Disallow: /timer/
 Disallow: /timer.html
-Disallow: /schedule
-Disallow: /schedule/
-Disallow: /schedule.html
 Disallow: /scratch
 Disallow: /scratch/
 Disallow: /merge-photos
