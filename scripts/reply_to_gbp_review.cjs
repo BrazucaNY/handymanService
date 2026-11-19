@@ -17,9 +17,9 @@ const client_secret = env.GOOGLE_CLIENT_SECRET;
 const refresh_token = env.GOOGLE_OAUTH_REFRESH_TOKEN;
 const accountId = "107235988987982670835";
 const locationId = "1964673381603454408";
-const reviewId = "AbFvOqkBOYTtM_WjSou_LTabcMWq3SAcSC1bkO8gQm-rfWs2CkGwCSEmFkObFDeRAAUSm1PrVUAwTQ";
+const reviewId = "AbFvOqlYhZGfiRQmCRzlkFc4SnQHD6Iy7JucShprLxfib2ipnB2TbPN8rdSU92k-OCWbfIyihX1WVQ";
 
-const replyText = "Ruby, thank you so much for the fantastic 5-star review! My teammate and I truly enjoyed working with you and making sure all 14+ pieces of furniture were assembled diligently to your exact specifications. Taking our time to deliver professional, meticulous quality and leaving everything spotless is always our standard. Whenever you need help with future furniture assembly or home projects, we would love to help! David, Here Handyman";
+const replyText = "John, thank you so much for the wonderful 5-star review! It was an absolute pleasure working with you and taking care of your plumbing fixtures, as well as helping out with those extra tasks around your home. Answering questions patiently and delivering skilled, courteous craftsmanship is always my standard. Whenever you need a hand with future plumbing repairs or any home projects, please don't hesitate to reach out! David, Here Handyman";
 
 async function replyToReview() {
   console.log("1. Refreshing Google OAuth access token...");
