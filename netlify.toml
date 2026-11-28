@@ -7,6 +7,18 @@
   path = "/dashboard*"
 
 [[edge_functions]]
+  function = "auth-guard"
+  path = "/timer*"
+
+[[edge_functions]]
+  function = "auth-guard"
+  path = "/merge-photos*"
+
+[[edge_functions]]
+  function = "auth-guard"
+  path = "/scratch*"
+
+[[edge_functions]]
   function = "content-negotiation"
   path = "/*"
 
@@ -184,7 +196,7 @@
   to = "/property-managers.html"
   status = 200
 
-# Clean URL redirects — service pages
+# Clean URL redirects :  service pages
 [[redirects]]
   from = "/furniture-assembly"
   to = "/furniture-assembly.html"
@@ -237,7 +249,7 @@
   to = "/gutter-cleaning.html"
   status = 200
 
-# Clean URL redirects — city landing pages (no .html in URL)
+# Clean URL redirects :  city landing pages (no .html in URL)
 [[redirects]]
   from = "/white-plains-handyman"
   to = "/white-plains-handyman.html"
@@ -299,7 +311,7 @@
   status = 200
 
 
-# Clean URL redirects — blog articles
+# Clean URL redirects :  blog articles
 [[redirects]]
   from = "/blog/furniture-assembly-cost-westchester"
   to = "/blog/furniture-assembly-cost-westchester.html"
@@ -371,6 +383,31 @@
   status = 200
 
 # Baseline Security & CSP Headers for ALL pages
+[[headers]]
+  for = "/login*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+[[headers]]
+  for = "/dashboard*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+[[headers]]
+  for = "/timer*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+[[headers]]
+  for = "/merge-photos*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+[[headers]]
+  for = "/scratch*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
 [[headers]]
   for = "/*"
   [headers.values]

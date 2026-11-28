@@ -28,6 +28,24 @@ Sitemap: https://www.herehandyman.com/image-sitemap.xml
 # GOOGLE
 # ============================================
 User-agent: Googlebot
+Disallow: /login
+Disallow: /login/
+Disallow: /login.html
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /dashboard.html
+Disallow: /admin
+Disallow: /admin/
+Disallow: /CRM
+Disallow: /CRM/
+Disallow: /timer
+Disallow: /timer/
+Disallow: /timer.html
+Disallow: /scratch
+Disallow: /scratch/
+Disallow: /merge-photos
+Disallow: /merge-photos/
+Disallow: /merge-photos.html
 Allow: /
 
 User-agent: Googlebot-Image
@@ -43,6 +61,24 @@ Allow: /
 # BING / MICROSOFT
 # ============================================
 User-agent: Bingbot
+Disallow: /login
+Disallow: /login/
+Disallow: /login.html
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /dashboard.html
+Disallow: /admin
+Disallow: /admin/
+Disallow: /CRM
+Disallow: /CRM/
+Disallow: /timer
+Disallow: /timer/
+Disallow: /timer.html
+Disallow: /scratch
+Disallow: /scratch/
+Disallow: /merge-photos
+Disallow: /merge-photos/
+Disallow: /merge-photos.html
 Allow: /
 
 User-agent: msnbot
